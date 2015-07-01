@@ -45,13 +45,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <!--jQuery UI-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="style.css">
 
     <!--Adding jquery file-->
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -126,7 +126,7 @@
               <li class="list-group-item">
                 <div class="row">
                   <div class="col-xs-9">
-                    <input type="text" style="width: 105%; height: 35px;padding: 10px;" placeholder="Search..." />
+                    <input type="text" class="form-control search_text" placeholder="Search..." />
                   </div>
                   <div class="col-xs-3">
                     <button class="btn btn-primary" style="width: 100%;" data-toggle="modal" data-target="#addModal">
@@ -147,7 +147,17 @@
 
       <div class="col-md-8 col-sm-12 hidden-sm hidden-xs">
         <div class="panel panel-default">
-            <div class="panel-heading text-center">Contact Details</div>
+            <div class="panel-heading text-center">
+              <h12>Contact Details</h12>
+                <button class="btn btn-success button_width pull-right" data-toggle="modal" data-target="#addModal">
+                Edit
+                </button>
+                <button class="btn btn-danger button_width pull-left" data-toggle="modal" data-target="#deleteModal">
+                Delete
+                </button>
+              
+            </div>
+
              <!-- List group -->  
               <div class="list-group">
                 <div class="list-group-item">
@@ -169,6 +179,8 @@
       </div><!--COL-->
     </div><!--ROW-->
   </div>
+
+  <!-- Add Contact Modal -->
   <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -199,7 +211,7 @@
             <div class="form-group">
               <label class="col-xs-4 control-label">Title</label>
               <div class="col-xs-8 ui-widget">
-                <input type="text" name="title" id="addTitle" placeholder="Title" />
+                <input type="text" name="title" class="form-control title_css" id="addTitle" placeholder="Title" />
               </div>
             </div>
             <div class="form-group">
@@ -339,11 +351,40 @@
               </div>
             </div>
           </div>
-        </div>
-                  
+        </div>   
         </div>
         </form>
+      </div><!--modal-content-->
+    </div>
+  </div><!--modal-->
 
+  <!--Delete Contact Modal-->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title text-center">
+              Are you sure, you want to DELETE this Contact?
+          </h4>   
+        </div>
+        <br>
+        <center>
+          <div class="modal-body">
+          <div class="btn-group">
+              <button class="btn btn-danger modal_button" data-dismiss="modal">
+                Yes
+              </button>
+            </div>
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <div class="btn-group">
+              <button type="submit" class="btn btn-success modal_button" data-dismiss="modal">
+                No
+              </button>
+            </div>
+            <br>
+            <br>
+          </div>
+        </center>
       </div><!--modal-content-->
     </div>
   </div><!--modal-->
