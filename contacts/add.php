@@ -15,7 +15,7 @@ if (isset($_POST['id'])) {
 		'1001'
 		)).";";
 	
-	$sql .= build_insert_str('contacts.group',array(
+	$sql .= build_insert_str(DB_NAME.'.group',array(
 		$timestamp,
 		$_POST['group'],
 		'1001'

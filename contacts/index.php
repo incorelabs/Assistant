@@ -45,7 +45,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <!--jQuery UI-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="<?php echo ROOT; ?>/dist/css/style.css">
 
     <!--Adding jquery file-->
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -60,18 +60,170 @@
     <![endif]-->
     <!--jQuery UI script-->
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script>
-    $(function() {
-      var availableTags = [
-        "Mr",
-        "Mrs",
-        "Miss",
-        "Master"
-      ];
+    var contact;
+    function getContact(id){
+      $.ajax({
+        method: "GET",
+        url: "getContact.php",
+        data: { 
+            id: id
+         }
+      })
+        .done(function(msg) {
+          contact = JSON.parse(msg);
+          setContactView(contact);
+        });
+    }
 
-      $( "#addTitle" ).autocomplete({
-        source: availableTags
-      });
+    function setContactView(arr){
+      //var json = JSON.stringify(arr);
+      var str = "<div class='panel-heading text-center'><h12>Contact Details</h12><button class='btn btn-success button_width pull-right' onclick='openEditContact();'>Edit</button><button class='btn btn-danger button_width pull-left' data-toggle='modal' data-target='#deleteModal'>Delete</button></div>";
+      
+      if (arr.fullName) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Name</h4><p class='list-group-item-text'>"+arr.fullName+"</p></div>";
+      };
+
+      if (arr.guardianName) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Guardian</h4><p class='list-group-item-text'>"+arr.guardianName+"</p></div>";
+      };
+
+      if (arr.company) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Company</h4><p class='list-group-item-text'>"+arr.company+"</p></div>";
+      };
+
+      if (arr.designation) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Designation</h4><p class='list-group-item-text'>"+arr.designation+"</p></div>";
+      };
+
+      if (arr.alias) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Alias</h4><p class='list-group-item-text'>"+arr.alias+"</p></div>";
+      };
+      
+      if (arr.dob) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>D.O.B</h4><p class='list-group-item-text'>"+arr.dob+"</p></div>";
+      };
+
+      if (arr.dom) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>D.O.M</h4><p class='list-group-item-text'>"+arr.dom+"</p></div>";
+      };
+
+      if (arr.remarks) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Remarks</h4><p class='list-group-item-text'>"+arr.remarks+"</p></div>";
+      };
+
+      if (arr.mobile) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Mobile</h4><p class='list-group-item-text'>"+arr.mobile+"</p></div>";
+      };
+
+      if (arr.email) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Email</h4><p class='list-group-item-text'>"+arr.email+"</p></div>";
+      };
+
+      if (arr.facebook) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Facebook</h4><p class='list-group-item-text'>"+arr.facebook+"</p></div>";
+      };
+
+      if (arr.twitter) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Twitter</h4><p class='list-group-item-text'>"+arr.twitter+"</p></div>";
+      };
+
+      if (arr.google) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Google</h4><p class='list-group-item-text'>"+arr.google+"</p></div>";
+      };
+
+      if (arr.linkedin) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Linkedin</h4><p class='list-group-item-text'>"+arr.linkedin+"</p></div>";
+      };
+
+      if (arr.website) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Website</h4><p class='list-group-item-text'>"+arr.website+"</p></div>";
+      };
+
+      $("#contactDetail").empty();
+      $("#contactDetail").html(str);
+    }
+
+    function openAddContact () {
+      document.getElementById("addContactForm").reset();
+      $("#addModal").modal('show');
+    }
+
+    function openEditContact () {
+      if (contact.firstName) {
+        $('#addFirstName').val(contact.firstName);
+      };
+
+      if (contact.middleName) {
+        $('#addMiddleName').val(contact.middleName);
+      };
+
+      if (contact.lastName) {
+        $('#addMiddleName').val(contact.lastName);
+      };
+
+      if (contact.guardianName) {
+        $('#addGuardianName').val(contact.guardianName);
+      };
+
+      if (contact.company) {
+        $('#addCompany').val(contact.company);
+      };
+
+      if (contact.designation) {
+        $('#addDesignation').val(contact.designation);
+      };
+
+      if (contact.alias) {
+        $('#addAlias').val(contact.alias);
+      };
+      
+      if (contact.dob) {
+        $('#addDOB').val(contact.dob);
+      };
+
+      if (contact.dom) {
+        $('#addDOM').val(contact.dom);
+      };
+
+      if (contact.remarks) {
+        $('#addRemarks').val(contact.remarks);
+      };
+
+      if (contact.mobile) {
+        $('#addMobile').val(contact.mobile);
+      };
+
+      if (contact.email) {
+        $('#addEmail').val(contact.email);
+      };
+
+      if (contact.facebook) {
+        $('#addFacebook').val(contact.facebook);
+      };
+
+      if (contact.twitter) {
+        $('#addTwitter').val(contact.twitter);
+      };
+
+      if (contact.google) {
+        $('#addGoogle').val(contact.google);
+      };
+
+      if (contact.linkedin) {
+        $('#addLinkedin').val(contact.linkedin);
+      };
+
+      if (contact.website) {
+        $('#addWebsite').val(contact.website);
+      };
+
+      $("#addModal").modal('show');
+    }
+
+    $(document).ready(function(event){
+      getContact(0);
     });
     </script>
 
@@ -129,48 +281,47 @@
                     <input type="text" class="form-control search_text" placeholder="Search..." />
                   </div>
                   <div class="col-xs-3">
-                    <button class="btn btn-primary" style="width: 100%;" data-toggle="modal" data-target="#addModal">
+                    <button class="btn btn-primary" style="width: 100%;" onclick="openAddContact();">
                     Add
                     </button>
                   </div>
                 </div>
               </li>
-              <a href="#" class="list-group-item">
-                <h4 class="list-group-item-heading">Kamlesh Bokdia</h4>
-              </a>
-              <a href="#" class="list-group-item">
-                <h4 class="list-group-item-heading">Darshan Turakhia</h4>
-              </a>
+              <?php 
+                $sql = "SELECT contactCode,fullName FROM contact ORDER BY fullName;";
+                $str = "";
+                if ($result = $mysqli->query($sql)) {
+                  if ($result->num_rows == 0) {
+                    $str = "<a href='#' class='list-group-item'>
+                            <li class='list-group-item-text'>No contacts</li>
+                          </a>";
+                  }
+                  else{
+                    while ($row = $result->fetch_assoc()) {
+                      $str .= "<a onclick='getContact(".$row['contactCode'].")' class='list-group-item'>
+                              <h4 class='list-group-item-heading'>".$row['fullName']."</h4>
+                            </a>";
+                    }
+                  }
+                }
+
+                echo $str;
+                
+              ?>
           </div><!--List close-->
         </div><!--Panel-->
       </div><!--COL-->
 
       <div class="col-md-8 col-sm-12 hidden-sm hidden-xs">
-        <div class="panel panel-default">
+        <div id="contactDetail" class="panel panel-default">
             <div class="panel-heading text-center">
               <h12>Contact Details</h12>
-                <button class="btn btn-success button_width pull-right" data-toggle="modal" data-target="#addModal">
-                Edit
-                </button>
-                <button class="btn btn-danger button_width pull-left" data-toggle="modal" data-target="#deleteModal">
-                Delete
-                </button>
-              
             </div>
 
              <!-- List group -->  
               <div class="list-group">
                 <div class="list-group-item">
-                  <h4 class="list-group-item-heading">Name</h4>
-                  <p class="list-group-item-text">Kamlesh Bokdia</p>
-                </div>
-                <div class="list-group-item">
-                  <h4 class="list-group-item-heading">Company</h4>
-                  <p class="list-group-item-text">Incore Labs.</p>
-                </div>
-                <div class="list-group-item">
-                  <h4 class="list-group-item-heading">Designation</h4>
-                  <p class="list-group-item-text">Director</p>
+                  <p class="list-group-item-text">Loading...</p>
                 </div>
               </div><!--List close-->
             
@@ -217,136 +368,130 @@
             <div class="form-group">
               <label class="col-xs-4 control-label">First Name</label>
               <div class="col-xs-8">
-                <input type="text" name="firstName" class="form-control" placeholder="First Name" value="">
+                <input type="text" name="firstName" id="addFirstName" class="form-control" placeholder="First Name" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-4 control-label">Middle Name</label>
               <div class="col-xs-8">
-                <input type="text" name="middleName" class="form-control" placeholder="Middle Name" value="">
+                <input type="text" name="middleName" id="addMiddleName" class="form-control" placeholder="Middle Name" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-4 control-label">Last Name</label>
               <div class="col-xs-8">
-                <input type="text" name="lastName" class="form-control" placeholder="Last Name" value="">
+                <input type="text" name="lastName" id="addMiddleName" class="form-control" placeholder="Last Name" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-4 control-label">Father/Husband Name</label>
               <div class="col-xs-8">
-                <input type="text" name="guardianName" class="form-control" placeholder="Father/Husband Name" value="">
+                <input type="text" name="guardianName" id="addGuardianName" class="form-control" placeholder="Father/Husband Name" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-4 control-label">Company</label>
               <div class="col-xs-8">
-                <input type="text" name="company" class="form-control" placeholder="Company" value="">
+                <input type="text" name="company" id="addCompany" class="form-control" placeholder="Company" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-4 control-label">Designation</label>
               <div class="col-xs-8">
-                <input type="text" name="designation" class="form-control" placeholder="Designation" value="">
+                <input type="text" name="designation" id="addDesignation" class="form-control" placeholder="Designation" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-4 control-label">Alias</label>
               <div class="col-xs-8">
-                <input type="text" name="alias" class="form-control" placeholder="Alias" value="">
+                <input type="text" name="alias" id="addAlias" class="form-control" placeholder="Alias" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-4 control-label">Date of Birth</label>
               <div class="col-xs-8">
-                <input type="text" name="dob" class="form-control" placeholder="Date of Birth" value="">
+                <input type="text" name="dob" id="addDOB" class="form-control datepicker" placeholder="Date of Birth" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-4 control-label">Anniversary Date</label>
               <div class="col-xs-8">
-                <input type="text" name="dom" class="form-control" placeholder="Anniversary Date" value="">
+                <input type="text" name="dom" id="addDOM" class="form-control datepicker" placeholder="Anniversary Date" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-4 control-label">Group</label>
               <div class="col-xs-8">
-                <input type="text" name="group" class="form-control" placeholder="Group" value="">
+                <input type="text" name="group" id="addGroup" class="form-control" placeholder="Group" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-4 control-label">Comments</label>
               <div class="col-xs-8">
-                <input type="text" name="remarks" class="form-control" placeholder="Comments" value="">
+                <input type="text" name="remarks" id="addRemarks" class="form-control" placeholder="Comments" />
               </div>
             </div>
             <div class="form-group">
               <div class="col-xs-4"></div>
               <div class="col-xs-8">
                 <label>
-                  <input type="checkbox" name="activeStatus" checked="checked" /> Active Status
+                  <input type="checkbox" id="addActiveStatus" name="activeStatus" checked="checked" /> Active Status
                 </label>
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-4 control-label">Mobile</label>
               <div class="col-xs-8">
-                <input type="text" name="mobile" class="form-control" placeholder="Phone" value="+">
+                <input type="text" name="mobile" id="addMobile" class="form-control" placeholder="Phone" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-4 control-label">Email</label>
               <div class="col-xs-8">
-                <input type="email" name="email" class="form-control" placeholder="Email" value="">
+                <input type="email" name="email" id="addEmail" class="form-control" placeholder="Email" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-4 control-label">Facebook ID</label>
               <div class="col-xs-8">
-                <input type="text" name="facebook" class="form-control" placeholder="Facebook ID"
-                value="">
+                <input type="text" name="facebook" id="addFacebook" class="form-control" placeholder="Facebook ID" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-4 control-label">Twitter Handle</label>
               <div class="col-xs-8">
-                <input type="text" name="twitter" class="form-control" placeholder="Twiter Handle"
-                value="">
+                <input type="text" name="twitter" id="addTwitter" class="form-control" placeholder="Twiter Handle" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-4 control-label">Google ID</label>
               <div class="col-xs-8">
-                <input type="text" name="google" class="form-control" placeholder="Facebook ID"
-                value="">
+                <input type="text" name="google" id="addGoogle" class="form-control" placeholder="Facebook ID" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-4 control-label">Linkedin ID</label>
               <div class="col-xs-8">
-                <input type="text" name="linkedin" class="form-control" placeholder="Linkedin ID"
-                value="">
+                <input type="text" name="linkedin" id="addLinkedin" class="form-control" placeholder="Linkedin ID" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-4 control-label">URL Address</label>
               <div class="col-xs-8">
-                <input type="text" name="website" class="form-control" placeholder="URL Address"
-                value="">
+                <input type="text" name="website" id="addWebsite" class="form-control" placeholder="URL Address" />
               </div>
             </div>
             <div class="form-group">
               <label class="col-xs-4 control-label">Address</label>
               <div class="col-xs-8">
-                <input type="text" name="address" class="form-control" placeholder="Address"
-                value="">
+                <input type="text" name="address" id="addAddress" class="form-control" placeholder="Address" />
               </div>
             </div>
             <div class="form-group">
               <div class="col-xs-4"></div>
               <div class="col-xs-8">
                 <label>
-                  <input type="checkbox" name="privacy" /> Private
+                  <input type="checkbox" id="addPrivacy" name="privacy" /> Private
                 </label>
               </div>
             </div>
@@ -388,6 +533,16 @@
       </div><!--modal-content-->
     </div>
   </div><!--modal-->
+  <script>
+    $(function() {
+      $( ".datepicker" ).datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        changeYear: true,
+        yearRange: "1915:2015"
+      });
+    });
+  </script>
 
   <script>
 
@@ -410,3 +565,4 @@
 
   </body>
 </html>
+<?php //$mysqli->close(); ?>

@@ -57,20 +57,22 @@
 		$insert_value_str = "";
 
 		foreach ($arr_values as $value)
-		{
-			if (is_string($value))
-			{
-				$value = str_replace("'", "", $value);
-				$value = str_replace('"', "", $value);
-				//$value = str_replace("\n", "<br>", $value);
-				$insert_value_str .= "'".$value."', ";
+		{	
+			if(is_null($value) ||  $value == ""){
+				$insert_value_str .= "null, ";
 			}
 			else
 			{
-				if(is_null($value) ||  $value == "")
-					$insert_value_str .= "null, ";
-				else
+				if (is_string($value))
+				{
+					$value = str_replace("'", "", $value);
+					$value = str_replace('"', "", $value);
+					//$value = str_replace("\n", "<br>", $value);
+					$insert_value_str .= "'".$value."', ";
+				}
+				else{
 					$insert_value_str .= $value.", ";
+				}
 			}
 
 				
