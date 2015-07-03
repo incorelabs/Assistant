@@ -82,63 +82,63 @@
       var str = "<div class='panel-heading text-center'><h12>Contact Details</h12><button class='btn btn-success button_width pull-right' onclick='openEditContact();'>Edit</button><button class='btn btn-danger button_width pull-left' data-toggle='modal' data-target='#deleteModal'>Delete</button></div>";
       
       if (arr.fullName) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Name</h4><p class='list-group-item-text'>"+arr.fullName+"</p></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Name:<value class='name'>"+arr.fullName+"</value></h4></div>";
       };
 
       if (arr.guardianName) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Guardian</h4><p class='list-group-item-text'>"+arr.guardianName+"</p></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Guardian:<value class='guardian'>"+arr.guardianName+"</value></h4></div>";
       };
 
       if (arr.company) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Company</h4><p class='list-group-item-text'>"+arr.company+"</p></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Company:<value class='company'>"+arr.company+"</value></h4></div>";
       };
 
       if (arr.designation) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Designation</h4><p class='list-group-item-text'>"+arr.designation+"</p></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Designation:<value class='designation'>"+arr.designation+"</value></h4></div>";
       };
 
       if (arr.alias) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Alias</h4><p class='list-group-item-text'>"+arr.alias+"</p></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Alias:<value class='alias'>"+arr.alias+"</value></h4></div>";
       };
       
       if (arr.dob) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>D.O.B</h4><p class='list-group-item-text'>"+arr.dob+"</p></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>D.O.B:<value class='dob'>"+arr.dob+"</value></h4></div>";
       };
 
       if (arr.dom) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>D.O.M</h4><p class='list-group-item-text'>"+arr.dom+"</p></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>D.O.M:<value class='dom'>"+arr.dom+"</value></h4></div>";
       };
 
       if (arr.remarks) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Remarks</h4><p class='list-group-item-text'>"+arr.remarks+"</p></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Remarks:<value class='remarks'>"+arr.remarks+"</value></h4></div>";
       };
 
       if (arr.mobile) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Mobile</h4><p class='list-group-item-text'>"+arr.mobile+"</p></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Mobile:<value class='mobile'>"+arr.mobile+"</value></h4></div>";
       };
 
       if (arr.email) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Email</h4><p class='list-group-item-text'>"+arr.email+"</p></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Email:<value class='email'>"+arr.email+"</value></h4></div>";
       };
 
       if (arr.facebook) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Facebook</h4><p class='list-group-item-text'>"+arr.facebook+"</p></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Facebook:<value class='fb'>"+arr.facebook+"</value></h4></div>";
       };
 
       if (arr.twitter) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Twitter</h4><p class='list-group-item-text'>"+arr.twitter+"</p></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Twitter:<value class='twitter'>"+arr.twitter+"</value></h4></div>";
       };
 
       if (arr.google) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Google</h4><p class='list-group-item-text'>"+arr.google+"</p></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Google:<value class='google'>"+arr.google+"</value></h4></div>";
       };
 
       if (arr.linkedin) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Linkedin</h4><p class='list-group-item-text'>"+arr.linkedin+"</p></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Linkedin:<value class='linkedin'>"+arr.linkedin+"</value></h4></div>";
       };
 
       if (arr.website) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading'>Website</h4><p class='list-group-item-text'>"+arr.website+"</p></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Website:<value class='url'>"+arr.website+"</value></h4></div>";
       };
 
       $("#contactDetail").empty();
@@ -230,7 +230,7 @@
   </head>
   <body>
     <!-- fixed top navbar -->
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -269,9 +269,43 @@
     </div><!-- /.container-fluid -->
   </nav>
 
-  <div class="container-fluid">
+  <div class="container-fluid navbar-padding">
     <div class="row">
-      <div class="col-md-4 col-sm-12">
+
+      <!-- A-Z Picker -->
+      <div class="col-md-1 col-sm-2 col-xs-2">
+          <ul class="affix">
+            <li><a href="">A</a></li>
+            <li><a href="">B</a></li>
+            <li><a href="">C</a></li>
+            <li><a href="">D</a></li>
+            <li><a href="">E</a></li>
+            <li><a href="">F</a></li>
+            <li><a href="">G</a></li>
+            <li><a href="">H</a></li>
+            <li><a href="">I</a></li>
+            <li><a href="">J</a></li>
+            <li><a href="">K</a></li>
+            <li><a href="">L</a></li>
+            <li><a href="">M</a></li> 
+            <li><a href="">N</a></li> 
+            <li><a href="">O</a></li> 
+            <li><a href="">P</a></li> 
+            <li><a href="">Q</a></li> 
+            <li><a href="">R</a></li> 
+            <li><a href="">S</a></li> 
+            <li><a href="">T</a></li> 
+            <li><a href="">U</a></li> 
+            <li><a href="">V</a></li> 
+            <li><a href="">W</a></li> 
+            <li><a href="">X</a></li> 
+            <li><a href="">Y</a></li> 
+            <li><a href="">Z</a></li>
+          </ul>
+      </div>
+
+
+      <div class="col-md-4 col-sm-10 col-xs-10">
         <div class="panel panel-default">
              <!-- List group -->
             <div class="list-group">
@@ -286,6 +320,32 @@
                     </button>
                   </div>
                 </div>
+                <li class="list-group-item list-group-item-info">A</li>
+                <li class="list-group-item list-group-item-info">B</li>
+                <li class="list-group-item list-group-item-info">C</li>
+                <li class="list-group-item list-group-item-info">D</li>
+                <li class="list-group-item list-group-item-info">E</li>
+                <li class="list-group-item list-group-item-info">F</li>
+                <li class="list-group-item list-group-item-info">G</li>
+                <li class="list-group-item list-group-item-info">H</li>
+                <li class="list-group-item list-group-item-info">I</li>
+                <li class="list-group-item list-group-item-info">J</li>
+                <li class="list-group-item list-group-item-info">K</li>
+                <li class="list-group-item list-group-item-info">L</li>
+                <li class="list-group-item list-group-item-info">M</li>
+                <li class="list-group-item list-group-item-info">N</li>
+                <li class="list-group-item list-group-item-info">O</li>
+                <li class="list-group-item list-group-item-info">P</li>
+                <li class="list-group-item list-group-item-info">Q</li>
+                <li class="list-group-item list-group-item-info">R</li>
+                <li class="list-group-item list-group-item-info">S</li>
+                <li class="list-group-item list-group-item-info">T</li>
+                <li class="list-group-item list-group-item-info">U</li>
+                <li class="list-group-item list-group-item-info">V</li>
+                <li class="list-group-item list-group-item-info">W</li>
+                <li class="list-group-item list-group-item-info">X</li>
+                <li class="list-group-item list-group-item-info">Y</li>
+                <li class="list-group-item list-group-item-info">Z</li>
               </li>
               <?php 
                 $sql = "SELECT contactCode,fullName FROM contact ORDER BY fullName;";
@@ -312,7 +372,7 @@
         </div><!--Panel-->
       </div><!--COL-->
 
-      <div class="col-md-8 col-sm-12 hidden-sm hidden-xs">
+      <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
         <div id="contactDetail" class="panel panel-default">
             <div class="panel-heading text-center">
               <h12>Contact Details</h12>
@@ -333,7 +393,7 @@
 
   <!-- Add Contact Modal -->
   <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
         <form class="form-horizontal" method="POST" action="add.php" id="addContactForm">
@@ -360,136 +420,166 @@
         <div class="modal-body">
             <input type="hidden" name="id" id='contactCode' value='<?php echo $id; ?>' />
             <div class="form-group">
-              <label class="col-xs-4 control-label">Title</label>
-              <div class="col-xs-8 ui-widget">
+              <label class="col-xs-2 control-label">Title</label>
+              <div class="col-xs-4 ui-widget">
                 <input type="text" name="title" class="form-control title_css" id="addTitle" placeholder="Title" />
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-4 control-label">First Name</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">First Name</label>
+              <div class="col-xs-4">
                 <input type="text" name="firstName" id="addFirstName" class="form-control" placeholder="First Name" />
               </div>
             </div>
             <div class="form-group">
-              <label class="col-xs-4 control-label">Middle Name</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">Middle Name</label>
+              <div class="col-xs-4">
                 <input type="text" name="middleName" id="addMiddleName" class="form-control" placeholder="Middle Name" />
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-4 control-label">Last Name</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">Last Name</label>
+              <div class="col-xs-4">
                 <input type="text" name="lastName" id="addMiddleName" class="form-control" placeholder="Last Name" />
               </div>
             </div>
             <div class="form-group">
-              <label class="col-xs-4 control-label">Father/Husband Name</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">Father/Husband Name</label>
+              <div class="col-xs-4">
                 <input type="text" name="guardianName" id="addGuardianName" class="form-control" placeholder="Father/Husband Name" />
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-4 control-label">Company</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">Company</label>
+              <div class="col-xs-4">
                 <input type="text" name="company" id="addCompany" class="form-control" placeholder="Company" />
               </div>
             </div>
             <div class="form-group">
-              <label class="col-xs-4 control-label">Designation</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">Designation</label>
+              <div class="col-xs-4">
                 <input type="text" name="designation" id="addDesignation" class="form-control" placeholder="Designation" />
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-4 control-label">Alias</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">Alias</label>
+              <div class="col-xs-4">
                 <input type="text" name="alias" id="addAlias" class="form-control" placeholder="Alias" />
               </div>
             </div>
             <div class="form-group">
-              <label class="col-xs-4 control-label">Date of Birth</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">Date of Birth</label>
+              <div class="col-xs-4">
                 <input type="text" name="dob" id="addDOB" class="form-control datepicker" placeholder="Date of Birth" />
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-4 control-label">Anniversary Date</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">Anniversary Date</label>
+              <div class="col-xs-4">
                 <input type="text" name="dom" id="addDOM" class="form-control datepicker" placeholder="Anniversary Date" />
               </div>
             </div>
             <div class="form-group">
-              <label class="col-xs-4 control-label">Group</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">Group</label>
+              <div class="col-xs-4">
                 <input type="text" name="group" id="addGroup" class="form-control" placeholder="Group" />
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-4 control-label">Comments</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">Comments</label>
+              <div class="col-xs-4">
                 <input type="text" name="remarks" id="addRemarks" class="form-control" placeholder="Comments" />
               </div>
             </div>
             <div class="form-group">
-              <div class="col-xs-4"></div>
-              <div class="col-xs-8">
+              <div class="col-xs-2"></div>
+              <div class="col-xs-4">
                 <label>
                   <input type="checkbox" id="addActiveStatus" name="activeStatus" checked="checked" /> Active Status
                 </label>
               </div>
             </div>
             <div class="form-group">
-              <label class="col-xs-4 control-label">Mobile</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">Mobile</label>
+              <div class="col-xs-4">
                 <input type="text" name="mobile" id="addMobile" class="form-control" placeholder="Phone" />
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-4 control-label">Email</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">Email</label>
+              <div class="col-xs-4">
                 <input type="email" name="email" id="addEmail" class="form-control" placeholder="Email" />
               </div>
             </div>
             <div class="form-group">
-              <label class="col-xs-4 control-label">Facebook ID</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">Facebook ID</label>
+              <div class="col-xs-4">
                 <input type="text" name="facebook" id="addFacebook" class="form-control" placeholder="Facebook ID" />
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-4 control-label">Twitter Handle</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">Twitter Handle</label>
+              <div class="col-xs-4">
                 <input type="text" name="twitter" id="addTwitter" class="form-control" placeholder="Twiter Handle" />
               </div>
             </div>
             <div class="form-group">
-              <label class="col-xs-4 control-label">Google ID</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">Google ID</label>
+              <div class="col-xs-4">
                 <input type="text" name="google" id="addGoogle" class="form-control" placeholder="Facebook ID" />
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-4 control-label">Linkedin ID</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">Linkedin ID</label>
+              <div class="col-xs-4">
                 <input type="text" name="linkedin" id="addLinkedin" class="form-control" placeholder="Linkedin ID" />
               </div>
             </div>
             <div class="form-group">
-              <label class="col-xs-4 control-label">URL Address</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">URL Address</label>
+              <div class="col-xs-4">
                 <input type="text" name="website" id="addWebsite" class="form-control" placeholder="URL Address" />
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-4 control-label">Address</label>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">Address</label>
+              <div class="col-xs-4">
                 <input type="text" name="address" id="addAddress" class="form-control" placeholder="Address" />
               </div>
             </div>
             <div class="form-group">
-              <div class="col-xs-4"></div>
-              <div class="col-xs-8">
+              <label class="col-xs-2 control-label">Address 1</label>
+              <div class="col-xs-4">
+                <input type="text" name="address1" id="address1" class="form-control" placeholder="Address 1" />
+              </div>
+              <label class="col-xs-2 control-label">Address 2</label>
+              <div class="col-xs-4">
+                <input type="text" name="address2" id="address2" class="form-control" placeholder="Address 2" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-2 control-label">Address 3</label>
+              <div class="col-xs-4">
+                <input type="text" name="address3" id="address3" class="form-control" placeholder="Address 3" />
+              </div>
+              <label class="col-xs-2 control-label">Address 4</label>
+              <div class="col-xs-4">
+                <input type="text" name="address4" id="address4" class="form-control" placeholder="Address 4" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-2 control-label">Address 5</label>
+              <div class="col-xs-4">
+                <input type="text" name="address5" id="address5" class="form-control" placeholder="Address 5" />
+              </div>
+              <label class="col-xs-2 control-label">Pincode</label>
+              <div class="col-xs-4">
+                <input type="text" name="pincode" id="pincode" class="form-control" placeholder="Pincode" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-2 control-label">Country Code</label>
+              <div class="col-xs-4">
+                <input type="text" name="country_code" id="country_code" class="form-control" placeholder="Country Code" />
+              </div>
+              <label class="col-xs-2 control-label">State Code</label>
+              <div class="col-xs-4">
+                <input type="text" name="state_code" id="state_code" class="form-control" placeholder="State Code" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-2 control-label">City Code</label>
+              <div class="col-xs-4">
+                <input type="text" name="city_code" id="city_code" class="form-control" placeholder="City Code" />
+              </div>
+              <label class="col-xs-2 control-label">Area Code</label>
+              <div class="col-xs-4">
+                <input type="text" name="area_code" id="area_code" class="form-control" placeholder="Area Code" />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-2"></div>
+              <div class="col-xs-4">
                 <label>
                   <input type="checkbox" id="addPrivacy" name="privacy" /> Private
                 </label>

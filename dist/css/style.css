@@ -20,3 +20,46 @@ h12
 {
 	width: 105%;
 }
+ul
+{
+list-style-type: none;
+}
+
+.navbar-padding
+{
+	padding-top: 70px;
+}
+
+
+.header_font
+{
+	color: #777;
+	font-weight: normal;
+	font-size: 14px;
+}
+value
+{
+	color: #000;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight: bold;
+	font-size: 18px;
+}
+.name{padding-left: 90px;}
+.guardian{padding-left: 68px;}
+.company{padding-left: 66px;}
+.designation{padding-left: 50px;}
+.alias{padding-left: 95px;}
+.dob{padding-left: 86px;}
+.dom{padding-left: 84px;}
+.remarks{padding-left: 68px;}
+.mobile{padding-left: 80px;}
+.email{padding-left: 88px;}
+.fb{padding-left: 60px;}
+.twitter{padding-left: 82px;}
+.google{padding-left: 81px;}
+.linkedin{padding-left: 75px;}
+.url{padding-left: 75px;}
+
+
+
+
