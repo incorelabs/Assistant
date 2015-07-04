@@ -36,9 +36,14 @@ h12
 {
 	width: 105%;
 }
-ul
+li
 {
 list-style-type: none;
+}
+.li-pad
+{
+	padding-left: 15px;
+	border-bottom: 1px solid #e2e2e2;
 }
 
 .navbar-padding

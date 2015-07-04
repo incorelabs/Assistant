@@ -273,9 +273,9 @@
     <div class="row">
 
       <!-- A-Z Picker -->
-      <div class="col-md-1 col-sm-2 col-xs-2 ul_margin">
+      <div class="col-md-1 col-sm-2 col-xs-2 ul_margin pre-scrollable">
           <nav>
-            <ul class="affix">
+            <ul class="">
               <center>
                 <li class="ul_pad"><a href="#">A</a></li>
                 <li class="ul_pad"><a href="#">B</a></li>
@@ -324,32 +324,32 @@
                     </button>
                   </div>
                 </div>
-                <li class="list-group-item list-group-item-info">A</li>
-                <li class="list-group-item list-group-item-info">B</li>
-                <li class="list-group-item list-group-item-info">C</li>
-                <li class="list-group-item list-group-item-info">D</li>
-                <li class="list-group-item list-group-item-info">E</li>
-                <li class="list-group-item list-group-item-info">F</li>
-                <li class="list-group-item list-group-item-info">G</li>
-                <li class="list-group-item list-group-item-info">H</li>
-                <li class="list-group-item list-group-item-info">I</li>
-                <li class="list-group-item list-group-item-info">J</li>
-                <li class="list-group-item list-group-item-info">K</li>
-                <li class="list-group-item list-group-item-info">L</li>
-                <li class="list-group-item list-group-item-info">M</li>
-                <li class="list-group-item list-group-item-info">N</li>
-                <li class="list-group-item list-group-item-info">O</li>
-                <li class="list-group-item list-group-item-info">P</li>
-                <li class="list-group-item list-group-item-info">Q</li>
-                <li class="list-group-item list-group-item-info">R</li>
-                <li class="list-group-item list-group-item-info">S</li>
-                <li class="list-group-item list-group-item-info">T</li>
-                <li class="list-group-item list-group-item-info">U</li>
-                <li class="list-group-item list-group-item-info">V</li>
-                <li class="list-group-item list-group-item-info">W</li>
-                <li class="list-group-item list-group-item-info">X</li>
-                <li class="list-group-item list-group-item-info">Y</li>
-                <li class="list-group-item list-group-item-info">Z</li>
+                <li class="list-group-item-info li-pad">A</li>
+                <li class="list-group-item-info li-pad">B</li>
+                <li class="list-group-item-info li-pad">C</li>
+                <li class="list-group-item-info li-pad">D</li>
+                <li class="list-group-item-info li-pad">E</li>
+                <li class="list-group-item-info li-pad">F</li>
+                <li class="list-group-item-info li-pad">G</li>
+                <li class="list-group-item-info li-pad">H</li>
+                <li class="list-group-item-info li-pad">I</li>
+                <li class="list-group-item-info li-pad">J</li>
+                <li class="list-group-item-info li-pad">K</li>
+                <li class="list-group-item-info li-pad">L</li>
+                <li class="list-group-item-info li-pad">M</li>
+                <li class="list-group-item-info li-pad">N</li>
+                <li class="list-group-item-info li-pad">O</li>
+                <li class="list-group-item-info li-pad">P</li>
+                <li class="list-group-item-info li-pad">Q</li>
+                <li class="list-group-item-info li-pad">R</li>
+                <li class="list-group-item-info li-pad">S</li>
+                <li class="list-group-item-info li-pad">T</li>
+                <li class="list-group-item-info li-pad">U</li>
+                <li class="list-group-item-info li-pad">V</li>
+                <li class="list-group-item-info li-pad">W</li>
+                <li class="list-group-item-info li-pad">X</li>
+                <li class="list-group-item-info li-pad">Y</li>
+                <li class="list-group-item-info li-pad">Z</li>
               </li>
               <?php 
                 $sql = "SELECT contactCode,fullName FROM contact ORDER BY fullName;";
