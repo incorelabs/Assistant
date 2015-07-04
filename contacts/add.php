@@ -8,18 +8,25 @@ $mysqli = getConnection();
 if (isset($_POST['id'])) {
 	$date = new DateTime();
 	$timestamp = $date->getTimestamp();
+	$sql = "";
 
-	$sql = build_insert_str('title',array(
-		$timestamp,
-		$_POST['title'],
-		'1001'
-		)).";";
+	if (isset($_POST['title']) && strlen($_POST['title']) > 0) {
+		$sql = build_insert_str('title',array(
+			$timestamp,
+			$_POST['title'],
+			'1001'
+			)).";";
+	}
 	
-	$sql .= build_insert_str(DB_NAME.'.group',array(
+	
+	if (isset($_POST['group']) && strlen($_POST['group']) > 0) {
+		$sql .= build_insert_str(DB_NAME.'.group',array(
 		$timestamp,
 		$_POST['group'],
 		'1001'
 		)).";";
+	}
+	
 
 	$sql .= build_insert_str('contact',array(
 		1001,
