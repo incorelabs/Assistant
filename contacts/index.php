@@ -310,7 +310,7 @@
 
 
       <div class="col-md-4 col-sm-10 col-xs-10">
-        <div class="panel panel-default">
+        <div class="panel panel-default pre-scrollable">
              <!-- List group -->
             <div class="list-group">
               <li class="list-group-item">
@@ -377,7 +377,7 @@
       </div><!--COL-->
 
       <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
-        <div id="contactDetail" class="panel panel-default">
+        <div id="contactDetail" class="panel panel-default pre-scrollable">
             <div class="panel-heading text-center">
               <h12>Contact Details</h12>
             </div>

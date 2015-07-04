@@ -1,3 +1,7 @@
+body
+{
+	overflow: hidden;
+}
 .title_css
 {
 	width: 40%;
@@ -72,6 +76,7 @@ value
 .linkedin{padding-left: 75px;}
 .url{padding-left: 75px;}
 
-
-
-
+.pre-scrollable {
+  max-height: 600px;
+  overflow-y: scroll;
+}
