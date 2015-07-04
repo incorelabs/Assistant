@@ -310,9 +310,9 @@
 
 
       <div class="col-md-4 col-sm-10 col-xs-10">
-        <div class="panel panel-default pre-scrollable">
+        <div class="panel panel-default pre-scrollable scrollbar" id="style-3">
              <!-- List group -->
-            <div class="list-group">
+            <div class="list-group force-scroll">
               <li class="list-group-item">
                 <div class="row">
                   <div class="col-xs-9">
@@ -377,8 +377,8 @@
       </div><!--COL-->
 
       <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
-        <div id="contactDetail" class="panel panel-default pre-scrollable">
-            <div class="panel-heading text-center">
+        <div id="contactDetail" class="panel panel-default pre-scrollable scrollbar" id="style-3">
+            <div class="panel-heading text-center force-overflow">
               <h12>Contact Details</h12>
             </div>
 
