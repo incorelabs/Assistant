@@ -8,7 +8,7 @@ body
 }
 .button_width
 {
-	width:10%;
+	width:15%;
 }
 .modal_button
 {
@@ -16,11 +16,7 @@ body
 	height: 40px;
 	font-size: 2rem;
 }
-.ul_pad
-{
-	padding-bottom: 2px;
-	width: 20px;
-}
+
 .ul_margin
 {
 	margin: 0px;
@@ -65,21 +61,21 @@ value
 	font-size: 16px; 
 }
 
-.name{padding-left: 90px;}
-.guardian{padding-left: 68px;}
-.company{padding-left: 66px;}
-.designation{padding-left: 50px;}
-.alias{padding-left: 95px;}
-.dob{padding-left: 86px;}
-.dom{padding-left: 84px;}
-.remarks{padding-left: 68px;}
-.mobile{padding-left: 80px;}
-.email{padding-left: 88px;}
-.fb{padding-left: 60px;}
-.twitter{padding-left: 82px;}
-.google{padding-left: 81px;}
-.linkedin{padding-left: 75px;}
-.url{padding-left: 75px;}
+.name{padding-left: 100px;}
+.guardian{padding-left: 74px;}
+.company{padding-left: 71px;}
+.designation{padding-left: 52px;}
+.alias{padding-left: 107px;}
+.dob{padding-left: 98px;}
+.dom{padding-left: 95px;}
+.remarks{padding-left: 74px;}
+.mobile{padding-left: 90px;}
+.email{padding-left: 99px;}
+.fb{padding-left: 65px;}
+.twitter{padding-left: 87px;}
+.google{padding-left: 86px;}
+.linkedin{padding-left: 77px;}
+.url{padding-left: 80px;}
 
 
 #style-3::-webkit-scrollbar-track
@@ -101,7 +97,6 @@ value
 
 .scrollbar
 {
-	background: #F5F5F5;
 	overflow-y: scroll;
 }
 
@@ -112,13 +107,18 @@ value
 		  max-height: 540px;
 		  overflow-y: scroll;
 		}
+		.ul_pad
+		{
+			padding-bottom: 0px;
+			font-size: 11px;
+		}
     }
 
     /* Extra Small Devices, Phones */ 
     @media only screen and (min-width : 480px) {
     	.pre-scrollable 
     	{
-		  max-height: 300px;
+		  max-height: 400px;
 		  overflow-y: scroll;
 		}
     }
@@ -136,7 +136,7 @@ value
     @media only screen and (min-width : 992px) {
     	.pre-scrollable 
     	{
-		  max-height: 600px;
+		  max-height: 530px;
 		  overflow-y: scroll;
 		}
     }
@@ -145,8 +145,13 @@ value
     @media only screen and (min-width : 1200px) {
     	.pre-scrollable 
     	{
-		  max-height: 600px;
+		  max-height: 530px;
 		  overflow-y: scroll;
+		}
+		.ul_pad
+		{
+			padding-bottom: 0px;
+			font-size: 14px;
 		}
     }
 
@@ -161,6 +166,11 @@ value
 		  max-height: 500px;
 		  overflow-y: scroll;
 		}
+		.ul_pad
+		{
+			padding-bottom: 0px;
+			font-size: 13px;
+		}
     }
 
     /* Medium Devices, Desktops */
@@ -170,14 +180,24 @@ value
 		  max-height: 600px;
 		  overflow-y: scroll;
 		}
+		.ul_pad
+		{
+			padding-bottom: 0px;
+			font-size: 13px;
+		}
     }
 
     /* Small Devices, Tablets */
     @media only screen and (max-width : 768px) {
     	.pre-scrollable 
     	{
-		  max-height: 300px;
+		  max-height: 400px;
 		  overflow-y: scroll;
+		}
+		.ul_pad
+		{
+			padding-bottom: 0px;
+			font-size: 13px;
 		}
     }
 
@@ -189,6 +209,11 @@ value
 		  max-height: 580px;
 		  overflow-y: scroll;
 		}
+		.ul_pad
+		{
+			padding-bottom: 0px;
+			font-size: 12px;
+		}
     }
 
     /* Custom, iPhone Retina */ 
@@ -198,5 +223,10 @@ value
     	{
 		  max-height: 400px;
 		  overflow-y: scroll;
+		}
+		.ul_pad
+		{
+			padding-bottom: 0px;
+			font-size: 11px;
 		}
     }

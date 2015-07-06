@@ -131,7 +131,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
     function setContactView(arr){
       //var json = JSON.stringify(arr);
-      var str = "<div class='panel-heading text-center'><h12>Contact Details</h12><button class='btn btn-success button_width pull-right' onclick='openEditContact();'>Edit</button><button class='btn btn-danger button_width pull-left' onclick='openDeleteModal("+arr.contactCode+")'>Delete</button></div>";
+      var str = "<div class='panel-heading text-center'><h12>Contact Details</h12><button class='btn btn-success button_width pull-right ' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span>&nbsp&nbspEdit</button><button class='btn btn-danger button_width pull-left' onclick='openDeleteModal("+arr.contactCode+")'><span class='glyphicon glyphicon-remove'></span>&nbspDelete</button></div>";
       
       //if (arr.fullName) {
         str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Name<value class='name'>"+((arr.fullName) ? arr.fullName : "")+"</value></h4></div>";
@@ -320,11 +320,11 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Profile<span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#">My Account</a></li>
-              <li><a href="#">Settings</a></li>
+              <li><a href="#"><span class='glyphicon glyphicon-user'></span>&nbspMy Account</a></li>
+              <li><a href="#"><span class='glyphicon glyphicon-wrench'></span>&nbspSettings</a></li>
               <!--<li><a href="#">Something else here</a></li>-->
               <li class="divider"></li>
-              <li><a href="#">Logout</a></li>
+              <li><a href="#"><span class='glyphicon glyphicon-log-out'></span>&nbspLogout</a></li>
             </ul>
           </li>
         </ul>
@@ -336,9 +336,9 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     <div class="row">
     
       <!-- A-Z Picker -->
-      <div class="col-md-1 col-sm-2 col-xs-2 ul_margin pre-scrollable">
+      <div class="col-md-1 col-sm-2 col-xs-2 ul_margin pre-scrollable scrollbar" id="style-3">
           <nav>
-            <ul class="">
+            <ul class="force-scroll">
               <center>
                 <li class="ul_pad"><a href="#A">A</a></li>
                 <li class="ul_pad"><a href="#B">B</a></li>
@@ -447,7 +447,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
   <!-- Add Contact Modal -->
   <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
       <div class="modal-content">
 
         <form class="form-horizontal" method="POST" action="add.php" id="addContactForm">
@@ -474,171 +474,233 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
         <div class="modal-body">
             <input type="hidden" name="id" id='contactCode' />
             <div class="form-group">
-              <label class="col-xs-2 control-label">Title</label>
-              <div class="col-xs-4 ui-widget">
+              <label class="col-xs-4 control-label">Title</label>
+              <div class="col-xs-8 ui-widget">
                 <input type="text" name="title" class="form-control title_css" id="addTitle" placeholder="Title" />
               </div>
-              <label class="col-xs-2 control-label">First Name</label>
-              <div class="col-xs-4">
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">First Name</label>
+              <div class="col-xs-8">
                 <input type="text" name="firstName" id="addFirstName" class="form-control" placeholder="First Name" />
               </div>
             </div>
             <div class="form-group">
-              <label class="col-xs-2 control-label">Middle Name</label>
-              <div class="col-xs-4">
+              <label class="col-xs-4 control-label">Middle Name</label>
+              <div class="col-xs-8">
                 <input type="text" name="middleName" id="addMiddleName" class="form-control" placeholder="Middle Name" />
               </div>
-              <label class="col-xs-2 control-label">Last Name</label>
-              <div class="col-xs-4">
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Last Name</label>
+              <div class="col-xs-8">
                 <input type="text" name="lastName" id="addMiddleName" class="form-control" placeholder="Last Name" />
               </div>
             </div>
+            <hr></hr>
             <div class="form-group">
-              <label class="col-xs-2 control-label">Father/Husband Name</label>
-              <div class="col-xs-4">
-                <input type="text" name="guardianName" id="addGuardianName" class="form-control" placeholder="Father/Husband Name" />
-              </div>
-              <label class="col-xs-2 control-label">Company</label>
-              <div class="col-xs-4">
-                <input type="text" name="company" id="addCompany" class="form-control" placeholder="Company" />
-              </div>
+              <ul class="nav nav-tabs nav-justified">
+                <li><a href="#tab1" data-toggle="tab"><span class='glyphicon glyphicon-user'></span>&nbspPersonal</a></li>
+                <li><a href="#tab2" data-toggle="tab"><span class='glyphicon glyphicon-road'></span>&nbspAddress</a></li>
+                <li><a href="#tab3" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span>&nbspProfessional</a></li>
+                <li><a href="#tab4" data-toggle="tab"><span class='glyphicon glyphicon-globe'></span>&nbspSocial</a></li>
+            <!--<li><a href="#tab5" data-toggle="tab">Fifth</a></li>
+                <li><a href="#tab6" data-toggle="tab">Sixth</a></li>
+                <li><a href="#tab7" data-toggle="tab">Seventh</a></li>-->
+              </ul>
             </div>
-            <div class="form-group">
-              <label class="col-xs-2 control-label">Designation</label>
-              <div class="col-xs-4">
-                <input type="text" name="designation" id="addDesignation" class="form-control" placeholder="Designation" />
-              </div>
-              <label class="col-xs-2 control-label">Alias</label>
-              <div class="col-xs-4">
-                <input type="text" name="alias" id="addAlias" class="form-control" placeholder="Alias" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-2 control-label">Date of Birth</label>
-              <div class="col-xs-4">
-                <input type="text" name="dob" id="addDOB" class="form-control datepicker" placeholder="Date of Birth" />
-              </div>
-              <label class="col-xs-2 control-label">Anniversary Date</label>
-              <div class="col-xs-4">
-                <input type="text" name="dom" id="addDOM" class="form-control datepicker" placeholder="Anniversary Date" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-2 control-label">Group</label>
-              <div class="col-xs-4">
-                <input type="text" name="group" id="addGroup" class="form-control" placeholder="Group" />
-              </div>
-              <label class="col-xs-2 control-label">Comments</label>
-              <div class="col-xs-4">
-                <input type="text" name="remarks" id="addRemarks" class="form-control" placeholder="Comments" />
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-xs-2"></div>
-              <div class="col-xs-4">
-                <label>
-                  <input type="checkbox" id="addActiveStatus" name="activeStatus" checked="checked" /> Active Status
-                </label>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-2 control-label">Mobile</label>
-              <div class="col-xs-4">
-                <input type="text" name="mobile" id="addMobile" class="form-control" placeholder="Phone" />
-              </div>
-              <label class="col-xs-2 control-label">Email</label>
-              <div class="col-xs-4">
-                <input type="email" name="email" id="addEmail" class="form-control" placeholder="Email" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-2 control-label">Facebook ID</label>
-              <div class="col-xs-4">
-                <input type="text" name="facebook" id="addFacebook" class="form-control" placeholder="Facebook ID" />
-              </div>
-              <label class="col-xs-2 control-label">Twitter Handle</label>
-              <div class="col-xs-4">
-                <input type="text" name="twitter" id="addTwitter" class="form-control" placeholder="Twiter Handle" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-2 control-label">Google ID</label>
-              <div class="col-xs-4">
-                <input type="text" name="google" id="addGoogle" class="form-control" placeholder="Google ID" />
-              </div>
-              <label class="col-xs-2 control-label">Linkedin ID</label>
-              <div class="col-xs-4">
-                <input type="text" name="linkedin" id="addLinkedin" class="form-control" placeholder="Linkedin ID" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-2 control-label">URL Address</label>
-              <div class="col-xs-4">
-                <input type="text" name="website" id="addWebsite" class="form-control" placeholder="URL Address" />
-              </div>
-              <label class="col-xs-2 control-label">Address</label>
-              <div class="col-xs-4">
-                <input type="text" name="address" id="addAddress" class="form-control" placeholder="Address" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-2 control-label">Address 1</label>
-              <div class="col-xs-4">
-                <input type="text" name="address1" id="address1" class="form-control" placeholder="Address 1" />
-              </div>
-              <label class="col-xs-2 control-label">Address 2</label>
-              <div class="col-xs-4">
-                <input type="text" name="address2" id="address2" class="form-control" placeholder="Address 2" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-2 control-label">Address 3</label>
-              <div class="col-xs-4">
-                <input type="text" name="address3" id="address3" class="form-control" placeholder="Address 3" />
-              </div>
-              <label class="col-xs-2 control-label">Address 4</label>
-              <div class="col-xs-4">
-                <input type="text" name="address4" id="address4" class="form-control" placeholder="Address 4" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-2 control-label">Address 5</label>
-              <div class="col-xs-4">
-                <input type="text" name="address5" id="address5" class="form-control" placeholder="Address 5" />
-              </div>
-              <label class="col-xs-2 control-label">Pincode</label>
-              <div class="col-xs-4">
-                <input type="text" name="pincode" id="pincode" class="form-control" placeholder="Pincode" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-2 control-label">Country Code</label>
-              <div class="col-xs-4">
-                <input type="text" name="country_code" id="country_code" class="form-control" placeholder="Country Code" />
-              </div>
-              <label class="col-xs-2 control-label">State Code</label>
-              <div class="col-xs-4">
-                <input type="text" name="state_code" id="state_code" class="form-control" placeholder="State Code" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-xs-2 control-label">City Code</label>
-              <div class="col-xs-4">
-                <input type="text" name="city_code" id="city_code" class="form-control" placeholder="City Code" />
-              </div>
-              <label class="col-xs-2 control-label">Area Code</label>
-              <div class="col-xs-4">
-                <input type="text" name="area_code" id="area_code" class="form-control" placeholder="Area Code" />
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-xs-2"></div>
-              <div class="col-xs-4">
-                <label>
-                  <input type="checkbox" id="addPrivacy" name="privacy" /> Private
-                </label>
-              </div>
-            </div>
+ 
+            <div class="tab-content">
+                <div class="tab-pane" id="tab1">
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Father/Husband Name</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="guardianName" id="addGuardianName" class="form-control" placeholder="Father/Husband Name" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Date of Birth</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="dob" id="addDOB" class="form-control datepicker" placeholder="Date of Birth" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Anniversary Date</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="dom" id="addDOM" class="form-control datepicker" placeholder="Anniversary Date" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Mobile</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="mobile" id="addMobile" class="form-control" placeholder="Phone" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Email</label>
+                    <div class="col-xs-8">
+                      <input type="email" name="email" id="addEmail" class="form-control" placeholder="Email" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Group</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="group" id="addGroup" class="form-control" placeholder="Group" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Comments</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="remarks" id="addRemarks" class="form-control" placeholder="Comments" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Alias</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="alias" id="addAlias" class="form-control" placeholder="Alias" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-xs-4"></div>
+                    <div class="col-xs-8">
+                      <label>
+                        <input type="checkbox" id="addActiveStatus" name="activeStatus" checked="checked" /> Active Status
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-xs-4"></div>
+                    <div class="col-xs-8">
+                      <label>
+                        <input type="checkbox" id="addPrivacy" name="privacy" /> Private
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab2">
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Address</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="address" id="addAddress" class="form-control" placeholder="Address" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Address 1</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="address1" id="address1" class="form-control" placeholder="Address 1" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Address 2</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="address2" id="address2" class="form-control" placeholder="Address 2" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Address 3</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="address3" id="address3" class="form-control" placeholder="Address 3" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Address 4</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="address4" id="address4" class="form-control" placeholder="Address 4" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Address 5</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="address5" id="address5" class="form-control" placeholder="Address 5" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Pincode</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="pincode" id="pincode" class="form-control" placeholder="Pincode" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Country</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="country_code" id="country_code" class="form-control" placeholder="Country" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">State</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="state_code" id="state_code" class="form-control" placeholder="State" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">City</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="city_code" id="city_code" class="form-control" placeholder="City" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Area</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="area_code" id="area_code" class="form-control" placeholder="Area" />
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab3">
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Company</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="company" id="addCompany" class="form-control" placeholder="Company" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Designation</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="designation" id="addDesignation" class="form-control" placeholder="Designation" />
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="tab4">
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Facebook ID</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="facebook" id="addFacebook" class="form-control" placeholder="Facebook ID" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Twitter Handle</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="twitter" id="addTwitter" class="form-control" placeholder="Twiter Handle" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Google ID</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="google" id="addGoogle" class="form-control" placeholder="Google ID" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Linkedin ID</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="linkedin" id="addLinkedin" class="form-control" placeholder="Linkedin ID" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">URL Address</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="website" id="addWebsite" class="form-control" placeholder="URL Address" />
+                    </div>
+                  </div>
+                </div>
+            <!--<div class="tab-pane" id="tab5">
+                  5
+                </div>
+                <div class="tab-pane" id="tab6">
+                  6
+                </div>
+                <div class="tab-pane" id="tab7">
+                  7
+                </div>-->
+            </div>  
           </div>
         </div>   
         </div>
