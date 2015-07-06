@@ -169,6 +169,69 @@
 	
 	}
 
+	function buildUpdateStr($tableName,$arr_values,$constraints,$type=null){
+		$base = "UPDATE ".$tableName." SET ";
+		$fields = buildUpdateFieldStr($arr_values);
+		$where = buildConstraintStr($constraints,$type);
+		return $base.$fields.$where;
+	}
+
+	function buildUpdateFieldStr($arr_values){
+		$update_field_str = "";
+		if(is_array($arr_values)){
+			foreach ($arr_values as $key => $value) {
+				$value = getStringByType($value);
+				$update_field_str .= $key."=".$value.",";
+			}
+		}
+		return rtrim($update_field_str,",");
+	}
+	 	
+	function operator($value){
+		$operator;
+		if(is_string($value)){
+			$operator = "LIKE '%".$value."%'";
+		}
+		else{
+			$operator = "= ".$value; 
+		}
+
+		return $operator;
+	}
+
+	function buildConstraintStr($constraints,$type=null){
+		$constraint_str = " WHERE ";
+		$counter = 0;
+		if(is_array($constraints)){
+			foreach ($constraints as $key => $value) {
+				$value = operator($value);
+				$constraint_str .= $key." ".$value;
+				if(isset($type[$counter]))
+					$constraint_str .= " ".$type[$counter]." ";
+				$counter++;
+			}
+		}
+
+		return $constraint_str;
+	}
+
+	function getStringByType($value){
+		$insert_value_str;
+		if(is_null($value) || $value == ""){
+				$insert_value_str = "null";
+		}
+		else
+		{
+			if (is_string($value)){
+				$insert_value_str = "'".$value."'";
+			}
+			else
+				$insert_value_str = $value;
+		}
+
+		return $insert_value_str;
+	}
+
 	function put_col_attr($arr_table,$arr_column)
 	{
 		for($i=0; $i < 3; $i++) 

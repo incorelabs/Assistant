@@ -27,6 +27,39 @@
   else{
 
   }
+
+$status = "";
+
+if (isset($_GET['status']) && isset($_GET['controller'])) {
+  if ($_GET['status'] == 1) {
+    if ($_GET['controller'] == "add") {
+      $status = "<div class='alert alert-success alert-dismissible' role='alert'>
+                  <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                  Contact have been added successfully.
+                </div>";
+    }
+    elseif ($_GET['controller'] == 'edit') {
+      $status = "<div class='alert alert-success alert-dismissible' role='alert'>
+                  <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                  Updated contact successfully !!!
+                </div>";
+    }
+  }
+  elseif ($_GET['status'] == 0) {
+    if ($_GET['controller'] == "add") {
+      $status = "<div class='alert alert-danger alert-dismissible' role='alert'>
+                  <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                  Something went wrong while adding the contact
+                </div>";
+    }
+    elseif ($_GET['controller'] == 'edit') {
+      $status = "<div class='alert alert-danger alert-dismissible' role='alert'>
+                  <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                  Contact was not updated. Please retry.
+                </div>";
+    }
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,6 +96,8 @@
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script>
     var contact;
+    var contactCode = <?php echo $id; ?>;
+
     function getContact(id){
       $.ajax({
         method: "GET",
@@ -146,11 +181,17 @@
     }
 
     function openAddContact () {
+      $("#addContactForm").attr("action","add.php");
+      $("#contactCode").val(contactCode);
       document.getElementById("addContactForm").reset();
       $("#addModal").modal('show');
     }
 
     function openEditContact () {
+      $("#addContactForm").attr("action","edit.php");
+
+      $("#contactCode").val(contact.contactCode);
+
       if (contact.firstName) {
         $('#addFirstName').val(contact.firstName);
       };
@@ -271,38 +312,38 @@
 
   <div class="container-fluid navbar-padding">
     <div class="row">
-
+    
       <!-- A-Z Picker -->
       <div class="col-md-1 col-sm-2 col-xs-2 ul_margin pre-scrollable">
           <nav>
             <ul class="">
               <center>
-                <li class="ul_pad"><a href="#">A</a></li>
-                <li class="ul_pad"><a href="#">B</a></li>
-                <li class="ul_pad"><a href="#">C</a></li>
-                <li class="ul_pad"><a href="#">D</a></li>
-                <li class="ul_pad"><a href="#">E</a></li>
-                <li class="ul_pad"><a href="#">F</a></li>
-                <li class="ul_pad"><a href="#">G</a></li>
-                <li class="ul_pad"><a href="#">H</a></li>
-                <li class="ul_pad"><a href="#">I</a></li>
-                <li class="ul_pad"><a href="#">J</a></li>
-                <li class="ul_pad"><a href="#">K</a></li>
-                <li class="ul_pad"><a href="#">L</a></li>
-                <li class="ul_pad"><a href="#">M</a></li>
-                <li class="ul_pad"><a href="#">N</a></li>
-                <li class="ul_pad"><a href="#">O</a></li>
-                <li class="ul_pad"><a href="#">P</a></li>
-                <li class="ul_pad"><a href="#">Q</a></li>
-                <li class="ul_pad"><a href="#">R</a></li>
-                <li class="ul_pad"><a href="#">S</a></li>
-                <li class="ul_pad"><a href="#">T</a></li>
-                <li class="ul_pad"><a href="#">U</a></li>
-                <li class="ul_pad"><a href="#">V</a></li>
-                <li class="ul_pad"><a href="#">W</a></li>
-                <li class="ul_pad"><a href="#">X</a></li>
-                <li class="ul_pad"><a href="#">Y</a></li>
-                <li class="ul_pad"><a href="#">Z</a></li>
+                <li class="ul_pad"><a href="#A">A</a></li>
+                <li class="ul_pad"><a href="#B">B</a></li>
+                <li class="ul_pad"><a href="#C">C</a></li>
+                <li class="ul_pad"><a href="#D">D</a></li>
+                <li class="ul_pad"><a href="#E">E</a></li>
+                <li class="ul_pad"><a href="#F">F</a></li>
+                <li class="ul_pad"><a href="#G">G</a></li>
+                <li class="ul_pad"><a href="#H">H</a></li>
+                <li class="ul_pad"><a href="#I">I</a></li>
+                <li class="ul_pad"><a href="#J">J</a></li>
+                <li class="ul_pad"><a href="#K">K</a></li>
+                <li class="ul_pad"><a href="#L">L</a></li>
+                <li class="ul_pad"><a href="#M">M</a></li>
+                <li class="ul_pad"><a href="#N">N</a></li>
+                <li class="ul_pad"><a href="#O">O</a></li>
+                <li class="ul_pad"><a href="#P">P</a></li>
+                <li class="ul_pad"><a href="#Q">Q</a></li>
+                <li class="ul_pad"><a href="#R">R</a></li>
+                <li class="ul_pad"><a href="#S">S</a></li>
+                <li class="ul_pad"><a href="#T">T</a></li>
+                <li class="ul_pad"><a href="#U">U</a></li>
+                <li class="ul_pad"><a href="#V">V</a></li>
+                <li class="ul_pad"><a href="#W">W</a></li>
+                <li class="ul_pad"><a href="#X">X</a></li>
+                <li class="ul_pad"><a href="#Y">Y</a></li>
+                <li class="ul_pad"><a href="#Z">Z</a></li>
               </center>
             </ul>
           </nav>
@@ -324,33 +365,10 @@
                     </button>
                   </div>
                 </div>
-                <li class="list-group-item-info li-pad">A</li>
-                <li class="list-group-item-info li-pad">B</li>
-                <li class="list-group-item-info li-pad">C</li>
-                <li class="list-group-item-info li-pad">D</li>
-                <li class="list-group-item-info li-pad">E</li>
-                <li class="list-group-item-info li-pad">F</li>
-                <li class="list-group-item-info li-pad">G</li>
-                <li class="list-group-item-info li-pad">H</li>
-                <li class="list-group-item-info li-pad">I</li>
-                <li class="list-group-item-info li-pad">J</li>
-                <li class="list-group-item-info li-pad">K</li>
-                <li class="list-group-item-info li-pad">L</li>
-                <li class="list-group-item-info li-pad">M</li>
-                <li class="list-group-item-info li-pad">N</li>
-                <li class="list-group-item-info li-pad">O</li>
-                <li class="list-group-item-info li-pad">P</li>
-                <li class="list-group-item-info li-pad">Q</li>
-                <li class="list-group-item-info li-pad">R</li>
-                <li class="list-group-item-info li-pad">S</li>
-                <li class="list-group-item-info li-pad">T</li>
-                <li class="list-group-item-info li-pad">U</li>
-                <li class="list-group-item-info li-pad">V</li>
-                <li class="list-group-item-info li-pad">W</li>
-                <li class="list-group-item-info li-pad">X</li>
-                <li class="list-group-item-info li-pad">Y</li>
-                <li class="list-group-item-info li-pad">Z</li>
-              </li>
+
+                
+
+
               <?php 
                 $sql = "SELECT contactCode,fullName FROM contact ORDER BY fullName;";
                 $str = "";
@@ -361,7 +379,16 @@
                           </a>";
                   }
                   else{
+                    $letterIndex = "";
                     while ($row = $result->fetch_assoc()) {
+
+                      $letter = substr(strtoupper($row['fullName']), 0,1);
+                      
+                      if ($letter != $letterIndex) {
+                        $str .= "<li class='list-group-item-info li-pad' id='".$letter."'>".$letter."</li>";
+                        $letterIndex = $letter;
+                      }
+                      
                       $str .= "<a onclick='getContact(".$row['contactCode'].")' class='list-group-item'>
                               <h4 class='list-group-item-heading'>".$row['fullName']."</h4>
                             </a>";
@@ -377,6 +404,7 @@
       </div><!--COL-->
 
       <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
+        <?php echo $status; ?>
         <div id="contactDetail" class="panel panel-default pre-scrollable scrollbar" id="style-3">
             <div class="panel-heading text-center force-overflow">
               <h12>Contact Details</h12>
@@ -422,7 +450,7 @@
         </div>  
 
         <div class="modal-body">
-            <input type="hidden" name="id" id='contactCode' value='<?php echo $id; ?>' />
+            <input type="hidden" name="id" id='contactCode' />
             <div class="form-group">
               <label class="col-xs-2 control-label">Title</label>
               <div class="col-xs-4 ui-widget">
@@ -514,7 +542,7 @@
             <div class="form-group">
               <label class="col-xs-2 control-label">Google ID</label>
               <div class="col-xs-4">
-                <input type="text" name="google" id="addGoogle" class="form-control" placeholder="Facebook ID" />
+                <input type="text" name="google" id="addGoogle" class="form-control" placeholder="Google ID" />
               </div>
               <label class="col-xs-2 control-label">Linkedin ID</label>
               <div class="col-xs-4">

@@ -5,6 +5,7 @@ require_once ROOT.'db/Connection.php';
 require_once ROOT.'modules/functions.php';
 $mysqli = getConnection();
 
+
 if (isset($_POST['id'])) {
 	$date = new DateTime();
 	$timestamp = $date->getTimestamp();
@@ -26,7 +27,7 @@ if (isset($_POST['id'])) {
 		'1001'
 		)).";";
 	}
-	
+
 
 	$sql .= build_insert_str('contact',array(
 		1001,
@@ -60,6 +61,9 @@ if (isset($_POST['id'])) {
 		(isset($_POST['privacy']) ? 1 : 0),
 		$timestamp
 		)).";";
+
+
+	
 	//echo $sql;
 
 	if ($mysqli->multi_query($sql)) {
