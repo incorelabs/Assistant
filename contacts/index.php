@@ -98,6 +98,19 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     var contact;
     var contactCode = <?php echo $id; ?>;
 
+    function getContactList(id){
+      $.ajax({
+        method: "GET",
+        url: "getContact.php",
+        data: { 
+            list: 1
+         }
+      })
+        .done(function(msg) {
+          contact = JSON.parse(msg);
+        });
+    }
+
     function getContact(id){
       $.ajax({
         method: "GET",
@@ -112,68 +125,72 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
         });
     }
 
+    function setContactViewList(arr){
+
+    }
+
     function setContactView(arr){
       //var json = JSON.stringify(arr);
-      var str = "<div class='panel-heading text-center'><h12>Contact Details</h12><button class='btn btn-success button_width pull-right' onclick='openEditContact();'>Edit</button><button class='btn btn-danger button_width pull-left' data-toggle='modal' data-target='#deleteModal'>Delete</button></div>";
+      var str = "<div class='panel-heading text-center'><h12>Contact Details</h12><button class='btn btn-success button_width pull-right' onclick='openEditContact();'>Edit</button><button class='btn btn-danger button_width pull-left' onclick='openDeleteModal("+arr.contactCode+")'>Delete</button></div>";
       
-      if (arr.fullName) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Name:<value class='name'>"+arr.fullName+"</value></h4></div>";
-      };
+      //if (arr.fullName) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Name<value class='name'>"+((arr.fullName) ? arr.fullName : "")+"</value></h4></div>";
+      //};
 
       if (arr.guardianName) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Guardian:<value class='guardian'>"+arr.guardianName+"</value></h4></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Guardian<value class='guardian'>"+arr.guardianName+"</value></h4></div>";
       };
 
-      if (arr.company) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Company:<value class='company'>"+arr.company+"</value></h4></div>";
-      };
+      //if (arr.company) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Company<value class='company'>"+((arr.company) ? arr.company : "" )+"</value></h4></div>";
+      //};
 
-      if (arr.designation) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Designation:<value class='designation'>"+arr.designation+"</value></h4></div>";
-      };
+      //if (arr.designation) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Designation<value class='designation'>"+((arr.designation) ? arr.designation : "")+"</value></h4></div>";
+      //};
 
       if (arr.alias) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Alias:<value class='alias'>"+arr.alias+"</value></h4></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Alias<value class='alias'>"+arr.alias+"</value></h4></div>";
       };
       
       if (arr.dob) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>D.O.B:<value class='dob'>"+arr.dob+"</value></h4></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>D.O.B<value class='dob'>"+arr.dob+"</value></h4></div>";
       };
 
       if (arr.dom) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>D.O.M:<value class='dom'>"+arr.dom+"</value></h4></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>D.O.M<value class='dom'>"+arr.dom+"</value></h4></div>";
       };
 
       if (arr.remarks) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Remarks:<value class='remarks'>"+arr.remarks+"</value></h4></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Remarks<value class='remarks'>"+arr.remarks+"</value></h4></div>";
       };
 
-      if (arr.mobile) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Mobile:<value class='mobile'>"+arr.mobile+"</value></h4></div>";
-      };
+      //if (arr.mobile) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Mobile<value class='mobile'>"+((arr.mobile) ? arr.mobile : "")+"</value></h4></div>";
+      //};
 
-      if (arr.email) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Email:<value class='email'>"+arr.email+"</value></h4></div>";
-      };
+      //if (arr.email) {
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Email<value class='email'>"+((arr.email) ? arr.email : "")+"</value></h4></div>";
+      //};
 
       if (arr.facebook) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Facebook:<value class='fb'>"+arr.facebook+"</value></h4></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Facebook<value class='fb'>"+arr.facebook+"</value></h4></div>";
       };
 
       if (arr.twitter) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Twitter:<value class='twitter'>"+arr.twitter+"</value></h4></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Twitter<value class='twitter'>"+arr.twitter+"</value></h4></div>";
       };
 
       if (arr.google) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Google:<value class='google'>"+arr.google+"</value></h4></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Google<value class='google'>"+arr.google+"</value></h4></div>";
       };
 
       if (arr.linkedin) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Linkedin:<value class='linkedin'>"+arr.linkedin+"</value></h4></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Linkedin<value class='linkedin'>"+arr.linkedin+"</value></h4></div>";
       };
 
       if (arr.website) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Website:<value class='url'>"+arr.website+"</value></h4></div>";
+        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Website<value class='url'>"+arr.website+"</value></h4></div>";
       };
 
       $("#contactDetail").empty();
@@ -261,6 +278,11 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
       };
 
       $("#addModal").modal('show');
+    }
+
+    function openDeleteModal(id){
+      $("#deleteContact").val(id);
+      $("#deleteModal").modal("show");
     }
 
     $(document).ready(function(event){
@@ -638,9 +660,13 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
         <center>
           <div class="modal-body">
           <div class="btn-group">
-              <button class="btn btn-danger modal_button" data-dismiss="modal">
+            <form action="delete.php" method="POST">
+              <input type="hidden" name="id" id="deleteContact" />
+              <button class="btn btn-danger modal_button" type="submit">
                 Yes
               </button>
+            </form>
+              
             </div>
             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
             <div class="btn-group">

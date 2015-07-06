@@ -215,6 +215,12 @@
 		return $constraint_str;
 	}
 
+	function buildDeleteStr($tableName,$constraints,$type=null){
+		$base = "DELETE FROM ".$tableName;
+		$where = buildConstraintStr($constraints,$type);
+		return $base.$where;
+	}
+
 	function getStringByType($value){
 		$insert_value_str;
 		if(is_null($value) || $value == ""){

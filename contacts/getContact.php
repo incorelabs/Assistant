@@ -23,5 +23,13 @@ if (isset($_GET['id'])) {
 	}
 }
 
-echo json_encode($contact)
+if (isset($_GET['list'])) {
+	$sql = "SELECT contactCode,fullName FROM contact ORDER BY fullName;";
+	if ($result = $mysqli->query($sql)) {
+		$contact = $result->fetch_all();
+		//print_r($contact);
+	}
+}
+
+echo json_encode($contact);
 ?>
