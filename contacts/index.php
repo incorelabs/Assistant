@@ -75,7 +75,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">-->
     <!--jQuery UI-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="<?php echo ROOT; ?>/dist/css/style.css">
@@ -131,7 +131,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
     function setContactView(arr){
       //var json = JSON.stringify(arr);
-      var str = "<div class='panel-heading text-center'><h12>Contact Details</h12><button class='btn btn-success button_width pull-right ' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span>&nbsp&nbspEdit</button><button class='btn btn-danger button_width pull-left' onclick='openDeleteModal("+arr.contactCode+")'><span class='glyphicon glyphicon-remove'></span>&nbspDelete</button></div>";
+      var str = "<div class='panel-heading text-center'><h12>Contact Details</h12><button class='btn btn-success button_width pull-right ' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span>&nbsp&nbspEdit</button><button class='btn btn-danger button_width pull-left' onclick='openDeleteModal("+arr.contactCode+")'><span class='glyphicon glyphicon-trash'></span>&nbspDelete</button></div>";
       
       //if (arr.fullName) {
         str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Name<value class='name'>"+((arr.fullName) ? arr.fullName : "")+"</value></h4></div>";
@@ -218,7 +218,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
       };
 
       if (contact.lastName) {
-        $('#addMiddleName').val(contact.lastName);
+        $('#addLastName').val(contact.lastName);
       };
 
       if (contact.guardianName) {
@@ -382,7 +382,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <input type="text" class="form-control search_text" placeholder="Search..." />
                   </div>
                   <div class="col-xs-3">
-                    <button class="btn btn-primary" style="width: 100%;" onclick="openAddContact();">
+                    <button class="btn btn-primary" style="width: 100%;" onclick="openAddContact();"><span class="glyphicon glyphicon-plus hidden-sm hidden-xs"></span>
                     Add
                     </button>
                   </div>
@@ -496,10 +496,10 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
             <div class="form-group">
               <label class="col-xs-4 control-label">Last Name</label>
               <div class="col-xs-8">
-                <input type="text" name="lastName" id="addMiddleName" class="form-control" placeholder="Last Name" />
+                <input type="text" name="lastName" id="addLastName" class="form-control" placeholder="Last Name" />
               </div>
             </div>
-            <hr></hr>
+            <hr />
             <div class="form-group">
               <ul class="nav nav-tabs nav-justified">
                 <li><a href="#tab1" data-toggle="tab"><span class='glyphicon glyphicon-user'></span>&nbspPersonal</a></li>

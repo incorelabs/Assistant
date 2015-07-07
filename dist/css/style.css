@@ -1,7 +1,27 @@
 body
 {
 	overflow: hidden;
+	background-color: #ecf0f1;
 }
+
+.navbar-default
+{
+	background-color: #34495e;
+}
+.navbar-default .navbar-brand
+{
+	color: white;
+}
+
+.navbar-default .navbar-nav>li>a
+{
+	color: white;
+}
+
+.dropdown-toggle{
+	color: white;
+}
+
 .title_css
 {
 	width: 40%;
