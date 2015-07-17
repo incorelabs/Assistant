@@ -134,6 +134,10 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
       var str = "<div class='panel-heading text-center'><h12>Contact Details</h12><button class='btn btn-success button_width pull-right ' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span>&nbsp&nbspEdit</button><button class='btn btn-danger button_width pull-left' onclick='openDeleteModal("+arr.contactCode+")'><span class='glyphicon glyphicon-trash'></span>&nbspDelete</button></div>";
       
       //if (arr.fullName) {
+        str += "<div class='list-group-item'><center><img src='../img/contacts/Darshan Turakhia.jpg' alt='...' class='img-rounded'></center></div>";
+      //};
+
+      //if (arr.fullName) {
         str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Name<value class='name'>"+((arr.fullName) ? arr.fullName : "")+"</value></h4></div>";
       //};
 
@@ -289,7 +293,16 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
       getContact(0);
     });
     </script>
-
+    <script>
+    $('.nav li').click(function(e) {
+    $('.nav li.active').removeClass('active');
+    var $this = $(this);
+    if (!$this.hasClass('active')) {
+        $this.addClass('active');
+    }
+    e.preventDefault();
+});
+    </script>
   </head>
   <body>
     <!-- fixed top navbar -->
@@ -579,59 +592,61 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     </div>
                   </div>
                 </div>
+
+                <!-- Start of Address Tab -->
                 <div class="tab-pane" id="tab2">
                   <div class="form-group">
-                    <label class="col-xs-4 control-label">Address</label>
+                    <ul class="nav nav-pills nav-justified">
+                      <li><a href="#home" data-toggle="tab"><span class='glyphicon glyphicon-home'></span>&nbspHome</a></li>
+                      <li><a href="#work" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span>&nbspWork</a></li>
+                      <li><a href="#other" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span>&nbspOther</a></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Start of Home tab -->
+                <div class="tab-pane" id="home">
+                  <div class="form-group">
+                    <ul class="nav nav-pills nav-justified">
+                      <li><a href="#home" data-toggle="tab"><span class='glyphicon glyphicon-home'></span>&nbspHome</a></li>
+                      <li><a href="#work" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span>&nbspWork</a></li>
+                      <li><a href="#other" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span>&nbspOther</a></li>
+                    </ul>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Home Address</label>
                     <div class="col-xs-8">
                       <input type="text" name="address" id="addAddress" class="form-control" placeholder="Address" />
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-xs-4 control-label">Address 1</label>
+                    <label class="col-xs-4 control-label"></label>
                     <div class="col-xs-8">
                       <input type="text" name="address1" id="address1" class="form-control" placeholder="Address 1" />
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-xs-4 control-label">Address 2</label>
+                    <label class="col-xs-4 control-label"></label>
                     <div class="col-xs-8">
                       <input type="text" name="address2" id="address2" class="form-control" placeholder="Address 2" />
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-xs-4 control-label">Address 3</label>
+                    <label class="col-xs-4 control-label"></label>
                     <div class="col-xs-8">
                       <input type="text" name="address3" id="address3" class="form-control" placeholder="Address 3" />
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-xs-4 control-label">Address 4</label>
+                    <label class="col-xs-4 control-label"></label>
                     <div class="col-xs-8">
                       <input type="text" name="address4" id="address4" class="form-control" placeholder="Address 4" />
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-xs-4 control-label">Address 5</label>
+                    <label class="col-xs-4 control-label">Area</label>
                     <div class="col-xs-8">
-                      <input type="text" name="address5" id="address5" class="form-control" placeholder="Address 5" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-xs-4 control-label">Pincode</label>
-                    <div class="col-xs-8">
-                      <input type="text" name="pincode" id="pincode" class="form-control" placeholder="Pincode" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-xs-4 control-label">Country</label>
-                    <div class="col-xs-8">
-                      <input type="text" name="country_code" id="country_code" class="form-control" placeholder="Country" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-xs-4 control-label">State</label>
-                    <div class="col-xs-8">
-                      <input type="text" name="state_code" id="state_code" class="form-control" placeholder="State" />
+                      <input type="text" name="area_code" id="area_code" class="form-control" placeholder="Area" />
                     </div>
                   </div>
                   <div class="form-group">
@@ -641,12 +656,168 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     </div>
                   </div>
                   <div class="form-group">
+                    <label class="col-xs-4 control-label">State</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="state_code" id="state_code" class="form-control" placeholder="State" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Country</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="country_code" id="country_code" class="form-control" placeholder="Country" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Pincode</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="pincode" id="pincode" class="form-control" placeholder="Pincode" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Start of Work Tab -->
+                <div class="tab-pane" id="work">
+                  <div class="form-group">
+                    <ul class="nav nav-pills nav-justified">
+                      <li><a href="#home" data-toggle="tab"><span class='glyphicon glyphicon-home'></span>&nbspHome</a></li>
+                      <li><a href="#work" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span>&nbspWork</a></li>
+                      <li><a href="#other" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span>&nbspOther</a></li>
+                    </ul>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Work Address</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="address" id="addAddress" class="form-control" placeholder="Address" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label"></label>
+                    <div class="col-xs-8">
+                      <input type="text" name="address1" id="address1" class="form-control" placeholder="Address 1" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label"></label>
+                    <div class="col-xs-8">
+                      <input type="text" name="address2" id="address2" class="form-control" placeholder="Address 2" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label"></label>
+                    <div class="col-xs-8">
+                      <input type="text" name="address3" id="address3" class="form-control" placeholder="Address 3" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label"></label>
+                    <div class="col-xs-8">
+                      <input type="text" name="address4" id="address4" class="form-control" placeholder="Address 4" />
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <label class="col-xs-4 control-label">Area</label>
                     <div class="col-xs-8">
                       <input type="text" name="area_code" id="area_code" class="form-control" placeholder="Area" />
                     </div>
                   </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">City</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="city_code" id="city_code" class="form-control" placeholder="City" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">State</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="state_code" id="state_code" class="form-control" placeholder="State" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Country</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="country_code" id="country_code" class="form-control" placeholder="Country" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Pincode</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="pincode" id="pincode" class="form-control" placeholder="Pincode" />
+                    </div>
+                  </div>
                 </div>
+
+                <!-- Start of Others Pane -->
+                <div class="tab-pane" id="other">
+                  <div class="form-group">
+                    <ul class="nav nav-pills nav-justified">
+                      <li><a href="#home" data-toggle="tab"><span class='glyphicon glyphicon-home'></span>&nbspHome</a></li>
+                      <li><a href="#work" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span>&nbspWork</a></li>
+                      <li><a href="#other" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span>&nbspOther</a></li>
+                    </ul>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Address</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="address" id="addAddress" class="form-control" placeholder="Address" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label"></label>
+                    <div class="col-xs-8">
+                      <input type="text" name="address1" id="address1" class="form-control" placeholder="Address 1" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label"></label>
+                    <div class="col-xs-8">
+                      <input type="text" name="address2" id="address2" class="form-control" placeholder="Address 2" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label"></label>
+                    <div class="col-xs-8">
+                      <input type="text" name="address3" id="address3" class="form-control" placeholder="Address 3" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label"></label>
+                    <div class="col-xs-8">
+                      <input type="text" name="address4" id="address4" class="form-control" placeholder="Address 4" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Area</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="area_code" id="area_code" class="form-control" placeholder="Area" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">City</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="city_code" id="city_code" class="form-control" placeholder="City" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">State</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="state_code" id="state_code" class="form-control" placeholder="State" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Country</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="country_code" id="country_code" class="form-control" placeholder="Country" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Pincode</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="pincode" id="pincode" class="form-control" placeholder="Pincode" />
+                    </div>
+                  </div>
+                </div>
+
+                <!--Start of Profession Tab-->
                 <div class="tab-pane" id="tab3">
                   <div class="form-group">
                     <label class="col-xs-4 control-label">Company</label>
@@ -661,6 +832,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     </div>
                   </div>
                 </div>
+
+                <!-- Start of Social Tab -->
                 <div class="tab-pane" id="tab4">
                   <div class="form-group">
                     <label class="col-xs-4 control-label">Facebook ID</label>
@@ -693,15 +866,6 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     </div>
                   </div>
                 </div>
-            <!--<div class="tab-pane" id="tab5">
-                  5
-                </div>
-                <div class="tab-pane" id="tab6">
-                  6
-                </div>
-                <div class="tab-pane" id="tab7">
-                  7
-                </div>-->
             </div>  
           </div>
         </div>   
