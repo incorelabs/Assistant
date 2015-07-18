@@ -134,11 +134,11 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
       var str = "<div class='panel-heading text-center'><h12>Contact Details</h12><button class='btn btn-success button_width pull-right ' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span>&nbsp&nbspEdit</button><button class='btn btn-danger button_width pull-left' onclick='openDeleteModal("+arr.contactCode+")'><span class='glyphicon glyphicon-trash'></span>&nbspDelete</button></div>";
       
       //if (arr.fullName) {
-        str += "<div class='list-group-item'><center><img src='../img/contacts/Darshan Turakhia.jpg' alt='...' class='img-rounded'></center></div>";
+        str += "<div class='list-group-item'><div class='image'><img src='../img/contacts/Darshan Turakhia.jpg' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><a href='#'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></a></div></div><div class='pull-right'>Privacy&nbsp&nbsp<div class='switch'><input type='checkbox' name='privacy' id='addPrivacy' class='switch-input'><label for='addPrivacy' class='switch-label'>Privacy</label></div></div><div class='header_font'>Name</div><h4 class='list-group-item-heading'>"+((arr.fullName) ? arr.fullName : "")+"</h4></div>";
       //};
 
       //if (arr.fullName) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Name<value class='name'>"+((arr.fullName) ? arr.fullName : "")+"</value></h4></div>";
+      //  str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Name<value class='name'>"+((arr.fullName) ? arr.fullName : "")+"</value></h4></div>";
       //};
 
       if (arr.guardianName) {
@@ -347,8 +347,9 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
   <div class="container-fluid navbar-padding">
     <div class="row">
-    
+<!--<label class='pull-right'><input type='checkbox' id='addPrivacy' name='privacy'/>Private</label> -->
       <!-- A-Z Picker -->
+      <!--
       <div class="col-md-1 col-sm-2 col-xs-2 ul_margin pre-scrollable scrollbar" id="style-3">
           <nav>
             <ul class="force-scroll">
@@ -383,18 +384,29 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
             </ul>
           </nav>
       </div>
-
-
-      <div class="col-md-4 col-sm-10 col-xs-10">
-        <div class="panel panel-default pre-scrollable scrollbar" id="style-3">
+      -->
+    
+      <div class="col-md-5 col-sm-12 col-xs-12">
+        <div class="panel panel-default scroll" id="style-3">
              <!-- List group -->
             <div class="list-group force-scroll">
               <li class="list-group-item">
                 <div class="row">
-                  <div class="col-xs-9">
+                  <div class="col-xs-6 col-md-6">
                     <input type="text" class="form-control search_text" placeholder="Search..." />
                   </div>
-                  <div class="col-xs-3">
+                  <div class="col-xs-3 col-md-3">
+                    <div class="input-group-btn">
+                    <select class="form-control selectpicker" name="category" width="100%">
+                      <option>Name</option>
+                      <option>Address</option>
+                      <option>Phone Number</option>
+                      <option>Company</option>
+                    </select>
+
+                  </div>
+                  </div>
+                  <div class="col-xs-3 col-md-3">
                     <button class="btn btn-primary" style="width: 100%;" onclick="openAddContact();"><span class="glyphicon glyphicon-plus hidden-sm hidden-xs"></span>
                     Add
                     </button>
@@ -409,8 +421,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                 $str = "";
                 if ($result = $mysqli->query($sql)) {
                   if ($result->num_rows == 0) {
-                    $str = "<a href='#' class='list-group-item'>
-                            <li class='list-group-item-text'>No contacts</li>
+                    $str = "<a href='#' class='list-group-item '>
+                            <li class='list-group-item-text header_font'>No contacts</li>
                           </a>";
                   }
                   else{
@@ -424,8 +436,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                         $letterIndex = $letter;
                       }
                       
-                      $str .= "<a onclick='getContact(".$row['contactCode'].")' class='list-group-item'>
-                              <h4 class='list-group-item-heading'>".$row['fullName']."</h4>
+                      $str .= "<a onclick='getContact(".$row['contactCode'].")' class='list-group-item contacts_font'>
+                              <h4 class='list-group-item-heading contacts_font'>".$row['fullName']."</h4>
                             </a>";
                     }
                   }
@@ -440,7 +452,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
       <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
         <?php echo $status; ?>
-        <div id="contactDetail" class="panel panel-default pre-scrollable scrollbar" id="style-3">
+        <div id="contactDetail" class="panel panel-default scroll" id="style-3">
             <div class="panel-heading text-center force-overflow">
               <h12>Contact Details</h12>
             </div>
@@ -512,11 +524,23 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                 <input type="text" name="lastName" id="addLastName" class="form-control" placeholder="Last Name" />
               </div>
             </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Mobile</label>
+              <div class="col-xs-8">
+                <input type="text" name="mobile" id="addMobile" class="form-control" placeholder="Phone" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Email</label>
+              <div class="col-xs-8">
+                <input type="email" name="email" id="addEmail" class="form-control" placeholder="Email" />
+              </div>
+            </div>
             <hr />
             <div class="form-group">
               <ul class="nav nav-tabs nav-justified">
-                <li><a href="#tab1" data-toggle="tab"><span class='glyphicon glyphicon-user'></span>&nbspPersonal</a></li>
                 <li><a href="#tab2" data-toggle="tab"><span class='glyphicon glyphicon-road'></span>&nbspAddress</a></li>
+                <li><a href="#tab1" data-toggle="tab"><span class='glyphicon glyphicon-user'></span>&nbspPersonal</a></li>
                 <li><a href="#tab3" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span>&nbspProfessional</a></li>
                 <li><a href="#tab4" data-toggle="tab"><span class='glyphicon glyphicon-globe'></span>&nbspSocial</a></li>
             <!--<li><a href="#tab5" data-toggle="tab">Fifth</a></li>
@@ -545,18 +569,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                       <input type="text" name="dom" id="addDOM" class="form-control datepicker" placeholder="Anniversary Date" />
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label class="col-xs-4 control-label">Mobile</label>
-                    <div class="col-xs-8">
-                      <input type="text" name="mobile" id="addMobile" class="form-control" placeholder="Phone" />
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-xs-4 control-label">Email</label>
-                    <div class="col-xs-8">
-                      <input type="email" name="email" id="addEmail" class="form-control" placeholder="Email" />
-                    </div>
-                  </div>
+                  
                   <div class="form-group">
                     <label class="col-xs-4 control-label">Group</label>
                     <div class="col-xs-8">
@@ -642,13 +655,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-8">
                       <input type="text" name="address4" id="address4" class="form-control" placeholder="Address 4" />
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-xs-4 control-label">Area</label>
-                    <div class="col-xs-8">
-                      <input type="text" name="area_code" id="area_code" class="form-control" placeholder="Area" />
-                    </div>
-                  </div>
+                  </div>                 
                   <div class="form-group">
                     <label class="col-xs-4 control-label">City</label>
                     <div class="col-xs-8">
@@ -671,6 +678,12 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <label class="col-xs-4 control-label">Pincode</label>
                     <div class="col-xs-8">
                       <input type="text" name="pincode" id="pincode" class="form-control" placeholder="Pincode" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-xs-4 control-label">Area</label>
+                    <div class="col-xs-8">
+                      <input type="text" name="area_code" id="area_code" class="form-control" placeholder="Area" />
                     </div>
                   </div>
                 </div>
@@ -756,7 +769,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     </ul>
                   </div>
                   <div class="form-group">
-                    <label class="col-xs-4 control-label">Address</label>
+                    <label class="col-xs-4 control-label">Other Address</label>
                     <div class="col-xs-8">
                       <input type="text" name="address" id="addAddress" class="form-control" placeholder="Address" />
                     </div>
