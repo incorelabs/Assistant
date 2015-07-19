@@ -176,3 +176,15 @@ img{
 .switch-input:checked + .switch-label:after {
   left: 24px;
 }
+.navbar-brand:hover {
+  color:white;
+  background-color:transparent
+}
+value{
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+}
+.contact_details{
+  padding-bottom: 30px;
+}

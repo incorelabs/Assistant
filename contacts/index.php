@@ -134,7 +134,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
       var str = "<div class='panel-heading text-center'><h12>Contact Details</h12><button class='btn btn-success button_width pull-right ' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span>&nbsp&nbspEdit</button><button class='btn btn-danger button_width pull-left' onclick='openDeleteModal("+arr.contactCode+")'><span class='glyphicon glyphicon-trash'></span>&nbspDelete</button></div>";
       
       //if (arr.fullName) {
-        str += "<div class='list-group-item'><div class='image'><img src='../img/contacts/Darshan Turakhia.jpg' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><a href='#'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></a></div></div><div class='pull-right'>Privacy&nbsp&nbsp<div class='switch'><input type='checkbox' name='privacy' id='addPrivacy' class='switch-input'><label for='addPrivacy' class='switch-label'>Privacy</label></div></div><div class='header_font'>Name</div><h4 class='list-group-item-heading'>"+((arr.fullName) ? arr.fullName : "")+"</h4></div>";
+        str += "<div class='list-group-item'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='../img/contacts/Darshan Turakhia.jpg' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='pull-right'>Private&nbsp&nbsp<div class='switch'><input type='checkbox' name='Private' id='addPrivacy' class='switch-input'><label for='addPrivacy' class='switch-label'>Privacy</label></div></div><div class='header_font'>Name</div><div class='pull-right' style='padding-top:3px;'>Active Status&nbsp&nbsp<div class='switch' ><input type='checkbox' name='activeStatus' id='addActiveStatus' class='switch-input' checked='checked'><label for='addActiveStatus' class='switch-label'>Active Status</label></div></div><h4 class='list-group-item-heading'>"+((arr.fullName) ? arr.fullName : "")+"</h4></div>";
       //};
 
       //if (arr.fullName) {
@@ -142,59 +142,59 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
       //};
 
       if (arr.guardianName) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Guardian<value class='guardian'>"+arr.guardianName+"</value></h4></div>";
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Guardian</div><value><div class='col-md-9'>"+arr.guardianName+"</div></value></div></div>";
       };
 
       //if (arr.company) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Company<value class='company'>"+((arr.company) ? arr.company : "" )+"</value></h4></div>";
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Company</div><value><div class='col-md-9'>"+((arr.company) ? arr.company : "" )+"</div></value></div></div>";
       //};
 
       //if (arr.designation) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Designation<value class='designation'>"+((arr.designation) ? arr.designation : "")+"</value></h4></div>";
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Designation</div><value><div class='col-md-9'>"+((arr.designation) ? arr.designation : "")+"</div></value></div></div>";
       //};
 
       if (arr.alias) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Alias<value class='alias'>"+arr.alias+"</value></h4></div>";
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Alias</div><value><div class='col-md-9'>"+arr.alias+"</div></value></div></div>";
       };
       
       if (arr.dob) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>D.O.B<value class='dob'>"+arr.dob+"</value></h4></div>";
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.B</div><value><div class='col-md-9'>"+arr.dob+"</div></value></div></div>";
       };
 
       if (arr.dom) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>D.O.M<value class='dom'>"+arr.dom+"</value></h4></div>";
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.M</div><value><div class='col-md-9'>"+arr.dom+"</div></value></div></div>";
       };
 
       if (arr.remarks) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Remarks<value class='remarks'>"+arr.remarks+"</value></h4></div>";
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Remarks</div><value><div class='col-md-9'>"+arr.remarks+"</div></value></div></div>";
       };
 
       //if (arr.mobile) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Mobile<value class='mobile'>"+((arr.mobile) ? arr.mobile : "")+"</value></h4></div>";
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile</div><value><div class='col-md-9'>"+((arr.mobile) ? arr.mobile : "")+"</div></value></div></div>";
       //};
 
       //if (arr.email) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Email<value class='email'>"+((arr.email) ? arr.email : "")+"</value></h4></div>";
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Email</div><value><div class='col-md-9'>"+((arr.email) ? arr.email : "")+"</div></value></div></div>";
       //};
 
       if (arr.facebook) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Facebook<value class='fb'>"+arr.facebook+"</value></h4></div>";
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Facebook</div><value><div class='col-md-9'>"+arr.facebook+"</div></value></div></div>";
       };
 
       if (arr.twitter) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Twitter<value class='twitter'>"+arr.twitter+"</value></h4></div>";
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Twitter</div><value><div class='col-md-9'>"+arr.twitter+"</div></value></div></div>";
       };
 
       if (arr.google) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Google<value class='google'>"+arr.google+"</value></h4></div>";
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Google</div><value><div class='col-md-9'>"+arr.google+"</div></value></div></div>";
       };
 
       if (arr.linkedin) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Linkedin<value class='linkedin'>"+arr.linkedin+"</value></h4></div>";
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Linkedin</div><value><div class='col-md-9'>"+arr.linkedin+"</div></value></div></div>";
       };
 
       if (arr.website) {
-        str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Website<value class='url'>"+arr.website+"</value></h4></div>";
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'>"+arr.website+"</div></value></div></div>";
       };
 
       $("#contactDetail").empty();
@@ -588,6 +588,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                       <input type="text" name="alias" id="addAlias" class="form-control" placeholder="Alias" />
                     </div>
                   </div>
+                  <!--
                   <div class="form-group">
                     <div class="col-xs-4"></div>
                     <div class="col-xs-8">
@@ -603,7 +604,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                         <input type="checkbox" id="addPrivacy" name="privacy" /> Private
                       </label>
                     </div>
-                  </div>
+                  </div>-->
                 </div>
 
                 <!-- Start of Address Tab -->
@@ -924,6 +925,56 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
       </div><!--modal-content-->
     </div>
   </div><!--modal-->
+
+  <!-- Image Modal -->
+  <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <form class="form-horizontal" method="POST" action="#" id="form1" runat="server">
+        
+        <div class="modal-header">
+
+          <div class="btn-group pull-left">
+            <button class="btn btn-danger" data-dismiss="modal">
+              <span class='glyphicon glyphicon-remove'></span>&nbsp
+              Cancel
+            </button>
+          </div>
+        
+          <div class="btn-group pull-right">
+            <button type="submit" class="btn btn-success">
+              <span class='glyphicon glyphicon-ok'></span>&nbsp
+              Save
+            </button>
+          </div>
+
+          <h4 class="modal-title text-center">
+              Edit Image
+          </h4>   
+        </div>  
+
+        <div class="modal-body">
+            <input type="hidden" name="id" id='contactCode' />
+            <div class="form-group">
+              <label class="col-xs-4 control-label">Select Image</label>
+              <div class="col-xs-8 ui-widget">
+                <input type='file' id="imgInp" />
+              </div>
+            </div>            
+            <div class="form-group">
+              <label class="col-xs-4 control-label"></label>
+              <div class="col-xs-8">
+                <img src="" id="imagepreview" style="width: 30%; height: 30%;" >
+              </div>
+            </div>
+          </div>
+        </form>
+      </div><!--modal-content-->
+    </div>
+  </div><!--modal-->
+
+
   <script>
     $(function() {
       $( ".datepicker" ).datepicker({
