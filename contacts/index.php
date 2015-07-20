@@ -93,7 +93,6 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     <![endif]-->
     <!--jQuery UI script-->
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script>
     var contact;
     var contactCode = <?php echo $id; ?>;
@@ -133,6 +132,12 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
       //var json = JSON.stringify(arr);
       var str = "<div class='panel-heading text-center'><h12>Contact Details</h12><button class='btn btn-success button_width pull-right ' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span>&nbsp&nbspEdit</button><button class='btn btn-danger button_width pull-left' onclick='openDeleteModal("+arr.contactCode+")'><span class='glyphicon glyphicon-trash'></span>&nbspDelete</button></div>";
       
+      if (arr.photoUploaded) {
+
+      }
+      else{
+        
+      };
       //if (arr.fullName) {
         str += "<div class='list-group-item'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='../img/contacts/Darshan Turakhia.jpg' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='pull-right'>Private&nbsp&nbsp<div class='switch'><input type='checkbox' name='Private' id='addPrivacy' class='switch-input'><label for='addPrivacy' class='switch-label'>Privacy</label></div></div><div class='header_font'>Name</div><div class='pull-right' style='padding-top:3px;'>Active Status&nbsp&nbsp<div class='switch' ><input type='checkbox' name='activeStatus' id='addActiveStatus' class='switch-input' checked='checked'><label for='addActiveStatus' class='switch-label'>Active Status</label></div></div><h4 class='list-group-item-heading'>"+((arr.fullName) ? arr.fullName : "")+"</h4></div>";
       //};
@@ -209,6 +214,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     }
 
     function openEditContact () {
+      document.getElementById("addContactForm").reset();
       $("#addContactForm").attr("action","edit.php");
 
       $("#contactCode").val(contact.contactCode);
@@ -291,6 +297,35 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
     $(document).ready(function(event){
       getContact(0);
+
+      var availableTags = [
+        "ActionScript",
+        "AppleScript",
+        "Asp",
+        "BASIC",
+        "C",
+        "C++",
+        "Clojure",
+        "COBOL",
+        "ColdFusion",
+        "Erlang",
+        "Fortran",
+        "Groovy",
+        "Haskell",
+        "Java",
+        "JavaScript",
+        "Lisp",
+        "Perl",
+        "PHP",
+        "Python",
+        "Ruby",
+        "Scala",
+        "Scheme"
+      ];
+
+      $( "#addTitle" ).autocomplete({
+        source: availableTags
+      });
     });
     </script>
     <script>
@@ -413,9 +448,6 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                 </div>
 
-                
-
-
               <?php 
                 $sql = "SELECT contactCode,fullName FROM contact ORDER BY fullName;";
                 $str = "";
@@ -503,7 +535,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
             <div class="form-group">
               <label class="col-xs-4 control-label">Title</label>
               <div class="col-xs-8 ui-widget">
-                <input type="text" name="title" class="form-control title_css" id="addTitle" placeholder="Title" />
+                <input type="text" name="title" class="form-control title_css" id="addTitle" />
               </div>
             </div>
             <div class="form-group">

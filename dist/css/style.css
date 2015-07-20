@@ -64,6 +64,9 @@ list-style-type: none;
 	padding-top: 70px;
 }
 
+.ui-autocomplete {
+    z-index: 5000;
+}
 
 .header_font
 {
