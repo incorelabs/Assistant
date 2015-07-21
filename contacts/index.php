@@ -298,6 +298,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     $(document).ready(function(event){
       getContact(0);
 
+      $('.alert').fadeOut(3000);
+
       var availableTags = [
         "ActionScript",
         "AppleScript",
@@ -330,13 +332,13 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     </script>
     <script>
     $('.nav li').click(function(e) {
-    $('.nav li.active').removeClass('active');
-    var $this = $(this);
-    if (!$this.hasClass('active')) {
-        $this.addClass('active');
-    }
-    e.preventDefault();
-});
+        $('.nav li.active').removeClass('active');
+        var $this = $(this);
+        if (!$this.hasClass('active')) {
+            $this.addClass('active');
+        }
+        e.preventDefault();
+    });
     </script>
   </head>
   <body>
@@ -382,6 +384,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
   <div class="container-fluid navbar-padding">
     <div class="row">
+      <?php echo $status; ?>
 <!--<label class='pull-right'><input type='checkbox' id='addPrivacy' name='privacy'/>Private</label> -->
       <!-- A-Z Picker -->
       <!--
@@ -483,7 +486,6 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
       </div><!--COL-->
 
       <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
-        <?php echo $status; ?>
         <div id="contactDetail" class="panel panel-default scroll" id="style-3">
             <div class="panel-heading text-center force-overflow">
               <h12>Contact Details</h12>
