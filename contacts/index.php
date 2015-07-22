@@ -99,6 +99,11 @@ if ($result = $mysqli->query($sql)) {
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="<?php echo ROOT; ?>/dist/css/style.css">
 
+    <!--For the Notification -->
+    <link rel="stylesheet" type="text/css" href="../dist/notification/css/ns-default.css" />
+    <link rel="stylesheet" type="text/css" href="../dist/notification/css/ns-style-attached.css" />
+    <script src="../dist/notification/js/modernizr.custom.js"></script>
+
     <!--Adding jquery file-->
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 
@@ -411,7 +416,7 @@ if ($result = $mysqli->query($sql)) {
           <button type="submit" class="btn btn-default">Submit</button>
         </form>-->
         <ul class="nav navbar-nav navbar-right">
-          <!--<li><a href="#">Link</a></li>-->
+          <li><a href="#" id="notification-trigger">Notification Test</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Profile<span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -1050,6 +1055,46 @@ if ($result = $mysqli->query($sql)) {
   }
 
   </script>
+
+  <!--For the Notification-->
+      <script src="../dist/notification/js/classie.js"></script>
+    <script src="../dist/notification/js/notificationFx.js"></script>
+    <script>
+      (function() {
+        var bttn = document.getElementById( 'notification-trigger' );
+
+        // make sure..
+        bttn.disabled = false;
+
+        bttn.addEventListener( 'click', function() {
+          // simulate loading (for demo purposes only)
+          classie.add( bttn, 'active' );
+          setTimeout( function() {
+
+            classie.remove( bttn, 'active' );
+            
+            // create the notification
+            var notification = new NotificationFx({
+              message : '<p>Contact has been added Successfully</p>',
+              layout : 'attached',
+              effect : 'bouncyflip',
+              type : 'notice', // notice, warning or error
+              onClose : function() {
+                bttn.disabled = false;
+              }
+            });
+
+            // show the notification
+            notification.show();
+
+          }, 0 );
+          
+          // disable the button (for demo purposes only)
+          this.disabled = true;
+        } );
+      })();
+    </script>
+
 
   </body>
 </html>
