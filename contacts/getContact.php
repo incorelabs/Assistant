@@ -7,16 +7,24 @@ $mysqli = getConnection();
 $contact = array();
 
 if (isset($_GET['id'])) {
-	$id  = $_GET['id'];
+	$id  = intval($_GET['id']);
 
 	if ($id == 0) {
-		$sql = "SELECT * FROM contact ORDER BY fullName LIMIT 1";
+		$sql = "SELECT `registerLicenceCode`, `contactCode`, title.description as 'title', `firstName`, `middleName`, `lastName`, `fullName`, `guardianName`, `company`, `designation`, `alias`, `dob`, `dom`, ".DB_NAME.".group.description as 'group', `emergencyCode`, `remarks`, `activeStatus`, `mobile`, `email`, `facebook`, `twitter`, `google`, `linkedin`, `website`, `noOfAddresses`, `noOfFamilyMembers`, `photoUploaded`, `userCode`, `privacy`, `lastAccessedDate` 
+				FROM contact
+				LEFT JOIN title ON title.code = contact.titleCode
+				LEFT JOIN ".DB_NAME.".group ON ".DB_NAME.".group.code = contact.groupCode
+				ORDER BY contact.fullName LIMIT 1";
 		if ($result = $mysqli->query($sql)) {
 			$contact = $result->fetch_assoc();
 		}
 	}
 	else{
-		$sql = "SELECT * FROM contact WHERE contactCode = ".$id;
+		$sql = "SELECT `registerLicenceCode`, `contactCode`, title.description as 'title', `firstName`, `middleName`, `lastName`, `fullName`, `guardianName`, `company`, `designation`, `alias`, `dob`, `dom`, ".DB_NAME.".group.description as 'group', `emergencyCode`, `remarks`, `activeStatus`, `mobile`, `email`, `facebook`, `twitter`, `google`, `linkedin`, `website`, `noOfAddresses`, `noOfFamilyMembers`, `photoUploaded`, `userCode`, `privacy`, `lastAccessedDate` 
+				FROM contact
+				LEFT JOIN title ON title.code = contact.titleCode
+				LEFT JOIN ".DB_NAME.".group ON ".DB_NAME.".group.code = contact.groupCode
+				WHERE contact.contactCode = ".$id;
 		if ($result = $mysqli->query($sql)) {
 			$contact = $result->fetch_assoc();
 		}

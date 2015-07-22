@@ -60,6 +60,25 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     }
   }
 }
+$title['code'] = array();
+$title['description'] = array();
+$sql = "SELECT * FROM title ORDER BY description";
+if ($result = $mysqli->query($sql)) {
+  while ($row = $result->fetch_assoc()) {
+    array_push($title['code'], $row['code']);
+    array_push($title['description'], $row['description']);
+  }
+}
+
+$group['code'] = array();
+$group['description'] = array();
+$sql = "SELECT * FROM ".DB_NAME.".group ORDER BY description";
+if ($result = $mysqli->query($sql)) {
+  while ($row = $result->fetch_assoc()) {
+    array_push($group['code'], $row['code']);
+    array_push($group['description'], $row['description']);
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -139,7 +158,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
         
       };
       //if (arr.fullName) {
-        str += "<div class='list-group-item'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='../img/contacts/Darshan Turakhia.jpg' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='pull-right'>Private&nbsp&nbsp<div class='switch'><input type='checkbox' name='Private' id='addPrivacy' class='switch-input'><label for='addPrivacy' class='switch-label'>Privacy</label></div></div><div class='header_font'>Name</div><div class='pull-right' style='padding-top:3px;'>Active Status&nbsp&nbsp<div class='switch' ><input type='checkbox' name='activeStatus' id='addActiveStatus' class='switch-input' checked='checked'><label for='addActiveStatus' class='switch-label'>Active Status</label></div></div><h4 class='list-group-item-heading'>"+((arr.fullName) ? arr.fullName : "")+"</h4></div>";
+        str += "<div class='list-group-item'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='../img/contacts/Darshan Turakhia.jpg' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='pull-right'>Private&nbsp&nbsp<div class='switch'><input type='checkbox' name='Private' id='addPrivacy' class='switch-input'><label for='addPrivacy' class='switch-label'>Privacy</label></div></div><div class='header_font'>Name</div><div class='pull-right' style='padding-top:3px;'>Active Status&nbsp&nbsp<div class='switch' ><input type='checkbox' name='activeStatus' id='addActiveStatus' class='switch-input' checked='checked'><label for='addActiveStatus' class='switch-label'>Active Status</label></div></div><h4 class='list-group-item-heading'>"+((arr.title) ? arr.title + " " : "")+((arr.fullName) ? arr.fullName : "")+"</h4></div>";
       //};
 
       //if (arr.fullName) {
@@ -168,6 +187,10 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
       if (arr.dom) {
         str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.M</div><value><div class='col-md-9'>"+arr.dom+"</div></value></div></div>";
+      };
+
+      if (arr.group) {
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Group</div><value><div class='col-md-9'>"+arr.group+"</div></value></div></div>";
       };
 
       if (arr.remarks) {
@@ -215,9 +238,16 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
     function openEditContact () {
       document.getElementById("addContactForm").reset();
+      
+      $('#titleId').val(0);
+      $('#groupId').val(0);
       $("#addContactForm").attr("action","edit.php");
 
       $("#contactCode").val(contact.contactCode);
+
+      if (contact.title) {
+        $('#addTitle').val(contact.title);
+      };
 
       if (contact.firstName) {
         $('#addFirstName').val(contact.firstName);
@@ -253,6 +283,10 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
       if (contact.dom) {
         $('#addDOM').val(contact.dom);
+      };
+
+      if (contact.group) {
+        $('#addGroup').val(contact.group);
       };
 
       if (contact.remarks) {
@@ -298,35 +332,46 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     $(document).ready(function(event){
       getContact(0);
 
-      $('.alert').fadeOut(3000);
+      $('.alert').fadeOut(2000);
 
-      var availableTags = [
-        "ActionScript",
-        "AppleScript",
-        "Asp",
-        "BASIC",
-        "C",
-        "C++",
-        "Clojure",
-        "COBOL",
-        "ColdFusion",
-        "Erlang",
-        "Fortran",
-        "Groovy",
-        "Haskell",
-        "Java",
-        "JavaScript",
-        "Lisp",
-        "Perl",
-        "PHP",
-        "Python",
-        "Ruby",
-        "Scala",
-        "Scheme"
-      ];
+      //Title Code
+      var json = JSON.stringify(<?php echo json_encode($title['description']); ?>);
+      var titleTags = JSON.parse(json);
+      json = JSON.stringify(<?php echo json_encode($title['code']); ?>);
+      var titleCode = JSON.parse(json);
+
+      //Group Code
+      json = JSON.stringify(<?php echo json_encode($group['code']); ?>);
+      var groupCode = JSON.parse(json);
+      json = JSON.stringify(<?php echo json_encode($group['description']); ?>);
+      var groupTag = JSON.parse(json);
 
       $( "#addTitle" ).autocomplete({
-        source: availableTags
+        source: titleTags,
+        change: function( event, ui ) {
+          if (ui.item) {
+            var index = $.inArray(ui.item.value,titleTags);
+            $("#titleId").val(titleCode[index]);
+          }
+          else{
+            $("#titleId").val(-1);
+          }
+          console.log($("#titleId").val());
+        },
+        select: function(event,ui){
+          var index = $.inArray(ui.item.value,titleTags);
+          $("#titleId").val(titleCode[index]);
+          console.log($("#titleId").val());
+        }
+      });
+
+      $( "#addGroup" ).autocomplete({
+        source: groupTag,
+        select: function(event,ui){
+          var index = $.inArray(ui.item.value,groupTag);
+          $("#groupId").val(groupCode[index]);
+          console.log($("#groupId").val());
+        }
       });
     });
     </script>
@@ -384,45 +429,10 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
   <div class="container-fluid navbar-padding">
     <div class="row">
-      <?php echo $status; ?>
-<!--<label class='pull-right'><input type='checkbox' id='addPrivacy' name='privacy'/>Private</label> -->
-      <!-- A-Z Picker -->
-      <!--
-      <div class="col-md-1 col-sm-2 col-xs-2 ul_margin pre-scrollable scrollbar" id="style-3">
-          <nav>
-            <ul class="force-scroll">
-              <center>
-                <li class="ul_pad"><a href="#A">A</a></li>
-                <li class="ul_pad"><a href="#B">B</a></li>
-                <li class="ul_pad"><a href="#C">C</a></li>
-                <li class="ul_pad"><a href="#D">D</a></li>
-                <li class="ul_pad"><a href="#E">E</a></li>
-                <li class="ul_pad"><a href="#F">F</a></li>
-                <li class="ul_pad"><a href="#G">G</a></li>
-                <li class="ul_pad"><a href="#H">H</a></li>
-                <li class="ul_pad"><a href="#I">I</a></li>
-                <li class="ul_pad"><a href="#J">J</a></li>
-                <li class="ul_pad"><a href="#K">K</a></li>
-                <li class="ul_pad"><a href="#L">L</a></li>
-                <li class="ul_pad"><a href="#M">M</a></li>
-                <li class="ul_pad"><a href="#N">N</a></li>
-                <li class="ul_pad"><a href="#O">O</a></li>
-                <li class="ul_pad"><a href="#P">P</a></li>
-                <li class="ul_pad"><a href="#Q">Q</a></li>
-                <li class="ul_pad"><a href="#R">R</a></li>
-                <li class="ul_pad"><a href="#S">S</a></li>
-                <li class="ul_pad"><a href="#T">T</a></li>
-                <li class="ul_pad"><a href="#U">U</a></li>
-                <li class="ul_pad"><a href="#V">V</a></li>
-                <li class="ul_pad"><a href="#W">W</a></li>
-                <li class="ul_pad"><a href="#X">X</a></li>
-                <li class="ul_pad"><a href="#Y">Y</a></li>
-                <li class="ul_pad"><a href="#Z">Z</a></li>
-              </center>
-            </ul>
-          </nav>
-      </div>
-      -->
+      <?php 
+        echo $status; 
+        //echo json_encode($group['code']);
+      ?>
     
       <div class="col-md-5 col-sm-12 col-xs-12">
         <div class="panel panel-default scroll" id="style-3">
@@ -504,6 +514,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     </div><!--ROW-->
   </div>
 
+
   <!-- Add Contact Modal -->
   <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
     <div class="modal-dialog">
@@ -540,6 +551,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                 <input type="text" name="title" class="form-control title_css" id="addTitle" />
               </div>
             </div>
+            <input type="hidden" id="titleId" name="titleId" value="0" />
             <div class="form-group">
               <label class="col-xs-4 control-label">First Name</label>
               <div class="col-xs-8">
@@ -603,10 +615,10 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                       <input type="text" name="dom" id="addDOM" class="form-control datepicker" placeholder="Anniversary Date" />
                     </div>
                   </div>
-                  
+                  <input type="hidden" id="groupId" name="groupId" value="0" />
                   <div class="form-group">
                     <label class="col-xs-4 control-label">Group</label>
-                    <div class="col-xs-8">
+                    <div class="col-xs-8 ui-widget">
                       <input type="text" name="group" id="addGroup" class="form-control" placeholder="Group" />
                     </div>
                   </div>

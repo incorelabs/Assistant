@@ -9,23 +9,40 @@ $mysqli = getConnection();
 if (isset($_POST['id'])) {
 	$date = new DateTime();
 	$timestamp = $date->getTimestamp();
+	$titleCode = 0;
+	$groupCode = 0;
 	$sql = "";
 
-	if (isset($_POST['title']) && strlen($_POST['title']) > 0) {
-		$sql = build_insert_str('title',array(
+	//Title ID manipulations
+	if (isset($_POST['titleId'])) {
+		if (intval($_POST['titleId']) > 0) {
+			$titleCode = $_POST['titleId'];
+		}
+		elseif (isset($_POST['title']) && strlen($_POST['title']) > 0) {
+			$sql = build_insert_str('title',array(
+				$timestamp,
+				$_POST['title'],
+				'1001'
+				)).";";
+			$titleCode = $timestamp;
+		}
+	}
+		
+	
+	//Group ID manipulation
+	if (isset($_POST["groupId"])) {
+		if (intval($_POST['groupId']) > 0) {
+			$groupCode = $_POST['group'];
+		}
+		elseif (isset($_POST['group']) && strlen($_POST['group']) > 0) {
+			$sql .= build_insert_str(DB_NAME.'.group',array(
 			$timestamp,
-			$_POST['title'],
+			$_POST['group'],
 			'1001'
 			)).";";
-	}
-	
-	
-	if (isset($_POST['group']) && strlen($_POST['group']) > 0) {
-		$sql .= build_insert_str(DB_NAME.'.group',array(
-		$timestamp,
-		$_POST['group'],
-		'1001'
-		)).";";
+
+			$groupCode =  $timestamp;
+		}
 	}
 
 
@@ -36,14 +53,14 @@ if (isset($_POST['id'])) {
 		$_POST['middleName'],
 		$_POST['lastName'],
 		$_POST['firstName']." ".$_POST['middleName']." ".$_POST['lastName'],
-		$timestamp,
+		$titleCode,
 		$_POST['guardianName'],
 		$_POST['company'],
 		$_POST['designation'],
 		$_POST['alias'],
 		$_POST['dob'],
 		$_POST['dom'],
-		$timestamp,
+		$groupCode,
 		null,
 		$_POST['remarks'],
 		(isset($_POST['activeStatus']) ? 1 : 0),
