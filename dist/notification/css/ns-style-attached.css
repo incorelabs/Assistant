@@ -16,7 +16,9 @@
     -webkit-transform-origin: 50% 0%;
     transform-origin: 50% 0%;
     background: #40d47e;
-    color: #484860;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
     top: 0;
     box-shadow: 0 13px 10px -5px rgba(0,0,0,0.2);
 }
