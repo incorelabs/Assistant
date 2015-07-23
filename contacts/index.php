@@ -445,24 +445,31 @@ if ($result = $mysqli->query($sql)) {
   <div class="container-fluid navbar-padding">
     <div class="row">
       <div class="col-xs-5">
-        <div class="col-xs-6 col-md-6">
-          <input type="text" class="form-control search_text" placeholder="Search..." />
-        </div>
-        <div class="col-xs-3 col-md-3">
-          <div class="input-group-btn">
-          <select class="form-control selectpicker" name="category" width="100%">
-            <option>Name</option>
-            <option>Address</option>
-            <option>Phone Number</option>
-            <option>Company</option>
-          </select>
 
-        </div>
-        </div>
-        <div class="col-xs-3 col-md-3">
-          <button class="btn btn-primary" style="width: 100%;" onclick="openAddContact();"><span class="glyphicon glyphicon-plus hidden-sm hidden-xs"></span>
-          Add
-          </button>
+        <div class="list-group">
+          <div class="list-group-item">
+            <div class="row">
+               <div class="col-xs-6 col-md-6">
+                <input type="text" class="form-control search_text" placeholder="Search..." />
+              </div>
+              <div class="col-xs-3 col-md-3">
+                <div class="input-group-btn">
+                <select class="form-control selectpicker" name="category" width="100%">
+                  <option>Name</option>
+                  <option>Address</option>
+                  <option>Phone Number</option>
+                  <option>Company</option>
+                </select>
+
+              </div>
+              </div>
+              <div class="col-xs-3 col-md-3">
+                <button class="btn btn-primary" style="width: 100%;" onclick="openAddContact();"><span class="glyphicon glyphicon-plus hidden-sm hidden-xs"></span>
+                Add
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     
@@ -491,7 +498,7 @@ if ($result = $mysqli->query($sql)) {
                 $str = "";
                 if ($result = $mysqli->query($sql)) {
                   if ($result->num_rows == 0) {
-                    $str = "<a href='#' class='list-group-item '>
+                    $str = "<a href='#' class='list-group-item'>
                             <li class='list-group-item-text header_font'>No contacts</li>
                           </a>";
                   }
