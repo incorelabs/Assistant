@@ -11,6 +11,7 @@ if (isset($_POST['id'])) {
 	$date = new DateTime();
 	$timestamp = $date->getTimestamp();
 	$titleValue = 0;
+	$groupValue = 0;
 	$sql = "";
 
 	if (isset($_POST['titleId'])) {
@@ -32,6 +33,25 @@ if (isset($_POST['id'])) {
 		}
 	}
 
+	if (isset($_POST['groupId'])) {
+		$groupId = intval($_POST['groupId']);
+		if ($groupId == -1) {
+			$groupValue = $timestamp;
+
+			$sql .= build_insert_str(DB_NAME.'.group',array(
+				$timestamp,
+				$_POST['group'],
+				'1001'
+			)).";";
+		}
+		elseif ($groupId == 0) {
+			$groupValue = "groupCode";
+		}
+		else{
+			$groupValue = $groupId;
+		}
+	}
+
 	$data = array(
 			"firstName" => $_POST['firstName'],
 			"middleName" => $_POST['middleName'],
@@ -44,6 +64,7 @@ if (isset($_POST['id'])) {
 			"alias" => $_POST['alias'],
 			"dob" => $_POST['dob'],
 			"dom" => $_POST['dom'],
+			"groupCode" => $groupValue,
 			"remarks" => $_POST['remarks'],
 			"activeStatus" => (isset($_POST['activeStatus']) ? 1 : 0),
 			"mobile" => $_POST["mobile"],

@@ -1,3 +1,0 @@
-[17-Jul-2015 11:52:45 UTC] PHP Fatal error:  Call to undefined function buildDeleteStr() in /home/incorelabs/public_html/Assist/contacts/delete.php on line 10
-[17-Jul-2015 11:53:12 UTC] PHP Fatal error:  Call to undefined function buildDeleteStr() in /home/incorelabs/public_html/Assist/contacts/delete.php on line 10
-[18-Jul-2015 06:06:53 UTC] PHP Fatal error:  Call to undefined function buildDeleteStr() in /home/incorelabs/public_html/Assist/contacts/delete.php on line 10

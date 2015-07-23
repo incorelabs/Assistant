@@ -154,16 +154,16 @@ if ($result = $mysqli->query($sql)) {
 
     function setContactView(arr){
       //var json = JSON.stringify(arr);
-      var str = "<div class='panel-heading text-center'><h12>Contact Details</h12><button class='btn btn-success button_width pull-right ' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span>&nbsp&nbspEdit</button><button class='btn btn-danger button_width pull-left' onclick='openDeleteModal("+arr.contactCode+")'><span class='glyphicon glyphicon-trash'></span>&nbspDelete</button></div>";
-      
+      var headerStr = "<h12>Contact Details</h12><button class='btn btn-success button_width pull-right' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span>&nbsp&nbspEdit</button><button class='btn btn-danger button_width pull-left' onclick='openDeleteModal("+arr.contactCode+")'><span class='glyphicon glyphicon-trash'></span>&nbspDelete</button>";
+      var str = "";
       if (arr.photoUploaded) {
 
       }
       else{
-        
+        str += "<div class='list-group-item'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='../img/contacts/profile/profilePicture.png' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='pull-right'>Private&nbsp&nbsp<div class='switch'><input type='checkbox' name='Private' id='addPrivacy' class='switch-input'><label for='addPrivacy' class='switch-label'>Privacy</label></div></div><div class='header_font'>Name</div><div class='pull-right' style='padding-top:3px;'>Active Status&nbsp&nbsp<div class='switch' ><input type='checkbox' name='activeStatus' id='addActiveStatus' class='switch-input' checked='checked'><label for='addActiveStatus' class='switch-label'>Active Status</label></div></div><h4 class='list-group-item-heading'>"+((arr.title) ? arr.title + " " : "")+((arr.fullName) ? arr.fullName : "")+"</h4></div>";
       };
       //if (arr.fullName) {
-        str += "<div class='list-group-item'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='../img/contacts/Darshan Turakhia.jpg' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='pull-right'>Private&nbsp&nbsp<div class='switch'><input type='checkbox' name='Private' id='addPrivacy' class='switch-input'><label for='addPrivacy' class='switch-label'>Privacy</label></div></div><div class='header_font'>Name</div><div class='pull-right' style='padding-top:3px;'>Active Status&nbsp&nbsp<div class='switch' ><input type='checkbox' name='activeStatus' id='addActiveStatus' class='switch-input' checked='checked'><label for='addActiveStatus' class='switch-label'>Active Status</label></div></div><h4 class='list-group-item-heading'>"+((arr.title) ? arr.title + " " : "")+((arr.fullName) ? arr.fullName : "")+"</h4></div>";
+        
       //};
 
       //if (arr.fullName) {
@@ -230,8 +230,10 @@ if ($result = $mysqli->query($sql)) {
         str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'>"+arr.website+"</div></value></div></div>";
       };
 
-      $("#contactDetail").empty();
-      $("#contactDetail").html(str);
+      $("#contactDetailHeader").empty();
+      $("#contactDetailHeader").html(headerStr);
+      $("#contactDetailBody").empty();
+      $("#contactDetailBody").html(str);
     }
 
     function openAddContact () {
@@ -361,17 +363,25 @@ if ($result = $mysqli->query($sql)) {
           else{
             $("#titleId").val(-1);
           }
-          console.log($("#titleId").val());
         },
         select: function(event,ui){
           var index = $.inArray(ui.item.value,titleTags);
           $("#titleId").val(titleCode[index]);
-          console.log($("#titleId").val());
         }
       });
 
       $( "#addGroup" ).autocomplete({
         source: groupTag,
+        change: function( event, ui ) {
+          if (ui.item) {
+            var index = $.inArray(ui.item.value,groupTag);
+            $("#groupId").val(groupCode[index]);
+          }
+          else{
+            $("#groupId").val(-1);
+          }
+          console.log($("#groupId").val());
+        },
         select: function(event,ui){
           var index = $.inArray(ui.item.value,groupTag);
           $("#groupId").val(groupCode[index]);
@@ -434,6 +444,38 @@ if ($result = $mysqli->query($sql)) {
 
   <div class="container-fluid navbar-padding">
     <div class="row">
+      <div class="col-xs-5">
+        <div class="col-xs-6 col-md-6">
+          <input type="text" class="form-control search_text" placeholder="Search..." />
+        </div>
+        <div class="col-xs-3 col-md-3">
+          <div class="input-group-btn">
+          <select class="form-control selectpicker" name="category" width="100%">
+            <option>Name</option>
+            <option>Address</option>
+            <option>Phone Number</option>
+            <option>Company</option>
+          </select>
+
+        </div>
+        </div>
+        <div class="col-xs-3 col-md-3">
+          <button class="btn btn-primary" style="width: 100%;" onclick="openAddContact();"><span class="glyphicon glyphicon-plus hidden-sm hidden-xs"></span>
+          Add
+          </button>
+        </div>
+      </div>
+    
+      <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
+        <div class="panel panel-default scroll" id="style-3">
+          <div id="contactDetailHeader" class="panel-heading text-center force-overflow">
+            <h12>Contact Details</h12>
+          </div>
+             
+        </div><!--Panel-->
+      </div><!--COL-->
+    </div><!--row-->
+    <div class="row">
       <?php 
         echo $status; 
         //echo json_encode($group['code']);
@@ -443,28 +485,6 @@ if ($result = $mysqli->query($sql)) {
         <div class="panel panel-default scroll" id="style-3">
              <!-- List group -->
             <div class="list-group force-scroll">
-              <li class="list-group-item">
-                <div class="row">
-                  <div class="col-xs-6 col-md-6">
-                    <input type="text" class="form-control search_text" placeholder="Search..." />
-                  </div>
-                  <div class="col-xs-3 col-md-3">
-                    <div class="input-group-btn">
-                    <select class="form-control selectpicker" name="category" width="100%">
-                      <option>Name</option>
-                      <option>Address</option>
-                      <option>Phone Number</option>
-                      <option>Company</option>
-                    </select>
-
-                  </div>
-                  </div>
-                  <div class="col-xs-3 col-md-3">
-                    <button class="btn btn-primary" style="width: 100%;" onclick="openAddContact();"><span class="glyphicon glyphicon-plus hidden-sm hidden-xs"></span>
-                    Add
-                    </button>
-                  </div>
-                </div>
 
               <?php 
                 $sql = "SELECT contactCode,fullName FROM contact ORDER BY fullName;";
@@ -502,17 +522,12 @@ if ($result = $mysqli->query($sql)) {
 
       <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
         <div id="contactDetail" class="panel panel-default scroll" id="style-3">
-            <div class="panel-heading text-center force-overflow">
-              <h12>Contact Details</h12>
-            </div>
-
              <!-- List group -->  
-              <div class="list-group">
+              <div id="contactDetailBody" class="list-group">
                 <div class="list-group-item">
                   <p class="list-group-item-text">Loading...</p>
                 </div>
               </div><!--List close-->
-            
              
         </div><!--Panel-->
       </div><!--COL-->
