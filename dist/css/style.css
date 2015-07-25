@@ -1,53 +1,53 @@
 body
 {
-	height: 100%;
-	overflow: hidden;
-	background-color: #ecf0f1;
+  height: 100%;
+  overflow: hidden;
+  background-color: #ecf0f1;
 }
 
 .navbar-default
 {
-	background-color: #34495e;
+  background-color: #34495e;
 }
 .navbar-default .navbar-brand
 {
-	color: white;
+  color: white;
 }
 
 .navbar-default .navbar-nav>li>a
 {
-	color: white;
+  color: white;
 }
 
 .dropdown-toggle{
-	color: white;
+  color: white;
 }
 
 .title_css
 {
-	width: 40%;
+  width: 40%;
 }
 .button_width
 {
-	width:15%;
+  width:15%;
 }
 .modal_button
 {
-	font-size: 2rem;
+  font-size: 2rem;
 }
 
 .ul_margin
 {
-	margin: 0px;
-	padding: 0px;
+  margin: 0px;
+  padding: 0px;
 }
 h12
 {
-	font-size: 2.5rem;
+  font-size: 2.5rem;
 }
 .search_text
 {
-	width: 105%;
+  width: 105%;
 }
 li
 {
@@ -55,13 +55,13 @@ list-style-type: none;
 }
 .li-pad
 {
-	padding-left: 15px;
-	background-color: #eeeeee;
+  padding-left: 15px;
+  background-color: #eeeeee;
 }
 
 .navbar-padding
 {
-	padding-top: 70px;
+  padding-top: 70px;
 }
 
 .ui-autocomplete {
@@ -70,25 +70,34 @@ list-style-type: none;
 
 .header_font
 {
-	color: #007aff;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-weight: bold;
-	font-size: 14px;
-	font-weight: 400;
-	margin: 0;
+  color: #007aff;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  font-weight: 200;
+  margin: 0;
+}
+.details_padding
+{
+  padding-top: 5px;
+}
+.header_margin
+{
+  padding-bottom: 5px !important;
+  padding-left: 17px !important;
 }
 .contacts_font
 {
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-	font-weight: 400;
-	font-size: 14px;
-	line-height: 0.6;
-	border-style: none;
-	border-top-width: 0px 0px;
-	margin-bottom: 0px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 0.6;
+  border-style: none;
+  border-top-width: 0px 0px;
+  margin-bottom: 0px;
 }
 .scroll{
-		max-height:calc(100vh - 140px);
+    max-height:calc(100vh - 145px);
         overflow-y: auto;
         overflow-x: hidden;
 }
@@ -97,9 +106,9 @@ list-style-type: none;
 }
 
 img{
-	height: 40px;
-	width: 40px;
-	margin-right: 20px;
+  height: 40px;
+  width: 40px;
+  margin-right: 20px;
 }
 
 .overlay {
@@ -202,4 +211,14 @@ value{
   border-top-right-radius: 0px !important;
   border-top-left-radius: 0px !important;
   border-top: 0px !important;
+}
+h5{
+  font-weight: 450;
+  font-size: 16px !important;
+}
+.btn-size{
+  width:13%;
+}
+.form-group-margin{
+  margin-bottom: 10px;
 }
