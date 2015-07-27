@@ -34,8 +34,11 @@ if (isset($_GET['id'])) {
 if (isset($_GET['list'])) {
 	$sql = "SELECT contactCode,fullName FROM contact ORDER BY fullName;";
 	if ($result = $mysqli->query($sql)) {
-		$contact = $result->fetch_all();
-		//print_r($contact);
+		$i = 0;
+		while ($row = $result->fetch_assoc()) {
+			$contact[$i] = array($row['contactCode'],$row['fullName']);
+			$i++;
+		}
 	}
 }
 
