@@ -567,7 +567,7 @@ if ($result = $mysqli->query($sql)) {
         </div><!--Panel-->
       </div><!--COL-->
 
-      <div class="col-md-7 col-sm-10">
+      <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
         <div id="contactDetail" class="panel panel-default scroll panel-margin" id="style-3">
              <!-- List group -->  
               <div id="contactDetailBody" class="list-group">
@@ -669,7 +669,7 @@ if ($result = $mysqli->query($sql)) {
               <div class="col-xs-7">
                 <div class="left-inner-addon ">
                   <i class="glyphicon glyphicon-phone"></i>
-                  <input type="text" name="mobile" id="addMobile" class="form-control" placeholder="Phone" />
+                  <input type="text" name="mobile" id="addMobile" class="form-control" placeholder="Mobile" />
                 </div>
               </div>
             </div>
@@ -779,7 +779,7 @@ if ($result = $mysqli->query($sql)) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-home"></i>
-                        <input type="text" name="address" id="addAddress" class="form-control" placeholder="Address" />
+                        <input type="text" name="address" id="addAddress" class="form-control" placeholder="Address 1" />
                       </div>
                     </div>
                   </div>
@@ -788,7 +788,7 @@ if ($result = $mysqli->query($sql)) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-home"></i>
-                        <input type="text" name="address1" id="address1" class="form-control" placeholder="Address 1" />
+                        <input type="text" name="address1" id="address1" class="form-control" placeholder="Address 2" />
                       </div>
                     </div>
                   </div>
@@ -797,7 +797,7 @@ if ($result = $mysqli->query($sql)) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-home"></i>
-                        <input type="text" name="address2" id="address2" class="form-control" placeholder="Address 2" />
+                        <input type="text" name="address2" id="address2" class="form-control" placeholder="Address 3" />
                       </div>
                     </div>
                   </div>
@@ -806,7 +806,7 @@ if ($result = $mysqli->query($sql)) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-home"></i>
-                        <input type="text" name="address3" id="address3" class="form-control" placeholder="Address 3" />
+                        <input type="text" name="address3" id="address3" class="form-control" placeholder="Address 4" />
                       </div>
                     </div>
                   </div>
@@ -815,7 +815,7 @@ if ($result = $mysqli->query($sql)) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-home"></i>
-                        <input type="text" name="address4" id="address4" class="form-control" placeholder="Address 4" />
+                        <input type="text" name="address4" id="address4" class="form-control" placeholder="Address 5" />
                       </div>
                     </div>
                   </div>                 
@@ -883,7 +883,7 @@ if ($result = $mysqli->query($sql)) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-briefcase"></i>
-                        <input type="text" name="address" id="addAddress" class="form-control" placeholder="Address" />
+                        <input type="text" name="address" id="addAddress" class="form-control" placeholder="Address 1" />
                       </div>
                     </div>
                   </div>
@@ -892,7 +892,7 @@ if ($result = $mysqli->query($sql)) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-briefcase"></i>
-                        <input type="text" name="address1" id="address1" class="form-control" placeholder="Address 1" />
+                        <input type="text" name="address1" id="address1" class="form-control" placeholder="Address 2" />
                       </div>
                     </div>
                   </div>
@@ -901,7 +901,7 @@ if ($result = $mysqli->query($sql)) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-briefcase"></i>
-                        <input type="text" name="address2" id="address2" class="form-control" placeholder="Address 2" />
+                        <input type="text" name="address2" id="address2" class="form-control" placeholder="Address 3" />
                       </div>
                     </div>
                   </div>
@@ -910,7 +910,7 @@ if ($result = $mysqli->query($sql)) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-briefcase"></i>
-                        <input type="text" name="address3" id="address3" class="form-control" placeholder="Address 3" />
+                        <input type="text" name="address3" id="address3" class="form-control" placeholder="Address 4" />
                       </div>
                     </div>
                   </div>
@@ -919,7 +919,7 @@ if ($result = $mysqli->query($sql)) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-briefcase"></i>
-                        <input type="text" name="address4" id="address4" class="form-control" placeholder="Address 4" />
+                        <input type="text" name="address4" id="address4" class="form-control" placeholder="Address 5" />
                       </div>
                     </div>
                   </div>                 
@@ -986,7 +986,7 @@ if ($result = $mysqli->query($sql)) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-road"></i>
-                        <input type="text" name="address" id="addAddress" class="form-control" placeholder="Address" />
+                        <input type="text" name="address" id="addAddress" class="form-control" placeholder="Address 1" />
                       </div>
                     </div>
                   </div>
@@ -995,7 +995,7 @@ if ($result = $mysqli->query($sql)) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-road"></i>
-                        <input type="text" name="address1" id="address1" class="form-control" placeholder="Address 1" />
+                        <input type="text" name="address1" id="address1" class="form-control" placeholder="Address 2" />
                       </div>
                     </div>
                   </div>
@@ -1004,7 +1004,7 @@ if ($result = $mysqli->query($sql)) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-road"></i>
-                        <input type="text" name="address2" id="address2" class="form-control" placeholder="Address 2" />
+                        <input type="text" name="address2" id="address2" class="form-control" placeholder="Address 3" />
                       </div>
                     </div>
                   </div>
@@ -1013,7 +1013,7 @@ if ($result = $mysqli->query($sql)) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-road"></i>
-                        <input type="text" name="address3" id="address3" class="form-control" placeholder="Address 3" />
+                        <input type="text" name="address3" id="address3" class="form-control" placeholder="Address 4" />
                       </div>
                     </div>
                   </div>
@@ -1022,7 +1022,7 @@ if ($result = $mysqli->query($sql)) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-road"></i>
-                        <input type="text" name="address4" id="address4" class="form-control" placeholder="Address 4" />
+                        <input type="text" name="address4" id="address4" class="form-control" placeholder="Address 5" />
                       </div>
                     </div>
                   </div>                 
