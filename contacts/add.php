@@ -84,10 +84,10 @@ if (isset($_POST['id'])) {
 	//echo $sql;
 
 	if ($mysqli->multi_query($sql)) {
-		exit(header("Location:index.php?status=1&controller=add"));
+		exit(header("Location:index.php?status=1&controller=add&landing=".$_POST['id']));
 	}
 	else{
-		exit(header("Location:index.php?status=0&controller=add"));
+		exit(header("Location:index.php?status=0&controller=add&landing=".$_POST['id']));
 	}
 
 }

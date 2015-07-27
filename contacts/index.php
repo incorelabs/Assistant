@@ -119,9 +119,11 @@ if ($result = $mysqli->query($sql)) {
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script>
     var contact;
+    var contactList;
+    var searchList;
     var contactCode = <?php echo $id; ?>;
 
-    function getContactList(id){
+    function getContactList(){
       $.ajax({
         method: "GET",
         url: "getContact.php",
@@ -130,7 +132,8 @@ if ($result = $mysqli->query($sql)) {
          }
       })
         .done(function(msg) {
-          contact = JSON.parse(msg);
+          contactList = JSON.parse(msg);
+          setContactViewList(contactList);
         });
     }
 
@@ -149,7 +152,42 @@ if ($result = $mysqli->query($sql)) {
     }
 
     function setContactViewList(arr){
+      var str = "";
+      if (arr.length == 0) {
+        str = "<div class='list-group-item'><li class='list-group-item-text header_font'>No contacts yet...</li></div>";
+      }
+      else{
+        var letterIndex = "";
+        for (var i = 0; i < arr.length; i++) {
+          var letter = arr[i][1].toUpperCase()[0];
+          if (letter != letterIndex) {
+            str += "<li class='list-group-item-info li-pad'>"+letter+"</li>";
+            letterIndex = letter;
+          }
+          str += "<a href='#' onclick='getContact("+arr[i][0]+")' class='list-group-item contacts_font'><h4 class='list-group-item-heading contacts_font'>"+arr[i][1]+"</h4></a>";
+        }
+      }
 
+      $("#contactList").empty();
+      $("#contactList").html(str);
+    }
+
+    function doSearch(){
+      var query = $("#searchContact").val();
+      query = query.toLowerCase();
+      searchList = [];
+      if (query.length == 0) {
+        searchList = contactList;
+      }
+      else{
+        for (var i = 0; i < contactList.length; i++) {
+          var name = contactList[i][1].toLowerCase();
+          if (name.indexOf(query) != -1) {
+            searchList.push(contactList[i]);
+          }
+        }
+      }
+      setContactViewList(searchList);
     }
 
     function setContactView(arr){
@@ -170,9 +208,9 @@ if ($result = $mysqli->query($sql)) {
       //  str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Name<value class='name'>"+((arr.fullName) ? arr.fullName : "")+"</value></h4></div>";
       //};
 
-      if (arr.guardianName) {
-        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Guardian</div><value><div class='col-md-9'>"+arr.guardianName+"</div></value></div></div>";
-      };
+      
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Guardian</div><value><div class='col-md-9'>"+((arr.guardianName) ? arr.guardianName : "")+"</div></value></div></div>";
+      
 
       //if (arr.company) {
         str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Company</div><value><div class='col-md-9'>"+((arr.company) ? arr.company : "" )+"</div></value></div></div>";
@@ -182,25 +220,25 @@ if ($result = $mysqli->query($sql)) {
         str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Designation</div><value><div class='col-md-9'>"+((arr.designation) ? arr.designation : "")+"</div></value></div></div>";
       //};
 
-      if (arr.alias) {
-        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Alias</div><value><div class='col-md-9'>"+arr.alias+"</div></value></div></div>";
-      };
+      //if (arr.alias) {
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Alias</div><value><div class='col-md-9'>"+((arr.alias) ? arr.alias : "")+"</div></value></div></div>";
+      //};
       
-      if (arr.dob) {
-        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.B</div><value><div class='col-md-9'>"+arr.dob+"</div></value></div></div>";
-      };
+      //if (arr.dob) {
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.B</div><value><div class='col-md-9'>"+((arr.dob) ? arr.dob : "")+"</div></value></div></div>";
+      //};
 
-      if (arr.dom) {
-        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.M</div><value><div class='col-md-9'>"+arr.dom+"</div></value></div></div>";
-      };
+      //if (arr.dom) {
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.M</div><value><div class='col-md-9'>"+((arr.dom) ? arr.dom : "")+"</div></value></div></div>";
+      //};
 
-      if (arr.group) {
-        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Group</div><value><div class='col-md-9'>"+arr.group+"</div></value></div></div>";
-      };
+      //if (arr.group) {
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Group</div><value><div class='col-md-9'>"+((arr.group) ? arr.group : "")+"</div></value></div></div>";
+      //};
 
-      if (arr.remarks) {
-        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Remarks</div><value><div class='col-md-9'>"+arr.remarks+"</div></value></div></div>";
-      };
+      //if (arr.remarks) {
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Remarks</div><value><div class='col-md-9'>"+((arr.remarks) ? arr.remarks : "")+"</div></value></div></div>";
+      //};
 
       //if (arr.mobile) {
         str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile</div><value><div class='col-md-9'>"+((arr.mobile) ? arr.mobile : "")+"</div></value></div></div>";
@@ -210,25 +248,25 @@ if ($result = $mysqli->query($sql)) {
         str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Email</div><value><div class='col-md-9'>"+((arr.email) ? arr.email : "")+"</div></value></div></div>";
       //};
 
-      if (arr.facebook) {
-        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Facebook</div><value><div class='col-md-9'>"+arr.facebook+"</div></value></div></div>";
-      };
+      //if (arr.facebook) {
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Facebook</div><value><div class='col-md-9'>"+((arr.facebook) ? arr.facebook : "")+"</div></value></div></div>";
+      //};
 
-      if (arr.twitter) {
-        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Twitter</div><value><div class='col-md-9'>"+arr.twitter+"</div></value></div></div>";
-      };
+      //if (arr.twitter) {
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Twitter</div><value><div class='col-md-9'>"+((arr.twitter) ? arr.twitter  : "")+"</div></value></div></div>";
+      //};
 
-      if (arr.google) {
-        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Google</div><value><div class='col-md-9'>"+arr.google+"</div></value></div></div>";
-      };
+      //if (arr.google) {
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Google</div><value><div class='col-md-9'>"+((arr.google) ? arr.google : "")+"</div></value></div></div>";
+      //};
 
-      if (arr.linkedin) {
-        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Linkedin</div><value><div class='col-md-9'>"+arr.linkedin+"</div></value></div></div>";
-      };
+      //if (arr.linkedin) {
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Linkedin</div><value><div class='col-md-9'>"+((arr.linkedin) ? arr.linkedin  : "")+"</div></value></div></div>";
+      //};
 
-      if (arr.website) {
-        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'>"+arr.website+"</div></value></div></div>";
-      };
+      //if (arr.website) {
+        str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'>"+((arr.website) ? arr.website : "")+"</div></value></div></div>";
+      //};
 
       $("#contactDetailHeader").empty();
       $("#contactDetailHeader").html(headerStr);
@@ -239,6 +277,8 @@ if ($result = $mysqli->query($sql)) {
     function openAddContact () {
       $("#addContactForm").attr("action","add.php");
       $("#contactCode").val(contactCode);
+      $('#contactModalHeading').empty();
+      $('#contactModalHeading').html("Add Contact");
       document.getElementById("addContactForm").reset();
       $("#addModal").modal('show');
     }
@@ -248,6 +288,8 @@ if ($result = $mysqli->query($sql)) {
       
       $('#titleId').val(0);
       $('#groupId').val(0);
+      $('#contactModalHeading').empty();
+      $('#contactModalHeading').html("Edit Contact");
       $("#addContactForm").attr("action","edit.php");
 
       $("#contactCode").val(contact.contactCode);
@@ -337,7 +379,14 @@ if ($result = $mysqli->query($sql)) {
     }
 
     $(document).ready(function(event){
-      getContact(0);
+      <?php 
+        $landing = 0;
+        if (isset($_GET['landing'])) {
+          $landing = $_GET['landing'];
+        }
+      ?>
+      getContact(<?php echo $landing; ?>);
+      getContactList();
 
       $('.alert').fadeOut(2000);
 
@@ -390,34 +439,8 @@ if ($result = $mysqli->query($sql)) {
       });
     });
     </script>
-    <script>
-    $('.nav li').click(function(e) {
-        $('.nav li.active').removeClass('active');
-        var $this = $(this);
-        if (!$this.hasClass('active')) {
-            $this.addClass('active');
-        }
-        e.preventDefault();
-    });
-    </script>
-    <script type="text/javascript">
-      /* FUNCTIONS BASE JS */
-function goTo(element) {
-  jQuery('html, body').animate({scrollTop: (jQuery(element).offset().top)-170}, 500, function(){});
-}
-
-
-//Menu latéral toggle & lettring
-jQuery(function() {
-  
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-});
-
-
-    </script>
+    
+    
   </head>
   <body>
     <!-- fixed top navbar -->
@@ -431,7 +454,7 @@ jQuery(function() {
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="btn btn-default pull-left" href="#menu-toggle" id="menu-toggle" tabindex="-1"><span class="glyphicon glyphicon-align-justify"></span></a>
+        
         <a class="navbar-brand dropdown-toggle" href="../">Assist</a>
       </div>
 
@@ -460,36 +483,11 @@ jQuery(function() {
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-<div id="wrapper" class="toggled" tabindex="-1">
-  <div id="sidebar-wrapper" >
-    <ul class="sidebar-nav">
-      <li class="sidebar-brand">
-        <a href="#">
-          Home
-        </a>
-      </li>
-      <li>
-        <a href="#">Contacts</a>
-      </li>
-      <li>
-        <a href="#">Cars</a>
-      </li>
-      <li>
-        <a href="#">Assets</a>
-      </li>
-      <li>
-        <a href="#">Land</a>
-      </li>
-      <li>
-        <a href="#">Family</a>
-      </li>
-      <li>
-        <a href="#">Personal</a>
-      </li>
-    </ul>
-  </div>        
-</div>
   <div class="container-fluid navbar-padding">
+    <?php 
+      echo $status; 
+      //echo json_encode($group['code']);
+    ?>
     <div class="row">
       <div class="col-xs-12 col-md-5">
 
@@ -498,7 +496,7 @@ jQuery(function() {
             <div class="row">
                <div class="col-xs-10 col-md-10">
                 <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search..." autofocus/>
+                <input id="searchContact" type="text" class="form-control" onkeyup="doSearch();" placeholder="Search..." autofocus/>
                   <div class="input-group-btn">
                         <div class="btn-group" role="group">
                             <div class="dropdown dropdown-lg">
@@ -557,51 +555,19 @@ jQuery(function() {
       </div><!--COL-->
     </div><!--row-->
     <div class="row">
-      <?php 
-        echo $status; 
-        //echo json_encode($group['code']);
-      ?>
     
       <div class="col-md-5 col-sm-12 col-xs-12">
         <div class="panel panel-default scroll panel-margin" id="style-3">
              <!-- List group -->
-            <div class="list-group force-scroll">
-
-              <?php 
-                $sql = "SELECT contactCode,fullName FROM contact ORDER BY fullName;";
-                $str = "";
-                if ($result = $mysqli->query($sql)) {
-                  if ($result->num_rows == 0) {
-                    $str = "<a href='#' class='list-group-item'>
-                            <li class='list-group-item-text header_font'>No contacts</li>
-                          </a>";
-                  }
-                  else{
-                    $letterIndex = "";
-                    while ($row = $result->fetch_assoc()) {
-
-                      $letter = substr(strtoupper($row['fullName']), 0,1);
-                      
-                      if ($letter != $letterIndex) {
-                        $str .= "<li class='list-group-item-info li-pad' id='".$letter."'>".$letter."</li>";
-                        $letterIndex = $letter;
-                      }
-                      
-                      $str .= "<a onclick='getContact(".$row['contactCode'].")' class='list-group-item contacts_font'>
-                              <h4 class='list-group-item-heading contacts_font'>".$row['fullName']."</h4>
-                            </a>";
-                    }
-                  }
-                }
-
-                echo $str;
-                
-              ?>
+            <div id="contactList" class="list-group force-scroll">
+              <div class="list-group-item">
+                <p class="list-group-item-text">Loading...</p>
+              </div>
           </div><!--List close-->
         </div><!--Panel-->
       </div><!--COL-->
 
-      <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
+      <div class="col-md-7 col-sm-10">
         <div id="contactDetail" class="panel panel-default scroll panel-margin" id="style-3">
              <!-- List group -->  
               <div id="contactDetailBody" class="list-group">
@@ -638,7 +604,7 @@ jQuery(function() {
             </button>
           </div>
 
-          <h4 class="modal-title text-center">
+          <h4 id="contactModalHeading" class="modal-title text-center">
               Add Contact
           </h4>   
         </div>  
