@@ -439,8 +439,33 @@ if ($result = $mysqli->query($sql)) {
       });
     });
     </script>
-    
-    
+
+    <!-- To hide the div on selection -->
+    <script>
+      $(function() {
+        $('#filter').change(function(){
+        if ($(this).val() != "0") {
+            $('#test').hide();
+        }
+        });
+      });
+    </script>
+
+    <!--To show the div on button click -->
+    <script>
+      function showDiv() {
+        var check = false;
+        var e = document.getElementById('test');
+        if(e.style.display == "block")
+        {
+            document.getElementById('test').style.display = "none";
+            
+        }
+        else
+           document.getElementById('test').style.display = "block";  
+      }
+    </script>
+
   </head>
   <body>
     <!-- fixed top navbar -->
@@ -496,34 +521,34 @@ if ($result = $mysqli->query($sql)) {
             <div class="row">
                <div class="col-xs-10 col-md-10">
                 <div class="input-group">
-                <input id="searchContact" type="text" class="form-control" onkeyup="doSearch();" placeholder="Search..." autofocus/>
+                <input id="searchContact" type="text" class="form-control" onkeyup="doSearch();" placeholder="Search..."/>
                   <div class="input-group-btn">
                         <div class="btn-group" role="group">
                             <div class="dropdown dropdown-lg">
-                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-filter"></span></button>
-                                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                              <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false" onclick="showDiv()"><span class="glyphicon glyphicon-filter"></span></button>
+                                <div class="dropdown-menu dropdown-menu-right" role="menu" id="test">
                                     <form class="form-horizontal" role="form">
                                       <div class="form-group">
                                         <label for="filter">Filter by</label>
-                                        <select class="form-control">
-                                          <option>Name</option>
-                                          <option>Mobile</option>
-                                          <option>Email</option>
-                                          <option>Company</option>
-                                          <option>Designation</option>
-                                          <option>Father/Husband</option>
-                                          <option>Birthday</option>
-                                          <option>Anniversary</option>
-                                          <option>Group</option>
-                                          <option>Home Area</option>
-                                          <option>Home City</option>
-                                          <option>Home Phone</option>
-                                          <option>Work Area</option>
-                                          <option>Work City</option>
-                                          <option>Work Phone</option>
-                                          <option>Other Area</option>
-                                          <option>Other City</option>
-                                          <option>Other Phone</option>
+                                        <select class="form-control" id="filter">
+                                          <option value="name">Name</option>
+                                          <option value="mobile">Mobile</option>
+                                          <option value="email">Email</option>
+                                          <option value="company">Company</option>
+                                          <option value="designation">Designation</option>
+                                          <option value="guardian">Father/Husband</option>
+                                          <option value="birthday">Birthday</option>
+                                          <option value="anniversary">Anniversary</option>
+                                          <option value="group">Group</option>
+                                          <option value="home_area">Home Area</option>
+                                          <option value="home_city">Home City</option>
+                                          <option value="home_phone">Home Phone</option>
+                                          <option value="work_area">Work Area</option>
+                                          <option value="work_city">Work City</option>
+                                          <option value="work_phone">Work Phone</option>
+                                          <option value="other_area">Other Area</option>
+                                          <option value="other_city">Other City</option>
+                                          <option value="other_phone">Other Phone</option>
                                         </select>
                                       </div>
                                     </form>
@@ -632,7 +657,7 @@ if ($result = $mysqli->query($sql)) {
               <div class="col-xs-4">
                 <div class="left-inner-addon ">
                   <i class="glyphicon glyphicon-star"></i>
-                  <input type="text" name="title" class="form-control" id="addTitle" placeholder="Title" />
+                  <input type="text" name="title" class="form-control" id="addTitle" placeholder="Title"/>
                 </div>
               </div>
             </div>
@@ -642,7 +667,7 @@ if ($result = $mysqli->query($sql)) {
                 <div class="col-xs-7">
                   <div class="left-inner-addon ">
                   <i class="fa fa-user"></i>
-                  <input type="text" name="firstName" id="addFirstName" class="form-control" placeholder="First Name" />
+                  <input type="text" name="firstName" id="addFirstName" class="form-control" placeholder="First Name"/>
                 </div>
               </div>
             </div>
@@ -1272,6 +1297,7 @@ if ($result = $mysqli->query($sql)) {
       .done(function( msg ) {
         console.log( "Data Saved: " + msg );
       });
+     
   }
 
   </script>
