@@ -1,4 +1,8 @@
 <?php
+$url = "http://incorelabs.com";
+header("Access-Control-Allow-Origin:".$url);
+header("Access-Control-Request-Method: GET, POST");
+header("Access-Control-Allow-Credentials: true");
 define("ROOT", "../");
 
 require_once ROOT.'db/Connection.php';
@@ -10,7 +14,7 @@ if (isset($_GET['id'])) {
 	$id  = $_GET['id'];
 
 	if ($id == 0) {
-		$sql = "SELECT `registerLicenceCode`, `contactCode`, title.description as 'title', `firstName`, `middleName`, `lastName`, `fullName`, `guardianName`, `company`, `designation`, `alias`, `dob`, `dom`, ".DB_NAME.".group.description as 'group', `emergencyCode`, `remarks`, `activeStatus`, `mobile`, `email`, `facebook`, `twitter`, `google`, `linkedin`, `website`, `noOfAddresses`, `noOfFamilyMembers`, `photoUploaded`, `userCode`, `privacy`, `lastAccessedDate` 
+		$sql = "SELECT `registerLicenceCode`, `contactCode`, title.description as 'contactTitle', `firstName`, `middleName`, `lastName`, `fullName`, `guardianName`, `company`, `designation`, `alias`, `dob`, `dom`, ".DB_NAME.".group.description as 'group', `emergencyCode`, `remarks`, `activeStatus`, `mobile`, `email`, `facebook`, `twitter`, `google`, `linkedin`, `website`, `noOfAddresses`, `noOfFamilyMembers`, `photoUploaded`, `userCode`, `privacy`, `lastAccessedDate` 
 				FROM contact
 				LEFT JOIN title ON title.code = contact.titleCode
 				LEFT JOIN ".DB_NAME.".group ON ".DB_NAME.".group.code = contact.groupCode
@@ -20,7 +24,7 @@ if (isset($_GET['id'])) {
 		}
 	}
 	else{
-		$sql = "SELECT `registerLicenceCode`, `contactCode`, title.description as 'title', `firstName`, `middleName`, `lastName`, `fullName`, `guardianName`, `company`, `designation`, `alias`, `dob`, `dom`, ".DB_NAME.".group.description as 'group', `emergencyCode`, `remarks`, `activeStatus`, `mobile`, `email`, `facebook`, `twitter`, `google`, `linkedin`, `website`, `noOfAddresses`, `noOfFamilyMembers`, `photoUploaded`, `userCode`, `privacy`, `lastAccessedDate` 
+		$sql = "SELECT `registerLicenceCode`, `contactCode`, title.description as 'contactTitle', `firstName`, `middleName`, `lastName`, `fullName`, `guardianName`, `company`, `designation`, `alias`, `dob`, `dom`, ".DB_NAME.".group.description as 'group', `emergencyCode`, `remarks`, `activeStatus`, `mobile`, `email`, `facebook`, `twitter`, `google`, `linkedin`, `website`, `noOfAddresses`, `noOfFamilyMembers`, `photoUploaded`, `userCode`, `privacy`, `lastAccessedDate` 
 				FROM contact
 				LEFT JOIN title ON title.code = contact.titleCode
 				LEFT JOIN ".DB_NAME.".group ON ".DB_NAME.".group.code = contact.groupCode

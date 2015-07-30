@@ -1,4 +1,9 @@
 <?php
+$url = "http://incorelabs.com";
+header("Access-Control-Allow-Origin:".$url);
+header("Access-Control-Request-Method: GET, POST");
+header("Access-Control-Allow-Credentials: true");
+
 define("ROOT", "../");
 
 require_once ROOT.'db/Connection.php';
@@ -82,10 +87,20 @@ if (isset($_POST['id'])) {
 	//echo $sql;
 
 	if ($mysqli->multi_query($sql)) {
-		exit(header("Location:index.php?status=1&controller=edit&landing=".$id));
+		$response["status"] = 1;
+		$response["controller"] = "edit";
+		$response["landing"] = $id;
+
+		echo json_encode($response);
+		//exit(header("Location:index.php?status=1&controller=edit&landing=".$id));
 	}
 	else{
-		exit(header("Location:index.php?status=0&controller=edit&landing=".$id));
+		$response["status"] = 1;
+		$response["controller"] = "edit";
+		$response["landing"] = $id;
+
+		echo json_encode($response);
+		//exit(header("Location:index.php?status=0&controller=edit&landing=".$id));
 	}
 }
 ?>

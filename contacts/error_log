@@ -1,5 +1,0 @@
-[27-Jul-2015 12:31:44 UTC] PHP Fatal error:  Call to undefined method mysqli_result::fetch_all() in /home/incorelabs/public_html/Assist/contacts/getContact.php on line 37
-[27-Jul-2015 12:31:56 UTC] PHP Fatal error:  Call to undefined method mysqli_result::fetch_all() in /home/incorelabs/public_html/Assist/contacts/getContact.php on line 37
-[27-Jul-2015 12:32:36 UTC] PHP Fatal error:  Call to undefined method mysqli_result::fetch_all() in /home/incorelabs/public_html/Assist/contacts/getContact.php on line 37
-[27-Jul-2015 12:32:51 UTC] PHP Fatal error:  Call to undefined method mysqli_result::fetch_all() in /home/incorelabs/public_html/Assist/contacts/getContact.php on line 37
-[27-Jul-2015 12:33:39 UTC] PHP Fatal error:  Call to undefined method mysqli_result::fetch_all() in /home/incorelabs/public_html/Assist/contacts/getContact.php on line 37

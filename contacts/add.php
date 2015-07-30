@@ -1,10 +1,37 @@
 <?php
+$url = "http://incorelabs.com";
+header("Access-Control-Allow-Origin:".$url);
+header("Access-Control-Request-Method: GET, POST");
+header("Access-Control-Allow-Credentials: true");
+
 define("ROOT", "../");
 
 require_once ROOT.'db/Connection.php';
 require_once ROOT.'modules/functions.php';
 $mysqli = getConnection();
 
+$id = 0; 
+
+$sql = "SELECT MAX(contactCode) as 'contactCode' FROM contact";
+
+if ($result = $mysqli->query($sql)) {
+	if ($result->num_rows == 0) {
+	  $id = 1001;
+	}
+    else{
+      while ($row = $result->fetch_assoc()) {
+        if (is_null($row['contactCode'])) {
+          $id = 1001;     
+        }
+        else{
+          $id = intval($row['contactCode']) + 1;
+        }
+      }
+    }
+}
+else{
+
+}
 
 if (isset($_POST['id'])) {
 	$date = new DateTime();
@@ -48,7 +75,7 @@ if (isset($_POST['id'])) {
 
 	$sql .= build_insert_str('contact',array(
 		1001,
-		$_POST['id'],
+		$id,
 		$_POST['firstName'],
 		$_POST['middleName'],
 		$_POST['lastName'],
@@ -82,12 +109,23 @@ if (isset($_POST['id'])) {
 
 	
 	//echo $sql;
+	$response = array();
 
 	if ($mysqli->multi_query($sql)) {
-		exit(header("Location:index.php?status=1&controller=add&landing=".$_POST['id']));
+		$response["status"] = 1;
+		$response["controller"] = "add";
+		$response["landing"] = $id;
+
+		echo json_encode($response);
+		//exit(header("Location:index.php?status=1&controller=add&landing=".$id));
 	}
 	else{
-		exit(header("Location:index.php?status=0&controller=add&landing=".$_POST['id']));
+		$response["status"] = 0;
+		$response["controller"] = "add";
+		$response["landing"] = $id;
+
+		echo json_encode($response);
+		//exit(header("Location:index.php?status=0&controller=add&landing=".$id));
 	}
 
 }
