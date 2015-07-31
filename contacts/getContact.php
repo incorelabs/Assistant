@@ -9,6 +9,7 @@ require_once ROOT.'db/Connection.php';
 $mysqli = getConnection();
 
 $contact = array();
+$addressType = array("home","work","other");
 
 if (isset($_GET['id'])) {
 	$id  = $_GET['id'];
@@ -20,8 +21,28 @@ if (isset($_GET['id'])) {
 				LEFT JOIN ".DB_NAME.".group ON ".DB_NAME.".group.code = contact.groupCode
 				ORDER BY contact.fullName LIMIT 1";
 		if ($result = $mysqli->query($sql)) {
-			$contact = $result->fetch_assoc();
+			$contact["contact"] = $result->fetch_assoc();
 		}
+
+		$id = $contact["contact"]["contactCode"];
+
+		$sql = "SELECT address.`registeredLicenceCode`, `contactCode`, `serialNo`, `typeCode`, `address`, `address1`, `address2`, `address3`, `address4`, `address5`, `pincode`, country.description as 'country', state.description as 'state', city.description as 'city', area.description as 'area', `phone` 
+				FROM `address` 
+				LEFT JOIN country ON country.code = address.countryCode
+				LEFT JOIN state ON state.code = address.stateCode
+				LEFT JOIN city ON city.code = address.cityCode
+				LEFT JOIN area ON area.code = address.areaCode
+				WHERE contactCode = ".$id."
+				ORDER BY address.typeCode";
+
+		if ($result = $mysqli->query($sql)) {
+			$i=0;
+			while ($row = $result->fetch_assoc()) {
+				$contact["address"][$addressType[$i]] = $row;
+				$i++;
+			}
+		}
+
 	}
 	else{
 		$sql = "SELECT `registerLicenceCode`, `contactCode`, title.description as 'contactTitle', `firstName`, `middleName`, `lastName`, `fullName`, `guardianName`, `company`, `designation`, `alias`, `dob`, `dom`, ".DB_NAME.".group.description as 'group', `emergencyCode`, `remarks`, `activeStatus`, `mobile`, `email`, `facebook`, `twitter`, `google`, `linkedin`, `website`, `noOfAddresses`, `noOfFamilyMembers`, `photoUploaded`, `userCode`, `privacy`, `lastAccessedDate` 
@@ -30,7 +51,24 @@ if (isset($_GET['id'])) {
 				LEFT JOIN ".DB_NAME.".group ON ".DB_NAME.".group.code = contact.groupCode
 				WHERE contact.contactCode =".$id;
 		if ($result = $mysqli->query($sql)) {
-			$contact = $result->fetch_assoc();
+			$contact["contact"] = $result->fetch_assoc();
+		}
+
+		$sql = "SELECT address.`registeredLicenceCode`, `contactCode`, `serialNo`, `typeCode`, `address`, `address1`, `address2`, `address3`, `address4`, `address5`, `pincode`, country.description as 'country', state.description as 'state', city.description as 'city', area.description as 'area', `phone` 
+				FROM `address` 
+				LEFT JOIN country ON country.code = address.countryCode
+				LEFT JOIN state ON state.code = address.stateCode
+				LEFT JOIN city ON city.code = address.cityCode
+				LEFT JOIN area ON area.code = address.areaCode
+				WHERE contactCode = ".$id."
+				ORDER BY address.typeCode";
+
+		if ($result = $mysqli->query($sql)) {
+			$i=0;
+			while ($row = $result->fetch_assoc()) {
+				$contact["address"][$addressType[$i]] = $row;
+				$i++;
+			}
 		}
 	}
 }

@@ -86,7 +86,7 @@
 		$insert_field_str = build_table_field_str($table);
 		$insert_value_str = build_table_value_str($arr_values);	
 
-		$sql = "INSERT INTO ".$table." ( ".$insert_field_str.") VALUES (".$insert_value_str.")";
+		$sql = "INSERT INTO ".$table." ( ".$insert_field_str.") VALUES (".$insert_value_str.");";
 
 		return $sql;
 	}
@@ -96,7 +96,7 @@
 		$insert_field_str = build_table_field_str($arr_fields);
 		$insert_value_str = build_table_value_str($arr_values);
 
-		$sql = "INSERT INTO ".$table." ( ".$insert_field_str.") VALUES (".$insert_value_str.")";
+		$sql = "INSERT INTO ".$table." ( ".$insert_field_str.") VALUES (".$insert_value_str.");";
 		return $sql;
 	}
 

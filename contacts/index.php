@@ -161,7 +161,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
             <div class="row">
                <div class="col-xs-10 col-md-10">
                 <div class="input-group">
-                <input id="searchContact" type="text" class="form-control" onkeyup="doSearch();" placeholder="Search..."/>
+                <input id="searchContact" type="text" class="form-control" onkeyup="doSearch();" placeholder="Search..." autofocus />
                   <div class="input-group-btn">
                         <div class="btn-group" role="group">
                             <div class="dropdown dropdown-lg">
@@ -444,7 +444,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-home"></i>
-                        <input type="text" name="address" id="addAddress" class="form-control" placeholder="Address 1" />
+                        <input type="text" name="homeAddress1" id="homeAddress1" class="form-control" placeholder="Address 1" />
                       </div>
                     </div>
                   </div>
@@ -453,7 +453,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-home"></i>
-                        <input type="text" name="address1" id="address1" class="form-control" placeholder="Address 2" />
+                        <input type="text" name="homeAddress2" id="homeAddress2" class="form-control" placeholder="Address 2" />
                       </div>
                     </div>
                   </div>
@@ -462,7 +462,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-home"></i>
-                        <input type="text" name="address2" id="address2" class="form-control" placeholder="Address 3" />
+                        <input type="text" name="homeAddress3" id="homeAddress3" class="form-control" placeholder="Address 3" />
                       </div>
                     </div>
                   </div>
@@ -471,7 +471,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-home"></i>
-                        <input type="text" name="address3" id="address3" class="form-control" placeholder="Address 4" />
+                        <input type="text" name="homeAddress4" id="homeAddress4" class="form-control" placeholder="Address 4" />
                       </div>
                     </div>
                   </div>
@@ -480,7 +480,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-home"></i>
-                        <input type="text" name="address4" id="address4" class="form-control" placeholder="Address 5" />
+                        <input type="text" name="homeAddress5" id="homeAddress5" class="form-control" placeholder="Address 5" />
                       </div>
                     </div>
                   </div>                 
@@ -489,7 +489,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
-                        <input type="text" name="city_code" id="city_code" class="form-control" placeholder="City" />
+                        <input type="text" name="homeCity" id="homeCity" class="form-control" placeholder="City" />
+                        <input type="hidden" id="homeCityCode" name="homeCityCode" value="0" />
                       </div>
                     </div>
                   </div>
@@ -498,7 +499,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
-                        <input type="text" name="state_code" id="state_code" class="form-control" placeholder="State" />
+                        <input type="text" name="homeState" id="homeState" class="form-control" placeholder="State" />
+                        <input type="hidden" id="homeStateCode" name="homeStateCode" value="0" />
                       </div>
                     </div>
                   </div>
@@ -507,7 +509,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
-                        <input type="text" name="country_code" id="country_code" class="form-control" placeholder="Country" />
+                        <input type="text" name="homeCountry" id="homeCountry" class="countryText form-control" placeholder="Country" />
+                        <input type="hidden" id="homeCountryCode" name="homeCountryCode" value="0" />
                       </div>
                     </div>
                   </div>
@@ -516,7 +519,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>  
-                        <input type="text" name="pincode" id="pincode" class="form-control" placeholder="Pincode" />
+                        <input type="text" name="homePincode" id="homePincode" class="form-control" placeholder="Pincode" />
                       </div>
                     </div>
                   </div>
@@ -525,7 +528,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
-                        <input type="text" name="area_code" id="area_code" class="form-control" placeholder="Area" />
+                        <input type="text" name="homeArea" id="homeArea" class="form-control" placeholder="Area" />
+                        <input type="hidden" id="homeAreaCode" name="homeAreaCode" value="0" />
                       </div>
                     </div>
                   </div>
@@ -534,7 +538,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-phone"></i>
-                        <input type="text" name="other_number" id="other_number" class="form-control" placeholder="Phone" />
+                        <input type="text" name="homePhone" id="homePhone" class="form-control" placeholder="Phone" />
                       </div>
                     </div>
                   </div>
@@ -548,7 +552,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-briefcase"></i>
-                        <input type="text" name="address" id="addAddress" class="form-control" placeholder="Address 1" />
+                        <input type="text" name="workAddress1" id="workAddress1" class="form-control" placeholder="Address 1" />
                       </div>
                     </div>
                   </div>
@@ -557,7 +561,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-briefcase"></i>
-                        <input type="text" name="address1" id="address1" class="form-control" placeholder="Address 2" />
+                        <input type="text" name="workAddress2" id="workAddress2" class="form-control" placeholder="Address 2" />
                       </div>
                     </div>
                   </div>
@@ -566,7 +570,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-briefcase"></i>
-                        <input type="text" name="address2" id="address2" class="form-control" placeholder="Address 3" />
+                        <input type="text" name="workAddress3" id="workAddress3" class="form-control" placeholder="Address 3" />
                       </div>
                     </div>
                   </div>
@@ -575,7 +579,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-briefcase"></i>
-                        <input type="text" name="address3" id="address3" class="form-control" placeholder="Address 4" />
+                        <input type="text" name="workAddress4" id="workAddress4" class="form-control" placeholder="Address 4" />
                       </div>
                     </div>
                   </div>
@@ -584,7 +588,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-briefcase"></i>
-                        <input type="text" name="address4" id="address4" class="form-control" placeholder="Address 5" />
+                        <input type="text" name="workAddress5" id="workAddress5" class="form-control" placeholder="Address 5" />
                       </div>
                     </div>
                   </div>                 
@@ -593,7 +597,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
-                        <input type="text" name="city_code" id="city_code" class="form-control" placeholder="City" />
+                        <input type="text" name="workCity" id="workCity" class="form-control" placeholder="City" />
+                        <input type="hidden" id="workCityCode" name="workCityCode" value="0" />
                       </div>
                     </div>
                   </div>
@@ -602,7 +607,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
-                        <input type="text" name="state_code" id="state_code" class="form-control" placeholder="State" />
+                        <input type="text" name="workState" id="workState" class="form-control" placeholder="State" />
+                        <input type="hidden" id="workStateCode" name="workStateCode" value="0" />
                       </div>
                     </div>
                   </div>
@@ -611,7 +617,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
-                        <input type="text" name="country_code" id="country_code" class="form-control" placeholder="Country" />
+                        <input type="text" name="workCountry" id="workCountry" class="countryText form-control" placeholder="Country" />
+                        <input type="hidden" id="workCountryCode" name="workCountryCode" value="0" />
                       </div>
                     </div>
                   </div>
@@ -629,7 +636,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
-                        <input type="text" name="area_code" id="area_code" class="form-control" placeholder="Area" />
+                        <input type="text" name="workArea" id="workArea" class="form-control" placeholder="Area" />
+                        <input type="hidden" id="workAreaCode" name="workAreaCode" value="0" />
                       </div>
                     </div>
                   </div>
@@ -638,7 +646,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-phone"></i>
-                        <input type="text" name="other_number" id="other_number" class="form-control" placeholder="Phone" />
+                        <input type="text" name="workNumber" id="workNumber" class="form-control" placeholder="Phone" />
                       </div>
                     </div>
                   </div>
@@ -651,7 +659,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-road"></i>
-                        <input type="text" name="address" id="addAddress" class="form-control" placeholder="Address 1" />
+                        <input type="text" name="otherAddress1" id="otherAddress1" class="form-control" placeholder="Address 1" />
                       </div>
                     </div>
                   </div>
@@ -660,7 +668,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-road"></i>
-                        <input type="text" name="address1" id="address1" class="form-control" placeholder="Address 2" />
+                        <input type="text" name="otherAddress2" id="otherAddress2" class="form-control" placeholder="Address 2" />
                       </div>
                     </div>
                   </div>
@@ -669,7 +677,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-road"></i>
-                        <input type="text" name="address2" id="address2" class="form-control" placeholder="Address 3" />
+                        <input type="text" name="otherAddress3" id="otherAddress3" class="form-control" placeholder="Address 3" />
                       </div>
                     </div>
                   </div>
@@ -678,7 +686,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-road"></i>
-                        <input type="text" name="address3" id="address3" class="form-control" placeholder="Address 4" />
+                        <input type="text" name="otherAddress4" id="otherAddress4" class="form-control" placeholder="Address 4" />
                       </div>
                     </div>
                   </div>
@@ -687,7 +695,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-road"></i>
-                        <input type="text" name="address4" id="address4" class="form-control" placeholder="Address 5" />
+                        <input type="text" name="otherAddress5" id="otherAddress5" class="form-control" placeholder="Address 5" />
                       </div>
                     </div>
                   </div>                 
@@ -696,7 +704,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
-                        <input type="text" name="city_code" id="city_code" class="form-control" placeholder="City" />
+                        <input type="text" name="otherCity" id="otherCity" class="form-control" placeholder="City" />
+                        <input type="hidden" id="otherCityCode" name="otherCityCode" value="0" />
                       </div>
                     </div>
                   </div>
@@ -705,7 +714,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
-                        <input type="text" name="state_code" id="state_code" class="form-control" placeholder="State" />
+                        <input type="text" name="otherState" id="otherState" class="form-control" placeholder="State" />
+                        <input type="hidden" id="otherStateCode" name="otherStateCode" value="0" />
                       </div>
                     </div>
                   </div>
@@ -714,7 +724,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
-                        <input type="text" name="country_code" id="country_code" class="form-control" placeholder="Country" />
+                        <input type="text" name="otherCountry" id="otherCountry" class="countryText form-control" placeholder="Country" />
+                        <input type="hidden" id="otherCountryCode" name="otherCountryCode" value="0" />
                       </div>
                     </div>
                   </div>
@@ -723,7 +734,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>  
-                        <input type="text" name="pincode" id="pincode" class="form-control" placeholder="Pincode" />
+                        <input type="text" name="otherPincode" id="otherPincode" class="form-control" placeholder="Pincode" />
                       </div>
                     </div>
                   </div>
@@ -732,7 +743,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
-                        <input type="text" name="area_code" id="area_code" class="form-control" placeholder="Area" />
+                        <input type="text" name="otherArea" id="otherArea" class="form-control" placeholder="Area" />
+                        <input type="hidden" id="otherAreaCode" name="otherAreaCode" value="0" />
                       </div>
                     </div>
                   </div>
@@ -741,7 +753,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-phone"></i>
-                        <input type="text" name="other_number" id="other_number" class="form-control" placeholder="Phone" />
+                        <input type="text" name="otherNumber" id="otherNumber" class="form-control" placeholder="Phone" />
                       </div>
                     </div>
                   </div>
