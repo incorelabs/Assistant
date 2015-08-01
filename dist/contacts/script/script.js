@@ -596,4 +596,16 @@ $(document).ready(function(event){
 
   $('.alert').fadeOut(2000);
 
+  $('#addModal').on('shown.bs.modal', function () {
+    console.log("on show");
+    $('#addTitle').focus()
+  });
+
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    console.log(e); // newly activated tab
+    var tabPane = $(e.target).attr('href')
+    var inputArr = $(tabPane).find('input');
+    $(inputArr[0]).focus();
+     // previous active tab
+  });
 });

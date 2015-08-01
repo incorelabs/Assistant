@@ -252,7 +252,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     <div class="modal-dialog">
       <div class="modal-content">
 
-        <form class="form-horizontal" method="POST" action="add.php" id="addContactForm">
+        <form class="form-horizontal" method="POST" action="add.php" id="addContactForm" autocomplete="off">
         
         <div class="modal-header">
 
