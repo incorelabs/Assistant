@@ -77,7 +77,9 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     <![endif]-->
     <!--jQuery UI script-->
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script src="../dist/contacts/script/script.js"></script>
+    <script id="erasable" src="../dist/contacts/script/script.js">
+    document.getElementById('erasable').innerHTML = "";
+    </script>
     
 
     <!-- To hide the div on selection -->
@@ -85,9 +87,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
       $(function() {
         $('#filter').change(function(){
         if ($(this).val() != "0") {
-            $('#test').hide();
+            $('#search_filter').hide();
         }
-        });
       });
     </script>
 
@@ -95,17 +96,34 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     <script>
       function showDiv() {
         var check = false;
-        var e = document.getElementById('test');
+        var e = document.getElementById('search_filter');
         if(e.style.display == "block")
         {
-            document.getElementById('test').style.display = "none";
+            document.getElementById('search_filter').style.display = "none";
             
         }
         else
-           document.getElementById('test').style.display = "block";  
+           document.getElementById('search_filter').style.display = "block";  
       }
     </script>
-
+    <script>
+      function showNotificationSuccess() 
+      {
+           document.getElementById('notification_success').style.display = "block";  
+           $(function(){
+            $("#notification_success").delay(2000).fadeOut("slow");
+          });
+      }
+    </script>
+    <script>
+      function showNotificationFailure() 
+      {
+           document.getElementById('notification_failure').style.display = "block";  
+           $(function(){
+            $("#notification_failure").delay(2000).fadeOut("slow");
+          });
+      }
+    </script>
   </head>
   <body>
     <!-- fixed top navbar -->
@@ -133,7 +151,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
           <button type="submit" class="btn btn-default">Submit</button>
         </form>-->
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" id="notification-trigger">Notification Test</a></li>
+          <li><a href="#" id="notification-trigger" onclick="showNotificationSuccess()">Success Notification</a></li>
+          <li><a href="#" id="notification-trigger" onclick="showNotificationFailure()">Failure Notification</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Profile<span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -153,57 +172,66 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
       echo $status; 
       //echo json_encode($group['code']);
     ?>
+
+    <div class="notification_outer" id="notification_outer" >
+      <div class="notification_success" id="notification_success" style="display:none">
+        Added Successfully!
+      </div>
+    </div>
+
+    <div class="notification_outer" id="notification_outer" >
+      <div class="notification_failure" id="notification_failure" style="display:none">
+        Something went wrong!
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-xs-12 col-md-5">
-
         <div class="list-group list-margin">
           <div class="list-group-item list-margin">
             <div class="row">
-               <div class="col-xs-10 col-md-10">
+               <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                 <div class="input-group">
                 <input id="searchContact" type="text" class="form-control" onkeyup="doSearch();" placeholder="Search..." autofocus />
                   <div class="input-group-btn">
-                        <div class="btn-group" role="group">
-                            <div class="dropdown dropdown-lg">
-                              <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false" onclick="showDiv()"><span class="glyphicon glyphicon-filter"></span></button>
-                                <div class="dropdown-menu dropdown-menu-right" role="menu" id="test">
-                                    <form class="form-horizontal" role="form">
-                                      <div class="form-group">
-                                        <label for="filter">Filter by</label>
-                                        <select class="form-control" id="filter">
-                                          <option value="name">Name</option>
-                                          <option value="mobile">Mobile</option>
-                                          <option value="email">Email</option>
-                                          <option value="company">Company</option>
-                                          <option value="designation">Designation</option>
-                                          <option value="guardian">Father/Husband</option>
-                                          <option value="birthday">Birthday</option>
-                                          <option value="anniversary">Anniversary</option>
-                                          <option value="group">Group</option>
-                                          <option value="home_area">Home Area</option>
-                                          <option value="home_city">Home City</option>
-                                          <option value="home_phone">Home Phone</option>
-                                          <option value="work_area">Work Area</option>
-                                          <option value="work_city">Work City</option>
-                                          <option value="work_phone">Work Phone</option>
-                                          <option value="other_area">Other Area</option>
-                                          <option value="other_city">Other City</option>
-                                          <option value="other_phone">Other Phone</option>
-                                        </select>
-                                      </div>
-                                    </form>
-                                </div>
+                    <div class="btn-group" role="group">
+                      <div class="dropdown dropdown-lg">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false" onclick="showDiv()"><span class="glyphicon glyphicon-filter"></span></button>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu" id="search_filter">
+                          <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                              <label for="filter">Filter by</label>
+                              <select class="form-control" id="filter">
+                                <option value="name">Name</option>
+                                <option value="mobile">Mobile</option>
+                                <option value="email">Email</option>
+                                <option value="company">Company</option>
+                                <option value="designation">Designation</option>
+                                <option value="guardian">Father/Husband</option>
+                                <option value="birthday">Birthday</option>
+                                <option value="anniversary">Anniversary</option>
+                                <option value="group">Group</option>
+                                <option value="home_area">Home Area</option>
+                                <option value="home_city">Home City</option>
+                                <option value="home_phone">Home Phone</option>
+                                <option value="work_area">Work Area</option>
+                                <option value="work_city">Work City</option>
+                                <option value="work_phone">Work Phone</option>
+                                <option value="other_area">Other Area</option>
+                                <option value="other_city">Other City</option>
+                                <option value="other_phone">Other Phone</option>
+                              </select>
                             </div>
-                            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                          </form>
                         </div>
+                      </div>
                     </div>
-
+                  </div>
                 </div>
               </div>
               <div>
-                <button class="btn btn-primary btn-size" onclick="openAddContact();"><span class="glyphicon glyphicon-plus"></span>
-                
-                </button>
+                  <!--<button type="button" class="btn btn-info btn-size"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>-->
+                  <button class="btn btn-primary btn-size" onclick="openAddContact();"><span class="glyphicon glyphicon-plus"></span></button>
               </div>
             </div>
           </div>
@@ -295,9 +323,9 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
             <div class="form-group form-group-margin">
               <label class="col-xs-4 control-label">Title</label>
               <div class="col-xs-4">
-                <div class="left-inner-addon ">
+                <div class="left-inner-addon">
                   <i class="glyphicon glyphicon-star"></i>
-                  <input type="text" name="title" class="form-control" id="addTitle" placeholder="Title"/>
+                  <input type="text" name="title" class="form-control" id="addTitle" placeholder="Title" autofocus/>
                 </div>
               </div>
             </div>
@@ -953,47 +981,6 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
   }
 
   </script>
-
-  <!--For the Notification-->
-      <script src="../dist/notification/js/classie.js"></script>
-    <script src="../dist/notification/js/notificationFx.js"></script>
-    <script>
-      (function() {
-        var bttn = document.getElementById( 'notification-trigger' );
-
-        // make sure..
-        bttn.disabled = false;
-
-        bttn.addEventListener( 'click', function() {
-          // simulate loading (for demo purposes only)
-          classie.add( bttn, 'active' );
-          setTimeout( function() {
-
-            classie.remove( bttn, 'active' );
-            
-            // create the notification
-            var notification = new NotificationFx({
-              message : '<p>Contact has been added Successfully</p>',
-              layout : 'attached',
-              effect : 'bouncyflip',
-              type : 'notice', // notice, warning or error
-              onClose : function() {
-                bttn.disabled = false;
-              }
-            });
-
-            // show the notification
-            notification.show();
-
-          }, 0 );
-          
-          // disable the button (for demo purposes only)
-          this.disabled = true;
-        } );
-      })();
-    </script>
-
-
   </body>
 </html>
 <?php //$mysqli->close(); ?>

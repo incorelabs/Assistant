@@ -136,7 +136,9 @@ img{
     opacity: 0.8;
     text-align: center;
 }
-
+.btn-size{
+  width: 13%;
+}
 .switch {
   position: relative;
   display: inline-block;
@@ -148,7 +150,7 @@ img{
 /* Switch */
 .switch-label {
   display: block;
-  width: 38px;
+  width: 28px;
   height: 10px;
   text-indent: -150%;
   clip: rect(0 0 0 0);
@@ -171,7 +173,7 @@ img{
 .switch-label:before {
   width: 100%;
   height: 100%;
-  background-color: #dedede;
+  background-color: red;
   border-radius: 9999em;
   -webkit-transition: background-color 0.25s ease;
           transition: background-color 0.25s ease;
@@ -196,7 +198,7 @@ img{
   background-color: #89c12d;
 }
 .switch-input:checked + .switch-label:after {
-  left: 24px;
+  left: 14px;
 }
 .navbar-brand:hover {
   color:white;
@@ -226,9 +228,7 @@ h5{
   font-weight: 450;
   font-size: 16px !important;
 }
-.btn-size{
-  width:13%;
-}
+
 .form-group-margin{
   margin-bottom: 10px;
 }
@@ -237,19 +237,16 @@ h5{
     padding: 6px 20px;
 }
 .input-group-btn .btn-group {
-    display: flex !important;
+    
 }
 .btn-group .btn {
-    border-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
     margin-left: -1px;
 }
 .btn-group .btn:last-child {
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
-}
-.btn-group .form-horizontal .btn[type="submit"] {
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
 }
 .form-horizontal .form-group {
     margin-left: 0;
@@ -264,9 +261,7 @@ h5{
     #adv-search {
         margin: 0 auto;
     }
-    .dropdown.dropdown-lg {
-        position: static !important;
-    }
+
     .dropdown.dropdown-lg .dropdown-menu {
       min-width: 300px;
     }
@@ -422,4 +417,37 @@ h5{
     color: #333;
     background-color: #fff;
     border-color: #ccc;
+}
+
+.notification_outer{
+  left:-3px;
+  top: 60px;
+  width:100%;
+  text-align:center;
+  z-index: 999;
+  position: absolute;
+}
+
+.notification_success{
+  border-radius: 8px;
+  min-width: auto;
+  max-width:250px;
+  height:40px;
+  margin:auto;
+  padding-top: 10px;
+  background-color: #9CCC65;
+  box-shadow: 5px 5px 2px #888888;
+  opacity: 0.95;
+}
+
+.notification_failure{
+  border-radius: 8px;
+  min-width: auto;
+  max-width:250px;
+  height:40px;
+  margin:auto;
+  padding-top: 10px;
+  background-color: #ef5350;
+  box-shadow: 5px 5px 2px #888888;
+  opacity: 0.95;
 }
