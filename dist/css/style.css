@@ -41,11 +41,6 @@ body
   color: white;
 }
 
-.modal_button
-{
-  font-size: 2rem;
-}
-
 .ul_margin
 {
   margin: 0px;
@@ -239,7 +234,7 @@ h5{
 .input-group-btn .btn-group {
     
 }
-.btn-group .btn {
+.btn-group1 .btn1 {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     margin-left: -1px;
@@ -441,6 +436,7 @@ h5{
 }
 
 .notification_failure{
+  color: #fff;
   border-radius: 8px;
   min-width: auto;
   max-width:250px;
@@ -450,4 +446,9 @@ h5{
   background-color: #ef5350;
   box-shadow: 5px 5px 2px #888888;
   opacity: 0.95;
+}
+.addImage{
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
 }
