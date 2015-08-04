@@ -212,9 +212,11 @@ function setContactView(arr){
     getContact(0);
     return;
   }
-  var headerStr = "<h12>Contact Details</h12><button class='btn btn-success pull-right' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger pull-left' onclick='openDeleteModal("+((arr.contact) ? arr.contact.contactCode : "1")+")'><span class='glyphicon glyphicon-trash'></span></button>";
+  var headerStr = "<div class='navbar navbar-default navbar-bg1 navbar-fixed-top' style='margin-top:50px; height:60px;'><div class='container-fluid'><div class='row'><div class='col-md-12' style='padding-top:12px'><center><h12>Contact Details</h12><button class='btn btn-success pull-right' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger pull-left' onclick='openDeleteModal("+((arr.contact) ? arr.contact.contactCode : "1")+")'><span class='glyphicon glyphicon-trash'></span></button></center></div></div><!-- /.navbar-collapse --></div><!--/.row --></div><!-- /.container-fluid -->";
   var str = "";
 
+  var mobileDetailOutHeader = "<div class='col-md-12 col-sm-12 panel-padding-remove'><div id='contactDetail' class='panel panel-default panel-margin' id='style-3'><!-- List group --><div id='contactDetailBody' class='list-group'>";
+  var mobileDetailOutFooter = "</div><!--List close--></div><!--Panel--></div><!--COL-->";
   str += "<div class='list-group-item'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='../img/contacts/profile/profilePicture1.png' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>"+((arr.contact.contactTitle) ? arr.contact.contactTitle + " " : "")+((arr.contact.fullName) ? arr.contact.fullName : "")+"</h5></div>";
   //if (arr.contact.fullName) {
     
@@ -289,10 +291,11 @@ function setContactView(arr){
   //};
 
 
-  $("#contactDetailHeader").empty();
-  $("#contactDetailHeader").html(headerStr);
-  $("#contactDetailBody").empty();
-  $("#contactDetailBody").html(str);
+  $("#mobileHeader").empty();
+  $("#mobileHeader").html(headerStr);
+  $("#mobileBody").empty();
+  str = mobileDetailOutHeader + str + mobileDetailOutFooter;
+  $("#mobileBody").html(str);
 }
 
 function openAddContact () {
@@ -715,14 +718,14 @@ window.mobilecheck = function() {
 
 $(document).ready(function(event){
   
-  if (window.mobilecheck()) {
+  //if (window.mobilecheck()) {
     var headerData = "<div class='navbar navbar-default navbar-bg navbar-fixed-top' style='margin-top:50px; height:60px;'><div class='container-fluid'><div class='row'><div class='col-md-12' style='padding-top:12px'><form><div class='form-group'><div class='col-md-10 col-sm-10 col-xs-10'><div class='input-group'><input id='searchContact' type='text' class='form-control' onkeyup='doSearch();' placeholder='Search...' autofocus /><div class='input-group-btn'><div class='btn-group btn-group1' role='group'><div class='dropdown dropdown-lg'><button type='button' class='btn btn1 btn-success dropdown-toggle' data-toggle='dropdown' aria-expanded='false' onclick='showDiv()'><span class='glyphicon glyphicon-filter'></span></button><div class='dropdown-menu dropdown-menu-right' role='menu' id='search_filter'><form class='form-horizontal' role='form'><div class='form-group' style='padding-bottom:30px;'><label for='filter'>Filter by</label><select class='form-control' id='filter'><option value='name'>Name</option><option value='mobile'>Mobile</option><option value='email'>Email</option><option value='company'>Company</option><option value='designation'>Designation</option><option value='guardian'>Father/Husband</option><option value='birthday'>Birthday</option><option value='anniversary'>Anniversary</option><option value='group'>Group</option><option value='home_area'>Home Area</option><option value='home_city'>Home City</option><option value='home_phone'>Home Phone</option><option value='work_area'>Work Area</option><option value='work_city'>Work City</option><option value='work_phone'>Work Phone</option><option value='other_area'>Other Area</option><option value='other_city'>Other City</option><option value='other_phone'>Other Phone</option></select></div></form></div></div></div></div></div></div><div><!--<button type='button' class='btn btn-info btn-size'><span class='glyphicon glyphicon-search' aria-hidden='true'></span></button>--><button class='btn btn-primary btn-size' onclick='openAddContact();'><span class='glyphicon glyphicon-plus'></span></button></div></div></form></div><!-- /.navbar-collapse --></div><!--/.row --></div><!-- /.container-fluid --></div>";
     $("#mobileHeader").html(headerData);
-    var bodyData = "<div class='col-md-5 col-sm-12 col-xs-12 panel-padding-remove'><div class='panel panel-default panel-margin' id='style-3'><!-- List group -->  <div id='contactList' class='list-group force-scroll'> <div class='list-group-item'><p class='list-group-item-text'>Loading...</p> </div></div><!--List close--> </div><!--Panel-->  </div><!--COL--></div>  <!-- Edit div-->";
+    var bodyData = "<div class='col-md-12 col-sm-12 col-xs-12 panel-padding-remove'><div class='panel panel-default panel-margin' id='style-3'><!-- List group -->  <div id='contactList' class='list-group force-scroll'> <div class='list-group-item'><p class='list-group-item-text'>Loading...</p> </div></div><!--List close--> </div><!--Panel-->  </div><!--COL--></div>  <!-- Edit div-->";
     $("#mobileBody").html(bodyData);
-  }
+  //}
 
-  getContact(0);
+  //getContact(0);
   getContactList();
   refreshMasterList();
 
