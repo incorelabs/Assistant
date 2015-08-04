@@ -94,47 +94,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     </script>
   </head>
   <body>
-    <!-- fixed top navbar -->
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        
-        <a class="navbar-brand dropdown-toggle" href="../">Assist</a>
-      </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <!--
-        <form class="navbar-form navbar-left" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>-->
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" id="notification-trigger" onclick="showNotificationSuccess()">Success Notification</a></li>
-          <li><a href="#" id="notification-trigger" onclick="showNotificationFailure()">Failure Notification</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Profile<span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#"><span class='glyphicon glyphicon-user'></span>&nbspMy Account</a></li>
-              <li><a href="#"><span class='glyphicon glyphicon-wrench'></span>&nbspSettings</a></li>
-              <!--<li><a href="#">Something else here</a></li>-->
-              <li class="divider"></li>
-              <li><a href="#"><span class='glyphicon glyphicon-log-out'></span>&nbspLogout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
 
     <!-- 2nd Navbar -->
   <div><!-- edit you show/hide in this div-->
@@ -217,6 +177,48 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     </div><!--/.row -->
   </div><!-- /.container-fluid -->
 </div><!--Closing Div of Show/Hide -->
+
+  <!-- fixed top navbar -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        
+        <a class="navbar-brand dropdown-toggle" href="../">Assist</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <!--
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>-->
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" id="notification-trigger" onclick="showNotificationSuccess()">Success Notification</a></li>
+          <li><a href="#" id="notification-trigger" onclick="showNotificationFailure()">Failure Notification</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Profile<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#"><span class='glyphicon glyphicon-user'></span>&nbspMy Account</a></li>
+              <li><a href="#"><span class='glyphicon glyphicon-wrench'></span>&nbspSettings</a></li>
+              <!--<li><a href="#">Something else here</a></li>-->
+              <li class="divider"></li>
+              <li><a href="#"><span class='glyphicon glyphicon-log-out'></span>&nbspLogout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
 
   <div class="container-fluid navbar-padding">
     <?php 
@@ -304,7 +306,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
     <div class="row row-margin-top" style="margin-top:100px">
       <div> <!-- Edit here -->
-        <div class="col-md-5 col-sm-12 col-xs-12 panel-padding-remove">
+        <div class="col-md-5 col-sm-12 col-xs-12 hidden-sm hidden-xs panel-padding-remove">
           <div class="panel panel-default panel-margin" id="style-3">
                <!-- List group -->
               <div id="contactList" class="list-group force-scroll">
@@ -317,7 +319,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
       </div>  <!-- Edit div-->
 
       <div><!-- Edit here -->
-        <div class="col-md-7 col-sm-12 hidden-sm hidden-xs panel-padding-remove">
+        <div class="col-md-7 col-sm-12  panel-padding-remove">
           <div id="contactDetail" class="panel panel-default panel-margin" id="style-3">
                <!-- List group -->  
                 <div id="contactDetailBody" class="list-group">
