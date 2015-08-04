@@ -16,6 +16,10 @@ body
 {
   background-color: #f1f1f1;
 }
+.navbar-bg1
+{
+  background-color: #fff;
+}
 .navbar-default .navbar-brand
 {
   color: white;
@@ -211,8 +215,11 @@ value{
   font-weight: 500;
   color: #000;
 }
-.contact_details{
+
+@media screen and (min-width: 768px){
+  .contact_details{
   padding-bottom: 30px;
+}
 }
 .list-margin{
   margin-bottom: 0px !important;
@@ -245,8 +252,8 @@ h5{
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     margin-left: -1px;
-        height: 33px;
-    margin-top: -2px;
+        height: 34px;
+    margin-top: 0px;
 }
 .btn-group .btn:last-child {
     border-top-right-radius: 4px;
@@ -428,8 +435,8 @@ h5{
   top: 60px;
   width:100%;
   text-align:center;
-  z-index: 999;
-  position: absolute;
+  z-index: 1200;
+  position: fixed;
 }
 
 .notification_success{
@@ -460,4 +467,7 @@ h5{
   width: 150px;
   height: 150px;
   border-radius: 10px;
+}
+.row-margin-top{
+  margin-top: 40px;
 }

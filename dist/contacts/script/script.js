@@ -726,4 +726,9 @@ $(document).ready(function(event){
     $(inputArr[0]).focus();
      // previous active tab
   });
+  $('#filter').change(function(){
+        if ($(this).val() != "0") {
+            $('#search_filter').hide();
+        }
+      });
 });

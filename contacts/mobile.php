@@ -73,23 +73,9 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     <![endif]-->
     <!--jQuery UI script-->
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script id="erasable" src="../dist/contacts/script/script.js"></script>
-    <script id="erasable" src="../dist/contacts/script/validation.js"></script>
-    
 
-    <!-- To hide the div on selection -->
-    <script>
-      $(function filter() 
-      {
-        $('#filter').change(function()
-        {
-          if ($(this).val() != "0")
-          {
-            $('#search_filter').hide();
-          }
-        });
-      });
-    </script>
+    <script src="../dist/contacts/script/script.js"></script>
+    <script src="../dist/contacts/script/validation.js"></script>
 
     <!--To show the div on button click -->
     <script>
@@ -104,26 +90,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
         else
            document.getElementById('search_filter').style.display = "block";  
       }
-    </script>
-
-    <!-- Show Notification Success -->
-    <script>
-      function showNotificationSuccess() 
-      {
-           document.getElementById('notification_success').style.display = "block";  
-           $(function(){
-            $("#notification_success").delay(2000).fadeOut("slow");
-          });
-      }
-    </script>
-    <script>
-      function showNotificationFailure() 
-      {
-           document.getElementById('notification_failure').style.display = "block";  
-           $(function(){
-            $("#notification_failure").delay(2000).fadeOut("slow");
-          });
-      }
+  
     </script>
   </head>
   <body>
@@ -170,7 +137,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
   </nav>
 
     <!-- 2nd Navbar -->
-  <div class=""><!-- Kamlesh edit you show/hide in this div-->
+  <div><!-- edit you show/hide in this div-->
    <div class="navbar navbar-default navbar-bg navbar-fixed-top" style="margin-top:50px; height:60px;">
     <div class="container-fluid">
     <div class="row">
@@ -228,48 +195,139 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
   </div>
 </div><!--Closing Div of Show/Hide -->
 
+
+<!-- 3rd Navbar for contact details header -->
+  <!-- 2nd Navbar -->
+  <div><!-- edit you show/hide in this div-->
+   <div class="navbar navbar-default navbar-bg1 navbar-fixed-top" style="margin-top:110px; height:60px;">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12" style="padding-top:12px">
+          <center>
+            <h12>Contact Details</h12>
+            <button class='btn btn-success pull-right' onclick='openEditContact();'>
+              <span class='glyphicon glyphicon-pencil'></span>
+            </button>
+            <button class='btn btn-danger pull-left' onclick='openDeleteModal("+((arr.contact) ? arr.contact.contactCode : "1")+")'>
+              <span class='glyphicon glyphicon-trash'></span>
+            </button>
+          </center>
+        </div>              
+      </div><!-- /.navbar-collapse -->
+    </div><!--/.row -->
+  </div><!-- /.container-fluid -->
+</div><!--Closing Div of Show/Hide -->
+
   <div class="container-fluid navbar-padding">
     <?php 
       echo $status; 
       //echo json_encode($group['code']);
     ?>
 
-    <div class="notification_outer" id="notification_outer" >
+    <div class="notification_outer">
       <div class="notification_success" id="notification_success" style="display:none">
         Added Successfully!
       </div>
     </div>
 
-    <div class="notification_outer" id="notification_outer" >
+    <div class="notification_outer">
       <div class="notification_failure" id="notification_failure" style="display:none">
         Something went wrong!
       </div>
     </div>
 
-    <div class="row" style="margin-top:45px;">
-    
-      <div class="col-md-5 col-sm-12 col-xs-12 panel-padding-remove">
-        <div class="panel panel-default panel-margin" id="style-3">
-             <!-- List group -->
-            <div id="contactList" class="list-group force-scroll">
-              <div class="list-group-item">
-                <p class="list-group-item-text">Loading...</p>
-              </div>
-          </div><!--List close-->
-        </div><!--Panel-->
-      </div><!--COL-->
 
+<!--
+    <div class="row">
+      <div class="col-xs-12 col-md-5">
+        <div class="list-group list-margin">
+          <div class="list-group-item list-margin">
+            <div class="row">
+               <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                <div class="input-group">
+                <input id="searchContact" type="text" class="form-control" onkeyup="doSearch();" placeholder="Search..." autofocus />
+                  <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                      <div class="dropdown dropdown-lg">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false" onclick="showDiv()"><span class="glyphicon glyphicon-filter"></span></button>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu" id="search_filter">
+                          <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                              <label for="filter">Filter by</label>
+                              <select class="form-control" id="filter">
+                                <option value="name">Name</option>
+                                <option value="mobile">Mobile</option>
+                                <option value="email">Email</option>
+                                <option value="company">Company</option>
+                                <option value="designation">Designation</option>
+                                <option value="guardian">Father/Husband</option>
+                                <option value="birthday">Birthday</option>
+                                <option value="anniversary">Anniversary</option>
+                                <option value="group">Group</option>
+                                <option value="home_area">Home Area</option>
+                                <option value="home_city">Home City</option>
+                                <option value="home_phone">Home Phone</option>
+                                <option value="work_area">Work Area</option>
+                                <option value="work_city">Work City</option>
+                                <option value="work_phone">Work Phone</option>
+                                <option value="other_area">Other Area</option>
+                                <option value="other_city">Other City</option>
+                                <option value="other_phone">Other Phone</option>
+                              </select>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                  <button type="button" class="btn btn-info btn-size"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                  <button class="btn btn-primary btn-size" onclick="openAddContact();"><span class="glyphicon glyphicon-plus"></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
       <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
-        <div id="contactDetail" class="panel panel-default panel-margin" id="style-3">
-             <!-- List group -->  
-              <div id="contactDetailBody" class="list-group">
+        <div class="panel panel-default scroll list-margin" id="style-3">
+          <div id="contactDetailHeader" class="panel-heading text-center" >
+            <h12>Contact Details</h12>
+          </div>
+             
+        </div>
+      </div>
+    </div>-->
+
+
+    <div class="row row-margin-top" style="margin-top:100px">
+      <div> <!-- Edit here -->
+        <div class="col-md-5 col-sm-12 col-xs-12 panel-padding-remove">
+          <div class="panel panel-default panel-margin" id="style-3">
+               <!-- List group -->
+              <div id="contactList" class="list-group force-scroll">
                 <div class="list-group-item">
                   <p class="list-group-item-text">Loading...</p>
                 </div>
-              </div><!--List close-->
-             
-        </div><!--Panel-->
-      </div><!--COL-->
+            </div><!--List close-->
+          </div><!--Panel-->
+        </div><!--COL-->
+      </div>  <!-- Edit div-->
+
+      <div><!-- Edit here -->
+        <div class="col-md-7 col-sm-12 hidden-sm hidden-xs panel-padding-remove">
+          <div id="contactDetail" class="panel panel-default panel-margin" id="style-3">
+               <!-- List group -->  
+                <div id="contactDetailBody" class="list-group">
+                  <div class="list-group-item">
+                    <p class="list-group-item-text">Loading...</p>
+                  </div>
+                </div><!--List close-->
+          </div><!--Panel-->
+        </div><!--COL-->
+      </div> <!-- Edit div -->
     </div><!--ROW-->
   </div>
 
@@ -319,6 +377,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                 </div>
               </div>
             </div>
+            <input type="hidden" name="inputType" id="inputType" />
             <div class="form-group form-group-margin">
               <label class="col-xs-4 control-label">Title</label>
               <div class="col-xs-4">
@@ -879,7 +938,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
           <div class="btn-group">
             <form action="delete.php" method="POST">
               <input type="hidden" name="id" id="deleteContact" />
-              <button class="btn btn-danger" type="submit">
+              <button class="btn btn-danger modal_button" type="submit">
                 <span class='glyphicon glyphicon-ok'></span>&nbsp
                 Yes
               </button>
@@ -888,7 +947,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
             </div>
             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
             <div class="btn-group">
-              <button type="submit" class="btn btn-success" data-dismiss="modal">
+              <button type="submit" class="btn btn-success modal_button" data-dismiss="modal">
                 <span class='glyphicon glyphicon-remove'></span>&nbsp
                 No
               </button>

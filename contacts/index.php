@@ -79,16 +79,6 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
     
 
-    <!-- To hide the div on selection -->
-    <script>
-      $(function() {
-        $('#filter').change(function(){
-        if ($(this).val() != "0") {
-            $('#search_filter').hide();
-        }
-      });
-    </script>
-
     <!--To show the div on button click -->
     <script>
       function showDiv() {
@@ -883,9 +873,9 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     </div>
   </div><!--modal-->
 
-  <!-- Image Modal -->
+<!-- Image Modal -->
   <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-md">
       <div class="modal-content">
 
         <form class="form-horizontal" method="POST" action="#" id="form1" runat="server">
@@ -894,15 +884,15 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
           <div class="btn-group pull-left">
             <button class="btn btn-danger" data-dismiss="modal">
-              <span class='glyphicon glyphicon-remove'></span>&nbsp
-              Cancel
+              <span class='glyphicon glyphicon-remove'></span>
+              
             </button>
           </div>
         
           <div class="btn-group pull-right">
             <button type="submit" class="btn btn-success">
-              <span class='glyphicon glyphicon-ok'></span>&nbsp
-              Save
+              <span class='glyphicon glyphicon-ok'></span>
+              
             </button>
           </div>
 
@@ -914,18 +904,24 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
         <div class="modal-body">
             <input type="hidden" name="id" id='contactCode' />
             <div class="form-group row">
-              <label class="col-lg-4 control-label">Select Image</label>
-              <div class="col-lg-8">
-                <input type='file' id="imgInp" />
+              <center>
+              <div class="col-sm-12 col-md-12">
+              <div class="col-lg-6 col-md-6 col-sm-5">
+              <label class="control-label">Select Image</label>
+                <br>              
+                <br>
+                <input type='file' id="imgInp" style="padding-bottom:10px;"/>          
               </div>
-            </div>            
-            <div class="form-group row">
-              <label class="col-lg-4 control-label"></label>
-              <div class="col-lg-8">
-                <img src="" id="imagepreview" style="width: 30%; height: 30%;" >
+              <div class="col-lg-6 col-md-6 col-sm-4">
+                <label class="control-label">Image Preview</label>
+                <br>
+                <br>
+                <img src="../img/contacts/profile/profilePicture1.png" id="imagepreview" class="addImage">
               </div>
             </div>
+            </center>
           </div>
+        </div>
         </form>
       </div><!--modal-content-->
     </div>
