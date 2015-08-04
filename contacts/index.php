@@ -814,7 +814,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-linkedin"></i>
-                      <input type="text" name="linkedin" id="addLinkedin" class="form-control" placeholder="Linkedin ID" />
+                        <input type="text" name="linkedin" id="addLinkedin" class="form-control" placeholder="Linkedin ID" />
+                      </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
