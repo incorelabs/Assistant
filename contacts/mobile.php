@@ -58,7 +58,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">-->
     <!--jQuery UI-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="<?php echo ROOT; ?>/dist/css/style.css">
+    <link rel="stylesheet" href="<?php echo ROOT; ?>/dist/css/mobile-style.css">
 
     <!--Adding jquery file-->
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -73,19 +73,21 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     <![endif]-->
     <!--jQuery UI script-->
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
-    <script src="../dist/contacts/script/script.js"></script>
-    <script src="../dist/contacts/script/validation.js"></script>
-
+    <script id="erasable" src="../dist/contacts/script/script.js"></script>
+    <script id="erasable" src="../dist/contacts/script/validation.js"></script>
     
 
     <!-- To hide the div on selection -->
     <script>
-      $(function() {
-        $('#filter').change(function(){
-        if ($(this).val() != "0") {
+      $(function filter() 
+      {
+        $('#filter').change(function()
+        {
+          if ($(this).val() != "0")
+          {
             $('#search_filter').hide();
-        }
+          }
+        });
       });
     </script>
 
@@ -102,7 +104,26 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
         else
            document.getElementById('search_filter').style.display = "block";  
       }
-  
+    </script>
+
+    <!-- Show Notification Success -->
+    <script>
+      function showNotificationSuccess() 
+      {
+           document.getElementById('notification_success').style.display = "block";  
+           $(function(){
+            $("#notification_success").delay(2000).fadeOut("slow");
+          });
+      }
+    </script>
+    <script>
+      function showNotificationFailure() 
+      {
+           document.getElementById('notification_failure').style.display = "block";  
+           $(function(){
+            $("#notification_failure").delay(2000).fadeOut("slow");
+          });
+      }
     </script>
   </head>
   <body>
@@ -147,39 +168,25 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-  <div class="container-fluid navbar-padding">
-    <?php 
-      echo $status; 
-      //echo json_encode($group['code']);
-    ?>
 
-    <div class="notification_outer">
-      <div class="notification_success" id="notification_success" style="display:none">
-        Added Successfully!
-      </div>
-    </div>
-
-    <div class="notification_outer">
-      <div class="notification_failure" id="notification_failure" style="display:none">
-        Something went wrong!
-      </div>
-    </div>
-
+    <!-- 2nd Navbar -->
+  <div class=""><!-- Kamlesh edit you show/hide in this div-->
+   <div class="navbar navbar-default navbar-bg navbar-fixed-top" style="margin-top:50px; height:60px;">
+    <div class="container-fluid">
     <div class="row">
-      <div class="col-xs-12 col-md-5">
-        <div class="list-group list-margin">
-          <div class="list-group-item list-margin">
-            <div class="row">
-               <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                <div class="input-group">
+      <div class="col-md-12" style="padding-top:12px">
+        <form>
+          <div class="form-group">
+            <div class="col-md-10 col-sm-10 col-xs-10">
+              <div class="input-group">
                 <input id="searchContact" type="text" class="form-control" onkeyup="doSearch();" placeholder="Search..." autofocus />
                   <div class="input-group-btn">
-                    <div class="btn-group" role="group">
+                    <div class="btn-group btn-group1" role="group">
                       <div class="dropdown dropdown-lg">
-                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false" onclick="showDiv()"><span class="glyphicon glyphicon-filter"></span></button>
+                        <button type="button" class="btn btn1 btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false" onclick="showDiv()"><span class="glyphicon glyphicon-filter"></span></button>
                         <div class="dropdown-menu dropdown-menu-right" role="menu" id="search_filter">
                           <form class="form-horizontal" role="form">
-                            <div class="form-group">
+                            <div class="form-group" style="padding-bottom:30px;">
                               <label for="filter">Filter by</label>
                               <select class="form-control" id="filter">
                                 <option value="name">Name</option>
@@ -213,24 +220,36 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   <!--<button type="button" class="btn btn-info btn-size"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>-->
                   <button class="btn btn-primary btn-size" onclick="openAddContact();"><span class="glyphicon glyphicon-plus"></span></button>
               </div>
-            </div>
           </div>
-        </div>
+        </form>
+      </div><!-- /.navbar-collapse -->
+      </div><!--/.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+</div><!--Closing Div of Show/Hide -->
+
+  <div class="container-fluid navbar-padding">
+    <?php 
+      echo $status; 
+      //echo json_encode($group['code']);
+    ?>
+
+    <div class="notification_outer" id="notification_outer" >
+      <div class="notification_success" id="notification_success" style="display:none">
+        Added Successfully!
       </div>
+    </div>
+
+    <div class="notification_outer" id="notification_outer" >
+      <div class="notification_failure" id="notification_failure" style="display:none">
+        Something went wrong!
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:45px;">
     
-      <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
-        <div class="panel panel-default scroll list-margin" id="style-3">
-          <div id="contactDetailHeader" class="panel-heading text-center" >
-            <h12>Contact Details</h12>
-          </div>
-             
-        </div><!--Panel-->
-      </div><!--COL-->
-    </div><!--row-->
-    <div class="row">
-    
-      <div class="col-md-5 col-sm-12 col-xs-12">
-        <div class="panel panel-default scroll panel-margin" id="style-3">
+      <div class="col-md-5 col-sm-12 col-xs-12 panel-padding-remove">
+        <div class="panel panel-default panel-margin" id="style-3">
              <!-- List group -->
             <div id="contactList" class="list-group force-scroll">
               <div class="list-group-item">
@@ -241,7 +260,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
       </div><!--COL-->
 
       <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
-        <div id="contactDetail" class="panel panel-default scroll panel-margin" id="style-3">
+        <div id="contactDetail" class="panel panel-default panel-margin" id="style-3">
              <!-- List group -->  
               <div id="contactDetailBody" class="list-group">
                 <div class="list-group-item">
@@ -300,7 +319,6 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                 </div>
               </div>
             </div>
-            <input type="hidden" name="inputType" id="inputType" />
             <div class="form-group form-group-margin">
               <label class="col-xs-4 control-label">Title</label>
               <div class="col-xs-4">
@@ -861,7 +879,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
           <div class="btn-group">
             <form action="delete.php" method="POST">
               <input type="hidden" name="id" id="deleteContact" />
-              <button class="btn btn-danger modal_button" type="submit">
+              <button class="btn btn-danger" type="submit">
                 <span class='glyphicon glyphicon-ok'></span>&nbsp
                 Yes
               </button>
@@ -870,7 +888,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
             </div>
             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
             <div class="btn-group">
-              <button type="submit" class="btn btn-success modal_button" data-dismiss="modal">
+              <button type="submit" class="btn btn-success" data-dismiss="modal">
                 <span class='glyphicon glyphicon-remove'></span>&nbsp
                 No
               </button>
@@ -885,7 +903,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
   <!-- Image Modal -->
   <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-md">
       <div class="modal-content">
 
         <form class="form-horizontal" method="POST" action="#" id="form1" runat="server">
@@ -894,15 +912,15 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
           <div class="btn-group pull-left">
             <button class="btn btn-danger" data-dismiss="modal">
-              <span class='glyphicon glyphicon-remove'></span>&nbsp
-              Cancel
+              <span class='glyphicon glyphicon-remove'></span>
+              
             </button>
           </div>
         
           <div class="btn-group pull-right">
             <button type="submit" class="btn btn-success">
-              <span class='glyphicon glyphicon-ok'></span>&nbsp
-              Save
+              <span class='glyphicon glyphicon-ok'></span>
+              
             </button>
           </div>
 
@@ -914,18 +932,24 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
         <div class="modal-body">
             <input type="hidden" name="id" id='contactCode' />
             <div class="form-group row">
-              <label class="col-lg-4 control-label">Select Image</label>
-              <div class="col-lg-8">
-                <input type='file' id="imgInp" />
+              <center>
+              <div class="col-sm-12 col-md-12">
+              <div class="col-lg-6 col-md-6 col-sm-5">
+              <label class="control-label">Select Image</label>
+                <br>              
+                <br>
+                <input type='file' id="imgInp" style="padding-bottom:10px;"/>          
               </div>
-            </div>            
-            <div class="form-group row">
-              <label class="col-lg-4 control-label"></label>
-              <div class="col-lg-8">
-                <img src="" id="imagepreview" style="width: 30%; height: 30%;" >
+              <div class="col-lg-6 col-md-6 col-sm-4">
+                <label class="control-label">Image Preview</label>
+                <br>
+                <br>
+                <img src="../img/contacts/profile/profilePicture1.png" id="imagepreview" class="addImage">
               </div>
             </div>
+            </center>
           </div>
+        </div>
         </form>
       </div><!--modal-content-->
     </div>
