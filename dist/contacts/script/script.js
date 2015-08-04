@@ -37,6 +37,7 @@ function getContactList(){
 
 function getContact(id){
   showLoadingInContactDetail();
+  console.log("Getting contact details of : "+id);
   $.ajax({
     method: "GET",
     url: root+"contacts/getContact.php",
@@ -46,6 +47,8 @@ function getContact(id){
   })
     .done(function(msg) {
       contact = JSON.parse(msg);
+      console.log("Contact arr: ");
+      console.log(contact);
       setContactView(contact);
     });
 }
@@ -201,10 +204,14 @@ function doSearch(){
 
 function setContactView(arr){
   //var json = JSON.stringify(arr);
-  if (contact.contact.contactCode == null) {
+  //console.log(arr);
+  if (arr.contact ) {
+    
+  }
+  else{
     getContact(0);
     return;
-  };
+  }
   var headerStr = "<h12>Contact Details</h12><button class='btn btn-success pull-right' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger pull-left' onclick='openDeleteModal("+((arr.contact) ? arr.contact.contactCode : "1")+")'><span class='glyphicon glyphicon-trash'></span></button>";
   var str = "";
 
@@ -391,7 +398,76 @@ function openEditContact () {
     $('#addWebsite').val(contact.contact.website);
   };
 
+  if (contact.address) {
+    var address = contact.address;
+    var type = "";
+    if (address.home) {
+      type = "home";
+      createEditAddressData(address,type);
+    }
+
+    if (address.work) {
+      type = "work";
+      createEditAddressData(address,type);
+    }
+
+    if (address.other) {
+      type = "other";
+      createEditAddressData(address,type);
+    }
+  }
+
   $("#addModal").modal('show');
+}
+
+function createEditAddressData(address,type){
+  if (address[type].countryCode) {
+    $("#"+type+"Country").val(address[type].country);
+    $("#"+type+"CountryCode").val(address[type].countryCode);
+  }
+
+  if (address[type].stateCode) {
+    $("#"+type+"State").val(address[type].state);
+    $("#"+type+"StateCode").val(address[type].stateCode); 
+  }
+
+  if (address[type].cityCode) {
+    $("#"+type+"City").val(address[type].city);
+    $("#"+type+"CityCode").val(address[type].cityCode); 
+  } 
+
+  if (address[type].areaCode) {
+    $("#"+type+"Area").val(address[type].area);
+    $("#"+type+"AreaCode").val(address[type].areaCode); 
+  }
+
+  if (address[type].address1) {
+    $("#"+type+"Address1").val(address[type].address1);
+  } 
+
+  if (address[type].address2) {
+    $("#"+type+"Address2").val(address[type].address2);
+  }
+
+  if (address[type].address3) {
+    $("#"+type+"Address3").val(address[type].address3);
+  }
+
+  if (address[type].address4) {
+    $("#"+type+"Address4").val(address[type].address4);
+  }
+
+  if (address[type].address5) {
+    $("#"+type+"Address5").val(address[type].address5);
+  }
+
+  if (address[type].pincode) {
+    $("#"+type+"Pincode").val(address[type].pincode);
+  }
+
+  if (address[type].phone) {
+    $("#"+type+"Phone").val(address[type].phone);
+  }
 }
 
 function openDeleteModal(id){
@@ -587,10 +663,12 @@ function submitContactForm(event){
       var id = parseInt(response.landing);
       var status = parseInt(response.status)
       if (status == 1) {
-        getContact(id);
-        getContactList();
-        showNotificationSuccess(response.message);
-        refreshMasterList();
+        setTimeout(function(){
+          getContact(id);
+          getContactList();
+          showNotificationSuccess(response.message);
+          refreshMasterList();
+        },500);
       }
       else{
         getContact(0);

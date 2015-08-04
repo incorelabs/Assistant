@@ -26,7 +26,7 @@ if (isset($_GET['id'])) {
 
 		$id = $contact["contact"]["contactCode"];
 
-		$sql = "SELECT address.`registeredLicenceCode`, `contactCode`, `serialNo`, `typeCode`, `address`, `address1`, `address2`, `address3`, `address4`, `address5`, `pincode`, country.description as 'country', state.description as 'state', city.description as 'city', area.description as 'area', `phone` 
+		$sql = "SELECT address.`registeredLicenceCode`, `contactCode`, `serialNo`, `typeCode`, `address`, `address1`, `address2`, `address3`, `address4`, `address5`, `pincode`, country.description as 'country', address.`countryCode`, address.`stateCode`, address.`cityCode`, address.`areaCode`, state.description as 'state', city.description as 'city', area.description as 'area', `phone` 
 				FROM `address` 
 				LEFT JOIN country ON country.code = address.countryCode
 				LEFT JOIN state ON state.code = address.stateCode
@@ -54,7 +54,7 @@ if (isset($_GET['id'])) {
 			$contact["contact"] = $result->fetch_assoc();
 		}
 
-		$sql = "SELECT address.`registeredLicenceCode`, `contactCode`, `serialNo`, `typeCode`, `address`, `address1`, `address2`, `address3`, `address4`, `address5`, `pincode`, country.description as 'country', state.description as 'state', city.description as 'city', area.description as 'area', `phone` 
+		$sql = "SELECT address.`registeredLicenceCode`, `contactCode`, `serialNo`, `typeCode`, `address`, `address1`, `address2`, `address3`, `address4`, `address5`, `pincode`, country.description as 'country', address.`countryCode`, address.`stateCode`, address.`cityCode`, address.`areaCode`, state.description as 'state', city.description as 'city', area.description as 'area', `phone` 
 				FROM `address` 
 				LEFT JOIN country ON country.code = address.countryCode
 				LEFT JOIN state ON state.code = address.stateCode
