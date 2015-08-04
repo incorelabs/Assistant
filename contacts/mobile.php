@@ -281,7 +281,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
             <input type="hidden" name="inputType" id="inputType" />
             <div class="form-group form-group-margin">
               <label class="col-xs-4 control-label">Title</label>
-              <div class="col-xs-4">
+              <div class="col-xs-7">
                 <div class="left-inner-addon">
                   <i class="glyphicon glyphicon-star"></i>
                   <input type="text" name="title" class="form-control" id="addTitle" placeholder="Title" autofocus/>
@@ -802,7 +802,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-linkedin"></i>
-                      <input type="text" name="linkedin" id="addLinkedin" class="form-control" placeholder="Linkedin ID" />
+                        <input type="text" name="linkedin" id="addLinkedin" class="form-control" placeholder="Linkedin ID" />
+                      </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
