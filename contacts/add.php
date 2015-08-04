@@ -13,7 +13,7 @@ function getCode($pCodeKey,$pKey,$tableName,$tableValues,$timestamp=1001){
 	$code = 0;
 	$sql = "";
 	if (isset($_POST[$pCodeKey])) {
-		if (intval($_POST[$pCodeKey]) > 0) {
+		if (intval($_POST[$pCodeKey]) >= 0) {
 			$code = $_POST[$pCodeKey];
 		}
 		elseif (isset($_POST[$pKey]) && strlen($_POST[$pKey]) > 0) {
@@ -24,45 +24,72 @@ function getCode($pCodeKey,$pKey,$tableName,$tableValues,$timestamp=1001){
 	return array("code"=>$code,"sql"=>$sql);
 }
 
+function hasDataWithPostKey($pkeys){
+	$hasData = true;
+	
+	foreach ($pkeys as $key => $value) {
+		if (isset($_POST[$value])) {
+			if (is_null($_POST[$value]) || $_POST[$value] == "") {
+				$hasData = false;
+			}
+			else{
+				$hasData = true;
+				break;
+			}
+		}
+	}
+
+	return $hasData;
+		
+}
+
 $mysqli = getConnection();
 
 $id = 0; 
 $addressSerial = 0;
-
-$sql = "SELECT MAX(contactCode) as 'contactCode' FROM contact";
-
-if ($result = $mysqli->query($sql)) {
-	if ($result->num_rows == 0) {
-	  $id = 1001;
-	}
-    else{
-      while ($row = $result->fetch_assoc()) {
-        if (is_null($row['contactCode'])) {
-          $id = 1001;     
-        }
-        else{
-          $id = intval($row['contactCode']) + 1;
-        }
-      }
-    }
-}
-else{
-
-}
-
-$sql = "SELECT serialNo FROM address WHERE contactCode = ".$id;
-if ($result = $mysqli->query($sql)) {
-	if ($result->num_rows == 0) {
-	  $addressSerial = 1001;
-	}
-	else{
-		while ($row = $result->fetch_assoc()) {
-			$addressSerial = intval($row['serialNo']) + 1;
-		}	
-	}
-}
+$status = 0;
+$response = array();
 
 if (isset($_POST['id'])) {
+
+	if (isset($_POST["inputType"])) {
+		if (intval($_POST["inputType"]) == 1) {
+			
+			$sql = "SELECT MAX(contactCode) as 'contactCode' FROM contact";
+
+			if ($result = $mysqli->query($sql)) {
+				if ($result->num_rows == 0) {
+				  $id = 1001;
+				}
+			    else{
+			      while ($row = $result->fetch_assoc()) {
+			        if (is_null($row['contactCode'])) {
+			          $id = 1001;     
+			        }
+			        else{
+			          $id = intval($row['contactCode']) + 1;
+			        }
+			      }
+			    }
+			}
+		}
+		elseif (intval($_POST["inputType"]) == 2) {
+			$id = $_POST["id"];
+		}
+	}
+
+	$sql = "SELECT serialNo FROM address WHERE contactCode = ".$id;
+	if ($result = $mysqli->query($sql)) {
+		if ($result->num_rows == 0) {
+		  $addressSerial = 1001;
+		}
+		else{
+			while ($row = $result->fetch_assoc()) {
+				$addressSerial = intval($row['serialNo']) + 1;
+			}	
+		}
+	}
+
 	$date = new DateTime();
 	$timestamp = $date->getTimestamp();
 	$titleCode = 0;
@@ -73,11 +100,9 @@ if (isset($_POST['id'])) {
 	$areaCode = array();
 	$sql = "";
 
-
-
 	//Title ID manipulations
 	if (isset($_POST['titleId'])) {
-		if (intval($_POST['titleId']) > 0) {
+		if (intval($_POST['titleId']) >= 0) {
 			$titleCode = $_POST['titleId'];
 		}
 		elseif (isset($_POST['title']) && strlen($_POST['title']) > 0) {
@@ -85,7 +110,7 @@ if (isset($_POST['id'])) {
 				$timestamp,
 				$_POST['title'],
 				'1001'
-				)).";";
+				));
 			$titleCode = $timestamp;
 		}
 	}
@@ -93,7 +118,7 @@ if (isset($_POST['id'])) {
 	
 	//Group ID manipulation
 	if (isset($_POST["groupId"])) {
-		if (intval($_POST['groupId']) > 0) {
+		if (intval($_POST['groupId']) >= 0) {
 			$groupCode = $_POST['groupId'];
 		}
 		elseif (isset($_POST['group']) && strlen($_POST['group']) > 0) {
@@ -265,8 +290,12 @@ if (isset($_POST['id'])) {
 			));
 	}*/
 
+	$sql .= buildDeleteStr("contact",array('contactCode'=>intval($id)));
+	$sql .= buildDeleteStr("address",array('contactCode'=>intval($id)));
+
 	//Address
-	$sql .= build_insert_str('address',array(
+	if (hasDataWithPostKey(array("homeAddress1","homePincode","homeArea","homeCity","homeState","homeCountry","homePhone"))) {
+		$sql .= build_insert_str('address',array(
 		1001,
 		$id,
 		$addressSerial,
@@ -284,9 +313,11 @@ if (isset($_POST['id'])) {
 		$areaCode["home"],
 		(isset($_POST['homePhone']) ? $_POST['homePhone'] : ""),
 			));
-
+	}
+	
 	//Work Address
-	$sql .= build_insert_str('address',array(
+	if (hasDataWithPostKey(array("workAddress1","workPincode","workArea","workCity","workState","workCountry","workPhone"))) {
+		$sql .= build_insert_str('address',array(
 		1001,
 		$id,
 		$addressSerial+1,
@@ -304,9 +335,11 @@ if (isset($_POST['id'])) {
 		$areaCode["work"],
 		(isset($_POST['workPhone']) ? $_POST['workPhone'] : ""),
 			));
-
+	}
+	
 	//other Address
-	$sql .= build_insert_str('address',array(
+	if (hasDataWithPostKey(array("otherAddress1","otherPincode","otherArea","otherCity","otherState","otherCountry","otherPhone"))) {
+		$sql .= build_insert_str('address',array(
 		1001,
 		$id,
 		$addressSerial+2,
@@ -324,8 +357,10 @@ if (isset($_POST['id'])) {
 		$areaCode["other"],
 		(isset($_POST['otherPhone']) ? $_POST['otherPhone'] : ""),
 			));
+	}
 
-	$sql .= build_insert_str('contact',array(
+	if (hasDataWithPostKey(array("firstName"))) {
+		$sql .= build_insert_str('contact',array(
 		1001,
 		$id,
 		$_POST['firstName'],
@@ -358,27 +393,30 @@ if (isset($_POST['id'])) {
 		$timestamp
 		));
 
+		$status = 1;
 
-	
-	//echo $sql;
-	$response = array();
-
-	if ($mysqli->multi_query($sql)) {
-		$response["status"] = 1;
-		$response["controller"] = "add";
-		$response["landing"] = $id;
-		//exit(header("Location:index.php?status=1&controller=add&landing=".$id));
-		echo json_encode($response);
+		//echo $sql;
+		if ($mysqli->multi_query($sql) === TRUE) {
+			$response["status"] = $status;
+			$response["controller"] = "add";
+			$response["landing"] = $id;
+			$response["message"] = "Successfully added to your contacts";
+		}
+		else{
+			$response["status"] = 0;
+			$response["controller"] = "add";
+			$response["landing"] = $id;
+			$response["message"] = "Error occured while uploading to the database: ".$mysqli->error;
+		}
 	}
 	else{
 		$response["status"] = 0;
 		$response["controller"] = "add";
 		$response["landing"] = $id;
-		//exit(header("Location:index.php?status=0&controller=add&landing=".$id));
-		echo json_encode($response);
+		$response["message"] = "Basic details where missing";
 	}
-
 	
+	echo json_encode($response);
 
 }
 ?>

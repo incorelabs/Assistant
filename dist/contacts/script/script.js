@@ -201,7 +201,11 @@ function doSearch(){
 
 function setContactView(arr){
   //var json = JSON.stringify(arr);
-  var headerStr = "<h12>Contact Details</h12><button class='btn btn-success pull-right' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger pull-left' onclick='openDeleteModal("+((arr.contact.contactCode) ? arr.contact.contactCode : "")+")'><span class='glyphicon glyphicon-trash'></span></button>";
+  if (contact.contact.contactCode == null) {
+    getContact(0);
+    return;
+  };
+  var headerStr = "<h12>Contact Details</h12><button class='btn btn-success pull-right' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger pull-left' onclick='openDeleteModal("+((arr.contact) ? arr.contact.contactCode : "1")+")'><span class='glyphicon glyphicon-trash'></span></button>";
   var str = "";
 
   str += "<div class='list-group-item'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='../img/contacts/profile/profilePicture1.png' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>"+((arr.contact.contactTitle) ? arr.contact.contactTitle + " " : "")+((arr.contact.fullName) ? arr.contact.fullName : "")+"</h5></div>";
@@ -287,6 +291,7 @@ function setContactView(arr){
 function openAddContact () {
   $("#addContactForm").attr("action","add.php");
   $("#contactCode").val(contactCode);
+  $("#inputType").val(1);
   $('#contactModalHeading').empty();
   $('#contactModalHeading').html("Add Contact");
   document.getElementById("addContactForm").reset();
@@ -295,17 +300,19 @@ function openAddContact () {
 
 function openEditContact () {
   document.getElementById("addContactForm").reset();
-  
-  $('#titleId').val(0);
-  $('#groupId').val(0);
+
   $('#contactModalHeading').empty();
   $('#contactModalHeading').html("Edit Contact");
-  $("#addContactForm").attr("action","edit.php");
-
+  $("#addContactForm").attr("action","add.php");
+  $("#inputType").val(2);
   $("#contactCode").val(contact.contact.contactCode);
 
   if (contact.contact.contactTitle) {
     $('#addTitle').val(contact.contact.contactTitle);
+  };
+
+  if (contact.contact.titleCode) {
+    $('#titleId').val(contact.contact.titleCode);
   };
 
   if (contact.contact.firstName) {
@@ -346,6 +353,10 @@ function openEditContact () {
 
   if (contact.contact.group) {
     $('#addGroup').val(contact.contact.group);
+  };
+
+  if (contact.contact.groupCode) {
+    $('#groupId').val(contact.contact.groupCode);
   };
 
   if (contact.contact.remarks) {
@@ -503,9 +514,12 @@ function setCityAutoCompleteWithOptions(autoCompleteId,changeCodeId,countryId,co
 }
 
 function setAreaAutoComplete(){
-  setAreaAutoCompleteWithOptions("#homeArea","#homeAreaCode","#homeCountry","#homeCountryCode","#homeState","#homeStateCode","#homeCity","#homeCityCode");
-  setAreaAutoCompleteWithOptions("#workArea","#workAreaCode","#workCountry","#workCountryCode","#workState","#workStateCode","#workCity","#workCityCode");
-  setAreaAutoCompleteWithOptions("#otherArea","#otherAreaCode","#otherCountry","#otherCountryCode","#otherState","#otherStateCode","#otherCity","#otherCityCode");
+  setAutoComplete("#homeArea", "#homeArea", areaTag, areaCode);
+  setAutoComplete("#workArea", "#workAreaCode", areaTag, areaCode);
+  setAutoComplete("#otherArea", "#otherAreaCode", areaTag, areaCode);
+  //setAreaAutoCompleteWithOptions("#homeArea","#homeAreaCode","#homeCountry","#homeCountryCode","#homeState","#homeStateCode","#homeCity","#homeCityCode");
+  //setAreaAutoCompleteWithOptions("#workArea","#workAreaCode","#workCountry","#workCountryCode","#workState","#workStateCode","#workCity","#workCityCode");
+  //setAreaAutoCompleteWithOptions("#otherArea","#otherAreaCode","#otherCountry","#otherCountryCode","#otherState","#otherStateCode","#otherCity","#otherCityCode");
 }
 
 function setAreaAutoCompleteWithOptions(autoCompleteId,changeCodeId,countryId,countryCodeId,stateId,stateCodeId,cityId,cityCodeId){
@@ -571,10 +585,33 @@ function submitContactForm(event){
       console.log(msg);
       var response = JSON.parse(msg);
       var id = parseInt(response.landing);
+      var status = parseInt(response.status)
+      if (status == 1) {
+        getContact(id);
+        getContactList();
+        showNotificationSuccess(response.message);
+        refreshMasterList();
+      }
+      else{
+        getContact(0);
+        showNotificationFailure(response.message);
+      }
       console.log(id);
-      getContact(id);
-      getContactList();
     });
+}
+
+function showNotificationSuccess(msg) 
+{
+  $("#notification_success").html(msg);
+  document.getElementById('notification_success').style.display = "block";  
+  $("#notification_success").delay(2000).fadeOut("slow");
+}
+
+function showNotificationFailure(msg) 
+{
+  $("#notification_failure").html(msg);
+  document.getElementById('notification_failure').style.display = "block";  
+  $("#notification_failure").delay(2000).fadeOut("slow");
 }
 
 function showLoadingInContactDetail(){
@@ -583,16 +620,20 @@ function showLoadingInContactDetail(){
   $("#contactDetailBody").html(contactDetailStr);
 }
 
-$(document).ready(function(event){
-  
-  getContact(0);
-  getContactList();
+function refreshMasterList(){
   getTitles();
   getGroupes();
   getCountry();
   getStates();
   getCities();
   getAreas();
+}
+
+$(document).ready(function(event){
+  
+  getContact(0);
+  getContactList();
+  refreshMasterList();
 
   $('.alert').fadeOut(2000);
 
@@ -602,7 +643,6 @@ $(document).ready(function(event){
   });
 
   $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-    console.log(e); // newly activated tab
     var tabPane = $(e.target).attr('href')
     var inputArr = $(tabPane).find('input');
     $(inputArr[0]).focus();

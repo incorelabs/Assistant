@@ -72,20 +72,17 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     <![endif]-->
     <!--jQuery UI script-->
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script id="erasable" src="../dist/contacts/script/script.js"></script>
+    <script src="../dist/contacts/script/script.js">
+    
     
 
     <!-- To hide the div on selection -->
     <script>
-      $(function filter() 
-      {
-        $('#filter').change(function()
-        {
-          if ($(this).val() != "0")
-          {
+      $(function() {
+        $('#filter').change(function(){
+        if ($(this).val() != "0") {
             $('#search_filter').hide();
-          }
-        });
+        }
       });
     </script>
 
@@ -102,26 +99,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
         else
            document.getElementById('search_filter').style.display = "block";  
       }
-    </script>
-
-    <!-- Show Notification Success -->
-    <script>
-      function showNotificationSuccess() 
-      {
-           document.getElementById('notification_success').style.display = "block";  
-           $(function(){
-            $("#notification_success").delay(2000).fadeOut("slow");
-          });
-      }
-    </script>
-    <script>
-      function showNotificationFailure() 
-      {
-           document.getElementById('notification_failure').style.display = "block";  
-           $(function(){
-            $("#notification_failure").delay(2000).fadeOut("slow");
-          });
-      }
+  
     </script>
   </head>
   <body>
@@ -172,13 +150,13 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
       //echo json_encode($group['code']);
     ?>
 
-    <div class="notification_outer" id="notification_outer" >
+    <div class="notification_outer">
       <div class="notification_success" id="notification_success" style="display:none">
         Added Successfully!
       </div>
     </div>
 
-    <div class="notification_outer" id="notification_outer" >
+    <div class="notification_outer">
       <div class="notification_failure" id="notification_failure" style="display:none">
         Something went wrong!
       </div>
@@ -193,9 +171,9 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                 <div class="input-group">
                 <input id="searchContact" type="text" class="form-control" onkeyup="doSearch();" placeholder="Search..." autofocus />
                   <div class="input-group-btn">
-                    <div class="btn-group btn-group1" role="group">
+                    <div class="btn-group" role="group">
                       <div class="dropdown dropdown-lg">
-                        <button type="button" class="btn btn1 btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false" onclick="showDiv()"><span class="glyphicon glyphicon-filter"></span></button>
+                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false" onclick="showDiv()"><span class="glyphicon glyphicon-filter"></span></button>
                         <div class="dropdown-menu dropdown-menu-right" role="menu" id="search_filter">
                           <form class="form-horizontal" role="form">
                             <div class="form-group">
@@ -319,6 +297,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                 </div>
               </div>
             </div>
+            <input type="hidden" name="inputType" id="inputType" />
             <div class="form-group form-group-margin">
               <label class="col-xs-4 control-label">Title</label>
               <div class="col-xs-4">
@@ -879,7 +858,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
           <div class="btn-group">
             <form action="delete.php" method="POST">
               <input type="hidden" name="id" id="deleteContact" />
-              <button class="btn btn-danger" type="submit">
+              <button class="btn btn-danger modal_button" type="submit">
                 <span class='glyphicon glyphicon-ok'></span>&nbsp
                 Yes
               </button>
@@ -888,7 +867,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
             </div>
             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
             <div class="btn-group">
-              <button type="submit" class="btn btn-success" data-dismiss="modal">
+              <button type="submit" class="btn btn-success modal_button" data-dismiss="modal">
                 <span class='glyphicon glyphicon-remove'></span>&nbsp
                 No
               </button>
@@ -903,7 +882,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
   <!-- Image Modal -->
   <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true">
-    <div class="modal-dialog modal-md">
+    <div class="modal-dialog modal-sm">
       <div class="modal-content">
 
         <form class="form-horizontal" method="POST" action="#" id="form1" runat="server">
@@ -912,15 +891,15 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
           <div class="btn-group pull-left">
             <button class="btn btn-danger" data-dismiss="modal">
-              <span class='glyphicon glyphicon-remove'></span>
-              
+              <span class='glyphicon glyphicon-remove'></span>&nbsp
+              Cancel
             </button>
           </div>
         
           <div class="btn-group pull-right">
             <button type="submit" class="btn btn-success">
-              <span class='glyphicon glyphicon-ok'></span>
-              
+              <span class='glyphicon glyphicon-ok'></span>&nbsp
+              Save
             </button>
           </div>
 
@@ -932,24 +911,18 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
         <div class="modal-body">
             <input type="hidden" name="id" id='contactCode' />
             <div class="form-group row">
-              <center>
-              <div class="col-sm-12 col-md-12">
-              <div class="col-lg-6 col-md-6 col-sm-5">
-              <label class="control-label">Select Image</label>
-                <br>              
-                <br>
-                <input type='file' id="imgInp" style="padding-bottom:10px;"/>          
+              <label class="col-lg-4 control-label">Select Image</label>
+              <div class="col-lg-8">
+                <input type='file' id="imgInp" />
               </div>
-              <div class="col-lg-6 col-md-6 col-sm-4">
-                <label class="control-label">Image Preview</label>
-                <br>
-                <br>
-                <img src="../img/contacts/profile/profilePicture1.png" id="imagepreview" class="addImage">
+            </div>            
+            <div class="form-group row">
+              <label class="col-lg-4 control-label"></label>
+              <div class="col-lg-8">
+                <img src="" id="imagepreview" style="width: 30%; height: 30%;" >
               </div>
             </div>
-            </center>
           </div>
-        </div>
         </form>
       </div><!--modal-content-->
     </div>

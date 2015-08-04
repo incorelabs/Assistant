@@ -218,7 +218,7 @@
 	function buildDeleteStr($tableName,$constraints,$type=null){
 		$base = "DELETE FROM ".$tableName;
 		$where = buildConstraintStr($constraints,$type);
-		return $base.$where;
+		return $base.$where.";";
 	}
 
 	function getStringByType($value){
