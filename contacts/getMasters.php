@@ -57,5 +57,6 @@ if (isset($_GET['type'])) {
 	}
 
 	echo json_encode($data);
+	$mysqli->close();
 }
 ?>

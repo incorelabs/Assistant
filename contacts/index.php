@@ -73,6 +73,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     <![endif]-->
     <!--jQuery UI script-->
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
 
     <script src="../dist/contacts/script/script.js"></script>
     <script src="../dist/contacts/script/validation.js"></script>
@@ -879,7 +880,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     <div class="modal-dialog modal-md">
       <div class="modal-content">
 
-        <form class="form-horizontal" method="POST" action="#" id="form1" runat="server">
+        <form class="form-horizontal" method="POST" action="uploadProfile.php" enctype="multipart/form-data" id="profileForm" runat="server">
         
         <div class="modal-header">
 
@@ -903,7 +904,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
         </div>  
 
         <div class="modal-body">
-            <input type="hidden" name="id" id='contactCode' />
+            <input type="hidden" name="photoId" id='photoId' />
             <div class="form-group row">
               <center>
               <div class="col-sm-12 col-md-12">
@@ -911,7 +912,8 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
               <label class="control-label">Select Image</label>
                 <br>              
                 <br>
-                <input type='file' id="imgInp" style="padding-bottom:10px;"/>          
+                <input type='file' id="imgInp" name="fileToUpload" style="padding-bottom:10px;"/>
+                <p id="imageErrorMsg"></p>         
               </div>
               <div class="col-lg-6 col-md-6 col-sm-4">
                 <label class="control-label">Image Preview</label>
@@ -924,6 +926,11 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
           </div>
         </div>
         </form>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+            <span class="sr-only" id="progressValue">0% Complete</span>
+          </div>
+        </div>
       </div><!--modal-content-->
     </div>
   </div><!--modal-->
@@ -961,4 +968,4 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
   </script>
   </body>
 </html>
-<?php //$mysqli->close(); ?>
+<?php $mysqli->close(); ?>

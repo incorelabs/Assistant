@@ -214,11 +214,15 @@ function setContactView(arr){
   }
   var headerStr = "<h12>Contact Details</h12><button class='btn btn-success pull-right' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger pull-left' onclick='openDeleteModal("+((arr.contact) ? arr.contact.contactCode : "1")+")'><span class='glyphicon glyphicon-trash'></span></button>";
   var str = "";
+  var imgLocation = "";
+  if (arr.contact.imageLocation) {
+    imgLocation = arr.contact.imageLocation;
+  }
+  else{
+    imgLocation = "../img/contacts/profile/profilePicture1.png";
+  }
 
-  str += "<div class='list-group-item'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='../img/contacts/profile/profilePicture1.png' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>"+((arr.contact.contactTitle) ? arr.contact.contactTitle + " " : "")+((arr.contact.fullName) ? arr.contact.fullName : "")+"</h5></div>";
-  //if (arr.contact.fullName) {
-    
-  //};
+  str += "<div class='list-group-item'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='"+imgLocation+"' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>"+((arr.contact.contactTitle) ? arr.contact.contactTitle + " " : "")+((arr.contact.fullName) ? arr.contact.fullName : "")+"</h5></div>";
 
   //if (arr.contact.fullName) {
   //  str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Name<value class='name'>"+((arr.contact.fullName) ? arr.contact.fullName : "")+"</value></h4></div>";
@@ -265,7 +269,7 @@ function setContactView(arr){
   //};
 
 
-  str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Address</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.address : "")+"</div></value></div></div>";
+  str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Address</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.address+"<br style='padding-bottom:30px'>"+arr.address.home.city : "")+"</div></value></div></div>";
   str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.city : "")+"</div></value></div></div>";
   str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.state : "")+"</div></value></div></div>";
   str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.country : "")+"</div></value></div></div>";
@@ -696,7 +700,6 @@ function showNotificationFailure(msg)
 
 function showLoadingInContactDetail(){
   var contactDetailStr = "<div class='list-group-item'><p class='list-group-item-text'>Loading...</p></div>";
-  $("#contactDetailBody").empty();
   $("#contactDetailBody").html(contactDetailStr);
 }
 
@@ -730,8 +733,9 @@ $(document).ready(function(event){
 
   $('.alert').fadeOut(2000);
 
+  $(".progress").hide();
+
   $('#addModal').on('shown.bs.modal', function () {
-    console.log("on show");
     $('#addTitle').focus()
   });
 
@@ -741,9 +745,61 @@ $(document).ready(function(event){
     $(inputArr[0]).focus();
      // previous active tab
   });
+
   $('#filter').change(function(){
     if ($(this).val() != "0") {
         $('#search_filter').hide();
     }
   });
+
+  $('#imgInp').change(function(){
+    var image = this.files[0];
+    if ((image.size || image.fileSize) < 1 * 1000 * 1000) {
+      console.log(image);
+      var img = $("#imagepreview");
+      var reader = new FileReader();
+      reader.onloadend = function() {         
+         //img.src = reader.result;
+         img.attr("src",reader.result);
+      }
+      reader.readAsDataURL(image);
+      $("#imageErrorMsg").html("");
+    }
+    else{
+      $("#imageErrorMsg").html("Image size is greater than 1MB");
+      document.getElementById("profileForm").reset();
+    }
+  });
+
+  $('#imageModal').on('show.bs.modal', function () {
+    document.getElementById("profileForm").reset();
+    $('#photoId').val(contact.contact.registerLicenceCode+contact.contact.contactCode);
+    if (contact.contact.imageLocation) {
+      $("#imagepreview").attr("src",contact.contact.imageLocation);
+    }
+    else{
+      $("#imagepreview").attr("src","../img/contacts/profile/profilePicture1.png");
+    }
+  });
+
+  $("#profileForm").ajaxForm({
+    beforeSubmit:function(){
+      $(".progress").show();
+    },
+    uploadProgress: function(event, position, total, percentComplete){
+      $(".progress-bar").width(percentComplete+"%");
+      $("#progressValue").html(percentComplete+"% complete");
+    }, 
+    success: function(responseText, statusText, xhr, $form){
+      console.log(responseText);
+      var response = JSON.parse(responseText);
+      if (response.status == 1) {
+        $("#imageModal").modal('hide');
+        $("#imageresource").attr("src",response.location);
+        contact.contact.imageLocation = response.location;
+        $(".progress").hide();
+      }
+    },
+  });
+
 });
