@@ -92,7 +92,6 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
         else
            document.getElementById('search_filter').style.display = "block";  
       }
-  
     </script>
   </head>
   <body>

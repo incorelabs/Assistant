@@ -335,18 +335,20 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
               </div>
             </div>
             
+            <center>
+            <div class="row">
             <div class="form-group form-group-margin">
-              <ul class="nav nav-tabs nav-justified">
-                <li><a href="#tab1" data-toggle="tab"><span class='glyphicon glyphicon-user'></span><br>Personal Details</a></li>
-                <li><a href="#tab3" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span><br>Professional Details</a></li>
-                <li><a href="#tab4" data-toggle="tab"><span class='glyphicon glyphicon-globe'></span><br>Social Details</a></li>
-                <li><a href="#home" data-toggle="tab"><span class='glyphicon glyphicon-home'></span><br>Home Address</a></li>
-                <li><a href="#work" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span><br>Work Address</a></li>
-                <li><a href="#other" data-toggle="tab"><span class='glyphicon glyphicon-road'></span><br>Other Address</a></li>
-                
-                <!--<li><a href="#tab7" data-toggle="tab">Seventh</a></li>-->
+              <ul class="nav nav-tabs">
+                <li><a href="#tab1" data-toggle="tab"><span class='glyphicon glyphicon-user'></span><br>Personal</a></li>
+                <li><a href="#tab3" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span><br>Professional</a></li>
+                <li><a href="#tab4" data-toggle="tab"><span class='glyphicon glyphicon-globe'></span><br>Social</a></li>
+                <li><a href="#home" data-toggle="tab"><span class='glyphicon glyphicon-home'></span><br>Home</a></li>
+                <li><a href="#work" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span><br>Work</a></li>
+                <li><a href="#other" data-toggle="tab"><span class='glyphicon glyphicon-road'></span><br>Other</a></li>
               </ul>
             </div>
+          </div>
+          </center>
  
             <div class="tab-content">
                 <div class="tab-pane" id="tab1">

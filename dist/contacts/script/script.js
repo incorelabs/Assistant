@@ -1,4 +1,4 @@
-
+//var root = "http://incorelabs.com/Assist/";
 var root = "http://localhost/assist/";
 var contact;
 var contactList;
@@ -215,7 +215,7 @@ function setContactView(arr){
   var headerStr = "<h12>Contact Details</h12><button class='btn btn-success pull-right' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger pull-left' onclick='openDeleteModal("+((arr.contact) ? arr.contact.contactCode : "1")+")'><span class='glyphicon glyphicon-trash'></span></button>";
   var str = "";
 
-  str += "<div class='list-group-item'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='../img/contacts/profile/profilePicture1.png' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>"+((arr.contact.contactTitle) ? arr.contact.contactTitle + " " : "")+((arr.contact.fullName) ? arr.contact.fullName : "")+"</h5></div>";
+  str += "<div class='row contact-details'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='../img/contacts/profile/profilePicture1.png' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>"+((arr.contact.contactTitle) ? arr.contact.contactTitle + " " : "")+((arr.contact.fullName) ? arr.contact.fullName : "")+"</h5></div>";
   //if (arr.contact.fullName) {
     
   //};
@@ -225,69 +225,69 @@ function setContactView(arr){
   //};
 
   
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Guardian</div><value><div class='col-md-9'>"+((arr.contact.guardianName) ? arr.contact.guardianName : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Guardian</div><value><div class='col-md-9'>"+((arr.contact.guardianName) ? arr.contact.guardianName : "")+"</div></value></div></div>";
   
 
   //if (arr.contact.company) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Company</div><value><div class='col-md-9'>"+((arr.contact.company) ? arr.contact.company : "" )+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Company</div><value><div class='col-md-9'>"+((arr.contact.company) ? arr.contact.company : "" )+"</div></value></div></div>";
   //};
 
   //if (arr.contact.designation) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Designation</div><value><div class='col-md-9'>"+((arr.contact.designation) ? arr.contact.designation : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Designation</div><value><div class='col-md-9'>"+((arr.contact.designation) ? arr.contact.designation : "")+"</div></value></div></div>";
   //};
 
   //if (arr.contact.alias) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Alias</div><value><div class='col-md-9'>"+((arr.contact.alias) ? arr.contact.alias : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Alias</div><value><div class='col-md-9'>"+((arr.contact.alias) ? arr.contact.alias : "")+"</div></value></div></div>";
   //};
   
   //if (arr.contact.dob) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.B</div><value><div class='col-md-9'>"+((arr.contact.dob) ? arr.contact.dob : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.B</div><value><div class='col-md-9'>"+((arr.contact.dob) ? arr.contact.dob : "")+"</div></value></div></div>";
   //};
 
   //if (arr.contact.dom) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.M</div><value><div class='col-md-9'>"+((arr.contact.dom) ? arr.contact.dom : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.M</div><value><div class='col-md-9'>"+((arr.contact.dom) ? arr.contact.dom : "")+"</div></value></div></div>";
   //};
 
   //if (arr.contact.group) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Group</div><value><div class='col-md-9'>"+((arr.contact.group) ? arr.contact.group : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Group</div><value><div class='col-md-9'>"+((arr.contact.group) ? arr.contact.group : "")+"</div></value></div></div>";
   //};
 
   //if (arr.contact.remarks) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Remarks</div><value><div class='col-md-9'>"+((arr.contact.remarks) ? arr.contact.remarks : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Remarks</div><value><div class='col-md-9'>"+((arr.contact.remarks) ? arr.contact.remarks : "")+"</div></value></div></div>";
   //};
 
   //if (arr.contact.mobile) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile</div><value><div class='col-md-9'>"+((arr.contact.mobile) ? arr.contact.mobile : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile</div><value><div class='col-md-9'>"+((arr.contact.mobile) ? arr.contact.mobile : "")+"</div></value></div></div>";
   //};
 
   //if (arr.contact.email) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Email</div><value><div class='col-md-9'>"+((arr.contact.email) ? arr.contact.email : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Email</div><value><div class='col-md-9'>"+((arr.contact.email) ? arr.contact.email : "")+"</div></value></div></div>";
   //};
 
 
-  str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Address</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.address : "")+"</div></value></div></div>";
-  str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.city : "")+"</div></value></div></div>";
-  str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.state : "")+"</div></value></div></div>";
-  str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.country : "")+"</div></value></div></div>";
+  str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Address</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.address+"<br>1st<br>2nd<br>3rd"+arr.address.home.city: "")+"</div></value></div></div>";
+  str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.city : "")+"</div></value></div></div>";
+  str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.state : "")+"</div></value></div></div>";
+  str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.country : "")+"</div></value></div></div>";
 
   //if (arr.contact.facebook) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Facebook</div><value><div class='col-md-9'>"+((arr.contact.facebook) ? arr.contact.facebook : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Facebook</div><value><div class='col-md-9'>"+((arr.contact.facebook) ? arr.contact.facebook : "")+"</div></value></div></div>";
   //};
 
   //if (arr.contact.twitter) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Twitter</div><value><div class='col-md-9'>"+((arr.contact.twitter) ? arr.contact.twitter  : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Twitter</div><value><div class='col-md-9'>"+((arr.contact.twitter) ? arr.contact.twitter  : "")+"</div></value></div></div>";
   //};
 
   //if (arr.contact.google) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Google</div><value><div class='col-md-9'>"+((arr.contact.google) ? arr.contact.google : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Google</div><value><div class='col-md-9'>"+((arr.contact.google) ? arr.contact.google : "")+"</div></value></div></div>";
   //};
 
   //if (arr.contact.linkedin) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Linkedin</div><value><div class='col-md-9'>"+((arr.contact.linkedin) ? arr.contact.linkedin  : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Linkedin</div><value><div class='col-md-9'>"+((arr.contact.linkedin) ? arr.contact.linkedin  : "")+"</div></value></div></div>";
   //};
 
   //if (arr.contact.website) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'>"+((arr.contact.website) ? arr.contact.website : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'>"+((arr.contact.website) ? arr.contact.website : "")+"</div></value></div></div>";
   //};
 
 
@@ -746,4 +746,43 @@ $(document).ready(function(event){
         $('#search_filter').hide();
     }
   });
+  $(function() {
+    
+    var active = $('a[data-toggle="tab"]').parents('.active').length;
+    var tabClicked = false;
+    
+    // Closes current active tab (toggle and pane):
+    var close = function() {
+        $('a[data-toggle="tab"]').parent().removeClass('active');
+        $('.tab-pane.active').removeClass('active');
+        active = false;
+    }
+    
+    // Closing active tab on clicking on toggle:
+    $('[data-toggle=tab]').click(function(){
+        if ($(this).parent().hasClass('active')){
+            $($(this).attr("href")).toggleClass('active');
+            active = false;
+        } else {
+            tabClicked = true;
+            active = this;
+        }
+    });
+    
+    // Closing active tab on clicking outside tab context (toggle and pane):
+    $(document).on('click.bs.tab.data-api', function(event) {
+        if(active && !tabClicked && !$(event.target).closest('.tab-pane.active').length) {
+            close();
+        }
+        
+        tabClicked = false;
+    });
+    
+    // Closing active tab on ESC key release:
+    $(document).keyup(function(e){
+        if(active && e.keyCode === 27) { // ESC
+            close();
+        }
+    });
+});
 });

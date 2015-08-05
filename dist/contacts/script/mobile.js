@@ -1,4 +1,4 @@
-
+//var root = "http://incorelabs.com/Assist/";
 var root = "http://localhost/assist/";
 var contact;
 var contactList;
@@ -212,7 +212,7 @@ function setContactView(arr){
     getContact(0);
     return;
   }
-  var headerStr = "<div class='navbar navbar-default navbar-bg1 navbar-fixed-top' style='margin-top:50px; height:60px;'><div class='container-fluid'><div class='row'><div class='col-md-12' style='padding-top:12px'><center><h12>Contact Details</h12><button class='btn btn-success pull-right' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger pull-left' onclick='openDeleteModal("+((arr.contact) ? arr.contact.contactCode : "1")+")'><span class='glyphicon glyphicon-trash'></span></button></center></div></div><!-- /.navbar-collapse --></div><!--/.row --></div><!-- /.container-fluid -->";
+  var headerStr = "<div class='navbar navbar-default navbar-bg1 navbar-fixed-top' style='margin-top:50px; height:60px;'><div class='container-fluid'><div class='row'><div class='col-md-12' style='padding-top:12px'><center><h12>Contact Details</h12><button class='btn btn-info pull-left' onclick=''><span class='fa fa-arrow-left'></span></button><button class='btn btn-success pull-right' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger pull-right' onclick='openDeleteModal("+((arr.contact) ? arr.contact.contactCode : "1")+")'><span class='glyphicon glyphicon-trash'></span></button></center></div></div><!-- /.navbar-collapse --></div><!--/.row --></div><!-- /.container-fluid -->";
   var str = "";
 
   var mobileDetailOutHeader = "<div class='col-md-12 col-sm-12 panel-padding-remove'><div id='contactDetail' class='panel panel-default panel-margin' id='style-3'><!-- List group --><div id='contactDetailBody' class='list-group'>";
@@ -265,7 +265,6 @@ function setContactView(arr){
   //if (arr.contact.email) {
     str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Email</div><value><div class='col-md-9'>"+((arr.contact.email) ? arr.contact.email : "")+"</div></value></div></div>";
   //};
-
 
   str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Address</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.address : "")+"</div></value></div></div>";
   str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.city : "")+"</div></value></div></div>";
@@ -747,4 +746,43 @@ $(document).ready(function(event){
         $('#search_filter').hide();
     }
   });
+  $(function() {
+    
+    var active = $('a[data-toggle="tab"]').parents('.active').length;
+    var tabClicked = false;
+    
+    // Closes current active tab (toggle and pane):
+    var close = function() {
+        $('a[data-toggle="tab"]').parent().removeClass('active');
+        $('.tab-pane.active').removeClass('active');
+        active = false;
+    }
+    
+    // Closing active tab on clicking on toggle:
+    $('[data-toggle=tab]').click(function(){
+        if ($(this).parent().hasClass('active')){
+            $($(this).attr("href")).toggleClass('active');
+            active = false;
+        } else {
+            tabClicked = true;
+            active = this;
+        }
+    });
+    
+    // Closing active tab on clicking outside tab context (toggle and pane):
+    $(document).on('click.bs.tab.data-api', function(event) {
+        if(active && !tabClicked && !$(event.target).closest('.tab-pane.active').length) {
+            close();
+        }
+        
+        tabClicked = false;
+    });
+    
+    // Closing active tab on ESC key release:
+    $(document).keyup(function(e){
+        if(active && e.keyCode === 27) { // ESC
+            close();
+        }
+    });
+});
 });
