@@ -15,10 +15,11 @@ if (isset($_GET['id'])) {
 	$id  = $_GET['id'];
 
 	if ($id == 0) {
-		$sql = "SELECT `registerLicenceCode`, `contactCode`, title.description as 'contactTitle', contact.`titleCode`, `firstName`, `middleName`, `lastName`, `fullName`, `guardianName`, `company`, `designation`, `alias`, `dob`, `dom`, ".DB_NAME.".group.description as 'group', contact.`groupCode`,`emergencyCode`, `remarks`, `activeStatus`, `mobile`, `email`, `facebook`, `twitter`, `google`, `linkedin`, `website`, `noOfAddresses`, `noOfFamilyMembers`, `photoUploaded`, `userCode`, `privacy`, `lastAccessedDate` 
+		$sql = "SELECT contact.`registerLicenceCode`, contact.`contactCode`, title.description as 'contactTitle', contact.`titleCode`, `firstName`, `middleName`, `lastName`, `fullName`, `guardianName`, `company`, `designation`, `alias`, `dob`, `dom`, ".DB_NAME.".group.description as 'group', contact.`groupCode`,`emergencyCode`, `remarks`, `activeStatus`, `mobile`, `email`, `facebook`, `twitter`, `google`, `linkedin`, `website`, `noOfAddresses`, `noOfFamilyMembers`, `photoUploaded`, images.path as 'imageLocation', `userCode`, `privacy`, `lastAccessedDate` 
 				FROM contact
 				LEFT JOIN title ON title.code = contact.titleCode
 				LEFT JOIN ".DB_NAME.".group ON ".DB_NAME.".group.code = contact.groupCode
+				LEFT JOIN images ON images.contactCode = contact.contactCode AND images.serialNo = 1
 				ORDER BY contact.fullName LIMIT 1";
 		if ($result = $mysqli->query($sql)) {
 			$contact["contact"] = $result->fetch_assoc();
@@ -45,10 +46,11 @@ if (isset($_GET['id'])) {
 
 	}
 	else{
-		$sql = "SELECT `registerLicenceCode`, `contactCode`, title.description as 'contactTitle', contact.`titleCode`, `firstName`, `middleName`, `lastName`, `fullName`, `guardianName`, `company`, `designation`, `alias`, `dob`, `dom`, ".DB_NAME.".group.description as 'group', contact.`groupCode`,`emergencyCode`, `remarks`, `activeStatus`, `mobile`, `email`, `facebook`, `twitter`, `google`, `linkedin`, `website`, `noOfAddresses`, `noOfFamilyMembers`, `photoUploaded`, `userCode`, `privacy`, `lastAccessedDate` 
+		$sql = "SELECT contact.`registerLicenceCode`, contact.`contactCode`, title.description as 'contactTitle', contact.`titleCode`, `firstName`, `middleName`, `lastName`, `fullName`, `guardianName`, `company`, `designation`, `alias`, `dob`, `dom`, ".DB_NAME.".group.description as 'group', contact.`groupCode`,`emergencyCode`, `remarks`, `activeStatus`, `mobile`, `email`, `facebook`, `twitter`, `google`, `linkedin`, `website`, `noOfAddresses`, `noOfFamilyMembers`, `photoUploaded`, images.path as 'imageLocation', `userCode`, `privacy`, `lastAccessedDate` 
 				FROM contact
 				LEFT JOIN title ON title.code = contact.titleCode
 				LEFT JOIN ".DB_NAME.".group ON ".DB_NAME.".group.code = contact.groupCode
+				LEFT JOIN images ON images.contactCode = contact.contactCode AND images.serialNo = 1
 				WHERE contact.contactCode =".$id;
 		if ($result = $mysqli->query($sql)) {
 			$contact["contact"] = $result->fetch_assoc();
@@ -85,4 +87,5 @@ if (isset($_GET['list'])) {
 }
 
 echo json_encode($contact);
+$mysqli->close();
 ?>

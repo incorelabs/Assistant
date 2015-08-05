@@ -17,5 +17,6 @@ if (isset($_POST['id'])) {
 	else{
 		exit(header("Location:index.php?status=0&controller=delete&landing=".$id));
 	}
+	$mysqli->close();
 }
 ?>
