@@ -850,7 +850,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
         <center>
           <div class="modal-body">
           <div class="btn-group">
-            <form action="delete.php" method="POST">
+            <form action="delete.php" id="deleteContact" method="POST">
               <input type="hidden" name="id" id="deleteContact" />
               <button class="btn btn-danger modal_button" type="submit">
                 <span class='glyphicon glyphicon-ok'></span>&nbsp
@@ -861,7 +861,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
             </div>
             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
             <div class="btn-group">
-              <button type="submit" class="btn btn-success modal_button" data-dismiss="modal">
+              <button class="btn btn-success modal_button" data-dismiss="modal">
                 <span class='glyphicon glyphicon-remove'></span>&nbsp
                 No
               </button>

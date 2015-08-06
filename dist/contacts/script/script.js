@@ -222,14 +222,9 @@ function setContactView(arr){
     imgLocation = "../img/contacts/profile/profilePicture1.png";
   }
 
-<<<<<<< HEAD
-  str += "<div class='row contact-details'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='../img/contacts/profile/profilePicture1.png' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>"+((arr.contact.contactTitle) ? arr.contact.contactTitle + " " : "")+((arr.contact.fullName) ? arr.contact.fullName : "")+"</h5></div>";
-  //if (arr.contact.fullName) {
-    
-  //};
-=======
+
   str += "<div class='list-group-item'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='"+imgLocation+"' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>"+((arr.contact.contactTitle) ? arr.contact.contactTitle + " " : "")+((arr.contact.fullName) ? arr.contact.fullName : "")+"</h5></div>";
->>>>>>> origin/master
+
 
   //if (arr.contact.fullName) {
   //  str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Name<value class='name'>"+((arr.contact.fullName) ? arr.contact.fullName : "")+"</value></h4></div>";
@@ -276,17 +271,12 @@ function setContactView(arr){
   //};
 
 
-<<<<<<< HEAD
-  str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Address</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.address+"<br>1st<br>2nd<br>3rd"+arr.address.home.city: "")+"</div></value></div></div>";
-  str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.city : "")+"</div></value></div></div>";
-  str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.state : "")+"</div></value></div></div>";
-  str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.country : "")+"</div></value></div></div>";
-=======
+
   str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Address</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.address+"<br style='padding-bottom:30px'>"+arr.address.home.city : "")+"</div></value></div></div>";
   str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.city : "")+"</div></value></div></div>";
   str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.state : "")+"</div></value></div></div>";
   str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.country : "")+"</div></value></div></div>";
->>>>>>> origin/master
+
 
   //if (arr.contact.facebook) {
     str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Facebook</div><value><div class='col-md-9'>"+((arr.contact.facebook) ? arr.contact.facebook : "")+"</div></value></div></div>";
@@ -851,6 +841,22 @@ $(document).ready(function(event){
         $("#imageresource").attr("src",response.location);
         contact.contact.imageLocation = response.location;
         $(".progress").hide();
+      }
+    },
+  });
+
+  $("#deleteContact").ajaxForm({ 
+    success: function(responseText, statusText, xhr, $form){
+      console.log(responseText);
+      var response = JSON.parse(responseText);
+      if (response.status == 1) {
+        showNotificationSuccess(response.message);
+        getContact(response.landing);
+        getContactList();
+        $("#deleteModal").modal('hide');
+      }
+      else{
+        showNotificationFailure(response.message);
       }
     },
   });

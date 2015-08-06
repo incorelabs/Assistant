@@ -5,7 +5,7 @@ $connection = mysqli_connect("localhost","root","");
 		die(mysqli_error($connection));
 	}
 
-$db_select = mysqli_select_db($connection,"assist");
+$db_select = mysqli_select_db($connection,"contacts");
 	if(!$db_select)
 	{
 		die(mysqli_errno());	
