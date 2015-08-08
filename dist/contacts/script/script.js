@@ -1,5 +1,5 @@
-//var root = "http://incorelabs.com/Assist/";
-var root = "http://localhost/assist/";
+var root = "http://incorelabs.com/Assist/";
+//var root = "http://localhost/assist/";
 var contact;
 var contactList;
 var searchList;
@@ -272,10 +272,10 @@ function setContactView(arr){
 
 
 
-  str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Address</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.address+"<br style='padding-bottom:30px'>"+arr.address.home.city : "")+"</div></value></div></div>";
-  str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.city : "")+"</div></value></div></div>";
-  str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.state : "")+"</div></value></div></div>";
-  str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.country : "")+"</div></value></div></div>";
+  str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Address</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.address+"<br style='padding-bottom:30px'>"+arr.address.home.city : "")+"</div></value></div></div>";
+  str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.city : "")+"</div></value></div></div>";
+  str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.state : "")+"</div></value></div></div>";
+  str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.country : "")+"</div></value></div></div>";
 
 
   //if (arr.contact.facebook) {

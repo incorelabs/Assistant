@@ -45,7 +45,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Assist - Contacts</title>
 
@@ -281,7 +281,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
             <input type="hidden" name="inputType" id="inputType" />
             <div class="form-group form-group-margin">
               <label class="col-xs-4 control-label">Title</label>
-              <div class="col-xs-7">
+              <div class="col-xs-8">
                 <div class="left-inner-addon">
                   <i class="glyphicon glyphicon-star"></i>
                   <input type="text" name="title" class="form-control" id="addTitle" placeholder="Title" autofocus/>
@@ -291,7 +291,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
             <input type="hidden" id="titleId" name="titleId" value="0" />
             <div class="form-group form-group-margin">
                 <label class="col-xs-4 control-label">First Name</label>
-                <div class="col-xs-7">
+                <div class="col-xs-8">
                   <div class="left-inner-addon ">
                   <i class="fa fa-user"></i>
                   <input type="text" name="firstName" id="addFirstName" class="form-control" placeholder="First Name"/>
@@ -300,7 +300,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
             </div>
             <div class="form-group form-group-margin">
               <label class="col-xs-4 control-label">Middle Name</label>
-              <div class="col-xs-7">
+              <div class="col-xs-8">
                 <div class="left-inner-addon ">
                   <i class="fa fa-user"></i>
                   <input type="text" name="middleName" id="addMiddleName" class="form-control" placeholder="Middle Name" />
@@ -309,7 +309,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
             </div>
             <div class="form-group form-group-margin">
               <label class="col-xs-4 control-label">Last Name</label>
-              <div class="col-xs-7">
+              <div class="col-xs-8">
                 <div class="left-inner-addon ">
                   <i class="fa fa-user"></i>
                   <input type="text" name="lastName" id="addLastName" class="form-control" placeholder="Last Name" />
@@ -318,7 +318,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
             </div>
             <div class="form-group form-group-margin">
               <label class="col-xs-4 control-label">Mobile</label>
-              <div class="col-xs-7">
+              <div class="col-xs-8">
                 <div class="left-inner-addon ">
                   <i class="glyphicon glyphicon-phone"></i>
                   <input type="text" name="mobile" id="addMobile" class="form-control" placeholder="Mobile" />
@@ -327,34 +327,30 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
             </div>
             <div class="form-group form-group-margin">
               <label class="col-xs-4 control-label">Email</label>
-              <div class="col-xs-7">
+              <div class="col-xs-8">
                 <div class="left-inner-addon ">
                   <i class="glyphicon glyphicon-envelope"></i>
                   <input type="email" name="email" id="addEmail" class="form-control" placeholder="Email" />
                 </div>
               </div>
             </div>
-            
-            <center>
-            <div class="row">
-            <div class="form-group form-group-margin">
-              <ul class="nav nav-tabs">
-                <li><a href="#tab1" data-toggle="tab"><span class='glyphicon glyphicon-user'></span><br>Personal</a></li>
-                <li><a href="#tab3" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span><br>Professional</a></li>
-                <li><a href="#tab4" data-toggle="tab"><span class='glyphicon glyphicon-globe'></span><br>Social</a></li>
-                <li><a href="#home" data-toggle="tab"><span class='glyphicon glyphicon-home'></span><br>Home</a></li>
-                <li><a href="#work" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span><br>Work</a></li>
-                <li><a href="#other" data-toggle="tab"><span class='glyphicon glyphicon-road'></span><br>Other</a></li>
-              </ul>
-            </div>
-          </div>
+
+          <center>
+            <ul class="row nav nav-tabs">
+              <li class="col-xs-2 panel-padding-remove"><a href="#tab1" data-toggle="tab"><i class='fa fa-user fa-2x'></i></a></li>
+              <li class="col-xs-2 panel-padding-remove"><a href="#tab3" data-toggle="tab"><i class='fa fa-briefcase fa-2x'></i></a></li>
+              <li class="col-xs-2 panel-padding-remove"><a href="#tab4" data-toggle="tab"><i class='fa fa-globe fa-2x'></i></a></li>
+              <li class="col-xs-2 panel-padding-remove"><a href="#home" data-toggle="tab"><i class='fa fa-home fa-2x'></i></a></li>
+              <li class="col-xs-2 panel-padding-remove"><a href="#work" data-toggle="tab"><i class='fa fa-building fa-2x'></i></a></li>
+              <li class="col-xs-2 panel-padding-remove"><a href="#other" data-toggle="tab"><i class='fa fa-road fa-2x'></i></a></li>
+            </ul>
           </center>
- 
+
             <div class="tab-content">
                 <div class="tab-pane" id="tab1">
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Father/Husband Name</label>
-                    <div class="col-xs-7">
+                    <label class="col-xs-4 control-label">Father / Husband Name</label>
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="glyphicon glyphicon-user"></i>
                         <input type="text" name="guardianName" id="addGuardianName" class="form-control" placeholder="Father/Husband Name" />
@@ -363,7 +359,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Date of Birth</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-birthday-cake"></i>
                         <input type="text" name="dob" id="addDOB" class="form-control datepicker" placeholder="Date of Birth" />
@@ -372,7 +368,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Anniversary Date</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-calendar"></i>
                         <input type="text" name="dom" id="addDOM" class="form-control datepicker" placeholder="Anniversary Date" />
@@ -382,7 +378,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   <input type="hidden" id="groupId" name="groupId" value="0" />
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Group</label>
-                    <div class="col-xs-7 ui-widget">
+                    <div class="col-xs-8 ui-widget">
                       <div class="left-inner-addon ">
                         <i class="glyphicon glyphicon-tag"></i>
                         <input type="text" name="group" id="addGroup" class="form-control" placeholder="Group" />
@@ -391,7 +387,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Comments</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-comment"></i>
                         <input type="text" name="remarks" id="addRemarks" class="form-control" placeholder="Comments" />
@@ -400,7 +396,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Alias</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="glyphicon glyphicon-user"></i>
                         <input type="text" name="alias" id="addAlias" class="form-control" placeholder="Alias" />
@@ -430,7 +426,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                 <div class="tab-pane" id="home">
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Home Address</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-home"></i>
                         <input type="text" name="homeAddress1" id="homeAddress1" class="form-control" placeholder="Address 1" />
@@ -439,7 +435,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-home"></i>
                         <input type="text" name="homeAddress2" id="homeAddress2" class="form-control" placeholder="Address 2" />
@@ -448,7 +444,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-home"></i>
                         <input type="text" name="homeAddress3" id="homeAddress3" class="form-control" placeholder="Address 3" />
@@ -457,7 +453,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-home"></i>
                         <input type="text" name="homeAddress4" id="homeAddress4" class="form-control" placeholder="Address 4" />
@@ -466,7 +462,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-home"></i>
                         <input type="text" name="homeAddress5" id="homeAddress5" class="form-control" placeholder="Address 5" />
@@ -475,7 +471,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>                 
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">City</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
                         <input type="text" name="homeCity" id="homeCity" class="form-control" placeholder="City" />
@@ -485,7 +481,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">State</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
                         <input type="text" name="homeState" id="homeState" class="form-control" placeholder="State" />
@@ -495,7 +491,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Country</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
                         <input type="text" name="homeCountry" id="homeCountry" class="countryText form-control" placeholder="Country" />
@@ -505,7 +501,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Pincode</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>  
                         <input type="text" name="homePincode" id="homePincode" class="form-control" placeholder="Pincode" />
@@ -514,7 +510,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Area</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
                         <input type="text" name="homeArea" id="homeArea" class="form-control" placeholder="Area" />
@@ -524,7 +520,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Phone</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-phone"></i>
                         <input type="text" name="homePhone" id="homePhone" class="form-control" placeholder="Phone" />
@@ -538,7 +534,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                 <div class="tab-pane" id="work">
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Work Address</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-briefcase"></i>
                         <input type="text" name="workAddress1" id="workAddress1" class="form-control" placeholder="Address 1" />
@@ -547,7 +543,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-briefcase"></i>
                         <input type="text" name="workAddress2" id="workAddress2" class="form-control" placeholder="Address 2" />
@@ -556,7 +552,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-briefcase"></i>
                         <input type="text" name="workAddress3" id="workAddress3" class="form-control" placeholder="Address 3" />
@@ -565,7 +561,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-briefcase"></i>
                         <input type="text" name="workAddress4" id="workAddress4" class="form-control" placeholder="Address 4" />
@@ -574,7 +570,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-briefcase"></i>
                         <input type="text" name="workAddress5" id="workAddress5" class="form-control" placeholder="Address 5" />
@@ -583,7 +579,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>                 
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">City</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
                         <input type="text" name="workCity" id="workCity" class="form-control" placeholder="City" />
@@ -593,7 +589,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">State</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
                         <input type="text" name="workState" id="workState" class="form-control" placeholder="State" />
@@ -603,7 +599,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Country</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
                         <input type="text" name="workCountry" id="workCountry" class="countryText form-control" placeholder="Country" />
@@ -613,7 +609,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Pincode</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>  
                         <input type="text" name="pincode" id="pincode" class="form-control" placeholder="Pincode" />
@@ -622,7 +618,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Area</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
                         <input type="text" name="workArea" id="workArea" class="form-control" placeholder="Area" />
@@ -632,7 +628,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Phone</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-phone"></i>
                         <input type="text" name="workNumber" id="workNumber" class="form-control" placeholder="Phone" />
@@ -645,7 +641,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                 <div class="tab-pane" id="other">
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Other Address</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-road"></i>
                         <input type="text" name="otherAddress1" id="otherAddress1" class="form-control" placeholder="Address 1" />
@@ -654,7 +650,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-road"></i>
                         <input type="text" name="otherAddress2" id="otherAddress2" class="form-control" placeholder="Address 2" />
@@ -663,7 +659,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-road"></i>
                         <input type="text" name="otherAddress3" id="otherAddress3" class="form-control" placeholder="Address 3" />
@@ -672,7 +668,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-road"></i>
                         <input type="text" name="otherAddress4" id="otherAddress4" class="form-control" placeholder="Address 4" />
@@ -681,7 +677,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-road"></i>
                         <input type="text" name="otherAddress5" id="otherAddress5" class="form-control" placeholder="Address 5" />
@@ -690,7 +686,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>                 
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">City</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
                         <input type="text" name="otherCity" id="otherCity" class="form-control" placeholder="City" />
@@ -700,7 +696,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">State</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
                         <input type="text" name="otherState" id="otherState" class="form-control" placeholder="State" />
@@ -710,7 +706,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Country</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
                         <input type="text" name="otherCountry" id="otherCountry" class="countryText form-control" placeholder="Country" />
@@ -720,7 +716,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Pincode</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>  
                         <input type="text" name="otherPincode" id="otherPincode" class="form-control" placeholder="Pincode" />
@@ -729,7 +725,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Area</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-globe"></i>
                         <input type="text" name="otherArea" id="otherArea" class="form-control" placeholder="Area" />
@@ -739,7 +735,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Phone</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-phone"></i>
                         <input type="text" name="otherNumber" id="otherNumber" class="form-control" placeholder="Phone" />
@@ -752,7 +748,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                 <div class="tab-pane" id="tab3">
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Company</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-building-o"></i>
                         <input type="text" name="company" id="addCompany" class="form-control" placeholder="Company" />
@@ -761,7 +757,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Designation</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-building-o"></i>
                         <input type="text" name="designation" id="addDesignation" class="form-control" placeholder="Designation" />
@@ -774,7 +770,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                 <div class="tab-pane" id="tab4">
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Facebook ID</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-facebook"></i>
                         <input type="text" name="facebook" id="addFacebook" class="form-control" placeholder="Facebook ID" />
@@ -783,7 +779,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Twitter Handle</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-twitter"></i>
                         <input type="text" name="twitter" id="addTwitter" class="form-control" placeholder="Twiter Handle" />
@@ -792,7 +788,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Google ID</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-google-plus"></i>
                         <input type="text" name="google" id="addGoogle" class="form-control" placeholder="Google ID" />
@@ -801,7 +797,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Linkedin ID</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-linkedin"></i>
                         <input type="text" name="linkedin" id="addLinkedin" class="form-control" placeholder="Linkedin ID" />
@@ -810,7 +806,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   </div>
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">URL Address</label>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <div class="left-inner-addon ">
                         <i class="fa fa-link"></i>
                         <input type="text" name="website" id="addWebsite" class="form-control" placeholder="URL Address" />
