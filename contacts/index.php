@@ -58,7 +58,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <!--jQuery UI-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="<?php echo ROOT; ?>/dist/css/style.css">
+    <link rel="stylesheet" href="<?php echo ROOT; ?>/dist/contacts/css/style.css">
 
     <!--Adding jquery file-->
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>

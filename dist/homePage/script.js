@@ -10,4 +10,18 @@ $(document).ready(function(){
 			formGroup.addClass("has-success");
 		}
 	});
+
+	$("#form-signup").ajaxForm({
+	    beforeSubmit:function(){
+	      
+	    },
+	    success: function(responseText, statusText, xhr, $form){
+	    	console.log(responseText);
+	    	var response = JSON.parse(responseText);
+	    	if (response.status == 0) {
+	    		showNotificationFailure(response.message);
+	    	}
+	      
+	    },
+  	});
 });
