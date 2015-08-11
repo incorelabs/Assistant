@@ -1,0 +1,75 @@
+body{
+	background-color: #f1f1f1;
+}
+.outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto; 
+    max-width: 340px;
+    width: calc(100%);
+}
+
+.textbox_height{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 40px;
+	border-radius: 5px !important;
+	font-weight: 400;
+}
+
+.panel-header-height{
+	height: 50px;
+}
+
+.clearfix-margin{
+	margin-bottom: 0px !important;
+}
+
+/* enable absolute positioning */
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .fa,
+.inner-addon .glyphicon 
+{
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .fa,
+.left-addon .glyphicon
+{ 
+	left:  0px;
+}
+.right-addon .fa,
+.right-addon .glyphicon
+{ 
+	right: 10px;
+}
+.left-addon input,
+.left-addon select
+{
+	padding-left:  35px;
+}
+.right-addon input,
+.right-addon select,
+.right-addon option
+{
+	padding-right: 30px;
+}
+

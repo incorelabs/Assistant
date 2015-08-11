@@ -346,7 +346,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
             </ul>
           </center>
 
-            <div class="tab-content">
+            <div class="tab-content tab-content-padding">
                 <div class="tab-pane" id="tab1">
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Father / Husband Name</label>

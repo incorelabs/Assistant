@@ -258,37 +258,39 @@ function setContactView(arr){
     str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Remarks</div><value><div class='col-md-9'>"+((arr.contact.remarks) ? arr.contact.remarks : "")+"</div></value></div></div>";
   //};
 
-  //if (arr.contact.mobile) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile</div><value><div class='col-md-9'>"+((arr.contact.mobile) ? arr.contact.mobile : "")+"</div></value></div></div>";
-  //};
+  if (arr.contact.mobile) {
+    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile</div><value><div class='col-md-9'>"+((arr.contact.mobile) ? arr.contact.mobile : "")+"<div class='pull-right'><a href='tel:"+((arr.contact.mobile) ? arr.contact.mobile : "")+"'><i class='fa fa-phone fa-lg'></i></a><a href='sms:"+((arr.contact.mobile) ? arr.contact.mobile : "")+"'><i class='fa fa-comment fa-lg'></i></a></div></value></div></div></div>";
+  }
+  else {
+  	 str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile</div><value><div class='col-md-9'>"+((arr.contact.mobile) ? arr.contact.mobile : "")+"</div></value></div></div>";
+  }
 
   //if (arr.contact.email) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Email</div><value><div class='col-md-9'>"+((arr.contact.email) ? arr.contact.email : "")+"</div></value></div></div>";
+    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Email</div><value><div class='col-md-9'><a href= 'mailto:"+((arr.contact.email) ? arr.contact.email : "")+"'>"+((arr.contact.email) ? arr.contact.email : "")+"</a></div></value></div></div>";
   //};
-
+  
   str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Address</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.address : "")+"</div></value></div></div>";
   str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.city : "")+"</div></value></div></div>";
 
   //if (arr.contact.facebook) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Facebook</div><value><div class='col-md-9'>"+((arr.contact.facebook) ? arr.contact.facebook : "")+"</div></value></div></div>";
+    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Facebook</div><value><div class='col-md-9'><a href='"+((arr.contact.facebook) ? arr.contact.facebook : "")+"' target='_blank'>"+((arr.contact.facebook) ? arr.contact.facebook : "")+"</a></div></value></div></div>";
   //};
 
   //if (arr.contact.twitter) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Twitter</div><value><div class='col-md-9'>"+((arr.contact.twitter) ? arr.contact.twitter  : "")+"</div></value></div></div>";
+    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Twitter</div><value><div class='col-md-9'><a href='"+((arr.contact.twitter) ? arr.contact.twitter  : "")+"' target='_blank'>"+((arr.contact.twitter) ? arr.contact.twitter  : "")+"</a></div></value></div></div>";
   //};
-
+  
   //if (arr.contact.google) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Google</div><value><div class='col-md-9'>"+((arr.contact.google) ? arr.contact.google : "")+"</div></value></div></div>";
+    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Google</div><value><div class='col-md-9'><a href='"+((arr.contact.google) ? arr.contact.google : "")+"' target='_blank'>"+((arr.contact.google) ? arr.contact.google : "")+"</a></div></value></div></div>";
   //};
 
   //if (arr.contact.linkedin) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Linkedin</div><value><div class='col-md-9'>"+((arr.contact.linkedin) ? arr.contact.linkedin  : "")+"</div></value></div></div>";
+    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Linkedin</div><value><div class='col-md-9'><a href='"+((arr.contact.linkedin) ? arr.contact.linkedin  : "")+"' target='_blank'>"+((arr.contact.linkedin) ? arr.contact.linkedin  : "")+"</a></div></value></div></div>";
   //};
 
   //if (arr.contact.website) {
-    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'>"+((arr.contact.website) ? arr.contact.website : "")+"</div></value></div></div>";
+    str += "<div class='list-group-item contact_details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'><a href='"+((arr.contact.website) ? arr.contact.website : "")+"' target='_blank'>"+((arr.contact.website) ? arr.contact.website : "")+"</a></div></value></div></div>";
   //};
-
 
   $("#mobileHeader").empty();
   $("#mobileHeader").html(headerStr);
@@ -718,7 +720,7 @@ window.mobilecheck = function() {
 $(document).ready(function(event){
   
   //if (window.mobilecheck()) {
-    var headerData = "<div class='navbar navbar-default navbar-bg navbar-fixed-top' style='margin-top:50px; height:60px;'><div class='container-fluid'><div class='row'><div class='col-md-12' style='padding-top:12px'><form><div class='form-group'><div class='col-md-10 col-sm-10 col-xs-10'><div class='input-group'><input id='searchContact' type='text' class='form-control' onkeyup='doSearch();' placeholder='Search...' autofocus /><div class='input-group-btn'><div class='btn-group btn-group1' role='group'><div class='dropdown dropdown-lg'><button type='button' class='btn btn1 btn-success dropdown-toggle' data-toggle='dropdown' aria-expanded='false' onclick='showDiv()'><span class='glyphicon glyphicon-filter'></span></button><div class='dropdown-menu dropdown-menu-right' role='menu' id='search_filter'><form class='form-horizontal' role='form'><div class='form-group' style='padding-bottom:30px;'><label for='filter'>Filter by</label><select class='form-control' id='filter'><option value='name'>Name</option><option value='mobile'>Mobile</option><option value='email'>Email</option><option value='company'>Company</option><option value='designation'>Designation</option><option value='guardian'>Father/Husband</option><option value='birthday'>Birthday</option><option value='anniversary'>Anniversary</option><option value='group'>Group</option><option value='home_area'>Home Area</option><option value='home_city'>Home City</option><option value='home_phone'>Home Phone</option><option value='work_area'>Work Area</option><option value='work_city'>Work City</option><option value='work_phone'>Work Phone</option><option value='other_area'>Other Area</option><option value='other_city'>Other City</option><option value='other_phone'>Other Phone</option></select></div></form></div></div></div></div></div></div><div><!--<button type='button' class='btn btn-info btn-size'><span class='glyphicon glyphicon-search' aria-hidden='true'></span></button>--><button class='btn btn-primary btn-size' onclick='openAddContact();'><span class='glyphicon glyphicon-plus'></span></button></div></div></form></div><!-- /.navbar-collapse --></div><!--/.row --></div><!-- /.container-fluid --></div>";
+    var headerData = "<div class='navbar navbar-default navbar-bg navbar-fixed-top' style='margin-top:50px; height:60px;'><div class='container-fluid'><div class='row'><div class='col-md-12' style='padding-top:12px'><form><div class='form-group'><div class='col-md-10 col-sm-10 col-xs-10'><div class='input-group'><input id='searchContact' type='text' class='form-control' onkeyup='doSearch();' placeholder='Search...' autofocus /><div class='input-group-btn'><div class='btn-group btn-group1' role='group'><div class='dropdown dropdown-lg'><button type='button' class='btn btn1 btn-success dropdown-toggle' data-toggle='dropdown' aria-expanded='false' onclick='showDiv()'><span class='glyphicon glyphicon-filter'></span></button><div class='dropdown-menu dropdown-menu-right' role='menu' id='search_filter'><form class='form-horizontal' role='form'><div class='form-group' style='padding-bottom:30px;'><label for='filter'>Filter by</label><select class='form-control' id='filter'><option value='name'>Name</option><option value='mobile'>Mobile</option><option value='email'>Email</option><option value='company'>Company</option><option value='designation'>Designation</option><option value='guardian'>Father/Husband</option><option value='birthday'>Birthday</option><option value='anniversary'>Anniversary</option><option value='group'>Group</option><option value='home_area'>Home Area</option><option value='home_city'>Home City</option><option value='home_phone'>Home Phone</option><option value='work_area'>Work Area</option><option value='work_city'>Work City</option><option value='work_phone'>Work Phone</option><option value='other_area'>Other Area</option><option value='other_city'>Other City</option><option value='other_phone'>Other Phone</option></select></div></form></div></div></div></div></div></div><div><!--<button type='button' class='btn btn-info btn-size'><span class='glyphicon glyphicon-search' aria-hidden='true'></span></button>--><button class='btn btn-primary btn-size' type='button' onclick='openAddContact();'><span class='glyphicon glyphicon-plus'></span></button></div></div></form></div><!-- /.navbar-collapse --></div><!--/.row --></div><!-- /.container-fluid --></div>";
     $("#mobileHeader").html(headerData);
     var bodyData = "<div class='col-md-12 col-sm-12 col-xs-12 panel-padding-remove'><div class='panel panel-default panel-margin' id='style-3'><!-- List group -->  <div id='contactList' class='list-group force-scroll'> <div class='list-group-item'><p class='list-group-item-text'>Loading...</p> </div></div><!--List close--> </div><!--Panel-->  </div><!--COL--></div>  <!-- Edit div-->";
     $("#mobileBody").html(bodyData);

@@ -263,11 +263,11 @@ function setContactView(arr){
   //};
 
   //if (arr.contact.mobile) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile</div><value><div class='col-md-9'>"+((arr.contact.mobile) ? arr.contact.mobile : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile</div><value><div class='col-md-9'><a href='tel:"+((arr.contact.mobile) ? arr.contact.mobile : "")+"'>"+((arr.contact.mobile) ? arr.contact.mobile : "")+"</a></div></value></div></div>";
   //};
 
   //if (arr.contact.email) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Email</div><value><div class='col-md-9'>"+((arr.contact.email) ? arr.contact.email : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Email</div><value><div class='col-md-9'><a href= 'mailto:"+((arr.contact.email) ? arr.contact.email : "")+"'>"+((arr.contact.email) ? arr.contact.email : "")+"</a></div></value></div></div>";
   //};
   var homeAddress = "";
   if (arr.address) {
@@ -297,23 +297,27 @@ function setContactView(arr){
 
 
   //if (arr.contact.facebook) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Facebook</div><value><div class='col-md-9'>"+((arr.contact.facebook) ? arr.contact.facebook : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Facebook</div><value><div class='col-md-9'><a href='"+((arr.contact.facebook) ? arr.contact.facebook : "")+"' target='_blank'>"+((arr.contact.facebook) ? arr.contact.facebook : "")+"</a></div></value></div></div>";
   //};
 
   //if (arr.contact.twitter) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Twitter</div><value><div class='col-md-9'>"+((arr.contact.twitter) ? arr.contact.twitter  : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Twitter</div><value><div class='col-md-9'><a href='"+((arr.contact.twitter) ? arr.contact.twitter  : "")+"' target='_blank'>"+((arr.contact.twitter) ? arr.contact.twitter  : "")+"</a></div></value></div></div>";
   //};
 
   //if (arr.contact.google) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Google</div><value><div class='col-md-9'>"+((arr.contact.google) ? arr.contact.google : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Google</div><value><div class='col-md-9'><a href='"+((arr.contact.google) ? arr.contact.google : "")+"' target='_blank'>"+((arr.contact.google) ? arr.contact.google : "")+"</a></div></value></div></div>";
   //};
 
   //if (arr.contact.linkedin) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Linkedin</div><value><div class='col-md-9'>"+((arr.contact.linkedin) ? arr.contact.linkedin  : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Linkedin</div><value><div class='col-md-9'><a href='"+((arr.contact.linkedin) ? arr.contact.linkedin  : "")+"' target='_blank'>"+((arr.contact.linkedin) ? arr.contact.linkedin  : "")+"</a></div></value></div></div>";
   //};
 
   //if (arr.contact.website) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'>"+((arr.contact.website) ? arr.contact.website : "")+"</div></value></div></div>";
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'><a href='"+((arr.contact.website) ? arr.contact.website : "")+"' target='_blank'>"+((arr.contact.website) ? arr.contact.website : "")+"</a></div></value></div></div>";
+  //};
+  
+  //if (arr.contact.website) {
+    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'<a href='whatsapp://send?text=The text to share!' data-action='share/whatsapp/share'>Share via Whatsapp</a></div></value></div></div>";
   //};
 
 
