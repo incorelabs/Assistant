@@ -245,6 +245,7 @@ if (isset($_POST['id'])) {
 			$sql .= $result['sql'];
 		}
 	}
+	echo $areaCode["home"];
 	//work Area Code Manipulation
 	if (isset($_POST["workAreaCode"])) {
 		$values = array($timestamp+1, $_POST['workArea'],$countryCode["work"],$stateCode["work"],$cityCode["work"],'1001');
@@ -300,7 +301,7 @@ if (isset($_POST['id'])) {
 		$id,
 		$addressSerial,
 		1001,
-		(isset($_POST['homeAddress1']) ? $_POST['homeAddress1'] : "")."\n".(isset($_POST['homeAddress2']) ? $_POST['homeAddress2'] : "")."\n".(isset($_POST['homeAddress3']) ? $_POST['homeAddress3'] : "")."\n".(isset($_POST['homeAddress4']) ? $_POST['homeAddress4'] : "")."\n".(isset($_POST['homeAddress5']) ? $_POST['homeAddress5'] : ""),
+		(isset($_POST['homeAddress1']) ? ($_POST['homeAddress1']) : "").(isset($_POST['homeAddress2']) ? ("\n".$_POST['homeAddress2']) : "").(isset($_POST['homeAddress3']) ? ("\n".$_POST['homeAddress3']) : "").(isset($_POST['homeAddress4']) ? ("\n".$_POST['homeAddress4']) : "").(isset($_POST['homeAddress5']) ? ("\n".$_POST['homeAddress5']) : ""),
 		(isset($_POST['homeAddress1']) ? $_POST['homeAddress1'] : ""),
 		(isset($_POST['homeAddress2']) ? $_POST['homeAddress2'] : ""),
 		(isset($_POST['homeAddress3']) ? $_POST['homeAddress3'] : ""),
@@ -395,8 +396,8 @@ if (isset($_POST['id'])) {
 
 		$status = 1;
 
-		//echo $sql;
-		if ($mysqli->multi_query($sql) === TRUE) {
+		echo $sql;
+		/*if ($mysqli->multi_query($sql) === TRUE) {
 			$response["status"] = $status;
 			$response["controller"] = "add";
 			$response["landing"] = $id;
@@ -407,7 +408,7 @@ if (isset($_POST['id'])) {
 			$response["controller"] = "add";
 			$response["landing"] = $id;
 			$response["message"] = "Error occured while uploading to the database: ".$mysqli->error;
-		}
+		}*/
 	}
 	else{
 		$response["status"] = 0;

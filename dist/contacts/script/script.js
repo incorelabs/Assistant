@@ -1,5 +1,5 @@
-var root = "http://incorelabs.com/Assist/";
-//var root = "http://localhost/assist/";
+//var root = "http://incorelabs.com/Assist/";
+var root = "http://localhost/assist/";
 var contact;
 var contactList;
 var searchList;
@@ -269,13 +269,31 @@ function setContactView(arr){
   //if (arr.contact.email) {
     str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Email</div><value><div class='col-md-9'>"+((arr.contact.email) ? arr.contact.email : "")+"</div></value></div></div>";
   //};
-
-
-
-  str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Address</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.address+"<br style='padding-bottom:30px'>"+arr.address.home.city : "")+"</div></value></div></div>";
-  str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.city : "")+"</div></value></div></div>";
-  str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.state : "")+"</div></value></div></div>";
-  str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.country : "")+"</div></value></div></div>";
+  var homeAddress = "";
+  if (arr.address) {
+    if (arr.address.home) {
+      var home = arr.address.home
+      homeAddress = home.address;
+      homeAddress = homeAddress.replace(/(?:\r\n|\r|\n)/g, '<br />');
+      homeAddress += "(Area) "+((home.area) ? ("<br />"+home.area) : "");
+      homeAddress += ((home.city) ? ("<br />"+home.city+" - ") : "");
+      homeAddress += ((home.pincode) ? (home.pincode) : "");
+      homeAddress += ((home.state) ? ("<br />"+home.state) : "");
+      homeAddress += ((home.country) ? ("<br />"+home.country) : "");
+      homeAddress += ((home.phone) ? ("<br />"+home.phone) : "");
+      
+      //str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.state : "")+"</div></value></div></div>";
+      //str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.country : "")+"</div></value></div></div>";
+    }
+    else{
+      homeAddress = "No home address details";
+    }
+  }
+  else{
+    homeAddress = "No details";
+  }
+   
+  str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Address</div><value><div class='col-md-9'>"+homeAddress+"</div></value></div></div>";
 
 
   //if (arr.contact.facebook) {
