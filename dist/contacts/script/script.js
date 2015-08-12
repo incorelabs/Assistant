@@ -315,11 +315,6 @@ function setContactView(arr){
   //if (arr.contact.website) {
     str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'><a href='"+((arr.contact.website) ? arr.contact.website : "")+"' target='_blank'>"+((arr.contact.website) ? arr.contact.website : "")+"</a></div></value></div></div>";
   //};
-  
-  //if (arr.contact.website) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'<a href='whatsapp://send?text=The text to share!' data-action='share/whatsapp/share'>Share via Whatsapp</a></div></value></div></div>";
-  //};
-
 
   $("#contactDetailHeader").empty();
   $("#contactDetailHeader").html(headerStr);

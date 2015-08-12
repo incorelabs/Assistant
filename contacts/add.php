@@ -245,7 +245,7 @@ if (isset($_POST['id'])) {
 			$sql .= $result['sql'];
 		}
 	}
-	echo $areaCode["home"];
+	//echo $areaCode["home"];
 	//work Area Code Manipulation
 	if (isset($_POST["workAreaCode"])) {
 		$values = array($timestamp+1, $_POST['workArea'],$countryCode["work"],$stateCode["work"],$cityCode["work"],'1001');

@@ -73,7 +73,17 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     <![endif]-->
     <!--jQuery UI script-->
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
+	
+	<!-- Header Links -->
+	<link type="text/css" rel="stylesheet" href="../dist/css/sidebar.css" />
+	<link type="text/css" rel="stylesheet" href="../dist/css/jquery_sidebar.css" />
+	<script type="text/javascript" src="../dist/script/jquery.mmenu.min.all.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('nav#menu').mmenu();
+		});
+	</script>
+	
     <script src="../dist/contacts/script/mobile.js"></script>
     <script src="../dist/contacts/script/validation.js"></script>
 
@@ -102,47 +112,66 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
   </div><!--Closing Div of Show/Hide -->
 
   <!-- fixed top navbar -->
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        
-        <a class="navbar-brand dropdown-toggle" href="../">Assist</a>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <!--
-        <form class="navbar-form navbar-left" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>-->
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" id="notification-trigger" onclick="showNotificationSuccess()">Success Notification</a></li>
-          <li><a href="#" id="notification-trigger" onclick="showNotificationFailure()">Failure Notification</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Profile<span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#"><span class='glyphicon glyphicon-user'></span>&nbspMy Account</a></li>
-              <li><a href="#"><span class='glyphicon glyphicon-wrench'></span>&nbspSettings</a></li>
-              <!--<li><a href="#">Something else here</a></li>-->
-              <li class="divider"></li>
-              <li><a href="#"><span class='glyphicon glyphicon-log-out'></span>&nbspLogout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-
+  <div id="page">
+  	<div class="header" style="position: fixed; z-index: 1000;">
+  		<a href="#menu"></a>
+  		Contacts
+  	</div>
+  	<nav id="menu">
+  		<ul>
+  			<li><a href="http://incorelabs.com/Assist">Home</a></li>
+  			<li><a href="#">Family</a></li>
+  			<li><a href="#Contacts">Contacts</a>
+				<ul>
+					<li><a href="http://incorelabs.com/Assist/contacts">Contact Details</a></li>
+					<li><a href="#">Events</a></li>
+					<li><a href="#">Event Allocation</a></li>
+					<li><a href="#">Address Diary</a></li>
+					<li><a href="#">Telephone Index</a></li>
+					<li><a href="#">Birthday List</a></li>
+					<li><a href="#">Anniversary List</a></li>
+					<li><a href="#">Event Status</a></li>
+				</ul>
+			</li>
+			<li><a href="#Investments">Investments</a>
+				<ul>
+					<li><a href="#">Investment Details</a></li>
+					<li><a href="#">Investment Status</a></li>
+				</ul>
+			</li>
+			<li><a href="#Assets">Assets</a>
+			<ul>
+				<li><a href="#">Assets Details</a></li>
+				<li><a href="#">Assets Status</a></li>
+			</ul>
+		</li>
+			<li><a href="#Documents">Documents</a>
+			<ul>
+				<li><a href="#">Document Details</a></li>
+				<li><a href="#">Document Status</a></li>
+			</ul>
+		</li>
+		<li><a href="#Expense">Expense</a>
+			<ul>
+				<li><a href="#">Expense Details</a></li>
+				<li><a href="#">Expense Status</a></li>
+			</ul>
+		</li>
+		<li><a href="#Income">Income</a>
+			<ul>
+				<li><a href="#">Income Details</a></li>
+				<li><a href="#">Income Status</a></li>
+			</ul>
+		</li>
+		<li><a href="#">Password</a></li>
+		<li><a href="#">Reminder</a></li>
+		<li><a href="#">Consolidate</a></li>
+		<li><a href="#">Settings</a></li>
+		<li><a href="#">Logout</a></li>
+		</ul>
+  	</nav>
+  </div>
+  
   <div class="container-fluid navbar-padding">
     <?php 
       echo $status; 

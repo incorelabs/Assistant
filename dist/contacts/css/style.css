@@ -66,7 +66,7 @@ list-style-type: none;
 
 .navbar-padding
 {
-  padding-top: 70px;
+  padding-top: 60px;
 }
 
 .ui-autocomplete {
@@ -102,7 +102,7 @@ list-style-type: none;
   margin-bottom: 0px;
 }
 .scroll{
-    max-height:calc(100vh - 145px);
+    max-height:calc(100vh - 130px);
         overflow-y: auto;
         overflow-x: hidden;
 }
