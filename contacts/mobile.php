@@ -50,63 +50,29 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     <title>Assist - Contacts</title>
 
     <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS -->
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <!-- Optional theme -->
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">-->
-    <!--jQuery UI-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <?php
+      include_once ROOT.'dist/bootstrap.php';
+    ?>
     <link rel="stylesheet" href="<?php echo ROOT; ?>/dist/contacts/css/mobile-style.css">
-
-    <!--Adding jquery file-->
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <!--jQuery UI script-->
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	
-	<!-- Header Links -->
-	<link type="text/css" rel="stylesheet" href="../dist/css/sidebar.css" />
-	<link type="text/css" rel="stylesheet" href="../dist/css/jquery_sidebar.css" />
-	<script type="text/javascript" src="../dist/script/jquery.mmenu.min.all.js"></script>
-	<script type="text/javascript">
-		$(function() {
-			$('nav#menu').mmenu();
-		});
-	</script>
-	
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+    <script src="../dist/script/script.js"></script>
     <script src="../dist/contacts/script/mobile.js"></script>
     <script src="../dist/contacts/script/validation.js"></script>
-
-    <!--To show the div on button click -->
-    <script>
-      function showDiv() {
-        var check = false;
-        var e = document.getElementById('search_filter');
-        if(e.style.display == "block")
-        {
-            document.getElementById('search_filter').style.display = "none";
-            
-        }
-        else
-           document.getElementById('search_filter').style.display = "block";  
-      }
-  
+	
+    <!-- Header Links -->
+    <link type="text/css" rel="stylesheet" href="../dist/css/sidebar.css" />
+    <link type="text/css" rel="stylesheet" href="../dist/css/jquery_sidebar.css" />
+    <script type="text/javascript" src="../dist/script/jquery.mmenu.min.all.js"></script>
+    <script type="text/javascript">
+    	$(function() {
+    		$('nav#menu').mmenu();
+    	});
     </script>
   </head>
   <body>
 
 
-    <!-- 2nd Navbar -->
+<!-- Navbar With Search -->
   <div id="mobileHeader"><!-- edit you show/hide in this div-->
    
   </div><!--Closing Div of Show/Hide -->
@@ -189,73 +155,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
         Something went wrong!
       </div>
     </div>
-
-
-<!--
-    <div class="row">
-      <div class="col-xs-12 col-md-5">
-        <div class="list-group list-margin">
-          <div class="list-group-item list-margin">
-            <div class="row">
-               <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                <div class="input-group">
-                <input id="searchContact" type="text" class="form-control" onkeyup="doSearch();" placeholder="Search..." autofocus />
-                  <div class="input-group-btn">
-                    <div class="btn-group" role="group">
-                      <div class="dropdown dropdown-lg">
-                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false" onclick="showDiv()"><span class="glyphicon glyphicon-filter"></span></button>
-                        <div class="dropdown-menu dropdown-menu-right" role="menu" id="search_filter">
-                          <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                              <label for="filter">Filter by</label>
-                              <select class="form-control" id="filter">
-                                <option value="name">Name</option>
-                                <option value="mobile">Mobile</option>
-                                <option value="email">Email</option>
-                                <option value="company">Company</option>
-                                <option value="designation">Designation</option>
-                                <option value="guardian">Father/Husband</option>
-                                <option value="birthday">Birthday</option>
-                                <option value="anniversary">Anniversary</option>
-                                <option value="group">Group</option>
-                                <option value="home_area">Home Area</option>
-                                <option value="home_city">Home City</option>
-                                <option value="home_phone">Home Phone</option>
-                                <option value="work_area">Work Area</option>
-                                <option value="work_city">Work City</option>
-                                <option value="work_phone">Work Phone</option>
-                                <option value="other_area">Other Area</option>
-                                <option value="other_city">Other City</option>
-                                <option value="other_phone">Other Phone</option>
-                              </select>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                  <button type="button" class="btn btn-info btn-size"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                  <button class="btn btn-primary btn-size" onclick="openAddContact();"><span class="glyphicon glyphicon-plus"></span></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     
-      <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
-        <div class="panel panel-default scroll list-margin" id="style-3">
-          <div id="contactDetailHeader" class="panel-heading text-center" >
-            <h12>Contact Details</h12>
-          </div>
-             
-        </div>
-      </div>
-    </div>-->
-
-
     <div class="row row-margin-top">
       <div id="mobileBody"> <!-- Edit here -->
       </div><!--ROW-->

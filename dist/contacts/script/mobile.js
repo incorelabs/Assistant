@@ -1,5 +1,3 @@
-//var root = "http://incorelabs.com/Assist/";
-var root = "http://localhost/assist/";
 var contact;
 var contactList;
 var searchList;
@@ -20,6 +18,19 @@ var city = [];
 var areaTag = [];
 var areaCode = [];
 var area = [];
+
+//Function to show hide the filter Option
+function showDiv() {
+      var check = false;
+      var e = document.getElementById('search_filter');
+      if(e.style.display == "block")
+      {
+          document.getElementById('search_filter').style.display = "none";
+          
+      }
+      else
+         document.getElementById('search_filter').style.display = "block";  
+}
 
 function getContactList(){
   $.ajax({

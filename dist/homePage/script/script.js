@@ -1,6 +1,3 @@
-//var root = "http://incorelabs.com/Assist/";
-var root = "http://localhost/assist/";
-
 $(document).ready(function(){
 	$(".mobile").focusout(function(){
 		//alert("focusout");

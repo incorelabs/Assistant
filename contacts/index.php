@@ -49,59 +49,25 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Assist - Contacts</title>
 
-    <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS -->
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <!--jQuery UI-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="<?php echo ROOT; ?>/dist/contacts/css/style.css">
-
-    <!--Adding jquery file-->
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <!--jQuery UI script-->
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <!-- Bootstrap -->   
+    <?php
+      include_once ROOT.'dist/bootstrap.php';
+    ?>
+    <link rel="stylesheet" href="<?php echo ROOT; ?>/dist/contacts/css/style.css">   
     <script src="http://malsup.github.com/jquery.form.js"></script>
-    
-    <!-- Header Links -->
-	<link type="text/css" rel="stylesheet" href="../dist/css/sidebar.css" />
-	<link type="text/css" rel="stylesheet" href="../dist/css/jquery_sidebar.css" />
-	<script type="text/javascript" src="../dist/script/jquery.mmenu.min.all.js"></script>
-	<script type="text/javascript">
-		$(function() {
-			$('nav#menu').mmenu();
-		});
-	</script>
-
+    <script src="../dist/script/script.js"></script>
     <script src="../dist/contacts/script/script.js"></script>
     <script src="../dist/contacts/script/validation.js"></script>
-    
-    <!--To show the div on button click -->
-    <script>
-      function showDiv() {
-        var check = false;
-        var e = document.getElementById('search_filter');
-        if(e.style.display == "block")
-        {
-            document.getElementById('search_filter').style.display = "none";
-            
-        }
-        else
-           document.getElementById('search_filter').style.display = "block";  
-      }
-    </script>
+
+    <!-- Header Links -->
+  	<link type="text/css" rel="stylesheet" href="../dist/css/sidebar.css" />
+  	<link type="text/css" rel="stylesheet" href="../dist/css/jquery_sidebar.css" />
+  	<script type="text/javascript" src="../dist/script/jquery.mmenu.min.all.js"></script>
+  	<script type="text/javascript">
+  		$(function() {
+  			$('nav#menu').mmenu();
+  		});
+  	</script>
   </head>
   <body>
     <!-- fixed top navbar -->
