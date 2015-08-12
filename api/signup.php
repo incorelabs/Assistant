@@ -1,5 +1,5 @@
 <?php
-define("ROOT", "");
+define("ROOT", "../");
 
 $response = array();
 
