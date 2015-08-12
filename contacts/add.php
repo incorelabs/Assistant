@@ -396,8 +396,8 @@ if (isset($_POST['id'])) {
 
 		$status = 1;
 
-		echo $sql;
-		/*if ($mysqli->multi_query($sql) === TRUE) {
+		//echo $sql;
+		if ($mysqli->multi_query($sql) === TRUE) {
 			$response["status"] = $status;
 			$response["controller"] = "add";
 			$response["landing"] = $id;
@@ -408,7 +408,7 @@ if (isset($_POST['id'])) {
 			$response["controller"] = "add";
 			$response["landing"] = $id;
 			$response["message"] = "Error occured while uploading to the database: ".$mysqli->error;
-		}*/
+		}
 	}
 	else{
 		$response["status"] = 0;

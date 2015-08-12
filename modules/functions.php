@@ -355,4 +355,14 @@
 
 			return ($temp_type." ".$temp_str);
 	}
+
+	function safeStringForSQL($arr){
+		global $connection;
+		
+		foreach ($arr as $key => $value) {
+			$arr[$key] = mysqli_real_escape_string($connection,$value);
+		}
+
+		return $arr;
+	}
 ?>
