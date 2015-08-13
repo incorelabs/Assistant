@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Assist - Sign Up</title>
+    <title>Assistant - Sign Up</title>
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
@@ -50,32 +50,36 @@
 							<div class="form-group">
 								<div class="inner-addon right-addon">
 								    <i class="fa fa-user" style="font-size: 20px;"></i>
-									<input type="text" class="form-control textbox_height" name="email" id="email" placeholder="Email ID" autofocus="true" />
+									<input type="text" class="form-control textbox_height email" name="email" id="email" placeholder="Email ID" autofocus="true" />
 								</div>
+								<div class="info"></div>
 							</div>
 							<div class="form-group">
 								<div class="inner-addon right-addon">
 								    <i class="fa fa-key" style="font-size: 20px;"></i>
-									<input type="password" class="form-control textbox_height" name="password" id="password" placeholder="Password" />
+									<input type="password" class="form-control textbox_height password" name="password" id="password" placeholder="Password" />
 								</div>
+								<div class="info"></div>
 							</div>
 							<div class="form-group">
 								<div class="inner-addon right-addon">
 								    <i class="fa fa-key" style="font-size: 20px;"></i>
-									<input type="password" class="form-control textbox_height" name="c_password" id="c_password" placeholder="Confirm Password" />
+									<input type="password" class="form-control textbox_height c_password" name="c_password" id="c_password" placeholder="Confirm Password" />
 								</div>
+								<div class="info"></div>
 							</div>
 							<hr />
 							<div class="form-group">
 								<div class="inner-addon right-addon">
 								    <i class="fa fa-user" style="font-size: 20px;"></i>
-									<input type="text" class="form-control textbox_height" name="name" id="name" placeholder="Name" />
+									<input type="text" class="form-control textbox_height name" name="name" id="name" placeholder="Name" />
 								</div>
+								<div class="info"></div>
 							</div>
 							<div class="form-group">
 							        <div class="inner-addon right-addon">
 							        <i class="fa fa-globe" style="font-size: 20px;"></i>
-							            <select name="country" class="form-control textbox_height">
+							            <select name="country" id="country" class="form-control textbox_height">
 							                <option value="">Select Country</option>
 							                <!--<option value="1046">India</option>-->
 							                <?php 
@@ -87,25 +91,28 @@
 							                	}
 							                ?>
 							            </select>
+							            <div class="info"></div>
 							        </div>
 							    </div>
 							<div class="form-group">
 								
 								<div class="inner-addon right-addon">
 								    <i class="glyphicon glyphicon-phone" style="font-size: 20px;"></i>
-									<input type="number" class="form-control textbox_height mobile" id="mobile" name="mobile" placeholder="Mobile" />
+									<input type="text" class="form-control textbox_height mobile" id="mobile" name="mobile" placeholder="Mobile" />
+									<div class="info"></div>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="inner-addon right-addon">
 								    <i class="fa fa-calendar" style="font-size: 20px;"></i>
 									<input type="" class="form-control textbox_height" name="dob" id="dob" placeholder="Date of Birth" />
+									<div class="info"></div>
 								</div>
 							</div>
 						</div>
 						<div class="panel-footer">
 							<div class="form-group" style="padding-top: 10px;">
-								<button type="submit" class="btn btn-primary form-control">Register</button>
+								<button type="submit" class="btn btn-primary form-control" id="register">Register</button>
 							</div>
 						</div>
 					</form>

@@ -68,6 +68,21 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
   			$('nav#menu').mmenu();
   		});
   	</script>
+
+    <script type="text/javascript">
+      //Function to show hide the filter Option
+      function showDiv() {
+      var check = false;
+      var e = document.getElementById('search_filter');
+      if(e.style.display == "block")
+      {
+          document.getElementById('search_filter').style.display = "none";
+          
+      }
+      else
+         document.getElementById('search_filter').style.display = "block";  
+    }
+    </script>
   </head>
   <body>
     <!-- fixed top navbar -->
@@ -78,11 +93,11 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
   	</div>
   	<nav id="menu">
   		<ul>
-  			<li><a href="http://incorelabs.com/Assist">Home</a></li>
-  			<li><a href="#">Family</a></li>
+  			<li><a href="http://incorelabs.com/Assistant">Home</a></li>
+  			<li><a href="http://incorelabs.com/family">Family</a></li>
   			<li><a href="#Contacts">Contacts</a>
   				<ul>
-  					<li><a href="http://incorelabs.com/Assist/contacts">Contact Details</a></li>
+  					<li><a href="http://incorelabs.com/Assistant/contacts">Contact Details</a></li>
   					<li><a href="#">Events</a></li>
   					<li><a href="#">Event Allocation</a></li>
   					<li><a href="#">Address Diary</a></li>

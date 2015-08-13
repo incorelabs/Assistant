@@ -78,3 +78,36 @@ select{
     -moz-appearance: none;
     appearance: none;
 }
+
+.bootcards-summary-item {
+    background: #f5f5f5;
+    display: block;
+    border-radius: 4px;
+    padding: 25px 10px;
+    text-align: center;
+    position: relative;
+    height: 130px;
+}
+
+.bootcards-summary .panel-body>.row>div {
+    padding: 8px;
+}
+
+.badge{
+height: 20px;
+}
+
+.badge-red{
+    background-color: red !important;
+    font-size: 9px;
+    height: 15px !important;
+}
+
+.badge-green{
+    background-color: green !important;
+    font-size: 9px;
+    height: 15px !important;
+}
+.info{
+color:#FF0000;
+}

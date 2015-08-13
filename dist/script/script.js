@@ -1,5 +1,5 @@
-var root = "http://incorelabs.com/Assist/";
-//var root = "http://localhost/assist/";
+//var root = "http://incorelabs.com/Assistant/";
+var root = "http://localhost/assistant/";
 
 function showNotificationSuccess(msg) 
 {
