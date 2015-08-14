@@ -1,16 +1,18 @@
 <?php
+	$root_location = "http://localhost/Assist/";
+	//$root_location = "http://incorelabs.com/Assistant/";
+	
 	$navbar_str = "<div id='page'>
 	<div class='header'>
 		<a href='#menu'></a>Home</div>
 		<nav id='menu'>
 		<ul>
 			<li>
-				<a href='http://incorelabs.com/Assistant'>Home</a>
+				<a href='".$root_location."'>Home</a>
 			</li>
-			<li><a href='http://incorelabs.com/Assistant/family'>Family</a></li>
 			<li><a href='#Contacts'>Contacts</a>
 				<ul>
-					<li><a href='http://incorelabs.com/Assistant/contacts'>Contact Details</a></li>
+					<li><a href='".$root_location."contacts'>Contact Details</a></li>
 					<li><a href='#'>Events</a></li><li><a href='#'>Event Allocation</a></li>
 					<li><a href='#'>Address Diary</a></li>
 					<li><a href='#'>Telephone Index</a></li>
@@ -52,7 +54,13 @@
 			<li><a href='#'>Password</a></li>
 			<li><a href='#'>Reminder</a></li>
 			<li><a href='#'>Consolidate</a></li>
-			<li><a href='#'>Settings</a></li>
+			<li><a href='#Preferences'>Preferences</a>
+				<ul>
+					<li><a href='".$root_location."family'>Family</a></li>
+					<li><a href='#'>Change Password</a></li>
+					<li><a href='#'>Setings</a></li>
+				</ul>
+			</li>
 			<li><a href='#'>Logout</a></li>
 		</ul>
 	</nav>
