@@ -22,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="dist/css/style.css" />
 	<link rel="stylesheet" href="dist/homePage/css/style.css" />
 	<script src="http://malsup.github.com/jquery.form.js"></script>
+	<script src="dist/date/script.js"></script>
 	<script src="dist/script/script.js"></script>
     <script src="dist/homePage/script/script.js"></script>
 </head>
@@ -105,7 +106,7 @@
 							<div class="form-group">
 								<div class="inner-addon right-addon">
 								    <i class="fa fa-calendar" style="font-size: 20px;"></i>
-									<input type="" class="form-control textbox_height" name="dob" id="dob" placeholder="Date of Birth" />
+									<input type="" class="form-control textbox_height date" name="dob" id="dob" placeholder="Date of Birth" />
 									<div class="info"></div>
 								</div>
 							</div>
@@ -120,6 +121,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="dist/date/script.js"></script>
+	
 </body>
 </html>

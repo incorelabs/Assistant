@@ -271,11 +271,33 @@ $(document).ready(function(){
 		}
 	}
 
+	$(".date").focusout(function(){
+		validateDate(this);
+	});
+
+	function validateDate(element){
+		var formGroup = $(element).closest(".form-group");
+		var date = new MyDate($(element).val());
+		if (date.isValid()){
+			formGroup.removeClass("has-error");
+			formGroup.addClass("has-success");
+			$(element).closest('.form-group').find('.info').empty();
+			dob_count = 1;
+			errorStatus[6] = true;
+		}
+		else{
+			formGroup.removeClass("has-success");
+			formGroup.addClass("has-error");
+			$(element).closest('.form-group').find('.info').html("Invalid Date. Enter Date in dd/mm/yyyy format");
+			dob_count = 0;
+			errorStatus[6] = false;
+		}
+	}
 	
 
 	$("#form-signup").ajaxForm({
 	    beforeSubmit:function(){
-	      if(email_count == 1 && pwd_count == 1 && c_pwd_count == 1 && name_count == 1 && country_count == 1 && mobile_count == 1)
+	      if(email_count == 1 && pwd_count == 1 && c_pwd_count == 1 && name_count == 1 && country_count == 1 && mobile_count == 1 && dob_count == 1)
 			{
 				return true;	 
 			}
