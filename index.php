@@ -5,11 +5,7 @@
 	$str = "";
 	if (isset($_SESSION['s_id'])) {
 		include_once ROOT.'dist/navbar.php';
-		$str .= $navbar_str."<div class='pull-right' style='padding-top:60px; padding-right:10%;'>
-							<button class='btn btn-danger'>
-								<a href='#' id='logout'>Logout</a>
-							</button>
-						</div>
+		$str .= $navbar_str."
 				<div class='container' style='padding-top:100px'>
 						<div class='col-lg-6 col-md-12'>
 						<div class='panel panel-primary'>
@@ -150,7 +146,7 @@
 											<td>Airtel Bill</td>
 											<td>23/03/2015</td>
 											<td>Darshan</td>
-											<td class='hidden-sm '>Phone</td>
+											<td class='hidden-sm hidden-xs'>Phone</td>
 											<td>254 Rs</td>
 										</tr>
 									</tbody>

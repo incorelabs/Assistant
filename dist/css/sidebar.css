@@ -13,7 +13,9 @@ a, a:link, a:active, a:visited, a:hover
 .content,
 .footer
 {
-	text-align: center;	position: fixed;	z-index: 1;
+	text-align: center;
+	position: fixed;
+	z-index: 1;
 }
 .header,
 .footer
@@ -43,11 +45,10 @@ a, a:link, a:active, a:visited, a:hover
 	bottom: 0;
 	left: 0;
 }
-.header a
+.menu_img
 {
 	background: center center no-repeat transparent;
 	background-image: url( data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADhJREFUeNpi/P//PwOtARMDHQBdLGFBYtMq3BiHT3DRPU4YR4NrNAmPJuHRJDyahEeT8Ii3BCDAAF0WBj5Er5idAAAAAElFTkSuQmCC );
-
 	display: block;
 	width: 40px;
 	height: 40px;
@@ -55,3 +56,13 @@ a, a:link, a:active, a:visited, a:hover
 	top: 5px;
 	left: 10px;
 }
+.header p
+{
+	display: block;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: 5px;
+	right: 20px;
+}
+
