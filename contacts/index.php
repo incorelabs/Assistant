@@ -232,8 +232,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
         <div class="panel panel-default scroll panel-margin" id="style-3">
              <!-- List group -->
             <div id="contactList" class="list-group force-scroll">
-              <div class="list-group-item">
-                <p class="list-group-item-text">Loading...</p>
+              <div class="list-group-item loading">
               </div>
           </div><!--List close-->
         </div><!--Panel-->

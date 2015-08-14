@@ -12,6 +12,14 @@ $(document).ready(function(){
 		validateEmail(this);
 	});
 
+	$(".email").focusin(function()
+	{
+		var email = $(this).val();
+		var formGroup = $(this).closest(".form-group");
+		formGroup.removeClass("has-error");
+		$(this).closest('.form-group').find('.info').empty();
+	});
+
 	function validateEmail(element){
 		var email = $(element).val();
 		var formGroup = $(element).closest(".form-group");
@@ -50,6 +58,14 @@ $(document).ready(function(){
 
 	$(".password").focusout(function(){
 		validatePassword(this);
+	});
+
+	$(".password").focusin(function()
+	{
+		var email = $(this).val();
+		var formGroup = $(this).closest(".form-group");
+		formGroup.removeClass("has-error");
+		$(this).closest('.form-group').find('.info').empty();
 	});
 
 	function validatePassword(element){
@@ -105,6 +121,13 @@ $(document).ready(function(){
 		
 		validateConfirmPassword(".password",this);
 	});
+	$(".c_password").focusin(function()
+	{
+		var email = $(this).val();
+		var formGroup = $(this).closest(".form-group");
+		formGroup.removeClass("has-error");
+		$(this).closest('.form-group').find('.info').empty();
+	});
 
 	function validateConfirmPassword(p,element){
 		var password = $(p).val();
@@ -141,6 +164,13 @@ $(document).ready(function(){
 
 	$(".name").focusout(function(){
 		validateName(this);
+	});
+	$(".name").focusin(function()
+	{
+		var email = $(this).val();
+		var formGroup = $(this).closest(".form-group");
+		formGroup.removeClass("has-error");
+		$(this).closest('.form-group').find('.info').empty();
 	});
 
 	function validateName(element){
@@ -190,6 +220,14 @@ $(document).ready(function(){
 		validateCountry(this);
 	});
 
+	$("#country").focusin(function()
+	{
+		var email = $(this).val();
+		var formGroup = $(this).closest(".form-group");
+		formGroup.removeClass("has-error");
+		$(this).closest('.form-group').find('.info').empty();
+	});
+
 	function validateCountry(element){
 		var country = $(element).val();
 		var formGroup = $(element).closest(".form-group");
@@ -213,6 +251,14 @@ $(document).ready(function(){
 
 	$(".mobile").focusout(function(){
 		validateMobile(this);
+	});
+
+	$(".mobile").focusin(function()
+	{
+		var email = $(this).val();
+		var formGroup = $(this).closest(".form-group");
+		formGroup.removeClass("has-error");
+		$(this).closest('.form-group').find('.info').empty();
 	});
 
 	function validateMobile(element){
@@ -275,6 +321,14 @@ $(document).ready(function(){
 		validateDate(this);
 	});
 
+	$(".date").focusin(function()
+	{
+		var email = $(this).val();
+		var formGroup = $(this).closest(".form-group");
+		formGroup.removeClass("has-error");
+		$(this).closest('.form-group').find('.info').empty();
+	});
+
 	function validateDate(element){
 		var formGroup = $(element).closest(".form-group");
 		var date = new MyDate($(element).val());
@@ -305,8 +359,10 @@ $(document).ready(function(){
 				validateEmail(".email");
 				validatePassword(".password");
 				validateConfirmPassword(".password",".c_password");
+				validateName(".name");
 				validateMobile(".mobile");
-				validateCountry(".country");
+				validateCountry("#country");
+				validateDate(".date");
 				return false;
 			}
 	    },

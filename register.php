@@ -51,7 +51,7 @@
 							<div class="form-group">
 								<div class="inner-addon right-addon">
 								    <i class="fa fa-user" style="font-size: 20px;"></i>
-									<input type="text" class="form-control textbox_height email" name="email" id="email" placeholder="Email ID" autofocus="true" />
+									<input type="text" class="form-control textbox_height email" name="email" id="email" placeholder="Email ID" />
 								</div>
 								<div class="info"></div>
 							</div>

@@ -718,7 +718,7 @@ function showNotificationFailure(msg)
 }
 
 function showLoadingInContactDetail(){
-  var contactDetailStr = "<div class='list-group-item'><p class='list-group-item-text'>Loading...</p></div>";
+  var contactDetailStr = "<div class='list-group-item loading'></div>";
   $("#contactDetailBody").html(contactDetailStr);
 }
 

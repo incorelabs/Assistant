@@ -458,3 +458,11 @@ h5{
   height: 150px;
   border-radius: 10px;
 }
+.loading{
+  height:calc(100vh - 135px);
+  background-image: url('../../../img/index/loading.gif');
+  background-repeat: no-repeat;
+  overflow-y: hidden; 
+  display:block;
+  margin: 0 auto 0 45%;
+}
