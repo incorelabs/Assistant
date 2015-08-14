@@ -120,5 +120,6 @@
 			</div>
 		</div>
 	</div>
+	<script src="dist/date/script.js"></script>
 </body>
 </html>
