@@ -4,6 +4,7 @@
 
 	$str = "";
 	if (isset($_SESSION['s_id'])) {
+		define('PAGE_TITLE', 'Home');
 		include_once ROOT.'dist/navbar.php';
 		$str .= $navbar_str."
 				<div class='container' style='padding-top:100px'>
