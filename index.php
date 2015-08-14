@@ -30,7 +30,7 @@
 								<div class='col-md-4'>
 									<div class='panel panel-default'>
 										<div class='panel-heading'>
-											<a href='contacts/'>Family</a>
+											<a href='family/'>Family</a>
 											<span class='badge pull-right'>3</span>
 										</div>
 										<div class='panel-body'>
@@ -213,9 +213,9 @@
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<title></title>
+	<title>Assistant</title>
 	<?php
     	include_once ROOT.'dist/bootstrap.php';
     ?>

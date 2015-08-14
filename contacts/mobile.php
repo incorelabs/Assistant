@@ -94,6 +94,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
 
   <!-- fixed top navbar -->
   <?php
+    define('PAGE_TITLE', 'Family');
     include_once ROOT.'dist/navbar.php';
     echo $navbar_str;
   ?> 
