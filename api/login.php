@@ -28,9 +28,16 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
 					$_SESSION['name'] = $row['RegName'];
 					$_SESSION['s_id'] = $row['RegCode'];
 					$_SESSION['mobile'] = $row['RegMobile'];
-					
+
+					$today = new DateTime("now");
+
+					$sql = "UPDATE `Table109` SET `RegHitsNo`= `RegHitsNo` + 1,`LastLoginDateTime`= '".$today->format("Y-m-d H:i:s")."'  WHERE `RegCode` = ".$row['RegCode'];
+					//echo $sql;
+					$mysqli->query($sql);
+
 					$response['status'] = 1;
 					$response['message'] = "Login Successfull";
+					$mysqli->close();
 			    }
 			}
 		}
@@ -48,6 +55,6 @@ else{
 	$response['status'] = 0;
 	$response['message'] = "Required fields are empty";
 }
-$mysqli->close();
+
 echo json_encode($response);
 ?>

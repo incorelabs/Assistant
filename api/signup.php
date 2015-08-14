@@ -57,6 +57,9 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['c_pa
 								      }
 								    }
 								}
+								$dob = explode("/", $_POST['dob']);
+								$dob = array($dob[2],$dob[1],$dob[0]);
+								$_POST['dob'] = implode("-", $dob);
 
 								$sql = "";
 								$sql .= build_insert_str('Table107',array(
@@ -122,7 +125,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['c_pa
 								else{
 									$response["status"] = 0;
 									$response["message"] = "Error occured while uploading to the database: ".$mysqli->error;
-								} 
+								}
 
 								$mysqli->close();
 							}
