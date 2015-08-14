@@ -1,10 +1,39 @@
+var familyList;
+
+function getFamilyList(){
+	$.ajax({
+	    method: "GET",
+	    url: root+"family/getFamily.php",
+	    data: { 
+	        list: 1
+	     }
+	  })
+	    .done(function(msg) {
+	      familyList = JSON.parse(msg);
+	      console.log(familyList);
+	      setFamilyList(familyList);
+	    });
+}
+
+function setFamilyList(arr){
+	var str = "";
+	for (var i = 0; i < arr.length; i++) {
+		str += "<tr class='text-left'><td>"+(i+1)+"</td><td>"+arr[i]['FamilyName']+"</td><td class='hidden-xs hidden-sm'>"+((arr[i]['RelationName']) ? arr[i]['RelationName'] : "-")+"</td><td class='hidden-xs hidden-sm'>"+((arr[i]['BirthDate']) ? arr[i]['BirthDate'] : "-")+"</td><td class='hidden-xs hidden-sm'>"+((arr[i]['Email']) ? arr[i]['Email'] : "-")+"</td><td>"+((arr[i]['Mobile']) ? arr[i]['Mobile'] : "-")+"</td><td class='hidden-xs hidden-sm'>"+((arr[i]['Gender']) ? arr[i]['Gender'] : "-")+"</td><td>"+((arr[i]['LoginFlag']) ? ((arr[i]['LoginFlag'] == 1) ? "Yes" : "No") : "-")+"</td><td><a href='#' data-toggle='modal' data-target='#addFamily'><i class='fa fa-pencil fa-lg fa-green'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' data-toggle='modal' data-target='#deleteFamily'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td></tr>";
+	}
+	$("#table-body").html(str);
+}
+
+
 function showhidediv( rad )
-    {
-        var rads = document.getElementsByName( rad.name );
-        document.getElementById( 'loginAccess' ).style.display = ( rads[0].checked ) ? 'block' : 'none';
-        document.getElementById( 'loginAccess' ).style.display = ( rads[1].checked ) ? 'none' : 'block';
-    }
+{
+    var rads = document.getElementsByName( rad.name );
+    document.getElementById( 'loginAccess' ).style.display = ( rads[0].checked ) ? 'block' : 'none';
+    document.getElementById( 'loginAccess' ).style.display = ( rads[1].checked ) ? 'none' : 'block';
+}
+
 $(document).ready(function(){
+
+	getFamilyList();
 
 	$("#gender").focusout(function(){
 		validateGender(this);
@@ -82,3 +111,5 @@ $(document).ready(function(){
 	});
 
 });
+
+

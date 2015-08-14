@@ -71,6 +71,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['c_pa
 									$_POST['email'],
 									$_POST['mobile'],
 									hash("sha256", $_POST['password']),
+									0,
 									1,
 									1
 								));
