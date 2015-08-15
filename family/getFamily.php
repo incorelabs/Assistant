@@ -1,11 +1,7 @@
 <?php
 session_start();
 define("ROOT", "../");
-
-if (!isset($_SESSION['s_id'])) {
-	header('HTTP/1.1 401 Unauthorized');
-	exit();
-}
+include_once ROOT.'dist/authenticate.php';
 require_once ROOT.'db/Connection.php';
 $mysqli = getConnection();
 

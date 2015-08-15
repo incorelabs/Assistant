@@ -20,7 +20,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['c_pa
 						if ($result = $mysqli->query($sql)) {
 							if ($result->num_rows == 0) {
 							 	$id = 0;
-								$familyCode = 0;
+								$familyCode = 1001;
 
 								$sql = "SELECT MAX(RegCode) as 'RegCode' FROM Table109";
 
@@ -40,23 +40,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['c_pa
 								    }
 								}
 
-								$sql = "SELECT MAX(FamilyCode) as 'FamilyCode' FROM Table107";
-
-								if ($result = $mysqli->query($sql)) {
-									if ($result->num_rows == 0) {
-									  $familyCode = 1001;
-									}
-								    else{
-								      while ($row = $result->fetch_assoc()) {
-								        if (is_null($row['FamilyCode'])) {
-								          $familyCode = 1001;     
-								        }
-								        else{
-								          $familyCode = intval($row['FamilyCode']) + 1;
-								        }
-								      }
-								    }
-								}
+								
 								$dob = explode("/", $_POST['dob']);
 								$dob = array($dob[2],$dob[1],$dob[0]);
 								$_POST['dob'] = implode("-", $dob);
@@ -86,7 +70,7 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['c_pa
 									$_POST['email'],
 									hash("sha256", $_POST['password']),
 									$_POST['mobile'],
-									$today->format("Y-m-d"),
+									"'".$today->format("Y-m-d")."'",
 									$_POST["country"],
 									1, 	// => Renewal Number
 									"'".$today->format("Y-m-d")."'",
