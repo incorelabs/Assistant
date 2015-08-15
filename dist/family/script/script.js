@@ -85,7 +85,7 @@ $(document).ready(function(){
 		{
 			formGroup.removeClass("has-success");
 			formGroup.addClass("has-error");
-			$(element).closest('.form-group').find('.info').html("Select a Gender");
+			$(element).closest('.form-group').find('.info').html("Select a Relation");
 			country_count = 0;
 		}
 		else
