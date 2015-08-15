@@ -68,7 +68,6 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
   			$('nav#menu').mmenu();
   		});
   	</script>
-
     <script type="text/javascript">
       //Function to show hide the filter Option
       function showDiv() {
@@ -291,7 +290,9 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   <input type="text" name="mobile" id="addMobile" class="form-control" placeholder="Mobile" />
                 </div>
               </div>
+              <a href='#' class='btn-add-mobile' style='font-size:20px;'><span class='fa fa-plus fa-blue' style='padding-top: 7px;padding-left: 10px;'></span></a>
             </div>
+            <div class='addMobileDiv'></div>
             <div class="form-group form-group-margin">
               <label class="col-xs-4 control-label">Email</label>
               <div class="col-xs-7">
@@ -300,10 +301,31 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   <input type="email" name="email" id="addEmail" class="form-control" placeholder="Email" />
                 </div>
               </div>
+              <a href='#' class='btn-add-email' style='font-size:20px;'><span class='fa fa-plus fa-blue' style='padding-top: 7px;padding-left: 10px;'></span></a>
             </div>
-            
+            <div class='addEmailDiv'></div>
             <div class="form-group form-group-margin">
-              <ul class="nav nav-tabs nav-justified">
+                <label class="col-xs-4 control-label">Default Address</label>
+                <div class="col-xs-7">
+                  <div class="col-xs-4">
+                      <label class="control-label">
+                        <input type="radio" name="defaultAddress" value="" style="margin-right:5px">Home
+                      </label>
+                  </div>
+                  <div class="col-xs-4">
+                      <label class="control-label" style="padding-left:10px">
+                        <input type="radio" name="defaultAddress" value="" style="margin-right:5px">Office
+                      </label>
+                  </div>
+                  <div class="col-xs-4">
+                      <label class="control-label" style="padding-left:10px">
+                        <input type="radio" name="defaultAddress" value="" style="margin-right:5px">Work
+                      </label>
+                  </div>
+                </div>
+            </div>
+            <div class="form-group form-group-margin">
+              <ul class="nav nav-tabs nav-justified" id="myTab">
                 <li><a href="#tab1" data-toggle="tab"><span class='glyphicon glyphicon-user'></span><br>Personal Details</a></li>
                 <li><a href="#tab3" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span><br>Professional Details</a></li>
                 <li><a href="#tab4" data-toggle="tab"><span class='glyphicon glyphicon-globe'></span><br>Social Details</a></li>
@@ -347,7 +369,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                   <input type="hidden" id="groupId" name="groupId" value="0" />
                   <div class="form-group form-group-margin">
                     <label class="col-xs-4 control-label">Group</label>
-                    <div class="col-xs-7 ui-widget">
+                    <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="glyphicon glyphicon-tag"></i>
                         <input type="text" name="group" id="addGroup" class="form-control" placeholder="Group" />
@@ -355,11 +377,20 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Comments</label>
+                    <label class="col-xs-4 control-label">Emergency</label>
+                    <div class="col-xs-7">
+                      <div class="left-inner-addon ">
+                        <i class="glyphicon glyphicon-tag"></i>
+                        <input type="text" name="" id="" class="form-control" placeholder="Emergency" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group form-group-margin">
+                    <label class="col-xs-4 control-label">Remarks</label>
                     <div class="col-xs-7">
                       <div class="left-inner-addon ">
                         <i class="fa fa-comment"></i>
-                        <input type="text" name="remarks" id="addRemarks" class="form-control" placeholder="Comments" />
+                        <input type="text" name="remarks" id="addRemarks" class="form-control" placeholder="Remarks" />
                       </div>
                     </div>
                   </div>
@@ -372,23 +403,6 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                       </div>
                     </div>
                   </div>
-                  <!--
-                  <div class="form-group form-group-margin">
-                    <div class="col-xs-4"></div>
-                    <div class="col-xs-8">
-                      <label>
-                        <input type="checkbox" id="addActiveStatus" name="activeStatus" checked="checked" /> Active Status
-                      </label>
-                    </div>
-                  </div>
-                  <div class="form-group form-group-margin">
-                    <div class="col-xs-4"></div>
-                    <div class="col-xs-8">
-                      <label>
-                        <input type="checkbox" id="addPrivacy" name="privacy" /> Private
-                      </label>
-                    </div>
-                  </div>-->
                 </div>
 
                 <!-- Start of Home tab -->
@@ -495,8 +509,11 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                         <input type="text" name="homePhone" id="homePhone" class="form-control" placeholder="Phone" />
                       </div>
                     </div>
+                    <a href='#' class='btn-home-phone' style='font-size:20px;'><span class='fa fa-plus fa-blue' style='padding-top: 7px;padding-left: 10px;'></span></a>
                   </div>
+                  <div class="addHomePhone"></div>
                 </div>
+                
 
 
                 <!-- Start of Work Tab -->
@@ -603,7 +620,9 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                         <input type="text" name="workNumber" id="workNumber" class="form-control" placeholder="Phone" />
                       </div>
                     </div>
+                    <a href='#' class='btn-work-phone' style='font-size:20px;'><span class='fa fa-plus fa-blue' style='padding-top: 7px;padding-left: 10px;'></span></a>
                   </div>
+                  <div class="addWorkPhone"></div>
                 </div>
 
                 <!-- Start of Others Pane -->
@@ -710,7 +729,9 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                         <input type="text" name="otherNumber" id="otherNumber" class="form-control" placeholder="Phone" />
                       </div>
                     </div>
-                  </div>
+                    <a href='#' class='btn-other-phone' style='font-size:20px;'><span class='fa fa-plus fa-blue' style='padding-top: 7px;padding-left: 10px;'></span></a>
+                    </div>
+                  <div class="addOtherPhone"></div>
                 </div>
               
                 <!--Start of Profession Tab-->

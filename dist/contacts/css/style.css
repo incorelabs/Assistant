@@ -466,3 +466,10 @@ h5{
   display:block;
   margin: 0 auto 0 45%;
 }
+
+.fa-blue{
+  color: #337ab7;
+}
+.fa-red{
+  color: #b71c1c;
+}

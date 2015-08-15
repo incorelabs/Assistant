@@ -16,6 +16,7 @@
 				<ul>
 					<li><a href='".$root_location."contacts'>Contact Details</a></li>
 					<li><a href='#'>Events</a></li><li><a href='#'>Event Allocation</a></li>
+					<li><a href='#'>Labels</a></li>
 					<li><a href='#'>Address Diary</a></li>
 					<li><a href='#'>Telephone Index</a></li>
 					<li><a href='#'>Birthday List</a></li>
@@ -61,6 +62,8 @@
 					<li><a href='".$root_location."family'>Family</a></li>
 					<li><a href='#'>Change Password</a></li>
 					<li><a href='#'>Setings</a></li>
+					<li><a href='#'>Import Contacts</a></li>
+					<li><a href='#'>Synchronize Contacts</a></li>
 				</ul>
 			</li>
 			<li><a href='#' class='logout'>Sign Out</a></li>

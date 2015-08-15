@@ -18,6 +18,11 @@ var city = [];
 var areaTag = [];
 var areaCode = [];
 var area = [];
+var mobileAddCount = 0;
+var emailAddCount = 1;
+var homePhoneCount = 1;
+var workPhoneCount = 1;
+var otherPhoneCount = 1;
 
 function getContactList(){
   $.ajax({
@@ -327,7 +332,21 @@ function openAddContact () {
   $('#contactModalHeading').empty();
   $('#contactModalHeading').html("Add Contact");
   document.getElementById("addContactForm").reset();
+  $('.addMobileDiv').empty();
+  mobileAddCount = 0;
+  $('.addEmailDiv').empty();
+  emailAddCount = 1;
+  $('.addHomePhone').empty();
+  --homePhoneCount;
+  $('.addWorkPhone').empty();
+  --workPhoneCount;
+  $('.addOtherPhone').empty();
+  otherPhoneCount = 0;
   $("#addModal").modal('show');
+
+  $(".tab-pane").removeClass('active');
+  $("li").removeClass('active');
+
 }
 
 function openEditContact () {
@@ -738,7 +757,96 @@ window.mobilecheck = function() {
 }
 
 $(document).ready(function(event){
-  
+  $('.btn-add-mobile').click(function()
+  {
+      if(mobileAddCount <= 1)
+      {
+        $(".addMobileDiv").append("<div class='description_text'><div class='form-group form-group-margin'><label class='col-xs-4 control-label'></label><div class='col-xs-7'><div class='left-inner-addon'><i class='glyphicon glyphicon-phone'></i><input type='text' name='' class='form-control' placeholder='Mobile'/></div></div><a href='#' id='' name='' style='font-size:20px;'><span class='fa fa-minus fa-red' style='padding-top: 7px;padding-left: 10px;'></span></a></div></div>");
+        mobileAddCount++;
+      }
+      else
+      {
+        $('.btn-add-mobile').bind('click', false);
+      }
+  });
+  $('.addMobileDiv').on('click','.description_text a',function()
+  {
+    $(this).closest('.description_text').remove();
+     mobileAddCount--;
+  });
+
+  $('.btn-add-email').click(function()
+  {
+      if(emailAddCount <= 1)
+      {
+        $(".addEmailDiv").append("<div class='description_text'><div class='form-group form-group-margin'><label class='col-xs-4 control-label'></label><div class='col-xs-7'><div class='left-inner-addon'><i class='glyphicon glyphicon-envelope'></i><input type='text' name='' class='form-control' placeholder='Email'/></div></div><a href='#' id='' name='' style='font-size:20px;'><span class='fa fa-minus fa-red' style='padding-top: 7px;padding-left: 10px;'></span></a></div></div>");
+        emailAddCount++;
+      }
+      else
+      {
+        $('.btn-add-email').bind('click', false);
+      }
+  });
+  $('.addEmailDiv').on('click','.description_text a',function()
+  {
+    $(this).closest('.description_text').remove();
+     emailAddCount--;
+  });
+
+  $('.btn-home-phone').click(function()
+  {
+      if(homePhoneCount <= 1)
+      {
+        $(".addHomePhone").append("<div class='description_text'><div class='form-group form-group-margin'><label class='col-xs-4 control-label'></label><div class='col-xs-7'><div class='left-inner-addon'><i class='fa fa-phone'></i><input type='text' name='' class='form-control' placeholder='Phone'/></div></div><a href='#' id='' name='' style='font-size:20px;'><span class='fa fa-minus fa-red' style='padding-top: 7px;padding-left: 10px;'></span></a></div></div>");
+        homePhoneCount++;
+      }
+      else
+      {
+        $('.btn-home-phone').bind('click', false);
+      }
+  });
+  $('.addHomePhone').on('click','.description_text a',function()
+  {
+    $(this).closest('.description_text').remove();
+     homePhoneCount--;
+  });
+
+  $('.btn-work-phone').click(function()
+  {
+      if(workPhoneCount <= 1)
+      {
+        $(".addWorkPhone").append("<div class='description_text'><div class='form-group form-group-margin'><label class='col-xs-4 control-label'></label><div class='col-xs-7'><div class='left-inner-addon'><i class='fa fa-phone'></i><input type='text' name='' class='form-control' placeholder='Phone'/></div></div><a href='#' id='' name='' style='font-size:20px;'><span class='fa fa-minus fa-red' style='padding-top: 7px;padding-left: 10px;'></span></a></div></div>");
+        workPhoneCount++;
+      }
+      else
+      {
+        $('.btn-work-phone').bind('click', false);
+      }
+  });
+  $('.addWorkPhone').on('click','.description_text a',function()
+  {
+    $(this).closest('.description_text').remove();
+     workPhoneCount--;
+  });
+
+  $('.btn-other-phone').click(function()
+  {
+      if(otherPhoneCount <= 1)
+      {
+        $(".addOtherPhone").append("<div class='description_text'><div class='form-group form-group-margin'><label class='col-xs-4 control-label'></label><div class='col-xs-7'><div class='left-inner-addon'><i class='fa fa-phone'></i><input type='text' name='' class='form-control' placeholder='Phone'/></div></div><a href='#' id='' name='' style='font-size:20px;'><span class='fa fa-minus fa-red' style='padding-top: 7px;padding-left: 10px;'></span></a></div></div>");
+        otherPhoneCount++;
+      }
+      else
+      {
+        $('.btn-other-phone').bind('click', false);
+      }
+  });
+  $('.addOtherPhone').on('click','.description_text a',function()
+  {
+    $(this).closest('.description_text').remove();
+     otherPhoneCount--;
+  });
+
   if (window.mobilecheck()) {
     var headerData = "<div class='navbar navbar-default navbar-bg navbar-fixed-top' style='margin-top:50px; height:60px;'><div class='container-fluid'><div class='row'><div class='col-md-12' style='padding-top:12px'><form><div class='form-group'><div class='col-md-10 col-sm-10 col-xs-10'><div class='input-group'><input id='searchContact' type='text' class='form-control' onkeyup='doSearch();' placeholder='Search...' autofocus /><div class='input-group-btn'><div class='btn-group btn-group1' role='group'><div class='dropdown dropdown-lg'><button type='button' class='btn btn1 btn-success dropdown-toggle' data-toggle='dropdown' aria-expanded='false' onclick='showDiv()'><span class='glyphicon glyphicon-filter'></span></button><div class='dropdown-menu dropdown-menu-right' role='menu' id='search_filter'><form class='form-horizontal' role='form'><div class='form-group' style='padding-bottom:30px;'><label for='filter'>Filter by</label><select class='form-control' id='filter'><option value='name'>Name</option><option value='mobile'>Mobile</option><option value='email'>Email</option><option value='company'>Company</option><option value='designation'>Designation</option><option value='guardian'>Father/Husband</option><option value='birthday'>Birthday</option><option value='anniversary'>Anniversary</option><option value='group'>Group</option><option value='home_area'>Home Area</option><option value='home_city'>Home City</option><option value='home_phone'>Home Phone</option><option value='work_area'>Work Area</option><option value='work_city'>Work City</option><option value='work_phone'>Work Phone</option><option value='other_area'>Other Area</option><option value='other_city'>Other City</option><option value='other_phone'>Other Phone</option></select></div></form></div></div></div></div></div></div><div><!--<button type='button' class='btn btn-info btn-size'><span class='glyphicon glyphicon-search' aria-hidden='true'></span></button>--><button class='btn btn-primary btn-size' onclick='openAddContact();'><span class='glyphicon glyphicon-plus'></span></button></div></div></form></div><!-- /.navbar-collapse --></div><!--/.row --></div><!-- /.container-fluid --></div>";
     $("#mobileHeader").html(headerData);
@@ -758,12 +866,12 @@ $(document).ready(function(event){
     $('#addTitle').focus()
   });
 
-  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+  /*$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     var tabPane = $(e.target).attr('href')
     var inputArr = $(tabPane).find('input');
     $(inputArr[0]).focus();
      // previous active tab
-  });
+  });*/
 
   $('#filter').change(function(){
     if ($(this).val() != "0") {
@@ -771,7 +879,7 @@ $(document).ready(function(event){
     }
   });
 
-  $(function() {
+  /*$(function() {
     
     var active = $('a[data-toggle="tab"]').parents('.active').length;
     var tabClicked = false;
@@ -802,14 +910,19 @@ $(document).ready(function(event){
         
         tabClicked = false;
     });
-    
-    // Closing active tab on ESC key release:
-    $(document).keyup(function(e){
-        if(active && e.keyCode === 27) { // ESC
-            close();
-        }
-    });
+});*/
+
+$('#myTab a').click(function (e) {
+    var tab = $(this);
+    if(tab.parent('li').hasClass('active')){
+        window.setTimeout(function(){
+            $(".tab-pane").removeClass('active');
+            tab.parent('li').removeClass('active');
+        },1);
+    }
 });
+
+
   $('#imgInp').change(function(){
     var image = this.files[0];
     if ((image.size || image.fileSize) < 1 * 1000 * 1000) {
