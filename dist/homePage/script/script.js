@@ -1,4 +1,18 @@
 $(document).ready(function(){
+	var downpayment = document.getElementById('forgotEmail'),
+    full_payment = document.getElementById('forgotMobile');
+
+	function enableToggle(current, other) {
+	    other.disabled = current.value.replace(/\s+/,'').length > 0 ? true : false;
+	}
+
+	downpayment.onkeyup = function () {
+	    enableToggle(this, forgotMobile);
+	}
+	full_payment.onkeyup = function () {
+	    enableToggle(this, forgotEmail);
+	}
+
 	$("#form-signup").ajaxForm({
 	    beforeSubmit:function(){
 	      if(email_count == 1 && pwd_count == 1 && c_pwd_count == 1 && name_count == 1 && country_count == 1 && mobile_count == 1 && dob_count == 1)
