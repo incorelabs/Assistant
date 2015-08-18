@@ -25,22 +25,9 @@
 	<script src="dist/date/script.js"></script>
 	<script src="dist/script/script.js"></script>
     <script src="dist/homePage/script/script.js"></script>
-  	<link rel="stylesheet" href="dist/css/sidebar.css" />
-	<link rel="stylesheet" href="dist/css/jquery_sidebar.css" />
-	<script src="dist/script/jquery.mmenu.min.all.js"></script>
-	<script type="text/javascript">
-		$(function() {
-			$('nav#menu').mmenu();
-		});
-	</script>
 </head>
 
 <body>
-<?php
-	define('PAGE_TITLE', 'Contact');
-    include_once ROOT.'dist/navbar_logout.php';
-    echo $navbar_str;
-?>  
 	<div class="notification_outer">
 	  <div class="notification_success" id="notification_success" style="display:none">
 	    Added Successfully!
@@ -53,9 +40,9 @@
 	  </div>
 	</div>
     <div class="outer">
-        <div class="middle" style="padding-top:60px">
-        	<div class="inner">
-        		<div class="panel panel-primary" style="margin-bottom:0px">    			
+        <div class="middle">
+        	<div class="inner"> 	
+        		<div class="panel panel-primary">    			
                		<div class="panel-heading panel-header-height">
                 		<h1 class="panel-title text-center" style="font-size: 24px;">Sign Up</h1>
                		</div>
@@ -131,9 +118,6 @@
 						</div>
 					</form>
 				</div>
-				<div class="text-right">
-        			<a href="login.php" style="color:blue">Already Registered? Login Here</a>
-        		</div>
 			</div>
 		</div>
 	</div>

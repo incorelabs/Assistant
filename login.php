@@ -25,22 +25,9 @@
 	<script src="http://malsup.github.com/jquery.form.js"></script>
 	<script src="dist/script/script.js"></script>
     <script src="dist/homePage/script/script.js"></script>
-    <link rel="stylesheet" href="dist/css/sidebar.css" />
-    <link rel="stylesheet" href="dist/css/jquery_sidebar.css" />
-    <script src="dist/script/jquery.mmenu.min.all.js"></script>
-    <script type="text/javascript">
-		$(function() {
-			$('nav#menu').mmenu();
-		});
-	</script>
   </head>
 
 <body>
-<?php
-	define('PAGE_TITLE', 'Contact');
-    include_once ROOT.'dist/navbar_logout.php';
-    echo $navbar_str;
-?>  
 	<div class="notification_outer">
 	  <div class="notification_success" id="notification_success" style="display:none">
 	    Added Successfully!
@@ -80,7 +67,7 @@
 							</div>
 							<div class="form-group clearfix clearfix-margin">
 								<div class="pull-left">
-									<i class="fa fa-key" style="margin-left: 3px;"></i>&nbsp;&nbsp;<a href="forgotPassword.php">Forgot Password</a>
+									<i class="fa fa-key" style="margin-left: 3px;"></i>&nbsp;&nbsp;<a href="#">Forgot Password</a>
 								</div>
 								<div class="pull-right">
 									<i class="fa fa-pencil"></i>&nbsp;&nbsp;<a href="register.php">Sign Up</a>
