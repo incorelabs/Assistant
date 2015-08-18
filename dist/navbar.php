@@ -3,7 +3,7 @@
 	//$root_location = "http://incorelabs.com/Assistant/";
 	
 	$navbar_str = "<div id='page'>
-	<div class='header'>
+	<div class='header' style='text-decoration:none;font-weight:200;font-size:20px'>
 		<a href='#menu' class='menu_img'></a>".PAGE_TITLE."
 		<p><a href='#' class='logout'><span class='fa fa-power-off fa-lg'></span></a></p>
 	</div>

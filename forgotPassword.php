@@ -33,6 +33,23 @@
 			$('nav#menu').mmenu();
 		});
 	</script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+			var downpayment = document.getElementById('forgotEmail'),
+		    full_payment = document.getElementById('forgotMobile');
+
+			function enableToggle(current, other) {
+			    other.disabled = current.value.replace(/\s+/,'').length > 0 ? true : false;
+			}
+
+			downpayment.onkeyup = function () {
+			    enableToggle(this, forgotMobile);
+			}
+			full_payment.onkeyup = function () {
+			    enableToggle(this, forgotEmail);
+			}
+		});
+	</script>
   </head>
 
 <body>

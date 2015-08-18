@@ -55,7 +55,7 @@
     <div class="outer">
         <div class="middle">
         	<div class="inner"> 	
-        		<div class="panel panel-primary">
+        		<div class="panel panel-background">
                		<div class="panel-heading panel-header-height">
                 		<h1 class="panel-title text-center" style="font-size: 24px;">Login</h1>
                		</div>
