@@ -108,3 +108,9 @@ height: 20px;
     font-size: 9px;
     height: 15px !important;
 }
+
+.panel-background>.panel-heading {
+    color: #fff;
+    background-color: #34495e;
+    border-color: #34495e;
+}

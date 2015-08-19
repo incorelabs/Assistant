@@ -25,9 +25,39 @@
 	<script src="http://malsup.github.com/jquery.form.js"></script>
 	<script src="dist/script/script.js"></script>
     <script src="dist/homePage/script/script.js"></script>
+    <link rel="stylesheet" href="dist/css/sidebar.css" />
+    <link rel="stylesheet" href="dist/css/jquery_sidebar.css" />
+    <script src="dist/script/jquery.mmenu.min.all.js"></script>
+    <script type="text/javascript">
+		$(function() {
+			$('nav#menu').mmenu();
+		});
+	</script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+			var downpayment = document.getElementById('forgotEmail'),
+		    full_payment = document.getElementById('forgotMobile');
+
+			function enableToggle(current, other) {
+			    other.disabled = current.value.replace(/\s+/,'').length > 0 ? true : false;
+			}
+
+			downpayment.onkeyup = function () {
+			    enableToggle(this, forgotMobile);
+			}
+			full_payment.onkeyup = function () {
+			    enableToggle(this, forgotEmail);
+			}
+		});
+	</script>
   </head>
 
 <body>
+<?php
+	define('PAGE_TITLE', 'Contact');
+    include_once ROOT.'dist/navbar_logout.php';
+    echo $navbar_str;
+?>  
 	<div class="notification_outer">
 	  <div class="notification_success" id="notification_success" style="display:none">
 	    Added Successfully!
@@ -41,37 +71,32 @@
 	</div>	
     <div class="outer">
         <div class="middle">
-        	<div class="inner"> 	
-        		<div class="panel panel-background">
+        	<div class="inner">
+        		<div class="panel panel-primary">
                		<div class="panel-heading panel-header-height">
-                		<h1 class="panel-title text-center" style="font-size: 24px;">Login</h1>
+                		<h1 class="panel-title text-center" style="font-size: 20px;">Forgot Password</h1>
                		</div>
                		<form action="api/login.php" method="POST" id="form-login">
                			<div class="panel-body">
 							<div class="form-group">
 								<div class="inner-addon left-addon">
 								    <i class="fa fa-user" style="font-size: 20px;"></i>
-									<input type="email" class="form-control textbox_height" name="email" placeholder="Email" autofocus="true" required/>
+									<input type="email" class="form-control textbox_height" name="forgotEmail" id="forgotEmail" placeholder="Email" autofocus="true"/>
+									<div class="info"></div>
 								</div>
 							</div>
+							<p class="text-center">OR</p>
 							<div class="form-group">
 								<div class="inner-addon left-addon">
-								    <i class="fa fa-key" style="font-size: 20px;"></i>
-									<input type="password" class="form-control textbox_height" name="password" placeholder="Password" required/>
+								    <i class="glyphicon glyphicon-phone" style="font-size: 20px;"></i>
+									<input type="text" class="form-control textbox_height" name="forgotMobile" id="forgotMobile" placeholder="Mobile"/>
+									<div class="info"></div>
 								</div>
 							</div>
 						</div>
-						<div class="panel-footer panel-footer-height">
+						<div class="panel-footer">
 							<div class="form-group">
-								<button type="submit" class="btn btn-primary form-control">Sign In</button>
-							</div>
-							<div class="form-group clearfix clearfix-margin">
-								<div class="pull-left">
-									<i class="fa fa-key" style="margin-left: 3px;"></i>&nbsp;&nbsp;<a href="#">Forgot Password</a>
-								</div>
-								<div class="pull-right">
-									<i class="fa fa-pencil"></i>&nbsp;&nbsp;<a href="register.php">Sign Up</a>
-								</div>
+								<button type="submit" class="btn btn-primary form-control">Submit</button>
 							</div>
 						</div><!--Footer-->
                		</form>
