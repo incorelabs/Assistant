@@ -14,7 +14,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
 			$_POST = safeStringForSQL($_POST);
 			$password = hash("sha256", $_POST['password']);
 
-			$sql = "SELECT RegCode, RegName, RegEmail, RegPassword, RegMobile FROM Table109 WHERE RegEmail = '".$_POST['email']."' AND RegPassword = '".$password."' LIMIT 1";
+			$sql = "SELECT RegCode, RegName, RegEmail, RegPassword, RegMobile, FamilyCode FROM Table109 WHERE RegEmail = '".$_POST['email']."' AND RegPassword = '".$password."' LIMIT 1";
 
 			if ($result = $mysqli->query($sql)) {
 				if ($result->num_rows == 0) {
@@ -28,6 +28,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
 					$_SESSION['name'] = $row['RegName'];
 					$_SESSION['s_id'] = $row['RegCode'];
 					$_SESSION['mobile'] = $row['RegMobile'];
+					$_SESSION['familyCode'] = $row['FamilyCode'];
 
 					$today = new DateTime("now");
 

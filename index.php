@@ -8,6 +8,7 @@
 		include_once ROOT.'dist/navbar.php';
 		$str .= $navbar_str."
 				<div class='container' style='padding-top:100px'>
+				".$_SESSION['name']."<br>".$_SESSION['familyCode']."
 						<div class='col-lg-6 col-md-12'>
 						<div class='panel panel-primary'>
 							<div class='panel-heading'>Shortcuts</div>

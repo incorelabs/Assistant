@@ -44,7 +44,7 @@ function setFamilyList(arr){
 			gender = "-";
 		}
 
-		str += "<tr class='text-left'><td>"+(i+1)+"</td><td>"+arr[i]['FamilyName']+"</td><td class='hidden-xs hidden-sm'>"+((arr[i]['RelationName']) ? arr[i]['RelationName'] : "-")+"</td><td class='hidden-xs hidden-sm'>"+((arr[i]['BirthDate']) ? arr[i]['BirthDate'] : "-")+"</td><td class='hidden-xs hidden-sm'>"+((arr[i]['Email']) ? arr[i]['Email'] : "-")+"</td><td>"+((arr[i]['Mobile']) ? arr[i]['Mobile'] : "-")+"</td><td class='hidden-xs hidden-sm'>"+(gender)+"</td><td>"+((arr[i]['LoginFlag']) ? ((arr[i]['LoginFlag'] == 1) ? "Yes" : "No") : "-")+"</td><td><a href='#' onclick='editFamily("+i+")'><i class='fa fa-pencil fa-lg fa-green'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' data-toggle='modal' data-target='#deleteFamily'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td></tr>";
+		str += "<tr class='text-left'><td>"+(i+1)+"</td><td>"+arr[i]['FamilyName']+"</td><td class='hidden-xs hidden-sm'>"+((arr[i]['RelationName']) ? arr[i]['RelationName'] : "-")+"</td><td class='hidden-xs hidden-sm'>"+((arr[i]['BirthDate']) ? arr[i]['BirthDate'] : "-")+"</td><td class='hidden-xs hidden-sm'>"+((arr[i]['Email']) ? arr[i]['Email'] : "-")+"</td><td>"+((arr[i]['Mobile']) ? arr[i]['Mobile'] : "-")+"</td><td class='hidden-xs hidden-sm'>"+(gender)+"</td><td>"+((arr[i]['LoginFlag']) ? ((arr[i]['LoginFlag'] == 1) ? "Yes" : "No") : "-")+"</td><td><a href='#' onclick='editFamily("+i+")'><i class='fa fa-pencil fa-lg fa-green'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='deleteFamily("+i+")'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td></tr>";
 	}
 	$("#table-body").html(str);
 }
@@ -57,9 +57,16 @@ function editFamily(index){
 	personDetail = familyList[index];
 	setInputFields(personDetail);
 	$("#familyCode").val(personDetail["FamilyCode"]);
-	$("#form-family").attr("action","edit.php");
-	$("#input-type").val(2);
+	//$("#form-family").attr("action","edit.php");
+	$("#input-type").val('M');
 	$("#addFamily").modal('show');
+}
+
+function deleteFamily(index){
+	personDetail = familyList[index];
+	$("#deleteFamilyCode").val(personDetail['FamilyCode']);
+	$("#form-delete-mode").val("D");
+	$("#deleteFamily").modal('show');
 }
 
 function setInputFields(personDetail){
@@ -196,8 +203,8 @@ $(document).ready(function(){
 		//$("#familyCode").val(personDetail["FamilyCode"]);
 		initializeDate();
 		mode = 1;
-		$("#form-family").attr("action","add.php");
-		$("#input-type").val(1);
+		//$("#form-family").attr("action","add.php");
+		$("#input-type").val('A');
 		$("#addFamily").modal('show');
 		document.getElementById( 'loginAccess' ).style.display = 'none';
 	});
@@ -250,6 +257,25 @@ $(document).ready(function(){
 	      		},500);
 	      	}
 	      	$("#addFamily").modal('hide');
+	    },
+	});
+
+	$("#form-family-delete").ajaxForm({
+		beforeSubmit:function(){
+	    },
+	    success: function(responseText, statusText, xhr, $form){
+	    	console.log(responseText);
+	    	var response = JSON.parse(responseText);
+	    	if (response.status == 0) {
+	    		showNotificationFailure(response.message);
+	    	}
+	      	else{
+	      		showNotificationSuccess(response.message);
+	      		setTimeout(function(){
+	      			getFamilyList();
+	      		},500);
+	      	}
+	      	$("#deleteFamily").modal('hide');
 	    },
 	});
 });
