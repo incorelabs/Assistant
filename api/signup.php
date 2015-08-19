@@ -70,17 +70,13 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['c_pa
 									$_POST['email'],
 									hash("sha256", $_POST['password']),
 									$_POST['mobile'],
-									"'".$today->format("Y-m-d")."'",
-									$_POST["country"],
-									1, 	// => Renewal Number
-									"'".$today->format("Y-m-d")."'",
-									"'".$nextYear->format("Y-m-d")."'",
-									1,	// => Family Size
-									0, 	// => Fees collected
-									0, 	// => Data used
-									0, 	// => Photo uploaded
-									0, 	// => No of hits
-									"'".$today->format("Y-m-d H:i:s")."'",
+									$familyCode,
+									1, // => 1 for parent and 2 for child
+									1 	// => 1 for active and 2 for inactive
+								));
+
+								$sql .= build_insert_str('Table120',array(
+									$id,
 									10000,	// => Contact Serial
 									10000, 	// => Invest
 									10000, 	// => Assets
@@ -96,10 +92,22 @@ if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['c_pa
 									10000, 	// => Extra6
 									10000, 	// => Extra7
 									10000, 	// => Extra8
-									10000, 	// => Extra9
-									$familyCode,
-									1, // => 1 for parent and 2 for child
-									1, 	// => 1 for active and 2 for inactive
+									10000 	// => Extra9
+								));
+
+								$sql .= build_insert_str('Table122',array(
+									$id,
+									"'".$today->format("Y-m-d")."'",
+									$_POST["country"],
+									1, 	// => Renewal Number
+									"'".$today->format("Y-m-d")."'",
+									"'".$nextYear->format("Y-m-d")."'",
+									1,	// => Family Size
+									0, 	// => Fees collected
+									0, 	// => Data used
+									0, 	// => Photo uploaded
+									0, 	// => No of hits
+									"'".$today->format("Y-m-d H:i:s")."'"
 								));
 
 								//echo $sql;

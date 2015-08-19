@@ -198,10 +198,13 @@ function clearDate(element){
 	//console.log(date);
 }
 
+function initializeDate(){
+	date = "__/__/____";
+	tempDate = "";
+}
+
 // Date validation
 $(document).ready(function(event){
-	
-
 
 	//Custom replaceAt function to replace a character
 	String.prototype.replaceAt=function(index, character) {

@@ -1,5 +1,7 @@
 var familyList;
 var relationList;
+var personDetail;
+var mode = 1;
 
 function getFamilyList(){
 	$.ajax({
@@ -42,9 +44,54 @@ function setFamilyList(arr){
 			gender = "-";
 		}
 
-		str += "<tr class='text-left'><td>"+(i+1)+"</td><td>"+arr[i]['FamilyName']+"</td><td class='hidden-xs hidden-sm'>"+((arr[i]['RelationName']) ? arr[i]['RelationName'] : "-")+"</td><td class='hidden-xs hidden-sm'>"+((arr[i]['BirthDate']) ? arr[i]['BirthDate'] : "-")+"</td><td class='hidden-xs hidden-sm'>"+((arr[i]['Email']) ? arr[i]['Email'] : "-")+"</td><td>"+((arr[i]['Mobile']) ? arr[i]['Mobile'] : "-")+"</td><td class='hidden-xs hidden-sm'>"+(gender)+"</td><td>"+((arr[i]['LoginFlag']) ? ((arr[i]['LoginFlag'] == 1) ? "Yes" : "No") : "-")+"</td><td><a href='#' data-toggle='modal' data-target='#addFamily'><i class='fa fa-pencil fa-lg fa-green'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' data-toggle='modal' data-target='#deleteFamily'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td></tr>";
+		str += "<tr class='text-left'><td>"+(i+1)+"</td><td>"+arr[i]['FamilyName']+"</td><td class='hidden-xs hidden-sm'>"+((arr[i]['RelationName']) ? arr[i]['RelationName'] : "-")+"</td><td class='hidden-xs hidden-sm'>"+((arr[i]['BirthDate']) ? arr[i]['BirthDate'] : "-")+"</td><td class='hidden-xs hidden-sm'>"+((arr[i]['Email']) ? arr[i]['Email'] : "-")+"</td><td>"+((arr[i]['Mobile']) ? arr[i]['Mobile'] : "-")+"</td><td class='hidden-xs hidden-sm'>"+(gender)+"</td><td>"+((arr[i]['LoginFlag']) ? ((arr[i]['LoginFlag'] == 1) ? "Yes" : "No") : "-")+"</td><td><a href='#' onclick='editFamily("+i+")'><i class='fa fa-pencil fa-lg fa-green'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' data-toggle='modal' data-target='#deleteFamily'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td></tr>";
 	}
 	$("#table-body").html(str);
+}
+
+function editFamily(index){
+	//console.log(familyList[index]);
+	initializeDate();
+	mode = 2;
+	$("#familyModalHeading").html("Edit");
+	personDetail = familyList[index];
+	setInputFields(personDetail);
+	$("#familyCode").val(personDetail["FamilyCode"]);
+	$("#form-family").attr("action","edit.php");
+	$("#input-type").val(2);
+	$("#addFamily").modal('show');
+}
+
+function setInputFields(personDetail){
+	if (personDetail["FamilyName"]) {
+		$("#firstName").val(personDetail["FamilyName"]);
+	}
+	if (personDetail["RelationCode"]) {
+		$("#relation").val(personDetail["RelationCode"]);
+	}
+	if (personDetail["BirthDate"]) {
+		$("#dob").val(personDetail["BirthDate"]);
+	}
+	if (personDetail["Email"]) {
+		$("#email").val(personDetail["Email"]);
+	}
+	if (personDetail["Mobile"]) {
+		$("#mobile").val(personDetail["Mobile"]);
+	}
+	if (personDetail["Gender"]) {
+		$("#gender").val(personDetail["Gender"]);
+	}
+	if (personDetail["LoginFlag"]) {
+		if (personDetail["LoginFlag"] == 1) {
+			$('input:radio[name=access]')[0].checked = true;
+		}
+		else{
+			$('input:radio[name=access]')[1].checked = true;
+		}
+	}
+	document.getElementById( 'loginAccess' ).style.display = 'none';
+	$("#password").val("");
+	$("#confirmPassword").val("");
 }
 
 function getRelationList(){
@@ -146,15 +193,28 @@ $(document).ready(function(){
 
 	$("#btn-addFamily").click(function(event){
 		document.getElementById("form-family").reset();
+		//$("#familyCode").val(personDetail["FamilyCode"]);
+		initializeDate();
+		mode = 1;
+		$("#form-family").attr("action","add.php");
+		$("#input-type").val(1);
+		$("#addFamily").modal('show');
+		document.getElementById( 'loginAccess' ).style.display = 'none';
 	});
 	
 	$('#addFamily').on('show.bs.modal', function (e) {
 	  $('.info').empty();
 	  $('.form-group').removeClass("has-success");
 	  $('.form-group').removeClass("has-error");
-	  var rads = document.getElementsByName( 'access' );
-	  document.getElementById( 'no' ).checked = true;
-	  document.getElementById( 'loginAccess' ).style.display = ( rads[1].checked ) ? 'none' : 'block';
+	  $("#familyModalHeading").html("Edit");
+	  if (mode == 2) {
+	  	$("#familyModalHeading").html("Edit");
+	  }else{
+	  	$("#familyModalHeading").html("Add");
+	  }
+	  
+	  //var rads = document.getElementsByName( 'access' );
+	  //document.getElementById( 'loginAccess' ).style.display = ( rads[1].checked ) ? 'none' : 'block';
 	});
 
 	$("#relation").change(function(event){
@@ -185,7 +245,9 @@ $(document).ready(function(){
 	    	}
 	      	else{
 	      		showNotificationSuccess(response.message);
-	      		getFamilyList();
+	      		setTimeout(function(){
+	      			getFamilyList();
+	      		},500);
 	      	}
 	      	$("#addFamily").modal('hide');
 	    },

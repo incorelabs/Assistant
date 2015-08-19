@@ -17,11 +17,14 @@ if (isset($_POST)) {
 				if (strlen($dob[0]) == 4 && $dob[1] < 13 && $dob[2] < 32) {
 					$_POST['dob'] = implode("-", $dob);
 
+
 					require_once ROOT.'db/Connection.php';
 					require_once ROOT.'modules/functions.php';
 					$mysqli = getConnection();
 
-					$regCode = $_SESSION['s_id'];
+					
+						  	
+				  	$regCode = intval($_SESSION['s_id']);
 
 					$sql = "SELECT * FROM Table109 WHERE RegCode = ".$regCode." AND FamilyCode = 1001 LIMIT 1;";
 
@@ -29,6 +32,7 @@ if (isset($_POST)) {
 						$parenMember = $result->fetch_assoc();
 						
 						if ($result->num_rows == 1) {
+							
 							
 							$sql = "SELECT MAX(FamilyCode) as 'FamilyCode' FROM Table107 WHERE RegCode = ".$regCode;
 
@@ -47,10 +51,24 @@ if (isset($_POST)) {
 							      }
 							    }
 							}
-
-							//$sql = "DELETE FROM Table107 WHERE RegCode = ".$regCode." AND FamilyCode = ".$_POST['familyCode'];
+						
+								
+							$sql = "";
+							//$sql = "DELETE FROM Table107 WHERE RegCode = ".$regCode." AND FamilyCode = ".$familyCode;
+							//$sql .= "DELETE FROM Table109 WHERE RegCode = ".$regCode." AND FamilyCode = ".$familyCode;
 
 							if ($_POST['access'] == 1 && !empty($_POST['password']) && !empty($_POST['confirmPassword'])) {
+
+								$sql .= build_insert_str('Table109',array(
+									$regCode,
+									$_POST['name'],
+									$_POST['email'],
+									hash("sha256", $_POST['password']),
+									$_POST['mobile'],
+									$familyCode,
+									(($familyCode == 1001) ? 1 : 2), // => 1 for parent and 2 for child
+									1 	// => 1 for active and 2 for inactive
+								));
 
 								$sql .= build_insert_str('Table107',array(
 									$regCode,
@@ -64,48 +82,6 @@ if (isset($_POST)) {
 									intval($_POST['gender']),
 									1,
 									1
-								));
-
-								$nextYear = new DateTime("now");
-								$nextYear->add(new DateInterval('P1Y'));
-								$today = new DateTime("now");
-
-								$sql .= build_insert_str('Table109',array(
-									$regCode,
-									$_POST['name'],
-									$_POST['email'],
-									hash("sha256", $_POST['password']),
-									$_POST['mobile'],
-									"'".$today->format("Y-m-d")."'",
-									$parenMember['RegCountryCode'],
-									$parenMember['RegRenewalNo'], 	// => Renewal Number
-									$parenMember['RegRenStDate'],
-									$parenMember['RegRenEnDate'],
-									0,	// => Family Size
-									0, 	// => Fees collected
-									0, 	// => Data used
-									0, 	// => Photo uploaded
-									0, 	// => No of hits
-									"'".$today->format("Y-m-d H:i:s")."'",
-									10000,	// => Contact Serial
-									10000, 	// => Invest
-									10000, 	// => Assets
-									10000, 	// => Document
-									10000, 	// => Expense
-									10000, 	// => Income
-									10000, 	// => Password
-									10000, 	// => Extra1
-									10000, 	// => Extra2
-									10000, 	// => Extra3
-									10000, 	// => Extra4
-									10000, 	// => Extra5
-									10000, 	// => Extra6
-									10000, 	// => Extra7
-									10000, 	// => Extra8
-									10000, 	// => Extra9
-									$familyCode,
-									2, // => 1 for parent and 2 for child
-									1, 	// => 1 for active and 2 for inactive
 								));
 
 							}
@@ -133,7 +109,7 @@ if (isset($_POST)) {
 								}
 							}
 							
-							$sql .= "UPDATE `Table109` SET `RegFamilySize`= (SELECT count(RegCode) FROM Table107 WHERE RegCode = ".$regCode.") WHERE `RegCode` = ".$regCode.";";
+							$sql .= "UPDATE `Table122` SET `RegFamilySize`= (SELECT count(RegCode) FROM Table107 WHERE RegCode = ".$regCode.") WHERE `RegCode` = ".$regCode.";";
 							//echo $sql;
 							if ($mysqli->multi_query($sql) === TRUE) {
 								$response["status"] = 1;
@@ -153,6 +129,7 @@ if (isset($_POST)) {
 						$response['status'] = 0;
 						$response['message'] = "Error occured while uploading to the database: ".$mysqli->error;
 					}
+						
 
 					$mysqli->close();
 				}
