@@ -67,7 +67,7 @@
 							</div>
 							<div class="form-group clearfix clearfix-margin">
 								<div class="pull-left">
-									<i class="fa fa-key" style="margin-left: 3px;"></i>&nbsp;&nbsp;<a href="#">Forgot Password</a>
+									<i class="fa fa-key" style="margin-left: 3px;"></i>&nbsp;&nbsp;<a href="forgot/">Forgot Password</a>
 								</div>
 								<div class="pull-right">
 									<i class="fa fa-pencil"></i>&nbsp;&nbsp;<a href="register.php">Sign Up</a>

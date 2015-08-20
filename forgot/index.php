@@ -1,10 +1,7 @@
 <?php
-	session_start();
-	define("ROOT", "");
+session_start();	
+define("ROOT", "../");
 	
-	if (isset($_SESSION['s_id'])) {
-		exit(header("Location:index.php"));
-	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,14 +17,14 @@
     <?php
     	include_once ROOT.'dist/bootstrap.php';
     ?>
-    <link rel="stylesheet" type="text/css" href="dist/css/style.css" />
-    <link rel="stylesheet" href="dist/homePage/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../dist/css/style.css" />
+    <link rel="stylesheet" href="../dist/homePage/css/style.css" />
 	<script src="http://malsup.github.com/jquery.form.js"></script>
-	<script src="dist/script/script.js"></script>
-    <script src="dist/homePage/script/script.js"></script>
-    <link rel="stylesheet" href="dist/css/sidebar.css" />
-    <link rel="stylesheet" href="dist/css/jquery_sidebar.css" />
-    <script src="dist/script/jquery.mmenu.min.all.js"></script>
+	<script src="../dist/script/script.js"></script>
+    <script src="../dist/forgot/script/script.js"></script>
+    <link rel="stylesheet" href="../dist/css/sidebar.css" />
+    <link rel="stylesheet" href="../dist/css/jquery_sidebar.css" />
+    <script src="../dist/script/jquery.mmenu.min.all.js"></script>
     <script type="text/javascript">
 		$(function() {
 			$('nav#menu').mmenu();
@@ -76,7 +73,7 @@
                		<div class="panel-heading panel-header-height">
                 		<h1 class="panel-title text-center" style="font-size: 20px;">Forgot Password</h1>
                		</div>
-               		<form action="api/login.php" method="POST" id="form-login">
+               		<form action="controller.php" method="POST" id="form-forgot">
                			<div class="panel-body">
 							<div class="form-group">
 								<div class="inner-addon left-addon">

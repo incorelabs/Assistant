@@ -12,7 +12,7 @@ if (isset($_GET['list'])) {
 			FROM `Table107`
 			LEFT JOIN Table112 ON Table112.`RelationCode` = Table107.`RelationCode`
 			WHERE Table107.`RegCode` = ".$_SESSION['s_id']."
-			ORDER BY `FamilyName`;";
+			ORDER BY `FamilyCode`;";
 	//echo $sql;
 	if ($result = $mysqli->query($sql)) {
 		$i = 0;
@@ -30,7 +30,7 @@ if (isset($_GET['code'])) {
 			LEFT JOIN Table112 ON Table112.`RelationCode` = Table107.`RelationCode`
 			WHERE Table107.`RegCode` = ".$_SESSION['s_id']." AND
 			Table107.`FamilyCode` = ".$id."
-			ORDER BY `FamilyName` LIMIT 1;";
+			ORDER BY `FamilyCode` LIMIT 1;";
 	//echo $sql;
 	if ($result = $mysqli->query($sql)) {
 		$family = $result->fetch_assoc();
