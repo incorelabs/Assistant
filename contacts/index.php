@@ -309,7 +309,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                 <div class="col-xs-7">
                   <div class="col-xs-4">
                       <label class="control-label">
-                        <input type="radio" name="defaultAddress" value="" style="margin-right:5px">Home
+                        <input type="radio" name="defaultAddress" value="" style="margin-right:5px" checked="checked">Home
                       </label>
                   </div>
                   <div class="col-xs-4">

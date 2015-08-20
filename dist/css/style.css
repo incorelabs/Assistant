@@ -35,3 +35,61 @@
 .info{
   color: #b71c1c;
 }
+
+.fa-red{
+  color: red;
+}
+
+.fa-blue{
+  color: blue;
+}
+
+.fa-green{
+  color: green;
+}
+
+.panel-border{
+    border: 1px solid #34495e;
+}
+.panel-background>.panel-heading {
+    color: #fff;
+    background-color: #34495e;
+    border-color: #34495e;
+}
+
+/* enable absolute positioning */
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .fa,
+.inner-addon .glyphicon 
+{
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .fa,
+.left-addon .glyphicon
+{ 
+  left:  0px;
+}
+.right-addon .fa,
+.right-addon .glyphicon
+{ 
+  right: 10px;
+}
+.left-addon input,
+.left-addon select
+{
+  padding-left:  35px;
+}
+.right-addon input,
+.right-addon select,
+.right-addon option
+{
+  padding-right: 30px;
+}

@@ -54,13 +54,13 @@
 					<li><a href='#'>Income Status</a></li>
 				</ul>
 			</li>
-			<li><a href='#'>Password</a></li>
+			<li><a href='".$root_location."passwords'>Password</a></li>
 			<li><a href='#'>Reminder</a></li>
 			<li><a href='#'>Consolidate</a></li>
 			<li><a href='#mm-8' data-target='#mm-8'>Preferences</a>
 				<ul>
 					<li><a href='".$root_location."family'>Family</a></li>
-					<li><a href='#'>Change Password</a></li>
+					<li><a href='".$root_location."preferences/changePassword.php'>Change Password</a></li>
 					<li><a href='#'>Setings</a></li>
 					<li><a href='#'>Import Contacts</a></li>
 					<li><a href='#'>Synchronize Contacts</a></li>

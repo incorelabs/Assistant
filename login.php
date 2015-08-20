@@ -25,9 +25,21 @@
 	<script src="http://malsup.github.com/jquery.form.js"></script>
 	<script src="dist/script/script.js"></script>
     <script src="dist/homePage/script/script.js"></script>
+    <link rel="stylesheet" href="dist/css/sidebar.css" />
+    <link rel="stylesheet" href="dist/css/jquery_sidebar.css" />
+    <script src="dist/script/jquery.mmenu.min.all.js"></script>
+    <script type="text/javascript">
+		$(function() {
+			$('nav#menu').mmenu();
+		});
+	</script>
   </head>
 
 <body>
+<?php
+    include_once ROOT.'dist/navbar_logout.php';
+    echo $navbar_str;
+?> 
 	<div class="notification_outer">
 	  <div class="notification_success" id="notification_success" style="display:none">
 	    Added Successfully!
@@ -42,9 +54,9 @@
     <div class="outer">
         <div class="middle">
         	<div class="inner"> 	
-        		<div class="panel panel-background">
+        		<div class="panel panel-border panel-background">
                		<div class="panel-heading panel-header-height">
-                		<h1 class="panel-title text-center" style="font-size: 24px;">Login</h1>
+                		<h1 class="panel-title text-center" style="font-size: 24px;">Sign In</h1>
                		</div>
                		<form action="api/login.php" method="POST" id="form-login">
                			<div class="panel-body">
