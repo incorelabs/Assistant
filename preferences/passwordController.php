@@ -120,7 +120,7 @@ if ($validate) {
 
 		//check previous three password list
 		if ($validate) {
-			$sql = "SELECT Password1, Password2, Password3 FROM Table116 WHERE RegCode = ".$_SESSION["s_id"]." AND FamilyCode = ".$_SESSION["familyCode"]." LIMIT 1;";
+			$sql = "SELECT PassDate1, Password1, PassDate2, Password2, PassDate3, Password3 FROM Table116 WHERE RegCode = ".$_SESSION["s_id"]." AND FamilyCode = ".$_SESSION["familyCode"]." LIMIT 1;";
 
 			if ($result = $mysqli->query($sql)) {
 				$row = $result->fetch_assoc();
@@ -145,8 +145,8 @@ if ($validate) {
 
 					default:
 						$validate = true;
-						$passwordList[0] = $row["Password1"];
-						$passwordList[1] = $row["Password2"];
+						$passwordList[0] = array("date"=>$row["PassDate1"], "password"=>$row["Password1"]);
+						$passwordList[1] = array("date"=>$row["PassDate2"], "password"=>$row["Password2"]);
 						break;
 				}
 			}
@@ -158,11 +158,13 @@ if ($validate) {
 if ($validate) {
 	do {
 		//Update password history table
-		$sql = "UPDATE Table116 SET PassDate1 = NOW(), Password1= ".$oldPassword.", PassDate2= NOW(), Password2=".$passwordList[0].", PassDate3 = NOW(), Password3 = ".$passwordList[1]." WHERE RegCode = ".$_SESSION["s_id"]." AND FamilyCode = ".$_SESSION["familyCode"].";";
+		$sql = "UPDATE Table116 SET PassDate1 = NOW(), Password1 = '".$oldPassword."', PassDate2= '".$passwordList[0]["date"]."', Password2='".$passwordList[0]["password"]."', PassDate3 = '".$passwordList[1]["date"]."', Password3 = '".$passwordList[1]["password"]."' WHERE RegCode = ".$_SESSION["s_id"]." AND FamilyCode = ".$_SESSION["familyCode"].";";
 
 		//Set new password
 		$password = hash("sha256", $_POST['password']);
 		$sql .= "UPDATE Table109 SET RegPassword = '".$password."', ForgotFlag = 2 WHERE RegCode = ".$_SESSION["s_id"]." AND FamilyCode = ".$_SESSION["familyCode"].";";
+		
+		//echo $sql;
 		if ($mysqli->multi_query($sql) === TRUE) {
 			$validate = true;
 			$response = createResponse(1,"Password updated");

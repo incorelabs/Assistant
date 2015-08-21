@@ -64,7 +64,7 @@ include_once ROOT.'dist/authenticate.php';
 							<div class="form-group">
 								<div class="inner-addon left-addon">
 								    <i class="fa fa-key" style="font-size: 20px;"></i>
-									<input type="password" class="form-control textbox-height password" name="oldPassword" placeholder="Current Password" autofocus="true" required/>
+									<input type="password" class="form-control textbox-height" name="oldPassword" placeholder="Current Password" autofocus="true" required/>
 									<div class="info"></div>
 								</div>
 							</div>

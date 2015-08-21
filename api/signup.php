@@ -199,16 +199,12 @@ if ($validate) {
 		$sql .= build_insert_str('Table116',array(
 			$id,
 			$familyCode,
-			"NOW()",
+			"'".$today->format("Y-m-d H:i:s")."'",
 			hash("sha256", $_POST['password']),
-			"",
-			"'".$nextYear->format("Y-m-d")."'",
-			1,	// => Family Size
-			0, 	// => Fees collected
-			0, 	// => Data used
-			0, 	// => Photo uploaded
-			0, 	// => No of hits
-			"'".$today->format("Y-m-d H:i:s")."'"
+			"", //password date 2
+			"", //password 2
+			"", //password date 3
+			"", // password 3
 		));
 
 		//echo $sql;
