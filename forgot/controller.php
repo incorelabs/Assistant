@@ -11,6 +11,7 @@ $validate;
 $regCode;
 $name;
 $email;
+$familyCode;
 
 function createResponse($status,$message){
 	return array('status' => $status, 'message' => $message);
@@ -67,7 +68,7 @@ $_POST = safeStringForSQL($_POST);
 //Business logic
 if ($validate) {
 	do {
-		$sql = "SELECT RegCode, RegName, RegEmail FROM Table109 WHERE RegEmail = '".$_POST['email']."' LIMIT 1;";
+		$sql = "SELECT RegCode, RegName, RegEmail, FamilyCode FROM Table109 WHERE RegEmail = '".$_POST['email']."' LIMIT 1;";
 		if ($result = $mysqli->query($sql)) {
 			if ($result->num_rows == 0) {
 				$validate = false;
@@ -79,7 +80,7 @@ if ($validate) {
 				$regCode = intval($user["RegCode"]);
 				$name = $user["RegName"];
 				$email = $user["RegEmail"];
-
+				$familyCode = $user["FamilyCode"];
 			}
 		}
 	} while (0);
@@ -94,7 +95,7 @@ if ($validate) {
 	do {
 		$password = "as".random_string(2)."sis".random_string(3)."t";
 
-		$sql = "UPDATE `Table109` SET `RegPassword`= '".hash("sha256", $password)."' WHERE `RegCode` = ".$regCode.";";
+		$sql = "UPDATE Table109 SET RegPassword= '".hash("sha256", $password)."', ForgotFlag = 1 WHERE RegCode = ".$regCode." AND FamilyCode = ".$familyCode.";";
 		if ($result = $mysqli->query($sql)) {
 			$validate = true;
 		}

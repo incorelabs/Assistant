@@ -58,7 +58,7 @@
 
 		foreach ($arr_values as $value)
 		{	
-			if((is_null($value) ||  $value == "") && $value != 0){
+			if((is_null($value) ||  $value == "") && ($value != 0 || $value != "0")){
 				$insert_value_str .= "null, ";
 			}
 			else

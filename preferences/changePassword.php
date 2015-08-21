@@ -4,10 +4,7 @@ define("ROOT", "../");
 //require_once ROOT.'db/Connection.php';
 
 //$mysqli = getConnection();
-
-if (!isset($_SESSION['s_id'])) {
-	header('Location:'.ROOT.'index.php');
-}
+include_once ROOT.'dist/authenticate.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +59,7 @@ if (!isset($_SESSION['s_id'])) {
                		<div class="panel-heading panel-header-height">
                 		<h1 class="panel-title text-center" style="font-size: 24px;font-weight:100">Change Password</h1>
                		</div>
-               		<form action="" method="POST" id="change-password">
+               		<form action="passwordController.php" method="POST" id="change-password">
                			<div class="panel-body">
 							<div class="form-group">
 								<div class="inner-addon left-addon">
@@ -75,14 +72,14 @@ if (!isset($_SESSION['s_id'])) {
 							<div class="form-group">
 								<div class="inner-addon left-addon">
 								    <i class="fa fa-key" style="font-size: 20px;"></i>
-									<input type="password" class="form-control textbox-height password" name="newPassword" placeholder="New Password" required/>
+									<input type="password" class="form-control textbox-height password" name="password" placeholder="New Password" required/>
 									<div class="info"></div>
 								</div>
 							</div>
 							<div class="form-group" style="margin-bottom:0px">
 								<div class="inner-addon left-addon">
 								    <i class="fa fa-key" style="font-size: 20px;"></i>
-									<input type="password" class="form-control textbox-height c_password" name="confirmNewPassword" placeholder="Confirm New Password" required/>
+									<input type="password" class="form-control textbox-height c_password" name="confirmPassword" placeholder="Confirm New Password" required/>
 									<div class="info"></div>
 								</div>
 							</div>

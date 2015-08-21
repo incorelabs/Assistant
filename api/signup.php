@@ -157,7 +157,8 @@ if ($validate) {
 			$_POST['mobile'],
 			$familyCode,
 			1, // => 1 for parent and 2 for child
-			1 	// => 1 for active and 2 for inactive
+			1, 	// => 1 for active and 2 for inactive
+			2 // => 1 for forgot and 2 for normal
 		));
 
 		$sql .= build_insert_str('Table120',array(
@@ -186,6 +187,21 @@ if ($validate) {
 			$_POST["country"],
 			1, 	// => Renewal Number
 			"'".$today->format("Y-m-d")."'",
+			"'".$nextYear->format("Y-m-d")."'",
+			1,	// => Family Size
+			0, 	// => Fees collected
+			0, 	// => Data used
+			0, 	// => Photo uploaded
+			0, 	// => No of hits
+			"'".$today->format("Y-m-d H:i:s")."'"
+		));
+
+		$sql .= build_insert_str('Table116',array(
+			$id,
+			$familyCode,
+			"NOW()",
+			hash("sha256", $_POST['password']),
+			"",
 			"'".$nextYear->format("Y-m-d")."'",
 			1,	// => Family Size
 			0, 	// => Fees collected

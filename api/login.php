@@ -61,7 +61,7 @@ if ($validate) {
 		$_POST = safeStringForSQL($_POST);
 		$password = hash("sha256", $_POST['password']);
 
-		$sql = "SELECT RegCode, RegName, RegEmail, RegPassword, RegMobile, FamilyCode FROM Table109 WHERE RegEmail = '".$_POST['email']."' AND RegPassword = '".$password."' LIMIT 1";
+		$sql = "SELECT RegCode, RegName, RegEmail, RegPassword, RegMobile, FamilyCode, ForgotFlag FROM Table109 WHERE RegEmail = '".$_POST['email']."' AND RegPassword = '".$password."' LIMIT 1";
 
 		if ($result = $mysqli->query($sql)) {
 			if ($result->num_rows == 0) {
@@ -83,7 +83,13 @@ if ($validate) {
 				//echo $sql;
 				$mysqli->query($sql);
 
-				$response = createResponse(1,"Login Successfull");
+				if (intval($row['ForgotFlag']) == 2) {
+					$response = createResponse(2,"Login Successfull");
+				}
+				else{
+					$response = createResponse(1,"Login Successfull");
+				}
+				
 		    }
 		}
 		

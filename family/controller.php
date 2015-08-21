@@ -279,7 +279,8 @@ if ($validate) {
 										$_POST['mobile'],
 										(($_POST["mode"] == "A") ? $familyCode : intval($_POST["familyCode"])),
 										(($familyCode == 1001) ? 1 : 2), // => 1 for parent and 2 for child
-										1 	// => 1 for active and 2 for inactive
+										1, 	// => 1 for active and 2 for inactive
+										2 // => 1 for forgot and 2 for normal
 									));
 								}
 								else{

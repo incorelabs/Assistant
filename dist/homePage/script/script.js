@@ -40,8 +40,14 @@ $(document).ready(function(){
 	    		showNotificationFailure(response.message);
 	    	}
 	      	else{
-	      		showNotificationSuccess(response.message);
-	      		window.location.href = "index.php";
+	      		if (response.status == 1) {
+	      			showNotificationSuccess(response.message);
+	      			window.location.href = root + "preferences/changePassword.php";
+	      		}
+	      		else{
+	      			showNotificationSuccess(response.message);
+	      			window.location.href = "index.php";
+	      		}
 	      	}
 	    },
   	});

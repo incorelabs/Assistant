@@ -280,7 +280,7 @@ $(document).ready(function()
 		    .done(function(msg) {
 		      var response = JSON.parse(msg);
 		      if (response.status == 1) {
-		      	window.location.href = "index.php";
+		      	window.location.href = root;
 		      }
 		      else{
 		      	showNotificationFailure("Logout unsuccessful. Please try again");
