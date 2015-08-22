@@ -428,39 +428,6 @@ h5{
     border-color: #ccc;
 }
 
-.notification_outer{
-  left:-3px;
-  top: 60px;
-  width:100%;
-  text-align:center;
-  z-index: 999;
-  position: absolute;
-}
-
-.notification_success{
-  border-radius: 8px;
-  min-width: auto;
-  max-width:250px;
-  height:40px;
-  margin:auto;
-  padding-top: 10px;
-  background-color: #9CCC65;
-  box-shadow: 5px 5px 2px #888888;
-  opacity: 0.95;
-}
-
-.notification_failure{
-  color: #fff;
-  border-radius: 8px;
-  min-width: auto;
-  max-width:250px;
-  height:40px;
-  margin:auto;
-  padding-top: 10px;
-  background-color: #ef5350;
-  box-shadow: 5px 5px 2px #888888;
-  opacity: 0.95;
-}
 .addImage{
   width: 150px;
   height: 150px;
@@ -506,6 +473,15 @@ h5{
 	height: 40px;
 }
 .input-group-addon-label{
-	min-width: 123px;
+	min-width: 100px;
+  font-size: 10px;
 	text-align: left;
+}
+@media screen and (min-width: 768px) {
+  .input-group-addon-label
+  {
+    font-size: 14px;
+    min-width: 127px;
+    text-align: left;
+  }
 }

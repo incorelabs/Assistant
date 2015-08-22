@@ -6,7 +6,7 @@ body{
   top: 60px;
   width:100%;
   text-align:center;
-  z-index: 999;
+  z-index: 1060;
   position: absolute;
 }
 
@@ -14,12 +14,16 @@ body{
   border-radius: 8px;
   min-width: auto;
   max-width:250px;
-  height:40px;
+  height:auto;
   margin:auto;
   padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   background-color: #9CCC65;
   box-shadow: 5px 5px 2px #888888;
   opacity: 0.95;
+  word-wrap: break-word;
 }
 
 .notification_failure{
@@ -27,12 +31,16 @@ body{
   border-radius: 8px;
   min-width: auto;
   max-width:250px;
-  height:40px;
+  height:auto;
   margin:auto;
   padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   background-color: #ef5350;
   box-shadow: 5px 5px 2px #888888;
   opacity: 0.95;
+  word-wrap: break-word;
 }
 
 .info{
@@ -72,6 +80,7 @@ body{
   position: absolute;
   padding: 10px;
   pointer-events: none;
+  z-index: 5;
 }
 
 /* align icon */

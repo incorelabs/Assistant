@@ -43,7 +43,28 @@ include_once ROOT.'dist/authenticate.php';
 		      $("#password").attr("type", "password");
 		    }
 		  });
-		});
+		  $("#showOtherPassword").click(function() {
+		    if ($("#otherPassword").attr("type") == "password") {
+		      $("#otherPassword").attr("type", "text");
+
+		    } else {
+		      $("#otherPassword").attr("type", "password");
+		    }
+		  });
+		var originalPassword = $(".textShow").html();
+		var encryptedPassword = originalPassword.replace(/./gi, "*");  // replace each character by an *
+		$(".textShow").text(encryptedPassword);
+		$("#passwordEncrypt").click(function () {
+            $(".textShow").text(function(original, encrypted){
+               return encrypted == originalPassword ? encryptedPassword : originalPassword
+            })
+        });
+        $("#notification_test").click(function(){
+        	document.getElementById("notification_success").style.display = "block";
+        	$("#notification_success").delay(2000).fadeOut("slow");
+        });
+	});
+		
 	</script>
   </head>
 
@@ -66,7 +87,7 @@ include_once ROOT.'dist/authenticate.php';
 	</div>
 	<div class="container-fluid navbar-padding">
 	  <div class="row">
-	    <div class="col-xs-12 col-md-5">
+	    <div class="col-xs-12 col-md-5" style="padding-right:0px">
 	      <div class="list-group list-margin">
 	        <div class="list-group-item list-margin">
 	          <div class="row">
@@ -100,7 +121,7 @@ include_once ROOT.'dist/authenticate.php';
 	  </div><!--row-->
 	<div class="row">
 
-	  <div class="col-md-5 col-sm-12 col-xs-12">
+	  <div class="col-md-5 col-sm-12 col-xs-12" style="padding-right:0px">
 	    <div class="panel panel-default scroll panel-margin" id="style-3">
 	    	<div class="panel-height">
 	         <!-- List group -->
@@ -161,7 +182,7 @@ include_once ROOT.'dist/authenticate.php';
 		                  	<div class='list-group-item-heading header_font'>
 		                  		<div class='col-md-3'>Password</div>
 		              			<value>
-		              				<div class='col-md-9'>*********</div>
+		              				<div class='col-md-9'><div class="textShow" style="display:block">kamlesh</div><div class="pull-right" style="margin-top:-22px"><a href="#" id="passwordEncrypt"><i class="fa fa-eye fa-lg"></i></a></div></div>
 		              			</value>
 		              		</div>
 		          		</div>
@@ -196,33 +217,52 @@ include_once ROOT.'dist/authenticate.php';
 				<div class="modal-body">
 					<div class="form-group form-group-margin">
 						<div class="input-group">
-						  <span class="input-group-addon input-group-addon-label">Holder's Name</span>
-						  <input type="text" class="form-control text-field-left-border" name="name" placeholder="Holder's Name"/>
+							<span class="input-group-addon input-group-addon-label">Holder's Name*</span>
+							<div class="inner-addon right-addon">
+							    <i class="fa fa-user" style="font-size: 20px;"></i>
+					  			<input type="text" class="form-control text-field-left-border" name="name" placeholder="Holder's Name"/>
+				  			</div>
 						</div>
 					</div>
 					<div class="form-group form-group-margin">
 						<div class="input-group">
-						  <span class="input-group-addon">Password Type</span>
-						  <input type="text" class="form-control text-field-left-border" name="passwordType" placeholder="Password Type"/>
+						    <span class="input-group-addon input-group-addon-label">Password Type*</span>
+						    <div class="inner-addon right-addon">
+							    <i class="fa fa-key" style="font-size: 20px;"></i>
+						  		<input type="text" class="form-control text-field-left-border" name="passwordType" placeholder="Password Type"/>
+							</div>
 						</div>
 					</div>
 					<div class="form-group form-group-margin">
 						<div class="input-group">
-						  <span class="input-group-addon input-group-addon-label">Description</span>
-						  <input type="text" class="form-control text-field-left-border" name="description" placeholder="Description"/>
+							<span class="input-group-addon input-group-addon-label">Description*</span>
+							<div class="inner-addon right-addon">
+							    <i class="fa fa-sticky-note-o" style="font-size: 20px;"></i>
+								<input type="text" class="form-control text-field-left-border" name="description" placeholder="Description"/>
+							</div>
 						</div>
 					</div>
 					<div class="form-group form-group-margin">
 						<div class="input-group">
-						  <span class="input-group-addon input-group-addon-label">Login ID</span>
-						  <input type="text" class="form-control text-field-left-border" name="userID" placeholder="Login ID" aria-describedby="basic-addon1"/>
+						  <span class="input-group-addon input-group-addon-label">Login ID*</span>
+						  <div class="inner-addon right-addon">
+							    <i class="fa fa-user" style="font-size: 20px;"></i>
+						  		<input type="text" class="form-control text-field-left-border" name="userID" placeholder="Login ID" aria-describedby="basic-addon1"/>
+						  </div>
 						</div>
 					</div>
 					<div class="form-group form-group-margin">
 						<div class="input-group">
-						  <span class="input-group-btn"><span class="input-group-addon group-addon-text-custom input-group-addon-label">Password</span></span>
+						  <span class="input-group-btn"><span class="input-group-addon group-addon-text-custom input-group-addon-label">Password*</span></span>
 						  <input type="password" class="form-control text-field-left-border" name="password" id="password" placeholder="Password"/>
 						  <span class="input-group-btn"><button class="btn btn-warning button-addon-custom" type="button" id="showPassword"><i class="fa fa-eye fa-lg"></i></button></span>
+						</div>
+					</div>
+					<div class="form-group form-group-margin">
+						<div class="input-group">
+						  <span class="input-group-btn"><span class="input-group-addon group-addon-text-custom input-group-addon-label">Other Password</span></span>
+						  <input type="password" class="form-control text-field-left-border" name="password" id="otherPassword" placeholder="Other Password (Optional)"/>
+						  <span class="input-group-btn"><button class="btn btn-warning button-addon-custom" type="button" id="showOtherPassword"><i class="fa fa-eye fa-lg"></i></button></span>
 						</div>
 					</div>
 				</div> <!-- Modal Body --> 
