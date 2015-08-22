@@ -179,12 +179,12 @@ include_once ROOT.'dist/authenticate.php';
 			<div class="modal-content">
 				<form class="form-horizontal" method="POST" action="controller.php" id="form-family" autocomplete="off">
 				<div class="modal-header">
-					<div class="form-group pull-left" style="padding-left:15px">
+					<div class="form-group pull-left" style="margin-top:-5px">
 						<button class="btn btn-danger button-top-remove" data-dismiss="modal">
 							<span class='glyphicon glyphicon-remove'></span>
 						</button>
 					</div>
-					<div class="form-group pull-right" style="padding-right:15px">
+					<div class="form-group pull-right" style="margin-top:-5px">
 						<button type="submit" class="btn btn-success button-top-remove">
 							<span class='glyphicon glyphicon-ok'></span>
 						</button>
@@ -196,32 +196,32 @@ include_once ROOT.'dist/authenticate.php';
 				<div class="modal-body">
 					<div class="form-group form-group-margin">
 						<div class="input-group">
-						  <span class="input-group-addon">Holder's Name</span>
-						  <input type="text" class="form-control text-field-left-border" placeholder="Holder's Name"/>
+						  <span class="input-group-addon input-group-addon-label">Holder's Name</span>
+						  <input type="text" class="form-control text-field-left-border" name="name" placeholder="Holder's Name"/>
 						</div>
 					</div>
 					<div class="form-group form-group-margin">
 						<div class="input-group">
 						  <span class="input-group-addon">Password Type</span>
-						  <input type="text" class="form-control text-field-left-border" placeholder="Password Type"/>
+						  <input type="text" class="form-control text-field-left-border" name="passwordType" placeholder="Password Type"/>
 						</div>
 					</div>
 					<div class="form-group form-group-margin">
 						<div class="input-group">
-						  <span class="input-group-addon">Description</span>
-						  <input type="text" class="form-control text-field-left-border" placeholder="Description"/>
+						  <span class="input-group-addon input-group-addon-label">Description</span>
+						  <input type="text" class="form-control text-field-left-border" name="description" placeholder="Description"/>
 						</div>
 					</div>
 					<div class="form-group form-group-margin">
 						<div class="input-group">
-						  <span class="input-group-addon">Login ID</span>
-						  <input type="text" class="form-control text-field-left-border" placeholder="Login ID" aria-describedby="basic-addon1"/>
+						  <span class="input-group-addon input-group-addon-label">Login ID</span>
+						  <input type="text" class="form-control text-field-left-border" name="userID" placeholder="Login ID" aria-describedby="basic-addon1"/>
 						</div>
 					</div>
 					<div class="form-group form-group-margin">
 						<div class="input-group">
-						  <span class="input-group-btn"><span class="input-group-addon group-addon-text-custom">Password</span></span>
-						  <input type="password" class="form-control text-field-left-border" id="password" placeholder="Password"/>
+						  <span class="input-group-btn"><span class="input-group-addon group-addon-text-custom input-group-addon-label">Password</span></span>
+						  <input type="password" class="form-control text-field-left-border" name="password" id="password" placeholder="Password"/>
 						  <span class="input-group-btn"><button class="btn btn-warning button-addon-custom" type="button" id="showPassword"><i class="fa fa-eye fa-lg"></i></button></span>
 						</div>
 					</div>
