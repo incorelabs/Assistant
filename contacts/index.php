@@ -93,85 +93,80 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     echo $navbar_str;
   ?>  
     <div class="container-fluid navbar-padding">
-    <?php 
-      echo $status; 
-      //echo json_encode($group['code']);
-    ?>
-
-    <div class="notification_outer">
-      <div class="notification_success" id="notification_success" style="display:none">
-        Added Successfully!
+      <div class="notification_outer">
+        <div class="notification_success" id="notification_success" style="display:none">
+          Added Successfully!
+        </div>
       </div>
-    </div>
 
-    <div class="notification_outer">
-      <div class="notification_failure" id="notification_failure" style="display:none">
-        Something went wrong!
+      <div class="notification_outer">
+        <div class="notification_failure" id="notification_failure" style="display:none">
+          Something went wrong!
+        </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-xs-12 col-md-5">
-        <div class="list-group list-margin">
-          <div class="list-group-item list-margin">
-            <div class="row">
-               <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                <div class="input-group">
-                <input id="searchContact" type="text" class="form-control" onkeyup="doSearch();" placeholder="Search..." autofocus />
-                  <div class="input-group-btn">
-                    <div class="btn-group" role="group">
-                      <div class="dropdown dropdown-lg">
-                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false" onclick="showDiv()"><span class="glyphicon glyphicon-filter"></span></button>
-                        <div class="dropdown-menu dropdown-menu-right" role="menu" id="search_filter">
-                          <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                              <label for="filter">Filter by</label>
-                              <select class="form-control" id="filter">
-                                <option value="name">Name</option>
-                                <option value="mobile">Mobile</option>
-                                <option value="email">Email</option>
-                                <option value="company">Company</option>
-                                <option value="designation">Designation</option>
-                                <option value="guardian">Father/Husband</option>
-                                <option value="birthday">Birthday</option>
-                                <option value="anniversary">Anniversary</option>
-                                <option value="group">Group</option>
-                                <option value="home_area">Home Area</option>
-                                <option value="home_city">Home City</option>
-                                <option value="home_phone">Home Phone</option>
-                                <option value="work_area">Work Area</option>
-                                <option value="work_city">Work City</option>
-                                <option value="work_phone">Work Phone</option>
-                                <option value="other_area">Other Area</option>
-                                <option value="other_city">Other City</option>
-                                <option value="other_phone">Other Phone</option>
-                              </select>
-                            </div>
-                          </form>
+      <div class="row">
+        <div class="col-xs-12 col-md-5">
+          <div class="list-group list-margin">
+            <div class="list-group-item list-margin">
+              <div class="row">
+                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                  <div class="input-group">
+                  <input id="searchContact" type="text" class="form-control" onkeyup="doSearch();" placeholder="Search..." autofocus />
+                    <div class="input-group-btn">
+                      <div class="btn-group" role="group">
+                        <div class="dropdown dropdown-lg">
+                          <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false" onclick="showDiv()"><span class="glyphicon glyphicon-filter"></span></button>
+                          <div class="dropdown-menu dropdown-menu-right" role="menu" id="search_filter">
+                            <form class="form-horizontal" role="form">
+                              <div class="form-group">
+                                <label for="filter">Filter by</label>
+                                <select class="form-control" id="filter">
+                                  <option value="name">Name</option>
+                                  <option value="mobile">Mobile</option>
+                                  <option value="email">Email</option>
+                                  <option value="company">Company</option>
+                                  <option value="designation">Designation</option>
+                                  <option value="guardian">Father/Husband</option>
+                                  <option value="birthday">Birthday</option>
+                                  <option value="anniversary">Anniversary</option>
+                                  <option value="group">Group</option>
+                                  <option value="home_area">Home Area</option>
+                                  <option value="home_city">Home City</option>
+                                  <option value="home_phone">Home Phone</option>
+                                  <option value="work_area">Work Area</option>
+                                  <option value="work_city">Work City</option>
+                                  <option value="work_phone">Work Phone</option>
+                                  <option value="other_area">Other Area</option>
+                                  <option value="other_city">Other City</option>
+                                  <option value="other_phone">Other Phone</option>
+                                </select>
+                              </div>
+                            </form>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div>
-                  <!--<button type="button" class="btn btn-info btn-size"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>-->
-                  <button class="btn btn-primary btn-size" onclick="openAddContact();"><span class="glyphicon glyphicon-plus"></span></button>
+                <div>
+                    <!--<button type="button" class="btn btn-info btn-size"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>-->
+                    <button class="btn btn-primary btn-size" onclick="openAddContact();"><span class="glyphicon glyphicon-plus"></span></button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    
-      <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
-        <div class="panel panel-default scroll list-margin" id="style-3">
-          <div id="contactDetailHeader" class="panel-heading text-center" >
-            <h12>Contact Details</h12>
-          </div>
-             
-        </div><!--Panel-->
-      </div><!--COL-->
-    </div><!--row-->
+      
+        <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
+          <div class="panel panel-default scroll list-margin" id="style-3">
+            <div id="contactDetailHeader" class="panel-heading text-center" >
+              <h12>Contact Details</h12>
+            </div>
+               
+          </div><!--Panel-->
+        </div><!--COL-->
+      </div><!--row-->
     <div class="row">
     
       <div class="col-md-5 col-sm-12 col-xs-12">

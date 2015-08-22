@@ -1,3 +1,6 @@
+body{
+  background-color: #ecf0f1;
+}
 .notification_outer{
   left:-3px;
   top: 60px;
