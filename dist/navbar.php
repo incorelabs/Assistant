@@ -63,7 +63,6 @@
 					<li><a href='".$root_location."preferences/changePassword.php'>Change Password</a></li>
 					<li><a href='#'>Setings</a></li>
 					<li><a href='#'>Import Contacts</a></li>
-					<li><a href='#'>Synchronize Contacts</a></li>
 				</ul>
 			</li>
 			<li><a href='#' class='logout'>Sign Out</a></li>

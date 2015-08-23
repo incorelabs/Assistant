@@ -5,7 +5,7 @@ function getFamilyList(){
 	    method: "GET",
 	    url: root+"family/getFamily.php",
 	    data: { 
-	        list: 1
+	        list: 2
 	     }
 	  })
 	    .done(function(msg) {
@@ -16,7 +16,18 @@ function getFamilyList(){
 }
 
 function setFamilyList(arr){
-	
+	var str= "";
+	for (var i = 0; i < arr.length; i++) {
+		if(arr[i].FamilyCode == familyCode)
+		{
+			str += "<option value = "+arr[i].FamilyCode+" selected = 'selected'>"+arr[i].FamilyName+"</option>";
+		}
+		else
+		{
+			str += "<option value = "+arr[i].FamilyCode+">"+arr[i].FamilyName+"</option>";
+		}
+	};
+	$("#holderName").html(str);
 }
 
 $(document).ready(function() {

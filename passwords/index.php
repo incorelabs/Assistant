@@ -23,6 +23,9 @@ include_once ROOT.'dist/authenticate.php';
     <link rel="stylesheet" type="text/css" href="../dist/css/style.css" />
     <link rel="stylesheet" href="../dist/passwords/css/style.css" />
 	<script src="http://malsup.github.com/jquery.form.js"></script>
+	<script>
+	var familyCode = '<?php echo $_SESSION['familyCode']; ?>';
+	</script>
 	<script src="../dist/script/script.js"></script>
     <script src="../dist/passwords/script/script.js"></script>
     <link rel="stylesheet" href="../dist/css/sidebar.css" />
@@ -63,6 +66,7 @@ include_once ROOT.'dist/authenticate.php';
         	document.getElementById("notification_success").style.display = "block";
         	$("#notification_success").delay(2000).fadeOut("slow");
         });
+        console.log(familyCode);
 	});
 		
 	</script>
@@ -144,7 +148,7 @@ include_once ROOT.'dist/authenticate.php';
 	    <div id="contactDetail" class="panel panel-default scroll panel-margin" id="style-3">
 			<div class="panel-height">
 	         <!-- List group -->  
-	          	<div id="contactDetailBody" class="list-group">
+	          	<div id="PasswordBody" class="list-group">
 		            <div class="list-group-item list-group-item-border">
 		          		<div class='row contact-details' style="padding-top:0px">
 		                  	<div class='list-group-item-heading header_font'>
@@ -217,11 +221,29 @@ include_once ROOT.'dist/authenticate.php';
 				<div class="modal-body">
 					<input type="hidden" name="passwordTypeCode" value="1" />
 					<div class="form-group form-group-margin">
+		              <label class="col-xs-3 control-label">Private</label>
+		                <div class="col-xs-3">
+		                  <div class='switch switch-padding'>
+		                  <input type='checkbox' name='Private' id='addPrivacy' class='switch-input' >
+		                  <label for='addPrivacy' class='switch-label'></label>
+		                </div>
+		                </div>
+		              <label class="col-xs-3 control-label">Active</label>
+		              <div class="col-xs-3">
+		                <div class='switch switch-padding'>
+		                  <input type='checkbox' name='activeStatus' id='addActiveStatus' class='switch-input' checked='checked'>
+		                  <label for='addActiveStatus' class='switch-label'></label>
+		                </div>
+		              </div>
+		            </div>
+					<div class="form-group form-group-margin">
 						<div class="input-group">
 							<span class="input-group-addon input-group-addon-label">Holder's Name*</span>
 							<div class="inner-addon right-addon">
-							    <i class="fa fa-user" style="font-size: 20px;"></i>
-					  			<input type="text" class="form-control text-field-left-border" name="name" placeholder="Holder's Name"/>
+							    <i class="fa fa-caret-down" style="font-size: 20px;"></i>
+					  			<select class="form-control select-field-left-border" id="holderName">
+					  				<option>Select Holder Name</option>
+					  			</select>
 				  			</div>
 						</div>
 					</div>
@@ -229,7 +251,7 @@ include_once ROOT.'dist/authenticate.php';
 						<div class="input-group">
 						    <span class="input-group-addon input-group-addon-label">Password Type*</span>
 						    <div class="inner-addon right-addon">
-							    <i class="fa fa-key" style="font-size: 20px;"></i>
+							    <i class="fa fa-key hidden-xs" style="font-size: 20px;"></i>
 						  		<input type="text" class="form-control text-field-left-border" name="passwordType" placeholder="Password Type"/>
 							</div>
 						</div>
@@ -238,7 +260,7 @@ include_once ROOT.'dist/authenticate.php';
 						<div class="input-group">
 							<span class="input-group-addon input-group-addon-label">Description*</span>
 							<div class="inner-addon right-addon">
-							    <i class="fa fa-sticky-note-o" style="font-size: 20px;"></i>
+							    <i class="fa fa-sticky-note-o hidden-xs" style="font-size: 20px;"></i>
 								<input type="text" class="form-control text-field-left-border" name="description" placeholder="Description"/>
 							</div>
 						</div>
@@ -247,7 +269,7 @@ include_once ROOT.'dist/authenticate.php';
 						<div class="input-group">
 						  <span class="input-group-addon input-group-addon-label">Login ID*</span>
 						  <div class="inner-addon right-addon">
-							    <i class="fa fa-user" style="font-size: 20px;"></i>
+							    <i class="fa fa-user hidden-xs" style="font-size: 20px;"></i>
 						  		<input type="text" class="form-control text-field-left-border" name="userID" placeholder="Login ID" aria-describedby="basic-addon1"/>
 						  </div>
 						</div>
@@ -256,14 +278,14 @@ include_once ROOT.'dist/authenticate.php';
 						<div class="input-group">
 						  <span class="input-group-btn"><span class="input-group-addon group-addon-text-custom input-group-addon-label">Password*</span></span>
 						  <input type="password" class="form-control text-field-left-border" name="password" id="password" placeholder="Password"/>
-						  <span class="input-group-btn"><button class="btn btn-warning button-addon-custom" type="button" id="showPassword"><i class="fa fa-eye fa-lg"></i></button></span>
+						  <span class="input-group-btn"><button class="btn btn-primary button-addon-custom" type="button" id="showPassword"><i class="fa fa-eye fa-lg"></i></button></span>
 						</div>
 					</div>
 					<div class="form-group form-group-margin">
 						<div class="input-group">
 						  <span class="input-group-btn"><span class="input-group-addon group-addon-text-custom input-group-addon-label">Other Password</span></span>
 						  <input type="password" class="form-control text-field-left-border" name="password1" id="otherPassword" placeholder="Other Password (Optional)"/>
-						  <span class="input-group-btn"><button class="btn btn-warning button-addon-custom" type="button" id="showOtherPassword"><i class="fa fa-eye fa-lg"></i></button></span>
+						  <span class="input-group-btn"><button class="btn btn-primary button-addon-custom" type="button" id="showOtherPassword"><i class="fa fa-eye fa-lg"></i></button></span>
 						</div>
 					</div>
 				</div> <!-- Modal Body --> 
