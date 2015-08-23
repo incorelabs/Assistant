@@ -8,7 +8,7 @@ $mysqli = getConnection();
 $family = array();
 
 function getFamilyList($orderBy){
-	global $family;
+	global $family,$mysqli;
 
 	$sql = "SELECT `FamilyCode`, `FamilyName`, Table107.`RelationCode`, Table112.`RelationName`, DATE_FORMAT(`BirthDate`,'%d/%m/%Y') as 'BirthDate', `Email`, `Mobile`, Table107.`Gender`, `LoginFlag`, `ActiveFlag` 
 			FROM `Table107`
