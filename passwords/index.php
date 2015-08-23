@@ -129,74 +129,20 @@ include_once ROOT.'dist/authenticate.php';
 	    <div class="panel panel-default scroll panel-margin" id="style-3">
 	    	<div class="panel-height">
 	         <!-- List group -->
-	          <div id="contactList" class="list-group force-scroll">
-	              <a href='#' class='list-group-item contacts_font'>
-	              	<h4 class='list-group-item-heading contacts_font'>Darshan - Yahoo</h4>
-	              </a>
-	              <a href='#' class='list-group-item contacts_font'>
-	              	<h4 class='list-group-item-heading contacts_font'>Darshan - Gmail</h4>
-	              </a>
-	              <a href='#' class='list-group-item contacts_font'>
-	              	<h4 class='list-group-item-heading contacts_font'>Kamlesh - Gmail</h4>
-	              </a>
+	          <div id="passwordsList" class="list-group force-scroll">
+	              
 	          </div><!--List close-->
 	      </div>
 	    </div><!--Panel-->
 	  </div><!--COL-->
 
 	  <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
-	    <div id="contactDetail" class="panel panel-default scroll panel-margin" id="style-3">
-			<div class="panel-height">
-	         <!-- List group -->  
-	          	<div id="PasswordBody" class="list-group">
-		            <div class="list-group-item list-group-item-border">
-		          		<div class='row contact-details' style="padding-top:0px">
-		                  	<div class='list-group-item-heading header_font'>
-		                  		<div class='col-md-3'>Holder's Name</div>
-		              			<value>
-		              				<div class='col-md-9'>Darshan</div>
-		              			</value>
-		              		</div>
-		          		</div>
-		              	<div class='row contact-details'>
-		                  	<div class='list-group-item-heading header_font'>
-		                  		<div class='col-md-3'>Password Type</div>
-		              			<value>
-		              				<div class='col-md-9'>Email</div>
-		              			</value>
-		              		</div>
-		          		</div>
-		          		<div class='row contact-details'>
-		                  	<div class='list-group-item-heading header_font'>
-		                  		<div class='col-md-3'>Description</div>
-		              			<value>
-		              				<div class='col-md-9'>Yahoo Password</div>
-		              			</value>
-		              		</div>
-		          		</div>
-		          		<div class='row contact-details'>
-		                  	<div class='list-group-item-heading header_font'>
-		                  		<div class='col-md-3'>Login ID</div>
-		              			<value>
-		              				<div class='col-md-9'>darshan@yahoo.co.in</div>
-		              			</value>
-		              		</div>
-		          		</div>
-		          		<div class='row contact-details'>
-		                  	<div class='list-group-item-heading header_font'>
-		                  		<div class='col-md-3'>Password</div>
-		              			<value>
-		              				<div class='col-md-9'><div class="textShow" style="display:block">kamlesh</div><div class="pull-right" style="margin-top:-22px"><a href="#" id="passwordEncrypt"><i class="fa fa-eye fa-lg"></i></a></div></div>
-		              			</value>
-		              		</div>
-		          		</div>
-			        </div>
-		        </div><!--List close-->
-			</div>
+	    <div id="password-Detail" class="panel panel-default scroll panel-margin" id="style-3">
+			
 	    </div><!--Panel-->
 	  </div><!--COL-->
 	</div><!--ROW-->
-  </div>
+  </div><!--Container-->
 
   <!-- Add Password Modal -->
 	<div class="modal fade" id="addPassword" tabindex="-1" role="dialog" aria-labelledby="addPassword" aria-hidden="true">
@@ -224,14 +170,14 @@ include_once ROOT.'dist/authenticate.php';
 		              <label class="col-xs-3 control-label">Private</label>
 		                <div class="col-xs-3">
 		                  <div class='switch switch-padding'>
-		                  <input type='checkbox' name='Private' id='addPrivacy' class='switch-input' >
+		                  <input type='checkbox' name='private' id='addPrivacy' class='switch-input' >
 		                  <label for='addPrivacy' class='switch-label'></label>
 		                </div>
 		                </div>
 		              <label class="col-xs-3 control-label">Active</label>
 		              <div class="col-xs-3">
 		                <div class='switch switch-padding'>
-		                  <input type='checkbox' name='activeStatus' id='addActiveStatus' class='switch-input' checked='checked'>
+		                  <input type='checkbox' name='active' id='addActiveStatus' class='switch-input' checked='checked'>
 		                  <label for='addActiveStatus' class='switch-label'></label>
 		                </div>
 		              </div>
@@ -241,7 +187,7 @@ include_once ROOT.'dist/authenticate.php';
 							<span class="input-group-addon input-group-addon-label">Holder's Name*</span>
 							<div class="inner-addon right-addon">
 							    <i class="fa fa-caret-down" style="font-size: 20px;"></i>
-					  			<select class="form-control select-field-left-border" id="holderName">
+					  			<select class="form-control select-field-left-border" id="holderName" name="name">
 					  				<option>Select Holder Name</option>
 					  			</select>
 				  			</div>

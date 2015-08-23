@@ -58,6 +58,7 @@ function getPasswordCode(){
 }
 
 //General Validation
+print_r($_POST);
 do {
 	if (isset($_POST)) {
 		$validate = true;
@@ -104,7 +105,10 @@ if ($validate) {
 			}
 		}
 
-		$sql .= "INSERT INTO `Table152`(`RegCode`, `PasswordCode`, `PasswordTypeCode`, `HolderCode`, `PasswordName`, `LoginID`, `LoginPassword1`, `LoginPassword2`, `InsertedBy`, `PrivateFlag`, `ActiveFlag`, `LastAccessDate`) VALUES (".$regCode.",".$passwordCode.",".$passwordTypeCode.",".intval($_POST["name"]).",'".$_POST["description"]."','".$_POST["userID"]."','".$_POST["password"]."','".$_POST["password1"]."',".intval($_SESSION["familyCode"]).",1,1,NOW());";
+		$private = (isset($_POST["private"]) ? "1" : "2");
+		$active = (isset($_POST["active"]) ? "1" : "2");
+
+		$sql .= "INSERT INTO `Table152`(`RegCode`, `PasswordCode`, `PasswordTypeCode`, `HolderCode`, `PasswordName`, `LoginID`, `LoginPassword1`, `LoginPassword2`, `InsertedBy`, `PrivateFlag`, `ActiveFlag`, `LastAccessDate`) VALUES (".$regCode.",".$passwordCode.",".$passwordTypeCode.",".intval($_POST["name"]).",'".$_POST["description"]."','".$_POST["userID"]."','".$_POST["password"]."','".$_POST["password1"]."',".intval($_SESSION["familyCode"]).",".$private.",".$active.",NOW());";
 
 		//echo $sql;
 		if ($mysqli->multi_query($sql) === TRUE) {
