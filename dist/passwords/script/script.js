@@ -1,5 +1,28 @@
+var familyList;
+
+function getFamilyList(){
+	$.ajax({
+	    method: "GET",
+	    url: root+"family/getFamily.php",
+	    data: { 
+	        list: 1
+	     }
+	  })
+	    .done(function(msg) {
+	      familyList = JSON.parse(msg);
+	      console.log(familyList);
+	      setFamilyList(familyList);
+	    });
+}
+
+function setFamilyList(arr){
+	
+}
+
 $(document).ready(function() {
-	console.log("Hi");
+	getFamilyList();
+
+	//Password form submit
 	$("#form-passwords").ajaxForm({
 		beforeSubmit:function(){
 	    },
