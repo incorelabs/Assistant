@@ -198,7 +198,7 @@ include_once ROOT.'dist/authenticate.php';
 	<div class="modal fade" id="addPassword" tabindex="-1" role="dialog" aria-labelledby="addPassword" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form class="form-horizontal" method="POST" action="controller.php" id="form-family" autocomplete="off">
+				<form class="form-horizontal" method="POST" action="controller.php" id="form-passwords" autocomplete="off">
 				<div class="modal-header">
 					<div class="form-group pull-left" style="margin-top:-5px">
 						<button class="btn btn-danger button-top-remove" data-dismiss="modal">
@@ -215,6 +215,7 @@ include_once ROOT.'dist/authenticate.php';
 					</h4>   
 				</div>
 				<div class="modal-body">
+					<input type="hidden" name="passwordTypeCode" value="1" />
 					<div class="form-group form-group-margin">
 						<div class="input-group">
 							<span class="input-group-addon input-group-addon-label">Holder's Name*</span>
@@ -261,7 +262,7 @@ include_once ROOT.'dist/authenticate.php';
 					<div class="form-group form-group-margin">
 						<div class="input-group">
 						  <span class="input-group-btn"><span class="input-group-addon group-addon-text-custom input-group-addon-label">Other Password</span></span>
-						  <input type="password" class="form-control text-field-left-border" name="password" id="otherPassword" placeholder="Other Password (Optional)"/>
+						  <input type="password" class="form-control text-field-left-border" name="password1" id="otherPassword" placeholder="Other Password (Optional)"/>
 						  <span class="input-group-btn"><button class="btn btn-warning button-addon-custom" type="button" id="showOtherPassword"><i class="fa fa-eye fa-lg"></i></button></span>
 						</div>
 					</div>
