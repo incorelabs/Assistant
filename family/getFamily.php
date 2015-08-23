@@ -7,12 +7,14 @@ $mysqli = getConnection();
 
 $family = array();
 
-if (isset($_GET['list'])) {
+function getFamilyList($orderBy){
+	global $family;
+
 	$sql = "SELECT `FamilyCode`, `FamilyName`, Table107.`RelationCode`, Table112.`RelationName`, DATE_FORMAT(`BirthDate`,'%d/%m/%Y') as 'BirthDate', `Email`, `Mobile`, Table107.`Gender`, `LoginFlag`, `ActiveFlag` 
 			FROM `Table107`
 			LEFT JOIN Table112 ON Table112.`RelationCode` = Table107.`RelationCode`
 			WHERE Table107.`RegCode` = ".$_SESSION['s_id']."
-			ORDER BY `FamilyCode`;";
+			ORDER BY `".$orderBy."`;";
 	//echo $sql;
 	if ($result = $mysqli->query($sql)) {
 		$i = 0;
@@ -21,6 +23,17 @@ if (isset($_GET['list'])) {
 			$i++;
 		}
 	}
+}
+
+if (isset($_GET['list'])) {
+	$listType = intval($_GET['list']);
+	if ($listType == 1) {
+		getFamilyList("FamilyCode");
+	}
+	elseif ($listType == 2) {
+		getFamilyList("FamilyName");
+	}
+	
 }
 
 if (isset($_GET['code'])) {
