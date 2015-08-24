@@ -58,7 +58,7 @@ function getPasswordCode(){
 }
 
 //General Validation
-print_r($_POST);
+//print_r($_POST);
 do {
 	if (isset($_POST)) {
 		$validate = true;
@@ -68,9 +68,13 @@ do {
 		$response = createResponse(0,"Invalid");
 		break;
 	}
+	//Delete mode
+	if ($_POST["mode"] == "D") {
+		break;
+	}
 
 	//Validate required fields
-	if ($validate && !empty($_POST["name"]) && !empty($_POST["passwordType"]) && !empty($_POST["description"]) && !empty($_POST["userID"]) && !empty($_POST["password"])) {
+	if ($validate && !empty($_POST["name"]) && !empty($_POST["mode"]) && !empty($_POST["passwordCode"]) && !empty($_POST["passwordType"]) && !empty($_POST["description"]) && !empty($_POST["userID"]) && !empty($_POST["password"])) {
 		$validate = true;
 	}
 	else{
@@ -83,44 +87,59 @@ do {
 
 //Business Logic
 if ($validate) {
-	do {
-		$sql = "";
-
-		$passwordTypeCode = intval($_POST["passwordTypeCode"]);
-		$passwordCode = getPasswordCode();
-		
-		$qry = "SELECT count(*) as 'count' FROM Table130 WHERE PasswordTypeCode = ".$passwordTypeCode." AND RegCode = ".$regCode.";";
-
-		//Create new entry in password master list
-		if ($result = $mysqli->query($qry)) {
-			$row = $result->fetch_assoc();
-			//print_r($row);
-			if (intval($row["count"]) == 0) {
-				$passwordTypeCode = getPasswordTypeCode();
-				$sql .= build_insert_str('Table130',array(
-					intval($passwordTypeCode),
-					$_POST["passwordType"],
-					$regCode
-				));	
+	$sql = "";
+	
+	if ($_POST["mode"] == "D") {
+		$passwordCode = $_POST["passwordCode"];
+		$sql .= "DELETE FROM Table152 WHERE RegCode = ".$regCode." AND PasswordCode = ".$passwordCode.";";
+	}
+	elseif ($_POST["mode"] == "M" || $_POST["mode"] == "A") {
+		do {
+			$passwordTypeCode = intval($_POST["passwordTypeCode"]);
+			
+			if ($_POST["mode"] == "M") {
+				$passwordCode = $_POST["passwordCode"];
 			}
-		}
+			elseif ($_POST["mode"] == "A") {
+				$passwordCode = getPasswordCode();	
+			}
+			
+			$qry = "SELECT count(*) as 'count' FROM Table130 WHERE LOWER(PasswordTypeName) = LOWER('".$_POST["passwordType"]."') AND RegCode IN (10000,".$regCode.");";
 
-		$private = (isset($_POST["private"]) ? "1" : "2");
-		$active = (isset($_POST["active"]) ? "1" : "2");
+			//Create new entry in password master list
+			if ($result = $mysqli->query($qry)) {
+				$row = $result->fetch_assoc();
+				//print_r($row);
+				if (intval($row["count"]) == 0) {
+					$passwordTypeCode = getPasswordTypeCode();
+					$sql .= build_insert_str('Table130',array(
+						intval($passwordTypeCode),
+						$_POST["passwordType"],
+						$regCode
+					));	
+				}
+			}
 
-		$sql .= "INSERT INTO `Table152`(`RegCode`, `PasswordCode`, `PasswordTypeCode`, `HolderCode`, `PasswordName`, `LoginID`, `LoginPassword1`, `LoginPassword2`, `InsertedBy`, `PrivateFlag`, `ActiveFlag`, `LastAccessDate`) VALUES (".$regCode.",".$passwordCode.",".$passwordTypeCode.",".intval($_POST["name"]).",'".$_POST["description"]."','".$_POST["userID"]."','".$_POST["password"]."','".$_POST["password1"]."',".intval($_SESSION["familyCode"]).",".$private.",".$active.",NOW());";
+			$sql .= "DELETE FROM Table152 WHERE RegCode = ".$regCode." AND PasswordCode = ".$passwordCode.";";
 
-		//echo $sql;
-		if ($mysqli->multi_query($sql) === TRUE) {
-			$validate = true;
-			$response = createResponse(1,"Password updated");
-		}
-		else{
-			$validate = false;
-			$response = createResponse(0,"Error occured while uploading to the database: ".$mysqli->error);
-			break;
-		}
-	} while (0);
+			$private = (isset($_POST["private"]) ? "1" : "2");
+			$active = (isset($_POST["active"]) ? "1" : "2");
+
+			$sql .= "INSERT INTO `Table152`(`RegCode`, `PasswordCode`, `PasswordTypeCode`, `HolderCode`, `PasswordName`, `LoginID`, `LoginPassword1`, `LoginPassword2`, `InsertedBy`, `PrivateFlag`, `ActiveFlag`, `LastAccessDate`) VALUES (".$regCode.",".$passwordCode.",".$passwordTypeCode.",".intval($_POST["name"]).",'".$_POST["description"]."','".$_POST["userID"]."','".$_POST["password"]."','".$_POST["password1"]."',".intval($_SESSION["familyCode"]).",".$private.",".$active.",NOW());";
+		} while (0);
+	}
+
+	//echo $sql;
+	if ($mysqli->multi_query($sql) === TRUE) {
+		$validate = true;
+		$response = createResponse(1,"Successfull");
+	}
+	else{
+		$validate = false;
+		$response = createResponse(0,"Error occured while uploading to the database: ".$mysqli->error);
+		break;
+	}
+		
 }
 echo json_encode($response);
 $mysqli->close();

@@ -1,6 +1,6 @@
 <?php
 	$root_location = "http://localhost/Assist/";
-	//$root_location = "http://incorelabs.com/Assistant/";
+	//$root_location = "http://43.225.52.206/~chetansanghvi/";
 	
 	$navbar_str = "<div id='page'>
 	<div class='header' style='text-decoration:none;font-weight:200;font-size:20px'>

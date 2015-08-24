@@ -101,7 +101,7 @@ include_once ROOT.'dist/authenticate.php';
 	              </div>
 	            </div>
 	            <div>
-	                <button class="btn btn-primary btn-size" data-toggle="modal" data-target="#addPassword" ><span class="glyphicon glyphicon-plus"></span></button>
+	                <button class="btn btn-primary btn-size" onclick="openAddModal();" ><span class="glyphicon glyphicon-plus"></span></button>
 	            </div>
 	          </div>
 	        </div>
@@ -110,14 +110,8 @@ include_once ROOT.'dist/authenticate.php';
 	  
 	    <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
 	      <div class="panel panel-default scroll list-margin" id="style-3">
-	        <div id="contactDetailHeader" class="panel-heading text-center" >
-	          <h12>Password Details</h12>
-	          <button class='btn btn-success pull-right' data-toggle="modal" data-target="#addPassword" onclick=''>
-	          	<span class='glyphicon glyphicon-pencil'></span>
-	          </button>
-	          <button class='btn btn-danger pull-left' data-toggle="modal" data-target="#deletePassword" onclick=''>
-	          	<span class='glyphicon glyphicon-trash'></span>
-	          </button>
+	        <div id="passwordDetailHeader" class="panel-heading text-center" >
+	          
 	        </div>
 	           
 	      </div><!--Panel-->
@@ -160,12 +154,13 @@ include_once ROOT.'dist/authenticate.php';
 							<span class='glyphicon glyphicon-ok'></span>
 						</button>
 					</div>
-					<h4 id="familyModalHeading" class="modal-title text-center">
-					Add Password
+					<h4 id="modalHeading" class="modal-title text-center">
 					</h4>   
 				</div>
 				<div class="modal-body">
-					<input type="hidden" name="passwordTypeCode" value="1" />
+					<input type="hidden" name="passwordTypeCode" id="passwordTypeCode" value="1" />
+					<input type="hidden" name="mode" id="input-type" />
+					<input type="hidden" name="passwordCode" id="passwordCode" value="1" />
 					<div class="form-group form-group-margin">
 		              <label class="col-xs-3 control-label">Private</label>
 		                <div class="col-xs-3">
@@ -198,7 +193,7 @@ include_once ROOT.'dist/authenticate.php';
 						    <span class="input-group-addon input-group-addon-label">Password Type*</span>
 						    <div class="inner-addon right-addon">
 							    <i class="fa fa-key hidden-xs" style="font-size: 20px;"></i>
-						  		<input type="text" class="form-control text-field-left-border" name="passwordType" placeholder="Password Type"/>
+						  		<input type="text" class="form-control text-field-left-border" id="passwordType" name="passwordType" placeholder="Password Type"/>
 							</div>
 						</div>
 					</div>
@@ -207,7 +202,7 @@ include_once ROOT.'dist/authenticate.php';
 							<span class="input-group-addon input-group-addon-label">Description*</span>
 							<div class="inner-addon right-addon">
 							    <i class="fa fa-sticky-note-o hidden-xs" style="font-size: 20px;"></i>
-								<input type="text" class="form-control text-field-left-border" name="description" placeholder="Description"/>
+								<input type="text" class="form-control text-field-left-border" name="description" id="description" placeholder="Description"/>
 							</div>
 						</div>
 					</div>
@@ -216,7 +211,7 @@ include_once ROOT.'dist/authenticate.php';
 						  <span class="input-group-addon input-group-addon-label">Login ID*</span>
 						  <div class="inner-addon right-addon">
 							    <i class="fa fa-user hidden-xs" style="font-size: 20px;"></i>
-						  		<input type="text" class="form-control text-field-left-border" name="userID" placeholder="Login ID" aria-describedby="basic-addon1"/>
+						  		<input type="text" class="form-control text-field-left-border" id="userID" name="userID" placeholder="Login ID" aria-describedby="basic-addon1"/>
 						  </div>
 						</div>
 					</div>
@@ -253,9 +248,9 @@ include_once ROOT.'dist/authenticate.php';
 		    <center>
 		      <div class="modal-body">
 		      <div class="btn-group">
-		        <form method="POST" action="controller.php" id="form-family-delete" >
-		          <input type="hidden" name="familyCode" id="deleteFamilyCode" />
-		          <input type="hidden" name="mode" id="form-delete-mode" />
+		        <form method="POST" action="controller.php" id="form-password-delete" >
+		          <input type="hidden" name="passwordCode" id="form-delete-code" />
+		          <input type="hidden" name="mode" id="form-delete-mode" value="D" />
 		          <button class="btn btn-danger modal_button" type="submit">
 		            <span class='glyphicon glyphicon-ok'></span>&nbsp
 		            Yes
