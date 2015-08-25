@@ -63,6 +63,9 @@
 					<li><a href='".$root_location."preferences/changePassword.php'>Change Password</a></li>
 					<li><a href='#'>Setings</a></li>
 					<li><a href='#'>Import Contacts</a></li>
+					<li><a href='#'>Cheque Printing</a></li>
+					<li><a href='#'>Label Printing</a></li>
+					<li><a href='#'>Document Printing</a></li>
 				</ul>
 			</li>
 			<li><a href='#' class='logout'>Sign Out</a></li>

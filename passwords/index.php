@@ -68,7 +68,6 @@ include_once ROOT.'dist/authenticate.php';
         });
         console.log(familyCode);
 	});
-		
 	</script>
   </head>
 

@@ -200,6 +200,8 @@ $(document).ready(function(){
 
 	$("#btn-addFamily").click(function(event){
 		document.getElementById("form-family").reset();
+		$("#password").attr("type", "password");
+		$("#confirmPassword").attr("type", "password");
 		//$("#familyCode").val(personDetail["FamilyCode"]);
 		initializeDate();
 		mode = 1;

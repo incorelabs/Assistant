@@ -60,12 +60,21 @@ function setPasswordList(arr){
 }
 
 function setPasswordDetail(index){
-	var detail = passwordList[index];
-	var headerStr = "<h12>Password Details</h12><button class='btn btn-success pull-right' onclick='openEditPassword("+index+")'> <span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger pull-left' onclick='openDeleteModal("+index+")'><span class='glyphicon glyphicon-trash'></span></button>";
+	var headerStr ="";
+	var str = "";
+	var detail = "" ;
 
-	var str= "";
-	str += "<div class='panel-height'><!-- List group --><div id='passwordBody' class='list-group'><div class='list-group-item list-group-item-border'><div class='row contact-details' style='padding-top:0px'><div class='list-group-item-heading header_font'><div class='col-md-3'>Holder's Name</div><value><div class='col-md-9'>"+detail["HolderName"]+"</div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Password Type</div><value><div class='col-md-9'>"+detail["PasswordTypeName"]+"</div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Description</div><value><div class='col-md-9'>"+detail["PasswordName"]+"</div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Login ID</div><value><div class='col-md-9'>"+detail["LoginID"]+"</div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Password</div><value><div class='col-md-9'><div class='textShow'>"+detail["LoginPassword1"]+"</div><div class='pull-right' style='margin-top:-22px'><a href='#' id='passwordEncrypt'><i class='fa fa-eye fa-lg'></i></a></div></div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Optional Password</div><value><div class='col-md-9'><div class='textShow'>"+detail["LoginPassword2"]+"</div><div class='pull-right' style='margin-top:-22px'><a href='#' id='passwordEncrypt'><i class='fa fa-eye fa-lg'></i></a></div></div></value></div></div></div></div><!--List close--></div>";
-	
+	if(passwordList.length == 0)
+	{
+		headerStr = "<h12>Password Details</h12>";
+		str += "<div class='panel-height'><div class='list-group'><div class='list-group-item list-group-item-border'><div class='row contact-details'><div class='list-group-item-heading text-center'>No Passwords Added</div></div></div></div></div>";
+	}
+	else
+	{
+		detail = passwordList[index];
+		headerStr = "<h12>Password Details</h12><button class='btn btn-success pull-right' onclick='openEditPassword("+index+")'> <span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger pull-left' onclick='openDeleteModal("+index+")'><span class='glyphicon glyphicon-trash'></span></button>";
+		str += "<div class='panel-height'><!-- List group --><div id='passwordBody' class='list-group'><div class='list-group-item list-group-item-border'><div class='row contact-details' style='padding-top:0px'><div class='list-group-item-heading header_font'><div class='col-md-3'>Holder's Name</div><value><div class='col-md-9'>"+detail["HolderName"]+"</div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Password Type</div><value><div class='col-md-9'>"+detail["PasswordTypeName"]+"</div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Description</div><value><div class='col-md-9'>"+detail["PasswordName"]+"</div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Login ID</div><value><div class='col-md-9'>"+detail["LoginID"]+"</div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Password</div><value><div class='col-md-9'><div class='textShow'>"+detail["LoginPassword1"]+"</div><div class='pull-right' style='margin-top:-22px'><a href='#' id='passwordEncrypt'><i class='fa fa-eye fa-lg'></i></a></div></div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Optional Password</div><value><div class='col-md-9'><div class='textShow'>"+detail["LoginPassword2"]+"</div><div class='pull-right' style='margin-top:-22px'><a href='#' id='passwordEncrypt'><i class='fa fa-eye fa-lg'></i></a></div></div></value></div></div></div></div><!--List close--></div>";
+	}
 	$("#passwordDetailHeader").html(headerStr);
 	$("#password-Detail").html(str);
 }
@@ -184,14 +193,19 @@ function setPasswordTypeAutoComplete(tags){
 }
 
 $(document).ready(function() {
+
 	getFamilyList();
 	getPasswordList();
 	getPasswordTypeList();
+	
 
 	$('#addPassword').on('shown.bs.modal', function () {
 	  $("#modalHeading").html(modalHeading);
 	})
-
+	$('#addPassword').on('show.bs.modal', function () {
+	  $("#password").attr("type", "password");
+	  $("#otherPassword").attr("type", "password");
+	})
 	//Password form submit
 	$("#form-passwords").ajaxForm({
 		beforeSubmit:function(){

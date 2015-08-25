@@ -245,9 +245,6 @@ h5{
     margin-top: -1px;
     padding: 6px 20px;
 }
-.input-group-btn .btn-group {
-    
-}
 .btn-group1 .btn1 {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -490,4 +487,8 @@ h5{
     min-width: 127px;
     text-align: left;
   }
+}
+.fa-size
+{
+  font-size: 20px;
 }
