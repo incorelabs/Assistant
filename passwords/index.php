@@ -180,7 +180,7 @@ include_once ROOT.'dist/authenticate.php';
 						<div class="input-group">
 							<span class="input-group-addon input-group-addon-label">Holder's Name*</span>
 							<div class="inner-addon right-addon">
-							    <i class="fa fa-caret-down" style="font-size: 20px;"></i>
+							    <i class="fa fa-caret-down fa-size"></i>
 					  			<select class="form-control select-field-left-border" id="holderName" name="name">
 					  				<option>Select Holder Name</option>
 					  			</select>
@@ -191,7 +191,7 @@ include_once ROOT.'dist/authenticate.php';
 						<div class="input-group">
 						    <span class="input-group-addon input-group-addon-label">Password Type*</span>
 						    <div class="inner-addon right-addon">
-							    <i class="fa fa-key hidden-xs" style="font-size: 20px;"></i>
+							    <i class="fa fa-key hidden-xs fa-size"></i>
 						  		<input type="text" class="form-control text-field-left-border" id="passwordType" name="passwordType" placeholder="Password Type"/>
 							</div>
 						</div>
@@ -200,7 +200,7 @@ include_once ROOT.'dist/authenticate.php';
 						<div class="input-group">
 							<span class="input-group-addon input-group-addon-label">Description*</span>
 							<div class="inner-addon right-addon">
-							    <i class="fa fa-sticky-note-o hidden-xs" style="font-size: 20px;"></i>
+							    <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
 								<input type="text" class="form-control text-field-left-border" name="description" id="description" placeholder="Description"/>
 							</div>
 						</div>
@@ -209,7 +209,7 @@ include_once ROOT.'dist/authenticate.php';
 						<div class="input-group">
 						  <span class="input-group-addon input-group-addon-label">Login ID*</span>
 						  <div class="inner-addon right-addon">
-							    <i class="fa fa-user hidden-xs" style="font-size: 20px;"></i>
+							    <i class="fa fa-user hidden-xs fa-size"></i>
 						  		<input type="text" class="form-control text-field-left-border" id="userID" name="userID" placeholder="Login ID" aria-describedby="basic-addon1"/>
 						  </div>
 						</div>

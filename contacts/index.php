@@ -53,6 +53,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     <?php
       include_once ROOT.'dist/bootstrap.php';
     ?>
+    <link rel="stylesheet" type="text/css" href="../dist/css/style.css" />
     <link rel="stylesheet" href="<?php echo ROOT; ?>/dist/contacts/css/style.css">   
     <script src="http://malsup.github.com/jquery.form.js"></script>
     <script src="../dist/script/script.js"></script>
@@ -241,85 +242,72 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
             </div>
             <input type="hidden" name="inputType" id="inputType" />
             <div class="form-group form-group-margin">
-              <label class="col-xs-4 control-label">Title</label>
-              <div class="col-xs-4">
-                <div class="left-inner-addon">
-                  <i class="glyphicon glyphicon-star"></i>
-                  <input type="text" name="title" class="form-control" id="addTitle" placeholder="Title" autofocus/>
+              <div class="input-group">
+              <span class="input-group-addon input-group-addon-label">Title*</span>
+                <div class="inner-addon right-addon">
+                  <i class="glyphicon glyphicon-star fa-size hidden-xs"></i>
+                  <input type="text" name="title" class="form-control text-field-left-border" id="addTitle" placeholder="Title" autofocus/>
                 </div>
               </div>
             </div>
             <input type="hidden" id="titleId" name="titleId" value="0" />
             <div class="form-group form-group-margin">
-                <label class="col-xs-4 control-label">First Name</label>
-                <div class="col-xs-7">
-                  <div class="left-inner-addon ">
-                  <i class="fa fa-user"></i>
-                  <input type="text" name="firstName" id="addFirstName" class="form-control" placeholder="First Name"/>
+              <div class="input-group">
+              <span class="input-group-addon input-group-addon-label">First Name*</span>
+                <div class="inner-addon right-addon">
+                  <i class="fa fa-user fa-size hidden-xs"></i>
+                  <input type="text" name="firstName" id="addFirstName" class="form-control text-field-left-border" placeholder="First Name"/>
                 </div>
               </div>
             </div>
             <div class="form-group form-group-margin">
-              <label class="col-xs-4 control-label">Middle Name</label>
-              <div class="col-xs-7">
-                <div class="left-inner-addon ">
-                  <i class="fa fa-user"></i>
-                  <input type="text" name="middleName" id="addMiddleName" class="form-control" placeholder="Middle Name" />
+              <div class="input-group">
+              <span class="input-group-addon input-group-addon-label">Middle Name</span>
+                <div class="inner-addon right-addon">
+                  <i class="fa fa-user fa-size hidden-xs"></i>
+                  <input type="text" name="middleName" id="addMiddleName" class="form-control text-field-left-border" placeholder="Middle Name" />
                 </div>
               </div>
             </div>
             <div class="form-group form-group-margin">
-              <label class="col-xs-4 control-label">Last Name</label>
-              <div class="col-xs-7">
-                <div class="left-inner-addon ">
-                  <i class="fa fa-user"></i>
-                  <input type="text" name="lastName" id="addLastName" class="form-control" placeholder="Last Name" />
+              <div class="input-group">
+              <span class="input-group-addon input-group-addon-label">Last Name</span>
+                <div class="inner-addon right-addon">
+                  <i class="fa fa-user fa-size hidden-xs"></i>
+                  <input type="text" name="lastName" id="addLastName" class="form-control text-field-left-border" placeholder="Last Name" />
                 </div>
               </div>
             </div>
             <div class="form-group form-group-margin">
-              <label class="col-xs-4 control-label">Mobile</label>
-              <div class="col-xs-7">
-                <div class="left-inner-addon ">
-                  <i class="glyphicon glyphicon-phone"></i>
-                  <input type="text" name="mobile" id="addMobile" class="form-control" placeholder="Mobile" />
-                </div>
+              <div class="input-group">
+                <span class="input-group-addon input-group-addon-label">Mobile</span>
+                <input type="text" name="mobile" id="addMobile" class="form-control text-field-left-border" placeholder="Mobile" />
+                <span class="input-group-btn"><button class="btn btn-success button-addon-custom btn-add-mobile" type="button"><i class="fa fa-plus fa-lg"></i></button></span>
               </div>
-              <a href='#' class='btn-add-mobile' style='font-size:20px;'><span class='fa fa-plus fa-blue' style='padding-top: 7px;padding-left: 10px;'></span></a>
             </div>
             <div class='addMobileDiv'></div>
             <div class="form-group form-group-margin">
-              <label class="col-xs-4 control-label">Email</label>
-              <div class="col-xs-7">
-                <div class="left-inner-addon ">
-                  <i class="glyphicon glyphicon-envelope"></i>
-                  <input type="email" name="email" id="addEmail" class="form-control" placeholder="Email" />
-                </div>
+              <div class="input-group">
+                <span class="input-group-addon input-group-addon-label">Email</span>
+                <input type="email" name="email" id="addEmail" class="form-control text-field-left-border" placeholder="Email" />
+                <span class="input-group-btn"><button class="btn btn-success button-addon-custom btn-add-email" type="button"><i class="fa fa-plus fa-lg"></i></button></span>
               </div>
-              <a href='#' class='btn-add-email' style='font-size:20px;'><span class='fa fa-plus fa-blue' style='padding-top: 7px;padding-left: 10px;'></span></a>
             </div>
             <div class='addEmailDiv'></div>
             <div class="form-group form-group-margin">
-                <label class="col-xs-4 control-label">Default Address</label>
-                <div class="col-xs-7">
-                  <div class="col-xs-4">
-                      <label class="control-label">
-                        <input type="radio" name="defaultAddress" value="" style="margin-right:5px" checked="checked">Home
-                      </label>
-                  </div>
-                  <div class="col-xs-4">
-                      <label class="control-label" style="padding-left:10px">
-                        <input type="radio" name="defaultAddress" value="" style="margin-right:5px">Office
-                      </label>
-                  </div>
-                  <div class="col-xs-4">
-                      <label class="control-label" style="padding-left:10px">
-                        <input type="radio" name="defaultAddress" value="" style="margin-right:5px">Work
-                      </label>
-                  </div>
+              <div class="input-group">
+                <span class="input-group-addon input-group-addon-label" style="height:40px;">Default Address</span>
+                <div class="inner-addon right-addon">
+                  <i class="fa fa-caret-down fa-size hidden-xs"></i>
+                  <select class="form-control select-field-left-border">
+                    <option value="" selected="selected">Home</option>
+                    <option value="">Work</option>
+                    <option value="">Other</option>
+                  </select>
                 </div>
+              </div>
             </div>
-            <div class="form-group form-group-margin">
+            <div class="form-group form-group-margin" style="margin-left:0px !important; margin-right:0px !important">
               <ul class="nav nav-tabs nav-justified" id="myTab">
                 <li><a href="#tab1" data-toggle="tab"><span class='glyphicon glyphicon-user'></span><br>Personal Details</a></li>
                 <li><a href="#tab3" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span><br>Professional Details</a></li>
@@ -327,74 +315,72 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                 <li><a href="#home" data-toggle="tab"><span class='glyphicon glyphicon-home'></span><br>Home Address</a></li>
                 <li><a href="#work" data-toggle="tab"><span class='glyphicon glyphicon-briefcase'></span><br>Work Address</a></li>
                 <li><a href="#other" data-toggle="tab"><span class='glyphicon glyphicon-road'></span><br>Other Address</a></li>
-                
-                <!--<li><a href="#tab7" data-toggle="tab">Seventh</a></li>-->
               </ul>
             </div>
  
             <div class="tab-content">
                 <div class="tab-pane" id="tab1">
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Father/Husband Name</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="glyphicon glyphicon-user"></i>
-                        <input type="text" name="guardianName" id="addGuardianName" class="form-control" placeholder="Father/Husband Name" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Guardian</span>
+                      <div class="inner-addon right-addon">
+                        <i class="glyphicon glyphicon-user fa-size"></i>
+                        <input type="text" name="guardianName" id="addGuardianName" class="form-control text-field-left-border" placeholder="Father/Husband Name" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Date of Birth</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-birthday-cake"></i>
-                        <input type="text" name="dob" id="addDOB" class="form-control datepicker" placeholder="Date of Birth" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Date of Birth</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-birthday-cake fa-size"></i>
+                        <input type="text" name="dob" id="addDOB" class="form-control datepicker text-field-left-border" placeholder="Date of Birth" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Anniversary Date</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-calendar"></i>
-                        <input type="text" name="dom" id="addDOM" class="form-control datepicker" placeholder="Anniversary Date" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Anniversary</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-calendar fa-size"></i>
+                        <input type="text" name="dom" id="addDOM" class="form-control datepicker text-field-left-border" placeholder="Anniversary Date" />
                       </div>
                     </div>
                   </div>
                   <input type="hidden" id="groupId" name="groupId" value="0" />
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Group</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="glyphicon glyphicon-tag"></i>
-                        <input type="text" name="group" id="addGroup" class="form-control" placeholder="Group" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Group</span>
+                      <div class="inner-addon right-addon">
+                        <i class="glyphicon glyphicon-tag fa-size"></i>
+                        <input type="text" name="group" id="addGroup" class="form-control text-field-left-border" placeholder="Group" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Emergency</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="glyphicon glyphicon-tag"></i>
-                        <input type="text" name="" id="" class="form-control" placeholder="Emergency" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Emergency</span>
+                      <div class="inner-addon right-addon">
+                        <i class="glyphicon glyphicon-tag fa-size"></i>
+                        <input type="text" name="" id="" class="form-control text-field-left-border" placeholder="Emergency" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Remarks</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-comment"></i>
-                        <input type="text" name="remarks" id="addRemarks" class="form-control" placeholder="Remarks" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Remarks</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-comment fa-size"></i>
+                        <input type="text" name="remarks" id="addRemarks" class="form-control text-field-left-border" placeholder="Remarks" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Alias</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="glyphicon glyphicon-user"></i>
-                        <input type="text" name="alias" id="addAlias" class="form-control" placeholder="Alias" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Alias</span>
+                      <div class="inner-addon right-addon">
+                        <i class="glyphicon glyphicon-user fa-size"></i>
+                        <input type="text" name="alias" id="addAlias" class="form-control text-field-left-border" placeholder="Alias" />
                       </div>
                     </div>
                   </div>
@@ -403,109 +389,106 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                 <!-- Start of Home tab -->
                 <div class="tab-pane" id="home">
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Home Address</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-home"></i>
-                        <input type="text" name="homeAddress1" id="homeAddress1" class="form-control" placeholder="Address 1" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Address Line 1</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-home fa-size"></i>
+                        <input type="text" name="homeAddress1" id="homeAddress1" class="form-control text-field-left-border" placeholder="Address 1" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-home"></i>
-                        <input type="text" name="homeAddress2" id="homeAddress2" class="form-control" placeholder="Address 2" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Address Line 2</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-home fa-size"></i>
+                        <input type="text" name="homeAddress2" id="homeAddress2" class="form-control text-field-left-border" placeholder="Address 2" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-home"></i>
-                        <input type="text" name="homeAddress3" id="homeAddress3" class="form-control" placeholder="Address 3" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Address Line 3</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-home fa-size"></i>
+                        <input type="text" name="homeAddress3" id="homeAddress3" class="form-control text-field-left-border" placeholder="Address 3" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-home"></i>
-                        <input type="text" name="homeAddress4" id="homeAddress4" class="form-control" placeholder="Address 4" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Address Line 4</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-home fa-size"></i>
+                        <input type="text" name="homeAddress4" id="homeAddress4" class="form-control text-field-left-border" placeholder="Address 4" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-home"></i>
-                        <input type="text" name="homeAddress5" id="homeAddress5" class="form-control" placeholder="Address 5" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Address Line 5</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-home fa-size"></i>
+                        <input type="text" name="homeAddress5" id="homeAddress5" class="form-control text-field-left-border" placeholder="Address 5" />
                       </div>
                     </div>
                   </div>                 
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">City</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-globe"></i>
-                        <input type="text" name="homeCity" id="homeCity" class="form-control" placeholder="City" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">City</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-globe fa-size"></i>
+                        <input type="text" name="homeCity" id="homeCity" class="form-control text-field-left-border" placeholder="City" />
                         <input type="hidden" id="homeCityCode" name="homeCityCode" value="0" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">State</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-globe"></i>
-                        <input type="text" name="homeState" id="homeState" class="form-control" placeholder="State" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">State</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-globe fa-size"></i>
+                        <input type="text" name="homeState" id="homeState" class="form-control text-field-left-border" placeholder="State" />
                         <input type="hidden" id="homeStateCode" name="homeStateCode" value="0" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Country</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-globe"></i>
-                        <input type="text" name="homeCountry" id="homeCountry" class="countryText form-control" placeholder="Country" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Country</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-globe fa-size"></i>
+                        <input type="text" name="homeCountry" id="homeCountry" class="countryText form-control text-field-left-border" placeholder="Country" />
                         <input type="hidden" id="homeCountryCode" name="homeCountryCode" value="0" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Pincode</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-globe"></i>  
-                        <input type="text" name="homePincode" id="homePincode" class="form-control" placeholder="Pincode" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Pincode</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-globe fa-size"></i>  
+                        <input type="text" name="homePincode" id="homePincode" class="form-control text-field-left-border" placeholder="Pincode" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Area</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-globe"></i>
-                        <input type="text" name="homeArea" id="homeArea" class="form-control" placeholder="Area" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Area</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-globe fa-size"></i>
+                        <input type="text" name="homeArea" id="homeArea" class="form-control text-field-left-border" placeholder="Area" />
                         <input type="hidden" id="homeAreaCode" name="homeAreaCode" value="0" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Phone</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-phone"></i>
-                        <input type="text" name="homePhone" id="homePhone" class="form-control" placeholder="Phone" />
+                    <div class="input-group">
+                      <span class="input-group-addon input-group-addon-label">Phone</span>
+                      <input type="text" name="homePhone" id="homePhone" class="form-control text-field-left-border" placeholder="Phone" />
+                      <span class="input-group-btn"><button class="btn btn-success button-addon-custom btn-home-phone" type="button"><i class="fa fa-plus fa-lg"></i></button></span>
                       </div>
                     </div>
-                    <a href='#' class='btn-home-phone' style='font-size:20px;'><span class='fa fa-plus fa-blue' style='padding-top: 7px;padding-left: 10px;'></span></a>
-                  </div>
                   <div class="addHomePhone"></div>
                 </div>
                 
@@ -514,108 +497,105 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                 <!-- Start of Work Tab -->
                 <div class="tab-pane" id="work">
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Work Address</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-briefcase"></i>
-                        <input type="text" name="workAddress1" id="workAddress1" class="form-control" placeholder="Address 1" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Address Line 1</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-briefcase fa-size"></i>
+                        <input type="text" name="workAddress1" id="workAddress1" class="form-control text-field-left-border" placeholder="Address 1" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-briefcase"></i>
-                        <input type="text" name="workAddress2" id="workAddress2" class="form-control" placeholder="Address 2" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Address Line 2</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-briefcase fa-size"></i>
+                        <input type="text" name="workAddress2" id="workAddress2" class="form-control text-field-left-border" placeholder="Address 2" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-briefcase"></i>
-                        <input type="text" name="workAddress3" id="workAddress3" class="form-control" placeholder="Address 3" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Address Line 3</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-briefcase fa-size"></i>
+                        <input type="text" name="workAddress3" id="workAddress3" class="form-control text-field-left-border" placeholder="Address 3" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-briefcase"></i>
-                        <input type="text" name="workAddress4" id="workAddress4" class="form-control" placeholder="Address 4" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Address Line 4</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-briefcase fa-size"></i>
+                        <input type="text" name="workAddress4" id="workAddress4" class="form-control text-field-left-border" placeholder="Address 4" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-briefcase"></i>
-                        <input type="text" name="workAddress5" id="workAddress5" class="form-control" placeholder="Address 5" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Address Line 5</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-briefcase fa-size"></i>
+                        <input type="text" name="workAddress5" id="workAddress5" class="form-control text-field-left-border" placeholder="Address 5" />
                       </div>
                     </div>
                   </div>                 
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">City</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-globe"></i>
-                        <input type="text" name="workCity" id="workCity" class="form-control" placeholder="City" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">City</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-globe fa-size"></i>
+                        <input type="text" name="workCity" id="workCity" class="form-control text-field-left-border" placeholder="City" />
                         <input type="hidden" id="workCityCode" name="workCityCode" value="0" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">State</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-globe"></i>
-                        <input type="text" name="workState" id="workState" class="form-control" placeholder="State" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">State</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-globe fa-size"></i>
+                        <input type="text" name="workState" id="workState" class="form-control text-field-left-border" placeholder="State" />
                         <input type="hidden" id="workStateCode" name="workStateCode" value="0" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Country</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-globe"></i>
-                        <input type="text" name="workCountry" id="workCountry" class="countryText form-control" placeholder="Country" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Country</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-globe fa-size"></i>
+                        <input type="text" name="workCountry" id="workCountry" class="countryText form-control text-field-left-border" placeholder="Country" />
                         <input type="hidden" id="workCountryCode" name="workCountryCode" value="0" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Pincode</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-globe"></i>  
-                        <input type="text" name="pincode" id="pincode" class="form-control" placeholder="Pincode" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Pincode</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-globe fa-size"></i>  
+                        <input type="text" name="pincode" id="pincode" class="form-control text-field-left-border" placeholder="Pincode" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Area</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-globe"></i>
-                        <input type="text" name="workArea" id="workArea" class="form-control" placeholder="Area" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Area</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-globe fa-size"></i>
+                        <input type="text" name="workArea" id="workArea" class="form-control text-field-left-border" placeholder="Area" />
                         <input type="hidden" id="workAreaCode" name="workAreaCode" value="0" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Phone</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-phone"></i>
-                        <input type="text" name="workNumber" id="workNumber" class="form-control" placeholder="Phone" />
-                      </div>
+                    <div class="input-group">
+                      <span class="input-group-addon input-group-addon-label">Phone</span>
+                      <input type="text" name="workNumber" id="workNumber" class="form-control text-field-left-border" placeholder="Phone" />
+                      <span class="input-group-btn"><button class="btn btn-success button-addon-custom btn-work-phone" type="button"><i class="fa fa-plus fa-lg"></i></button></span>
                     </div>
-                    <a href='#' class='btn-work-phone' style='font-size:20px;'><span class='fa fa-plus fa-blue' style='padding-top: 7px;padding-left: 10px;'></span></a>
                   </div>
                   <div class="addWorkPhone"></div>
                 </div>
@@ -623,129 +603,126 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                 <!-- Start of Others Pane -->
                 <div class="tab-pane" id="other">
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Other Address</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-road"></i>
-                        <input type="text" name="otherAddress1" id="otherAddress1" class="form-control" placeholder="Address 1" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Address Line 1</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-road fa-size"></i>
+                        <input type="text" name="otherAddress1" id="otherAddress1" class="form-control text-field-left-border" placeholder="Address 1" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-road"></i>
-                        <input type="text" name="otherAddress2" id="otherAddress2" class="form-control" placeholder="Address 2" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Address Line 2</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-road fa-size"></i>
+                        <input type="text" name="otherAddress2" id="otherAddress2" class="form-control text-field-left-border" placeholder="Address 2" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-road"></i>
-                        <input type="text" name="otherAddress3" id="otherAddress3" class="form-control" placeholder="Address 3" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Address Line 3</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-road fa-size"></i>
+                        <input type="text" name="otherAddress3" id="otherAddress3" class="form-control text-field-left-border" placeholder="Address 3" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-road"></i>
-                        <input type="text" name="otherAddress4" id="otherAddress4" class="form-control" placeholder="Address 4" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Address Line 4</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-road fa-size"></i>
+                        <input type="text" name="otherAddress4" id="otherAddress4" class="form-control text-field-left-border" placeholder="Address 4" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label"></label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-road"></i>
-                        <input type="text" name="otherAddress5" id="otherAddress5" class="form-control" placeholder="Address 5" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Address Line 5</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-road fa-size"></i>
+                        <input type="text" name="otherAddress5" id="otherAddress5" class="form-control text-field-left-border" placeholder="Address 5" />
                       </div>
                     </div>
                   </div>                 
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">City</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-globe"></i>
-                        <input type="text" name="otherCity" id="otherCity" class="form-control" placeholder="City" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">City</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-globe fa-size"></i>
+                        <input type="text" name="otherCity" id="otherCity" class="form-control text-field-left-border" placeholder="City" />
                         <input type="hidden" id="otherCityCode" name="otherCityCode" value="0" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">State</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-globe"></i>
-                        <input type="text" name="otherState" id="otherState" class="form-control" placeholder="State" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">State</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-globe fa-size"></i>
+                        <input type="text" name="otherState" id="otherState" class="form-control text-field-left-border" placeholder="State" />
                         <input type="hidden" id="otherStateCode" name="otherStateCode" value="0" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Country</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-globe"></i>
-                        <input type="text" name="otherCountry" id="otherCountry" class="countryText form-control" placeholder="Country" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Country</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-globe fa-size"></i>
+                        <input type="text" name="otherCountry" id="otherCountry" class="countryText form-control text-field-left-border" placeholder="Country" />
                         <input type="hidden" id="otherCountryCode" name="otherCountryCode" value="0" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Pincode</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-globe"></i>  
-                        <input type="text" name="otherPincode" id="otherPincode" class="form-control" placeholder="Pincode" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Pincode</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-globe fa-size"></i>  
+                        <input type="text" name="otherPincode" id="otherPincode" class="form-control text-field-left-border" placeholder="Pincode" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Area</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-globe"></i>
-                        <input type="text" name="otherArea" id="otherArea" class="form-control" placeholder="Area" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Area</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-globe fa-size"></i>
+                        <input type="text" name="otherArea" id="otherArea" class="form-control text-field-left-border" placeholder="Area" />
                         <input type="hidden" id="otherAreaCode" name="otherAreaCode" value="0" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Phone</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-phone"></i>
-                        <input type="text" name="otherNumber" id="otherNumber" class="form-control" placeholder="Phone" />
-                      </div>
+                    <div class="input-group">
+                      <span class="input-group-addon input-group-addon-label">Phone</span>
+                      <input type="text" name="otherNumber" id="otherNumber" class="form-control text-field-left-border" placeholder="Phone" />
+                      <span class="input-group-btn"><button class="btn btn-success button-addon-custom btn-other-phone" type="button"><i class="fa fa-plus fa-lg"></i></button></span>
                     </div>
-                    <a href='#' class='btn-other-phone' style='font-size:20px;'><span class='fa fa-plus fa-blue' style='padding-top: 7px;padding-left: 10px;'></span></a>
-                    </div>
+                  </div>
                   <div class="addOtherPhone"></div>
                 </div>
               
                 <!--Start of Profession Tab-->
                 <div class="tab-pane" id="tab3">
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Company</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-building-o"></i>
-                        <input type="text" name="company" id="addCompany" class="form-control" placeholder="Company" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Company</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-building-o fa-size"></i>
+                        <input type="text" name="company" id="addCompany" class="form-control text-field-left-border" placeholder="Company" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Designation</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-building-o"></i>
-                        <input type="text" name="designation" id="addDesignation" class="form-control" placeholder="Designation" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Designation</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-building-o fa-size"></i>
+                        <input type="text" name="designation" id="addDesignation" class="form-control text-field-left-border" placeholder="Designation" />
                       </div>
                     </div>
                   </div>
@@ -754,47 +731,47 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
                 <!-- Start of Social Tab -->
                 <div class="tab-pane" id="tab4">
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Facebook ID</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-facebook"></i>
-                        <input type="text" name="facebook" id="addFacebook" class="form-control" placeholder="Facebook ID" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Facebook</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-facebook fa-size"></i>
+                        <input type="text" name="facebook" id="addFacebook" class="form-control text-field-left-border" placeholder="Facebook ID" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Twitter Handle</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-twitter"></i>
-                        <input type="text" name="twitter" id="addTwitter" class="form-control" placeholder="Twiter Handle" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Twitter</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-twitter fa-size"></i>
+                        <input type="text" name="twitter" id="addTwitter" class="form-control text-field-left-border" placeholder="Twitter Handle" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Google ID</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-google-plus"></i>
-                        <input type="text" name="google" id="addGoogle" class="form-control" placeholder="Google ID" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Google Plus</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-google-plus fa-size"></i>
+                        <input type="text" name="google" id="addGoogle" class="form-control text-field-left-border" placeholder="Google ID" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">Linkedin ID</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-linkedin"></i>
-                        <input type="text" name="linkedin" id="addLinkedin" class="form-control" placeholder="Linkedin ID" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">Linkedin</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-linkedin fa-size"></i>
+                        <input type="text" name="linkedin" id="addLinkedin" class="form-control text-field-left-border" placeholder="Linkedin ID" />
                       </div>
                     </div>
                   </div>
                   <div class="form-group form-group-margin">
-                    <label class="col-xs-4 control-label">URL Address</label>
-                    <div class="col-xs-7">
-                      <div class="left-inner-addon ">
-                        <i class="fa fa-link"></i>
-                        <input type="text" name="website" id="addWebsite" class="form-control" placeholder="URL Address" />
+                    <div class="input-group">
+                    <span class="input-group-addon input-group-addon-label">URL Address</span>
+                      <div class="inner-addon right-addon">
+                        <i class="fa fa-link fa-size"></i>
+                        <input type="text" name="website" id="addWebsite" class="form-control text-field-left-border" placeholder="URL Address" />
                       </div>
                     </div>
                   </div>

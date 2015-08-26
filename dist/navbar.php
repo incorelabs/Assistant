@@ -10,7 +10,7 @@
 		<nav id='menu'>
 		<ul>
 			<li>
-				<a href='".$root_location."'>Home</a>
+				<a href='".$root_location."'>Dashboard</a>
 			</li>
 			<li><a href='#mm-2' data-target='#mm-2'>Contacts</a>
 				<ul>
@@ -61,11 +61,11 @@
 				<ul>
 					<li><a href='".$root_location."family'>Family</a></li>
 					<li><a href='".$root_location."preferences/changePassword.php'>Change Password</a></li>
-					<li><a href='#'>Setings</a></li>
 					<li><a href='#'>Import Contacts</a></li>
-					<li><a href='#'>Cheque Printing</a></li>
-					<li><a href='#'>Label Printing</a></li>
-					<li><a href='#'>Document Printing</a></li>
+					<li><a href='#'>General Settings</a></li>
+					<li><a href='#'>Label Settings</a></li>
+					<li><a href='#'>Cheque Settings</a></li>
+					<li><a href='#'>Envelope Settings</a></li>
 				</ul>
 			</li>
 			<li><a href='#' class='logout'>Sign Out</a></li>

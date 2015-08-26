@@ -337,11 +337,11 @@ function openAddContact () {
   $('.addEmailDiv').empty();
   emailAddCount = 1;
   $('.addHomePhone').empty();
-  --homePhoneCount;
+  homePhoneCount = 1;
   $('.addWorkPhone').empty();
-  --workPhoneCount;
+  workPhoneCount = 1;
   $('.addOtherPhone').empty();
-  otherPhoneCount = 0;
+  otherPhoneCount = 1;
   $("#addModal").modal('show');
 
   $(".tab-pane").removeClass('active');
@@ -761,15 +761,15 @@ $(document).ready(function(event){
   {
       if(mobileAddCount <= 1)
       {
-        $(".addMobileDiv").append("<div class='description_text'><div class='form-group form-group-margin'><label class='col-xs-4 control-label'></label><div class='col-xs-7'><div class='left-inner-addon'><i class='glyphicon glyphicon-phone'></i><input type='text' name='' class='form-control' placeholder='Mobile'/></div></div><a href='#' id='' name='' style='font-size:20px;'><span class='fa fa-minus fa-red' style='padding-top: 7px;padding-left: 10px;'></span></a></div></div>");
+        $(".addMobileDiv").append("<div class='description_text'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other Mobile' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-mobile' type='button' id=''><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
         mobileAddCount++;
       }
       else
       {
-        $('.btn-add-mobile').bind('click', false);
+        $('.btn-add-mobile').bind('click', true);
       }
   });
-  $('.addMobileDiv').on('click','.description_text a',function()
+  $('.addMobileDiv').on('click','.description_text button',function()
   {
     $(this).closest('.description_text').remove();
      mobileAddCount--;
@@ -779,15 +779,17 @@ $(document).ready(function(event){
   {
       if(emailAddCount <= 1)
       {
-        $(".addEmailDiv").append("<div class='description_text'><div class='form-group form-group-margin'><label class='col-xs-4 control-label'></label><div class='col-xs-7'><div class='left-inner-addon'><i class='glyphicon glyphicon-envelope'></i><input type='text' name='' class='form-control' placeholder='Email'/></div></div><a href='#' id='' name='' style='font-size:20px;'><span class='fa fa-minus fa-red' style='padding-top: 7px;padding-left: 10px;'></span></a></div></div>");
+        //$(".addEmailDiv").append("<div class='description_text'><div class='form-group form-group-margin'><label class='col-xs-4 control-label'></label><div class='col-xs-7'><div class='left-inner-addon'><i class='glyphicon glyphicon-envelope'></i><input type='text' name='' class='form-control' placeholder='Email'/></div></div><a href='#' id='' name='' style='font-size:20px;'><span class='fa fa-minus fa-red' style='padding-top: 7px;padding-left: 10px;'></span></a></div></div>");
+        $(".addEmailDiv").append("<div class='description_text'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='email' name='' id='' class='form-control text-field-left-border' placeholder='Other Email' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-email' type='button' id=''><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+
         emailAddCount++;
       }
       else
       {
-        $('.btn-add-email').bind('click', false);
+        $('.btn-add-email').bind('click', true);
       }
   });
-  $('.addEmailDiv').on('click','.description_text a',function()
+  $('.addEmailDiv').on('click','.description_text button',function()
   {
     $(this).closest('.description_text').remove();
      emailAddCount--;
@@ -797,15 +799,15 @@ $(document).ready(function(event){
   {
       if(homePhoneCount <= 1)
       {
-        $(".addHomePhone").append("<div class='description_text'><div class='form-group form-group-margin'><label class='col-xs-4 control-label'></label><div class='col-xs-7'><div class='left-inner-addon'><i class='fa fa-phone'></i><input type='text' name='' class='form-control' placeholder='Phone'/></div></div><a href='#' id='' name='' style='font-size:20px;'><span class='fa fa-minus fa-red' style='padding-top: 7px;padding-left: 10px;'></span></a></div></div>");
+        $(".addHomePhone").append("<div class='description_text'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-home-phone' type='button'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
         homePhoneCount++;
       }
       else
       {
-        $('.btn-home-phone').bind('click', false);
+        $('.btn-home-phone').bind('click', true);
       }
   });
-  $('.addHomePhone').on('click','.description_text a',function()
+  $('.addHomePhone').on('click','.description_text button',function()
   {
     $(this).closest('.description_text').remove();
      homePhoneCount--;
@@ -815,15 +817,15 @@ $(document).ready(function(event){
   {
       if(workPhoneCount <= 1)
       {
-        $(".addWorkPhone").append("<div class='description_text'><div class='form-group form-group-margin'><label class='col-xs-4 control-label'></label><div class='col-xs-7'><div class='left-inner-addon'><i class='fa fa-phone'></i><input type='text' name='' class='form-control' placeholder='Phone'/></div></div><a href='#' id='' name='' style='font-size:20px;'><span class='fa fa-minus fa-red' style='padding-top: 7px;padding-left: 10px;'></span></a></div></div>");
+        $(".addWorkPhone").append("<div class='description_text'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-work-phone' type='button'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
         workPhoneCount++;
       }
       else
       {
-        $('.btn-work-phone').bind('click', false);
+        $('.btn-work-phone').bind('click', true);
       }
   });
-  $('.addWorkPhone').on('click','.description_text a',function()
+  $('.addWorkPhone').on('click','.description_text button',function()
   {
     $(this).closest('.description_text').remove();
      workPhoneCount--;
@@ -833,15 +835,15 @@ $(document).ready(function(event){
   {
       if(otherPhoneCount <= 1)
       {
-        $(".addOtherPhone").append("<div class='description_text'><div class='form-group form-group-margin'><label class='col-xs-4 control-label'></label><div class='col-xs-7'><div class='left-inner-addon'><i class='fa fa-phone'></i><input type='text' name='' class='form-control' placeholder='Phone'/></div></div><a href='#' id='' name='' style='font-size:20px;'><span class='fa fa-minus fa-red' style='padding-top: 7px;padding-left: 10px;'></span></a></div></div>");
+        $(".addOtherPhone").append("<div class='description_text'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-other-phone' type='button'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
         otherPhoneCount++;
       }
       else
       {
-        $('.btn-other-phone').bind('click', false);
+        $('.btn-other-phone').bind('click', true);
       }
   });
-  $('.addOtherPhone').on('click','.description_text a',function()
+  $('.addOtherPhone').on('click','.description_text button',function()
   {
     $(this).closest('.description_text').remove();
      otherPhoneCount--;

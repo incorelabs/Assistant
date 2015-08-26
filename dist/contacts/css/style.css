@@ -390,6 +390,7 @@ h5{
     color: #333;
     background-color: #fff;
     border-color: #ccc;
+  }
 }
   #wrapper {
     padding-left: 250px;
@@ -472,4 +473,31 @@ h5{
 }
 .fa-red{
   color: #b71c1c;
+}
+
+.radio-btn-custom{
+  width: 80px;
+  margin-right: 0px;
+  padding: 12px 12px;
+}
+@media(min-width:768px) {
+  .radio-btn-custom
+  {
+    width: 120px;
+    margin-right: 0px;
+  }
+}
+
+.input-group-addon-text{
+  min-width: 95px;
+  font-size: 10px;
+  text-align: left;
+  background-color: #fff;
+}
+@media screen and (min-width: 768px) {
+  .input-group-addon-text
+  {
+    font-size: 14px;
+    min-width: 115px;
+  }
 }
