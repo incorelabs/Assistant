@@ -157,7 +157,7 @@ include_once ROOT.'dist/authenticate.php';
 					</h4>   
 				</div>
 				<div class="modal-body">
-					<input type="hidden" name="passwordTypeCode" id="passwordTypeCode" value="1" />
+					<input type="hidden" name="passwordTypeCode" id="passwordTypeCode" value="0" />
 					<input type="hidden" name="mode" id="input-type" />
 					<input type="hidden" name="passwordCode" id="passwordCode" value="1" />
 					<div class="form-group form-group-margin">

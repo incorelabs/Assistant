@@ -3,6 +3,7 @@ var passwordList;
 var modalHeading;
 var firstTime = true;
 var detailIndex = 0;
+var isPasswordTypeSelected = false;
 
 function getFamilyList(){
 	$.ajax({
@@ -188,6 +189,18 @@ function setPasswordTypeAutoComplete(tags){
       select: function( event, ui ) {
       	var index = $.inArray(ui.item.value, data);
       	$("#passwordTypeCode").val(dataIndex[index]);
+      	isPasswordTypeSelected = true;
+      	//console.log("ON SELECT: " + ($("#passwordTypeCode").val()));
+
+      },
+      change: function( event, ui ) {
+      	console.log("Change triggered");
+      	//$("#passwordTypeCode").val("1");
+      	if (!isPasswordTypeSelected) {
+      		$("#passwordTypeCode").val("0");
+      	}
+      	isPasswordTypeSelected = false;
+      	//console.log("ON Change: " + ($("#passwordTypeCode").val()));
       }
     });
 }
@@ -201,11 +214,13 @@ $(document).ready(function() {
 
 	$('#addPassword').on('shown.bs.modal', function () {
 	  $("#modalHeading").html(modalHeading);
-	})
+	});
+
 	$('#addPassword').on('show.bs.modal', function () {
 	  $("#password").attr("type", "password");
 	  $("#otherPassword").attr("type", "password");
 	})
+
 	//Password form submit
 	$("#form-passwords").ajaxForm({
 		beforeSubmit:function(){
