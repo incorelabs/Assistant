@@ -4,6 +4,7 @@
 	
 	$navbar_str = "<div id='page'>
 	<div class='header' style='text-decoration:none;font-weight:200;font-size:20px'>
+		<a href='#' id='backButton' class='pull-left hidden' style='margin-left: -35px;'><i class='fa fa-chevron-left fa-lg'></i></a>
 		<a href='#menu' class='menu_img'></a>".PAGE_TITLE."
 		<p><a href='#' class='logout'><span class='fa fa-power-off fa-lg'></span></a></p>
 	</div>

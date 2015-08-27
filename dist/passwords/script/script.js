@@ -64,7 +64,36 @@ function setPasswordDetail(index){
 	var headerStr ="";
 	var str = "";
 	var detail = "" ;
+	if(window.innerWidth < 992)
+	{
+		console.log("width less than 992");
+		//Show the Password Details Header and hides the search header
+		$("#searchPasswordHeader").addClass('hidden');
+		$("#passwordDetailsHeader").removeClass('hidden-xs hidden-sm');
 
+		//Show the Password Details and hides the password list
+		$("#passwordList").addClass('hidden');
+		$("#passwordDetails").removeClass('hidden-xs hidden-sm');
+
+		//Show Hide of menu button with back button
+		$(".menu_img").addClass('hidden');
+		$("#backButton").removeClass('hidden');
+
+		$("#backButton").click(function () {
+			//Show the Password Details Header and hides the search header
+			$("#passwordDetailsHeader").addClass('hidden-xs hidden-sm');
+			$("#searchPasswordHeader").removeClass('hidden');
+
+			//Show the Password Details and hides the password list
+			$("#passwordList").removeClass('hidden');
+			$("#passwordDetails").addClass('hidden-xs hidden-sm');
+
+			//Show Hide of menu button with back button
+			$(".menu_img").removeClass('hidden');
+			$("#backButton").addClass('hidden');
+		});
+
+	}
 	if(passwordList.length == 0)
 	{
 		headerStr = "<h12>Password Details</h12>";

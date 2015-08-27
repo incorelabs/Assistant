@@ -90,7 +90,7 @@ include_once ROOT.'dist/authenticate.php';
 	</div>
 	<div class="container-fluid navbar-padding">
 	  <div class="row">
-	    <div class="col-xs-12 col-md-5" style="padding-right:0px">
+	    <div class="col-xs-12 col-md-5" id="searchPasswordHeader">
 	      <div class="list-group list-margin">
 	        <div class="list-group-item list-margin">
 	          <div class="row">
@@ -107,7 +107,7 @@ include_once ROOT.'dist/authenticate.php';
 	      </div>
 	    </div>
 	  
-	    <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
+	    <div class="col-md-7 col-xs-12 col-sm-12 hidden-sm hidden-xs" id="passwordDetailsHeader">
 	      <div class="panel panel-default scroll list-margin" id="style-3">
 	        <div id="passwordDetailHeader" class="panel-heading text-center" >
 	          
@@ -118,7 +118,7 @@ include_once ROOT.'dist/authenticate.php';
 	  </div><!--row-->
 	<div class="row">
 
-	  <div class="col-md-5 col-sm-12 col-xs-12" style="padding-right:0px">
+	  <div class="col-md-5 col-sm-12 col-xs-12" id="passwordList">
 	    <div class="panel panel-default scroll panel-margin" id="style-3">
 	    	<div class="panel-height">
 	         <!-- List group -->
@@ -129,7 +129,7 @@ include_once ROOT.'dist/authenticate.php';
 	    </div><!--Panel-->
 	  </div><!--COL-->
 
-	  <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
+	  <div class="col-md-7 col-sm-12 col-xs-12 hidden-sm hidden-xs" id="passwordDetails">
 	    <div id="password-Detail" class="panel panel-default scroll panel-margin" id="style-3">
 			
 	    </div><!--Panel-->
