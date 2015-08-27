@@ -7,9 +7,27 @@ require_once ROOT.'db/Connection.php';
 require_once ROOT.'modules/functions.php';
 $mysqli = getConnection();
 
-$familyCode = 0;
 $response = array();
 $validate;
+
+//Input variables
+$regCode = intval($_SESSION['s_id']);
+$sFamilyCode = intval($_SESSION['familyCode']); //Session family code
+$pFamilyCode = 0; // Post Family code
+$name = "";
+$relationCode = 0;
+$relationName = "";
+$dob = "";
+$email = "";
+$mobile = "";
+$password = "";
+$gender = 0;
+$access = 0;
+$parentFlag = 0;
+$forgotFlag = 2; //default is no
+$loginFlag = 2; //default is no
+$activeFlag = 1; //default is active
+$mode = 0;
 
 function createResponse($status,$message){
 	return array('status' => $status, 'message' => $message);
@@ -17,7 +35,7 @@ function createResponse($status,$message){
 
 function validatePassword(){
 	global $response;
-	$validate;
+	$validate = null;
 	do {
 		//Check if password is entered
 		if(!empty($_POST['password']) && !empty($_POST['confirmPassword'])){
@@ -170,21 +188,33 @@ if ($validate && $_POST["mode"] != "D") {
 if ($validate) {
 	do {
 		$sql = "";
-		$s_familyCode = intval($_SESSION['familyCode']);
-		
+		$sFamilyCode = intval($_SESSION['familyCode']);
 
 		//Delete
 		if ($_POST["mode"] == "D") {
-			$p_familyCode = intval($_POST['familyCode']);
+			$pFamilyCode = intval($_POST['familyCode']);
 			
-			if ($s_familyCode == $p_familyCode || $s_familyCode != 1001) {
+			if ($sFamilyCode == $pFamilyCode || $sFamilyCode != 1001) {
 				$validate = false;
 				$response = createResponse(0,"You cannot delete this person");
 				break;
 			}
 			else{
-				$sql .= "DELETE FROM Table107 WHERE RegCode = ".$_SESSION['s_id']." AND FamilyCode = ".$p_familyCode.";";
-				$sql .= "DELETE FROM Table109 WHERE RegCode = ".$_SESSION['s_id']." AND FamilyCode = ".$p_familyCode.";";
+                $mode = 3;
+                $sql .= "call spTable109(
+                    ".$regCode.",
+                    ".$name.",
+                    ".$email.",
+                    ".$password.",
+                    ".$mobile.",
+                    ".$pFamilyCode.",
+                    ".$parentFlag.",
+                    ".$activeFlag.",
+                    ".$forgotFlag.",
+                    ".$mode.",
+                 );";
+				//$sql .= "DELETE FROM Table107 WHERE RegCode = ".$_SESSION['s_id']." AND FamilyCode = ".$pFamilyCode.";";
+				//$sql .= "DELETE FROM Table109 WHERE RegCode = ".$_SESSION['s_id']." AND FamilyCode = ".$pFamilyCode.";";
 			}
 
 		}
@@ -192,131 +222,80 @@ if ($validate) {
 		//Modify
 		if ($_POST["mode"] == "M") {
 
-			$p_familyCode = intval($_POST['familyCode']);
+			$pFamilyCode = intval($_POST['familyCode']);
 
-			if ($s_familyCode > 1001 && $s_familyCode != $p_familyCode) {
+			if ($sFamilyCode > 1001 && $sFamilyCode != $pFamilyCode) {
 				$validate = false;
 				$response = createResponse(0,"You cannot edit this person");
 				break;
 			}
 			else{
-				$sql .= "DELETE FROM Table107 WHERE RegCode = ".$_SESSION['s_id']." AND FamilyCode = ".$p_familyCode.";";
+                $mode = 2;
+                $name = $_POST['name'];
+                $relationCode = $_POST['relation'];
+                $dob = $_POST['dob'];
+                $email = $_POST['email'];
+                $mobile = $_POST['mobile'];
+                $password = ((intval($_POST["access"]) == 1) ? hash("sha256", $_POST['password']) : "");
+                $gender = intval($_POST['gender']);
+                $loginFlag = ((intval($_POST["access"]) == 1) ? 1 : 2);
+                $activeFlag = 1;
+				//$sql .= "DELETE FROM Table107 WHERE RegCode = ".$_SESSION['s_id']." AND FamilyCode = ".$pFamilyCode.";";
 			}
 		}
 
-		//Add or modify
-		if ($_POST["mode"] == "M" || $_POST["mode"] == "A") {
+		//Add
+		if ($_POST["mode"] == "A") {
+            //If not parent break
+            if($sFamilyCode != 1001){
+                $validate = false;
+                $response = createResponse(0,"You cannot add a person");
+                break;
+            }
 
-			$familyCode = 0;
-			//If add mode then generate code
-			if ($_POST["mode"] == "A") {
-				
-				$qry = "SELECT MAX(FamilyCode) as 'FamilyCode' FROM Table107 WHERE RegCode = ".$_SESSION['s_id'];
-				//echo $qry;
-				if ($result = $mysqli->query($qry)) {	
-			      while ($row = $result->fetch_assoc()) {
-			        if (is_null($row['FamilyCode'])) {
-			          $familyCode = 1001;     
-			        }
-			        else{
-			        	$familyCode = intval($row['FamilyCode']) + 1;
-			        }
-			      }
-			    
-				}
-			}
+            //On access check for mail id
+            if(intval($_POST["access"]) == 1){
+                //Check if mail ID is already registered or not
+                $qry1 = "SELECT count(*) as 'count' FROM `Table109` WHERE `RegEmail` = '".$_POST['email']."';";
+                if ($result = $mysqli->query($qry1)) {
+                    $row = $result->fetch_assoc();
+                    if (intval($row['count']) == 0) {
+                        $validate = true;
+                    }
+                    else{
+                        $validate = false;
+                        $response = createResponse(0,"This Mail ID is already registered");
+                        break;
+                    }
+                }
+            }
 
-			$sql .= build_insert_str('Table107',array(
-				intval($_SESSION['s_id']),
-				(($_POST["mode"] == "A") ? $familyCode : intval($_POST["familyCode"])),
-				$_POST['name'],
-				$_POST['relation'],
-				"'".$_POST['dob']."'",
-				$_POST['email'],
-				$_POST['mobile'],
-				((intval($_POST["access"]) == 1) ? hash("sha256", $_POST['password']) : ""),
-				intval($_POST['gender']),
-				((intval($_POST["access"]) == 1) ? 1 : 0),
-				1
-			));	
+            $mode = 2;
+            $name = $_POST['name'];
+            $relationCode = $_POST['relation'];
+            $dob = $_POST['dob'];
+            $email = $_POST['email'];
+            $mobile = $_POST['mobile'];
+            $password = ((intval($_POST["access"]) == 1) ? hash("sha256", $_POST['password']) : "");
+            $gender = intval($_POST['gender']);
+            $loginFlag = ((intval($_POST["access"]) == 1) ? 1 : 2);
+            $activeFlag = 1;
+        }
 
-			if ($s_familyCode == 1001) {
-				
-				$p_familyCode = intval($_POST['familyCode']);
-				//if Access provided
-				if ($_POST["access"] == 1) {
-					$qry = "SELECT count(*) as 'count' FROM Table109 WHERE RegCode = ".$_SESSION['s_id']." AND FamilyCode = ".$p_familyCode.";";
-
-					if ($result = $mysqli->query($qry)) {
-						$row = $result->fetch_assoc();
-						if (intval($row['count']) == 0) {
-							
-							//Check if mail ID is already registered or not 
-							$qry1 = "SELECT count(*) as 'count' FROM `Table109` WHERE `RegEmail` = '".$_POST['email']."';";
-							if ($result = $mysqli->query($qry1)) {
-								$row = $result->fetch_assoc();
-								if (intval($row['count']) == 0) {
-									$validate = true;
-								}
-								else{
-									$validate = false;
-									$response = createResponse(0,"This Mail ID is already registered");
-									break;
-								}
-							}
-							
-							if ($validate) {
-
-								//echo validatePassword();
-								if (validatePassword()) {
-
-									$validate = true;
-									$sql .= build_insert_str('Table109',array(
-										intval($_SESSION['s_id']),
-										$_POST['name'],
-										$_POST['email'],
-										hash("sha256", $_POST['password']),
-										$_POST['mobile'],
-										(($_POST["mode"] == "A") ? $familyCode : intval($_POST["familyCode"])),
-										(($familyCode == 1001) ? 1 : 2), // => 1 for parent and 2 for child
-										1, 	// => 1 for active and 2 for inactive
-										2 // => 1 for forgot and 2 for normal
-									));
-								}
-								else{
-									$validate = false;
-									break;
-								}
-							}
-						}
-						else{
-							$sql .= "UPDATE `Table109` SET `RegName`= '".$_POST['name']."', `RegMobile`= '".$_POST['mobile']."', `ActiveFlag`= 1 WHERE `RegCode` = ".intval($_SESSION['s_id'])." AND `FamilyCode`= ".$p_familyCode.";";
-						}
-					}
-				}
-				//if no access
-				else{
-					//check if data is present in Table109
-					$qry = "SELECT count(*) as 'count' FROM Table109 WHERE RegCode = ".$_SESSION['s_id']." AND FamilyCode = ".$p_familyCode.";";
-
-					if ($result = $mysqli->query($qry)) {
-						$row = $result->fetch_assoc();
-						//if yes delete the record
-						if (intval($row['count']) > 0) {
-							$sql .= "DELETE FROM Table109 WHERE RegCode = ".$_SESSION['s_id']." AND FamilyCode = ".$p_familyCode.";";
-						}
-					}
-				}
-			}
-			else{
-				//Check condition to remove login
-				if ($_POST["access"] == 2) {
-					$sql .= "DELETE FROM Table109 WHERE RegCode = ".$_SESSION['s_id']." AND FamilyCode = ".$s_familyCode.";";
-				}
-			}
-			
-		}
-
+        $sql .=  "call spTable107(
+					".$regCode.",
+					".$pFamilyCode.",
+					".$name.",
+					".$relationCode.",
+					".$dob.",
+					".$email.",
+					".$mobile.",
+					".$password.",
+					".$gender.",
+					".$loginFlag.",
+					".$activeFlag.",
+					".$mode."
+				);";
 		//echo $sql;
 		if ($mysqli->multi_query($sql) === TRUE) {
 			$response = createResponse(1,"Successfull");

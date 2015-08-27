@@ -11,7 +11,6 @@ $response = array();
 $validate;
 
 //Input variables
-$passwordCode;
 $regCode = intval($_SESSION['s_id']);
 $passwordCode;
 $passwordTypeCode = 0;
