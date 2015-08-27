@@ -1,4 +1,0 @@
-[23-Aug-2015 07:36:41 UTC] PHP Fatal error:  Call to undefined function mysqli_connect() in /home/chetansanghvi/public_html/db/header_db.php on line 2
-[23-Aug-2015 07:37:46 UTC] PHP Fatal error:  Call to undefined function mysqli_connect() in /home/chetansanghvi/public_html/db/header_db.php on line 2
-[23-Aug-2015 07:49:03 UTC] PHP Fatal error:  Call to undefined function mysqli_connect() in /home/chetansanghvi/public_html/db/header_db.php on line 2
-[24-Aug-2015 09:55:34 UTC] PHP Warning:  mysqli_errno() expects exactly 1 parameter, 0 given in /home/chetansanghvi/public_html/db/header_db.php on line 11
