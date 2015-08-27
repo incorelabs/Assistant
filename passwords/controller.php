@@ -29,48 +29,7 @@ function createResponse($status,$message){
 	return array('status' => $status, 'message' => $message);
 }
 
-function getPasswordTypeCode(){
-	global $mysqli;
-	$passwordTypeCode;
-
-	$qry = "SELECT MAX(PasswordTypeCode) as 'PasswordTypeCode' FROM Table130;";
-	//echo $qry;
-	if ($result = $mysqli->query($qry)) {	
-      while ($row = $result->fetch_assoc()) {
-        if (is_null($row['PasswordTypeCode'])) {
-          $passwordTypeCode = 1001;     
-        }
-        else{
-        	$passwordTypeCode = intval($row['PasswordTypeCode']) + 1;
-        }
-      }
-    
-	}
-	return $passwordTypeCode;
-}
-
-function getPasswordCode(){
-	global $mysqli,$regCode;
-	$passwordCode;
-
-	$qry = "SELECT MAX(PasswordCode) as 'PasswordCode' FROM Table152 WHERE RegCode = ".$regCode;
-	if ($result = $mysqli->query($qry)) {	
-      while ($row = $result->fetch_assoc()) {
-        if (is_null($row['PasswordCode'])) {
-          $passwordCode = 1001;     
-        }
-        else{
-        	$passwordCode = intval($row['PasswordCode']) + 1;
-        }
-      }
-    
-	}
-
-	return $passwordCode;
-}
-
 //General Validation
-//print_r($_POST);
 do {
 	if (isset($_POST)) {
 		$validate = true;
@@ -110,6 +69,7 @@ if ($validate) {
 	}
 	elseif ($_POST["mode"] == "M" || $_POST["mode"] == "A") {
 		do {
+			$passwordCode = $_POST["passwordCode"];
 			$passwordTypeCode = intval($_POST["passwordTypeCode"]);
 			$passwordTypeName = $_POST["passwordType"];
 			$holderCode = intval($_POST['name']);
@@ -122,11 +82,9 @@ if ($validate) {
 			$active = (isset($_POST["active"]) ? "1" : "2");
 			
 			if ($_POST["mode"] == "M") {
-				$passwordCode = $_POST["passwordCode"];
 				$mode = 2;
 			}
 			elseif ($_POST["mode"] == "A") {
-				$passwordCode = getPasswordCode();
 				$mode = 1;	
 			}
 
@@ -170,7 +128,6 @@ if ($validate) {
 	else{
 		$validate = false;
 		$response = createResponse(0,"Error occured while uploading to the database: ".$mysqli->error);
-		break;
 	}
 		
 }
