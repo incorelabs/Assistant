@@ -1,5 +1,5 @@
 //var root = "http://43.225.52.206/~chetansanghvi/";
-var root = "http://localhost/Assist/";
+var root = "http://localhost/Assistant/";
 var errorStatus = [false,false,false,false,false,false,false];
 var email_count = 0;
 var pwd_count = 0;

@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 define("ROOT", "../");
 
@@ -10,6 +9,8 @@ $mysqli = getConnection();
 
 $response = array();
 $validate;
+
+//Input variables
 $passwordCode;
 $regCode = intval($_SESSION['s_id']);
 $passwordCode;

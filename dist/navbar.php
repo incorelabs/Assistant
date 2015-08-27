@@ -1,5 +1,5 @@
 <?php
-	$root_location = "http://localhost/Assist/";
+	$root_location = "http://localhost/Assistant/";
 	//$root_location = "http://43.225.52.206/~chetansanghvi/";
 	
 	$navbar_str = "<div id='page'>
