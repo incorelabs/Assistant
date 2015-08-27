@@ -87,4 +87,7 @@ Temporary Items
 .apdisk
 
 # Created by .ignore support plugin (hsz.mobi)
+/db/Connection.php
+/db/header_db.php
+/db/local.php
 /db
