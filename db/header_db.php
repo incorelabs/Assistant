@@ -1,5 +1,5 @@
 <?php
-$connection = mysqli_connect("localhost","root","incorelabs");
+$connection = mysqli_connect("localhost","root","");
 	if(!$connection)
 	{
 		die(mysqli_error($connection));
