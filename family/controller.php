@@ -189,6 +189,7 @@ if ($validate) {
 	do {
 		$sql = "";
 		$sFamilyCode = intval($_SESSION['familyCode']);
+        $isMailSame = true;
 
 		//Delete
 		if ($_POST["mode"] == "D") {
@@ -218,6 +219,16 @@ if ($validate) {
 			}
 			else{
                 $mode = 2;
+                $qry = "SELECT RegEmail FROM Table109 WHERE RegCode = ".$regCode." AND FamilyCode = ".$pFamilyCode;
+                if ($result = $mysqli->query($qry)) {
+                    $row = $result->fetch_assoc();
+                    if ($row['RegEmail'] == $_POST["email"]) {
+                        $isMailSame = true;
+                    }
+                    else{
+                        $isMailSame = false;
+                    }
+                }
 				//$sql .= "DELETE FROM Table107 WHERE RegCode = ".$_SESSION['s_id']." AND FamilyCode = ".$pFamilyCode.";";
 			}
 		}
@@ -234,16 +245,18 @@ if ($validate) {
             //On access check for mail id
             if(intval($_POST["access"]) == 1){
                 //Check if mail ID is already registered or not
-                $qry1 = "SELECT count(*) as 'count' FROM `Table109` WHERE `RegEmail` = '".$_POST['email']."';";
-                if ($result = $mysqli->query($qry1)) {
-                    $row = $result->fetch_assoc();
-                    if (intval($row['count']) == 0) {
-                        $validate = true;
-                    }
-                    else{
-                        $validate = false;
-                        $response = createResponse(0,"This Mail ID is already registered");
-                        break;
+                if(!$isMailSame){
+                    $qry1 = "SELECT count(*) as 'count' FROM Table109 WHERE RegEmail = '".$_POST['email']."';";
+                    if ($result = $mysqli->query($qry1)) {
+                        $row = $result->fetch_assoc();
+                        if (intval($row['count']) == 0) {
+                            $validate = true;
+                        }
+                        else{
+                            $validate = false;
+                            $response = createResponse(0,"This Mail ID is already registered");
+                            break;
+                        }
                     }
                 }
             }
@@ -260,6 +273,7 @@ if ($validate) {
             $mobile = "'".$_POST['mobile']."'";
             $password = ((intval($_POST["access"]) == 1) ? "'".hash("sha256", $_POST['password'])."'" : "null");
             $gender = intval($_POST['gender']);
+            $parentFlag = (($pFamilyCode == 1001) ? 1 : 2);
             $loginFlag = ((intval($_POST["access"]) == 1) ? 1 : 2);
             $activeFlag = 1;
         }
@@ -274,6 +288,7 @@ if ($validate) {
 					".$mobile.",
 					".$password.",
 					".$gender.",
+					".$parentFlag.",
 					".$loginFlag.",
 					".$activeFlag.",
 					".$mode."
