@@ -21,6 +21,9 @@
     ?>
     <link rel="stylesheet" type="text/css" href="dist/css/style.css" />
 	<link rel="stylesheet" href="dist/homePage/css/style.css" />
+	<script>
+		var root = "<?php echo ROOT; ?>";
+	</script>
 	<script src="http://malsup.github.com/jquery.form.js"></script>
 	<script src="dist/date/script.js"></script>
 	<script src="dist/script/script.js"></script>
@@ -38,6 +41,7 @@
 <body>
   <?php
     include_once ROOT.'dist/navbar_logout.php';
+  	$root_location = ROOT;
     echo $navbar_str;
   ?> 
 	<div class="notification_outer">

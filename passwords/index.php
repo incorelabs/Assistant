@@ -24,7 +24,8 @@ include_once ROOT.'dist/authenticate.php';
     <link rel="stylesheet" href="../dist/passwords/css/style.css" />
 	<script src="http://malsup.github.com/jquery.form.js"></script>
 	<script>
-	var familyCode = '<?php echo $_SESSION['familyCode']; ?>';
+		var root = "<?php echo ROOT; ?>";
+		var familyCode = '<?php echo $_SESSION['familyCode']; ?>';
 	</script>
 	<script src="../dist/script/script.js"></script>
     <script src="../dist/passwords/script/script.js"></script>
@@ -74,6 +75,7 @@ include_once ROOT.'dist/authenticate.php';
 <body>
 	<?php
 		define('PAGE_TITLE', 'Passwords');
+		$root_location = ROOT;
 	    include_once ROOT.'dist/navbar.php';
 	    echo $navbar_str;
 	?> 

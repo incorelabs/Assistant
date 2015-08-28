@@ -56,6 +56,9 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
     <link rel="stylesheet" type="text/css" href="../dist/css/style.css" />
     <link rel="stylesheet" href="<?php echo ROOT; ?>/dist/contacts/css/style.css">   
     <script src="http://malsup.github.com/jquery.form.js"></script>
+    <script>
+      var root = "<?php echo ROOT; ?>";
+    </script>
     <script src="../dist/script/script.js"></script>
     <script src="../dist/contacts/script/script.js"></script>
     <script src="../dist/contacts/script/validation.js"></script>
@@ -89,7 +92,7 @@ if (isset($_GET['status']) && isset($_GET['controller'])) {
   <?php
 
     define('PAGE_TITLE', 'Contact');
-
+    $root_location = ROOT;
     include_once ROOT.'dist/navbar.php';
     echo $navbar_str;
   ?>  

@@ -22,6 +22,9 @@ include_once ROOT.'dist/authenticate.php';
     ?>
     <link rel="stylesheet" type="text/css" href="../dist/css/style.css" />
     <link rel="stylesheet" href="../dist/preferences/css/style.css" />
+	<script>
+		var root = "<?php echo ROOT; ?>";
+	</script>
 	<script src="http://malsup.github.com/jquery.form.js"></script>
 	<script src="../dist/script/script.js"></script>
     <script src="../dist/preferences/script/script.js"></script>
@@ -38,6 +41,7 @@ include_once ROOT.'dist/authenticate.php';
 <body>
 <?php
 	define('PAGE_TITLE', 'Change Password');
+	$root_location = ROOT;
     include_once ROOT.'dist/navbar.php';
     echo $navbar_str;
 ?> 

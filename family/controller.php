@@ -14,13 +14,13 @@ $validate;
 $regCode = intval($_SESSION['s_id']);
 $sFamilyCode = intval($_SESSION['familyCode']); //Session family code
 $pFamilyCode = 0; // Post Family code
-$name = "";
+$name = "null";
 $relationCode = 0;
 $relationName = "";
-$dob = "";
-$email = "";
-$mobile = "";
-$password = "";
+$dob = "null";
+$email = "null";
+$mobile = "null";
+$password = "null";
 $gender = 0;
 $access = 0;
 $parentFlag = 0;
@@ -201,20 +201,7 @@ if ($validate) {
 			}
 			else{
                 $mode = 3;
-                $sql .= "call spTable109(
-                    ".$regCode.",
-                    ".$name.",
-                    ".$email.",
-                    ".$password.",
-                    ".$mobile.",
-                    ".$pFamilyCode.",
-                    ".$parentFlag.",
-                    ".$activeFlag.",
-                    ".$forgotFlag.",
-                    ".$mode.",
-                 );";
-				//$sql .= "DELETE FROM Table107 WHERE RegCode = ".$_SESSION['s_id']." AND FamilyCode = ".$pFamilyCode.";";
-				//$sql .= "DELETE FROM Table109 WHERE RegCode = ".$_SESSION['s_id']." AND FamilyCode = ".$pFamilyCode.";";
+				$sql .= "DELETE FROM Table109 WHERE RegCode = ".$regCode." AND FamilyCode = ".$pFamilyCode.";";
 			}
 
 		}
@@ -231,21 +218,12 @@ if ($validate) {
 			}
 			else{
                 $mode = 2;
-                $name = $_POST['name'];
-                $relationCode = $_POST['relation'];
-                $dob = $_POST['dob'];
-                $email = $_POST['email'];
-                $mobile = $_POST['mobile'];
-                $password = ((intval($_POST["access"]) == 1) ? hash("sha256", $_POST['password']) : "");
-                $gender = intval($_POST['gender']);
-                $loginFlag = ((intval($_POST["access"]) == 1) ? 1 : 2);
-                $activeFlag = 1;
 				//$sql .= "DELETE FROM Table107 WHERE RegCode = ".$_SESSION['s_id']." AND FamilyCode = ".$pFamilyCode.";";
 			}
 		}
 
 		//Add
-		if ($_POST["mode"] == "A") {
+		if ($_POST["mode"] == "A" || $_POST["mode"] == "M") {
             //If not parent break
             if($sFamilyCode != 1001){
                 $validate = false;
@@ -270,13 +248,17 @@ if ($validate) {
                 }
             }
 
-            $mode = 2;
-            $name = $_POST['name'];
+			if($_POST["mode"] == "A"){
+				$mode = 1;
+                $pFamilyCode = 1;
+			}
+
+            $name = "'".$_POST['name']."'";
             $relationCode = $_POST['relation'];
-            $dob = $_POST['dob'];
-            $email = $_POST['email'];
-            $mobile = $_POST['mobile'];
-            $password = ((intval($_POST["access"]) == 1) ? hash("sha256", $_POST['password']) : "");
+            $dob = "'".$_POST['dob']."'";
+            $email ="'". $_POST['email']."'";
+            $mobile = "'".$_POST['mobile']."'";
+            $password = ((intval($_POST["access"]) == 1) ? "'".hash("sha256", $_POST['password'])."'" : "null");
             $gender = intval($_POST['gender']);
             $loginFlag = ((intval($_POST["access"]) == 1) ? 1 : 2);
             $activeFlag = 1;

@@ -5,6 +5,7 @@
 	$str = "";
 	if (isset($_SESSION['s_id'])) {
 		define('PAGE_TITLE', 'Dashboard');
+		$root_location = ROOT;
 		include_once ROOT.'dist/navbar.php';
 		$str .= $navbar_str."
 				<div class='container' style='padding-top:100px'>
@@ -224,6 +225,9 @@
     <link rel="stylesheet" href="dist/homePage/css/style.css" />
     <link rel="stylesheet" href="dist/css/sidebar.css" />
     <link rel="stylesheet" href="dist/css/jquery_sidebar.css" />
+	<script>
+		var root = "<?php echo ROOT; ?>";
+	</script>
 	<script src="http://malsup.github.com/jquery.form.js"></script>
 	<script src="dist/script/script.js"></script>
     <script src="dist/homePage/script/script.js"></script>
