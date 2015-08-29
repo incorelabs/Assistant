@@ -194,6 +194,12 @@ if ($validate) {
 		//Delete
 		if ($_POST["mode"] == "D") {
 			$pFamilyCode = intval($_POST['familyCode']);
+
+            if($pFamilyCode == 1001){
+                $validate = false;
+                $response = createResponse(0,"You cannot delete this person");
+                break;
+            }
 			
 			if ($sFamilyCode == $pFamilyCode || $sFamilyCode != 1001) {
 				$validate = false;

@@ -2,6 +2,8 @@ var familyList;
 var relationList;
 var personDetail;
 var mode = 1;
+var isYesEnabled;
+var isNoEnabled;
 
 function getFamilyList(){
 	$.ajax({
@@ -85,17 +87,33 @@ function setInputFields(personDetail){
 	if (personDetail["Mobile"]) {
 		$("#mobile").val(personDetail["Mobile"]);
 	}
+	else{
+		$("#mobile").val("");
+	}
 	if (personDetail["Gender"]) {
 		$("#gender").val(personDetail["Gender"]);
 	}
+    if(personDetail["FamilyCode"] == 1001){
+        $("#provideLoginDiv").addClass("hidden");
+    }
+    else{
+        $("#provideLoginDiv").removeClass("hidden");
+    }
 	if (personDetail["LoginFlag"]) {
 		if (personDetail["LoginFlag"] == 1) {
 			$('input:radio[name=access]')[0].checked = true;
+            isYesEnabled = false;
+            isNoEnabled = true;
+            $("#email").attr("readonly",true);
 		}
 		else{
 			$('input:radio[name=access]')[1].checked = true;
+            isYesEnabled = true;
+            isNoEnabled = false;
+            $("#email").removeAttr("readonly");
 		}
 	}
+
 	document.getElementById( 'loginAccess' ).style.display = 'none';
 	$("#password").val("");
 	$("#confirmPassword").val("");
@@ -280,6 +298,20 @@ $(document).ready(function(){
 	      	$("#deleteFamily").modal('hide');
 	    },
 	});
+
+    $("#yes").click(function(event){
+        if (isYesEnabled){
+            showhidediv(this);
+        }
+        return isYesEnabled;
+    });
+
+    $("#no").click(function(event){
+        if (isNoEnabled){
+            showhidediv(this);
+        }
+        return isNoEnabled;
+    });
 });
 
 

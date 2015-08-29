@@ -113,99 +113,54 @@ if ($validate) {
 //Business Logic
 if ($validate) {
 	do {
-		$id = 0;
+		$regCode = "NULL";
 		$familyCode = 1001;
-
-		$sql = "SELECT MAX(RegCode) as 'RegCode' FROM Table109";
-
-		//Assign ID
-		if ($result = $mysqli->query($sql)) {	
-	      while ($row = $result->fetch_assoc()) {
-	        if (is_null($row['RegCode'])) {
-	          $id = 10001;     
-	        }
-	        else{
-	          $id = intval($row['RegCode']) + 1;
-	        }
-	      }
-		}
-
-		$sql = "";
-		$sql .= build_insert_str('Table107',array(
-			$id,
-			$familyCode,
-			$_POST['name'],
-			1,
-			(empty($_POST['dob']) ? "" : "'".$_POST['dob']."'"),
-			$_POST['email'],
-			$_POST['mobile'],
-			hash("sha256", $_POST['password']),
-			0,
-			1,
-			1
-		));
-
+		$name = "'".$_POST['name']."'";
+		$relationCode = 1; //Self
+		$gender = 0; //initialize
+		$dob = (empty($_POST['dob']) ? "NULL" : "'".$_POST['dob']."'");
+		$email = "'".$_POST['email']."'";
+		$password =	"'".hash("sha256", $_POST['password'])."'";
+		$mobile = "'".$_POST['mobile']."'";
+		$parentFlag = 1;
+		$loginFlag = 1;
+		$activeFlag = 1;
+		$country = intval($_POST["country"]);
+		$familySize = 1;
+		$renewalNo = 1;
+		$feesCollected = 0;
+		$dataSizeUsed = 0;
+		$photoUploaded = 0;
+		$noOfHits = 0;
 		$nextYear = new DateTime("now");
 		$nextYear->add(new DateInterval('P1Y'));
 		$today = new DateTime("now");
 
-		$sql .= build_insert_str('Table109',array(
-			$id,
-			$_POST['name'],
-			$_POST['email'],
-			hash("sha256", $_POST['password']),
-			$_POST['mobile'],
-			$familyCode,
-			1, // => 1 for parent and 2 for child
-			1, 	// => 1 for active and 2 for inactive
-			2 // => 1 for forgot and 2 for normal
-		));
-
-		$sql .= build_insert_str('Table120',array(
-			$id,
-			10000,	// => Contact Serial
-			10000, 	// => Invest
-			10000, 	// => Assets
-			10000, 	// => Document
-			10000, 	// => Expense
-			10000, 	// => Income
-			10000, 	// => Password
-			10000, 	// => Extra1
-			10000, 	// => Extra2
-			10000, 	// => Extra3
-			10000, 	// => Extra4
-			10000, 	// => Extra5
-			10000, 	// => Extra6
-			10000, 	// => Extra7
-			10000, 	// => Extra8
-			10000 	// => Extra9
-		));
-
-		$sql .= build_insert_str('Table122',array(
-			$id,
-			"'".$today->format("Y-m-d")."'",
-			$_POST["country"],
-			1, 	// => Renewal Number
-			"'".$today->format("Y-m-d")."'",
-			"'".$nextYear->format("Y-m-d")."'",
-			1,	// => Family Size
-			0, 	// => Fees collected
-			0, 	// => Data used
-			0, 	// => Photo uploaded
-			0, 	// => No of hits
-			"'".$today->format("Y-m-d H:i:s")."'"
-		));
-
-		$sql .= build_insert_str('Table116',array(
-			$id,
-			$familyCode,
-			"'".$today->format("Y-m-d H:i:s")."'",
-			hash("sha256", $_POST['password']),
-			"", //password date 2
-			"", //password 2
-			"", //password date 3
-			"", // password 3
-		));
+		$sql = "call createNewUser(
+			".$regCode.",
+			".$familyCode.",
+			".$name.",
+			".$relationCode.",
+			".$dob.",
+			".$email.",
+			".$mobile.",
+			".$password.",
+			".$gender.",
+			".$parentFlag.",
+			".$loginFlag.",
+			".$activeFlag.",
+			NOW(),
+			".$country.",
+			".$renewalNo.",
+			'".$today->format("Y-m-d")."',
+			'".$nextYear->format("Y-m-d")."',
+			".$familySize.",
+			".$feesCollected.",
+			".$dataSizeUsed.",
+			".$photoUploaded.",
+			".$noOfHits.",
+			'".$today->format("Y-m-d H:i:s")."'
+		);";
 
 		//echo $sql;
 		if ($mysqli->multi_query($sql) === TRUE) {
