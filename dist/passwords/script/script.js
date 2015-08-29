@@ -76,7 +76,7 @@ function setPasswordDetail(index){
 		$("#passwordDetailsHeader").removeClass('hidden-xs hidden-sm');
 
 		//Show the Password Details and hides the password list
-		$("#passwordList").addClass('hidden');
+		$("#passwordListDiv").addClass('hidden');
 		$("#passwordDetails").removeClass('hidden-xs hidden-sm');
 
 		//Show Hide of menu button with back button
@@ -89,14 +89,14 @@ function setPasswordDetail(index){
 			$("#searchPasswordHeader").removeClass('hidden');
 
 			//Show the Password Details and hides the password list
-			$("#passwordList").removeClass('hidden');
+			$("#passwordListDiv").removeClass('hidden');
 			$("#passwordDetails").addClass('hidden-xs hidden-sm');
 
 			//Show Hide of menu button with back button
 			$(".menu_img").removeClass('hidden');
 			$("#backButton").addClass('hidden');
-		});
 
+		});
 	}
 	if(passwordList.length == 0)
 	{
@@ -314,4 +314,18 @@ $(document).ready(function() {
 	      	}
 	    }
 	});
+
+	if(window.innerWidth < 992)
+	{
+		$("body").css("overflow", "auto");
+		$("#passwordListScroll").removeClass("scroll");
+		$("#passwordsList").addClass("mobile-list");
+		$("#passwordListDiv").addClass("mobileBody");
+		$("#searchPasswordHeader").addClass("mobileHeader");
+
+		$("#password-Detail").removeClass("scroll");
+		$("#passwordDetails").addClass("mobileBody");
+		$("#passwordDetailsHeader").addClass("mobileHeader");
+
+	}
 });

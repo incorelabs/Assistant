@@ -98,7 +98,7 @@ list-style-type: none;
   font-size: 14px;
   line-height: 0.6;
   border-style: none;
-  border-top-width: 0px 0px;
+  border-top-width: 0px;
   margin-bottom: 0px;
 }
 .scroll{
@@ -226,7 +226,7 @@ value{
   border-top: 0px !important;
 }
 h5{
-  font-weight: 450;
+  font-weight: 400;
   font-size: 16px !important;
 }
 
@@ -449,8 +449,8 @@ h5{
 	height: calc(100vh - 135px);
 }
 .list-group{
-	-webkit-box-shadow: 0 0px 0px rgba(0,0,0,.075); */
-    box-shadow: 0 0px 0px rgba(0,0,0,.075); */
+	-webkit-box-shadow: 0 0px 0px rgba(0,0,0,.075);
+    box-shadow: 0 0px 0px rgba(0,0,0,.075);
 }
 .list-group-item-border{
 	border: 0px !important;
@@ -500,4 +500,18 @@ h5{
     body{
         overflow:hidden;
     }
+}
+
+.mobileHeader{
+    z-index: 100 !important;
+    margin-top: -10px !important;
+    position: fixed !important;
+    padding: 0px;
+}
+.mobileBody{
+    padding: 0px;
+    margin-top: 45px;
+}
+.mobile-list{
+    margin:0px !important;
 }
