@@ -55,18 +55,6 @@ include_once ROOT.'dist/authenticate.php';
 		      $("#otherPassword").attr("type", "password");
 		    }
 		  });
-		var originalPassword = $(".textShow").html();
-		var encryptedPassword = originalPassword.replace(/./gi, "*");  // replace each character by an *
-		$(".textShow").text(encryptedPassword);
-		$("#passwordEncrypt").click(function () {
-            $(".textShow").text(function(original, encrypted){
-               return encrypted == originalPassword ? encryptedPassword : originalPassword
-            })
-        });
-        $("#notification_test").click(function(){
-        	document.getElementById("notification_success").style.display = "block";
-        	$("#notification_success").delay(2000).fadeOut("slow");
-        });
         console.log(familyCode);
 	});
 	</script>
@@ -92,11 +80,11 @@ include_once ROOT.'dist/authenticate.php';
 	</div>
 	<div class="container-fluid navbar-padding">
 	  <div class="row">
-	    <div class="col-xs-12 col-md-5" id="searchPasswordHeader">
+	    <div class="col-xs-12 col-md-5 col-padding" id="searchPasswordHeader">
 	      <div class="list-group list-margin">
 	        <div class="list-group-item list-margin">
 	          <div class="row">
-	             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+	             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-padding">
 	              <div class="">
 	              <input id="searchContact" type="text" class="form-control" placeholder="Search..." autofocus />
 	              </div>
@@ -109,7 +97,7 @@ include_once ROOT.'dist/authenticate.php';
 	      </div>
 	    </div>
 	  
-	    <div class="col-md-7 col-xs-12 col-sm-12 hidden-sm hidden-xs" id="passwordDetailsHeader">
+	    <div class="col-md-7 col-xs-12 col-sm-12 hidden-sm hidden-xs col-padding" id="passwordDetailsHeader">
 	      <div class="panel panel-default scroll list-margin" id="style-3">
 	        <div id="passwordDetailHeader" class="panel-heading text-center" >
 	          
@@ -120,7 +108,7 @@ include_once ROOT.'dist/authenticate.php';
 	  </div><!--row-->
 	<div class="row">
 
-	  <div class="col-md-5 col-sm-12 col-xs-12" id="passwordList">
+	  <div class="col-md-5 col-sm-12 col-xs-12 col-padding" id="passwordList">
 	    <div class="panel panel-default scroll panel-margin" id="style-3">
 	    	<div class="panel-height">
 	         <!-- List group -->
@@ -131,7 +119,7 @@ include_once ROOT.'dist/authenticate.php';
 	    </div><!--Panel-->
 	  </div><!--COL-->
 
-	  <div class="col-md-7 col-sm-12 col-xs-12 hidden-sm hidden-xs" id="passwordDetails">
+	  <div class="col-md-7 col-sm-12 col-xs-12 hidden-sm hidden-xs col-padding" id="passwordDetails">
 	    <div id="password-Detail" class="panel panel-default scroll panel-margin" id="style-3">
 			
 	    </div><!--Panel-->

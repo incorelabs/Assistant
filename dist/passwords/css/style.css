@@ -476,8 +476,8 @@ h5{
 	height: 40px;
 }
 .input-group-addon-label{
-	min-width: 100px;
-  font-size: 10px;
+	min-width: 105px;
+    font-size: 11px;
 	text-align: left;
 }
 @media screen and (min-width: 768px) {
@@ -491,4 +491,13 @@ h5{
 .fa-size
 {
   font-size: 20px;
+}
+
+@media(min-width:992px) {
+    .col-padding{
+        padding-right: 0px;
+    }
+    body{
+        overflow:hidden;
+    }
 }

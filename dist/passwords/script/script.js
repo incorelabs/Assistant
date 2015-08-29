@@ -46,9 +46,8 @@ function getPasswordList(){
 	    .done(function(msg) {
 	      passwordList = JSON.parse(msg);
 	      //console.log(passwordList);
-	      setPasswordList(passwordList);
 	      setPasswordDetail(detailIndex);
-	     
+	      setPasswordList(passwordList);
 	    });
 }
 
@@ -64,6 +63,11 @@ function setPasswordDetail(index){
 	var headerStr ="";
 	var str = "";
 	var detail = "" ;
+	var originalPassword = "";
+	var originalOtherPassword ="";
+	var encryptedPassword ="";
+	var encryptedOtherPassword ="";
+
 	if(window.innerWidth < 992)
 	{
 		console.log("width less than 992");
@@ -103,10 +107,33 @@ function setPasswordDetail(index){
 	{
 		detail = passwordList[index];
 		headerStr = "<h12>Password Details</h12><button class='btn btn-success pull-right' onclick='openEditPassword("+index+")'> <span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger pull-left' onclick='openDeleteModal("+index+")'><span class='glyphicon glyphicon-trash'></span></button>";
-		str += "<div class='panel-height'><!-- List group --><div id='passwordBody' class='list-group'><div class='list-group-item list-group-item-border'><div class='row contact-details' style='padding-top:0px'><div class='list-group-item-heading header_font'><div class='col-md-3'>Holder's Name</div><value><div class='col-md-9'>"+detail["HolderName"]+"</div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Password Type</div><value><div class='col-md-9'>"+detail["PasswordTypeName"]+"</div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Description</div><value><div class='col-md-9'>"+detail["PasswordName"]+"</div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Login ID</div><value><div class='col-md-9'>"+detail["LoginID"]+"</div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Password</div><value><div class='col-md-8'><div class='textShow'>"+detail["LoginPassword1"]+"</div></div><div class='col-md-1 pull-right'><a href='#' id='passwordEncrypt'><i class='fa fa-eye fa-lg'></i></a></div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Optional Password</div><value><div class='col-md-8'><div class='textShow'>"+detail["LoginPassword2"]+"</div></div><div class='col-md-1 pull-right'><a href='#' id='passwordEncrypt'><i class='fa fa-eye fa-lg'></i></a></div></value></div></div></div></div><!--List close--></div>";
+		str += "<div class='panel-height'><!-- List group --><div id='passwordBody' class='list-group'><div class='list-group-item list-group-item-border'><div class='row contact-details' style='padding-top:0px'><div class='list-group-item-heading header_font'><div class='col-md-3'>Holder's Name</div><value><div class='col-md-9'>"+detail["HolderName"]+"</div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Password Type</div><value><div class='col-md-9'>"+detail["PasswordTypeName"]+"</div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Description</div><value><div class='col-md-9'>"+detail["PasswordName"]+"</div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Login ID</div><value><div class='col-md-9'>"+detail["LoginID"]+"</div></value></div></div><div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Password</div><value><div class='col-md-8 col-sm-8 col-xs-8'><div class='textShow'>"+detail["LoginPassword1"]+"</div></div><div class='col-md-1 pull-right'><a href='#' id='passwordEncrypt'><i class='fa fa-eye fa-lg'></i></a></div></value></div></div><div class='row contact-details' id='optionalPasswordRow'><div class='list-group-item-heading header_font'><div class='col-md-3'>Optional Password</div><value><div class='col-md-8 col-sm-8 col-xs-8'><div class='textShow1'>"+detail["LoginPassword2"]+"</div></div><div class='col-md-1 pull-right'><a href='#' id='passwordEncrypt1'><i class='fa fa-eye fa-lg'></i></a></div></value></div></div></div></div><!--List close--></div>";
 	}
 	$("#passwordDetailHeader").html(headerStr);
 	$("#password-Detail").html(str);
+	originalPassword = $(".textShow").html();
+	encryptedPassword = originalPassword.replace(/./gi, "*");  // replace each character by an *
+	$(".textShow").text(encryptedPassword);
+	$("#passwordEncrypt").click(function () {
+		$(".textShow").text(function(original, encrypted){
+			return encrypted == originalPassword ? encryptedPassword : originalPassword
+		})
+	});
+
+	originalOtherPassword = $(".textShow1").html();
+	if(originalOtherPassword.length > 0) {
+		encryptedOtherPassword = originalOtherPassword.replace(/./gi, "*");
+	}
+	else {
+		$("#optionalPasswordRow").addClass("hidden");
+		encryptedOtherPassword = originalOtherPassword;
+	}
+	$(".textShow1").text(encryptedOtherPassword);
+	$("#passwordEncrypt1").click(function () {
+		$(".textShow1").text(function(original, encrypted){
+			return encrypted == originalOtherPassword ? encryptedOtherPassword : originalOtherPassword
+		})
+	});
 }
 
 function openDeleteModal(index){
