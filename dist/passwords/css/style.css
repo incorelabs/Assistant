@@ -1,22 +1,22 @@
 body
 {
-  height: 100%;
-  overflow: hidden;
-  background-color: #ecf0f1;
+    height: 100%;
+    overflow: hidden;
+    background-color: #ecf0f1;
 }
 
 .navbar-default
 {
-  background-color: #34495e;
+    background-color: #34495e;
 }
 .navbar-default .navbar-brand
 {
-  color: white;
+    color: white;
 }
 
 .navbar-default .navbar-brand:hover
 {
-  color: #a1a1a1 !important;
+    color: #a1a1a1 !important;
 }
 .navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
     background-color: #34495e;
@@ -26,47 +26,47 @@ body
 }
 .navbar-default .navbar-nav>li>a
 {
-  color: white;
+    color: white;
 }
 .navbar-default .navbar-nav>li>a:hover
 {
     color: #a1a1a1 !important;
-    background-color: #34495e; 
+    background-color: #34495e;
 }
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
     color: #a1a1a1 !important;
     background-color: #34495e !important;
 }
 .dropdown-toggle{
-  color: white;
+    color: white;
 }
 
 .ul_margin
 {
-  margin: 0px;
-  padding: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 h12
 {
-  font-size: 2.5rem;
+    font-size: 2.5rem;
 }
 .search_text
 {
-  width: 105%;
+    width: 105%;
 }
 li
 {
-list-style-type: none;
+    list-style-type: none;
 }
 .li-pad
 {
-  padding-left: 15px;
-  background-color: #eeeeee;
+    padding-left: 15px;
+    background-color: #eeeeee;
 }
 
 .navbar-padding
 {
-  padding-top: 60px;
+    padding-top: 60px;
 }
 
 .ui-autocomplete {
@@ -75,45 +75,45 @@ list-style-type: none;
 
 .header_font
 {
-  color: #007aff;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-weight: bold;
-  font-size: 14px;
-  font-weight: 200;
-  margin: 0;
+    color: #007aff;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    font-weight: 200;
+    margin: 0;
 }
 .details_padding
 {
-  padding-top: 5px;
+    padding-top: 5px;
 }
 .header_margin
 {
-  padding-bottom: 5px !important;
-  padding-left: 17px !important;
+    padding-bottom: 5px !important;
+    padding-left: 17px !important;
 }
 .contacts_font
 {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 0.6;
-  border-style: none;
-  border-top-width: 0px 0px;
-  margin-bottom: 0px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 0.6;
+    border-style: none;
+    border-top-width: 0px;
+    margin-bottom: 0px;
 }
 .scroll{
     max-height:calc(100vh - 130px);
-        overflow-y: auto;
-        overflow-x: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
-::-webkit-scrollbar { 
-    display: none; 
+::-webkit-scrollbar {
+    display: none;
 }
 
 img{
-  height: 40px;
-  width: 40px;
-  margin-right: 20px;
+    height: 40px;
+    width: 40px;
+    margin-right: 20px;
 }
 
 .overlay {
@@ -123,7 +123,7 @@ img{
     width:40px;
     height:40px;
     position:absolute;
-    margin-right: 20px; 
+    margin-right: 20px;
     top:10px;
     left:15px;
     display:inline-block;
@@ -132,113 +132,113 @@ img{
     text-align: center;
 }
 .btn-size{
-  width: 13%;
+    width: 13%;
 }
 .switch {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 /* Hide the checkbox input (only needed for `:checked` property) */
 .switch-input {
-  display: none;
+    display: none;
 }
 /* Switch */
 .switch-label {
-  display: block;
-  width: 28px;
-  height: 10px;
-  text-indent: -150%;
-  clip: rect(0 0 0 0);
-  color: transparent;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  /* Switch Rail & Knob */
-  /* Switch Rail */
-  /* Switch Knob */
+    display: block;
+    width: 28px;
+    height: 10px;
+    text-indent: -150%;
+    clip: rect(0 0 0 0);
+    color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* Switch Rail & Knob */
+    /* Switch Rail */
+    /* Switch Knob */
 }
 .switch-label:before,
 .switch-label:after {
-  content: "";
-  display: block;
-  position: absolute;
-  cursor: pointer;
+    content: "";
+    display: block;
+    position: absolute;
+    cursor: pointer;
 }
 .switch-label:before {
-  width: 100%;
-  height: 100%;
-  background-color: red;
-  border-radius: 9999em;
-  -webkit-transition: background-color 0.25s ease;
-          transition: background-color 0.25s ease;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    border-radius: 9999em;
+    -webkit-transition: background-color 0.25s ease;
+    transition: background-color 0.25s ease;
 }
 .switch-label:after {
-  top: 0;
-  left: 0;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background-color: #ffffff;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.45);
-  -webkit-transition: left 0.25s ease;
-          transition: left 0.25s ease;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.45);
+    -webkit-transition: left 0.25s ease;
+    transition: left 0.25s ease;
 }
 /* When input is checked */
 .switch-input:checked + .switch-label {
-  /* Switch Rail */
-  /* Switch Knob */
+    /* Switch Rail */
+    /* Switch Knob */
 }
 .switch-input:checked + .switch-label:before {
-  background-color: #89c12d;
+    background-color: #89c12d;
 }
 .switch-input:checked + .switch-label:after {
-  left: 14px;
+    left: 14px;
 }
 .navbar-brand:hover {
-  color:white;
-  background-color:transparent
+    color:white;
+    background-color:transparent
 }
 value{
-  font-size: 16px;
-  font-weight: 500;
-  color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
 }
 .contact_details{
-  padding-bottom: 30px;
+    padding-bottom: 30px;
 }
 .contact-details{
-  border-bottom: 1px solid #ddd;
-  padding-top: 10px;
-  padding-bottom: 8px;
-  padding-left: 30px;
+    border-bottom: 1px solid #ddd;
+    padding-top: 10px;
+    padding-bottom: 8px;
+    padding-left: 30px;
 }
 .list-margin{
-  margin-bottom: 0px !important;
-  border-bottom-right-radius: 0px !important;
-  border-bottom-left-radius: 0px !important;
-  border-bottom: 0px !important;
+    margin-bottom: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-bottom: 0px !important;
 }
 .panel-margin{
-  margin-top: 0px !important;
-  border-top-right-radius: 0px !important;
-  border-top-left-radius: 0px !important;
-  border-top: 0px !important;
+    margin-top: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+    border-top: 0px !important;
 }
 h5{
-  font-weight: 450;
-  font-size: 16px !important;
+    font-weight: 400;
+    font-size: 16px !important;
 }
 
 .form-group-margin{
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 @media screen and (min-width: 768px) {
-	.form-group-margin{
-	  margin-bottom: 10px;
-	  margin-left: 45px !important;
-	  margin-right: 45px !important;
-	}
+    .form-group-margin{
+        margin-bottom: 10px;
+        margin-left: 45px !important;
+        margin-right: 45px !important;
+    }
 }
 
 .dropdown.dropdown-lg .dropdown-menu {
@@ -269,17 +269,17 @@ h5{
     }
 
     .dropdown.dropdown-lg .dropdown-menu {
-      min-width: 300px;
+        min-width: 300px;
     }
     .switch-padding{
-      margin-top: 9px;
+        margin-top: 9px;
     }
 }
 .left-inner-addon {
     position: relative;
 }
 .left-inner-addon input {
-    padding-left: 30px;    
+    padding-left: 30px;
 }
 .left-inner-addon i {
     position: absolute;
@@ -291,7 +291,7 @@ h5{
     position: relative;
 }
 .right-inner-addon input {
-    padding-right: 30px;    
+    padding-right: 30px;
 }
 .right-inner-addon i {
     position: absolute;
@@ -302,119 +302,119 @@ h5{
 
 
 #wrapper {
-  padding-left: 0;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 #wrapper.toggled {
-  padding-left: 250px;
+    padding-left: 250px;
 }
 
 #sidebar-wrapper {
-  z-index: 1000;
-  position: fixed;
-  left: 250px;
-  width: 0;
-  height: 100%;
-  margin-left: -250px;
-  overflow-y: auto;
-  background: #f9f9f9;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #f9f9f9;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 #wrapper.toggled #sidebar-wrapper {
-  width: 250px;
+    width: 250px;
 }
 
 #page-content-wrapper {
-  width: 100%;
-  padding: 15px;
+    width: 100%;
+    padding: 15px;
 }
 
 #wrapper.toggled #page-content-wrapper {
-  position: absolute;
-  margin-right: -250px;
+    position: absolute;
+    margin-right: -250px;
 }
 /* Sidebar Styles */
 
 .sidebar-nav {
-  position: absolute;
-  top: 0;
-  width: 250px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .sidebar-nav li {
-  text-indent: 20px;
-  line-height: 40px;
+    text-indent: 20px;
+    line-height: 40px;
 }
 
 .sidebar-nav li a {
-  display: block;
-  text-decoration: none;
-  color: #000;
+    display: block;
+    text-decoration: none;
+    color: #000;
 }
 
 .sidebar-nav li a:hover {
-  text-decoration: none;
-  color: #a1a1a1;
-  background: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+    color: #a1a1a1;
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .sidebar-nav > .sidebar-brand {
-  height: 65px;
-  font-size: 18px;
-  line-height: 60px;
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
 }
 
 .sidebar-nav > .sidebar-brand a {
-  color: #999999;
+    color: #999999;
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
-  color: red;
-  background: none;
+    color: red;
+    background: none;
 }
 
 @media(min-width:768px) {
-  .btn-default {
-    margin: 8px;
-    color: #333;
-    background-color: #fff;
-    border-color: #ccc;
-}
-  #wrapper {
-    padding-left: 250px;
-  }
-  #wrapper.toggled {
-    padding-left: 0;
-  }
-  #sidebar-wrapper {
-    width: 250px;
-  }
-  #wrapper.toggled #sidebar-wrapper {
-    width: 0;
-  }
-  #page-content-wrapper {
-    padding: 20px;
-  }
-  #wrapper.toggled #page-content-wrapper {
-    position: relative;
-    margin-right: 0;
-  }
+    .btn-default {
+        margin: 8px;
+        color: #333;
+        background-color: #fff;
+        border-color: #ccc;
+    }
+    #wrapper {
+        padding-left: 250px;
+    }
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+    #sidebar-wrapper {
+        width: 250px;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+    #page-content-wrapper {
+        padding: 20px;
+    }
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
 }
 .btn-default {
     margin: 8px;
@@ -426,71 +426,71 @@ h5{
 }
 
 .addImage{
-  width: 150px;
-  height: 150px;
-  border-radius: 10px;
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
 }
 .loading{
-  height:calc(100vh - 135px);
-  background-image: url('../../../img/index/loading2.gif');
-  background-repeat: no-repeat;
-  overflow-y: hidden; 
-  display:block;
-  margin: 0 auto 0 45%;
+    height:calc(100vh - 135px);
+    background-image: url('../../../img/index/loading2.gif');
+    background-repeat: no-repeat;
+    overflow-y: hidden;
+    display:block;
+    margin: 0 auto 0 45%;
 }
 
 .fa-blue{
-  color: #337ab7;
+    color: #337ab7;
 }
 .fa-red{
-  color: #b71c1c;
+    color: #b71c1c;
 }
 .panel-height{
-	height: calc(100vh - 135px);
+    height: calc(100vh - 135px);
 }
 .list-group{
-	-webkit-box-shadow: 0 0px 0px rgba(0,0,0,.075); */
-    box-shadow: 0 0px 0px rgba(0,0,0,.075); */
+    -webkit-box-shadow: 0 0px 0px rgba(0,0,0,.075);
+    box-shadow: 0 0px 0px rgba(0,0,0,.075);
 }
 .list-group-item-border{
-	border: 0px !important;
+    border: 0px !important;
 }
 .text-field-left-border{
-	border-top-left-radius: 0px !important;
-	border-bottom-left-radius: 0px !important;
-	height:40px;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    height:40px;
 }
 .select-field-left-border{
-  border-top-left-radius: 0px !important;
-  border-bottom-left-radius: 0px !important;
-  height:40px;
-  -webkit-appearance: none;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    height:40px;
+    -webkit-appearance: none;
 }
 .group-addon-text-custom{
-	height: 40px;
-	border-top-left-radius:4px !important;
-	border-bottom-left-radius: 4px !important;
-	border-left: 1px solid #ccc !important;
+    height: 40px;
+    border-top-left-radius:4px !important;
+    border-bottom-left-radius: 4px !important;
+    border-left: 1px solid #ccc !important;
 }
 .button-addon-custom{
-	height: 40px;
+    height: 40px;
 }
 .input-group-addon-label{
-	min-width: 105px;
+    min-width: 105px;
     font-size: 11px;
-	text-align: left;
+    text-align: left;
 }
 @media screen and (min-width: 768px) {
-  .input-group-addon-label
-  {
-    font-size: 14px;
-    min-width: 127px;
-    text-align: left;
-  }
+    .input-group-addon-label
+    {
+        font-size: 14px;
+        min-width: 127px;
+        text-align: left;
+    }
 }
 .fa-size
 {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 @media(min-width:992px) {
@@ -500,4 +500,18 @@ h5{
     body{
         overflow:hidden;
     }
+}
+
+.mobileHeader{
+    z-index: 100 !important;
+    margin-top: -10px !important;
+    position: fixed !important;
+    padding: 0px;
+}
+.mobileBody{
+    padding: 0px;
+    margin-top: 45px;
+}
+.mobile-list{
+    margin:0px !important;
 }

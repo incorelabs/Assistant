@@ -7,17 +7,17 @@ var isPasswordTypeSelected = false;
 
 function getFamilyList(){
 	$.ajax({
-	    method: "GET",
-	    url: root+"family/getFamily.php",
-	    data: { 
-	        list: 2
-	     }
-	  })
-	    .done(function(msg) {
-	      familyList = JSON.parse(msg);
-	      //console.log(familyList);
-	      setFamilyList(familyList);
-	    });
+		method: "GET",
+		url: root+"family/getFamily.php",
+		data: {
+			list: 2
+		}
+	})
+		.done(function(msg) {
+			familyList = JSON.parse(msg);
+			//console.log(familyList);
+			setFamilyList(familyList);
+		});
 }
 
 function setFamilyList(arr){
@@ -37,18 +37,18 @@ function setFamilyList(arr){
 
 function getPasswordList(){
 	$.ajax({
-	    method: "GET",
-	    url: root+"passwords/getPasswordsList.php",
-	    data: { 
-	        list: 1
-	     }
-	  })
-	    .done(function(msg) {
-	      passwordList = JSON.parse(msg);
-	      //console.log(passwordList);
-	      setPasswordDetail(detailIndex);
-	      setPasswordList(passwordList);
-	    });
+		method: "GET",
+		url: root+"passwords/getPasswordsList.php",
+		data: {
+			list: 1
+		}
+	})
+		.done(function(msg) {
+			passwordList = JSON.parse(msg);
+			//console.log(passwordList);
+			setPasswordDetail(detailIndex);
+			setPasswordList(passwordList);
+		});
 }
 
 function setPasswordList(arr){
@@ -76,7 +76,7 @@ function setPasswordDetail(index){
 		$("#passwordDetailsHeader").removeClass('hidden-xs hidden-sm');
 
 		//Show the Password Details and hides the password list
-		$("#passwordList").addClass('hidden');
+		$("#passwordListDiv").addClass('hidden');
 		$("#passwordDetails").removeClass('hidden-xs hidden-sm');
 
 		//Show Hide of menu button with back button
@@ -89,14 +89,14 @@ function setPasswordDetail(index){
 			$("#searchPasswordHeader").removeClass('hidden');
 
 			//Show the Password Details and hides the password list
-			$("#passwordList").removeClass('hidden');
+			$("#passwordListDiv").removeClass('hidden');
 			$("#passwordDetails").addClass('hidden-xs hidden-sm');
 
 			//Show Hide of menu button with back button
 			$(".menu_img").removeClass('hidden');
 			$("#backButton").addClass('hidden');
-		});
 
+		});
 	}
 	if(passwordList.length == 0)
 	{
@@ -167,7 +167,7 @@ function setModalInputFields(detail){
 	var temp = familyCode;
 	familyCode = detail["HolderCode"];
 	setFamilyList(familyList);
-	
+
 	if (detail["ActiveFlag"]) {
 		if (detail["ActiveFlag"] == 1) {
 			$("#addActiveStatus").attr("checked",true);
@@ -210,24 +210,24 @@ function setModalInputFields(detail){
 	}
 
 	if (detail["LoginPassword2"]) {
-		$("#otherPassword").val(detail["LoginPassword2"]);	
+		$("#otherPassword").val(detail["LoginPassword2"]);
 	}
 	familyCode = temp;
 }
 
 function getPasswordTypeList(){
 	$.ajax({
-	    method: "GET",
-	    url: "getMasters.php",
-	    data: { 
-	        passwordType: 1
-	     }
-	  })
-	    .done(function(msg) {
-	      var passwordType = JSON.parse(msg);
-	      //console.log(passwordType);
-	      setPasswordTypeAutoComplete(passwordType);
-	    });
+		method: "GET",
+		url: "getMasters.php",
+		data: {
+			passwordType: 1
+		}
+	})
+		.done(function(msg) {
+			var passwordType = JSON.parse(msg);
+			//console.log(passwordType);
+			setPasswordTypeAutoComplete(passwordType);
+		});
 }
 
 function setPasswordTypeAutoComplete(tags){
@@ -241,24 +241,24 @@ function setPasswordTypeAutoComplete(tags){
 
 	//console.log(data);
 	$("#passwordType").autocomplete({
-      source: data,
-      select: function( event, ui ) {
-      	var index = $.inArray(ui.item.value, data);
-      	$("#passwordTypeCode").val(dataIndex[index]);
-      	isPasswordTypeSelected = true;
-      	//console.log("ON SELECT: " + ($("#passwordTypeCode").val()));
+		source: data,
+		select: function( event, ui ) {
+			var index = $.inArray(ui.item.value, data);
+			$("#passwordTypeCode").val(dataIndex[index]);
+			isPasswordTypeSelected = true;
+			//console.log("ON SELECT: " + ($("#passwordTypeCode").val()));
 
-      },
-      change: function( event, ui ) {
-      	console.log("Change triggered");
-      	//$("#passwordTypeCode").val("1");
-      	if (!isPasswordTypeSelected) {
-      		$("#passwordTypeCode").val("0");
-      	}
-      	isPasswordTypeSelected = false;
-      	//console.log("ON Change: " + ($("#passwordTypeCode").val()));
-      }
-    });
+		},
+		change: function( event, ui ) {
+			console.log("Change triggered");
+			//$("#passwordTypeCode").val("1");
+			if (!isPasswordTypeSelected) {
+				$("#passwordTypeCode").val("0");
+			}
+			isPasswordTypeSelected = false;
+			//console.log("ON Change: " + ($("#passwordTypeCode").val()));
+		}
+	});
 }
 
 $(document).ready(function() {
@@ -266,52 +266,66 @@ $(document).ready(function() {
 	getFamilyList();
 	getPasswordList();
 	getPasswordTypeList();
-	
+
 
 	$('#addPassword').on('shown.bs.modal', function () {
-	  $("#modalHeading").html(modalHeading);
+		$("#modalHeading").html(modalHeading);
 	});
 
 	$('#addPassword').on('show.bs.modal', function () {
-	  $("#password").attr("type", "password");
-	  $("#otherPassword").attr("type", "password");
+		$("#password").attr("type", "password");
+		$("#otherPassword").attr("type", "password");
 	})
 
 	//Password form submit
 	$("#form-passwords").ajaxForm({
 		beforeSubmit:function(){
-	    },
-	    success: function(responseText, statusText, xhr, $form){
-	    	console.log(responseText);
-	    	var response = JSON.parse(responseText);
-	    	if (response.status == 0) {
-	    		showNotificationFailure(response.message);
-	    	}
-	      	else{
-	      		getPasswordList();
+		},
+		success: function(responseText, statusText, xhr, $form){
+			console.log(responseText);
+			var response = JSON.parse(responseText);
+			if (response.status == 0) {
+				showNotificationFailure(response.message);
+			}
+			else{
+				getPasswordList();
 				getPasswordTypeList();
-	      		showNotificationSuccess(response.message);
-	      		$("#addPassword").modal("hide");
-	      	}
-	    }
+				showNotificationSuccess(response.message);
+				$("#addPassword").modal("hide");
+			}
+		}
 	});
 
 	//Password form submit
 	$("#form-password-delete").ajaxForm({
 		beforeSubmit:function(){
-	    },
-	    success: function(responseText, statusText, xhr, $form){
-	    	console.log(responseText);
-	    	var response = JSON.parse(responseText);
-	    	if (response.status == 0) {
-	    		showNotificationFailure(response.message);
-	    	}
-	      	else{
-	      		getPasswordList();
+		},
+		success: function(responseText, statusText, xhr, $form){
+			console.log(responseText);
+			var response = JSON.parse(responseText);
+			if (response.status == 0) {
+				showNotificationFailure(response.message);
+			}
+			else{
+				getPasswordList();
 				getPasswordTypeList();
-	      		showNotificationSuccess(response.message);
-	      		$("#deletePassword").modal("hide");
-	      	}
-	    }
+				showNotificationSuccess(response.message);
+				$("#deletePassword").modal("hide");
+			}
+		}
 	});
+
+	if(window.innerWidth < 992)
+	{
+		$("body").css("overflow", "auto");
+		$("#passwordListScroll").removeClass("scroll");
+		$("#passwordsList").addClass("mobile-list");
+		$("#passwordListDiv").addClass("mobileBody");
+		$("#searchPasswordHeader").addClass("mobileHeader");
+
+		$("#password-Detail").removeClass("scroll");
+		$("#passwordDetails").addClass("mobileBody");
+		$("#passwordDetailsHeader").addClass("mobileHeader");
+
+	}
 });
