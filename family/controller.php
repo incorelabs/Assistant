@@ -267,7 +267,7 @@ if ($validate) {
                         $validate = true;
                     }
                     else{
-                        $validate = false;˚
+                        $validate = false;
                         break;
                     }
                 }

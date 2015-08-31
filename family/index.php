@@ -159,16 +159,6 @@ echo $navbar_str;
                     </div>
                     <div class="form-group form-group-margin">
                         <div class="input-group">
-                            <span class="input-group-addon input-group-addon-label">Email*</span>
-                            <div class="inner-addon right-addon">
-                                <i class="fa fa-envelope-o fa-size hidden-xs"></i>
-                                <input type="email" name="email" id="email" class="form-control email text-field-left-border" placeholder="Email" />
-                            </div>
-                        </div>
-                        <div class='info'></div>
-                    </div>
-                    <div class="form-group form-group-margin">
-                        <div class="input-group">
                             <span class="input-group-addon input-group-addon-label">Mobile</span>
                             <div class="inner-addon right-addon">
                                 <i class="glyphicon glyphicon-phone fa-size hidden-xs"></i>
@@ -211,6 +201,16 @@ echo $navbar_str;
                     </div>
                     <div id="loginAccess" style="display:none">
                         <hr/>
+                        <div class="form-group form-group-margin">
+                            <div class="input-group">
+                                <span class="input-group-addon input-group-addon-label">Email*</span>
+                                <div class="inner-addon right-addon">
+                                    <i class="fa fa-envelope-o fa-size hidden-xs"></i>
+                                    <input type="email" name="email" id="email" class="form-control email text-field-left-border" placeholder="Email" />
+                                </div>
+                            </div>
+                            <div class='info'></div>
+                        </div>
                         <div class="form-group form-group-margin">
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-label">Password*</span>

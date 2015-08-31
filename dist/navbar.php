@@ -64,7 +64,7 @@
 					<li><a href='".$root_location."preferences/changePassword.php'>Change Password</a></li>
 					<li><a href='#'>Import Contacts</a></li>
 					<li><a href='#'>General Settings</a></li>
-					<li><a href='#'>Label Settings</a></li>
+					<li><a href='".$root_location."preferences/labelSettings/'>Label Settings</a></li>
 					<li><a href='#'>Cheque Settings</a></li>
 					<li><a href='#'>Envelope Settings</a></li>
 				</ul>

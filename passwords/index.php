@@ -84,7 +84,7 @@ echo $navbar_str;
 			<div class="list-group list-margin">
 				<div class="list-group-item list-margin">
 					<div class="row">
-						<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-padding">
+						<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 							<div class="">
 								<input id="searchContact" type="text" class="form-control" placeholder="Search..." autofocus />
 							</div>
@@ -112,7 +112,7 @@ echo $navbar_str;
 			<div class="panel panel-default scroll panel-margin" id="passwordListScroll">
 				<div class="panel-height">
 					<!-- List group -->
-					<div id="passwordsList" class="list-group force-scroll">
+					<div id="passwordsList" class="list-group force-scroll mobile-list">
 
 					</div><!--List close-->
 				</div>

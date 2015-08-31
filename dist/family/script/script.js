@@ -2,8 +2,8 @@ var familyList;
 var relationList;
 var personDetail;
 var mode = 1;
-var isYesEnabled;
-var isNoEnabled;
+var isYesEnabled = true;
+var isNoEnabled = true;
 
 function getFamilyList(){
 	$.ajax({
@@ -296,9 +296,9 @@ $(document).ready(function(){
 	});
 
     $("#yes").click(function(event){
-        if (isYesEnabled){
-            showhidediv(this);
-        }
+        if (isYesEnabled) {
+			showhidediv(this);
+		}
         return isYesEnabled;
     });
 
