@@ -1,3 +1,0 @@
-[21-Aug-2015 10:50:12 UTC] PHP Fatal error:  Call to undefined function phpsession_start() in /home/incorelabs/public_html/Assistant/family/index.php on line 1
-[21-Aug-2015 10:50:17 UTC] PHP Fatal error:  Call to undefined function phpsession_start() in /home/incorelabs/public_html/Assistant/family/index.php on line 1
-[21-Aug-2015 10:53:50 UTC] PHP Fatal error:  Call to undefined function phpsession_start() in /home/incorelabs/public_html/Assistant/family/index.php on line 1
