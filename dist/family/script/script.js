@@ -272,9 +272,7 @@ $(document).ready(function(){
 	    	}
 	      	else{
 	      		showNotificationSuccess(response.message);
-	      		setTimeout(function(){
-	      			getFamilyList();
-	      		},500);
+				setTimeout(getFamilyList(),200);
 	      	}
 	      	$("#addFamily").modal('hide');
 	    },
@@ -291,9 +289,7 @@ $(document).ready(function(){
 	    	}
 	      	else{
 	      		showNotificationSuccess(response.message);
-	      		setTimeout(function(){
-	      			getFamilyList();
-	      		},500);
+	      		setTimeout(getFamilyList(),200);
 	      	}
 	      	$("#deleteFamily").modal('hide');
 	    },

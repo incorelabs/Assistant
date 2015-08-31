@@ -88,7 +88,7 @@ do {
 	}
 
 	//Required fields validation
-	if ($validate && !empty($_POST["name"]) && !empty($_POST["relation"]) && !empty($_POST['dob']) && !empty($_POST['email']) && !empty($_POST['gender'])) {
+	if ($validate && !empty($_POST["name"]) && !empty($_POST["relation"]) && !empty($_POST['dob']) && !empty($_POST['gender'])) {
 		$validate = true;
 	}
 	else{
@@ -104,16 +104,6 @@ do {
 	else{
 		$validate = false;
 		$response = createResponse(0,"Invalid Name");
-		break;
-	}
-
-	//Email validation
-	if ($validate && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-		$validate = true;
-	}
-	else{
-		$validate = false;
-		$response = createResponse(0, "Invalid email");
 		break;
 	}
 
@@ -242,14 +232,46 @@ if ($validate) {
 		//Add
 		if ($_POST["mode"] == "A" || $_POST["mode"] == "M") {
             //If not parent break
-            if($sFamilyCode != 1001){
-                $validate = false;
-                $response = createResponse(0,"You cannot add a person");
-                break;
-            }
+			if($_POST["mode"] == "A"){
+				$mode = 1;
+				$pFamilyCode = 1;
+
+				if($sFamilyCode != 1001){
+					$validate = false;
+					$response = createResponse(0,"You cannot add a person");
+					break;
+				}
+			}
 
             //On access check for mail id
             if(intval($_POST["access"]) == 1){
+				//Email validation
+				if(!empty($_POST["email"])){
+					if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+						$validate = true;
+					}
+					else{
+						$validate = false;
+						$response = createResponse(0, "Invalid email");
+						break;
+					}
+				}
+                else{
+                    $validate = false;
+                    $response = createResponse(0, "Email ID is required for providing acccess");
+                    break;
+                }
+
+                if($_POST["mode"] == "A"){
+                    if(validatePassword()){
+                        $validate = true;
+                    }
+                    else{
+                        $validate = false;˚
+                        break;
+                    }
+                }
+
                 //Check if mail ID is already registered or not
                 if(!$isMailSame){
                     $qry1 = "SELECT count(*) as 'count' FROM Table109 WHERE RegEmail = '".$_POST['email']."';";
@@ -266,11 +288,6 @@ if ($validate) {
                     }
                 }
             }
-
-			if($_POST["mode"] == "A"){
-				$mode = 1;
-                $pFamilyCode = 1;
-			}
 
             $name = "'".$_POST['name']."'";
             $relationCode = $_POST['relation'];
