@@ -68,7 +68,7 @@ function setPasswordDetail(index){
 	var encryptedPassword ="";
 	var encryptedOtherPassword ="";
 
-	if(window.innerWidth < 992)
+	if(window.innerWidth < 992 && !firstTime)
 	{
 		console.log("width less than 992");
 		//Show the Password Details Header and hides the search header
@@ -98,6 +98,7 @@ function setPasswordDetail(index){
 
 		});
 	}
+	firstTime = false;
 	if(passwordList.length == 0)
 	{
 		headerStr = "<h12>Password Details</h12>";
@@ -315,17 +316,56 @@ $(document).ready(function() {
 		}
 	});
 
-	if(window.innerWidth < 992)
-	{
-		$("body").css("overflow", "auto");
-		$("#passwordListScroll").removeClass("scroll");
-		$("#passwordsList").addClass("mobile-list");
-		$("#passwordListDiv").addClass("mobileBody");
-		$("#searchPasswordHeader").addClass("mobileHeader");
+    if(window.innerWidth < 992)
+    {
+        $("body").css("overflow", "auto");
+        $("#passwordListScroll").removeClass("scroll");
+        $("#passwordsList").addClass("mobile-list");
+        $("#passwordListDiv").addClass("mobileBody");
+        $("#searchPasswordHeader").addClass("mobileHeader");
 
-		$("#password-Detail").removeClass("scroll");
-		$("#passwordDetails").addClass("mobileBody");
-		$("#passwordDetailsHeader").addClass("mobileHeader");
+        $("#password-Detail").removeClass("scroll");
+        $("#passwordDetails").addClass("mobileBody");
+        $("#passwordDetailsHeader").addClass("mobileHeader");
+    }
+});
+$(window).resize(function() {
+    console.log(window.innerWidth);
+    if(window.innerWidth < 992)
+    {
+        $("body").css("overflow", "auto");
+        $("#passwordListScroll").removeClass("scroll");
+        $("#passwordsList").addClass("mobile-list");
+        $("#passwordListDiv").addClass("mobileBody");
+        $("#searchPasswordHeader").addClass("mobileHeader");
 
-	}
+        $("#password-Detail").removeClass("scroll");
+        $("#passwordDetails").addClass("mobileBody");
+        $("#passwordDetailsHeader").addClass("mobileHeader");
+    }
+    else
+    {
+
+        $("body").css("overflow", "hidden");
+        $("#passwordListScroll").addClass("scroll");
+        $("#passwordsList").removeClass("mobile-list");
+        $("#passwordListDiv").removeClass("mobileBody");
+        $("#searchPasswordHeader").removeClass("mobileHeader");
+
+        $("#password-Detail").addClass("scroll");
+        $("#passwordDetails").removeClass("mobileBody");
+        $("#passwordDetailsHeader").removeClass("mobileHeader");
+
+        //Show the Password Details Header and hides the search header
+        $("#passwordDetailsHeader").addClass('hidden-xs hidden-sm');
+        $("#searchPasswordHeader").removeClass('hidden');
+
+        //Show the Password Details and hides the password list
+        $("#passwordListDiv").removeClass('hidden');
+        $("#passwordDetails").addClass('hidden-xs hidden-sm');
+
+        //Show Hide of menu button with back button
+        $(".menu_img").removeClass('hidden');
+        $("#backButton").addClass('hidden');
+    }
 });
