@@ -98,10 +98,10 @@ list-style-type: none;
   font-size: 14px;
   line-height: 0.6;
   border-style: none;
-  border-top-width: 0px 0px;
+  border-top-width: 0px;
   margin-bottom: 0px;
 }
-.scroll{
+.panelHeight{
     max-height:calc(100vh - 130px);
         overflow-y: auto;
         overflow-x: hidden;
@@ -226,7 +226,7 @@ value{
   border-top: 0px !important;
 }
 h5{
-  font-weight: 450;
+  font-weight: 400;
   font-size: 16px !important;
 }
 
@@ -411,7 +411,7 @@ h5{
     position: relative;
     margin-right: 0;
   }
-}
+
 .btn-default {
     margin: 8px;
     margin-left: 5px;
@@ -432,7 +432,6 @@ h5{
 
 .notification_success{
   border-radius: 8px;
-  min-width: auto;
   max-width:250px;
   height:40px;
   margin:auto;
@@ -445,7 +444,6 @@ h5{
 .notification_failure{
   color: #fff;
   border-radius: 8px;
-  min-width: auto;
   max-width:250px;
   height:40px;
   margin:auto;

@@ -319,12 +319,12 @@ $(document).ready(function() {
     if(window.innerWidth < 992)
     {
         $("body").css("overflow", "auto");
-        $("#passwordListScroll").removeClass("scroll");
+        $("#passwordListScroll").removeClass("panelHeight");
         $("#passwordsList").addClass("mobile-list");
         $("#passwordListDiv").addClass("mobileBody");
         $("#searchPasswordHeader").addClass("mobileHeader");
 
-        $("#password-Detail").removeClass("scroll");
+        $("#password-Detail").removeClass("panelHeight");
         $("#passwordDetails").addClass("mobileBody");
         $("#passwordDetailsHeader").addClass("mobileHeader");
     }
@@ -334,12 +334,12 @@ $(window).resize(function() {
     if(window.innerWidth < 992)
     {
         $("body").css("overflow", "auto");
-        $("#passwordListScroll").removeClass("scroll");
+        $("#passwordListScroll").removeClass("panelHeight");
         $("#passwordsList").addClass("mobile-list");
         $("#passwordListDiv").addClass("mobileBody");
         $("#searchPasswordHeader").addClass("mobileHeader");
 
-        $("#password-Detail").removeClass("scroll");
+        $("#password-Detail").removeClass("panelHeight");
         $("#passwordDetails").addClass("mobileBody");
         $("#passwordDetailsHeader").addClass("mobileHeader");
     }
@@ -347,12 +347,12 @@ $(window).resize(function() {
     {
 
         $("body").css("overflow", "hidden");
-        $("#passwordListScroll").addClass("scroll");
+        $("#passwordListScroll").addClass("panelHeight");
         $("#passwordsList").removeClass("mobile-list");
         $("#passwordListDiv").removeClass("mobileBody");
         $("#searchPasswordHeader").removeClass("mobileHeader");
 
-        $("#password-Detail").addClass("scroll");
+        $("#password-Detail").addClass("panelHeight");
         $("#passwordDetails").removeClass("mobileBody");
         $("#passwordDetailsHeader").removeClass("mobileHeader");
 

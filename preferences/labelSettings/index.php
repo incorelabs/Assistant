@@ -78,13 +78,14 @@ echo $navbar_str;
             <thead>
             <tr class="text-left">
                 <th class="text-left">#</th>
-                <th class="text-left">Label Name</th>
-                <th class="text-left hidden-xs hidden-sm">Label in Rows</th>
-                <th class="text-left hidden-xs hidden-sm">Label in Columns</th>
-                <th class="text-left">Lines Per Label</th>
+                <th class="text-left">Name</th>
+                <th class="text-left hidden-xs hidden-sm">Rows</th>
+                <th class="text-left hidden-xs hidden-sm">Columns</th>
+                <th class="text-left">Lines</th>
                 <th class="text-left hidden-xs hidden-sm">Single Content</th>
-                <th class="text-left">Logo Print</th>
+                <th class="text-left">Logo</th>
                 <th class="text-left">Orientation</th>
+                <th class="text-left">Actions</th>
             </tr>
             </thead>
             <tbody id="table-body">
@@ -277,10 +278,10 @@ echo $navbar_str;
                         </div>
                         <div class="form-group form-group-margin">
                             <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Logo Path</span>
+                                <span class="input-group-addon input-group-addon-label">Upload Logo</span>
                                 <div class="inner-addon right-addon">
                                     <i class="fa fa-long-arrow-down fa-size hidden-xs"></i>
-                                    <input type="file" name="nextTop" id="nextTop" class="form-control text-field-left-border custom-file-input" placeholder="Next Top" />
+                                    <input type="file" name="nextTop" id="nextTop" class="form-control text-field-left-border custom-file-input" placeholder="" />
                                 </div>
                             </div>
                             <div class='info'></div>
