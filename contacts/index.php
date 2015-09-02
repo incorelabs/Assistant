@@ -121,7 +121,7 @@ define("ROOT", "../");
                             </div>
                             <div>
                                 <!--<button type="button" class="btn btn-info btn-size"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>-->
-                                <button class="btn btn-primary btn-size" onclick="openAddContact();"><span
+                                <button class="btn btn-primary btn-size" onclick="pageContact.openAddContact();"><span
                                         class="glyphicon glyphicon-plus"></span></button>
                             </div>
                         </div>
@@ -175,12 +175,12 @@ define("ROOT", "../");
     </div>
 
 
-    <!-- Add Contact Modal -->
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal" aria-hidden="true">
+    <!-- Contact Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <form class="form-horizontal" method="POST" action="add.php" id="addContactForm" autocomplete="off">
+                <form class="form-horizontal" method="POST" action="controller.php" id="contactForm" autocomplete="off">
 
                     <div class="modal-header">
 
@@ -192,25 +192,24 @@ define("ROOT", "../");
                         </div>
 
                         <div class="form-group pull-right">
-                            <button type="button" class="btn btn-success" onclick="submitContactForm(event);">
+                            <button type="submit" class="btn btn-success button-top-remove">
                                 <span class='glyphicon glyphicon-ok'></span>
                             </button>
                         </div>
 
-                        <h4 id="contactModalHeading" class="modal-title text-center">
-                            Add Contact
-                        </h4>
+                        <h4 id="contactModalHeading" class="modal-title text-center"></h4>
                     </div>
 
                     <div class="modal-body">
-                        <input type="hidden" name="id" id='contactCode'/>
+                        <input type="hidden" name="contactCode" id='contactCode'/>
+                        <input type="hidden" name="mode" id="mode" />
 
                         <div class="form-group form-group-margin">
                             <label class="col-xs-3 control-label">Private</label>
 
                             <div class="col-xs-3">
                                 <div class='switch switch-padding'>
-                                    <input type='checkbox' name='Private' id='addPrivacy' class='switch-input'>
+                                    <input type='checkbox' name='private' id='addPrivacy' class='switch-input'>
                                     <label for='addPrivacy' class='switch-label'></label>
                                 </div>
                             </div>
@@ -218,13 +217,12 @@ define("ROOT", "../");
 
                             <div class="col-xs-3">
                                 <div class='switch switch-padding'>
-                                    <input type='checkbox' name='activeStatus' id='addActiveStatus' class='switch-input'
+                                    <input type='checkbox' name='active' id='addActiveStatus' class='switch-input'
                                            checked='checked'>
                                     <label for='addActiveStatus' class='switch-label'></label>
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" name="inputType" id="inputType"/>
 
                         <div class="form-group form-group-margin">
                             <div class="input-group">
@@ -277,9 +275,9 @@ define("ROOT", "../");
                                 <span class="input-group-addon input-group-addon-label">Mobile</span>
                                 <input type="text" name="mobile" id="addMobile"
                                        class="form-control text-field-left-border" placeholder="Mobile"/>
-                                <span class="input-group-btn"><button
-                                        class="btn btn-success button-addon-custom btn-add-mobile" type="button"><i
-                                            class="fa fa-plus fa-lg"></i></button></span>
+                            <span class="input-group-btn"><button
+                                    class="btn btn-success button-addon-custom btn-add-mobile" type="button"><i
+                                        class="fa fa-plus fa-lg"></i></button></span>
                             </div>
                         </div>
                         <div class='addMobileDiv'></div>
@@ -288,9 +286,9 @@ define("ROOT", "../");
                                 <span class="input-group-addon input-group-addon-label">Email</span>
                                 <input type="email" name="email" id="addEmail"
                                        class="form-control text-field-left-border" placeholder="Email"/>
-                                <span class="input-group-btn"><button
-                                        class="btn btn-success button-addon-custom btn-add-email" type="button"><i
-                                            class="fa fa-plus fa-lg"></i></button></span>
+                            <span class="input-group-btn"><button
+                                    class="btn btn-success button-addon-custom btn-add-email" type="button"><i
+                                        class="fa fa-plus fa-lg"></i></button></span>
                             </div>
                         </div>
                         <div class='addEmailDiv'></div>
@@ -535,9 +533,9 @@ define("ROOT", "../");
                                         <span class="input-group-addon input-group-addon-label">Phone</span>
                                         <input type="text" name="homePhone" id="homePhone"
                                                class="form-control text-field-left-border" placeholder="Phone"/>
-                                        <span class="input-group-btn"><button
-                                                class="btn btn-success button-addon-custom btn-home-phone"
-                                                type="button"><i class="fa fa-plus fa-lg"></i></button></span>
+                                    <span class="input-group-btn"><button
+                                            class="btn btn-success button-addon-custom btn-home-phone"
+                                            type="button"><i class="fa fa-plus fa-lg"></i></button></span>
                                     </div>
                                 </div>
                                 <div class="addHomePhone"></div>
@@ -666,9 +664,9 @@ define("ROOT", "../");
                                         <span class="input-group-addon input-group-addon-label">Phone</span>
                                         <input type="text" name="workNumber" id="workNumber"
                                                class="form-control text-field-left-border" placeholder="Phone"/>
-                                        <span class="input-group-btn"><button
-                                                class="btn btn-success button-addon-custom btn-work-phone"
-                                                type="button"><i class="fa fa-plus fa-lg"></i></button></span>
+                                    <span class="input-group-btn"><button
+                                            class="btn btn-success button-addon-custom btn-work-phone"
+                                            type="button"><i class="fa fa-plus fa-lg"></i></button></span>
                                     </div>
                                 </div>
                                 <div class="addWorkPhone"></div>
@@ -797,9 +795,9 @@ define("ROOT", "../");
                                         <span class="input-group-addon input-group-addon-label">Phone</span>
                                         <input type="text" name="otherNumber" id="otherNumber"
                                                class="form-control text-field-left-border" placeholder="Phone"/>
-                                        <span class="input-group-btn"><button
-                                                class="btn btn-success button-addon-custom btn-other-phone"
-                                                type="button"><i class="fa fa-plus fa-lg"></i></button></span>
+                                    <span class="input-group-btn"><button
+                                            class="btn btn-success button-addon-custom btn-other-phone"
+                                            type="button"><i class="fa fa-plus fa-lg"></i></button></span>
                                     </div>
                                 </div>
                                 <div class="addOtherPhone"></div>
