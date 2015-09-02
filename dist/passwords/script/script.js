@@ -147,7 +147,7 @@ function openDeleteModal(index){
 
 function openAddModal(){
 	document.getElementById("form-passwords").reset();
-	$("#input-type").val("A");
+	$("#mode").val("A");
 	modalHeading = "Add";
 	$("#passwordCode").val("1");
 	$("#addPassword").modal('show');
@@ -156,7 +156,7 @@ function openAddModal(){
 function openEditPassword(index){
 	detailIndex = index;
 	var detail = passwordList[index];
-	$("#input-type").val("M");
+	$("#mode").val("M");
 	modalHeading = "Edit";
 	$("#passwordCode").val(detail["PasswordCode"]);
 	setModalInputFields(detail);

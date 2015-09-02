@@ -124,7 +124,7 @@ echo $navbar_str;
                     </h4>
                 </div>
                 <input type="hidden" id="familyCode" name="familyCode" value="1" />
-                <input type="hidden" id="input-type" name="mode" />
+                <input type="hidden" id="mode" name="mode" />
                 <div class="modal-body">
                     <div class="form-group form-group-margin">
                         <div class="input-group">

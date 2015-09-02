@@ -148,7 +148,7 @@ echo $navbar_str;
 				</div>
 				<div class="modal-body">
 					<input type="hidden" name="passwordTypeCode" id="passwordTypeCode" value="0" />
-					<input type="hidden" name="mode" id="input-type" />
+					<input type="hidden" name="mode" id="mode" />
 					<input type="hidden" name="passwordCode" id="passwordCode" value="1" />
 					<div class="form-group form-group-margin">
 						<label class="col-xs-3 control-label">Private</label>

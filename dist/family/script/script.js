@@ -60,7 +60,7 @@ function editFamily(index){
 	setInputFields(personDetail);
 	$("#familyCode").val(personDetail["FamilyCode"]);
 	//$("#form-family").attr("action","edit.php");
-	$("#input-type").val('M');
+	$("#mode").val('M');
 	$("#addFamily").modal('show');
 }
 
@@ -224,7 +224,7 @@ $(document).ready(function(){
 		initializeDate();
 		mode = 1;
 		//$("#form-family").attr("action","add.php");
-		$("#input-type").val('A');
+		$("#mode").val('A');
 		$("#addFamily").modal('show');
 		document.getElementById( 'loginAccess' ).style.display = 'none';
 	});
