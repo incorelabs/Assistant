@@ -1,11 +1,19 @@
 <?php
 session_start();
-
-include_once ROOT.'dist/authenticate.php';
 define("ROOT", "../");
+include_once ROOT.'dist/authenticate.php';
+require_once ROOT.'db/Connection.php';
+
+$mysqli = getConnection();
+$regCode = intval($_SESSION['s_id']);
+
 class ContactList{
     var $limit;
     var $requestPage;
+    var $contactList;
+    var $count;
+    var $mysqli;
+    var $regCode;
 
     function __construct($limit,$page){
         $this->limit = $limit;
@@ -18,6 +26,10 @@ class ContactList{
         return array("lower"=>$lower, "upper" => $upper);
     }
 
+    function setMysqli($mysqli){
+        $this->mysqli = $mysqli;
+    }
+
     function setLimit($limit){
         $this->limit = $limit;
     }
@@ -25,13 +37,21 @@ class ContactList{
     function setRequestPage($requestPage){
         $this->requestPage = $requestPage;
     }
+
+    function setCount($count = null){
+        if(is_null($count)){
+            $sql = "";
+            if($result = $this->mysqli->query($sql)) {
+
+            }
+        }
+    }
 }
 
 function createResponse($status,$message){
     return array('status' => $status, 'message' => $message);
 }
 
-$regCode = intval($_SESSION['s_id']);
 $validate;
 $response;
 
@@ -48,8 +68,7 @@ do{
 }while(0);
 
 if($validate){
-    require_once ROOT.'db/Connection.php';
-    $mysqli = getConnection();
+
     $limit = 250;
     $requestPage = intval($_GET['pageNo']);
 
@@ -57,17 +76,20 @@ if($validate){
     $contactList = array();
 
     $sql = "SELECT Table151.ContactCode,
-                Table151.FullName,
+                Table151.FullName
             FROM Table151
             ORDER BY Table151.FullName
             LIMIT ".$limit." OFFSET ".$logicObj->getLimits()["lower"].";";
 
+    //echo $sql;
     if($result = $mysqli->query($sql)){
+
         if($result->num_rows == 0){
             $validate = false;
             $response = createResponse(0,"No contacts");
         }
         else{
+            echo $result->num_rows;
             $i = 0;
             while($row = $result->fetch_assoc()){
                 $contactList[$i] = array($row['ContactCode'],$row['FullName']);
@@ -83,6 +105,7 @@ if($validate){
             $row = $result->fetch_assoc();
             $noOfContacts = intval($row['count']);
             $pages = round($noOfContacts/$limit);
+            $response = createResponse(1,"Success");
             $response["pages"] = $pages;
             $response["result"] = $contactList;
             $validate = true;
