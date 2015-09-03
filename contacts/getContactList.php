@@ -18,6 +18,8 @@ class ContactList{
     function __construct($limit,$page){
         $this->limit = $limit;
         $this->requestPage = $page;
+        $this->regCode = intval($_SESSION['s_id']);
+        $this->mysqli = getConnection();
     }
 
     function getLimits(){
@@ -30,6 +32,10 @@ class ContactList{
         $this->mysqli = $mysqli;
     }
 
+    function setRegCode($regCode){
+        $this->regCode = $regCode;
+    }
+
     function setLimit($limit){
         $this->limit = $limit;
     }
@@ -40,7 +46,7 @@ class ContactList{
 
     function setCount($count = null){
         if(is_null($count)){
-            $sql = "";
+            $sql = "SELECT count(*) as 'count' FROM Table151 WHERE Table151.RegCode = ".$this->regCode;
             if($result = $this->mysqli->query($sql)) {
 
             }
@@ -89,7 +95,6 @@ if($validate){
             $response = createResponse(0,"No contacts");
         }
         else{
-            echo $result->num_rows;
             $i = 0;
             while($row = $result->fetch_assoc()){
                 $contactList[$i] = array($row['ContactCode'],$row['FullName']);
