@@ -134,7 +134,7 @@ do{
 }while(0);
 
 if($validate){
-    $limit = 3; //should be greater than 1
+    $limit = 2; //should be greater than 1
     $requestPage = intval($_GET['pageNo']) - 1;
 
     $contactListObj = new ContactList($limit,$requestPage);

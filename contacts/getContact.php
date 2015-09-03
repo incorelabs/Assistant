@@ -1,8 +1,4 @@
 <?php
-$url = "http://incorelabs.com";
-header("Access-Control-Allow-Origin:".$url);
-header("Access-Control-Request-Method: GET, POST");
-header("Access-Control-Allow-Credentials: true");
 define("ROOT", "../");
 
 require_once ROOT.'db/Connection.php';
