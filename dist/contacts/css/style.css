@@ -457,6 +457,7 @@ h5{
   height: 150px;
   border-radius: 10px;
 }
+
 .loading{
   height:calc(100vh - 135px);
   background-image: url('../../../img/index/loading2.gif');
@@ -473,29 +474,22 @@ h5{
   color: #b71c1c;
 }
 
-.radio-btn-custom{
-  width: 80px;
-  margin-right: 0px;
-  padding: 12px 12px;
-}
-@media(min-width:768px) {
-  .radio-btn-custom
-  {
-    width: 120px;
-    margin-right: 0px;
-  }
+.input-group-addon-label{
+    min-width: 65px;
+    font-size: 10px;
+    text-align: left;
 }
 
-.input-group-addon-text{
-  min-width: 95px;
-  font-size: 10px;
-  text-align: left;
-  background-color: #fff;
-}
 @media screen and (min-width: 768px) {
-  .input-group-addon-text
-  {
-    font-size: 14px;
-    min-width: 115px;
-  }
+    .input-group-addon-label
+    {
+        font-size: 14px;
+        min-width: 114px;
+        text-align: left;
+    }
+    .radio-btn-custom
+    {
+        width: 120px;
+        margin-right: 0px;
+    }
 }
