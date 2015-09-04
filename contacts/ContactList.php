@@ -141,7 +141,7 @@ if($validate){
     $requestPage = intval($_GET['pageNo']) - 1;
 
     $contactListObj = new ContactList($limit,$requestPage);
-    $response = $contactListObj->getContactListQuery();
+    $response = $contactListObj->getResponse();
 }
 
 echo json_encode($response);
