@@ -84,12 +84,77 @@ class ContactDetail
             if($result->num_rows == 1){
                 $this->successful = true;
                 $this->detail["contact"] = $result->fetch_assoc();
+
+                //Set Address
+                $this->setAddressDetails();
+
+                //Set Image URL
+                if($this->detail["contact"]["PhotoUploaded"] == 1){
+                    $this->setImagePath();
+                }
             }
             else{
                 $this->successful = false;
                 $this->errMsg = "No detail";
             }
 
+        }
+        else{
+            $this->successful = false;
+            $this->errMsg = $this->mysqli->error;
+        }
+    }
+
+    function getAddressDetailQuery($tableName){
+        $sql = "SELECT `Address1`, `Address2`, `Address3`, `Address4`, `Address5`, `Pincode`, `CountryCode`, `StateCode`, `CityCode`, `AreaCode`, `Phone1`, `Phone2`, `Phone3`
+                FROM `".$tableName."`
+                WHERE  `RegCode` = ".$this->regCode." AND `ContactCode` = ".$this->contactCode.";";
+        return $sql;
+    }
+
+    function setAddressDetails(){
+        $arr = array(array("objName"=>"home","tableName"=>"Table153"),array("objName"=>"work","tableName"=>"Table155"),array("objName"=>"other","tableName"=>"Table157"));
+        foreach ($arr as $value) {
+            $this->setAddressDetail($value);
+        }
+    }
+
+    function setAddressDetail($tableArr){
+        $sql = $this->getAddressDetailQuery($tableArr["tableName"]);
+        if($result = $this->mysqli->query($sql)){
+            $this->successful = true;
+            if($result->num_rows == 0){
+                $this->detail["address"][$tableArr["objName"]] = null;
+            }
+            else{
+                $this->detail["address"][$tableArr["objName"]] = $result->fetch_assoc();
+            }
+        }
+        else{
+            $this->successful = false;
+            $this->errMsg = $this->mysqli->error;
+        }
+    }
+
+    function getImagePathQuery(){
+        $sql = "SELECT `ImagePath`
+                FROM `Table159`
+                WHERE `RegCode` = ".$this->regCode." AND
+                `ContactCode` = ".$this->contactCode." AND
+                `SerialNo` = 1;";
+        return $sql;
+    }
+
+    function setImagePath(){
+        $sql = $this->getImagePathQuery();
+        if($result = $this->mysqli->query($sql)){
+            $this->successful = true;
+            if($result->num_rows == 0){
+                $this->detail["contact"]["PhotoUploaded"] = 0;
+            }
+            else{
+                $this->detail["contact"]["ImageURL"] = $result->fetch_assoc()["ImagePath"];
+            }
         }
         else{
             $this->successful = false;

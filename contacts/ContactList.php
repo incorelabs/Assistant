@@ -62,7 +62,7 @@ class ContactList{
             else{
                 $i = 0;
                 while($row = $result->fetch_assoc()){
-                    $this->contactList[$i] = array($row['ContactCode'],$row['FullName']);
+                    $this->contactList[$i] = $row;
                     $i++;
                 }
                 $this->successful = true;
