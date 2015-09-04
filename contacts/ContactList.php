@@ -102,7 +102,9 @@ class ContactList{
 
     function setPages($pages=null){
         if(is_null($pages)){
-            $this->pages = intval($this->count / $this->limit + 1);
+            $pages = intval($this->count / $this->limit);
+            $remainder = intval($this->count % $this->limit);
+            $this->pages = $pages + (($remainder == 0) ? 0 : 1);
         }
         else{
             $this->pages = $pages;
