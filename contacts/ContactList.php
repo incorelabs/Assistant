@@ -35,11 +35,7 @@ class ContactList{
             $where .= " AND ".$parameter["key"]." LIKE %".$parameter["value"]."% ";
         }
 
-        $sql = "SELECT Table151.ContactCode,
-                Table151.FullName
-            FROM Table151
-            ORDER BY Table151.FullName ".$where."
-            LIMIT ".$this->limit." OFFSET ".$this->getLimits()["lower"].";";
+        $sql = "SELECT Table151.ContactCode, Table151.FullName FROM Table151".$where." ORDER BY Table151.FullName LIMIT ".$this->limit." OFFSET ".$this->getLimits()["lower"].";";
         return $sql;
     }
 
@@ -145,7 +141,7 @@ if($validate){
     $requestPage = intval($_GET['pageNo']) - 1;
 
     $contactListObj = new ContactList($limit,$requestPage);
-    $response = $contactListObj->getResponse();
+    $response = $contactListObj->getContactListQuery();
 }
 
 echo json_encode($response);
