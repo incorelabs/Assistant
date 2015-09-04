@@ -29,11 +29,16 @@ class ContactList{
         return array("lower"=>$lower, "upper" => $upper);
     }
 
-    function getContactListQuery(){
+    function getContactListQuery($parameter = null){
+        $where = " WHERE RegCode = ".$this->regCode." ";
+        if(!is_null($parameter)){
+            $where .= " AND ".$parameter["key"]." LIKE %".$parameter["value"]."% ";
+        }
+
         $sql = "SELECT Table151.ContactCode,
                 Table151.FullName
             FROM Table151
-            ORDER BY Table151.FullName
+            ORDER BY Table151.FullName ".$where."
             LIMIT ".$this->limit." OFFSET ".$this->getLimits()["lower"].";";
         return $sql;
     }
