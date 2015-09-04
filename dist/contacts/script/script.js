@@ -1,994 +1,377 @@
-var contact;
-var contactList;
-var searchList;
-var contactCode = 1234567890;
-var titleTags = [];
-var titleCode = [];
-var groupTag = [];
-var groupCode = [];
-var countryTag = [];
-var countryCode = [];
-var country = [];
-var stateTag = [];
-var stateCode = [];
-var state = [];
-var cityTag = [];
-var cityCode = [];
-var city = [];
-var areaTag = [];
-var areaCode = [];
-var area = [];
-var mobileAddCount = 0;
-var emailAddCount = 1;
-var homePhoneCount = 1;
-var workPhoneCount = 1;
-var otherPhoneCount = 1;
-
-function getContactList(){
-  $.ajax({
-    method: "GET",
-    url: root+"contacts/getContact.php",
-    data: { 
-        list: 1
-     }
-  })
-    .done(function(msg) {
-      contactList = JSON.parse(msg);
-      setContactViewList(contactList);
-    });
-}
-
-function getContact(id){
-  showLoadingInContactDetail();
-  console.log("Getting contact details of : "+id);
-  $.ajax({
-    method: "GET",
-    url: root+"contacts/getContact.php",
-    data: { 
-        id: id
-     }
-  })
-    .done(function(msg) {
-      contact = JSON.parse(msg);
-      console.log("Contact arr: ");
-      console.log(contact);
-      setContactView(contact);
-    });
-}
-
-function getTitles(){
-  var title;
-  $.ajax({
-    method: "GET",
-    url: root+"contacts/getMasters.php",
-    data: { 
-        type: 'title'
-     }
-  })
-    .done(function(msg) {
-      title = JSON.parse(msg);
-      for (var i = 0; i < title.length; i++) {
-        titleTags[i] = title[i]['description'];
-        titleCode[i] = title[i]['code'];
-      };
-      setTitleAutoComplete();
-    });
-}
-
-function getGroupes(){
-  var title;
-  $.ajax({
-    method: "GET",
-    url: root+"contacts/getMasters.php",
-    data: { 
-        type: 'group'
-     }
-  })
-    .done(function(msg) {
-      title = JSON.parse(msg);
-      for (var i = 0; i < title.length; i++) {
-        groupTag[i] = title[i]['description'];
-        groupCode[i] = title[i]['code'];
-      };
-      setGroupAutoComplete();
-    });
-}
-
-function getCountry(){
-  $.ajax({
-    method: "GET",
-    url: root+"contacts/getMasters.php",
-    data: { 
-        type: 'country'
-     }
-  })
-    .done(function(msg) {
-      country = JSON.parse(msg);
-      for (var i = 0; i < country.length; i++) {
-        countryTag[i] = country[i]['description'];
-        countryCode[i] = country[i]['code'];
-      };
-      setCountryAutoComplete();
-    });
-}
-
-function getStates(){
-  $.ajax({
-    method: "GET",
-    url: root+"contacts/getMasters.php",
-    data: { 
-        type: 'state'
-     }
-  })
-    .done(function(msg) {
-      state = JSON.parse(msg);
-      for (var i = 0; i < state.length; i++) {
-        stateTag[i] = state[i]['description'];
-        stateCode[i] = state[i]['code'];
-      };
-      setStateAutoComplete();
-    });
-}
-
-function getCities(){
-  $.ajax({
-    method: "GET",
-    url: root+"contacts/getMasters.php",
-    data: { 
-        type: 'city'
-     }
-  })
-    .done(function(msg) {
-      city = JSON.parse(msg);
-      for (var i = 0; i < city.length; i++) {
-        cityTag[i] = city[i]['description'];
-        cityCode[i] = city[i]['code'];
-      };
-      setCityAutoComplete();
-    });
-}
-
-function getAreas(){
-  $.ajax({
-    method: "GET",
-    url: root+"contacts/getMasters.php",
-    data: { 
-        type: 'area'
-     }
-  })
-    .done(function(msg) {
-      area = JSON.parse(msg);
-      for (var i = 0; i < area.length; i++) {
-        areaTag[i] = area[i]['description'];
-        areaCode[i] = area[i]['code'];
-      };
-      setAreaAutoComplete();
-    });
-}
-
-function setContactViewList(arr){
-  var str = "";
-  if (arr.length == 0) {
-    str = "<div class='list-group-item'><li class='list-group-item-text header_font'>No contacts yet...</li></div>";
-  }
-  else{
-    var letterIndex = "";
-    for (var i = 0; i < arr.length; i++) {
-      var letter = arr[i][1].toUpperCase()[0];
-      if (letter != letterIndex) {
-        str += "<li class='list-group-item-info li-pad'>"+letter+"</li>";
-        letterIndex = letter;
-      }
-      str += "<a href='#' onclick='getContact("+arr[i][0]+")' class='list-group-item contacts_font'><h4 class='list-group-item-heading contacts_font'>"+arr[i][1]+"</h4></a>";
-    }
-  }
-
-  $("#contactList").empty();
-  $("#contactList").html(str);
-}
-
-function doSearch(){
-  var query = $("#searchContact").val();
-  query = query.toLowerCase();
-  searchList = [];
-  if (query.length == 0) {
-    searchList = contactList;
-  }
-  else{
-    for (var i = 0; i < contactList.length; i++) {
-      var name = contactList[i][1].toLowerCase();
-      if (name.indexOf(query) != -1) {
-        searchList.push(contactList[i]);
-      }
-    }
-  }
-  setContactViewList(searchList);
-}
-
-function setContactView(arr){
-  //var json = JSON.stringify(arr);
-  //console.log(arr);
-  if (arr.contact ) {
-    
-  }
-  else{
-    getContact(0);
-    return;
-  }
-  var headerStr = "<h12>Contact Details</h12><button class='btn btn-success pull-right' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger pull-left' onclick='openDeleteModal("+((arr.contact) ? arr.contact.contactCode : "1")+")'><span class='glyphicon glyphicon-trash'></span></button>";
-  var str = "";
-  var imgLocation = "";
-  if (arr.contact.imageLocation) {
-    imgLocation = arr.contact.imageLocation;
-  }
-  else{
-    imgLocation = "../img/contacts/profile/profilePicture1.png";
-  }
-
-
-  str += "<div class='list-group-item'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='"+imgLocation+"' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>"+((arr.contact.contactTitle) ? arr.contact.contactTitle + " " : "")+((arr.contact.fullName) ? arr.contact.fullName : "")+"</h5></div>";
-
-
-  //if (arr.contact.fullName) {
-  //  str += "<div class='list-group-item'><h4 class='list-group-item-heading header_font'>Name<value class='name'>"+((arr.contact.fullName) ? arr.contact.fullName : "")+"</value></h4></div>";
-  //};
-
-  
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Guardian</div><value><div class='col-md-9'>"+((arr.contact.guardianName) ? arr.contact.guardianName : "")+"</div></value></div></div>";
-  
-
-  //if (arr.contact.company) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Company</div><value><div class='col-md-9'>"+((arr.contact.company) ? arr.contact.company : "" )+"</div></value></div></div>";
-  //};
-
-  //if (arr.contact.designation) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Designation</div><value><div class='col-md-9'>"+((arr.contact.designation) ? arr.contact.designation : "")+"</div></value></div></div>";
-  //};
-
-  //if (arr.contact.alias) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Alias</div><value><div class='col-md-9'>"+((arr.contact.alias) ? arr.contact.alias : "")+"</div></value></div></div>";
-  //};
-  
-  //if (arr.contact.dob) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.B</div><value><div class='col-md-9'>"+((arr.contact.dob) ? arr.contact.dob : "")+"</div></value></div></div>";
-  //};
-
-  //if (arr.contact.dom) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.M</div><value><div class='col-md-9'>"+((arr.contact.dom) ? arr.contact.dom : "")+"</div></value></div></div>";
-  //};
-
-  //if (arr.contact.group) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Group</div><value><div class='col-md-9'>"+((arr.contact.group) ? arr.contact.group : "")+"</div></value></div></div>";
-  //};
-
-  //if (arr.contact.remarks) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Remarks</div><value><div class='col-md-9'>"+((arr.contact.remarks) ? arr.contact.remarks : "")+"</div></value></div></div>";
-  //};
-
-  //if (arr.contact.mobile) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile</div><value><div class='col-md-9'><a href='tel:"+((arr.contact.mobile) ? arr.contact.mobile : "")+"'>"+((arr.contact.mobile) ? arr.contact.mobile : "")+"</a></div></value></div></div>";
-  //};
-
-  //if (arr.contact.email) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Email</div><value><div class='col-md-9'><a href= 'mailto:"+((arr.contact.email) ? arr.contact.email : "")+"'>"+((arr.contact.email) ? arr.contact.email : "")+"</a></div></value></div></div>";
-  //};
-  var homeAddress = "";
-  if (arr.address) {
-    if (arr.address.home) {
-      var home = arr.address.home
-      homeAddress = home.address;
-      homeAddress = homeAddress.replace(/(?:\r\n|\r|\n)/g, '<br />');
-      homeAddress += "(Area) "+((home.area) ? ("<br />"+home.area) : "");
-      homeAddress += ((home.city) ? ("<br />"+home.city+" - ") : "");
-      homeAddress += ((home.pincode) ? (home.pincode) : "");
-      homeAddress += ((home.state) ? ("<br />"+home.state) : "");
-      homeAddress += ((home.country) ? ("<br />"+home.country) : "");
-      homeAddress += ((home.phone) ? ("<br />"+home.phone) : "");
-      
-      //str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.state : "")+"</div></value></div></div>";
-      //str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home City</div><value><div class='col-md-9'>"+((arr.address) ? arr.address.home.country : "")+"</div></value></div></div>";
-    }
-    else{
-      homeAddress = "No home address details";
-    }
-  }
-  else{
-    homeAddress = "No details";
-  }
-   
-  str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Address</div><value><div class='col-md-9'>"+homeAddress+"</div></value></div></div>";
-
-
-  //if (arr.contact.facebook) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Facebook</div><value><div class='col-md-9'><a href='"+((arr.contact.facebook) ? arr.contact.facebook : "")+"' target='_blank'>"+((arr.contact.facebook) ? arr.contact.facebook : "")+"</a></div></value></div></div>";
-  //};
-
-  //if (arr.contact.twitter) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Twitter</div><value><div class='col-md-9'><a href='"+((arr.contact.twitter) ? arr.contact.twitter  : "")+"' target='_blank'>"+((arr.contact.twitter) ? arr.contact.twitter  : "")+"</a></div></value></div></div>";
-  //};
-
-  //if (arr.contact.google) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Google</div><value><div class='col-md-9'><a href='"+((arr.contact.google) ? arr.contact.google : "")+"' target='_blank'>"+((arr.contact.google) ? arr.contact.google : "")+"</a></div></value></div></div>";
-  //};
-
-  //if (arr.contact.linkedin) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Linkedin</div><value><div class='col-md-9'><a href='"+((arr.contact.linkedin) ? arr.contact.linkedin  : "")+"' target='_blank'>"+((arr.contact.linkedin) ? arr.contact.linkedin  : "")+"</a></div></value></div></div>";
-  //};
-
-  //if (arr.contact.website) {
-    str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'><a href='"+((arr.contact.website) ? arr.contact.website : "")+"' target='_blank'>"+((arr.contact.website) ? arr.contact.website : "")+"</a></div></value></div></div>";
-  //};
-
-  $("#contactDetailHeader").empty();
-  $("#contactDetailHeader").html(headerStr);
-  $("#contactDetailBody").empty();
-  $("#contactDetailBody").html(str);
-}
-
-function openAddContact () {
-  $("#addContactForm").attr("action","add.php");
-  $("#contactCode").val(contactCode);
-  $("#inputType").val(1);
-  $('#contactModalHeading').empty();
-  $('#contactModalHeading').html("Add Contact");
-  document.getElementById("addContactForm").reset();
-  $('.addMobileDiv').empty();
-  mobileAddCount = 0;
-  $('.addEmailDiv').empty();
-  emailAddCount = 1;
-  $('.addHomePhone').empty();
-  homePhoneCount = 1;
-  $('.addWorkPhone').empty();
-  workPhoneCount = 1;
-  $('.addOtherPhone').empty();
-  otherPhoneCount = 1;
-  $("#addModal").modal('show');
-
-  $(".tab-pane").removeClass('active');
-  $("li").removeClass('active');
-
-}
-
-function openEditContact () {
-  document.getElementById("addContactForm").reset();
-
-  $('#contactModalHeading').empty();
-  $('#contactModalHeading').html("Edit Contact");
-  $("#addContactForm").attr("action","add.php");
-  $("#inputType").val(2);
-  $("#contactCode").val(contact.contact.contactCode);
-
-  if (contact.contact.contactTitle) {
-    $('#addTitle').val(contact.contact.contactTitle);
-  };
-
-  if (contact.contact.titleCode) {
-    $('#titleId').val(contact.contact.titleCode);
-  };
-
-  if (contact.contact.firstName) {
-    $('#addFirstName').val(contact.contact.firstName);
-  };
-
-  if (contact.contact.middleName) {
-    $('#addMiddleName').val(contact.contact.middleName);
-  };
-
-  if (contact.contact.lastName) {
-    $('#addLastName').val(contact.contact.lastName);
-  };
-
-  if (contact.contact.guardianName) {
-    $('#addGuardianName').val(contact.contact.guardianName);
-  };
-
-  if (contact.contact.company) {
-    $('#addCompany').val(contact.contact.company);
-  };
-
-  if (contact.contact.designation) {
-    $('#addDesignation').val(contact.contact.designation);
-  };
-
-  if (contact.contact.alias) {
-    $('#addAlias').val(contact.contact.alias);
-  };
-  
-  if (contact.contact.dob) {
-    $('#addDOB').val(contact.contact.dob);
-  };
-
-  if (contact.contact.dom) {
-    $('#addDOM').val(contact.contact.dom);
-  };
-
-  if (contact.contact.group) {
-    $('#addGroup').val(contact.contact.group);
-  };
-
-  if (contact.contact.groupCode) {
-    $('#groupId').val(contact.contact.groupCode);
-  };
-
-  if (contact.contact.remarks) {
-    $('#addRemarks').val(contact.contact.remarks);
-  };
-
-  if (contact.contact.mobile) {
-    $('#addMobile').val(contact.contact.mobile);
-  };
-
-  if (contact.contact.email) {
-    $('#addEmail').val(contact.contact.email);
-  };
-
-  if (contact.contact.facebook) {
-    $('#addFacebook').val(contact.contact.facebook);
-  };
-
-  if (contact.contact.twitter) {
-    $('#addTwitter').val(contact.contact.twitter);
-  };
-
-  if (contact.contact.google) {
-    $('#addGoogle').val(contact.contact.google);
-  };
-
-  if (contact.contact.linkedin) {
-    $('#addLinkedin').val(contact.contact.linkedin);
-  };
-
-  if (contact.contact.website) {
-    $('#addWebsite').val(contact.contact.website);
-  };
-
-  if (contact.address) {
-    var address = contact.address;
-    var type = "";
-    if (address.home) {
-      type = "home";
-      createEditAddressData(address,type);
-    }
-
-    if (address.work) {
-      type = "work";
-      createEditAddressData(address,type);
-    }
-
-    if (address.other) {
-      type = "other";
-      createEditAddressData(address,type);
-    }
-  }
-
-  $("#addModal").modal('show');
-}
-
-function createEditAddressData(address,type){
-  if (address[type].countryCode) {
-    $("#"+type+"Country").val(address[type].country);
-    $("#"+type+"CountryCode").val(address[type].countryCode);
-  }
-
-  if (address[type].stateCode) {
-    $("#"+type+"State").val(address[type].state);
-    $("#"+type+"StateCode").val(address[type].stateCode); 
-  }
-
-  if (address[type].cityCode) {
-    $("#"+type+"City").val(address[type].city);
-    $("#"+type+"CityCode").val(address[type].cityCode); 
-  } 
-
-  if (address[type].areaCode) {
-    $("#"+type+"Area").val(address[type].area);
-    $("#"+type+"AreaCode").val(address[type].areaCode); 
-  }
-
-  if (address[type].address1) {
-    $("#"+type+"Address1").val(address[type].address1);
-  } 
-
-  if (address[type].address2) {
-    $("#"+type+"Address2").val(address[type].address2);
-  }
-
-  if (address[type].address3) {
-    $("#"+type+"Address3").val(address[type].address3);
-  }
-
-  if (address[type].address4) {
-    $("#"+type+"Address4").val(address[type].address4);
-  }
-
-  if (address[type].address5) {
-    $("#"+type+"Address5").val(address[type].address5);
-  }
-
-  if (address[type].pincode) {
-    $("#"+type+"Pincode").val(address[type].pincode);
-  }
-
-  if (address[type].phone) {
-    $("#"+type+"Phone").val(address[type].phone);
-  }
-}
-
-function openDeleteModal(id){
-  $("#deleteContact").val(id);
-  $("#deleteModal").modal("show");
-}
-
-function setTitleAutoComplete(){
-  setAutoComplete("#addTitle", "#titleId", titleTags, titleCode);
-}
-
-function setGroupAutoComplete(){
-  setAutoComplete("#addGroup", "#groupId", groupTag, groupCode);
-}
-
-function setCountryAutoComplete(){
-  setAutoComplete("#homeCountry", "#homeCountryCode", countryTag, countryCode);
-  setAutoComplete("#workCountry", "#workCountryCode", countryTag, countryCode);
-  setAutoComplete("#otherCountry", "#otherCountryCode", countryTag, countryCode);
-}
-
-function setAutoComplete(autoCompleteId, changeCodeId, autoCompleteArray, changeCodeArray){
-  $( autoCompleteId ).autocomplete({
-    source: autoCompleteArray,
-    change: function(event, ui){
-      if (ui.item) {
-        var index = $.inArray(ui.item.value, autoCompleteArray);
-        $(changeCodeId).val(changeCodeArray[index]);
-      }
-      else{
-        $(changeCodeId).val(-1);
-      }
+var pageContact = {
+    currentPageNo: 1,
+    localContact: null,
+    contactList: {},
+    searchList: {},
+    titleTags: [],
+    titleCode: [],
+    groupTag: [],
+    groupCode: [],
+    countryTag: [],
+    countryCode: [],
+    country: [],
+    stateTag: [],
+    stateCode: [],
+    state: [],
+    cityTag: [],
+    cityCode: [],
+    city: [],
+    areaTag: [],
+    areaCode: [],
+    area: [],
+    mobileAddCount: 0,
+    emailAddCount: 1,
+    homePhoneCount: 1,
+    workPhoneCount: 1,
+    otherPhoneCount: 1,
+    getContactList: function () {
+        var url = "ContactList.php";
+
+        $.getJSON(url, {
+            pageNo: pageContact.currentPageNo
+        }).done(function (data) {
+            console.log(data);
+
+            console.log(pageContact.currentPageNo);
+            pageContact.setContactList(data);
+        }).fail(function (error) {
+
+        });
     },
-    select: function(event, ui){
-      var index = $.inArray(ui.item.value, autoCompleteArray);
-      $(changeCodeId).val(changeCodeArray[index]);
-      console.log($(changeCodeId).val());
-    }
-  });
-}
+    setContactList: function (data) {
+        if (data.status == 1) {
+            $('#loadMore').remove();
+            pageContact.currentPageNo++;
+            var letterIndex = "";
+            var str = "";
+            for (var i = 0; i < data.result.length; i++) {
+                var letter = data.result[i][1].toUpperCase()[0];
+                console.log(letter);
+                if (letter != letterIndex) {
+                    str += "<li class='list-group-item-info li-pad'>" + letter + "</li>";
+                    letterIndex = letter;
+                    console.log(letterIndex);
+                }
+                str += "<a onclick='pageContact.getContactDetails(" + data.result[i][0] + ")' class='list-group-item contacts_font'><h4 class='list-group-item-heading contacts_font'>" + data.result[i][1] + "</h4></a>";
+            }
+            //$("#contactList").empty();
+            $("#contactList").append(str);
+            console.log(str);
+            // Print on screen
+            console.log(data.result);
+            if (pageContact.currentPageNo <= data.pages) {
+                // Show Load More
+                var str = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pageContact.getContactList();'>Load more..</a></div>";
+                $("#contactList").append(str);
+            }
 
-function setStateAutoComplete(){
-  setStateAutoCompleteWithOptions("#homeState","#homeStateCode","#homeCountry","#homeCountryCode");
-  setStateAutoCompleteWithOptions("#workState","#workStateCode","#workCountry","#workCountryCode");
-  setStateAutoCompleteWithOptions("#otherState","#otherStateCode","#otherCountry","#otherCountryCode");
-}
-
-function setStateAutoCompleteWithOptions(autoCompleteId,changeCodeId,countryId,countryCodeId){
-  $( autoCompleteId ).autocomplete({
-    source: stateTag,
-    change: function(event, ui){
-      if (ui.item) {
-        var index = $.inArray(ui.item.value, stateTag);
-        $(changeCodeId).val(stateCode[index]);
-      }
-      else{
-        $(changeCodeId).val(-1);
-      }
-    },
-    select: function(event, ui){
-      var index = $.inArray(ui.item.value, stateTag);
-      var code = stateCode[index];
-      $(changeCodeId).val(stateCode[index]);
-      var countryCodeValue = 0;
-      for (var i = 0; i < state.length; i++) {
-        if(state[i]["code"] == code){
-          countryCodeValue = state[i]["countryCode"];
-          break;
-        }
-      };
-      $(countryCodeId).val(countryCodeValue);
-      var countryIndex = $.inArray(countryCodeValue,countryCode);
-      $(countryId).val(countryTag[countryIndex]);
-      console.log($(changeCodeId).val());
-    }
-  });
-}
-
-function setCityAutoComplete(){
-  setCityAutoCompleteWithOptions("#homeCity","#homeCityCode","#homeCountry","#homeCountryCode","#homeState","#homeStateCode");
-  setCityAutoCompleteWithOptions("#workCity","#workCityCode","#workCountry","#workCountryCode","#workState","#workStateCode");
-  setCityAutoCompleteWithOptions("#otherCity","#otherCityCode","#otherCountry","#otherCountryCode","#otherState","#otherStateCode");
-}
-
-function setCityAutoCompleteWithOptions(autoCompleteId,changeCodeId,countryId,countryCodeId,stateId,stateCodeId){
-  $( autoCompleteId ).autocomplete({
-    source: cityTag,
-    change: function(event, ui){
-      if (ui.item) {
-        var index = $.inArray(ui.item.value, cityTag);
-        $(changeCodeId).val(cityCode[index]);
-      }
-      else{
-        $(changeCodeId).val(-1);
-      }
-    },
-    select: function(event, ui){
-      var index = $.inArray(ui.item.value, cityTag);
-      var code = cityCode[index];
-      $(changeCodeId).val(cityCode[index]);
-      var stateCodeValue = 0;
-      var countryCodeValue = 0;
-      for (var i = 0; i < city.length; i++) {
-        if(city[i]["code"] == code){
-          stateCodeValue = city[i]["stateCode"];
-          countryCodeValue = city[i]["countryCode"];
-          break;
-        }
-      };
-      $(stateCodeId).val(stateCodeValue);
-      var stateIndex = $.inArray(stateCodeValue,stateCode);
-      $(stateId).val(stateTag[stateIndex]);
-      console.log(stateTag[stateIndex]);
-      $(countryCodeId).val(countryCodeValue);
-      var countryIndex = $.inArray(countryCodeValue,countryCode);
-      $(countryId).val(countryTag[countryIndex]);
-      //console.log($("#homeStateCode").val());
-    }
-  });
-}
-
-function setAreaAutoComplete(){
-  setAutoComplete("#homeArea", "#homeArea", areaTag, areaCode);
-  setAutoComplete("#workArea", "#workAreaCode", areaTag, areaCode);
-  setAutoComplete("#otherArea", "#otherAreaCode", areaTag, areaCode);
-  //setAreaAutoCompleteWithOptions("#homeArea","#homeAreaCode","#homeCountry","#homeCountryCode","#homeState","#homeStateCode","#homeCity","#homeCityCode");
-  //setAreaAutoCompleteWithOptions("#workArea","#workAreaCode","#workCountry","#workCountryCode","#workState","#workStateCode","#workCity","#workCityCode");
-  //setAreaAutoCompleteWithOptions("#otherArea","#otherAreaCode","#otherCountry","#otherCountryCode","#otherState","#otherStateCode","#otherCity","#otherCityCode");
-}
-
-function setAreaAutoCompleteWithOptions(autoCompleteId,changeCodeId,countryId,countryCodeId,stateId,stateCodeId,cityId,cityCodeId){
-  $( autoCompleteId ).autocomplete({
-    source: areaTag,
-    change: function(event, ui){
-      if (ui.item) {
-        var index = $.inArray(ui.item.value, areaTag);
-        $(changeCodeId).val(areaCode[index]);
-      }
-      else{
-        $(changeCodeId).val(-1);
-      }
-    },
-    select: function(event, ui){
-      var index = $.inArray(ui.item.value, areaTag);
-      var code = areaCode[index];
-      $(changeCodeId).val(areaCode[index]);
-      var cityCodeValue = 0;
-      var stateCodeValue = 0;
-      var countryCodeValue = 0;
-      for (var i = 0; i < area.length; i++) {
-        if(area[i]["code"] == code){
-          cityCodeValue = area[i]["cityCode"]
-          stateCodeValue = area[i]["stateCode"];
-          countryCodeValue = area[i]["countryCode"];
-          break;
-        }
-      };
-
-      $(cityCodeId).val(cityCodeValue);
-      var cityIndex = $.inArray(cityCodeValue,cityCode);
-      $(cityId).val(cityTag[cityIndex]);
-
-      $(stateCodeId).val(stateCodeValue);
-      var stateIndex = $.inArray(stateCodeValue,stateCode);
-      $(stateId).val(stateTag[stateIndex]);
-      
-      console.log(stateTag[stateIndex]);
-      
-      $(countryCodeId).val(countryCodeValue);
-      var countryIndex = $.inArray(countryCodeValue,countryCode);
-      $(countryId).val(countryTag[countryIndex]);
-      //console.log($("#homeStateCode").val());
-    }
-  });
-}
-
-function submitContactForm(event){
-  console.log("Submit button clicked");
-  var formData = $('#addContactForm').serializeArray();
-  var uri = $("#addContactForm").attr("action");
-  var url = root + "contacts/" + uri;
-  showLoadingInContactDetail();
-  $("#addModal").modal('hide');
-
-  $.ajax({
-    method: "POST",
-    url: url,
-    data: formData
-  })
-    .done(function(msg) {
-      console.log(msg);
-      var response = JSON.parse(msg);
-      var id = parseInt(response.landing);
-      var status = parseInt(response.status)
-      if (status == 1) {
-        setTimeout(function(){
-          getContact(id);
-          getContactList();
-          showNotificationSuccess(response.message);
-          refreshMasterList();
-        },500);
-      }
-      else{
-        getContact(0);
-        showNotificationFailure(response.message);
-      }
-      console.log(id);
-    });
-}
-
-function showNotificationSuccess(msg) 
-{
-  $("#notification_success").html(msg);
-  document.getElementById('notification_success').style.display = "block";  
-  $("#notification_success").delay(2000).fadeOut("slow");
-}
-
-function showNotificationFailure(msg) 
-{
-  $("#notification_failure").html(msg);
-  document.getElementById('notification_failure').style.display = "block";  
-  $("#notification_failure").delay(2000).fadeOut("slow");
-}
-
-function showLoadingInContactDetail(){
-  var contactDetailStr = "<div class='list-group-item loading'></div>";
-  $("#contactDetailBody").html(contactDetailStr);
-}
-
-function refreshMasterList(){
-  getTitles();
-  getGroupes();
-  getCountry();
-  getStates();
-  getCities();
-  getAreas();
-}
-
-window.mobilecheck = function() {
-  var check = false;
-  (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4)))check = true})(navigator.userAgent||navigator.vendor||window.opera);
-  return check;
-}
-
-$(document).ready(function(event){
-  $('.btn-add-mobile').click(function()
-  {
-      if(mobileAddCount <= 1)
-      {
-        $(".addMobileDiv").append("<div class='description_text'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other Mobile' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-mobile' type='button' id=''><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
-        mobileAddCount++;
-      }
-      else
-      {
-        $('.btn-add-mobile').bind('click', true);
-      }
-  });
-  $('.addMobileDiv').on('click','.description_text button',function()
-  {
-    $(this).closest('.description_text').remove();
-     mobileAddCount--;
-  });
-
-  $('.btn-add-email').click(function()
-  {
-      if(emailAddCount <= 1)
-      {
-        //$(".addEmailDiv").append("<div class='description_text'><div class='form-group form-group-margin'><label class='col-xs-4 control-label'></label><div class='col-xs-7'><div class='left-inner-addon'><i class='glyphicon glyphicon-envelope'></i><input type='text' name='' class='form-control' placeholder='Email'/></div></div><a href='#' id='' name='' style='font-size:20px;'><span class='fa fa-minus fa-red' style='padding-top: 7px;padding-left: 10px;'></span></a></div></div>");
-        $(".addEmailDiv").append("<div class='description_text'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='email' name='' id='' class='form-control text-field-left-border' placeholder='Other Email' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-email' type='button' id=''><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
-
-        emailAddCount++;
-      }
-      else
-      {
-        $('.btn-add-email').bind('click', true);
-      }
-  });
-  $('.addEmailDiv').on('click','.description_text button',function()
-  {
-    $(this).closest('.description_text').remove();
-     emailAddCount--;
-  });
-
-  $('.btn-home-phone').click(function()
-  {
-      if(homePhoneCount <= 1)
-      {
-        $(".addHomePhone").append("<div class='description_text'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-home-phone' type='button'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
-        homePhoneCount++;
-      }
-      else
-      {
-        $('.btn-home-phone').bind('click', true);
-      }
-  });
-  $('.addHomePhone').on('click','.description_text button',function()
-  {
-    $(this).closest('.description_text').remove();
-     homePhoneCount--;
-  });
-
-  $('.btn-work-phone').click(function()
-  {
-      if(workPhoneCount <= 1)
-      {
-        $(".addWorkPhone").append("<div class='description_text'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-work-phone' type='button'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
-        workPhoneCount++;
-      }
-      else
-      {
-        $('.btn-work-phone').bind('click', true);
-      }
-  });
-  $('.addWorkPhone').on('click','.description_text button',function()
-  {
-    $(this).closest('.description_text').remove();
-     workPhoneCount--;
-  });
-
-  $('.btn-other-phone').click(function()
-  {
-      if(otherPhoneCount <= 1)
-      {
-        $(".addOtherPhone").append("<div class='description_text'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-other-phone' type='button'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
-        otherPhoneCount++;
-      }
-      else
-      {
-        $('.btn-other-phone').bind('click', true);
-      }
-  });
-  $('.addOtherPhone').on('click','.description_text button',function()
-  {
-    $(this).closest('.description_text').remove();
-     otherPhoneCount--;
-  });
-
-  if (window.mobilecheck()) {
-    var headerData = "<div class='navbar navbar-default navbar-bg navbar-fixed-top' style='margin-top:50px; height:60px;'><div class='container-fluid'><div class='row'><div class='col-md-12' style='padding-top:12px'><form><div class='form-group'><div class='col-md-10 col-sm-10 col-xs-10'><div class='input-group'><input id='searchContact' type='text' class='form-control' onkeyup='doSearch();' placeholder='Search...' autofocus /><div class='input-group-btn'><div class='btn-group btn-group1' role='group'><div class='dropdown dropdown-lg'><button type='button' class='btn btn1 btn-success dropdown-toggle' data-toggle='dropdown' aria-expanded='false' onclick='showDiv()'><span class='glyphicon glyphicon-filter'></span></button><div class='dropdown-menu dropdown-menu-right' role='menu' id='search_filter'><form class='form-horizontal' role='form'><div class='form-group' style='padding-bottom:30px;'><label for='filter'>Filter by</label><select class='form-control' id='filter'><option value='name'>Name</option><option value='mobile'>Mobile</option><option value='email'>Email</option><option value='company'>Company</option><option value='designation'>Designation</option><option value='guardian'>Father/Husband</option><option value='birthday'>Birthday</option><option value='anniversary'>Anniversary</option><option value='group'>Group</option><option value='home_area'>Home Area</option><option value='home_city'>Home City</option><option value='home_phone'>Home Phone</option><option value='work_area'>Work Area</option><option value='work_city'>Work City</option><option value='work_phone'>Work Phone</option><option value='other_area'>Other Area</option><option value='other_city'>Other City</option><option value='other_phone'>Other Phone</option></select></div></form></div></div></div></div></div></div><div><!--<button type='button' class='btn btn-info btn-size'><span class='glyphicon glyphicon-search' aria-hidden='true'></span></button>--><button class='btn btn-primary btn-size' onclick='openAddContact();'><span class='glyphicon glyphicon-plus'></span></button></div></div></form></div><!-- /.navbar-collapse --></div><!--/.row --></div><!-- /.container-fluid --></div>";
-    $("#mobileHeader").html(headerData);
-    var bodyData = "<div class='col-md-5 col-sm-12 col-xs-12 panel-padding-remove'><div class='panel panel-default panel-margin' id='style-3'><!-- List group -->  <div id='contactList' class='list-group force-scroll'> <div class='list-group-item'><p class='list-group-item-text'>Loading...</p> </div></div><!--List close--> </div><!--Panel-->  </div><!--COL--></div>  <!-- Edit div-->";
-    $("#mobileBody").html(bodyData);
-  }
-
-  getContact(0);
-  getContactList();
-  refreshMasterList();
-
-  $('.alert').fadeOut(2000);
-
-  $(".progress").hide();
-
-  $('#addModal').on('shown.bs.modal', function () {
-    $('#addTitle').focus()
-  });
-
-  /*$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-    var tabPane = $(e.target).attr('href')
-    var inputArr = $(tabPane).find('input');
-    $(inputArr[0]).focus();
-     // previous active tab
-  });*/
-
-  $('#filter').change(function(){
-    if ($(this).val() != "0") {
-        $('#search_filter').hide();
-    }
-  });
-
-  /*$(function() {
-    
-    var active = $('a[data-toggle="tab"]').parents('.active').length;
-    var tabClicked = false;
-    
-    // Closes current active tab (toggle and pane):
-    var close = function() {
-        $('a[data-toggle="tab"]').parent().removeClass('active');
-        $('.tab-pane.active').removeClass('active');
-        active = false;
-    }
-    
-    // Closing active tab on clicking on toggle:
-    $('[data-toggle=tab]').click(function(){
-        if ($(this).parent().hasClass('active')){
-            $($(this).attr("href")).toggleClass('active');
-            active = false;
         } else {
-            tabClicked = true;
-            active = this;
+            var str = "<div class='list-group-item'><li class='list-group-item-text header_font'>";
+            str += data.message + "</li></div>";
+            $("#contactList").empty();
+            $("#contactList").html(str);
         }
-    });
-    
-    // Closing active tab on clicking outside tab context (toggle and pane):
-    $(document).on('click.bs.tab.data-api', function(event) {
-        if(active && !tabClicked && !$(event.target).closest('.tab-pane.active').length) {
-            close();
+    },
+    getContactDetails: function (contactCode) {
+        var url = "ContactDetails.php";
+
+        $.getJSON(url, {
+            contactCode: contactCode
+        }).done(function (data) {
+            console.log(data);
+            console.log(data.detail.contact);
+            pageContact.setContactDetails(data);
+        }).fail(function (error) {
+
+        });
+    },
+    setContactDetails: function (data) {
+        if (data.status == 1) {
+            this.localContact = data.detail;
+            var headerStr = "<h12>Contact Details</h12><button class='btn btn-success pull-right' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger pull-left' onclick='openDeleteModal(" + data.detail.contact.ContactCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
+            var str = "";
+            var imgLocation = "";
+            if (data.detail.contact.imageLocation) {
+                imgLocation = data.detail.contact.imageLocation;
+            }
+            else {
+                imgLocation = "../img/contacts/profile/profilePicture1.png";
+            }
+
+
+            str += "<div class='list-group-item'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='" + imgLocation + "' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>" + ((data.detail.contact.TitleName) ? data.detail.contact.TitleName + " " : "") + ((data.detail.contact.FullName) ? data.detail.contact.FullName : "") + "</h5></div>";
+
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Guardian</div><value><div class='col-md-9'>" + ((data.detail.contact.GuardianName) ? data.detail.contact.GuardianName : "") + "</div></value></div></div>";
+
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Company</div><value><div class='col-md-9'>" + ((data.detail.contact.Company) ? data.detail.contact.Company : "" ) + "</div></value></div></div>";
+
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Designation</div><value><div class='col-md-9'>" + ((data.detail.contact.Designation) ? data.detail.contact.Designation : "") + "</div></value></div></div>";
+
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Alias</div><value><div class='col-md-9'>" + ((data.detail.contact.Alias) ? data.detail.contact.Alias : "") + "</div></value></div></div>";
+
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.B</div><value><div class='col-md-9'>" + ((data.detail.contact.Dob) ? data.detail.contact.Dob : "") + "</div></value></div></div>";
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.M</div><value><div class='col-md-9'>" + ((data.detail.contact.Dom) ? data.detail.contact.Dom : "") + "</div></value></div></div>";
+
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Group</div><value><div class='col-md-9'>" + ((data.detail.contact.GroupName) ? data.detail.contact.GroupName : "") + "</div></value></div></div>";
+
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Remarks</div><value><div class='col-md-9'>" + ((data.detail.contact.Remarks) ? data.detail.contact.Remarks : "") + "</div></value></div></div>";
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile (1)</div><value><div class='col-md-9'><a href='tel:" + ((data.detail.contact.Mobile1) ? data.detail.contact.Mobile1 : "") + "'>" + ((data.detail.contact.Mobile1) ? data.detail.contact.Mobile1 : "") + "</a></div></value></div></div>";
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile (2)</div><value><div class='col-md-9'><a href='tel:" + ((data.detail.contact.Mobile2) ? data.detail.contact.Mobile2 : "") + "'>" + ((data.detail.contact.Mobile2) ? data.detail.contact.Mobile2 : "") + "</a></div></value></div></div>";
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile (3)</div><value><div class='col-md-9'><a href='tel:" + ((data.detail.contact.Mobile3) ? data.detail.contact.Mobile3 : "") + "'>" + ((data.detail.contact.Mobile3) ? data.detail.contact.Mobile3 : "") + "</a></div></value></div></div>";
+
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Email (1)</div><value><div class='col-md-9'><a href= 'mailto:" + ((data.detail.contact.Email1) ? data.detail.contact.Email1 : "") + "'>" + ((data.detail.contact.Email1) ? data.detail.contact.Email1 : "") + "</a></div></value></div></div>";
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Email (2)</div><value><div class='col-md-9'><a href= 'mailto:" + ((data.detail.contact.Email2) ? data.detail.contact.Email2 : "") + "'>" + ((data.detail.contact.Email2) ? data.detail.contact.Email2 : "") + "</a></div></value></div></div>";
+
+            var homeAddress = "";
+            if (data.detail.address) {
+                if (data.detail.address.home) {
+                    var home = data.detail.address.home;
+                    homeAddress = home.address;
+                    homeAddress = homeAddress.replace(/(?:\r\n|\r|\n)/g, '<br />');
+                    homeAddress += "(Area) " + ((home.area) ? ("<br />" + home.area) : "");
+                    homeAddress += ((home.city) ? ("<br />" + home.city + " - ") : "");
+                    homeAddress += ((home.pincode) ? (home.pincode) : "");
+                    homeAddress += ((home.state) ? ("<br />" + home.state) : "");
+                    homeAddress += ((home.country) ? ("<br />" + home.country) : "");
+                    homeAddress += ((home.phone) ? ("<br />" + home.phone) : "");
+                }
+                else {
+                    homeAddress = "No home address details";
+                }
+            }
+            else {
+                homeAddress = "No details";
+            }
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Address</div><value><div class='col-md-9'>" + homeAddress + "</div></value></div></div>";
+
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Facebook</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Facebook) ? data.detail.contact.Facebook : "") + "' target='_blank'>" + ((data.detail.contact.Facebook) ? data.detail.contact.Facebook : "") + "</a></div></value></div></div>";
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Twitter</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Twitter) ? data.detail.contact.Twitter : "") + "' target='_blank'>" + ((data.detail.contact.Twitter) ? data.detail.contact.Twitter : "") + "</a></div></value></div></div>";
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Google</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Google) ? data.detail.contact.Google : "") + "' target='_blank'>" + ((data.detail.contact.Google) ? data.detail.contact.Google : "") + "</a></div></value></div></div>";
+
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Linkedin</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Linkedin) ? data.detail.contact.Linkedin : "") + "' target='_blank'>" + ((data.detail.contact.Linkedin) ? data.detail.contact.Linkedin : "") + "</a></div></value></div></div>";
+
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Website) ? data.detail.contact.Website : "") + "' target='_blank'>" + ((data.detail.contact.Website) ? data.detail.contact.Website : "") + "</a></div></value></div></div>";
+
+            $("#contactDetailHeader").empty();
+            $("#contactDetailHeader").html(headerStr);
+            $("#contactDetailBody").empty();
+            $("#contactDetailBody").html(str);
+
+        } else {
+            this.localContact = null;
         }
-        
-        tabClicked = false;
-    });
-});*/
-
-$('#myTab a').click(function (e) {
-    var tab = $(this);
-    if(tab.parent('li').hasClass('active')){
-        window.setTimeout(function(){
-            $(".tab-pane").removeClass('active');
-            tab.parent('li').removeClass('active');
-        },1);
-    }
-});
-
-
-  $('#imgInp').change(function(){
-    var image = this.files[0];
-    if ((image.size || image.fileSize) < 1 * 1000 * 1000) {
-      console.log(image);
-      var img = $("#imagepreview");
-      var reader = new FileReader();
-      reader.onloadend = function() {         
-         //img.src = reader.result;
-         img.attr("src",reader.result);
-      }
-      reader.readAsDataURL(image);
-      $("#imageErrorMsg").html("");
-    }
-    else{
-      $("#imageErrorMsg").html("Image size is greater than 1MB");
-      document.getElementById("profileForm").reset();
-    }
-  });
-
-  $('#imageModal').on('show.bs.modal', function () {
-    document.getElementById("profileForm").reset();
-    $('#photoId').val(contact.contact.registerLicenceCode+contact.contact.contactCode);
-    if (contact.contact.imageLocation) {
-      $("#imagepreview").attr("src",contact.contact.imageLocation);
-    }
-    else{
-      $("#imagepreview").attr("src","../img/contacts/profile/profilePicture1.png");
-    }
-  });
-
-  $("#profileForm").ajaxForm({
-    beforeSubmit:function(){
-      $(".progress").show();
     },
-    uploadProgress: function(event, position, total, percentComplete){
-      $(".progress-bar").width(percentComplete+"%");
-      $("#progressValue").html(percentComplete+"% complete");
-    }, 
-    success: function(responseText, statusText, xhr, $form){
-      console.log(responseText);
-      var response = JSON.parse(responseText);
-      if (response.status == 1) {
-        $("#imageModal").modal('hide');
-        $("#imageresource").attr("src",response.location);
-        contact.contact.imageLocation = response.location;
-        $(".progress").hide();
-      }
-    },
-  });
+    getTitles: function () {
+        var url = "getMasters.php";
 
-  $("#deleteContact").ajaxForm({ 
-    success: function(responseText, statusText, xhr, $form){
-      console.log(responseText);
-      var response = JSON.parse(responseText);
-      if (response.status == 1) {
-        showNotificationSuccess(response.message);
-        getContact(response.landing);
-        getContactList();
-        $("#deleteModal").modal('hide');
-      }
-      else{
-        showNotificationFailure(response.message);
-      }
+        $.getJSON(url, {
+            type: 'title'
+        }).done(function (data) {
+            var title = JSON.parse(data);
+            for (var i = 0; i < title.length; i++) {
+                pageContact.titleTags[i] = title[i]['description'];
+                pageContact.titleCode[i] = title[i]['code'];
+            }
+            pageContact.setTitleAutoComplete();
+        }).fail(function (error) {
+
+        });
     },
-  });
+    getGroups: function () {
+        var url = "getMasters.php";
+
+        $.getJSON(url, {
+            type: 'group'
+        }).done(function (data) {
+            var group = JSON.parse(data);
+            for (var i = 0; i < group.length; i++) {
+                pageContact.groupTag[i] = group[i]['description'];
+                pageContact.groupCode[i] = group[i]['code'];
+            }
+            pageContact.setGroupAutoComplete();
+        }).fail(function (error) {
+
+        });
+    },
+    getCountry: function () {
+        var url = "getMasters.php";
+
+        $.getJSON(url, {
+            type: 'country'
+        }).done(function (data) {
+            var country = JSON.parse(data);
+            for (var i = 0; i < country.length; i++) {
+                pageContact.countryTag[i] = country[i]['description'];
+                pageContact.countryCode[i] = country[i]['code'];
+            }
+            pageContact.setCountryAutoComplete();
+        }).fail(function (error) {
+
+        });
+    },
+    getStates: function () {
+        var url = "getMasters.php";
+
+        $.getJSON(url, {
+            type: 'state'
+        }).done(function (data) {
+            var state = JSON.parse(data);
+            for (var i = 0; i < state.length; i++) {
+                pageContact.stateTag[i] = state[i]['description'];
+                pageContact.stateCode[i] = state[i]['code'];
+            }
+            pageContact.setStateAutoComplete();
+        }).fail(function (error) {
+
+        });
+    },
+    getCities: function () {
+        var url = "getMasters.php";
+
+        $.getJSON(url, {
+            type: 'city'
+        }).done(function (data) {
+            var city = JSON.parse(data);
+            for (var i = 0; i < city.length; i++) {
+                pageContact.cityTag[i] = city[i]['description'];
+                pageContact.cityCode[i] = city[i]['code'];
+            }
+            pageContact.setCityAutoComplete();
+        }).fail(function (error) {
+
+        });
+    },
+    getAreas: function () {
+        var url = "getMasters.php";
+
+        $.getJSON(url, {
+            type: 'area'
+        }).done(function (data) {
+            var area = JSON.parse(data);
+            for (var i = 0; i < area.length; i++) {
+                pageContact.areaTag[i] = area[i]['description'];
+                pageContact.areaCode[i] = area[i]['code'];
+            }
+            pageContact.setAreaAutoComplete();
+        }).fail(function (error) {
+
+        });
+    },
+    doSearch: function () {
+
+    },
+    openAddContact: function () {
+        document.getElementById("contactForm").reset();
+        $("#mode").val("A");
+        $("#contactCode").val(0);
+
+        $('#contactModalHeading').empty();
+        $('#contactModalHeading').html("Add Contact");
+
+        $('.addMobileDiv').empty();
+        this.mobileAddCount = 0;
+        $('.addEmailDiv').empty();
+        this.emailAddCount = 1;
+        $('.addHomePhone').empty();
+        this.homePhoneCount = 1;
+        $('.addWorkPhone').empty();
+        this.workPhoneCount = 1;
+        $('.addOtherPhone').empty();
+        this.otherPhoneCount = 1;
+        $("#contactModal").modal('show');
+
+        // To close the tab pane and to remove the active border
+
+        $(".tab-pane").removeClass('active');
+        $("li").removeClass('active');
+    },
+    openEditContact: function () {
+
+    },
+    createEditAddressData: function (address, type) {
+
+    },
+    openDeleteModal: function (contactCode) {
+        $("#deleteContact").val(contactCode);
+        $("#deleteModal").modal("show");
+    },
+    setTitleAutoComplete: function () {
+        pageContact.setAutoComplete("#addTitle", "#titleId", pageContact.titleTags, pageContact.titleCode);
+    },
+    setGroupAutoComplete: function () {
+        pageContact.setAutoComplete("#addGroup", "#groupId", pageContact.groupTag, pageContact.groupCode);
+    },
+    setCountryAutoComplete: function () {
+
+    },
+    setStateAutoComplete: function () {
+
+    },
+    setStateAutoCompleteWithOptions: function (autoCompleteId, changeCodeId, countryId, countryCodeId) {
+
+    },
+    setCityAutoComplete: function () {
+
+    },
+    setCityAutoCompleteWithOptions: function (autoCompleteId, changeCodeId, countryId, countryCodeId, stateId, stateCodeId) {
+
+    },
+    setAreaAutoComplete: function () {
+
+    },
+    setAreaAutoCompleteWithOptions: function (autoCompleteId, changeCodeId, countryId, countryCodeId, stateId, stateCodeId, cityId, cityCodeId) {
+
+    },
+    setAutoComplete: function (autoCompleteId, changeCodeId, autoCompleteArray, changeCodeArray) {
+
+    },
+    submitContactForm: function (event) {
+
+    },
+    showNotificationSuccess: function (msg) {
+        $("#notification_success").html(msg);
+        document.getElementById('notification_success').style.display = "block";
+        $("#notification_success").delay(2000).fadeOut("slow");
+    },
+    showNotificationFailure: function (msg) {
+        $("#notification_failure").html(msg);
+        document.getElementById('notification_failure').style.display = "block";
+        $("#notification_failure").delay(2000).fadeOut("slow");
+    },
+    showLoadingInContactDetail: function () {
+        var contactDetailStr = "<div class='list-group-item loading'></div>";
+        $("#contactDetailBody").html(contactDetailStr);
+    },
+    refreshMasterList: function () {
+        this.getTitles();
+        this.getGroups();
+        this.getCountry();
+        this.getStates();
+        this.getCities();
+        this.getAreas();
+    }
+};
+
+$(document).ready(function (event) {
+    pageContact.getContactList();
 
 });

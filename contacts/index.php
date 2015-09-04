@@ -1,5 +1,7 @@
 <?php
+session_start();
 define("ROOT", "../");
+include_once ROOT.'dist/authenticate.php';
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -147,8 +149,7 @@ define("ROOT", "../");
                 <div class="panel panel-default panelHeight panel-margin" id="style-3">
                     <!-- List group -->
                     <div id="contactList" class="list-group force-scroll">
-                        <div class="list-group-item loading">
-                        </div>
+
                     </div>
                     <!--List close-->
                 </div>
@@ -1011,4 +1012,3 @@ define("ROOT", "../");
 
     </body>
     </html>
-<?php $mysqli->close(); ?>
