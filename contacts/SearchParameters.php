@@ -7,17 +7,6 @@
  */
 class SearchParameters
 {
-    var $group;
-    var $homeArea;
-    var $homeCity;
-    var $homePhone;
-    var $workArea;
-    var $workCity;
-    var $workPhone;
-    var $otherArea;
-    var $otherCity;
-    var $otherPhone;
-
     function getNameClause($value){
         return " LOWER(FullName) LIKE LOWER('%".$value."%') " ;
     }
