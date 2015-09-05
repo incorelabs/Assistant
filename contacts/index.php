@@ -232,7 +232,7 @@ echo $navbar_str;
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" id="titleId" name="titleId" value="0"/>
+                    <input type="hidden" name="titleCode" id="titleCode" value="0"/>
 
                     <div class="form-group form-group-margin">
                         <div class="input-group">
@@ -367,7 +367,7 @@ echo $navbar_str;
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="groupId" name="groupId" value="0"/>
+                            <input type="hidden" name="groupCode" id="groupCode" value="0"/>
 
                             <div class="form-group form-group-margin">
                                 <div class="input-group">

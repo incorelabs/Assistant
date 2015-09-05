@@ -694,9 +694,9 @@ $(document).ready(function (event) {
             // [ { name: 'username', value: 'jresig' }, { name: 'password', value: 'secret' } ]
 
             // return false to cancel submit
-            return false;
         },
         success: function (responseText, statusText, xhr, $form) {
+            console.log(responseText);
 
         }
     });
