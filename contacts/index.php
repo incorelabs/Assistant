@@ -270,7 +270,7 @@ echo $navbar_str;
                     <div class="form-group form-group-margin">
                         <div class="input-group">
                             <span class="input-group-addon input-group-addon-label">Mobile</span>
-                            <input type="text" name="mobile" id="addMobile"
+                            <input type="text" name="mobile1" id="addMobile1"
                                    class="form-control text-field-left-border" placeholder="Mobile"/>
                             <span class="input-group-btn">
                                 <button class="btn btn-success button-addon-custom btn-add-mobile" type="button"
@@ -284,7 +284,7 @@ echo $navbar_str;
                     <div class="form-group form-group-margin">
                         <div class="input-group">
                             <span class="input-group-addon input-group-addon-label">Email</span>
-                            <input type="email" name="email" id="addEmail"
+                            <input type="email" name="email1" id="addEmail1"
                                    class="form-control text-field-left-border" placeholder="Email"/>
                             <span class="input-group-btn">
                                 <button class="btn btn-success button-addon-custom btn-add-email" type="button"
@@ -423,7 +423,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-home fa-size"></i>
-                                        <input type="text" name="homeAddress1" id="homeAddress1"
+                                        <input type="text" name="address[home][address1]" id="homeAddress1"
                                                class="form-control text-field-left-border" placeholder="Address 1"/>
                                     </div>
                                 </div>
@@ -434,7 +434,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-home fa-size"></i>
-                                        <input type="text" name="homeAddress2" id="homeAddress2"
+                                        <input type="text" name="address[home][address2]" id="homeAddress2"
                                                class="form-control text-field-left-border" placeholder="Address 2"/>
                                     </div>
                                 </div>
@@ -445,7 +445,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-home fa-size"></i>
-                                        <input type="text" name="homeAddress3" id="homeAddress3"
+                                        <input type="text" name="address[home][address3]" id="homeAddress3"
                                                class="form-control text-field-left-border" placeholder="Address 3"/>
                                     </div>
                                 </div>
@@ -456,7 +456,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-home fa-size"></i>
-                                        <input type="text" name="homeAddress4" id="homeAddress4"
+                                        <input type="text" name="address[home][address4]" id="homeAddress4"
                                                class="form-control text-field-left-border" placeholder="Address 4"/>
                                     </div>
                                 </div>
@@ -467,7 +467,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-home fa-size"></i>
-                                        <input type="text" name="homeAddress5" id="homeAddress5"
+                                        <input type="text" name="address[home][address5]" id="homeAddress5"
                                                class="form-control text-field-left-border" placeholder="Address 5"/>
                                     </div>
                                 </div>
@@ -478,9 +478,10 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
-                                        <input type="text" name="homeCity" id="homeCity"
+                                        <input type="text" name="address[home][city]" id="homeCity"
                                                class="form-control text-field-left-border" placeholder="City"/>
-                                        <input type="hidden" id="homeCityCode" name="homeCityCode" value="0"/>
+                                        <input type="hidden" name="address[home][cityCode]" id="homeCityCode"
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -490,9 +491,10 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
-                                        <input type="text" name="homeState" id="homeState"
+                                        <input type="text" name="address[home][state]" id="homeState"
                                                class="form-control text-field-left-border" placeholder="State"/>
-                                        <input type="hidden" id="homeStateCode" name="homeStateCode" value="0"/>
+                                        <input type="hidden" name="address[home][stateCode]" id="homeStateCode"
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -502,10 +504,11 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
-                                        <input type="text" name="homeCountry" id="homeCountry"
+                                        <input type="text" name="address[home][country]" id="homeCountry"
                                                class="countryText form-control text-field-left-border"
                                                placeholder="Country"/>
-                                        <input type="hidden" id="homeCountryCode" name="homeCountryCode" value="0"/>
+                                        <input type="hidden" name="address[home][countryCode]" id="homeCountryCode"
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -515,7 +518,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
-                                        <input type="text" name="homePincode" id="homePincode"
+                                        <input type="text" name="address[home][pincode]" id="homePincode"
                                                class="form-control text-field-left-border" placeholder="Pincode"/>
                                     </div>
                                 </div>
@@ -526,16 +529,17 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
-                                        <input type="text" name="homeArea" id="homeArea"
+                                        <input type="text" name="address[home][area]" id="homeArea"
                                                class="form-control text-field-left-border" placeholder="Area"/>
-                                        <input type="hidden" id="homeAreaCode" name="homeAreaCode" value="0"/>
+                                        <input type="hidden" name="address[home][areaCode]" id="homeAreaCode"
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group form-group-margin">
                                 <div class="input-group">
                                     <span class="input-group-addon input-group-addon-label">Phone</span>
-                                    <input type="text" name="homePhone" id="homePhone"
+                                    <input type="text" name="address[home][phone1]" id="homePhone1"
                                            class="form-control text-field-left-border" placeholder="Phone"/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-success button-addon-custom btn-home-phone"
@@ -557,7 +561,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-briefcase fa-size"></i>
-                                        <input type="text" name="workAddress1" id="workAddress1"
+                                        <input type="text" name="address[work][address1]" id="workAddress1"
                                                class="form-control text-field-left-border" placeholder="Address 1"/>
                                     </div>
                                 </div>
@@ -568,7 +572,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-briefcase fa-size"></i>
-                                        <input type="text" name="workAddress2" id="workAddress2"
+                                        <input type="text" name="address[work][address2]" id="workAddress2"
                                                class="form-control text-field-left-border" placeholder="Address 2"/>
                                     </div>
                                 </div>
@@ -579,7 +583,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-briefcase fa-size"></i>
-                                        <input type="text" name="workAddress3" id="workAddress3"
+                                        <input type="text" name="address[work][address3]" id="workAddress3"
                                                class="form-control text-field-left-border" placeholder="Address 3"/>
                                     </div>
                                 </div>
@@ -590,7 +594,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-briefcase fa-size"></i>
-                                        <input type="text" name="workAddress4" id="workAddress4"
+                                        <input type="text" name="address[work][address4]" id="workAddress4"
                                                class="form-control text-field-left-border" placeholder="Address 4"/>
                                     </div>
                                 </div>
@@ -601,7 +605,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-briefcase fa-size"></i>
-                                        <input type="text" name="workAddress5" id="workAddress5"
+                                        <input type="text" name="address[work][address5]" id="workAddress5"
                                                class="form-control text-field-left-border" placeholder="Address 5"/>
                                     </div>
                                 </div>
@@ -612,9 +616,10 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
-                                        <input type="text" name="workCity" id="workCity"
+                                        <input type="text" name="address[work][city]" id="workCity"
                                                class="form-control text-field-left-border" placeholder="City"/>
-                                        <input type="hidden" id="workCityCode" name="workCityCode" value="0"/>
+                                        <input type="hidden" name="address[work][cityCode]" id="workCityCode"
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -624,9 +629,10 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
-                                        <input type="text" name="workState" id="workState"
+                                        <input type="text" name="address[work][state]" id="workState"
                                                class="form-control text-field-left-border" placeholder="State"/>
-                                        <input type="hidden" id="workStateCode" name="workStateCode" value="0"/>
+                                        <input type="hidden" name="address[work][stateCode]" id="workStateCode"
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -636,10 +642,11 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
-                                        <input type="text" name="workCountry" id="workCountry"
+                                        <input type="text" name="address[work][country]" id="workCountry"
                                                class="countryText form-control text-field-left-border"
                                                placeholder="Country"/>
-                                        <input type="hidden" id="workCountryCode" name="workCountryCode" value="0"/>
+                                        <input type="hidden" name="address[work][countryCode]" id="workCountryCode"
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -649,7 +656,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
-                                        <input type="text" name="pincode" id="pincode"
+                                        <input type="text" name="address[work][pincode]" id="pincode"
                                                class="form-control text-field-left-border" placeholder="Pincode"/>
                                     </div>
                                 </div>
@@ -660,16 +667,17 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
-                                        <input type="text" name="workArea" id="workArea"
+                                        <input type="text" name="address[work][area]" id="workArea"
                                                class="form-control text-field-left-border" placeholder="Area"/>
-                                        <input type="hidden" id="workAreaCode" name="workAreaCode" value="0"/>
+                                        <input type="hidden" name="address[work][areaCode]" id="workAreaCode"
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group form-group-margin">
                                 <div class="input-group">
                                     <span class="input-group-addon input-group-addon-label">Phone</span>
-                                    <input type="text" name="workNumber" id="workNumber"
+                                    <input type="text" name="address[work][phone1]" id="workPhone1"
                                            class="form-control text-field-left-border" placeholder="Phone"/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-success button-addon-custom btn-work-phone"
@@ -690,7 +698,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-road fa-size"></i>
-                                        <input type="text" name="otherAddress1" id="otherAddress1"
+                                        <input type="text" name="address[other][address1]" id="otherAddress1"
                                                class="form-control text-field-left-border" placeholder="Address 1"/>
                                     </div>
                                 </div>
@@ -701,7 +709,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-road fa-size"></i>
-                                        <input type="text" name="otherAddress2" id="otherAddress2"
+                                        <input type="text" name="address[other][address2]" id="otherAddress2"
                                                class="form-control text-field-left-border" placeholder="Address 2"/>
                                     </div>
                                 </div>
@@ -712,7 +720,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-road fa-size"></i>
-                                        <input type="text" name="otherAddress3" id="otherAddress3"
+                                        <input type="text" name="address[other][address3]" id="otherAddress3"
                                                class="form-control text-field-left-border" placeholder="Address 3"/>
                                     </div>
                                 </div>
@@ -723,7 +731,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-road fa-size"></i>
-                                        <input type="text" name="otherAddress4" id="otherAddress4"
+                                        <input type="text" name="address[other][address4]" id="otherAddress4"
                                                class="form-control text-field-left-border" placeholder="Address 4"/>
                                     </div>
                                 </div>
@@ -734,7 +742,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-road fa-size"></i>
-                                        <input type="text" name="otherAddress5" id="otherAddress5"
+                                        <input type="text" name="address[other][address5]" id="otherAddress5"
                                                class="form-control text-field-left-border" placeholder="Address 5"/>
                                     </div>
                                 </div>
@@ -745,9 +753,10 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
-                                        <input type="text" name="otherCity" id="otherCity"
+                                        <input type="text" name="address[other][city]" id="otherCity"
                                                class="form-control text-field-left-border" placeholder="City"/>
-                                        <input type="hidden" id="otherCityCode" name="otherCityCode" value="0"/>
+                                        <input type="hidden" name="address[other][cityCode]" id="otherCityCode"
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -757,9 +766,9 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
-                                        <input type="text" name="otherState" id="otherState"
+                                        <input type="text" name="address[other][state]" id="otherState"
                                                class="form-control text-field-left-border" placeholder="State"/>
-                                        <input type="hidden" id="otherStateCode" name="otherStateCode" value="0"/>
+                                        <input type="hidden" name="address[other][stateCode]" id="otherStateCode" value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -769,11 +778,10 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
-                                        <input type="text" name="otherCountry" id="otherCountry"
+                                        <input type="text" name="address[other][country]" id="otherCountry"
                                                class="countryText form-control text-field-left-border"
                                                placeholder="Country"/>
-                                        <input type="hidden" id="otherCountryCode" name="otherCountryCode"
-                                               value="0"/>
+                                        <input type="hidden" name="address[other][countryCode]" id="otherCountryCode" value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -783,7 +791,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
-                                        <input type="text" name="otherPincode" id="otherPincode"
+                                        <input type="text" name="address[other][pincode]" id="otherPincode"
                                                class="form-control text-field-left-border" placeholder="Pincode"/>
                                     </div>
                                 </div>
@@ -794,16 +802,16 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
-                                        <input type="text" name="otherArea" id="otherArea"
+                                        <input type="text" name="address[other][area]" id="otherArea"
                                                class="form-control text-field-left-border" placeholder="Area"/>
-                                        <input type="hidden" id="otherAreaCode" name="otherAreaCode" value="0"/>
+                                        <input type="hidden" name="address[other][areaCode]" id="otherAreaCode" value="0"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group form-group-margin">
                                 <div class="input-group">
                                     <span class="input-group-addon input-group-addon-label">Phone</span>
-                                    <input type="text" name="otherNumber" id="otherNumber"
+                                    <input type="text" name="address[other][phone1]" id="otherPhone1"
                                            class="form-control text-field-left-border" placeholder="Phone"/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-success button-addon-custom btn-other-phone"
