@@ -72,6 +72,61 @@ var pageContact = {
             $("#contactList").html(str);
         }
     },
+    doSearch: function () {
+        pageContact.currentPageNo = 1;
+        $("#contactList").empty();
+        pageContact.getSearchResults();
+    },
+    getSearchResults: function () {
+        var url = "ContactList.php";
+
+        $.getJSON(url, {
+            pageNo: pageContact.currentPageNo,
+            searchType: $('#filter').val(),
+            searchText: $('#searchBox').val()
+        }).done(function (data) {
+            console.log(data);
+
+            console.log(pageContact.currentPageNo);
+            pageContact.setSearchResults(data);
+        }).fail(function (error) {
+
+        });
+    },
+    setSearchResults: function (data) {
+        if (data.status == 1) {
+            $('#loadMore').remove();
+            pageContact.currentPageNo++;
+            var letterIndex = "";
+            var str = "";
+            for (var i = 0; i < data.result.length; i++) {
+                var letter = data.result[i].FullName.toUpperCase()[0];
+                console.log(letter);
+                if (letter != letterIndex) {
+                    str += "<li class='list-group-item-info li-pad'>" + letter + "</li>";
+                    letterIndex = letter;
+                    console.log(letterIndex);
+                }
+                str += "<a onclick='pageContact.getContactDetails(" + data.result[i].ContactCode + ")' class='list-group-item contacts_font'><h4 class='list-group-item-heading contacts_font'>" + data.result[i].FullName + "</h4></a>";
+            }
+            //$("#contactList").empty();
+            $("#contactList").append(str);
+            console.log(str);
+            // Print on screen
+            console.log(data.result);
+            if (pageContact.currentPageNo <= data.pages) {
+                // Show Load More
+                var str = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pageContact.getSearchResults();'>Load more..</a></div>";
+                $("#contactList").append(str);
+            }
+
+        } else {
+            var str = "<div class='list-group-item'><li class='list-group-item-text header_font'>";
+            str += data.message + "</li></div>";
+            $("#contactList").empty();
+            $("#contactList").html(str);
+        }
+    },
     getContactDetails: function (contactCode) {
         var url = "ContactDetails.php";
 
@@ -87,7 +142,7 @@ var pageContact = {
     },
     setContactDetails: function (data) {
         if (data.status == 1) {
-            this.localContact = data.detail;
+            pageContact.localContact = data.detail;
             var headerStr = "<h12>Contact Details</h12><button class='btn btn-success pull-right' onclick='pageContact.openEditContact();'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger pull-left' onclick='pageContact.openDeleteModal(" + data.detail.contact.ContactCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
             var str = "";
             var imgLocation = "";
@@ -177,7 +232,7 @@ var pageContact = {
             $("#contactDetailBody").html(str);
 
         } else {
-            this.localContact = null;
+            pageContact.localContact = null;
         }
     },
     getTitles: function () {
@@ -276,23 +331,6 @@ var pageContact = {
 
         });
     },
-    doSearch: function () {
-        var url = "ContactList.php";
-        this.currentPageNo = 1;
-
-        $.getJSON(url, {
-            pageNo: pageContact.currentPageNo,
-            searchType: $('#filter').val(),
-            searchText: $('#searchBox').val()
-        }).done(function (data) {
-            console.log(data);
-
-            console.log(pageContact.currentPageNo);
-            //pageContact.setContactList(data);
-        }).fail(function (error) {
-
-        });
-    },
     openAddContact: function () {
         document.getElementById("contactForm").reset();
         $("#form-add-edit-mode").val("A");
@@ -302,15 +340,15 @@ var pageContact = {
         $('#contactModalHeading').html("Add Contact");
 
         $('.addMobileDiv').empty();
-        this.addBtnMobileCount = 0;
+        pageContact.addBtnMobileCount = 0;
         $('.addEmailDiv').empty();
-        this.addBtnEmailCount = 0;
+        pageContact.addBtnEmailCount = 0;
         $('.addHomePhone').empty();
-        this.addBtnHomePhoneCount = 0;
+        pageContact.addBtnHomePhoneCount = 0;
         $('.addWorkPhone').empty();
-        this.addBtnWorkPhoneCount = 0;
+        pageContact.addBtnWorkPhoneCount = 0;
         $('.addOtherPhone').empty();
-        this.addBtnOtherPhoneCount = 0;
+        pageContact.addBtnOtherPhoneCount = 0;
         $("#contactModal").modal('show');
 
         // To close the tab pane and to remove the active border
@@ -325,120 +363,120 @@ var pageContact = {
         $('#contactModalHeading').empty();
         $('#contactModalHeading').html("Edit Contact");
 
-        $("#form-add-edit-code").val(this.localContact.contact.ContactCode);
+        $("#form-add-edit-code").val(pageContact.localContact.contact.ContactCode);
 
-        if (this.localContact.contact.TitleName) {
-            $('#addTitle').val(this.localContact.contact.TitleName);
+        if (pageContact.localContact.contact.TitleName) {
+            $('#addTitle').val(pageContact.localContact.contact.TitleName);
         }
 
-        if (this.localContact.contact.TitleCode) {
-            $('#titleId').val(this.localContact.contact.TitleCode);
+        if (pageContact.localContact.contact.TitleCode) {
+            $('#titleId').val(pageContact.localContact.contact.TitleCode);
         }
 
-        if (this.localContact.contact.FirstName) {
-            $('#addFirstName').val(this.localContact.contact.FirstName);
+        if (pageContact.localContact.contact.FirstName) {
+            $('#addFirstName').val(pageContact.localContact.contact.FirstName);
         }
 
-        if (this.localContact.contact.MiddleName) {
-            $('#addMiddleName').val(this.localContact.contact.MiddleName);
+        if (pageContact.localContact.contact.MiddleName) {
+            $('#addMiddleName').val(pageContact.localContact.contact.MiddleName);
         }
 
-        if (this.localContact.contact.LastName) {
-            $('#addLastName').val(this.localContact.contact.LastName);
+        if (pageContact.localContact.contact.LastName) {
+            $('#addLastName').val(pageContact.localContact.contact.LastName);
         }
 
-        if (this.localContact.contact.GuardianName) {
-            $('#addGuardianName').val(this.localContact.contact.GuardianName);
+        if (pageContact.localContact.contact.GuardianName) {
+            $('#addGuardianName').val(pageContact.localContact.contact.GuardianName);
         }
 
-        if (this.localContact.contact.Company) {
-            $('#addCompany').val(this.localContact.contact.Company);
+        if (pageContact.localContact.contact.Company) {
+            $('#addCompany').val(pageContact.localContact.contact.Company);
         }
 
-        if (this.localContact.contact.Designation) {
-            $('#addDesignation').val(this.localContact.contact.Designation);
+        if (pageContact.localContact.contact.Designation) {
+            $('#addDesignation').val(pageContact.localContact.contact.Designation);
         }
 
-        if (this.localContact.contact.Alias) {
-            $('#addAlias').val(this.localContact.contact.Alias);
+        if (pageContact.localContact.contact.Alias) {
+            $('#addAlias').val(pageContact.localContact.contact.Alias);
         }
 
-        if (this.localContact.contact.Dob) {
-            $('#addDOB').val(this.localContact.contact.Dob);
+        if (pageContact.localContact.contact.Dob) {
+            $('#addDOB').val(pageContact.localContact.contact.Dob);
         }
 
-        if (this.localContact.contact.Dom) {
-            $('#addDOM').val(this.localContact.contact.Dom);
+        if (pageContact.localContact.contact.Dom) {
+            $('#addDOM').val(pageContact.localContact.contact.Dom);
         }
 
-        if (this.localContact.contact.GroupName) {
-            $('#addGroup').val(this.localContact.contact.GroupName);
+        if (pageContact.localContact.contact.GroupName) {
+            $('#addGroup').val(pageContact.localContact.contact.GroupName);
         }
 
-        if (this.localContact.contact.GroupCode) {
-            $('#groupId').val(this.localContact.contact.GroupCode);
+        if (pageContact.localContact.contact.GroupCode) {
+            $('#groupId').val(pageContact.localContact.contact.GroupCode);
         }
 
-        if (this.localContact.contact.Remarks) {
-            $('#addRemarks').val(this.localContact.contact.Remarks);
+        if (pageContact.localContact.contact.Remarks) {
+            $('#addRemarks').val(pageContact.localContact.contact.Remarks);
         }
 
-        if (this.localContact.contact.Mobile1) {
-            $('#addMobile1').val(this.localContact.contact.Mobile1);
+        if (pageContact.localContact.contact.Mobile1) {
+            $('#addMobile1').val(pageContact.localContact.contact.Mobile1);
         }
 
-        if (this.localContact.contact.Mobile2) {
-            $('#addMobile2').val(this.localContact.contact.Mobile2);
+        if (pageContact.localContact.contact.Mobile2) {
+            $('#addMobile2').val(pageContact.localContact.contact.Mobile2);
         }
 
-        if (this.localContact.contact.Mobile3) {
-            $('#addMobile3').val(this.localContact.contact.Mobile3);
+        if (pageContact.localContact.contact.Mobile3) {
+            $('#addMobile3').val(pageContact.localContact.contact.Mobile3);
         }
 
-        if (this.localContact.contact.Email1) {
-            $('#addEmail1').val(this.localContact.contact.Email1);
+        if (pageContact.localContact.contact.Email1) {
+            $('#addEmail1').val(pageContact.localContact.contact.Email1);
         }
 
-        if (this.localContact.contact.Email2) {
-            $('#addEmail2').val(this.localContact.contact.Email2);
+        if (pageContact.localContact.contact.Email2) {
+            $('#addEmail2').val(pageContact.localContact.contact.Email2);
         }
 
-        if (this.localContact.contact.Facebook) {
-            $('#addFacebook').val(this.localContact.contact.Facebook);
+        if (pageContact.localContact.contact.Facebook) {
+            $('#addFacebook').val(pageContact.localContact.contact.Facebook);
         }
 
-        if (this.localContact.contact.Twitter) {
-            $('#addTwitter').val(this.localContact.contact.Twitter);
+        if (pageContact.localContact.contact.Twitter) {
+            $('#addTwitter').val(pageContact.localContact.contact.Twitter);
         }
 
-        if (this.localContact.contact.Google) {
-            $('#addGoogle').val(this.localContact.contact.Google);
+        if (pageContact.localContact.contact.Google) {
+            $('#addGoogle').val(pageContact.localContact.contact.Google);
         }
 
-        if (this.localContact.contact.Linkedin) {
-            $('#addLinkedin').val(this.localContact.contact.Linkedin);
+        if (pageContact.localContact.contact.Linkedin) {
+            $('#addLinkedin').val(pageContact.localContact.contact.Linkedin);
         }
 
-        if (this.localContact.contact.Website) {
-            $('#addWebsite').val(this.localContact.contact.Website);
+        if (pageContact.localContact.contact.Website) {
+            $('#addWebsite').val(pageContact.localContact.contact.Website);
         }
 
-        if (this.localContact.address) {
-            var address = this.localContact.address;
+        if (pageContact.localContact.address) {
+            var address = pageContact.localContact.address;
             var type = "";
             if (address.home) {
                 type = "home";
-                this.createEditAddressData(address, type);
+                pageContact.createEditAddressData(address, type);
             }
 
             if (address.work) {
                 type = "work";
-                this.createEditAddressData(address, type);
+                pageContact.createEditAddressData(address, type);
             }
 
             if (address.other) {
                 type = "other";
-                this.createEditAddressData(address, type);
+                pageContact.createEditAddressData(address, type);
             }
         }
 
@@ -499,12 +537,12 @@ var pageContact = {
         $("#contactDetailBody").html(contactDetailStr);
     },
     refreshMasterList: function () {
-        this.getTitles();
-        this.getGroups();
-        this.getCountry();
-        this.getStates();
-        this.getCities();
-        this.getAreas();
+        pageContact.getTitles();
+        pageContact.getGroups();
+        pageContact.getCountry();
+        pageContact.getStates();
+        pageContact.getCities();
+        pageContact.getAreas();
     },
     showFilters: function () {
         //Function to show hide the filter Option.
@@ -524,33 +562,33 @@ var pageContact = {
          */
         switch (btnType) {
             case 0:
-                if (this.addBtnMobileCount < 2) {
+                if (pageContact.addBtnMobileCount < 2) {
                     $(".addMobileDiv").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other Mobile' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-mobile' type='button' onclick='pageContact.removeBtn(this, 0)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
-                    this.addBtnMobileCount++;
+                    pageContact.addBtnMobileCount++;
                 }
                 break;
             case 1:
-                if (this.addBtnEmailCount < 1) {
+                if (pageContact.addBtnEmailCount < 1) {
                     $(".addEmailDiv").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='email' name='' id='' class='form-control text-field-left-border' placeholder='Other Email' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-email' type='button' onclick='pageContact.removeBtn(this, 1)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
-                    this.addBtnEmailCount++;
+                    pageContact.addBtnEmailCount++;
                 }
                 break;
             case 2:
-                if (this.addBtnHomePhoneCount < 1) {
+                if (pageContact.addBtnHomePhoneCount < 1) {
                     $(".addHomePhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-home-phone' type='button' onclick='pageContact.removeBtn(this, 2)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
-                    this.addBtnHomePhoneCount++;
+                    pageContact.addBtnHomePhoneCount++;
                 }
                 break;
             case 3:
-                if (this.addBtnWorkPhoneCount < 1) {
+                if (pageContact.addBtnWorkPhoneCount < 1) {
                     $(".addWorkPhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-work-phone' type='button' onclick='pageContact.removeBtn(this, 3)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
-                    this.addBtnWorkPhoneCount++;
+                    pageContact.addBtnWorkPhoneCount++;
                 }
                 break;
             case 4:
-                if (this.addBtnOtherPhoneCount < 1) {
+                if (pageContact.addBtnOtherPhoneCount < 1) {
                     $(".addOtherPhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-other-phone' type='button' onclick='pageContact.removeBtn(this, 4)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
-                    this.addBtnOtherPhoneCount++;
+                    pageContact.addBtnOtherPhoneCount++;
                 }
                 break;
         }
@@ -559,19 +597,19 @@ var pageContact = {
         $(btnToRemove).closest('.addedBtn').remove();
         switch (btnType) {
             case 0:
-                this.addBtnMobileCount--;
+                pageContact.addBtnMobileCount--;
                 break;
             case 1:
-                this.addBtnEmailCount--;
+                pageContact.addBtnEmailCount--;
                 break;
             case 2:
-                this.addBtnHomePhoneCount--;
+                pageContact.addBtnHomePhoneCount--;
                 break;
             case 3:
-                this.addBtnWorkPhoneCount--;
+                pageContact.addBtnWorkPhoneCount--;
                 break;
             case 4:
-                this.addBtnOtherPhoneCount--;
+                pageContact.addBtnOtherPhoneCount--;
                 break;
         }
     }
