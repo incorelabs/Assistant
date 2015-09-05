@@ -65,7 +65,7 @@
 					<li><a href='#'>Import Contacts</a></li>
 					<li><a href='#'>General Settings</a></li>
 					<li><a href='".$root_location."preferences/labelSettings/'>Label Settings</a></li>
-					<li><a href='#'>Cheque Settings</a></li>
+					<li><a href='".$root_location."preferences/chequeSettings/'>Cheque Settings</a></li>
 					<li><a href='".$root_location."preferences/envelopeSettings/'>Envelope Settings</a></li>
 				</ul>
 			</li>

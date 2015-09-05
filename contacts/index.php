@@ -66,13 +66,22 @@ echo $navbar_str;
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                             <div class="input-group">
                                 <input id="searchBox" type="text" class="form-control" placeholder="Search..." autofocus/>
-
                                 <div class="input-group-btn">
                                     <div class="btn-group" role="group">
                                         <div class="dropdown dropdown-lg">
                                             <button type="button" class="btn btn-success dropdown-toggle"
                                                     data-toggle="dropdown" aria-expanded="false"
-                                                    onclick="pageContact.showFilters();"><span
+                                                    onclick="" style="border-radius:0px"><span
+                                                    class="fa fa-search"></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group-btn">
+                                    <div class="btn-group" role="group">
+                                        <div class="dropdown dropdown-lg">
+                                            <button type="button" class="btn btn-danger dropdown-toggle"
+                                                    data-toggle="dropdown" aria-expanded="false"
+                                                    onclick="pageContact.showFilters();" style="border-bottom-left-radius: 0px; border-top-left-radius: 0px;"><span
                                                     class="glyphicon glyphicon-filter"></span></button>
                                             <div class="dropdown-menu dropdown-menu-right" role="menu"
                                                  id="search_filter">
