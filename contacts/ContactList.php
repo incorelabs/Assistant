@@ -96,6 +96,36 @@ class ContactList{
             case 8:
                 $this->searchClause = $searchParameters->getDomClause($searchText);
                 break;
+            case 9:
+                $this->searchClause = $searchParameters->getGroupClause($this->regCode,$searchText);
+                break;
+            case 10:
+                $this->searchClause = $searchParameters->getHomeAreaClause($this->regCode,$searchText);
+                break;
+            case 11:
+                $this->searchClause = $searchParameters->getHomeCityClause($this->regCode,$searchText);
+                break;
+            case 12:
+                $this->searchClause = $searchParameters->getHomePhoneClause($this->regCode,$searchText);
+                break;
+            case 13:
+                $this->searchClause = $searchParameters->getWorkAreaClause($this->regCode,$searchText);
+                break;
+            case 14:
+                $this->searchClause = $searchParameters->getWorkCityClause($this->regCode,$searchText);
+                break;
+            case 15:
+                $this->searchClause = $searchParameters->getWorkPhoneClause($this->regCode,$searchText);
+                break;
+            case 16:
+                $this->searchClause = $searchParameters->getOtherAreaClause($this->regCode,$searchText);
+                break;
+            case 17:
+                $this->searchClause = $searchParameters->getOtherCityClause($this->regCode,$searchText);
+                break;
+            case 18:
+                $this->searchClause = $searchParameters->getOtherPhoneClause($this->regCode,$searchText);
+                break;
         }
     }
 
@@ -208,9 +238,10 @@ if($validate){
     $limit = 2; //should be greater than 1
     $requestPage = intval($_GET['pageNo']) - 1;
     $searchText = (!empty($_GET['searchText']) ? $_GET['searchText'] : null);
-    $searchType = (!empty($_GET['searchType']) ? $_GET['searchType'] : null);
+    $searchType = (!empty($_GET['searchType']) ? intval($_GET['searchType']) : null);
 
     $contactListObj = new ContactList($limit,$requestPage,$searchType,$searchText);
+    //$response = $contactListObj->getContactListQuery();
     $response = $contactListObj->getResponse();
 }
 
