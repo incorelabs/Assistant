@@ -3,7 +3,7 @@ define("ROOT", "");
 require_once ROOT.'db/Connection.php';
 $mysqli = getConnection();
 $fields = array();
-$tableName = "Table128";
+$tableName = "Table119";
 
 function getCSString($fields){
     $str = "";

@@ -53,9 +53,9 @@ $linkedin = "NULL";
 $website = "NULL";
 $private = "NULL";
 $active = "NULL";
-$home = new Address();
-$work = new Address();
-$others = new Address();
+$home;
+$work;
+$others;
 //print_r($home->getAddress()["address1"]);
 $mode = 0;
 
@@ -136,25 +136,10 @@ if ($validate) {
         if(intval($_POST["emergencyCode"]) < 1000 && !empty($_POST['emergency'])){
             $emergency = "'".$_POST["emergency"]."'";
             $sql .= "call spTable128(@sEmergencyCode,
-                    @sEmergencyName,
-                    @sRegCode,
+                    .$emergency.,
+                    ".$regCode.",
                     1);";
         }
-
-//            //create city code
-//            if(intval($_POST["cityCode"]) < 1000){
-//
-//            }
-//
-//            //create state code
-//            if(intval($_POST["stateCode"]) < 1000){
-//
-//            }
-//
-//            //create country code
-//            if(intval($_POST["countryCode"]) < 1000){
-//
-//            }
 
         $fName = "'".$_POST['firstName']."'";
         $mName = (!empty($_POST['middleName']) ? "'".$_POST['middleName']."'" : "NULL");
@@ -216,16 +201,60 @@ if ($validate) {
             ".$active.",
             NOW(),
             ".$mode.");";
+
+        if(!empty($_POST["address"]["home"])){
+            $home = $_POST["address"]["home"];
+
+            $areaCode = (!empty($home['areaCode']) ? "'".$home['areaCode']."'" : "NULL");
+            $cityCode = (!empty($home['cityCode']) ? "'".$home['cityCode']."'" : "NULL");
+            $stateCode = (!empty($home['stateCode']) ? "'".$home['stateCode']."'" : "NULL");
+            $countryCode = (!empty($home['countryCode']) ? "'".$home['countryCode']."'" : "NULL");
+
+            $sql .= "set @sAreaCode = ".$areaCode.";";
+            $sql .= "set @sCityCode = ".$cityCode.";";
+            $sql .= "set @sStateCode = ".$stateCode.";";
+            $sql .= "set @sCountryCode = ".$countryCode.";";
+
+            $address1 = (!empty($home['address1']) ? "'".$home['address1']."'" : "NULL");
+            $address2 = (!empty($home['address2']) ? "'".$home['address2']."'" : "NULL");
+            $address3 = (!empty($home['address3']) ? "'".$home['address3']."'" : "NULL");
+            $address4 = (!empty($home['address4']) ? "'".$home['address4']."'" : "NULL");
+            $address5 = (!empty($home['address5']) ? "'".$home['address5']."'" : "NULL");
+            $city = (!empty($home['city']) ? "'".$home['city']."'" : "NULL");
+            $state = (!empty($home['state']) ? "'".$home['state']."'" : "NULL");
+            $country = (!empty($home['country']) ? "'".$home['country']."'" : "NULL");
+            $pincode = (!empty($home['pincode']) ? "'".$home['pincode']."'" : "NULL");
+            $area = (!empty($home['area']) ? "'".$home['area']."'" : "NULL");
+            $phone1 = (!empty($home['phone1']) ? "'".$home['phone1']."'" : "NULL");
+            $phone2 = (!empty($home['phone2']) ? "'".$home['phone2']."'" : "NULL");
+
+            //create codes
+            if(intval($home["areaCode"]) < 1000 && !empty($home['area'])){
+                $sql .= "call spTable119(@sAreaCode, ".$home['area'].", ".$regCode.", 1);";
+            }
+            if(intval($home["cityCode"]) < 1000 && $home["stateCode"] > 1000 && !empty($home['city'])){
+                $sql .= "call spTable110(@sCityCode, ".$home['city'].", @sStateCode, @sCountryCode, ".$regCode.", 1);";
+            }
+            if(intval($home["stateCode"]) < 1000 && $home["countryCode"] > 1000 && !empty($home['state'])){
+                $sql .= "call spTable108(@sStateCode, ".$home["state"].", @sCountryCode, ".$regCode.", 1);";
+            }
+            if(intval($home["countryCode"]) < 1000 && !empty($home["country"])){
+                $sql .= "call spTable106(@sCountryCode, ".$home["country"].", NULL, NULL, 1);";
+            }
+
+            $sql .= "call spTable153(".$regCode.", ".$contactCode.",".$address1.", ".$address2.", ".$address3.", ".$address4.", ".$address5.", ".$pincode.", @sCountryCode, @sStateCode, @sCityCode, @sAreaCode, @sPhone1, @sPhone2, @sPhone3, @sModeFlag);";
+        }
     }while(0);
 
-    if ($mysqli->multi_query($sql) === TRUE) {
-        $validate = true;
-        $response = createResponse(1,"Successful");
-    }
-    else{
-        $validate = false;
-        $response = createResponse(0,"Error occurred while uploading to the database: ".$mysqli->error);
-    }
+    echo $sql;
+//    if ($mysqli->multi_query($sql) === TRUE) {
+//        $validate = true;
+//        $response = createResponse(1,"Successful");
+//    }
+//    else{
+//        $validate = false;
+//        $response = createResponse(0,"Error occurred while uploading to the database: ".$mysqli->error);
+//    }
 
 }
 echo json_encode($response);
