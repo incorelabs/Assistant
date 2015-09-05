@@ -82,24 +82,24 @@ echo $navbar_str;
                                                     <div class="form-group">
                                                         <label for="filter">Filter by</label>
                                                         <select class="form-control" id="filter">
-                                                            <option value="name">Name</option>
-                                                            <option value="mobile">Mobile</option>
-                                                            <option value="email">Email</option>
-                                                            <option value="company">Company</option>
-                                                            <option value="designation">Designation</option>
-                                                            <option value="guardian">Father/Husband</option>
-                                                            <option value="birthday">Birthday</option>
-                                                            <option value="anniversary">Anniversary</option>
-                                                            <option value="group">Group</option>
-                                                            <option value="home_area">Home Area</option>
-                                                            <option value="home_city">Home City</option>
-                                                            <option value="home_phone">Home Phone</option>
-                                                            <option value="work_area">Work Area</option>
-                                                            <option value="work_city">Work City</option>
-                                                            <option value="work_phone">Work Phone</option>
-                                                            <option value="other_area">Other Area</option>
-                                                            <option value="other_city">Other City</option>
-                                                            <option value="other_phone">Other Phone</option>
+                                                            <option value="1">Name</option>
+                                                            <option value="2">Mobile</option>
+                                                            <option value="3">Email</option>
+                                                            <option value="4">Company</option>
+                                                            <option value="5">Designation</option>
+                                                            <option value="6">Father/Husband</option>
+                                                            <option value="7">Birthday</option>
+                                                            <option value="8">Anniversary</option>
+                                                            <option value="9">Group</option>
+                                                            <option value="10">Home Area</option>
+                                                            <option value="11">Home City</option>
+                                                            <option value="12">Home Phone</option>
+                                                            <option value="13">Work Area</option>
+                                                            <option value="14">Work City</option>
+                                                            <option value="15">Work Phone</option>
+                                                            <option value="16">Other Area</option>
+                                                            <option value="17">Other City</option>
+                                                            <option value="18">Other Phone</option>
                                                         </select>
                                                     </div>
                                                 </form>

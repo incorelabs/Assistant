@@ -494,48 +494,46 @@ var pageContact = {
     showFilters: function () {
         //Function to show hide the filter Option.
         var e = document.getElementById('search_filter');
-        if (e.style.display == "block") {
+        if (e.style.display == "block")
             document.getElementById('search_filter').style.display = "none";
-
-        }
         else
             document.getElementById('search_filter').style.display = "block";
     },
     addBtn: function (btnType) {
         /*
-            mobile: 0 => 3,
-            email: 1 => 2,
-            home-phone: 2 => 2,
-            work-phone: 3 => 2,
-            other-phone: 4 => 2
+         mobile: 0 => 3,
+         email: 1 => 2,
+         home-phone: 2 => 2,
+         work-phone: 3 => 2,
+         other-phone: 4 => 2
          */
         switch (btnType) {
             case 0:
-                if(this.addBtnMobileCount < 2) {
+                if (this.addBtnMobileCount < 2) {
                     $(".addMobileDiv").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other Mobile' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-mobile' type='button' onclick='pageContact.removeBtn(this, 0)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
                     this.addBtnMobileCount++;
                 }
                 break;
             case 1:
-                if(this.addBtnEmailCount < 1) {
+                if (this.addBtnEmailCount < 1) {
                     $(".addEmailDiv").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='email' name='' id='' class='form-control text-field-left-border' placeholder='Other Email' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-email' type='button' onclick='pageContact.removeBtn(this, 1)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
                     this.addBtnEmailCount++;
                 }
                 break;
             case 2:
-                if(this.addBtnHomePhoneCount < 1) {
+                if (this.addBtnHomePhoneCount < 1) {
                     $(".addHomePhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-home-phone' type='button' onclick='pageContact.removeBtn(this, 2)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
                     this.addBtnHomePhoneCount++;
                 }
                 break;
             case 3:
-                if(this.addBtnWorkPhoneCount < 1) {
+                if (this.addBtnWorkPhoneCount < 1) {
                     $(".addWorkPhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-work-phone' type='button' onclick='pageContact.removeBtn(this, 3)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
                     this.addBtnWorkPhoneCount++;
                 }
                 break;
             case 4:
-                if(this.addBtnOtherPhoneCount < 1) {
+                if (this.addBtnOtherPhoneCount < 1) {
                     $(".addOtherPhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-other-phone' type='button' onclick='pageContact.removeBtn(this, 4)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
                     this.addBtnOtherPhoneCount++;
                 }
@@ -567,20 +565,75 @@ var pageContact = {
 $(document).ready(function (event) {
     pageContact.getContactList();
 
-});
+    $('#filter').change(function () {
+        if ($(this).val() != "0") {
+            $('#search_filter').hide();
+        }
+    });
 
-$("#deleteContact").ajaxForm({
-    success: function (responseText, statusText, xhr, $form) {
-        console.log(responseText);
-        var response = JSON.parse(responseText);
-        if (response.status == 1) {
-            showNotificationSuccess(response.message);
-            getContact(response.landing);
-            getContactList();
-            $("#deleteModal").modal('hide');
+    $('#imgInp').change(function () {
+        var image = this.files[0];
+        if ((image.size || image.fileSize) < 1 * 1000 * 1000) {
+            console.log(image);
+            var img = $("#imagepreview");
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                //img.src = reader.result;
+                img.attr("src", reader.result);
+            }
+            reader.readAsDataURL(image);
+            $("#imageErrorMsg").html("");
         }
         else {
-            showNotificationFailure(response.message);
+            $("#imageErrorMsg").html("Image size is greater than 1MB");
+            document.getElementById("profileForm").reset();
         }
-    },
+    });
+
+    $('#imageModal').on('show.bs.modal', function () {
+        document.getElementById("profileForm").reset();
+        $('#photoId').val(pageContact.localContact.contact.ContactCode);
+        if (pageContact.localContact.contact.ImageURL) {
+            $("#imagepreview").attr("src", pageContact.localContact.contact.ImageURL);
+        }
+        else {
+            $("#imagepreview").attr("src", "../img/contacts/profile/profilePicture1.png");
+        }
+    });
+
+    $("#profileForm").ajaxForm({
+        beforeSubmit: function () {
+            $(".progress").show();
+        },
+        uploadProgress: function (event, position, total, percentComplete) {
+            $(".progress-bar").width(percentComplete + "%");
+            $("#progressValue").html(percentComplete + "% complete");
+        },
+        success: function (responseText, statusText, xhr, $form) {
+            console.log(responseText);
+            var response = JSON.parse(responseText);
+            if (response.status == 1) {
+                $("#imageModal").modal('hide');
+                $("#imageresource").attr("src", response.location);
+                pageContact.localContact.contact.ImageURL = response.location;
+                $(".progress").hide();
+            }
+        }
+    });
+
+    $("#deleteContact").ajaxForm({
+        success: function (responseText, statusText, xhr, $form) {
+            console.log(responseText);
+            var response = JSON.parse(responseText);
+            if (response.status == 1) {
+                showNotificationSuccess(response.message);
+                getContact(response.landing);
+                getContactList();
+                $("#deleteModal").modal('hide');
+            }
+            else {
+                showNotificationFailure(response.message);
+            }
+        }
+    });
 });
