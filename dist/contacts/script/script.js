@@ -277,6 +277,21 @@ var pageContact = {
         });
     },
     doSearch: function () {
+        var url = "ContactList.php";
+        this.currentPageNo = 1;
+
+        $.getJSON(url, {
+            pageNo: pageContact.currentPageNo,
+            searchType: $('#filter').val(),
+            searchText: $('#searchBox').val()
+        }).done(function (data) {
+            console.log(data);
+
+            console.log(pageContact.currentPageNo);
+            //pageContact.setContactList(data);
+        }).fail(function (error) {
+
+        });
     },
     openAddContact: function () {
         document.getElementById("contactForm").reset();

@@ -65,9 +65,7 @@ echo $navbar_str;
                     <div class="row">
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                             <div class="input-group">
-                                <input id="searchContact" type="text" class="form-control"
-                                       onkeyup="pageContact.doSearch();"
-                                       placeholder="Search..." autofocus/>
+                                <input id="searchBox" type="text" class="form-control" placeholder="Search..." autofocus/>
 
                                 <div class="input-group-btn">
                                     <div class="btn-group" role="group">
