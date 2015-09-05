@@ -19,11 +19,11 @@ var pageContact = {
     areaTag: [],
     areaCode: [],
     area: [],
-    mobileAddCount: 0,
-    emailAddCount: 1,
-    homePhoneCount: 1,
-    workPhoneCount: 1,
-    otherPhoneCount: 1,
+    addBtnMobileCount: 0,
+    addBtnEmailCount: 0,
+    addBtnHomePhoneCount: 0,
+    addBtnWorkPhoneCount: 0,
+    addBtnOtherPhoneCount: 0,
     getContactList: function () {
         var url = "ContactList.php";
 
@@ -45,14 +45,14 @@ var pageContact = {
             var letterIndex = "";
             var str = "";
             for (var i = 0; i < data.result.length; i++) {
-                var letter = data.result[i][1].toUpperCase()[0];
+                var letter = data.result[i].FullName.toUpperCase()[0];
                 console.log(letter);
                 if (letter != letterIndex) {
                     str += "<li class='list-group-item-info li-pad'>" + letter + "</li>";
                     letterIndex = letter;
                     console.log(letterIndex);
                 }
-                str += "<a onclick='pageContact.getContactDetails(" + data.result[i][0] + ")' class='list-group-item contacts_font'><h4 class='list-group-item-heading contacts_font'>" + data.result[i][1] + "</h4></a>";
+                str += "<a onclick='pageContact.getContactDetails(" + data.result[i].ContactCode + ")' class='list-group-item contacts_font'><h4 class='list-group-item-heading contacts_font'>" + data.result[i].FullName + "</h4></a>";
             }
             //$("#contactList").empty();
             $("#contactList").append(str);
@@ -88,7 +88,7 @@ var pageContact = {
     setContactDetails: function (data) {
         if (data.status == 1) {
             this.localContact = data.detail;
-            var headerStr = "<h12>Contact Details</h12><button class='btn btn-success pull-right' onclick='openEditContact();'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger pull-left' onclick='openDeleteModal(" + data.detail.contact.ContactCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
+            var headerStr = "<h12>Contact Details</h12><button class='btn btn-success pull-right' onclick='pageContact.openEditContact();'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger pull-left' onclick='pageContact.openDeleteModal(" + data.detail.contact.ContactCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
             var str = "";
             var imgLocation = "";
             if (data.detail.contact.imageLocation) {
@@ -277,26 +277,25 @@ var pageContact = {
         });
     },
     doSearch: function () {
-
     },
     openAddContact: function () {
         document.getElementById("contactForm").reset();
-        $("#mode").val("A");
-        $("#contactCode").val(0);
+        $("#form-add-edit-mode").val("A");
+        $("#form-add-edit-code").val(0);
 
         $('#contactModalHeading').empty();
         $('#contactModalHeading').html("Add Contact");
 
         $('.addMobileDiv').empty();
-        this.mobileAddCount = 0;
+        this.addBtnMobileCount = 0;
         $('.addEmailDiv').empty();
-        this.emailAddCount = 1;
+        this.addBtnEmailCount = 0;
         $('.addHomePhone').empty();
-        this.homePhoneCount = 1;
+        this.addBtnHomePhoneCount = 0;
         $('.addWorkPhone').empty();
-        this.workPhoneCount = 1;
+        this.addBtnWorkPhoneCount = 0;
         $('.addOtherPhone').empty();
-        this.otherPhoneCount = 1;
+        this.addBtnOtherPhoneCount = 0;
         $("#contactModal").modal('show');
 
         // To close the tab pane and to remove the active border
@@ -305,13 +304,136 @@ var pageContact = {
         $("li").removeClass('active');
     },
     openEditContact: function () {
+        document.getElementById("contactForm").reset();
+        $("#form-add-edit-mode").val("M");
 
+        $('#contactModalHeading').empty();
+        $('#contactModalHeading').html("Edit Contact");
+
+        $("#form-add-edit-code").val(this.localContact.contact.ContactCode);
+
+        if (this.localContact.contact.TitleName) {
+            $('#addTitle').val(this.localContact.contact.TitleName);
+        }
+
+        if (this.localContact.contact.TitleCode) {
+            $('#titleId').val(this.localContact.contact.TitleCode);
+        }
+
+        if (this.localContact.contact.FirstName) {
+            $('#addFirstName').val(this.localContact.contact.FirstName);
+        }
+
+        if (this.localContact.contact.MiddleName) {
+            $('#addMiddleName').val(this.localContact.contact.MiddleName);
+        }
+
+        if (this.localContact.contact.LastName) {
+            $('#addLastName').val(this.localContact.contact.LastName);
+        }
+
+        if (this.localContact.contact.GuardianName) {
+            $('#addGuardianName').val(this.localContact.contact.GuardianName);
+        }
+
+        if (this.localContact.contact.Company) {
+            $('#addCompany').val(this.localContact.contact.Company);
+        }
+
+        if (this.localContact.contact.Designation) {
+            $('#addDesignation').val(this.localContact.contact.Designation);
+        }
+
+        if (this.localContact.contact.Alias) {
+            $('#addAlias').val(this.localContact.contact.Alias);
+        }
+
+        if (this.localContact.contact.Dob) {
+            $('#addDOB').val(this.localContact.contact.Dob);
+        }
+
+        if (this.localContact.contact.Dom) {
+            $('#addDOM').val(this.localContact.contact.Dom);
+        }
+
+        if (this.localContact.contact.GroupName) {
+            $('#addGroup').val(this.localContact.contact.GroupName);
+        }
+
+        if (this.localContact.contact.GroupCode) {
+            $('#groupId').val(this.localContact.contact.GroupCode);
+        }
+
+        if (this.localContact.contact.Remarks) {
+            $('#addRemarks').val(this.localContact.contact.Remarks);
+        }
+
+        if (this.localContact.contact.Mobile1) {
+            $('#addMobile1').val(this.localContact.contact.Mobile1);
+        }
+
+        if (this.localContact.contact.Mobile2) {
+            $('#addMobile2').val(this.localContact.contact.Mobile2);
+        }
+
+        if (this.localContact.contact.Mobile3) {
+            $('#addMobile3').val(this.localContact.contact.Mobile3);
+        }
+
+        if (this.localContact.contact.Email1) {
+            $('#addEmail1').val(this.localContact.contact.Email1);
+        }
+
+        if (this.localContact.contact.Email2) {
+            $('#addEmail2').val(this.localContact.contact.Email2);
+        }
+
+        if (this.localContact.contact.Facebook) {
+            $('#addFacebook').val(this.localContact.contact.Facebook);
+        }
+
+        if (this.localContact.contact.Twitter) {
+            $('#addTwitter').val(this.localContact.contact.Twitter);
+        }
+
+        if (this.localContact.contact.Google) {
+            $('#addGoogle').val(this.localContact.contact.Google);
+        }
+
+        if (this.localContact.contact.Linkedin) {
+            $('#addLinkedin').val(this.localContact.contact.Linkedin);
+        }
+
+        if (this.localContact.contact.Website) {
+            $('#addWebsite').val(this.localContact.contact.Website);
+        }
+
+        if (this.localContact.address) {
+            var address = this.localContact.address;
+            var type = "";
+            if (address.home) {
+                type = "home";
+                this.createEditAddressData(address, type);
+            }
+
+            if (address.work) {
+                type = "work";
+                this.createEditAddressData(address, type);
+            }
+
+            if (address.other) {
+                type = "other";
+                this.createEditAddressData(address, type);
+            }
+        }
+
+        $("#contactModal").modal('show');
     },
     createEditAddressData: function (address, type) {
 
     },
     openDeleteModal: function (contactCode) {
-        $("#deleteContact").val(contactCode);
+        $("#form-delete-code").val(contactCode);
         $("#deleteModal").modal("show");
     },
     setTitleAutoComplete: function () {
@@ -368,10 +490,97 @@ var pageContact = {
         this.getStates();
         this.getCities();
         this.getAreas();
+    },
+    showFilters: function () {
+        //Function to show hide the filter Option.
+        var e = document.getElementById('search_filter');
+        if (e.style.display == "block") {
+            document.getElementById('search_filter').style.display = "none";
+
+        }
+        else
+            document.getElementById('search_filter').style.display = "block";
+    },
+    addBtn: function (btnType) {
+        /*
+            mobile: 0 => 3,
+            email: 1 => 2,
+            home-phone: 2 => 2,
+            work-phone: 3 => 2,
+            other-phone: 4 => 2
+         */
+        switch (btnType) {
+            case 0:
+                if(this.addBtnMobileCount < 2) {
+                    $(".addMobileDiv").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other Mobile' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-mobile' type='button' onclick='pageContact.removeBtn(this, 0)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+                    this.addBtnMobileCount++;
+                }
+                break;
+            case 1:
+                if(this.addBtnEmailCount < 1) {
+                    $(".addEmailDiv").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='email' name='' id='' class='form-control text-field-left-border' placeholder='Other Email' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-email' type='button' onclick='pageContact.removeBtn(this, 1)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+                    this.addBtnEmailCount++;
+                }
+                break;
+            case 2:
+                if(this.addBtnHomePhoneCount < 1) {
+                    $(".addHomePhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-home-phone' type='button' onclick='pageContact.removeBtn(this, 2)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+                    this.addBtnHomePhoneCount++;
+                }
+                break;
+            case 3:
+                if(this.addBtnWorkPhoneCount < 1) {
+                    $(".addWorkPhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-work-phone' type='button' onclick='pageContact.removeBtn(this, 3)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+                    this.addBtnWorkPhoneCount++;
+                }
+                break;
+            case 4:
+                if(this.addBtnOtherPhoneCount < 1) {
+                    $(".addOtherPhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='' id='' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-other-phone' type='button' onclick='pageContact.removeBtn(this, 4)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+                    this.addBtnOtherPhoneCount++;
+                }
+                break;
+        }
+    },
+    removeBtn: function (btnToRemove, btnType) {
+        $(btnToRemove).closest('.addedBtn').remove();
+        switch (btnType) {
+            case 0:
+                this.addBtnMobileCount--;
+                break;
+            case 1:
+                this.addBtnEmailCount--;
+                break;
+            case 2:
+                this.addBtnHomePhoneCount--;
+                break;
+            case 3:
+                this.addBtnWorkPhoneCount--;
+                break;
+            case 4:
+                this.addBtnOtherPhoneCount--;
+                break;
+        }
     }
 };
 
 $(document).ready(function (event) {
     pageContact.getContactList();
 
+});
+
+$("#deleteContact").ajaxForm({
+    success: function (responseText, statusText, xhr, $form) {
+        console.log(responseText);
+        var response = JSON.parse(responseText);
+        if (response.status == 1) {
+            showNotificationSuccess(response.message);
+            getContact(response.landing);
+            getContactList();
+            $("#deleteModal").modal('hide');
+        }
+        else {
+            showNotificationFailure(response.message);
+        }
+    },
 });
