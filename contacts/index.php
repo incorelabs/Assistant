@@ -65,15 +65,15 @@ echo $navbar_str;
                     <div class="row">
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                             <div class="input-group">
-                                <input id="searchBox" type="text" class="form-control" placeholder="Search..." autofocus/>
+                                <input id="searchBox" type="text" class="form-control" placeholder="Search..."
+                                       autofocus/>
+
                                 <div class="input-group-btn">
                                     <div class="btn-group" role="group">
-                                        <div class="dropdown dropdown-lg">
-                                            <button type="button" class="btn btn-success dropdown-toggle"
-                                                    data-toggle="dropdown" aria-expanded="false"
-                                                    onclick="" style="border-radius:0px"><span
-                                                    class="fa fa-search"></span></button>
-                                        </div>
+                                        <button type="button" class="btn btn-success" onclick="pageContact.doSearch();"
+                                                style="border-radius:0px">
+                                            <span class="fa fa-search"></span>
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="input-group-btn">
@@ -81,7 +81,8 @@ echo $navbar_str;
                                         <div class="dropdown dropdown-lg">
                                             <button type="button" class="btn btn-danger dropdown-toggle"
                                                     data-toggle="dropdown" aria-expanded="false"
-                                                    onclick="pageContact.showFilters();" style="border-bottom-left-radius: 0px; border-top-left-radius: 0px;"><span
+                                                    onclick="pageContact.showFilters();"
+                                                    style="border-bottom-left-radius: 0px; border-top-left-radius: 0px;"><span
                                                     class="glyphicon glyphicon-filter"></span></button>
                                             <div class="dropdown-menu dropdown-menu-right" role="menu"
                                                  id="search_filter">
@@ -272,7 +273,8 @@ echo $navbar_str;
                             <input type="text" name="mobile" id="addMobile"
                                    class="form-control text-field-left-border" placeholder="Mobile"/>
                             <span class="input-group-btn">
-                                <button class="btn btn-success button-addon-custom btn-add-mobile" type="button" onclick="pageContact.addBtn(0)">
+                                <button class="btn btn-success button-addon-custom btn-add-mobile" type="button"
+                                        onclick="pageContact.addBtn(0)">
                                     <i class="fa fa-plus fa-lg"></i>
                                 </button>
                             </span>
@@ -285,7 +287,8 @@ echo $navbar_str;
                             <input type="email" name="email" id="addEmail"
                                    class="form-control text-field-left-border" placeholder="Email"/>
                             <span class="input-group-btn">
-                                <button class="btn btn-success button-addon-custom btn-add-email" type="button" onclick="pageContact.addBtn(1)">
+                                <button class="btn btn-success button-addon-custom btn-add-email" type="button"
+                                        onclick="pageContact.addBtn(1)">
                                     <i class="fa fa-plus fa-lg"></i>
                                 </button>
                             </span>
@@ -536,7 +539,7 @@ echo $navbar_str;
                                            class="form-control text-field-left-border" placeholder="Phone"/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-success button-addon-custom btn-home-phone"
-                                            type="button" onclick="pageContact.addBtn(2)">
+                                                type="button" onclick="pageContact.addBtn(2)">
                                             <i class="fa fa-plus fa-lg"></i>
                                         </button>
                                     </span>
@@ -670,7 +673,7 @@ echo $navbar_str;
                                            class="form-control text-field-left-border" placeholder="Phone"/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-success button-addon-custom btn-work-phone"
-                                            type="button" onclick="pageContact.addBtn(3)">
+                                                type="button" onclick="pageContact.addBtn(3)">
                                             <i class="fa fa-plus fa-lg"></i>
                                         </button>
                                     </span>
@@ -804,7 +807,7 @@ echo $navbar_str;
                                            class="form-control text-field-left-border" placeholder="Phone"/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-success button-addon-custom btn-other-phone"
-                                            type="button" onclick="pageContact.addBtn(4)">
+                                                type="button" onclick="pageContact.addBtn(4)">
                                             <i class="fa fa-plus fa-lg"></i>
                                         </button>
                                     </span>

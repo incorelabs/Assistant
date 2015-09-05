@@ -519,9 +519,6 @@ var pageContact = {
     setAutoComplete: function (autoCompleteId, changeCodeId, autoCompleteArray, changeCodeArray) {
 
     },
-    submitContactForm: function (event) {
-
-    },
     showNotificationSuccess: function (msg) {
         $("#notification_success").html(msg);
         document.getElementById('notification_success').style.display = "block";
@@ -687,6 +684,20 @@ $(document).ready(function (event) {
             else {
                 showNotificationFailure(response.message);
             }
+        }
+    });
+
+    $("#contactForm").ajaxForm({
+        beforeSubmit: function (arr, $form, options) {
+            console.log(arr);
+            // The array of form data takes the following form:
+            // [ { name: 'username', value: 'jresig' }, { name: 'password', value: 'secret' } ]
+
+            // return false to cancel submit
+            return false;
+        },
+        success: function (responseText, statusText, xhr, $form) {
+
         }
     });
 });
