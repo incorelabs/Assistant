@@ -1,4 +1,8 @@
 <?php
+spl_autoload_register(function ($class) {
+    include $class . '.php';
+});
+
 session_start();
 define("ROOT", "../");
 include_once ROOT.'dist/authenticate.php';
@@ -14,12 +18,32 @@ class ContactList{
     var $regCode;
     var $response;
     var $successful; // if contacts retrieved then successful
+    var $searchText;
+    var $searchType;
+    var $searchClause;
+    var $countQuery;
+    var $contactListQuery;
+    var $whereConstraints;
 
-    function __construct($limit,$page){
+    function __construct($limit,$page,$searchType=null,$searchText=null){
         $this->limit = $limit;
         $this->requestPage = $page;
         $this->regCode = intval($_SESSION['s_id']);
         $this->mysqli = getConnection();
+
+        if(!is_null($searchType) && !is_null($searchText)){
+            $this->searchText = $searchText;
+            $this->searchType = $searchType;
+            $this->setSearchClause($searchText);
+            $this->setWhereConstraints($this->searchClause);
+        }
+        else{
+            $this->setWhereConstraints();
+        }
+
+        $this->setContactListQuery();
+        $this->setContactList();
+        $this->setCountQuery();
         $this->setCount();
     }
 
@@ -29,14 +53,50 @@ class ContactList{
         return array("lower"=>$lower, "upper" => $upper);
     }
 
-    function getContactListQuery($parameter = null){
-        $where = " WHERE RegCode = ".$this->regCode." ";
-        if(!is_null($parameter)){
-            $where .= " AND ".$parameter["key"]." LIKE %".$parameter["value"]."% ";
-        }
+    function getContactListQuery(){
+        return $this->contactListQuery;
+    }
 
-        $sql = "SELECT Table151.ContactCode, Table151.FullName FROM Table151".$where." ORDER BY Table151.FullName LIMIT ".$this->limit." OFFSET ".$this->getLimits()["lower"].";";
-        return $sql;
+    function setContactListQuery(){
+        $this->contactListQuery = "SELECT Table151.ContactCode, Table151.FullName FROM Table151".$this->whereConstraints." ORDER BY Table151.FullName LIMIT ".$this->limit." OFFSET ".$this->getLimits()["lower"].";";
+    }
+
+    function setWhereConstraints($parameter = null){
+        $where = " WHERE RegCode = ".$this->regCode;
+        if(!is_null($parameter)) {
+            $where .= " AND".$parameter;
+        }
+        $this->whereConstraints = $where;
+    }
+
+    function setSearchClause($searchText){
+        $searchParameters = new SearchParameters();
+        switch($this->searchType){
+            case 1:
+                $this->searchClause = $searchParameters->getNameClause($searchText);
+                break;
+            case 2:
+                $this->searchClause = $searchParameters->getMobileClause($searchText);
+                break;
+            case 3:
+                $this->searchClause = $searchParameters->getEmailClause($searchText);
+                break;
+            case 4:
+                $this->searchClause = $searchParameters->getCompanyClause($searchText);
+                break;
+            case 5:
+                $this->searchClause = $searchParameters->getDesignationClause($searchText);
+                break;
+            case 6:
+                $this->searchClause = $searchParameters->getGuardianNameClause($searchText);
+                break;
+            case 7:
+                $this->searchClause = $searchParameters->getDobClause($searchText);
+                break;
+            case 8:
+                $this->searchClause = $searchParameters->getDomClause($searchText);
+                break;
+        }
     }
 
     function getResponse(){
@@ -87,13 +147,21 @@ class ContactList{
         $this->requestPage = $requestPage;
     }
 
+    function setCountQuery(){
+        $qry = "SELECT count(*) as 'count' FROM Table151";
+        $this->countQuery = $qry . $this->whereConstraints;
+    }
+
+    function getCountQuery(){
+        return $this->countQuery;
+    }
+
     function setCount($count = null){
         if(is_null($count)){
-            $sql = "SELECT count(*) as 'count' FROM Table151 WHERE Table151.RegCode = ".$this->regCode;
+            $sql = $this->getCountQuery();
             if($result = $this->mysqli->query($sql)) {
                 $row = $result->fetch_assoc();
                 $this->count = intval($row['count']);
-                $this->setContactList();
             }
         }
         else{
@@ -139,8 +207,10 @@ do{
 if($validate){
     $limit = 2; //should be greater than 1
     $requestPage = intval($_GET['pageNo']) - 1;
+    $searchText = (!empty($_GET['searchText']) ? $_GET['searchText'] : null);
+    $searchType = (!empty($_GET['searchType']) ? $_GET['searchType'] : null);
 
-    $contactListObj = new ContactList($limit,$requestPage);
+    $contactListObj = new ContactList($limit,$requestPage,$searchType,$searchText);
     $response = $contactListObj->getResponse();
 }
 
