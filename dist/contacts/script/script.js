@@ -863,14 +863,25 @@ $(document).ready(function (event) {
     $("#contactForm").ajaxForm({
         beforeSubmit: function (arr, $form, options) {
             console.log(arr);
+            pageContact.showLoadingInContactDetail();
             // The array of form data takes the following form:
             // [ { name: 'username', value: 'jresig' }, { name: 'password', value: 'secret' } ]
 
             // return false to cancel submit
         },
-        success: function (responseText, statusText, xhr, $form) {
-            console.log(responseText);
-
+        success: function (data, statusText, xhr, $form) {
+            console.log(data);
+            $("#contactModal").modal('hide');
+            if (data.status == 1) {
+                setTimeout(function () {
+                    pageContact.getContactDetails(data.landing);
+                    pageContact.getContactList();
+                    pageContact.showNotificationSuccess(data.message);
+                    pageContact.refreshMasterList();
+                }, 500);
+            } else {
+                pageContact.showNotificationFailure(data.message);
+            }
         }
     });
 });
