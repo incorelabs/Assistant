@@ -106,9 +106,7 @@ class ContactDetail
     }
 
     function getAddressDetailQuery($tableName){
-        $sql = "SELECT `Address1`, `Address2`, `Address3`, `Address4`, `Address5`, `Pincode`, `CountryCode`, `StateCode`, `CityCode`, `AreaCode`, `Phone1`, `Phone2`, `Phone3`
-                FROM `".$tableName."`
-                WHERE  `RegCode` = ".$this->regCode." AND `ContactCode` = ".$this->contactCode.";";
+        $sql = "SELECT ".$tableName.".`Address1`, ".$tableName.".`Address2`, ".$tableName.".`Address3`, ".$tableName.".`Address4`, ".$tableName.".`Address5`, ".$tableName.".`Pincode`, Table106.CountryName,".$tableName.".`CountryCode`, Table108.StateName,".$tableName.".`StateCode`, Table110.CityName,".$tableName.".`CityCode`, Table119.AreaName,".$tableName.".`AreaCode`, ".$tableName.".`Phone1`, ".$tableName.".`Phone2` FROM `".$tableName."` LEFT JOIN Table110 ON Table110.CityCode = ".$tableName.".CityCode LEFT JOIN Table108 ON Table108.StateCode = ".$tableName.".StateCode LEFT JOIN Table106 ON Table106.CountryCode = ".$tableName.".CountryCode LEFT JOIN Table119 ON Table119.AreaCode = ".$tableName.".AreaCode WHERE  ".$tableName.".`RegCode` = ".$this->regCode." AND ".$tableName.".`ContactCode` = ".$this->contactCode.";";
         return $sql;
     }
 

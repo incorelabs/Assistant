@@ -19,8 +19,8 @@ $mysqli = getConnection();
 
 $response = array();
 $validate = false;
-
-print_r($_POST);
+$landing;
+//print_r($_POST);
 
 //Input variables
 $regCode = intval($_SESSION['s_id']);
@@ -76,6 +76,13 @@ do {
         break;
     }
 
+    if(!empty($_POST['mode'])){
+        $validate = true;
+        if($_POST['mode'] == "D"){
+            break;
+        }
+    }
+
     //Required Validation
     if(!empty($_POST['mode']) && !empty($_POST['title']) && !empty($_POST['firstName'])){
         $validate = true;
@@ -105,48 +112,51 @@ if ($validate) {
             $contactCode = $_POST["contactCode"];
         }
 
-        if($_POST["mode"] == "M"){
-            $mode = 2;
-            $contactCode = $_POST["contactCode"];
-        }
+        if($_POST["mode"] == "M" || $_POST["mode"] == "A"){
 
-        if($_POST["mode"] == "A"){
-            $mode = 1;
-            $contactCode = 0;
-        }
+            if($_POST["mode"] == "M"){
+                $mode = 2;
+                $contactCode = $_POST["contactCode"];
+                $landing = $contactCode;
+            }
+            elseif($_POST["mode"] == "A"){
+                $mode = 1;
+                $contactCode = 0;
+            }
 
-        //create title code
-        if(intval($_POST["titleCode"]) < 1000 && !empty($_POST['title'])){
-            $title = "'".$_POST["title"]."'";
-            $sql .= "call spTable114(@sTitleCode,
+            //create title code
+            if(intval($_POST["titleCode"]) < 1000 && !empty($_POST['title'])){
+                $title = "'".$_POST["title"]."'";
+                $sql .= "call spTable114(@sTitleCode,
                     ".$title.",
                     NULL,
                     ".$regCode.",
                     1);";
-        }
+            }
 
-        //create group code
-        if(intval($_POST["groupCode"]) < 1000 && !empty($_POST['group'])){
-            $group = "'".$_POST['group']."'";
-            $sql .= "call spTable126(@sGroupCode,
+            //create group code
+            if(intval($_POST["groupCode"]) < 1000 && !empty($_POST['group'])){
+                $group = "'".$_POST['group']."'";
+                $sql .= "call spTable126(@sGroupCode,
                     ".$group.",
                     ".$regCode.",
                     1);";
-        }
+            }
 
-        //create emergency code
-        if(intval($_POST["emergencyCode"]) < 1000 && !empty($_POST['emergency'])){
-            $emergency = "'".$_POST["emergency"]."'";
-            $sql .= "call spTable128(@sEmergencyCode,
+            //create emergency code
+            if(intval($_POST["emergencyCode"]) < 1000 && !empty($_POST['emergency'])){
+                $emergency = "'".$_POST["emergency"]."'";
+                $sql .= "call spTable128(@sEmergencyCode,
                     .$emergency.,
                     ".$regCode.",
                     1);";
+            }
         }
 
-        $fName = "'".$_POST['firstName']."'";
+        $fName = (!empty($_POST['firstName']) ? "'".$_POST['firstName']."'" : "NULL");
         $mName = (!empty($_POST['middleName']) ? "'".$_POST['middleName']."'" : "NULL");
         $lName = (!empty($_POST['lastName']) ? "'".$_POST['lastName']."'" : "NULL");
-        $fullName = "'".$_POST['firstName'].(!empty($_POST['middleName']) ? " ".$_POST['middleName'] : "").(!empty($_POST['lastName']) ? " ".$_POST['lastName'] : "")."'";
+        $fullName = "'".(!empty($_POST['firstName']) ? $_POST['firstName'] : "").(!empty($_POST['middleName']) ? " ".$_POST['middleName'] : "").(!empty($_POST['lastName']) ? " ".$_POST['lastName'] : "")."'";
         $mobile1 = (!empty($_POST['mobile1']) ? "'".$_POST['mobile1']."'" : "NULL");
         $mobile2 = (!empty($_POST['mobile2']) ? "'".$_POST['mobile2']."'" : "NULL");
         $mobile3 = (!empty($_POST['mobile3']) ? "'".$_POST['mobile3']."'" : "NULL");
@@ -168,9 +178,10 @@ if ($validate) {
         $private = (isset($_POST["private"]) ? "1" : "2");
         $active = (isset($_POST["active"]) ? "1" : "2");
 
+        $sql .= "SET @contactCode = ".$contactCode.";";
         $sql .= "call spTable151(
             ".$regCode.",
-            ".$contactCode.",
+            @contactCode,
             ".$fName.",
             ".$mName.",
             ".$lName.",
@@ -203,6 +214,7 @@ if ($validate) {
             ".$active.",
             NOW(),
             ".$mode.");";
+        $sql .= "SELECT @contactCode as 'ContactCode';";
 
         if(!empty($_POST["address"]["home"])){
             $home = $_POST["address"]["home"];
@@ -231,20 +243,20 @@ if ($validate) {
             $phone2 = (!empty($home['phone2']) ? "'".$home['phone2']."'" : "NULL");
 
             //create codes
-            if(intval($home["areaCode"]) < 1000 && !empty($home['area'])){
-                $sql .= "call spTable119(@sAreaCode, ".$home['area'].", ".$regCode.", 1);";
-            }
-            if(intval($home["cityCode"]) < 1000 && $home["stateCode"] > 1000 && !empty($home['city'])){
-                $sql .= "call spTable110(@sCityCode, ".$home['city'].", @sStateCode, @sCountryCode, ".$regCode.", 1);";
-            }
-            if(intval($home["stateCode"]) < 1000 && $home["countryCode"] > 1000 && !empty($home['state'])){
-                $sql .= "call spTable108(@sStateCode, ".$home["state"].", @sCountryCode, ".$regCode.", 1);";
-            }
             if(intval($home["countryCode"]) < 1000 && !empty($home["country"])){
-                $sql .= "call spTable106(@sCountryCode, ".$home["country"].", NULL, NULL, 1);";
+                $sql .= "call spTable106(@sCountryCode, ".$country.", NULL, NULL, 1);";
+            }
+            if(intval($home["stateCode"]) < 1000 && !empty($home['state'])){
+                $sql .= "call spTable108(@sStateCode, ".$state.", @sCountryCode, ".$regCode.", 1);";
+            }
+            if(intval($home["cityCode"]) < 1000 && !empty($home['city'])){
+                $sql .= "call spTable110(@sCityCode, ".$city.", @sStateCode, @sCountryCode, ".$regCode.", 1);";
+            }
+            if(intval($home["areaCode"]) < 1000 && !empty($home['area'])){
+                $sql .= "call spTable119(@sAreaCode, ".$area.", ".$regCode.", 1);";
             }
 
-            $sql .= "call spTable153(".$regCode.", ".$contactCode.",".$address1.", ".$address2.", ".$address3.", ".$address4.", ".$address5.", ".$pincode.", @sCountryCode, @sStateCode, @sCityCode, @sAreaCode, @sPhone1, @sPhone2, @sPhone3, @sModeFlag);";
+            $sql .= "call spTable153(".$regCode.", ".$contactCode.",".$address1.", ".$address2.", ".$address3.", ".$address4.", ".$address5.", ".$pincode.", @sCountryCode, @sStateCode, @sCityCode, @sAreaCode, ".$phone1.", ".$phone2.", NULL, $mode);";
         }
 
         if(!empty($_POST["address"]["work"])){
@@ -274,20 +286,20 @@ if ($validate) {
             $phone2 = (!empty($work['phone2']) ? "'".$work['phone2']."'" : "NULL");
 
             //create codes
-            if(intval($work["areaCode"]) < 1000 && !empty($work['area'])){
-                $sql .= "call spTable119(@sAreaCode, ".$work['area'].", ".$regCode.", 1);";
-            }
-            if(intval($work["cityCode"]) < 1000 && $work["stateCode"] > 1000 && !empty($work['city'])){
-                $sql .= "call spTable110(@sCityCode, ".$work['city'].", @sStateCode, @sCountryCode, ".$regCode.", 1);";
-            }
-            if(intval($work["stateCode"]) < 1000 && $work["countryCode"] > 1000 && !empty($work['state'])){
-                $sql .= "call spTable108(@sStateCode, ".$work["state"].", @sCountryCode, ".$regCode.", 1);";
-            }
             if(intval($work["countryCode"]) < 1000 && !empty($work["country"])){
-                $sql .= "call spTable106(@sCountryCode, ".$work["country"].", NULL, NULL, 1);";
+                $sql .= "call spTable106(@sCountryCode, ".$country.", NULL, NULL, 1);";
+            }
+            if(intval($work["stateCode"]) < 1000 && !empty($work['state'])){
+                $sql .= "call spTable108(@sStateCode, ".$state.", @sCountryCode, ".$regCode.", 1);";
+            }
+            if(intval($work["cityCode"]) < 1000 && !empty($work['city'])){
+                $sql .= "call spTable110(@sCityCode, ".$city.", @sStateCode, @sCountryCode, ".$regCode.", 1);";
+            }
+            if(intval($work["areaCode"]) < 1000 && !empty($work['area'])){
+                $sql .= "call spTable119(@sAreaCode, ".$area.", ".$regCode.", 1);";
             }
 
-            $sql .= "call spTable155(".$regCode.", ".$contactCode.",".$address1.", ".$address2.", ".$address3.", ".$address4.", ".$address5.", ".$pincode.", @sCountryCode, @sStateCode, @sCityCode, @sAreaCode, @sPhone1, @sPhone2, @sPhone3, @sModeFlag);";
+            $sql .= "call spTable155(".$regCode.", ".$contactCode.",".$address1.", ".$address2.", ".$address3.", ".$address4.", ".$address5.", ".$pincode.", @sCountryCode, @sStateCode, @sCityCode, @sAreaCode, ".$phone1.", ".$phone2.", NULL, $mode);";
         }
 
         if(!empty($_POST["address"]["other"])){
@@ -317,33 +329,44 @@ if ($validate) {
             $phone2 = (!empty($other['phone2']) ? "'".$other['phone2']."'" : "NULL");
 
             //create codes
-            if(intval($other["areaCode"]) < 1000 && !empty($other['area'])){
-                $sql .= "call spTable119(@sAreaCode, ".$other['area'].", ".$regCode.", 1);";
-            }
-            if(intval($other["cityCode"]) < 1000 && $other["stateCode"] > 1000 && !empty($other['city'])){
-                $sql .= "call spTable110(@sCityCode, ".$other['city'].", @sStateCode, @sCountryCode, ".$regCode.", 1);";
-            }
-            if(intval($other["stateCode"]) < 1000 && $other["countryCode"] > 1000 && !empty($other['state'])){
-                $sql .= "call spTable108(@sStateCode, ".$other["state"].", @sCountryCode, ".$regCode.", 1);";
-            }
             if(intval($other["countryCode"]) < 1000 && !empty($other["country"])){
-                $sql .= "call spTable106(@sCountryCode, ".$other["country"].", NULL, NULL, 1);";
+                $sql .= "call spTable106(@sCountryCode, ".$country.", NULL, NULL, 1);";
+            }
+            if(intval($other["stateCode"]) < 1000 && !empty($other['state'])){
+                $sql .= "call spTable108(@sStateCode, ".$state.", @sCountryCode, ".$regCode.", 1);";
+            }
+            if(intval($other["cityCode"]) < 1000 && !empty($other['city'])){
+                $sql .= "call spTable110(@sCityCode, ".$city.", @sStateCode, @sCountryCode, ".$regCode.", 1);";
+            }
+            if(intval($other["areaCode"]) < 1000 && !empty($other['area'])){
+                $sql .= "call spTable119(@sAreaCode, ".$area.", ".$regCode.", 1);";
             }
 
-            $sql .= "call spTable157(".$regCode.", ".$contactCode.",".$address1.", ".$address2.", ".$address3.", ".$address4.", ".$address5.", ".$pincode.", @sCountryCode, @sStateCode, @sCityCode, @sAreaCode, @sPhone1, @sPhone2, @sPhone3, @sModeFlag);";
+            $sql .= "call spTable157(".$regCode.", ".$contactCode.",".$address1.", ".$address2.", ".$address3.", ".$address4.", ".$address5.", ".$pincode.", @sCountryCode, @sStateCode, @sCityCode, @sAreaCode, ".$phone1.", ".$phone2.", NULL, $mode);";
         }
 
     }while(0);
 
-    echo $sql;
-//    if ($mysqli->multi_query($sql) === TRUE) {
-//        $validate = true;
-//        $response = createResponse(1,"Successful");
-//    }
-//    else{
-//        $validate = false;
-//        $response = createResponse(0,"Error occurred while uploading to the database: ".$mysqli->error);
-//    }
+    //echo $sql;
+    if ($mysqli->multi_query($sql)) {
+        do {
+            /* store first result set */
+            if ($result = $mysqli->use_result()) {
+                while ($row = $result->fetch_row()) {
+                    $landing = $row[0];
+                }
+                $result->close();
+            }
+        } while ($mysqli->next_result());
+
+        $validate = true;
+        $response = createResponse(1,"Successful");
+        $response["landing"] = $landing;
+    }
+    else{
+        $validate = false;
+        $response = createResponse(0,"Error occurred while uploading to the database: ".$mysqli->error);
+    }
 
 }
 echo json_encode($response);
