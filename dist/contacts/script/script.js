@@ -170,6 +170,8 @@ var pageContact = {
 
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Group</div><value><div class='col-md-9'>" + ((data.detail.contact.GroupName) ? data.detail.contact.GroupName : "") + "</div></value></div></div>";
 
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Emergency</div><value><div class='col-md-9'>" + ((data.detail.contact.EmergencyName) ? data.detail.contact.EmergencyName : "") + "</div></value></div></div>";
+
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Remarks</div><value><div class='col-md-9'>" + ((data.detail.contact.Remarks) ? data.detail.contact.Remarks : "") + "</div></value></div></div>";
 
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile</div><value><div class='col-md-9'>";
@@ -229,7 +231,7 @@ var pageContact = {
                     homeAddress += ((home.Pincode) ? home.Pincode : "");
                     if (home.CityName != null || home.Pincode != null)
                         homeAddress += "<br/>";
-                    homeAddress += "(Area) " + ((home.AreaName) ? (home.AreaName + "<br/>") : "");
+                    homeAddress += ((home.AreaName) ? ("(Area) " + home.AreaName + "<br/>") : "");
                     homeAddress += ((home.Phone1) ? (home.Phone1 + " ") : "") + ((home.Phone2) ? (home.Phone2) : "");
                 }
 
@@ -247,7 +249,7 @@ var pageContact = {
                     workAddress += ((work.Pincode) ? work.Pincode : "");
                     if (work.CityName != null || work.Pincode != null)
                         workAddress += "<br/>";
-                    workAddress += "(Area) " + ((work.AreaName) ? (work.AreaName + "<br/>") : "");
+                    workAddress += ((work.AreaName) ? ("(Area) " + work.AreaName + "<br/>") : "");
                     workAddress += ((work.Phone1) ? (work.Phone1 + " ") : "") + ((work.Phone2) ? (work.Phone2) : "");
                 }
 
@@ -265,7 +267,7 @@ var pageContact = {
                     otherAddress += ((other.Pincode) ? other.Pincode : "");
                     if (other.CityName != null || other.Pincode != null)
                         otherAddress += "<br/>";
-                    otherAddress += "(Area) " + ((other.AreaName) ? (other.AreaName + "<br/>") : "");
+                    otherAddress += ((other.AreaName) ? ("(Area) " + other.AreaName + "<br/>") : "");
                     otherAddress += ((other.Phone1) ? (other.Phone1 + " ") : "") + ((other.Phone2) ? (other.Phone2) : "");
                 }
             }
@@ -871,9 +873,9 @@ $(document).ready(function (event) {
         },
         success: function (data, statusText, xhr, $form) {
             console.log(data);
-            $("#contactModal").modal('hide');
             if (data.status == 1) {
                 setTimeout(function () {
+                    $("#contactModal").modal('hide');
                     pageContact.getContactDetails(data.landing);
                     pageContact.getContactList();
                     pageContact.showNotificationSuccess(data.message);
