@@ -999,7 +999,7 @@ echo $navbar_str;
                 </div>
 
                 <div class="modal-body">
-                    <input type="hidden" name="photoId" id='photoId'/>
+                    <input type="hidden" name="contactCode" id='photoId'/>
 
                     <div class="form-group row">
                         <center>

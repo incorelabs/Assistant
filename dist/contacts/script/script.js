@@ -144,7 +144,7 @@ var pageContact = {
     setContactDetails: function (data) {
         if (data.status == 1) {
             pageContact.localContact = data.detail;
-            var headerStr = "<h12>Contact Details</h12><button class='btn btn-success pull-right' onclick='pageContact.openEditContact();'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger pull-left' onclick='pageContact.openDeleteModal(" + data.detail.contact.ContactCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
+            var headerStr = "<h12>Contact Details</h12><button id='editContactBtn' class='btn btn-success pull-right' onclick='pageContact.openEditContact();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deleteContactBtn' class='btn btn-danger pull-left' onclick='pageContact.openDeleteModal(" + data.detail.contact.ContactCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
             var str = "";
             var imgLocation = "";
             if (data.detail.contact.ImageURL != null) {
@@ -854,13 +854,16 @@ $(document).ready(function (event) {
                 setTimeout(function () {
                     pageContact.currentPageNo = 1;
                     $("#contactList").empty();
+                    $("#contactDetailBody").empty();
+                    $("#editContactBtn").remove();
+                    $("#deleteContactBtn").remove();
                     pageContact.showNotificationSuccess(data.message);
                     pageContact.getContactList();
                     $("#deleteModal").modal('hide');
                 }, 500);
             }
             else {
-                showNotificationFailure(response.message);
+                pageContact.showNotificationFailure(response.message);
             }
         }
     });
