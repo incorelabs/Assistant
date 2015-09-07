@@ -853,6 +853,7 @@ $(document).ready(function (event) {
             if (data.status == 1) {
                 setTimeout(function () {
                     pageContact.currentPageNo = 1;
+                    $("#contactList").empty();
                     pageContact.showNotificationSuccess(data.message);
                     pageContact.getContactList();
                     $("#deleteModal").modal('hide');
@@ -880,6 +881,7 @@ $(document).ready(function (event) {
             if (data.status == 1) {
                 setTimeout(function () {
                     pageContact.currentPageNo = 1;
+                    $("#contactList").empty();
                     pageContact.getContactDetails(data.landing);
                     pageContact.getContactList();
                     pageContact.showNotificationSuccess(data.message);
