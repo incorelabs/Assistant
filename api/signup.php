@@ -12,6 +12,19 @@ function createResponse($status,$message){
 	return array('status' => $status, 'message' => $message);
 }
 
+function createInitialFolders($regCode){
+	$path = ROOT."img/".$regCode;
+	mkdir($path);
+	$path = ROOT."img/".$regCode."/Contacts";
+	mkdir($path);
+	$path = ROOT."img/".$regCode."/Investments";
+	mkdir($path);
+	$path = ROOT."img/".$regCode."/Assets";
+	mkdir($path);
+	$path = ROOT."img/".$regCode."/Documents";
+	mkdir($path);
+}
+
 //General Validation
 do {
 	if (isset($_POST)) {
@@ -136,8 +149,9 @@ if ($validate) {
 		$nextYear->add(new DateInterval('P1Y'));
 		$today = new DateTime("now");
 
-		$sql = "call createNewUser(
-			".$regCode.",
+		$sql = "SET @regCode = ".$regCode.";";
+		$sql .= "call createNewUser(
+			@regCode,
 			".$familyCode.",
 			".$name.",
 			".$relationCode.",
@@ -162,8 +176,21 @@ if ($validate) {
 			'".$today->format("Y-m-d H:i:s")."'
 		);";
 
+		$sql .= "SELECT @regCode;";
+
 		//echo $sql;
 		if ($mysqli->multi_query($sql) === TRUE) {
+			do {
+				/* store first result set */
+				if ($result = $mysqli->use_result()) {
+					while ($row = $result->fetch_row()) {
+						$regCode = $row[0];
+					}
+					$result->close();
+				}
+			} while ($mysqli->next_result());
+
+			createInitialFolders($regCode);
 			$response = createResponse(1,"Successfull");
 		}
 		else{

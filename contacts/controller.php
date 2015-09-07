@@ -12,7 +12,7 @@ spl_autoload_register(function ($class) {
 session_start();
 define("ROOT", "../");
 
-//include_once ROOT.'dist/authenticate.php';
+include_once ROOT.'dist/authenticate.php';
 require_once ROOT.'db/Connection.php';
 require_once ROOT.'modules/functions.php';
 $mysqli = getConnection();
