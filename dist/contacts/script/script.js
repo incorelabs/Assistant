@@ -851,6 +851,7 @@ $(document).ready(function (event) {
             var data = JSON.parse(responseText);
             console.log(data);
             if (data.status == 1) {
+                pageContact.currentPageNo--;
                 pageContact.showNotificationSuccess(data.message);
                 pageContact.getContactList();
                 $("#deleteModal").modal('hide');
@@ -876,6 +877,7 @@ $(document).ready(function (event) {
             console.log(data.status);
             if (data.status == 1) {
                 setTimeout(function () {
+                    pageContact.currentPageNo--;
                     pageContact.getContactDetails(data.landing);
                     pageContact.getContactList();
                     pageContact.showNotificationSuccess(data.message);
