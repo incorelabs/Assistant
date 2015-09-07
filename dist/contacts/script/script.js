@@ -848,11 +848,10 @@ $(document).ready(function (event) {
 
     $("#deleteContact").ajaxForm({
         success: function (responseText, statusText, xhr, $form) {
-            console.log(responseText);
-            var response = JSON.parse(responseText);
-            if (response.status == 1) {
-                pageContact.showNotificationSuccess(response.message);
-                pageContact.getContactDetails(response.landing);
+            var data = JSON.parse(responseText);
+            console.log(data);
+            if (data.status == 1) {
+                pageContact.showNotificationSuccess(data.message);
                 pageContact.getContactList();
                 $("#deleteModal").modal('hide');
             }
@@ -871,15 +870,17 @@ $(document).ready(function (event) {
 
             // return false to cancel submit
         },
-        success: function (data, statusText, xhr, $form) {
+        success: function (responseText, statusText, xhr, $form) {
+            var data = JSON.parse(responseText);
             console.log(data);
+            console.log(data.status);
             if (data.status == 1) {
                 setTimeout(function () {
-                    $("#contactModal").modal('hide');
                     pageContact.getContactDetails(data.landing);
                     pageContact.getContactList();
                     pageContact.showNotificationSuccess(data.message);
                     pageContact.refreshMasterList();
+                    $("#contactModal").modal('hide');
                 }, 500);
             } else {
                 pageContact.showNotificationFailure(data.message);
