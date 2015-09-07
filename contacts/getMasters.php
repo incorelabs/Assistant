@@ -1,9 +1,4 @@
 <?php
-$url = "http://incorelabs.com";
-header("Access-Control-Allow-Origin:".$url);
-header("Access-Control-Request-Method: GET, POST");
-header("Access-Control-Allow-Credentials: true");
-
 define("ROOT", "../");
 
 require_once ROOT.'db/Connection.php';
@@ -28,32 +23,37 @@ if (isset($_GET['type'])) {
 	$i = 0;
 	//title
 	if ($_GET['type'] == 'title') {
-		$data = createDataAPI("title","description");
+		$data = createDataAPI("Table114","TitleName");
 	}
 
 	//group
 	if ($_GET['type'] == 'group') {
-		$data = createDataAPI(DB_NAME.".group","description");
+		$data = createDataAPI("Table126","GroupName");
+	}
+
+	//group
+	if ($_GET['type'] == 'emergency') {
+		$data = createDataAPI("Table128","EmergencyName");
 	}
 
 	//country
 	if ($_GET['type'] == 'country') {
-		$data = createDataAPI("country","description");
+		$data = createDataAPI("Table106","CountryName");
 	}
 
 	//state
 	if ($_GET['type'] == 'state') {
-		$data = createDataAPI("state", "description");
+		$data = createDataAPI("Table108", "StateName");
 	}
 
 	//city
 	if ($_GET['type'] == 'city') {
-		$data = createDataAPI("city","description");
+		$data = createDataAPI("Table110","CityName");
 	}
 
 	//area
 	if ($_GET['type'] == 'area') {
-		$data = createDataAPI("area","description");
+		$data = createDataAPI("Table119","AreaName");
 	}
 
 	echo json_encode($data);

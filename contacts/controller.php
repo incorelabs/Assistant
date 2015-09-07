@@ -20,6 +20,8 @@ $mysqli = getConnection();
 $response = array();
 $validate = false;
 
+print_r($_POST);
+
 //Input variables
 $regCode = intval($_SESSION['s_id']);
 $contactCode = 0;
@@ -75,7 +77,7 @@ do {
     }
 
     //Required Validation
-    if(!empty($_POST['mode']) && !empty($_POST['addTitle']) && !empty($_POST['firstName'])){
+    if(!empty($_POST['mode']) && !empty($_POST['title']) && !empty($_POST['firstName'])){
         $validate = true;
     }
     else{
@@ -244,6 +246,93 @@ if ($validate) {
 
             $sql .= "call spTable153(".$regCode.", ".$contactCode.",".$address1.", ".$address2.", ".$address3.", ".$address4.", ".$address5.", ".$pincode.", @sCountryCode, @sStateCode, @sCityCode, @sAreaCode, @sPhone1, @sPhone2, @sPhone3, @sModeFlag);";
         }
+
+        if(!empty($_POST["address"]["work"])){
+            $work = $_POST["address"]["work"];
+
+            $areaCode = (!empty($work['areaCode']) ? "'".$work['areaCode']."'" : "NULL");
+            $cityCode = (!empty($work['cityCode']) ? "'".$work['cityCode']."'" : "NULL");
+            $stateCode = (!empty($work['stateCode']) ? "'".$work['stateCode']."'" : "NULL");
+            $countryCode = (!empty($work['countryCode']) ? "'".$work['countryCode']."'" : "NULL");
+
+            $sql .= "set @sAreaCode = ".$areaCode.";";
+            $sql .= "set @sCityCode = ".$cityCode.";";
+            $sql .= "set @sStateCode = ".$stateCode.";";
+            $sql .= "set @sCountryCode = ".$countryCode.";";
+
+            $address1 = (!empty($work['address1']) ? "'".$work['address1']."'" : "NULL");
+            $address2 = (!empty($work['address2']) ? "'".$work['address2']."'" : "NULL");
+            $address3 = (!empty($work['address3']) ? "'".$work['address3']."'" : "NULL");
+            $address4 = (!empty($work['address4']) ? "'".$work['address4']."'" : "NULL");
+            $address5 = (!empty($work['address5']) ? "'".$work['address5']."'" : "NULL");
+            $city = (!empty($work['city']) ? "'".$work['city']."'" : "NULL");
+            $state = (!empty($work['state']) ? "'".$work['state']."'" : "NULL");
+            $country = (!empty($work['country']) ? "'".$work['country']."'" : "NULL");
+            $pincode = (!empty($work['pincode']) ? "'".$work['pincode']."'" : "NULL");
+            $area = (!empty($work['area']) ? "'".$work['area']."'" : "NULL");
+            $phone1 = (!empty($work['phone1']) ? "'".$work['phone1']."'" : "NULL");
+            $phone2 = (!empty($work['phone2']) ? "'".$work['phone2']."'" : "NULL");
+
+            //create codes
+            if(intval($work["areaCode"]) < 1000 && !empty($work['area'])){
+                $sql .= "call spTable119(@sAreaCode, ".$work['area'].", ".$regCode.", 1);";
+            }
+            if(intval($work["cityCode"]) < 1000 && $work["stateCode"] > 1000 && !empty($work['city'])){
+                $sql .= "call spTable110(@sCityCode, ".$work['city'].", @sStateCode, @sCountryCode, ".$regCode.", 1);";
+            }
+            if(intval($work["stateCode"]) < 1000 && $work["countryCode"] > 1000 && !empty($work['state'])){
+                $sql .= "call spTable108(@sStateCode, ".$work["state"].", @sCountryCode, ".$regCode.", 1);";
+            }
+            if(intval($work["countryCode"]) < 1000 && !empty($work["country"])){
+                $sql .= "call spTable106(@sCountryCode, ".$work["country"].", NULL, NULL, 1);";
+            }
+
+            $sql .= "call spTable155(".$regCode.", ".$contactCode.",".$address1.", ".$address2.", ".$address3.", ".$address4.", ".$address5.", ".$pincode.", @sCountryCode, @sStateCode, @sCityCode, @sAreaCode, @sPhone1, @sPhone2, @sPhone3, @sModeFlag);";
+        }
+
+        if(!empty($_POST["address"]["other"])){
+            $other = $_POST["address"]["other"];
+
+            $areaCode = (!empty($other['areaCode']) ? "'".$other['areaCode']."'" : "NULL");
+            $cityCode = (!empty($other['cityCode']) ? "'".$other['cityCode']."'" : "NULL");
+            $stateCode = (!empty($other['stateCode']) ? "'".$other['stateCode']."'" : "NULL");
+            $countryCode = (!empty($other['countryCode']) ? "'".$other['countryCode']."'" : "NULL");
+
+            $sql .= "set @sAreaCode = ".$areaCode.";";
+            $sql .= "set @sCityCode = ".$cityCode.";";
+            $sql .= "set @sStateCode = ".$stateCode.";";
+            $sql .= "set @sCountryCode = ".$countryCode.";";
+
+            $address1 = (!empty($other['address1']) ? "'".$other['address1']."'" : "NULL");
+            $address2 = (!empty($other['address2']) ? "'".$other['address2']."'" : "NULL");
+            $address3 = (!empty($other['address3']) ? "'".$other['address3']."'" : "NULL");
+            $address4 = (!empty($other['address4']) ? "'".$other['address4']."'" : "NULL");
+            $address5 = (!empty($other['address5']) ? "'".$other['address5']."'" : "NULL");
+            $city = (!empty($other['city']) ? "'".$other['city']."'" : "NULL");
+            $state = (!empty($other['state']) ? "'".$other['state']."'" : "NULL");
+            $country = (!empty($other['country']) ? "'".$other['country']."'" : "NULL");
+            $pincode = (!empty($other['pincode']) ? "'".$other['pincode']."'" : "NULL");
+            $area = (!empty($other['area']) ? "'".$other['area']."'" : "NULL");
+            $phone1 = (!empty($other['phone1']) ? "'".$other['phone1']."'" : "NULL");
+            $phone2 = (!empty($other['phone2']) ? "'".$other['phone2']."'" : "NULL");
+
+            //create codes
+            if(intval($other["areaCode"]) < 1000 && !empty($other['area'])){
+                $sql .= "call spTable119(@sAreaCode, ".$other['area'].", ".$regCode.", 1);";
+            }
+            if(intval($other["cityCode"]) < 1000 && $other["stateCode"] > 1000 && !empty($other['city'])){
+                $sql .= "call spTable110(@sCityCode, ".$other['city'].", @sStateCode, @sCountryCode, ".$regCode.", 1);";
+            }
+            if(intval($other["stateCode"]) < 1000 && $other["countryCode"] > 1000 && !empty($other['state'])){
+                $sql .= "call spTable108(@sStateCode, ".$other["state"].", @sCountryCode, ".$regCode.", 1);";
+            }
+            if(intval($other["countryCode"]) < 1000 && !empty($other["country"])){
+                $sql .= "call spTable106(@sCountryCode, ".$other["country"].", NULL, NULL, 1);";
+            }
+
+            $sql .= "call spTable157(".$regCode.", ".$contactCode.",".$address1.", ".$address2.", ".$address3.", ".$address4.", ".$address5.", ".$pincode.", @sCountryCode, @sStateCode, @sCityCode, @sAreaCode, @sPhone1, @sPhone2, @sPhone3, @sModeFlag);";
+        }
+
     }while(0);
 
     echo $sql;
