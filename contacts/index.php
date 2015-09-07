@@ -232,7 +232,7 @@ echo $navbar_str;
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="titleCode" id="titleCode" value="1001"/>
+                    <input type="hidden" name="titleCode" id="titleCode" value="0"/>
 
                     <div class="form-group form-group-margin">
                         <div class="input-group">
@@ -303,9 +303,9 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-size hidden-xs"></i>
                                 <select class="form-control select-field-left-border">
-                                    <option value="" selected="selected">Home</option>
-                                    <option value="">Work</option>
-                                    <option value="">Other</option>
+                                    <option value="1" selected="selected">Home</option>
+                                    <option value="2">Work</option>
+                                    <option value="3">Other</option>
                                 </select>
                             </div>
                         </div>
@@ -367,7 +367,7 @@ echo $navbar_str;
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="groupCode" id="groupCode" value="1001"/>
+                            <input type="hidden" name="groupCode" id="groupCode" value="0"/>
 
                             <div class="form-group form-group-margin">
                                 <div class="input-group">
@@ -380,7 +380,7 @@ echo $navbar_str;
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="emergencyCode" id="emergencyCode" value="1001"/>
+                            <input type="hidden" name="emergencyCode" id="emergencyCode" value="0"/>
 
                             <div class="form-group form-group-margin">
                                 <div class="input-group">
@@ -484,7 +484,7 @@ echo $navbar_str;
                                         <input type="text" name="address[home][city]" id="homeCity"
                                                class="form-control text-field-left-border" placeholder="City"/>
                                         <input type="hidden" name="address[home][cityCode]" id="homeCityCode"
-                                               value="1001"/>
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -497,7 +497,7 @@ echo $navbar_str;
                                         <input type="text" name="address[home][state]" id="homeState"
                                                class="form-control text-field-left-border" placeholder="State"/>
                                         <input type="hidden" name="address[home][stateCode]" id="homeStateCode"
-                                               value="1001"/>
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -511,7 +511,7 @@ echo $navbar_str;
                                                class="countryText form-control text-field-left-border"
                                                placeholder="Country"/>
                                         <input type="hidden" name="address[home][countryCode]" id="homeCountryCode"
-                                               value="1046"/>
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -535,7 +535,7 @@ echo $navbar_str;
                                         <input type="text" name="address[home][area]" id="homeArea"
                                                class="form-control text-field-left-border" placeholder="Area"/>
                                         <input type="hidden" name="address[home][areaCode]" id="homeAreaCode"
-                                               value="1001"/>
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -622,7 +622,7 @@ echo $navbar_str;
                                         <input type="text" name="address[work][city]" id="workCity"
                                                class="form-control text-field-left-border" placeholder="City"/>
                                         <input type="hidden" name="address[work][cityCode]" id="workCityCode"
-                                               value="1001"/>
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -635,7 +635,7 @@ echo $navbar_str;
                                         <input type="text" name="address[work][state]" id="workState"
                                                class="form-control text-field-left-border" placeholder="State"/>
                                         <input type="hidden" name="address[work][stateCode]" id="workStateCode"
-                                               value="1001"/>
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -649,7 +649,7 @@ echo $navbar_str;
                                                class="countryText form-control text-field-left-border"
                                                placeholder="Country"/>
                                         <input type="hidden" name="address[work][countryCode]" id="workCountryCode"
-                                               value="1046"/>
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -673,7 +673,7 @@ echo $navbar_str;
                                         <input type="text" name="address[work][area]" id="workArea"
                                                class="form-control text-field-left-border" placeholder="Area"/>
                                         <input type="hidden" name="address[work][areaCode]" id="workAreaCode"
-                                               value="1001"/>
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -759,7 +759,7 @@ echo $navbar_str;
                                         <input type="text" name="address[other][city]" id="otherCity"
                                                class="form-control text-field-left-border" placeholder="City"/>
                                         <input type="hidden" name="address[other][cityCode]" id="otherCityCode"
-                                               value="1001"/>
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -772,7 +772,7 @@ echo $navbar_str;
                                         <input type="text" name="address[other][state]" id="otherState"
                                                class="form-control text-field-left-border" placeholder="State"/>
                                         <input type="hidden" name="address[other][stateCode]" id="otherStateCode"
-                                               value="1001"/>
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -786,7 +786,7 @@ echo $navbar_str;
                                                class="countryText form-control text-field-left-border"
                                                placeholder="Country"/>
                                         <input type="hidden" name="address[other][countryCode]" id="otherCountryCode"
-                                               value="1046"/>
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -810,7 +810,7 @@ echo $navbar_str;
                                         <input type="text" name="address[other][area]" id="otherArea"
                                                class="form-control text-field-left-border" placeholder="Area"/>
                                         <input type="hidden" name="address[other][areaCode]" id="otherAreaCode"
-                                               value="1001"/>
+                                               value="0"/>
                                     </div>
                                 </div>
                             </div>
@@ -1017,7 +1017,7 @@ echo $navbar_str;
                                     <label class="control-label">Image Preview</label>
                                     <br>
                                     <br>
-                                    <img src="../img/contacts/profile/profilePicture1.png" id="imagepreview"
+                                    <img src="../img/default/contact/profilePicture.png" id="imagepreview"
                                          class="addImage">
                                 </div>
                             </div>
