@@ -851,10 +851,12 @@ $(document).ready(function (event) {
             var data = JSON.parse(responseText);
             console.log(data);
             if (data.status == 1) {
-                pageContact.currentPageNo--;
-                pageContact.showNotificationSuccess(data.message);
-                pageContact.getContactList();
-                $("#deleteModal").modal('hide');
+                setTimeout(function () {
+                    pageContact.currentPageNo = 1;
+                    pageContact.showNotificationSuccess(data.message);
+                    pageContact.getContactList();
+                    $("#deleteModal").modal('hide');
+                }, 500);
             }
             else {
                 showNotificationFailure(response.message);
@@ -877,7 +879,7 @@ $(document).ready(function (event) {
             console.log(data.status);
             if (data.status == 1) {
                 setTimeout(function () {
-                    pageContact.currentPageNo--;
+                    pageContact.currentPageNo = 1;
                     pageContact.getContactDetails(data.landing);
                     pageContact.getContactList();
                     pageContact.showNotificationSuccess(data.message);
