@@ -1,24 +1,25 @@
 var pageContact = {
     currentPageNo: 1,
     localContact: null,
-    contactList: {},
-    searchList: {},
-    titleTags: [],
+    defContactList: $.Deferred(),
+    titleTag: [],
     titleCode: [],
     groupTag: [],
     groupCode: [],
+    emergencyTag: [],
+    emergencyCode: [],
     countryTag: [],
     countryCode: [],
-    country: [],
+    countryData: [],
     stateTag: [],
     stateCode: [],
-    state: [],
+    stateData: [],
     cityTag: [],
     cityCode: [],
-    city: [],
+    cityData: [],
     areaTag: [],
     areaCode: [],
-    area: [],
+    areaData: [],
     addBtnMobileCount: 0,
     addBtnEmailCount: 0,
     addBtnHomePhoneCount: 0,
@@ -31,7 +32,7 @@ var pageContact = {
             pageNo: pageContact.currentPageNo
         }).done(function (data) {
             console.log(data);
-
+            pageContact.defContactList.resolve(data);
             console.log(pageContact.currentPageNo);
             pageContact.setContactList(data);
         }).fail(function (error) {
@@ -147,72 +148,133 @@ var pageContact = {
             var str = "";
             var imgLocation = "";
             if (data.detail.contact.imageLocation) {
-                imgLocation = data.detail.contact.imageLocation;
+                imgLocation = data.detail.contact.ImageURL;
             }
             else {
                 imgLocation = "../img/contacts/profile/profilePicture1.png";
             }
 
-
             str += "<div class='list-group-item'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='" + imgLocation + "' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>" + ((data.detail.contact.TitleName) ? data.detail.contact.TitleName + " " : "") + ((data.detail.contact.FullName) ? data.detail.contact.FullName : "") + "</h5></div>";
-
 
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Guardian</div><value><div class='col-md-9'>" + ((data.detail.contact.GuardianName) ? data.detail.contact.GuardianName : "") + "</div></value></div></div>";
 
-
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Company</div><value><div class='col-md-9'>" + ((data.detail.contact.Company) ? data.detail.contact.Company : "" ) + "</div></value></div></div>";
-
 
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Designation</div><value><div class='col-md-9'>" + ((data.detail.contact.Designation) ? data.detail.contact.Designation : "") + "</div></value></div></div>";
 
-
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Alias</div><value><div class='col-md-9'>" + ((data.detail.contact.Alias) ? data.detail.contact.Alias : "") + "</div></value></div></div>";
-
 
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.B</div><value><div class='col-md-9'>" + ((data.detail.contact.Dob) ? data.detail.contact.Dob : "") + "</div></value></div></div>";
 
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.M</div><value><div class='col-md-9'>" + ((data.detail.contact.Dom) ? data.detail.contact.Dom : "") + "</div></value></div></div>";
 
-
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Group</div><value><div class='col-md-9'>" + ((data.detail.contact.GroupName) ? data.detail.contact.GroupName : "") + "</div></value></div></div>";
-
 
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Remarks</div><value><div class='col-md-9'>" + ((data.detail.contact.Remarks) ? data.detail.contact.Remarks : "") + "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile (1)</div><value><div class='col-md-9'><a href='tel:" + ((data.detail.contact.Mobile1) ? data.detail.contact.Mobile1 : "") + "'>" + ((data.detail.contact.Mobile1) ? data.detail.contact.Mobile1 : "") + "</a></div></value></div></div>";
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile</div><value><div class='col-md-9'>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile (2)</div><value><div class='col-md-9'><a href='tel:" + ((data.detail.contact.Mobile2) ? data.detail.contact.Mobile2 : "") + "'>" + ((data.detail.contact.Mobile2) ? data.detail.contact.Mobile2 : "") + "</a></div></value></div></div>";
+            if (data.detail.contact.Mobile1 != null || data.detail.contact.Mobile2 != null || data.detail.contact.Mobile3) {
+                if (data.detail.contact.Mobile1 != null)
+                    str += "<a href='tel:" + data.detail.contact.Mobile1 + "'>" + data.detail.contact.Mobile1 + "</a>";
+                if (data.detail.contact.Mobile1 != null && data.detail.contact.Mobile2 !== null)
+                    str += "<br/>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile (3)</div><value><div class='col-md-9'><a href='tel:" + ((data.detail.contact.Mobile3) ? data.detail.contact.Mobile3 : "") + "'>" + ((data.detail.contact.Mobile3) ? data.detail.contact.Mobile3 : "") + "</a></div></value></div></div>";
+                if (data.detail.contact.Mobile1 != null && data.detail.contact.Mobile2 == null && data.detail.contact.Mobile3 !== null)
+                    str += "<br/>";
 
+                if (data.detail.contact.Mobile2 != null)
+                    str += "<a href='tel:" + data.detail.contact.Mobile2 + "'>" + data.detail.contact.Mobile2 + "</a>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Email (1)</div><value><div class='col-md-9'><a href= 'mailto:" + ((data.detail.contact.Email1) ? data.detail.contact.Email1 : "") + "'>" + ((data.detail.contact.Email1) ? data.detail.contact.Email1 : "") + "</a></div></value></div></div>";
+                if (data.detail.contact.Mobile2 != null && data.detail.contact.Mobile3 !== null)
+                    str += "<br/>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Email (2)</div><value><div class='col-md-9'><a href= 'mailto:" + ((data.detail.contact.Email2) ? data.detail.contact.Email2 : "") + "'>" + ((data.detail.contact.Email2) ? data.detail.contact.Email2 : "") + "</a></div></value></div></div>";
+                if (data.detail.contact.Mobile3 != null)
+                    str += "<a href='tel:" + data.detail.contact.Mobile3 + "'>" + data.detail.contact.Mobile3 + "</a>";
+            }
+
+            str += "</div></value></div></div>";
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Email</div><value><div class='col-md-9'>";
+
+            if (data.detail.contact.Email1 != null || data.detail.contact.Email2 != null) {
+
+                if (data.detail.contact.Email1 != null)
+                    str += "<a href= 'mailto:" + data.detail.contact.Email1 + "'>" + data.detail.contact.Email1 + "</a>";
+
+                if (data.detail.contact.Email1 != null && data.detail.contact.Email2 != null)
+                    str += "<br/>";
+
+                if (data.detail.contact.Email2 != null)
+                    str += "<a href= 'mailto:" + data.detail.contact.Email2 + "'>" + data.detail.contact.Email2 + "</a>";
+            }
+
+            str += "</div></value></div></div>";
 
             var homeAddress = "";
+            var workAddress = "";
+            var otherAddress = "";
             if (data.detail.address) {
                 if (data.detail.address.home) {
                     var home = data.detail.address.home;
-                    homeAddress = home.address;
-                    homeAddress = homeAddress.replace(/(?:\r\n|\r|\n)/g, '<br />');
-                    homeAddress += "(Area) " + ((home.area) ? ("<br />" + home.area) : "");
-                    homeAddress += ((home.city) ? ("<br />" + home.city + " - ") : "");
-                    homeAddress += ((home.pincode) ? (home.pincode) : "");
-                    homeAddress += ((home.state) ? ("<br />" + home.state) : "");
-                    homeAddress += ((home.country) ? ("<br />" + home.country) : "");
-                    homeAddress += ((home.phone) ? ("<br />" + home.phone) : "");
+                    homeAddress += ((home.Address1) ? (home.Address1 + "<br/>") : "");
+                    homeAddress += ((home.Address2) ? (home.Address2 + "<br/>") : "");
+                    homeAddress += ((home.Address3) ? (home.Address3 + "<br/>") : "");
+                    homeAddress += ((home.Address4) ? (home.Address4 + "<br/>") : "");
+                    homeAddress += ((home.Address5) ? (home.Address5 + "<br/>") : "");
+                    homeAddress += ((home.CityName) ? home.CityName : "");
+                    if (home.CityName != null && home.Pincode != null) {
+                        homeAddress += " - ";
+                    }
+                    homeAddress += ((home.Pincode) ? home.Pincode : "");
+                    if (home.CityName != null || home.Pincode != null)
+                        homeAddress += "<br/>";
+                    homeAddress += "(Area) " + ((home.AreaName) ? (home.AreaName + "<br/>") : "");
+                    homeAddress += ((home.Phone1) ? (home.Phone1 + " ") : "") + ((home.Phone2) ? (home.Phone2) : "");
                 }
-                else {
-                    homeAddress = "No home address details";
+
+                if (data.detail.address.work) {
+                    var work = data.detail.address.work;
+                    workAddress += ((work.Address1) ? (work.Address1 + "<br/>") : "");
+                    workAddress += ((work.Address2) ? (work.Address2 + "<br/>") : "");
+                    workAddress += ((work.Address3) ? (work.Address3 + "<br/>") : "");
+                    workAddress += ((work.Address4) ? (work.Address4 + "<br/>") : "");
+                    workAddress += ((work.Address5) ? (work.Address5 + "<br/>") : "");
+                    workAddress += ((work.CityName) ? work.CityName : "");
+                    if (work.CityName != null && work.Pincode != null) {
+                        workAddress += " - ";
+                    }
+                    workAddress += ((work.Pincode) ? work.Pincode : "");
+                    if (work.CityName != null || work.Pincode != null)
+                        workAddress += "<br/>";
+                    workAddress += "(Area) " + ((work.AreaName) ? (work.AreaName + "<br/>") : "");
+                    workAddress += ((work.Phone1) ? (work.Phone1 + " ") : "") + ((work.Phone2) ? (work.Phone2) : "");
                 }
-            }
-            else {
-                homeAddress = "No details";
+
+                if (data.detail.address.other) {
+                    var other = data.detail.address.other;
+                    otherAddress += ((other.Address1) ? (other.Address1 + "<br/>") : "");
+                    otherAddress += ((other.Address2) ? (other.Address2 + "<br/>") : "");
+                    otherAddress += ((other.Address3) ? (other.Address3 + "<br/>") : "");
+                    otherAddress += ((other.Address4) ? (other.Address4 + "<br/>") : "");
+                    otherAddress += ((other.Address5) ? (other.Address5 + "<br/>") : "");
+                    otherAddress += ((other.CityName) ? other.CityName : "");
+                    if (other.CityName != null && other.Pincode != null) {
+                        otherAddress += " - ";
+                    }
+                    otherAddress += ((other.Pincode) ? other.Pincode : "");
+                    if (other.CityName != null || other.Pincode != null)
+                        otherAddress += "<br/>";
+                    otherAddress += "(Area) " + ((other.AreaName) ? (other.AreaName + "<br/>") : "");
+                    otherAddress += ((other.Phone1) ? (other.Phone1 + " ") : "") + ((other.Phone2) ? (other.Phone2) : "");
+                }
             }
 
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Address</div><value><div class='col-md-9'>" + homeAddress + "</div></value></div></div>";
 
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Work Address</div><value><div class='col-md-9'>" + workAddress + "</div></value></div></div>";
+
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Other Address</div><value><div class='col-md-9'>" + otherAddress + "</div></value></div></div>";
 
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Facebook</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Facebook) ? data.detail.contact.Facebook : "") + "' target='_blank'>" + ((data.detail.contact.Facebook) ? data.detail.contact.Facebook : "") + "</a></div></value></div></div>";
 
@@ -220,9 +282,7 @@ var pageContact = {
 
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Google</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Google) ? data.detail.contact.Google : "") + "' target='_blank'>" + ((data.detail.contact.Google) ? data.detail.contact.Google : "") + "</a></div></value></div></div>";
 
-
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Linkedin</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Linkedin) ? data.detail.contact.Linkedin : "") + "' target='_blank'>" + ((data.detail.contact.Linkedin) ? data.detail.contact.Linkedin : "") + "</a></div></value></div></div>";
-
 
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Website) ? data.detail.contact.Website : "") + "' target='_blank'>" + ((data.detail.contact.Website) ? data.detail.contact.Website : "") + "</a></div></value></div></div>";
 
@@ -235,96 +295,109 @@ var pageContact = {
             pageContact.localContact = null;
         }
     },
-    getTitles: function () {
+    getTitleData: function () {
         var url = "getMasters.php";
 
         $.getJSON(url, {
             type: 'title'
-        }).done(function (data) {
-            var title = JSON.parse(data);
-            for (var i = 0; i < title.length; i++) {
-                pageContact.titleTags[i] = title[i]['description'];
-                pageContact.titleCode[i] = title[i]['code'];
+        }).done(function (titleData) {
+            for (var i = 0; i < titleData.length; i++) {
+                pageContact.titleTag[i] = titleData[i].TitleName;
+                pageContact.titleCode[i] = titleData[i].TitleCode;
             }
             pageContact.setTitleAutoComplete();
         }).fail(function (error) {
 
         });
     },
-    getGroups: function () {
+    getGroupData: function () {
         var url = "getMasters.php";
 
         $.getJSON(url, {
             type: 'group'
-        }).done(function (data) {
-            var group = JSON.parse(data);
-            for (var i = 0; i < group.length; i++) {
-                pageContact.groupTag[i] = group[i]['description'];
-                pageContact.groupCode[i] = group[i]['code'];
+        }).done(function (groupData) {
+            for (var i = 0; i < groupData.length; i++) {
+                pageContact.groupTag[i] = groupData[i].GroupName;
+                pageContact.groupCode[i] = groupData[i].GroupCode;
             }
             pageContact.setGroupAutoComplete();
         }).fail(function (error) {
 
         });
     },
-    getCountry: function () {
+    getEmergencyData: function () {
+        var url = "getMasters.php";
+
+        $.getJSON(url, {
+            type: 'emergency'
+        }).done(function (emergencyData) {
+            for (var i = 0; i < emergencyData.length; i++) {
+                pageContact.emergencyTag[i] = emergencyData[i].EmergencyName;
+                pageContact.emergencyCode[i] = emergencyData[i].EmergencyCode;
+            }
+            pageContact.setEmergencyAutoComplete();
+        }).fail(function (error) {
+
+        });
+    },
+    getCountryData: function () {
         var url = "getMasters.php";
 
         $.getJSON(url, {
             type: 'country'
         }).done(function (data) {
-            var country = JSON.parse(data);
-            for (var i = 0; i < country.length; i++) {
-                pageContact.countryTag[i] = country[i]['description'];
-                pageContact.countryCode[i] = country[i]['code'];
+            pageContact.countryData = data;
+            for (var i = 0; i < pageContact.countryData.length; i++) {
+                pageContact.countryTag[i] = pageContact.countryData[i].CountryName;
+                pageContact.countryCode[i] = pageContact.countryData[i].CountryCode;
             }
             pageContact.setCountryAutoComplete();
         }).fail(function (error) {
 
         });
     },
-    getStates: function () {
+    getStateData: function () {
         var url = "getMasters.php";
 
         $.getJSON(url, {
             type: 'state'
         }).done(function (data) {
-            var state = JSON.parse(data);
-            for (var i = 0; i < state.length; i++) {
-                pageContact.stateTag[i] = state[i]['description'];
-                pageContact.stateCode[i] = state[i]['code'];
+            pageContact.stateData = data;
+            for (var i = 0; i < pageContact.stateData.length; i++) {
+                pageContact.stateTag[i] = pageContact.stateData[i].StateName;
+                pageContact.stateCode[i] = pageContact.stateData[i].StateCode;
             }
             pageContact.setStateAutoComplete();
         }).fail(function (error) {
 
         });
     },
-    getCities: function () {
+    getCityData: function () {
         var url = "getMasters.php";
 
         $.getJSON(url, {
             type: 'city'
         }).done(function (data) {
-            var city = JSON.parse(data);
-            for (var i = 0; i < city.length; i++) {
-                pageContact.cityTag[i] = city[i]['description'];
-                pageContact.cityCode[i] = city[i]['code'];
+            pageContact.cityData = data;
+            for (var i = 0; i < pageContact.cityData.length; i++) {
+                pageContact.cityTag[i] = pageContact.cityData[i].CityName;
+                pageContact.cityCode[i] = pageContact.cityData[i].CityCode;
             }
             pageContact.setCityAutoComplete();
         }).fail(function (error) {
 
         });
     },
-    getAreas: function () {
+    getAreaData: function () {
         var url = "getMasters.php";
 
         $.getJSON(url, {
             type: 'area'
         }).done(function (data) {
-            var area = JSON.parse(data);
-            for (var i = 0; i < area.length; i++) {
-                pageContact.areaTag[i] = area[i]['description'];
-                pageContact.areaCode[i] = area[i]['code'];
+            pageContact.areaData = data;
+            for (var i = 0; i < pageContact.areaData.length; i++) {
+                pageContact.areaTag[i] = pageContact.areaData[i].AreaName;
+                pageContact.areaCode[i] = pageContact.areaData[i].AreaCode;
             }
             pageContact.setAreaAutoComplete();
         }).fail(function (error) {
@@ -490,34 +563,120 @@ var pageContact = {
         $("#deleteModal").modal("show");
     },
     setTitleAutoComplete: function () {
-        pageContact.setAutoComplete("#addTitle", "#titleId", pageContact.titleTags, pageContact.titleCode);
+        pageContact.setAutoComplete("#addTitle", "#titleCode", pageContact.titleTag, pageContact.titleCode);
     },
     setGroupAutoComplete: function () {
-        pageContact.setAutoComplete("#addGroup", "#groupId", pageContact.groupTag, pageContact.groupCode);
+        pageContact.setAutoComplete("#addGroup", "#groupCode", pageContact.groupTag, pageContact.groupCode);
+    },
+    setEmergencyAutoComplete: function () {
+        pageContact.setAutoComplete("#addEmergency", "#emergencyCode", pageContact.emergencyTag, pageContact.emergencyCode);
     },
     setCountryAutoComplete: function () {
-
+        pageContact.setAutoComplete("#homeCountry", "#homeCountryCode", pageContact.countryTag, pageContact.countryCode);
+        pageContact.setAutoComplete("#workCountry", "#workCountryCode", pageContact.countryTag, pageContact.countryCode);
+        pageContact.setAutoComplete("#otherCountry", "#otherCountryCode", pageContact.countryTag, pageContact.countryCode);
     },
     setStateAutoComplete: function () {
-
+        pageContact.setStateAutoCompleteWithOptions("#homeState", "#homeStateCode", "#homeCountry", "#homeCountryCode");
+        pageContact.setStateAutoCompleteWithOptions("#workState", "#workStateCode", "#workCountry", "#workCountryCode");
+        pageContact.setStateAutoCompleteWithOptions("#otherState", "#otherStateCode", "#otherCountry", "#otherCountryCode");
     },
     setStateAutoCompleteWithOptions: function (autoCompleteId, changeCodeId, countryId, countryCodeId) {
-
+        $(autoCompleteId).autocomplete({
+            source: pageContact.stateTag,
+            change: function (event, ui) {
+                if (ui.item) {
+                    var index = $.inArray(ui.item.value, pageContact.stateTag);
+                    $(changeCodeId).val(pageContact.stateCode[index]);
+                }
+                else {
+                    $(changeCodeId).val(-1);
+                }
+            },
+            select: function (event, ui) {
+                var index = $.inArray(ui.item.value, pageContact.stateTag);
+                var code = pageContact.stateCode[index];
+                $(changeCodeId).val(pageContact.stateCode[index]);
+                var countryCodeValue = 0;
+                for (var i = 0; i < pageContact.stateData.length; i++) {
+                    if (pageContact.stateData[i].StateCode == code) {
+                        countryCodeValue = pageContact.stateData[i].CountryCode;
+                        break;
+                    }
+                }
+                $(countryCodeId).val(countryCodeValue);
+                var countryIndex = $.inArray(countryCodeValue, pageContact.countryCode);
+                $(countryId).val(pageContact.countryTag[countryIndex]);
+                console.log($(changeCodeId).val());
+            }
+        });
     },
     setCityAutoComplete: function () {
-
+        pageContact.setCityAutoCompleteWithOptions("#homeCity", "#homeCityCode", "#homeCountry", "#homeCountryCode", "#homeState", "#homeStateCode");
+        pageContact.setCityAutoCompleteWithOptions("#workCity", "#workCityCode", "#workCountry", "#workCountryCode", "#workState", "#workStateCode");
+        pageContact.setCityAutoCompleteWithOptions("#otherCity", "#otherCityCode", "#otherCountry", "#otherCountryCode", "#otherState", "#otherStateCode");
     },
     setCityAutoCompleteWithOptions: function (autoCompleteId, changeCodeId, countryId, countryCodeId, stateId, stateCodeId) {
-
+        $(autoCompleteId).autocomplete({
+            source: pageContact.cityTag,
+            change: function (event, ui) {
+                if (ui.item) {
+                    var index = $.inArray(ui.item.value, pageContact.cityTag);
+                    $(changeCodeId).val(pageContact.cityCode[index]);
+                }
+                else {
+                    $(changeCodeId).val(-1);
+                }
+            },
+            select: function (event, ui) {
+                var index = $.inArray(ui.item.value, pageContact.cityTag);
+                var code = pageContact.cityCode[index];
+                $(changeCodeId).val(pageContact.cityCode[index]);
+                var stateCodeValue = 0;
+                var countryCodeValue = 0;
+                for (var i = 0; i < pageContact.cityData.length; i++) {
+                    if (pageContact.cityData[i].CityCode == code) {
+                        stateCodeValue = pageContact.cityData[i].StateCode;
+                        countryCodeValue = pageContact.cityData[i].CountryCode;
+                        break;
+                    }
+                }
+                $(stateCodeId).val(stateCodeValue);
+                var stateIndex = $.inArray(stateCodeValue, pageContact.stateCode);
+                $(stateId).val(pageContact.stateTag[stateIndex]);
+                console.log(pageContact.stateTag[stateIndex]);
+                $(countryCodeId).val(countryCodeValue);
+                var countryIndex = $.inArray(countryCodeValue, pageContact.countryCode);
+                $(countryId).val(pageContact.countryTag[countryIndex]);
+                //console.log($("#homeStateCode").val());
+            }
+        });
     },
     setAreaAutoComplete: function () {
-
-    },
-    setAreaAutoCompleteWithOptions: function (autoCompleteId, changeCodeId, countryId, countryCodeId, stateId, stateCodeId, cityId, cityCodeId) {
-
+        pageContact.setAutoComplete("#homeArea", "#homeArea", pageContact.areaTag, pageContact.areaCode);
+        pageContact.setAutoComplete("#workArea", "#workAreaCode", pageContact.areaTag, pageContact.areaCode);
+        pageContact.setAutoComplete("#otherArea", "#otherAreaCode", pageContact.areaTag, pageContact.areaCode);
     },
     setAutoComplete: function (autoCompleteId, changeCodeId, autoCompleteArray, changeCodeArray) {
-
+        $(autoCompleteId).autocomplete({
+            source: autoCompleteArray,
+            change: function (event, ui) {
+                if (ui.item) {
+                    var index = $.inArray(ui.item.value, autoCompleteArray);
+                    $(changeCodeId).val(changeCodeArray[index]);
+                }
+                else {
+                    $(changeCodeId).val(-1);
+                }
+            },
+            select: function (event, ui) {
+                console.log(ui);
+                var index = $.inArray(ui.item.value, autoCompleteArray);
+                console.log(index);
+                $(changeCodeId).val(changeCodeArray[index]);
+                console.log($(changeCodeId).val());
+            }
+        });
     },
     showNotificationSuccess: function (msg) {
         $("#notification_success").html(msg);
@@ -534,12 +693,13 @@ var pageContact = {
         $("#contactDetailBody").html(contactDetailStr);
     },
     refreshMasterList: function () {
-        pageContact.getTitles();
-        pageContact.getGroups();
-        pageContact.getCountry();
-        pageContact.getStates();
-        pageContact.getCities();
-        pageContact.getAreas();
+        pageContact.getTitleData();
+        pageContact.getGroupData();
+        pageContact.getEmergencyData();
+        pageContact.getCountryData();
+        pageContact.getStateData();
+        pageContact.getCityData();
+        pageContact.getAreaData();
     },
     showFilters: function () {
         //Function to show hide the filter Option.
@@ -561,31 +721,31 @@ var pageContact = {
             case 0:
                 if (pageContact.addBtnMobileCount < 2) {
                     pageContact.addBtnMobileCount++;
-                    $(".addMobileDiv").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='text' name='mobile"+(pageContact.addBtnMobileCount+1)+"' id='addMobile"+(pageContact.addBtnMobileCount+1)+"' class='form-control text-field-left-border' placeholder='Other Mobile' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-mobile' type='button' onclick='pageContact.removeBtn(this, 0)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+                    $(".addMobileDiv").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='text' name='mobile" + (pageContact.addBtnMobileCount + 1) + "' id='addMobile" + (pageContact.addBtnMobileCount + 1) + "' class='form-control text-field-left-border' placeholder='Other Mobile' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-mobile' type='button' onclick='pageContact.removeBtn(this, 0)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
                 }
                 break;
             case 1:
                 if (pageContact.addBtnEmailCount < 1) {
                     pageContact.addBtnEmailCount++;
-                    $(".addEmailDiv").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='email' name='email"+(pageContact.addBtnEmailCount+1)+"' id='addEmail"+(pageContact.addBtnEmailCount+1)+"' class='form-control text-field-left-border' placeholder='Other Email' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-email' type='button' onclick='pageContact.removeBtn(this, 1)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+                    $(".addEmailDiv").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='email' name='email" + (pageContact.addBtnEmailCount + 1) + "' id='addEmail" + (pageContact.addBtnEmailCount + 1) + "' class='form-control text-field-left-border' placeholder='Other Email' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-email' type='button' onclick='pageContact.removeBtn(this, 1)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
                 }
                 break;
             case 2:
                 if (pageContact.addBtnHomePhoneCount < 1) {
                     pageContact.addBtnHomePhoneCount++;
-                    $(".addHomePhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='address[home][phone"+(pageContact.addBtnHomePhoneCount+1)+"]' id='homePhone"+(pageContact.addBtnHomePhoneCount+1)+"' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-home-phone' type='button' onclick='pageContact.removeBtn(this, 2)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+                    $(".addHomePhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='address[home][phone" + (pageContact.addBtnHomePhoneCount + 1) + "]' id='homePhone" + (pageContact.addBtnHomePhoneCount + 1) + "' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-home-phone' type='button' onclick='pageContact.removeBtn(this, 2)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
                 }
                 break;
             case 3:
                 if (pageContact.addBtnWorkPhoneCount < 1) {
                     pageContact.addBtnWorkPhoneCount++;
-                    $(".addWorkPhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='address[work][phone"+pageContact.addBtnWorkPhoneCount+"]' id='workPhone"+pageContact.addBtnWorkPhoneCount+"' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-work-phone' type='button' onclick='pageContact.removeBtn(this, 3)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+                    $(".addWorkPhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='address[work][phone" + pageContact.addBtnWorkPhoneCount + "]' id='workPhone" + pageContact.addBtnWorkPhoneCount + "' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-work-phone' type='button' onclick='pageContact.removeBtn(this, 3)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
                 }
                 break;
             case 4:
                 if (pageContact.addBtnOtherPhoneCount < 1) {
                     pageContact.addBtnOtherPhoneCount++;
-                    $(".addOtherPhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='address[other][phone"+pageContact.addBtnOtherPhoneCount+"]' id='otherPhone"+pageContact.addBtnOtherPhoneCount+"' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-other-phone' type='button' onclick='pageContact.removeBtn(this, 4)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+                    $(".addOtherPhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='address[other][phone" + pageContact.addBtnOtherPhoneCount + "]' id='otherPhone" + pageContact.addBtnOtherPhoneCount + "' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-other-phone' type='button' onclick='pageContact.removeBtn(this, 4)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
                 }
                 break;
         }
@@ -614,6 +774,13 @@ var pageContact = {
 
 $(document).ready(function (event) {
     pageContact.getContactList();
+    pageContact.refreshMasterList();
+
+    $.when(pageContact.defContactList).done(function (data) {
+        console.log(data.status);
+        if (data.status == 1)
+            pageContact.getContactDetails(data.result[0].ContactCode);
+    });
 
     $('#filter').change(function () {
         if ($(this).val() != "0") {
@@ -647,7 +814,7 @@ $(document).ready(function (event) {
             $("#imagepreview").attr("src", pageContact.localContact.contact.ImageURL);
         }
         else {
-            $("#imagepreview").attr("src", "../img/contacts/profile/profilePicture1.png");
+            $("#imagepreview").attr("src", "../img/default/contact/profilePicture.png");
         }
     });
 
@@ -671,14 +838,20 @@ $(document).ready(function (event) {
         }
     });
 
+    $('#contactModal').on('shown.bs.modal', function () {
+        $('#addTitle').focus();
+    });
+
+    $(".progress").hide();
+
     $("#deleteContact").ajaxForm({
         success: function (responseText, statusText, xhr, $form) {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 1) {
-                showNotificationSuccess(response.message);
-                getContact(response.landing);
-                getContactList();
+                pageContact.showNotificationSuccess(response.message);
+                pageContact.getContactDetails(response.landing);
+                pageContact.getContactList();
                 $("#deleteModal").modal('hide');
             }
             else {

@@ -388,7 +388,8 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="glyphicon glyphicon-tag fa-size"></i>
-                                        <input type="text" name="emergency" id="addEmergency" class="form-control text-field-left-border"
+                                        <input type="text" name="emergency" id="addEmergency"
+                                               class="form-control text-field-left-border"
                                                placeholder="Emergency"/>
                                     </div>
                                 </div>
@@ -770,7 +771,8 @@ echo $navbar_str;
                                         <i class="fa fa-globe fa-size"></i>
                                         <input type="text" name="address[other][state]" id="otherState"
                                                class="form-control text-field-left-border" placeholder="State"/>
-                                        <input type="hidden" name="address[other][stateCode]" id="otherStateCode" value="1001"/>
+                                        <input type="hidden" name="address[other][stateCode]" id="otherStateCode"
+                                               value="1001"/>
                                     </div>
                                 </div>
                             </div>
@@ -783,7 +785,8 @@ echo $navbar_str;
                                         <input type="text" name="address[other][country]" id="otherCountry"
                                                class="countryText form-control text-field-left-border"
                                                placeholder="Country"/>
-                                        <input type="hidden" name="address[other][countryCode]" id="otherCountryCode" value="1046"/>
+                                        <input type="hidden" name="address[other][countryCode]" id="otherCountryCode"
+                                               value="1046"/>
                                     </div>
                                 </div>
                             </div>
@@ -806,7 +809,8 @@ echo $navbar_str;
                                         <i class="fa fa-globe fa-size"></i>
                                         <input type="text" name="address[other][area]" id="otherArea"
                                                class="form-control text-field-left-border" placeholder="Area"/>
-                                        <input type="hidden" name="address[other][areaCode]" id="otherAreaCode" value="1001"/>
+                                        <input type="hidden" name="address[other][areaCode]" id="otherAreaCode"
+                                               value="1001"/>
                                     </div>
                                 </div>
                             </div>
