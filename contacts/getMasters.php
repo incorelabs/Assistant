@@ -7,10 +7,11 @@ require_once ROOT.'db/Connection.php';
 $mysqli = getConnection();
 
 function createDataAPI($tableName, $orderColumn){
+    $regCode = intval($_SESSION['s_id']);
 	global $mysqli;
 	$i = 0;
 	$data = array();
-	$sql = "SELECT * FROM ".$tableName." ORDER BY ".$orderColumn;
+	$sql = "SELECT * FROM ".$tableName." WHERE RegCode in (10000,".$regCode.") ORDER BY ".$orderColumn;
 	if ($result = $mysqli->query($sql)) {
 	  while ($row = $result->fetch_assoc()) {
 	  	$data[$i] = $row;

@@ -147,7 +147,7 @@ if ($validate) {
             if(intval($_POST["emergencyCode"]) < 1000 && !empty($_POST['emergency'])){
                 $emergency = "'".$_POST["emergency"]."'";
                 $sql .= "call spTable128(@sEmergencyCode,
-                    .$emergency.,
+                    ".$emergency.",
                     ".$regCode.",
                     1);";
             }
