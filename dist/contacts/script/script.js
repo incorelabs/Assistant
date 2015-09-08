@@ -438,7 +438,38 @@ var pageContact = {
         $('#contactModalHeading').empty();
         $('#contactModalHeading').html("Edit Contact");
 
+        $('.addMobileDiv').empty();
+        pageContact.addBtnMobileCount = 0;
+        $('.addEmailDiv').empty();
+        pageContact.addBtnEmailCount = 0;
+        $('.addHomePhone').empty();
+        pageContact.addBtnHomePhoneCount = 0;
+        $('.addWorkPhone').empty();
+        pageContact.addBtnWorkPhoneCount = 0;
+        $('.addOtherPhone').empty();
+        pageContact.addBtnOtherPhoneCount = 0;
+
         $("#form-add-edit-code").val(pageContact.localContact.contact.ContactCode);
+
+        switch (pageContact.localContact.contact.PrivateFlag) {
+            case 1:
+                $('#addPrivacy').attr('checked', true);
+                break;
+            case 2:
+            default:
+                $('#addPrivacy').attr('checked', false);
+                break;
+        }
+
+        switch (pageContact.localContact.contact.ActiveFlag) {
+            case 1:
+                $('#addActiveStatus').attr('checked', true);
+                break;
+            case 2:
+            default:
+                $('#addActiveStatus').attr('checked', false);
+                break;
+        }
 
         if (pageContact.localContact.contact.TitleName) {
             $('#addTitle').val(pageContact.localContact.contact.TitleName);
@@ -508,19 +539,29 @@ var pageContact = {
             $('#addMobile1').val(pageContact.localContact.contact.Mobile1);
         }
 
-        if (pageContact.localContact.contact.Mobile2) {
-            $('#addMobile2').val(pageContact.localContact.contact.Mobile2);
+        if (pageContact.localContact.contact.Mobile2 != null || pageContact.localContact.contact.Mobile3 != null) {
+            pageContact.addBtnMobileCount++;
+            $(".addMobileDiv").append(pageContact.appendMobileString());
+
+            if (pageContact.localContact.contact.Mobile2) {
+                $('#addMobile2').val(pageContact.localContact.contact.Mobile2);
+            }
+
+            if (pageContact.localContact.contact.Mobile3) {
+                pageContact.addBtnMobileCount++;
+                $(".addMobileDiv").append(pageContact.appendMobileString());
+                $('#addMobile3').val(pageContact.localContact.contact.Mobile3);
+            }
         }
 
-        if (pageContact.localContact.contact.Mobile3) {
-            $('#addMobile3').val(pageContact.localContact.contact.Mobile3);
-        }
 
         if (pageContact.localContact.contact.Email1) {
             $('#addEmail1').val(pageContact.localContact.contact.Email1);
         }
 
         if (pageContact.localContact.contact.Email2) {
+            pageContact.addBtnEmailCount++;
+            $(".addEmailDiv").append(pageContact.appendEmailString());
             $('#addEmail2').val(pageContact.localContact.contact.Email2);
         }
 
@@ -564,6 +605,15 @@ var pageContact = {
         }
 
         $("#contactModal").modal('show');
+    },
+    appendMobileString: function () {
+        return "<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='text' name='mobile" + (pageContact.addBtnMobileCount + 1) + "' id='addMobile" + (pageContact.addBtnMobileCount + 1) + "' class='form-control text-field-left-border' placeholder='Other Mobile' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-mobile' type='button' onclick='pageContact.removeBtn(this, 0)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>";
+    },
+    appendEmailString: function () {
+        return "<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='email' name='email" + (pageContact.addBtnEmailCount + 1) + "' id='addEmail" + (pageContact.addBtnEmailCount + 1) + "' class='form-control text-field-left-border' placeholder='Other Email' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-email' type='button' onclick='pageContact.removeBtn(this, 1)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>";
+    },
+    appendPhoneString: function (type) {
+
     },
     createEditAddressData: function (address, type) {
         if (address[type].CountryCode) {
@@ -615,6 +665,20 @@ var pageContact = {
         }
 
         if (address[type].Phone2) {
+            switch (type) {
+                case "home":
+                    pageContact.addBtnHomePhoneCount++;
+                    $(".addHomePhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='address[home][phone" + (pageContact.addBtnHomePhoneCount + 1) + "]' id='homePhone" + (pageContact.addBtnHomePhoneCount + 1) + "' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-home-phone' type='button' onclick='pageContact.removeBtn(this, 2)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+                    break;
+                case "work":
+                    pageContact.addBtnWorkPhoneCount++;
+                    $(".addWorkPhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='address[work][phone" + pageContact.addBtnWorkPhoneCount + "]' id='workPhone" + pageContact.addBtnWorkPhoneCount + "' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-work-phone' type='button' onclick='pageContact.removeBtn(this, 3)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+                    break;
+                case "other":
+                    pageContact.addBtnOtherPhoneCount++;
+                    $(".addOtherPhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='address[other][phone" + pageContact.addBtnOtherPhoneCount + "]' id='otherPhone" + pageContact.addBtnOtherPhoneCount + "' class='form-control text-field-left-border' placeholder='Other' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-other-phone' type='button' onclick='pageContact.removeBtn(this, 4)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+                    break;
+            }
             $("#" + type + "Phone2").val(address[type].Phone2);
         }
     },
@@ -781,13 +845,13 @@ var pageContact = {
             case 0:
                 if (pageContact.addBtnMobileCount < 2) {
                     pageContact.addBtnMobileCount++;
-                    $(".addMobileDiv").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='text' name='mobile" + (pageContact.addBtnMobileCount + 1) + "' id='addMobile" + (pageContact.addBtnMobileCount + 1) + "' class='form-control text-field-left-border' placeholder='Other Mobile' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-mobile' type='button' onclick='pageContact.removeBtn(this, 0)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+                    $(".addMobileDiv").append(pageContact.appendMobileString());
                 }
                 break;
             case 1:
                 if (pageContact.addBtnEmailCount < 1) {
                     pageContact.addBtnEmailCount++;
-                    $(".addEmailDiv").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='email' name='email" + (pageContact.addBtnEmailCount + 1) + "' id='addEmail" + (pageContact.addBtnEmailCount + 1) + "' class='form-control text-field-left-border' placeholder='Other Email' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-email' type='button' onclick='pageContact.removeBtn(this, 1)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+                    $(".addEmailDiv").append(pageContact.appendEmailString());
                 }
                 break;
             case 2:
