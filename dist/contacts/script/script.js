@@ -408,11 +408,22 @@ var pageContact = {
     },
     openAddContact: function () {
         document.getElementById("contactForm").reset();
+
+        $('#addPrivacy').attr('checked', false);
+        $('#addActiveStatus').attr('checked', true);
+
         $("#form-add-edit-mode").val("A");
         $("#form-add-edit-code").val(0);
 
         $('#contactModalHeading').empty();
         $('#contactModalHeading').html("Add Contact");
+
+        $("#homeState").attr('readonly', false);
+        $("#workState").attr('readonly', false);
+        $("#otherState").attr('readonly', false);
+        $("#homeCountry").attr('readonly', false);
+        $("#workCountry").attr('readonly', false);
+        $("#otherCountry").attr('readonly', false);
 
         $('.addMobileDiv').empty();
         pageContact.addBtnMobileCount = 0;
@@ -605,6 +616,11 @@ var pageContact = {
         }
 
         $("#contactModal").modal('show');
+
+        // To close the tab pane and to remove the active border
+
+        $(".tab-pane").removeClass('active');
+        $("li").removeClass('active');
     },
     appendMobileString: function () {
         return "<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='text' name='mobile" + (pageContact.addBtnMobileCount + 1) + "' id='addMobile" + (pageContact.addBtnMobileCount + 1) + "' class='form-control text-field-left-border' placeholder='Other Mobile' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-mobile' type='button' onclick='pageContact.removeBtn(this, 0)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>";
@@ -728,6 +744,7 @@ var pageContact = {
                 $(countryCodeId).val(countryCodeValue);
                 var countryIndex = $.inArray(countryCodeValue, pageContact.countryCode);
                 $(countryId).val(pageContact.countryTag[countryIndex]);
+                $(countryId).attr('readonly', true);
                 console.log($(changeCodeId).val());
             }
         });
@@ -750,6 +767,7 @@ var pageContact = {
                 }
             },
             select: function (event, ui) {
+                console.log(ui);
                 var index = $.inArray(ui.item.value, pageContact.cityTag);
                 var code = pageContact.cityCode[index];
                 $(changeCodeId).val(pageContact.cityCode[index]);
@@ -765,10 +783,13 @@ var pageContact = {
                 $(stateCodeId).val(stateCodeValue);
                 var stateIndex = $.inArray(stateCodeValue, pageContact.stateCode);
                 $(stateId).val(pageContact.stateTag[stateIndex]);
+                $(stateId).attr('readonly', true);
                 console.log(pageContact.stateTag[stateIndex]);
                 $(countryCodeId).val(countryCodeValue);
                 var countryIndex = $.inArray(countryCodeValue, pageContact.countryCode);
                 $(countryId).val(pageContact.countryTag[countryIndex]);
+                $(countryId).attr('readonly', true);
+
                 //console.log($("#homeStateCode").val());
             }
         });
