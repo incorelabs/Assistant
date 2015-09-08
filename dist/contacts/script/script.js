@@ -445,7 +445,7 @@ var pageContact = {
         }
 
         if (pageContact.localContact.contact.TitleCode) {
-            $('#titleId').val(pageContact.localContact.contact.TitleCode);
+            $('#titleCode').val(pageContact.localContact.contact.TitleCode);
         }
 
         if (pageContact.localContact.contact.FirstName) {
@@ -489,7 +489,15 @@ var pageContact = {
         }
 
         if (pageContact.localContact.contact.GroupCode) {
-            $('#groupId').val(pageContact.localContact.contact.GroupCode);
+            $('#groupCode').val(pageContact.localContact.contact.GroupCode);
+        }
+
+        if (pageContact.localContact.contact.EmergencyName) {
+            $('#addEmergency').val(pageContact.localContact.contact.EmergencyName);
+        }
+
+        if (pageContact.localContact.contact.EmergencyCode) {
+            $('#emergencyCode').val(pageContact.localContact.contact.EmergencyCode);
         }
 
         if (pageContact.localContact.contact.Remarks) {
