@@ -25,6 +25,7 @@ include_once ROOT . 'dist/authenticate.php';
     <script src="../dist/script/script.js"></script>
     <script src="../dist/contacts/script/script.js"></script>
     <script src="../dist/contacts/script/validation.js"></script>
+    <script src="../dist/date/script.js"></script>
 
     <!-- Header Links -->
     <link type="text/css" rel="stylesheet" href="../dist/css/sidebar.css"/>
@@ -350,7 +351,7 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-birthday-cake fa-size"></i>
                                         <input type="text" name="dob" id="addDOB"
-                                               class="form-control datepicker text-field-left-border"
+                                               class="form-control date text-field-left-border"
                                                placeholder="Date of Birth"/>
                                     </div>
                                 </div>
@@ -362,7 +363,7 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-calendar fa-size"></i>
                                         <input type="text" name="dom" id="addDOM"
-                                               class="form-control datepicker text-field-left-border"
+                                               class="form-control date text-field-left-border"
                                                placeholder="Anniversary Date"/>
                                     </div>
                                 </div>
