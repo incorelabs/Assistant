@@ -452,20 +452,20 @@ var pageContact = {
         $("#form-add-edit-code").val(pageContact.localContact.contact.ContactCode);
 
         switch (pageContact.localContact.contact.PrivateFlag) {
-            case 1:
+            case "1":
                 $('#addPrivacy').attr('checked', true);
                 break;
-            case 2:
+            case "2":
             default:
                 $('#addPrivacy').attr('checked', false);
                 break;
         }
 
         switch (pageContact.localContact.contact.ActiveFlag) {
-            case 1:
+            case "1":
                 $('#addActiveStatus').attr('checked', true);
                 break;
-            case 2:
+            case "2":
             default:
                 $('#addActiveStatus').attr('checked', false);
                 break;
@@ -611,9 +611,6 @@ var pageContact = {
     },
     appendEmailString: function () {
         return "<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='email' name='email" + (pageContact.addBtnEmailCount + 1) + "' id='addEmail" + (pageContact.addBtnEmailCount + 1) + "' class='form-control text-field-left-border' placeholder='Other Email' /><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-email' type='button' onclick='pageContact.removeBtn(this, 1)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>";
-    },
-    appendPhoneString: function (type) {
-
     },
     createEditAddressData: function (address, type) {
         if (address[type].CountryCode) {
