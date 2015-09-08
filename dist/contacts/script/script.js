@@ -558,7 +558,57 @@ var pageContact = {
         $("#contactModal").modal('show');
     },
     createEditAddressData: function (address, type) {
+        if (address[type].CountryCode) {
+            $("#" + type + "Country").val(address[type].CountryName);
+            $("#" + type + "CountryCode").val(address[type].CountryCode);
+        }
 
+        if (address[type].StateCode) {
+            $("#" + type + "State").val(address[type].StateName);
+            $("#" + type + "StateCode").val(address[type].StateCode);
+        }
+
+        if (address[type].CityCode) {
+            $("#" + type + "City").val(address[type].CityName);
+            $("#" + type + "CityCode").val(address[type].CityCode);
+        }
+
+        if (address[type].AreaCode) {
+            $("#" + type + "Area").val(address[type].AreaName);
+            $("#" + type + "AreaCode").val(address[type].AreaCode);
+        }
+
+        if (address[type].Address1) {
+            $("#" + type + "Address1").val(address[type].Address1);
+        }
+
+        if (address[type].Address2) {
+            $("#" + type + "Address2").val(address[type].Address2);
+        }
+
+        if (address[type].Address3) {
+            $("#" + type + "Address3").val(address[type].Address3);
+        }
+
+        if (address[type].Address4) {
+            $("#" + type + "Address4").val(address[type].Address4);
+        }
+
+        if (address[type].Address5) {
+            $("#" + type + "Address5").val(address[type].Address5);
+        }
+
+        if (address[type].Pincode) {
+            $("#" + type + "Pincode").val(address[type].Pincode);
+        }
+
+        if (address[type].Phone1) {
+            $("#" + type + "Phone1").val(address[type].Phone1);
+        }
+
+        if (address[type].Phone2) {
+            $("#" + type + "Phone2").val(address[type].Phone2);
+        }
     },
     openDeleteModal: function (contactCode) {
         $("#form-delete-code").val(contactCode);
