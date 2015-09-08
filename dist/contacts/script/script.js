@@ -1036,4 +1036,52 @@ $(document).ready(function (event) {
             }
         }
     });
+
+    $("#homeCity").on('input propertychange', function () {
+        if ($(this).val().trim() == "") {
+            $("#homeState").val('');
+            $("#homeState").attr('readonly', false);
+            $("#homeCountry").val('');
+            $("#homeCountry").attr('readonly', false);
+        }
+    });
+
+    $("#homeState").on('input propertychange', function () {
+        if ($(this).val().trim() == "") {
+            $("#homeCountry").val('');
+            $("#homeCountry").attr('readonly', false);
+        }
+    });
+
+    $("#workCity").on('input propertychange', function () {
+        if ($(this).val().trim() == "") {
+            $("#workState").val('');
+            $("#workState").attr('readonly', false);
+            $("#workCountry").val('');
+            $("#workCountry").attr('readonly', false);
+        }
+    });
+
+    $("#workState").on('input propertychange', function () {
+        if ($(this).val().trim() == "") {
+            $("#workCountry").val('');
+            $("#workCountry").attr('readonly', false);
+        }
+    });
+
+    $("#otherCity").on('input propertychange', function () {
+        if ($(this).val().trim() == "") {
+            $("#otherState").val('');
+            $("#otherState").attr('readonly', false);
+            $("#otherCountry").val('');
+            $("#otherCountry").attr('readonly', false);
+        }
+    });
+
+    $("#otherState").on('input propertychange', function () {
+        if ($(this).val().trim() == "") {
+            $("#otherCountry").val('');
+            $("#otherCountry").attr('readonly', false);
+        }
+    });
 });
