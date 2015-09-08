@@ -1,207 +1,249 @@
-body{
-  background-color: #ecf0f1;
-}
-.notification_outer{
-  left:-3px;
-  top: 60px;
-  width:100%;
-  text-align:center;
-  z-index: 1060;
-  position: absolute;
+body {
+    background-color: #ecf0f1;
+    height: 100%;
 }
 
-.notification_success{
-  border-radius: 8px;
-  max-width:250px;
-  height:auto;
-  margin:auto;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  background-color: #9CCC65;
-  box-shadow: 5px 5px 2px #888888;
-  opacity: 0.95;
-  word-wrap: break-word;
+.notification_outer {
+    left: -3px;
+    top: 60px;
+    width: 100%;
+    text-align: center;
+    z-index: 1060;
+    position: fixed;
 }
 
-.notification_failure{
-  color: #fff;
-  border-radius: 8px;
-  max-width:250px;
-  height:auto;
-  margin:auto;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  background-color: #ef5350;
-  box-shadow: 5px 5px 2px #888888;
-  opacity: 0.95;
-  word-wrap: break-word;
+.notification_success {
+    border-radius: 8px;
+    max-width: 250px;
+    height: auto;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #9CCC65;
+    box-shadow: 5px 5px 2px #888888;
+    opacity: 0.95;
+    word-wrap: break-word;
 }
 
-.info{
-  color: #b71c1c;
+.notification_failure {
+    color: #fff;
+    border-radius: 8px;
+    max-width: 250px;
+    height: auto;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #ef5350;
+    box-shadow: 5px 5px 2px #888888;
+    opacity: 0.95;
+    word-wrap: break-word;
 }
 
-.fa-red{
-  color: red;
+.info {
+    color: #b71c1c;
 }
 
-.fa-blue{
-  color: blue;
+.fa-red {
+    color: red;
 }
 
-.fa-green{
-  color: green;
+.fa-blue {
+    color: blue;
 }
 
-.panel-border{
+.fa-green {
+    color: green;
+}
+
+.panel-border {
     border: 1px solid #34495e;
 }
-.panel-background>.panel-heading {
+
+.panel-background > .panel-heading {
     color: #fff;
     background-color: #34495e;
     border-color: #34495e;
 }
 
 .switch {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
+
 /* Hide the checkbox input (only needed for `:checked` property) */
 .switch-input {
-  display: none;
+    display: none;
 }
+
 /* Switch */
 .switch-label {
-  display: block;
-  width: 28px;
-  height: 10px;
-  text-indent: -150%;
-  clip: rect(0 0 0 0);
-  color: transparent;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  /* Switch Rail & Knob */
-  /* Switch Rail */
-  /* Switch Knob */
+    display: block;
+    width: 28px;
+    height: 10px;
+    text-indent: -150%;
+    clip: rect(0 0 0 0);
+    color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* Switch Rail & Knob */
+    /* Switch Rail */
+    /* Switch Knob */
 }
+
 .switch-label:before,
 .switch-label:after {
-  content: "";
-  display: block;
-  position: absolute;
-  cursor: pointer;
+    content: "";
+    display: block;
+    position: absolute;
+    cursor: pointer;
 }
+
 .switch-label:before {
-  width: 100%;
-  height: 100%;
-  background-color: red;
-  border-radius: 9999em;
-  -webkit-transition: background-color 0.25s ease;
-          transition: background-color 0.25s ease;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    border-radius: 9999em;
+    -webkit-transition: background-color 0.25s ease;
+    transition: background-color 0.25s ease;
 }
+
 .switch-label:after {
-  top: 0;
-  left: 0;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background-color: #ffffff;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.45);
-  -webkit-transition: left 0.25s ease;
-          transition: left 0.25s ease;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.45);
+    -webkit-transition: left 0.25s ease;
+    transition: left 0.25s ease;
 }
+
 /* When input is checked */
 .switch-input:checked + .switch-label {
-  /* Switch Rail */
-  /* Switch Knob */
+    /* Switch Rail */
+    /* Switch Knob */
 }
+
 .switch-input:checked + .switch-label:before {
-  background-color: #89c12d;
+    background-color: #89c12d;
 }
+
 .switch-input:checked + .switch-label:after {
-  left: 14px;
+    left: 14px;
 }
-.form-group-margin{
-  margin-bottom: 15px;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
+
+.form-group-margin {
+    margin-bottom: 15px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
+
 @media screen and (min-width: 768px) {
-  .form-group-margin{
-    margin-bottom: 10px;
-    margin-left: 45px !important;
-    margin-right: 45px !important;
-  }
+    .form-group-margin {
+        margin-bottom: 10px;
+        margin-left: 45px !important;
+        margin-right: 45px !important;
+    }
 }
-.text-field-left-border{
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-  height:40px;
+
+.text-field-left-border {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    height: 40px;
 }
-.select-field-left-border{
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-  height:40px;
-  -webkit-appearance: none;
+
+.select-field-left-border {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    height: 40px;
+    -webkit-appearance: none;
 }
-.button-addon-custom{
-  height: 40px;
+
+.button-addon-custom {
+    height: 40px;
 }
-.fa-size
-{
-  font-size: 20px;
+
+.fa-size {
+    font-size: 20px;
 }
+
 /* enable absolute positioning */
-.inner-addon { 
+.inner-addon {
     position: relative;
 }
 
 /* style icon */
 .inner-addon .fa,
-.inner-addon .glyphicon 
-{
-  position: absolute;
-  padding: 10px;
-  pointer-events: none;
-  z-index: 5;
+.inner-addon .glyphicon {
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+    z-index: 5;
 }
 
 /* align icon */
 .left-addon .fa,
-.left-addon .glyphicon
-{ 
-  left:  0;
+.left-addon .glyphicon {
+    left: 0;
 }
+
 .right-addon .fa,
-.right-addon .glyphicon
-{ 
-  right: 10px;
+.right-addon .glyphicon {
+    right: 10px;
 }
+
 .left-addon input,
-.left-addon select
-{
-  padding-left:  35px;
+.left-addon select {
+    padding-left: 35px;
 }
+
 .right-addon input,
 .right-addon select,
-.right-addon option
-{
-  padding-right: 30px;
-}
-.fa-red{
-  color: red;
+.right-addon option {
+    padding-right: 30px;
 }
 
-.fa-blue{
-  color: blue;
+.fa-red {
+    color: red;
 }
 
-.fa-green{
-  color: green;
+.fa-blue {
+    color: blue;
+}
+
+.fa-green {
+    color: green;
+}
+
+.loader {
+    background: url('../../img/index/load.gif') no-repeat;
+    position: absolute;
+    z-index: 9999;
+    height: 200px;
+    width: 200px;
+    transform: translate(-12%, -12%);
+    left: 50%;
+    top: 50%;
+}
+
+.cover {
+    position: fixed;
+    overflow-y: hidden;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.50;
+    background: black;
+    z-index: 10;
+    display: none;
 }

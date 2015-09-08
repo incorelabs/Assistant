@@ -280,6 +280,8 @@ $(document).ready(function () {
     //Password form submit
     $("#form-passwords").ajaxForm({
         beforeSubmit: function () {
+            $(".cover").fadeIn(100);
+            $("#pageLoading").addClass("loader");
         },
         success: function (responseText, statusText, xhr, $form) {
             console.log(responseText);
@@ -293,12 +295,16 @@ $(document).ready(function () {
                 showNotificationSuccess(response.message);
                 $("#addPassword").modal("hide");
             }
+            $("#pageLoading").removeClass("loader");
+            $(".cover").fadeOut(100);
         }
     });
 
     //Password form submit
     $("#form-password-delete").ajaxForm({
         beforeSubmit: function () {
+            $(".cover").fadeIn(100);
+            $("#pageLoading").addClass("loader");
         },
         success: function (responseText, statusText, xhr, $form) {
             console.log(responseText);
@@ -312,6 +318,8 @@ $(document).ready(function () {
                 showNotificationSuccess(response.message);
                 $("#deletePassword").modal("hide");
             }
+            $("#pageLoading").removeClass("loader");
+            $(".cover").fadeOut(100);
         }
     });
 

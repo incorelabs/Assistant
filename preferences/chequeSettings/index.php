@@ -35,6 +35,14 @@ define("ROOT", "../../");
     <script src="../../dist/script/script.js"></script>
     <script src="../../dist/date/script.js"></script>
     <script src="../../dist/preferences/chequeSettings/script/script.js"></script>
+    <script>
+        $(document).ready(function () {
+            console.log(window.innerWidth);
+            if (window.innerWidth < 500) {
+                $(':input').removeAttr('placeholder');
+            }
+        });
+    </script>
 </head>
 <body>
 <!-- fixed top navbar -->
@@ -67,9 +75,8 @@ echo $navbar_str;
             <tr>
                 <th class="text-center col-md-1 col-sm-1 col-xs-1">#</th>
                 <th class="text-center col-md-1 col-sm-1 col-xs-1">Name</th>
-                <th class="text-center col-md-1 col-sm-1 hidden-xs">From</th>
-                <th class="text-center col-md-1 col-sm-1 hidden-xs">Caption</th>
-                <th class="text-center col-md-1 col-sm-1 col-xs-1">Logo</th>
+                <th class="text-center col-md-1 col-sm-1 hidden-xs">A/C Holder Name</th>
+                <th class="text-center col-md-1 col-sm-1 col-xs-1">Continuous Feed</th>
                 <th class="text-center col-md-1 col-sm-1 col-xs-1">Print Feed</th>
                 <th class="text-center col-md-1 col-sm-1 col-xs-1">Actions</th>
             </tr>
@@ -78,29 +85,27 @@ echo $navbar_str;
             <tr>
                 <td class="text-center col-md-1 col-sm-1 col-xs-1">1</td>
                 <td class="text-center col-md-1 col-sm-1 col-xs-1">Test</td>
-                <td class="text-center col-md-1 col-sm-1 hidden-xs">No</td>
-                <td class="text-center col-md-1 col-sm-1 hidden-xs">Test</td>
+                <td class="text-center col-md-1 col-sm-1 hidden-xs">Darshan</td>
+                <td class="text-center col-md-1 col-sm-1 col-xs-1">Yes</td>
                 <td class="text-center col-md-1 col-sm-1 col-xs-1">Left</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">No</td>
                 <td class="text-center col-md-1 col-sm-1 col-xs-1"><a href="#" data-toggle="modal"
                                                                       data-target="#chequeModal"><i
                             class="fa fa-pencil fa-lg fa-green"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"
                                                                                                          data-toggle="modal"
-                                                                                                         data-target="#deleteLabel"><i
+                                                                                                         data-target="#deleteCheque"><i
                             class="fa fa-trash-o fa-lg fa-red"></i></a></td>
             </tr>
             <tr>
                 <td class="text-center col-md-1 col-sm-1 col-xs-1">2</td>
                 <td class="text-center col-md-1 col-sm-1 col-xs-1">Test1</td>
-                <td class="text-center col-md-1 col-sm-1 hidden-xs">Yes</td>
-                <td class="text-center col-md-1 col-sm-1 hidden-xs">Test123</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">Right</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">Yes</td>
+                <td class="text-center col-md-1 col-sm-1 hidden-xs">-</td>
+                <td class="text-center col-md-1 col-sm-1 col-xs-1">No</td>
+                <td class="text-center col-md-1 col-sm-1 col-xs-1">Middle</td>
                 <td class="text-center col-md-1 col-sm-1 col-xs-1"><a href="#" data-toggle="modal"
                                                                       data-target="#chequeModal"><i
                             class="fa fa-pencil fa-lg fa-green"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"
                                                                                                          data-toggle="modal"
-                                                                                                         data-target="#deleteLabel"><i
+                                                                                                         data-target="#deleteCheque"><i
                             class="fa fa-trash-o fa-lg fa-red"></i></a></td>
             </tr>
             </tbody>
@@ -134,215 +139,229 @@ echo $navbar_str;
                         <table class="table borderless">
                             <thead>
                             <tr>
-                                <td class="col-md-1 col-sm-1 col-xs-1">
-                                    <span class="input-group-addon-label text-left input-group-addon span-label-height label-border">Name</span>
+                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <span
+                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Name</span>
                                 </td>
-                                <td colspan="3" class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td colspan="3" class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="text" name="chequeName" id="chequeName"
                                            class="form-control input-height" placeholder="Cheque Name"/>
                                 </td>
                             </tr>
                             <tr>
-                                <th class="text-center col-md-1 col-sm-1 col-xs-1 border-remove"></th>
-                                <th class="text-center col-md-1 col-sm-1 col-xs-1 border-remove">Top</th>
-                                <th class="text-center col-md-1 col-sm-1 col-xs-1 border-remove">Left</th>
-                                <th class="text-center col-md-1 col-sm-1 col-xs-1 border-remove">Width</th>
+                                <th class="text-center col-md-1 col-sm-1 col-xs-1 border-remove table-padding"></th>
+                                <th class="text-center col-md-1 col-sm-1 col-xs-1 border-remove table-padding">Top</th>
+                                <th class="text-center col-md-1 col-sm-1 col-xs-1 border-remove table-padding">Left</th>
+                                <th class="text-center col-md-1 col-sm-1 col-xs-1 border-remove table-padding">Wide</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr id="chequeDate">
-                                <td class="col-md-1 col-sm-1 col-xs-1">
-                                    <span class="input-group-addon-label text-left input-group-addon span-label-height label-border">Date</span>
+                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding table-padding-first-row">
+                                    <span
+                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Date</span>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding table-padding-first-row">
                                     <input type="number" class="form-control input-height" placeholder="Top"
                                            id="dateTop"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding table-padding-first-row">
                                     <input type="number" class="form-control input-height" placeholder="Left"
                                            id="dateLeft"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
-                                    <input type="number" class="form-control input-height" placeholder="Width"
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding table-padding-first-row">
+                                    <input type="number" class="form-control input-height" placeholder="Wide"
                                            id="dateWidth" disabled="disabled"/>
                                 </td>
                             </tr>
                             <tr id="chequeName">
-                                <td class="col-md-1 col-sm-1 col-xs-1">
-                                    <span class="input-group-addon-label text-left input-group-addon span-label-height label-border">Name</span>
+                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <span
+                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Name</span>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="number" class="form-control input-height" placeholder="Top"
                                            id="nameTop"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="number" class="form-control input-height" placeholder="Left"
                                            id="nameLeft"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
-                                    <input type="number" class="form-control input-height" placeholder="Width"
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <input type="number" class="form-control input-height" placeholder="Wide"
                                            id="nameWidth"/>
                                 </td>
                             </tr>
                             <tr id="chequeBearer">
-                                <td class="col-md-1 col-sm-1 col-xs-1">
-                                    <span class="input-group-addon-label text-left input-group-addon span-label-height label-border">Bearer</span>
+                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <span
+                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Bearer</span>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="number" class="form-control input-height" placeholder="Top"
                                            id="bearerTop"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="number" class="form-control input-height" placeholder="Left"
                                            id="bearerLeft"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
-                                    <input type="number" class="form-control input-height" placeholder="Width"
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <input type="number" class="form-control input-height" placeholder="Wide"
                                            id="bearerWidth"/>
                                 </td>
                             </tr>
                             <tr id="chequeRupeeLineOne">
-                                <td class="col-md-1 col-sm-1 col-xs-1">
-                                    <span class="input-group-addon-label text-left input-group-addon span-label-height label-border">Rupee Line 1</span>
+                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <span
+                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Rupee Line 1</span>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="number" class="form-control input-height" placeholder="Top"
                                            id="rupeeLineOneTop"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="number" class="form-control input-height" placeholder="Left"
                                            id="rupeeLineOneLeft"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
-                                    <input type="number" class="form-control input-height" placeholder="Width"
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <input type="number" class="form-control input-height" placeholder="Wide"
                                            id="rupeeLineOneWidth"/>
                                 </td>
                             </tr>
                             <tr id="chequeRupeeLineTwo">
-                                <td class="col-md-1 col-sm-1 col-xs-1">
-                                    <span class="input-group-addon-label text-left input-group-addon span-label-height label-border">Rupee Line 2</span>
+                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <span
+                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Rupee Line 2</span>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="number" class="form-control input-height" placeholder="Top"
                                            id="rupeeLineTwoTop"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="number" class="form-control input-height" placeholder="Left"
                                            id="rupeeLineTwoLeft"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
-                                    <input type="number" class="form-control input-height" placeholder="Width"
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <input type="number" class="form-control input-height" placeholder="Wide"
                                            id="rupeeLineTwoWidth"/>
                                 </td>
                             </tr>
                             <tr id="chequeAmount">
-                                <td class="col-md-1 col-sm-1 col-xs-1">
-                                    <span class="input-group-addon-label text-left input-group-addon span-label-height label-border">Amount</span>
+                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <span
+                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Amount</span>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="number" class="form-control input-height" placeholder="Top"
                                            id="amountTop"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="number" class="form-control input-height" placeholder="Left"
                                            id="amountLeft"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
-                                    <input type="number" class="form-control input-height" placeholder="Width"
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <input type="number" class="form-control input-height" placeholder="Wide"
                                            id="amountWidth" disabled="disabled"/>
                                 </td>
                             </tr>
                             <tr id="chequeAcctPayee">
-                                <td class="col-md-1 col-sm-1 col-xs-1">
-                                    <span class="input-group-addon-label text-left input-group-addon span-label-height label-border">A/C Payee</span>
+                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <span
+                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">A/C Payee</span>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="number" class="form-control input-height" placeholder="Top"
                                            id="acctPayeeTop"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="number" class="form-control input-height" placeholder="Left"
                                            id="acctPayeeLeft"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
-                                    <input type="number" class="form-control input-height" placeholder="Width"
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <input type="number" class="form-control input-height" placeholder="Wide"
                                            id="acctPayeeWidth" disabled="disabled"/>
                                 </td>
                             </tr>
                             <tr id="chequeNotExceed">
-                                <td class="col-md-1 col-sm-1 col-xs-1">
-                                    <span class="input-group-addon-label text-left input-group-addon span-label-height label-border">Not Exceed</span>
+                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <span
+                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Not Exceeding</span>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="number" class="form-control input-height" placeholder="Top"
                                            id="notExceedTop"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="number" class="form-control input-height" placeholder="Left"
                                            id="notExceedLeft"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
-                                    <input type="number" class="form-control input-height" placeholder="Width"
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <input type="number" class="form-control input-height" placeholder="Wide"
                                            id="notExceedWidth" disabled="disabled"/>
                                 </td>
                             </tr>
-                            <tr id="chequeForAcctName">
-                                <td class="col-md-1 col-sm-1 col-xs-1">
-                                    <span class="input-group-addon-label text-left input-group-addon span-label-height label-border">For Account</span>
+                            <tr id="chequeForHolderName">
+                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <span
+                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">For Holder</span>
                                 </td>
-                                <td colspan="3" class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td colspan="3" class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="text" name="forAcctName" id="forAcctName"
-                                           class="form-control input-height" placeholder="For Account Name"/>
+                                           class="form-control input-height" placeholder="For Holder Name"/>
                                 </td>
                             </tr>
-                            <tr id="chequeForAcctNamePosition">
-                                <td class="col-md-1 col-sm-1 col-xs-1">
-                                    <span class="input-group-addon-label text-left input-group-addon span-label-height label-border">For Account</span>
+                            <tr id="chequeForHolderNamePosition">
+                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <span
+                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">For Holder</span>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="number" class="form-control input-height" placeholder="Top"
                                            id="forAcctNameTop"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="number" class="form-control input-height" placeholder="Left"
                                            id="forAcctNameLeft"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
-                                    <input type="number" class="form-control input-height" placeholder="Width"
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <input type="number" class="form-control input-height" placeholder="Wide"
                                            id="forAcctNameWidth" disabled="disabled"/>
                                 </td>
                             </tr>
                             <tr id="chequeSignatory">
-                                <td class="col-md-1 col-sm-1 col-xs-1">
-                                    <span class="input-group-addon-label text-left input-group-addon span-label-height label-border">Signatory</span>
+                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <span
+                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Signatory</span>
                                 </td>
-                                <td colspan="3" class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td colspan="3" class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="text" name="signatory" id="signatory"
                                            class="form-control input-height" placeholder="Signatory"/>
                                 </td>
                             </tr>
                             <tr id="chequeSignatoryPosition">
-                                <td class="col-md-1 col-sm-1 col-xs-1">
-                                    <span class="input-group-addon-label text-left input-group-addon span-label-height label-border">Signatory</span>
+                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <span
+                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Signatory</span>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="number" class="form-control input-height" placeholder="Top"
                                            id="forAcctNameTop"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <input type="number" class="form-control input-height" placeholder="Left"
                                            id="forAcctNameLeft"/>
                                 </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1">
-                                    <input type="number" class="form-control input-height" placeholder="Width"
+                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <input type="number" class="form-control input-height" placeholder="Wide"
                                            id="forAcctNameWidth" disabled="disabled"/>
                                 </td>
                             </tr>
                             <tr id="chequeDateSplit">
-                                <td class="col-md-1 col-sm-1 col-xs-1">
-                                    <span class="input-group-addon-label text-left input-group-addon span-label-height label-border">Date Split</span>
+                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <span
+                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Date Split</span>
                                 </td>
-                                <td colspan="3" class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td colspan="3" class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <select class="form-control input-height">
                                         <option value="yes">Yes</option>
                                         <option value="no">No</option>
@@ -350,10 +369,11 @@ echo $navbar_str;
                                 </td>
                             </tr>
                             <tr id="chequeFeed">
-                                <td class="col-md-1 col-sm-1 col-xs-1">
-                                    <span class="input-group-addon-label text-left input-group-addon span-label-height label-border">Cheque Feed</span>
+                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <span
+                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Print Feed</span>
                                 </td>
-                                <td colspan="3" class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td colspan="3" class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <select class="form-control input-height">
                                         <option value="left">Left</option>
                                         <option value="middle">Middle</option>
@@ -362,10 +382,11 @@ echo $navbar_str;
                                 </td>
                             </tr>
                             <tr id="chequeContinuousFeed">
-                                <td class="col-md-1 col-sm-1 col-xs-1">
-                                    <span class="input-group-addon-label text-left input-group-addon span-label-height label-border">Continuous Feed</span>
+                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
+                                    <span
+                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Continuous Feed</span>
                                 </td>
-                                <td colspan="3" class="text-center col-md-1 col-sm-1 col-xs-1">
+                                <td colspan="3" class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
                                     <select class="form-control input-height">
                                         <option value="yes">Yes</option>
                                         <option value="no" selected="selected">No</option>
@@ -375,14 +396,17 @@ echo $navbar_str;
                             </tbody>
                         </table>
                     </div>
-                    <!-- Modal Body -->
+                </div>
+                <!-- Modal Body -->
             </form>
         </div>
         <!--modal-content-->
     </div>
-</div><!--modal-->
+    <!--modal dialog-->
+</div>
+<!--modal start-->
 <!--Delete Contact Modal-->
-<div class="modal fade" id="deleteLabel" tabindex="-1" role="dialog" aria-labelledby="deleteLabel" aria-hidden="true">
+<div class="modal fade" id="deleteCheque" tabindex="-1" role="dialog" aria-labelledby="deleteCheque" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

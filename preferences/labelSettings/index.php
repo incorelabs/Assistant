@@ -126,7 +126,7 @@ echo $navbar_str;
     </div>
 </div>
 
-<!-- Add Member Modal -->
+<!-- Add Label Modal -->
 <div class="modal fade" id="addLabel" tabindex="-1" role="dialog" aria-labelledby="labelModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -142,7 +142,7 @@ echo $navbar_str;
                             <span class='glyphicon glyphicon-ok'></span>
                         </button>
                     </div>
-                    <h4 id="familyModalHeading" class="modal-title text-center">
+                    <h4 id="" class="modal-title text-center">
                         Add Label
                     </h4>
                 </div>

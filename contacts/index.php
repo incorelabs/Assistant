@@ -311,23 +311,38 @@ echo $navbar_str;
                             </div>
                         </div>
                     </div>
-                    <div class="form-group form-group-margin"
-                         style="margin-left:0px !important; margin-right:0px !important">
-                        <ul class="nav nav-tabs nav-justified" id="myTab">
-                            <li><a href="#tab1" data-toggle="tab"><span class='glyphicon glyphicon-user'></span><br>Personal
-                                    Details</a></li>
-                            <li><a href="#tab3" data-toggle="tab"><span
-                                        class='glyphicon glyphicon-briefcase'></span><br>Professional Details</a>
-                            </li>
-                            <li><a href="#tab4" data-toggle="tab"><span
-                                        class='glyphicon glyphicon-globe'></span><br>Social Details</a></li>
-                            <li><a href="#home" data-toggle="tab"><span class='glyphicon glyphicon-home'></span><br>Home
-                                    Address</a></li>
-                            <li><a href="#work" data-toggle="tab"><span
-                                        class='glyphicon glyphicon-briefcase'></span><br>Work Address</a></li>
-                            <li><a href="#other" data-toggle="tab"><span
-                                        class='glyphicon glyphicon-road'></span><br>Other Address</a></li>
-                        </ul>
+                    <div id="websiteTabs">
+                        <div class="form-group form-group-margin"
+                             style="margin-left:0px !important; margin-right:0px !important">
+                            <ul class="nav nav-tabs nav-justified" id="myTab">
+                                <li><a href="#tab1" data-toggle="tab"><span class='glyphicon glyphicon-user'></span><br>Personal
+                                        Details</a></li>
+                                <li><a href="#tab3" data-toggle="tab"><span
+                                            class='glyphicon glyphicon-briefcase'></span><br>Professional Details</a>
+                                </li>
+                                <li><a href="#tab4" data-toggle="tab"><span
+                                            class='glyphicon glyphicon-globe'></span><br>Social Details</a></li>
+                                <li><a href="#home" data-toggle="tab"><span class='glyphicon glyphicon-home'></span><br>Home
+                                        Address</a></li>
+                                <li><a href="#work" data-toggle="tab"><span
+                                            class='glyphicon glyphicon-briefcase'></span><br>Work Address</a></li>
+                                <li><a href="#other" data-toggle="tab"><span
+                                            class='glyphicon glyphicon-road'></span><br>Other Address</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="mobileTabs" class="mobile-panel-hide">
+                        <center>
+                            <ul class="row nav nav-tabs" id="myTab">
+                                <li class="col-xs-2 panel-padding-remove"><a href="#tab1" data-toggle="tab"><i class='fa fa-user fa-2x'></i></a></li>
+                                <li class="col-xs-2 panel-padding-remove"><a href="#tab3" data-toggle="tab"><i class='fa fa-briefcase fa-2x'></i></a></li>
+                                <li class="col-xs-2 panel-padding-remove"><a href="#tab4" data-toggle="tab"><i class='fa fa-globe fa-2x'></i></a></li>
+                                <li class="col-xs-2 panel-padding-remove"><a href="#home" data-toggle="tab"><i class='fa fa-home fa-2x'></i></a></li>
+                                <li class="col-xs-2 panel-padding-remove"><a href="#work" data-toggle="tab"><i class='fa fa-building fa-2x'></i></a></li>
+                                <li class="col-xs-2 panel-padding-remove"><a href="#other" data-toggle="tab"><i class='fa fa-road fa-2x'></i></a></li>
+                            </ul>
+                        </center>
                     </div>
 
                     <div class="tab-content">

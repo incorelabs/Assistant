@@ -273,4 +273,6 @@ echo $navbar_str;
     </div>
 </div><!--modal-->
 </body>
+<div class="cover"><div id="pageLoading"></div></div>
+
 </html>

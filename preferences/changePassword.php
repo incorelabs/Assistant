@@ -99,4 +99,7 @@ include_once ROOT.'dist/authenticate.php';
 		</div>
 	</div>
 </body>
+<div class="cover">
+	<div id="pageLoading"></div>
+</div>
 </html>

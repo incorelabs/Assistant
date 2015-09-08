@@ -482,7 +482,7 @@ h5 {
 }
 
 .input-group-addon-label {
-    min-width: 65px;
+    min-width: 96px;
     font-size: 10px;
     text-align: left;
 }
@@ -490,7 +490,7 @@ h5 {
 @media screen and (min-width: 768px) {
     .input-group-addon-label {
         font-size: 14px;
-        min-width: 114px;
+        min-width: 125px;
         text-align: left;
     }
 
@@ -498,4 +498,14 @@ h5 {
         width: 120px;
         margin-right: 0px;
     }
+}
+
+.panel-padding-remove
+{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.mobile-panel-hide{
+    display: none;
+    padding-bottom: 15px;
 }

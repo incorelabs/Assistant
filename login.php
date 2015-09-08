@@ -57,7 +57,8 @@
 	</div>	
     <div class="outer">
         <div class="middle">
-        	<div class="inner"> 	
+        	<div class="inner">
+
         		<div class="panel panel-border panel-background">
                		<div class="panel-heading panel-header-height">
                 		<h1 class="panel-title text-center" style="font-size: 24px;">Sign In</h1>
@@ -95,5 +96,9 @@
 			</div>
 		</div>
 	</div>
+
 </body>
+<div class="cover">
+	<div id="pageLoading"></div>
+</div>
 </html>

@@ -263,6 +263,8 @@ $(document).ready(function(){
 
 	$("#form-family").ajaxForm({
 		beforeSubmit:function(){
+			$(".cover").fadeIn(100);
+			$("#pageLoading").addClass("loader");
 	    },
 	    success: function(responseText, statusText, xhr, $form){
 	    	console.log(responseText);
@@ -275,11 +277,16 @@ $(document).ready(function(){
 				setTimeout(getFamilyList(),200);
 	      	}
 	      	$("#addFamily").modal('hide');
+			$("#pageLoading").removeClass("loader");
+			$(".cover").fadeOut(100);
 	    },
 	});
 
 	$("#form-family-delete").ajaxForm({
 		beforeSubmit:function(){
+			$(".cover").fadeIn(100);
+			$("#pageLoading").addClass("loader");
+
 	    },
 	    success: function(responseText, statusText, xhr, $form){
 	    	console.log(responseText);
@@ -292,6 +299,8 @@ $(document).ready(function(){
 	      		setTimeout(getFamilyList(),200);
 	      	}
 	      	$("#deleteFamily").modal('hide');
+			$("#pageLoading").removeClass("loader");
+			$(".cover").fadeOut(100);
 	    },
 	});
 

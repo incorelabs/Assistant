@@ -45,7 +45,7 @@
     min-width: 35px;
     font-size: 10px;
     text-align: left;
-    max-width: 75px;
+    max-width: 70px;
 }
 @media screen and (min-width: 768px) {
     .input-group-addon-label
@@ -103,5 +103,19 @@ table{
     border-top: none !important;
 }
 .table-padding{
-    padding: 8px;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+@media screen and (min-width: 500px) {
+    .table-padding{
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+}
+.table-padding-first-row{
+    padding-top: 10px !important;
 }
