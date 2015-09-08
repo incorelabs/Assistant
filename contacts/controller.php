@@ -113,6 +113,29 @@ if ($validate) {
             $sql .= "DELETE FROM Table153 WHERE RegCode = ".$regCode." AND ContactCode = ".$contactCode.";";
             $sql .= "DELETE FROM Table155 WHERE RegCode = ".$regCode." AND ContactCode = ".$contactCode.";";
             $sql .= "DELETE FROM Table157 WHERE RegCode = ".$regCode." AND ContactCode = ".$contactCode.";";
+            $sql .= "DELETE FROM Table159 WHERE RegCode = ".$regCode." AND ContactCode = ".$contactCode." AND SerialNo = 1 ;";
+
+            //Delete Contact Image
+            $qry = "SELECT ImagePath FROM Table159 WHERE RegCode = ".$regCode." AND ContactCode = ".$contactCode." AND SerialNo = 1 LIMIT 1;";
+
+            $doImageExist = true;
+            $filePath;
+            if($result = $mysqli->query($qry)){
+                if($result->num_rows == 0){
+                    $doImageExist = false;
+                }
+                else{
+                    $filePath = $result->fetch_assoc()["ImagePath"];
+                }
+            }
+
+            if($doImageExist){
+                if(file_exists($filePath)){
+                    unlink($filePath);
+                }
+            }
+
+            break;
         }
 
         if($_POST["mode"] == "M" || $_POST["mode"] == "A"){
@@ -154,6 +177,20 @@ if ($validate) {
                     ".$regCode.",
                     1);";
             }
+        }
+
+        // change date format yyyy-mm-dd
+        if(!empty($_POST['dob'])){
+            $dob = explode("/", $_POST['dob']);
+            $dob = array($dob[2],$dob[1],$dob[0]);
+            $_POST['dob'] = implode("-", $dob);
+        }
+
+        // change date format yyyy-mm-dd
+        if(!empty($_POST['dom'])) {
+            $dob = explode("/", $_POST['dom']);
+            $dob = array($dob[2],$dob[1],$dob[0]);
+            $_POST['dom'] = implode("-", $dob);
         }
 
         $fName = (!empty($_POST['firstName']) ? "'".$_POST['firstName']."'" : "NULL");
@@ -350,7 +387,7 @@ if ($validate) {
 
     }while(0);
 
-    echo $sql;
+    //echo $sql;
     if ($mysqli->multi_query($sql)) {
         $response = createResponse(1,"Successful");
         if($mode == 1 || $mode == 2){

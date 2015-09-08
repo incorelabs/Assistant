@@ -18,8 +18,7 @@ function createResponse($status,$message){
 }
 
 function validatePassword(){
-	global $response;
-	$validate;
+	global $response,$validate;
 	do {
 		//Check if password is entered
 		if(!empty($_POST['password']) && !empty($_POST['confirmPassword'])){
