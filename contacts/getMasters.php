@@ -41,7 +41,14 @@ if (isset($_GET['type'])) {
 
 	//country
 	if ($_GET['type'] == 'country') {
-		$data = createDataAPI("Table106","CountryName");
+		//$data = createDataAPI("Table106","CountryName");
+        $sql = "SELECT * FROM Table106 ORDER BY CountryName";
+        if ($result = $mysqli->query($sql)) {
+            while ($row = $result->fetch_assoc()) {
+                $data[$i] = $row;
+                $i++;
+            }
+        }
 	}
 
 	//state

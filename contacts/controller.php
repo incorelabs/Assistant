@@ -110,6 +110,9 @@ if ($validate) {
         if($_POST["mode"] == "D"){
             $mode = 3;
             $contactCode = $_POST["contactCode"];
+            $sql .= "DELETE FROM Table153 WHERE RegCode = ".$regCode." AND ContactCode = ".$contactCode.";";
+            $sql .= "DELETE FROM Table155 WHERE RegCode = ".$regCode." AND ContactCode = ".$contactCode.";";
+            $sql .= "DELETE FROM Table157 WHERE RegCode = ".$regCode." AND ContactCode = ".$contactCode.";";
         }
 
         if($_POST["mode"] == "M" || $_POST["mode"] == "A"){
@@ -347,21 +350,24 @@ if ($validate) {
 
     }while(0);
 
-    //echo $sql;
+    echo $sql;
     if ($mysqli->multi_query($sql)) {
-        do {
-            /* store first result set */
-            if ($result = $mysqli->use_result()) {
-                while ($row = $result->fetch_row()) {
-                    $landing = $row[0];
-                }
-                $result->close();
-            }
-        } while ($mysqli->next_result());
-
-        $validate = true;
         $response = createResponse(1,"Successful");
-        $response["landing"] = $landing;
+        if($mode == 1 || $mode == 2){
+            do {
+                /* store first result set */
+                if ($result = $mysqli->use_result()) {
+                    while ($row = $result->fetch_row()) {
+                        $landing = $row[0];
+                    }
+                    $result->close();
+                }
+            } while ($mysqli->next_result());
+            $response["landing"] = $landing;
+        }
+        $validate = true;
+
+
     }
     else{
         $validate = false;
