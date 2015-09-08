@@ -24,6 +24,7 @@ $landing;
 
 //Input variables
 $regCode = intval($_SESSION['s_id']);
+$familyCode = intval($_SESSION['familyCode']);
 $contactCode = 0;
 $title = "";
 $titleCode = "NULL";
@@ -110,6 +111,7 @@ if ($validate) {
         if($_POST["mode"] == "D"){
             $mode = 3;
             $contactCode = $_POST["contactCode"];
+            $sql .= "DELETE FROM Table151 WHERE RegCode = ".$regCode." AND ContactCode = ".$contactCode.";";
             $sql .= "DELETE FROM Table153 WHERE RegCode = ".$regCode." AND ContactCode = ".$contactCode.";";
             $sql .= "DELETE FROM Table155 WHERE RegCode = ".$regCode." AND ContactCode = ".$contactCode.";";
             $sql .= "DELETE FROM Table157 WHERE RegCode = ".$regCode." AND ContactCode = ".$contactCode.";";
@@ -250,6 +252,7 @@ if ($validate) {
             1,
             0,
             ".$defaultAddress.",
+            ".$familyCode.",
             ".$private.",
             ".$active.",
             NOW(),

@@ -16,6 +16,7 @@ class ContactList{
     var $count;
     var $mysqli;
     var $regCode;
+    var $familyCode;
     var $response;
     var $successful; // if contacts retrieved then successful
     var $searchText;
@@ -29,6 +30,7 @@ class ContactList{
         $this->limit = $limit;
         $this->requestPage = $page;
         $this->regCode = intval($_SESSION['s_id']);
+        $this->familyCode = intval($_SESSION['familyCode']);
         $this->mysqli = getConnection();
 
         if(!is_null($searchType) && !is_null($searchText)){
@@ -62,7 +64,7 @@ class ContactList{
     }
 
     function setWhereConstraints($parameter = null){
-        $where = " WHERE RegCode = ".$this->regCode;
+        $where = " WHERE RegCode = ".$this->regCode." AND ((FamilyCode != ".$this->familyCode." and PrivateFlag = 2) or FamilyCode = ".$this->familyCode.")";
         if(!is_null($parameter)) {
             $where .= " AND".$parameter;
         }

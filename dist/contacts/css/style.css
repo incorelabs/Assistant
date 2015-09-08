@@ -458,38 +458,6 @@ h5 {
     border-color: #ccc;
 }
 
-.notification_outer {
-    left: -3px;
-    top: 60px;
-    width: 100%;
-    text-align: center;
-    z-index: 999;
-    position: absolute;
-}
-
-.notification_success {
-    border-radius: 8px;
-    max-width: 250px;
-    height: 40px;
-    margin: auto;
-    padding-top: 10px;
-    background-color: #9CCC65;
-    box-shadow: 5px 5px 2px #888888;
-    opacity: 0.95;
-}
-
-.notification_failure {
-    color: #fff;
-    border-radius: 8px;
-    max-width: 250px;
-    height: 40px;
-    margin: auto;
-    padding-top: 10px;
-    background-color: #ef5350;
-    box-shadow: 5px 5px 2px #888888;
-    opacity: 0.95;
-}
-
 .addImage {
     width: 150px;
     height: 150px;

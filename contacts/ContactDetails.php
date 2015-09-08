@@ -66,6 +66,7 @@ class ContactDetail
             `Table151`.`TotalFamilyMembers`,
             `Table151`.`PhotoUploaded`,
             `Table151`.`CommunicateAddress`,
+            `Table151`.`FamilyCode`,
             `Table151`.`PrivateFlag`,
             `Table151`.`ActiveFlag`,
             `Table151`.`LastAccessDateTime`
