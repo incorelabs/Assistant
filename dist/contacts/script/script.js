@@ -713,7 +713,7 @@ var pageContact = {
         });
     },
     setAreaAutoComplete: function () {
-        pageContact.setAutoComplete("#homeArea", "#homeArea", pageContact.areaTag, pageContact.areaCode);
+        pageContact.setAutoComplete("#homeArea", "#homeAreaCode", pageContact.areaTag, pageContact.areaCode);
         pageContact.setAutoComplete("#workArea", "#workAreaCode", pageContact.areaTag, pageContact.areaCode);
         pageContact.setAutoComplete("#otherArea", "#otherAreaCode", pageContact.areaTag, pageContact.areaCode);
     },
