@@ -59,7 +59,7 @@ class PasswordList
     }
 
     function setPasswordListQuery(){
-        $this->passwordListQuery = "SELECT Table152.PasswordCode, Table107.FamilyName as 'HolderName', Table130.PasswordTypeName FROM Table152 LEFT JOIN Table130 ON Table130.PasswordTypeCode = Table152.PasswordTypeCode LEFT JOIN Table107 ON Table107.RegCode = Table152.RegCode AND Table107.FamilyCode = Table152.HolderCode".$this->whereConstraints." ORDER BY Table107.FamilyName LIMIT ".$this->limit." OFFSET ".$this->getLimits()["lower"].";";
+        $this->passwordListQuery = "SELECT Table152.PasswordCode, Table107.FamilyName as 'HolderName', Table130.PasswordTypeName FROM Table152 INNER JOIN Table130 ON Table130.PasswordTypeCode = Table152.PasswordTypeCode LEFT JOIN Table107 ON Table107.RegCode = Table152.RegCode AND Table107.FamilyCode = Table152.HolderCode".$this->whereConstraints." ORDER BY Table107.FamilyName LIMIT ".$this->limit." OFFSET ".$this->getLimits()["lower"].";";
     }
 
     function setWhereConstraints($parameter = null){
