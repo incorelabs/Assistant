@@ -240,6 +240,10 @@ $(document).ready(function(event){
 		return false;
 	});
 
+	$(".date").focusout(function (event) {
+		initializeDate();
+	});
+
 	$(".date").keydown(function(event){
 		//console.log(event);
 		if (tempDate.length > 0) {
