@@ -10,7 +10,7 @@ var MyDate = function (date){
 };
 
 MyDate.prototype.isLeapYear = function() {
-	year = this.year;
+	var year = this.year;
 	return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
 };
 
@@ -27,11 +27,11 @@ MyDate.prototype.isDayValid = function() {
 		case 1:
 			return this.day < 32;
 			break;
-		
+
 		case 2:
 			return (this.isLeapYear()) ? (this.day < 30) : (this.day < 29);
 			break;
-		
+
 		case 3:
 			return this.day < 32;
 			break;
@@ -86,7 +86,7 @@ function inputDate(element,str){
 			$(element).val(date);
 			$(element).selectRange(1);
 			break;
-		
+
 		case 1:
 			tempDate += str;
 			date = date.replaceAt(1,str);
@@ -213,7 +213,7 @@ $(document).ready(function(event){
 
 	//Move cursor in the input box
 	$.fn.selectRange = function(start, end) {
-	    if(!end) end = start; 
+	    if(!end) end = start;
 	    return this.each(function() {
 	        if (this.setSelectionRange) {
 	            this.focus();
@@ -228,7 +228,7 @@ $(document).ready(function(event){
 	    });
 	};
 
-	
+
 	$(".date").keypress(function(event){
 		//console.log(event);
 		if (event.charCode > 47 && event.charCode < 58) {
@@ -253,6 +253,3 @@ $(document).ready(function(event){
 	});
 
 });
-
-
-	
