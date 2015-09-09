@@ -123,11 +123,11 @@ if ($validate) {
 	//echo $sql;
 	if ($mysqli->multi_query($sql) === TRUE) {
 		$validate = true;
-		$response = createResponse(1,"Successfull");
+		$response = createResponse(1,"Successful");
 	}
 	else{
 		$validate = false;
-		$response = createResponse(0,"Error occured while uploading to the database: ".$mysqli->error);
+		$response = createResponse(0,"Error occurred while uploading to the database: ".$mysqli->error);
 	}
 		
 }
