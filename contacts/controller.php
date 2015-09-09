@@ -110,6 +110,11 @@ if ($validate) {
     do{
         if($_POST["mode"] == "D"){
             $mode = 3;
+            $qry = "SELECT ContactCode FROM Table151 WHERE RegCode =".$regCode." ORDER BY FullName LIMIT 1;";
+            if($result = $mysqli->query($qry)){
+                $landing = $result->fetch_assoc()["ContactCode"];
+            }
+
             $contactCode = $_POST["contactCode"];
             $sql .= "DELETE FROM Table151 WHERE RegCode = ".$regCode." AND ContactCode = ".$contactCode.";";
             $sql .= "DELETE FROM Table153 WHERE RegCode = ".$regCode." AND ContactCode = ".$contactCode.";";
@@ -394,29 +399,33 @@ if ($validate) {
     if ($mysqli->multi_query($sql)) {
         $response = createResponse(1,"Successful");
         if($mode == 1 || $mode == 2){
-            for(;;){
-
-                if ($result = $mysqli->use_result()) {
-                    while ($row = $result->fetch_row()) {
-                        $landing = $row[0];
+            if($active == "1"){
+                for(;;){
+                    if ($result = $mysqli->use_result()) {
+                        while ($row = $result->fetch_row()) {
+                            $landing = $row[0];
+                        }
+                        $result->close();
                     }
-                    $result->close();
-                }
 
-                if($mysqli->more_results()){
-                    $mysqli->next_result();
-                }
-                else{
-                    break;
-                }
+                    if($mysqli->more_results()){
+                        $mysqli->next_result();
+                    }
+                    else{
+                        break;
+                    }
 
+                }
             }
-
-            $response["landing"] = $landing;
+            else{
+                $qry = "SELECT ContactCode FROM Table151 WHERE RegCode =".$regCode." ORDER BY FullName LIMIT 1;";
+                if($result = $mysqli->query($qry)){
+                    $landing = $result->fetch_assoc()["ContactCode"];
+                }
+            }
         }
         $validate = true;
-
-
+        $response["landing"] = $landing;
     }
     else{
         $validate = false;

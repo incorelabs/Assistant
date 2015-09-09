@@ -64,7 +64,7 @@ class ContactList{
     }
 
     function setWhereConstraints($parameter = null){
-        $where = " WHERE RegCode = ".$this->regCode." AND ((FamilyCode != ".$this->familyCode." and PrivateFlag = 2) or FamilyCode = ".$this->familyCode.")";
+        $where = " WHERE RegCode = ".$this->regCode." AND ((FamilyCode != ".$this->familyCode." and PrivateFlag = 2) or FamilyCode = ".$this->familyCode.") AND ActiveFlag = 1";
         if(!is_null($parameter)) {
             $where .= " AND".$parameter;
         }
@@ -248,4 +248,3 @@ if($validate){
 }
 
 echo json_encode($response);
-?>
