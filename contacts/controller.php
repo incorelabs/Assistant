@@ -394,15 +394,24 @@ if ($validate) {
     if ($mysqli->multi_query($sql)) {
         $response = createResponse(1,"Successful");
         if($mode == 1 || $mode == 2){
-            do {
-                /* store first result set */
+            for(;;){
+
                 if ($result = $mysqli->use_result()) {
                     while ($row = $result->fetch_row()) {
                         $landing = $row[0];
                     }
                     $result->close();
                 }
-            } while ($mysqli->next_result());
+
+                if($mysqli->more_results()){
+                    $mysqli->next_result();
+                }
+                else{
+                    break;
+                }
+
+            }
+
             $response["landing"] = $landing;
         }
         $validate = true;
