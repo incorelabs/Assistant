@@ -1,58 +1,40 @@
 <?php
-define("ROOT", "");
-require_once ROOT.'db/Connection.php';
-$mysqli = getConnection();
-$fields = array();
-$tableName = "Table119";
+/**
+ * Created by PhpStorm.
+ * User: kbokdia
+ * Date: 09/09/15
+ * Time: 7:02 PM
+ */
 
-function getCSString($fields){
-    $str = "";
-    foreach($fields as $value){
-        $str .= "s".$value["name"]." ".$value["type"].",<br>";
+function getPasswordList($orderBy){
+    global $response,$mysqli,$regCode,$familyCode;
+
+    $sql = "SELECT Table152.RegCode, Table152.PasswordCode, Table152.PasswordTypeCode, Table130.PasswordTypeName, Table152.HolderCode, Table107.FamilyName as 'HolderName',Table152.PasswordName, Table152.LoginID, Table152.LoginPassword1, Table152.LoginPassword2, Table152.InsertedBy, Table152.PrivateFlag, Table152.ActiveFlag FROM Table152
+		INNER JOIN Table130 ON Table130.PasswordTypeCode = Table152.PasswordTypeCode
+		INNER JOIN Table107 ON Table107.RegCode = Table152.RegCode AND Table107.FamilyCode = Table152.HolderCode
+		WHERE Table152.RegCode = ".$regCode." AND ((Table152.InsertedBy != ".$familyCode." and PrivateFlag = 2) or Table152.InsertedBy = ".$familyCode.")
+		ORDER BY ".$orderBy.";";
+    //echo $sql;
+    if ($result = $mysqli->query($sql)) {
+        $i = 0;
+        while ($row = $result->fetch_assoc()) {
+            $response[$i] = $row;
+            $i++;
+        }
     }
-    return $str;
 }
 
-$sql = "SHOW COLUMNS FROM .$tableName";
-if ($result = $mysqli->query($sql)) {
-    $i = 0;
-    while($row = $result->fetch_assoc()){
-        $fields[$i]["name"] = $row["Field"];
-        $fields[$i]["type"] = $row["Type"];
-        $i++;
+do{
+    if (isset($_GET['list'])) {
+        $listType = intval($_GET['list']);
+        getPasswordList("Table107.FamilyName");
     }
-}
 
-$str = "CREATE PROCEDURE sp".$tableName."(\n";
-$str .= getCSString($fields);
-
-//Insert
-$str .= "sModeFlag tinyint(1)<br>)<br>
-        BEGIN<br>
-            if sModeFlag = 1 then<br>
-                INSERT INTO ".$tableName."
-		        VALUES(<br>";
-foreach($fields as $value){
-    $str .= "s".$value["name"].",<br>";
-}
-//$str .= getCSString($fields);
-$str = rtrim($str,",<br>");
-
-//Update
-$str .= "<br>);<br><br>
-         elseif sModeFlag = 2 then<br>
-            UPDATE ".$tableName."<br>
-            SET<br>";
-foreach($fields as $value){
-    $str .= $value["name"]." = s".$value["name"].",<br>";
-}
-$str = rtrim($str,",<br>");
-$str .= "<br>WHERE ".$fields[0]["name"]." = s".$fields[0]["name"].";<br><br>";
-
-//Delete
-$str .= "elseif sModeFlag = 3 then<br>";
-$str .= "DELETE FROM ".$tableName." WHERE ".$fields[0]["name"]." = s".$fields[0]["name"].";<br><br>";
-$str .= "end if;<br>END";
-echo $str;
-//print_r($fields);
-?>
+    if(!empty($_GET['passwordCode'])){
+        $passwordCode = $_GET['passwordCode'];
+        $sql = "SELECT Table152.RegCode, Table152.PasswordCode, Table152.PasswordTypeCode, Table130.PasswordTypeName, Table152.HolderCode, Table107.FamilyName as 'HolderName',Table152.PasswordName, Table152.LoginID, Table152.LoginPassword1, Table152.LoginPassword2, Table152.InsertedBy, Table152.PrivateFlag, Table152.ActiveFlag FROM Table152 INNER JOIN Table130 ON Table130.PasswordTypeCode = Table152.PasswordTypeCode LEFT JOIN Table107 ON Table107.RegCode = Table152.RegCode AND Table107.FamilyCode = Table152.HolderCode WHERE Table152.RegCode = ".$regCode." AND Table152.PasswordCode = ".$passwordCode."  ORDER BY FamilyName  LIMIT 1;";
+        if($result = $mysqli->query($sql)){
+            $response = $result->fetch_assoc();
+        }
+    }
+}while(0);

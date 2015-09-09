@@ -37,7 +37,7 @@ function setFamilyList(arr) {
 function getPasswordList() {
     $.ajax({
         method: "GET",
-        url: root + "passwords/getPasswordsList.php",
+        url: root + "passwords/getPasswordList.php",
         data: {
             list: 1
         }
