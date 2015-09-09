@@ -10,6 +10,199 @@ $mysqli = getConnection();
 $response = array();
 $validate;
 
+class FamilyController
+{
+    var $mode;
+    var $data;
+    var $regCode;
+    var $familyCode;
+    var $isParent;
+    var $response;
+    var $mysqli;
+
+    function __construct($data){
+        $this->mysqli = getConnection();
+        $this->data = $data;
+        $this->regCode = intval($_SESSION['s_id']);
+        $this->familyCode = intval($_SESSION['familyCode']); //Session family code
+        $this->isParent = (($this->familyCode == 1001) ? true : false );
+
+        //set mode
+        if($this->data["mode"] == "A"){
+            $this->mode = 1;
+        }
+        elseif($this->data["mode"] == "M"){
+            $this->mode = 2;
+        }
+        elseif($this->data["mode"] == "D"){
+            $this->mode = 3;
+        }
+
+        //call respect methods based on mode
+        switch($this->mode){
+            case 1:
+                $this->addMember();
+                break;
+            case 2:
+                $this->editMember();
+                break;
+            case 3:
+                $this->deleteMember();
+                break;
+        }
+    }
+
+    function getDeleteQuery($dataFamilyCode){
+        return "DELETE FROM Table109 WHERE RegCode = ".$this->regCode." AND FamilyCode = ".$dataFamilyCode.";"."DELETE FROM Table107 WHERE RegCode = ".$this->regCode." AND FamilyCode = ".$dataFamilyCode.";";
+    }
+
+    function deleteMember(){
+        if(!$this->isParent){
+            $this->response = createResponse(0,"You do not have permission to delete");
+            return;
+        }
+        elseif($this->familyCode == intval($this->data["familyCode"])){
+            $this->response = createResponse(0,"You cannot delete yourself");
+            return;
+        }
+        else{
+            $this->runMultipleQuery($this->getDeleteQuery(intval($this->data["familyCode"])));
+        }
+    }
+
+    function editMember(){
+        if(!$this->isParent && intval($this->data["familyCode"]) != $this->familyCode){
+            $this->response = createResponse(0,"You cannot edit this person");
+            return;
+        }
+
+        $isChanged = true;
+        $sql = "SELECT LoginFlag FROM Table107 WHERE RegCode = ".$this->regCode." AND FamilyCode =".intval($this->data["familyCode"]);
+        if($result = $this->mysqli->query($sql)){
+            if($result->num_rows == 1){
+                if(intval($result->fetch_assoc()['LoginFlag']) == intval($this->data["access"])){
+                    $isChanged = false;
+                }
+            }
+        }
+
+        $validate = true;
+        $sql = "";
+
+        //if login access is changed then check the state
+        if($isChanged){
+            if(intval($this->data["access"]) == 1){
+                if($this->isMailIdAvailable() && validatePassword()){
+                    $validate = true;
+                }
+                else{
+                    $this->response = createResponse(0,"Mail ID is unavailable or Password details do not match the policy");
+                    $validate = false;
+                    return;
+                }
+            }
+            elseif(intval($this->data["access"]) == 2){
+                $sql .= "DELETE FROM Table109 WHERE RegCode = ".$this->regCode." AND FamilyCode = ".intval($this->data["familyCode"]).";";
+                $sql .= "UPDATE Table107 SET Email = NULL WHERE RegCode = ".$this->regCode." AND FamilyCode = ".intval($this->data["familyCode"]).";";
+            }
+        }
+
+        if($validate){
+            $sql .= $this->getSpTable107Query();
+            $this->runMultipleQuery($sql);
+        }
+    }
+
+    function addMember(){
+        if(!$this->isParent){
+            $this->response = createResponse(0,"You cannot add a member");
+            return;
+        }
+
+        $validate = true;
+
+        if(intval($this->data["access"]) == 1){
+            if($this->isMailIdAvailable() && validatePassword()){
+                $validate = true;
+            }
+            else{
+                $this->response = createResponse(0,"Mail ID is unavailable or Password details do not match the policy");
+                $validate = false;
+                return;
+            }
+        }
+
+        if($validate){
+            $sql = $this->getSpTable107Query();
+            $this->runMultipleQuery($sql);
+        }
+    }
+
+    function isMailIdAvailable(){
+        $qry1 = "SELECT count(*) as 'count' FROM Table109 WHERE RegEmail = '".$this->data['email']."';";
+        if ($result = $this->mysqli->query($qry1)) {
+            $row = $result->fetch_assoc();
+            if (intval($row['count']) == 0) {
+                return true;
+            }
+            else{
+                return  false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
+    function getSpTable107Query(){
+        $name = "'".$this->data['name']."'";
+        $relationCode = $this->data['relation'];
+        $dob = "'".$this->data['dob']."'";
+        $email = ((intval($this->data["access"]) == 1) ? "'". $this->data['email']."'" : "NULL");
+        $mobile = "'".$this->data['mobile']."'";
+        $password = ((intval($this->data["access"]) == 1) ? "'".hash("sha256", $this->data['password'])."'" : "null");
+        $gender = intval($this->data['gender']);
+        $parentFlag = ((intval($this->data["familyCode"]) == 1001) ? 1 : 2);
+        $loginFlag = ((intval($this->data["access"]) == 1) ? 1 : 2);
+        $activeFlag = 1;
+
+        $sql =  "call spTable107(
+					".$this->regCode.",
+					".intval($this->data["familyCode"]).",
+					".$name.",
+					".$relationCode.",
+					".$dob.",
+					".$email.",
+					".$mobile.",
+					".$password.",
+					".$gender.",
+					".$parentFlag.",
+					".$loginFlag.",
+					".$activeFlag.",
+					".$this->mode."
+				);";
+
+        return $sql;
+    }
+
+    function runMultipleQuery($sql){
+        if ($this->mysqli->multi_query($sql) === TRUE) {
+            $this->response = createResponse(1,"Successful");
+        }
+        else{
+            $this->response = createResponse(0,"Error occurred while uploading to the database: ".$this->mysqli->error);
+        }
+    }
+
+    function getResponse(){
+        return $this->response;
+    }
+
+    function __destruct(){
+        $this->mysqli->close();
+    }
+}
+
 //Input variables
 $regCode = intval($_SESSION['s_id']);
 $sFamilyCode = intval($_SESSION['familyCode']); //Session family code
@@ -35,8 +228,9 @@ function createResponse($status,$message){
 
 function validatePassword(){
 	global $response;
-	$validate = null;
-	do {
+	$validate = false;
+
+    do {
 		//Check if password is entered
 		if(!empty($_POST['password']) && !empty($_POST['confirmPassword'])){
 
@@ -67,6 +261,7 @@ function validatePassword(){
 		}
 
 	} while (0);
+
 	return $validate;
 }
 
@@ -176,154 +371,8 @@ if ($validate && $_POST["mode"] != "D") {
 
 //Business logic
 if ($validate) {
-	do {
-		$sql = "";
-		$sFamilyCode = intval($_SESSION['familyCode']);
-        $isMailSame = true;
-
-		//Delete
-		if ($_POST["mode"] == "D") {
-			$pFamilyCode = intval($_POST['familyCode']);
-
-            if($pFamilyCode == 1001){
-                $validate = false;
-                $response = createResponse(0,"You cannot delete this person");
-                break;
-            }
-			
-			if ($sFamilyCode == $pFamilyCode || $sFamilyCode != 1001) {
-				$validate = false;
-				$response = createResponse(0,"You cannot delete this person");
-				break;
-			}
-			else{
-                $mode = 3;
-				$sql .= "DELETE FROM Table109 WHERE RegCode = ".$regCode." AND FamilyCode = ".$pFamilyCode.";";
-			}
-
-		}
-
-		//Modify
-		if ($_POST["mode"] == "M") {
-
-			$pFamilyCode = intval($_POST['familyCode']);
-
-			if ($sFamilyCode > 1001 && $sFamilyCode != $pFamilyCode) {
-				$validate = false;
-				$response = createResponse(0,"You cannot edit this person");
-				break;
-			}
-			else{
-                $mode = 2;
-                $qry = "SELECT RegEmail FROM Table109 WHERE RegCode = ".$regCode." AND FamilyCode = ".$pFamilyCode;
-                if ($result = $mysqli->query($qry)) {
-                    $row = $result->fetch_assoc();
-                    if ($row['RegEmail'] == $_POST["email"]) {
-                        $isMailSame = true;
-                    }
-                    else{
-                        $isMailSame = false;
-                    }
-                }
-				//$sql .= "DELETE FROM Table107 WHERE RegCode = ".$_SESSION['s_id']." AND FamilyCode = ".$pFamilyCode.";";
-			}
-		}
-
-		//Add
-		if ($_POST["mode"] == "A" || $_POST["mode"] == "M") {
-            //If not parent break
-			if($_POST["mode"] == "A"){
-				$mode = 1;
-				$pFamilyCode = 1;
-
-				if($sFamilyCode != 1001){
-					$validate = false;
-					$response = createResponse(0,"You cannot add a person");
-					break;
-				}
-			}
-
-            //On access check for mail id
-            if(intval($_POST["access"]) == 1){
-				//Email validation
-				if(!empty($_POST["email"])){
-					if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-						$validate = true;
-					}
-					else{
-						$validate = false;
-						$response = createResponse(0, "Invalid email");
-						break;
-					}
-				}
-                else{
-                    $validate = false;
-                    $response = createResponse(0, "Email ID is required for providing acccess");
-                    break;
-                }
-
-                if($_POST["mode"] == "A"){
-                    if(validatePassword()){
-                        $validate = true;
-                    }
-                    else{
-                        $validate = false;
-                        break;
-                    }
-                }
-
-                //Check if mail ID is already registered or not
-                if(!$isMailSame){
-                    $qry1 = "SELECT count(*) as 'count' FROM Table109 WHERE RegEmail = '".$_POST['email']."';";
-                    if ($result = $mysqli->query($qry1)) {
-                        $row = $result->fetch_assoc();
-                        if (intval($row['count']) == 0) {
-                            $validate = true;
-                        }
-                        else{
-                            $validate = false;
-                            $response = createResponse(0,"This Mail ID is already registered");
-                            break;
-                        }
-                    }
-                }
-            }
-
-            $name = "'".$_POST['name']."'";
-            $relationCode = $_POST['relation'];
-            $dob = "'".$_POST['dob']."'";
-            $email ="'". $_POST['email']."'";
-            $mobile = "'".$_POST['mobile']."'";
-            $password = ((intval($_POST["access"]) == 1) ? "'".hash("sha256", $_POST['password'])."'" : "null");
-            $gender = intval($_POST['gender']);
-            $parentFlag = (($pFamilyCode == 1001) ? 1 : 2);
-            $loginFlag = ((intval($_POST["access"]) == 1) ? 1 : 2);
-            $activeFlag = 1;
-        }
-
-        $sql .=  "call spTable107(
-					".$regCode.",
-					".$pFamilyCode.",
-					".$name.",
-					".$relationCode.",
-					".$dob.",
-					".$email.",
-					".$mobile.",
-					".$password.",
-					".$gender.",
-					".$parentFlag.",
-					".$loginFlag.",
-					".$activeFlag.",
-					".$mode."
-				);";
-		//echo $sql;
-		if ($mysqli->multi_query($sql) === TRUE) {
-			$response = createResponse(1,"Successfull");
-		}
-		else{
-			$response = createResponse(0,"Error occured while uploading to the database: ".$mysqli->error);
-		}
-	} while (0);	
+    $familyController = new FamilyController($_POST);
+    $response = $familyController->getResponse();
 }
 echo json_encode($response);
 $mysqli->close();
