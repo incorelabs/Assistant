@@ -1,4 +1,5 @@
 var pageContact = {
+    websiteRoot: "",
     currentPageNo: 1,
     localContact: null,
     defContactList: $.Deferred(),
@@ -26,7 +27,7 @@ var pageContact = {
     addBtnWorkPhoneCount: 0,
     addBtnOtherPhoneCount: 0,
     getContactList: function () {
-        var url = "ContactList.php";
+        var url = pageContact.websiteRoot + "ContactList.php";
 
         $.getJSON(url, {
             pageNo: pageContact.currentPageNo
@@ -79,7 +80,7 @@ var pageContact = {
         pageContact.getSearchResults();
     },
     getSearchResults: function () {
-        var url = "ContactList.php";
+        var url = pageContact.websiteRoot + "ContactList.php";
 
         $.getJSON(url, {
             pageNo: pageContact.currentPageNo,
@@ -129,7 +130,7 @@ var pageContact = {
         }
     },
     getContactDetails: function (contactCode) {
-        var url = "ContactDetails.php";
+        var url = pageContact.websiteRoot + "ContactDetails.php";
 
         $.getJSON(url, {
             contactCode: contactCode
@@ -298,7 +299,7 @@ var pageContact = {
         }
     },
     getTitleData: function () {
-        var url = "getMasters.php";
+        var url = pageContact.websiteRoot + "getMasters.php";
 
         $.getJSON(url, {
             type: 'title'
@@ -313,7 +314,7 @@ var pageContact = {
         });
     },
     getGroupData: function () {
-        var url = "getMasters.php";
+        var url = pageContact.websiteRoot + "getMasters.php";
 
         $.getJSON(url, {
             type: 'group'
@@ -328,7 +329,7 @@ var pageContact = {
         });
     },
     getEmergencyData: function () {
-        var url = "getMasters.php";
+        var url = pageContact.websiteRoot + "getMasters.php";
 
         $.getJSON(url, {
             type: 'emergency'
@@ -343,7 +344,7 @@ var pageContact = {
         });
     },
     getCountryData: function () {
-        var url = "getMasters.php";
+        var url = pageContact.websiteRoot + "getMasters.php";
 
         $.getJSON(url, {
             type: 'country'
@@ -359,7 +360,7 @@ var pageContact = {
         });
     },
     getStateData: function () {
-        var url = "getMasters.php";
+        var url = pageContact.websiteRoot + "getMasters.php";
 
         $.getJSON(url, {
             type: 'state'
@@ -375,7 +376,7 @@ var pageContact = {
         });
     },
     getCityData: function () {
-        var url = "getMasters.php";
+        var url = pageContact.websiteRoot + "getMasters.php";
 
         $.getJSON(url, {
             type: 'city'
@@ -391,7 +392,7 @@ var pageContact = {
         });
     },
     getAreaData: function () {
-        var url = "getMasters.php";
+        var url = pageContact.websiteRoot + "getMasters.php";
 
         $.getJSON(url, {
             type: 'area'
@@ -923,7 +924,7 @@ $(document).ready(function (event) {
         var div = document.getElementById('mobileTabs');
         div.style.display = "block";
     }
-    else{
+    else {
         var div = document.getElementById('websiteTabs');
         div.style.display = "block";
         var div = document.getElementById('mobileTabs');
@@ -943,11 +944,11 @@ $(document).ready(function (event) {
     //To open and close the tab on click over it again
     $('#myTab a').click(function (e) {
         var tab = $(this);
-        if(tab.parent('li').hasClass('active')){
-            window.setTimeout(function(){
+        if (tab.parent('li').hasClass('active')) {
+            window.setTimeout(function () {
                 $(".tab-pane").removeClass('active');
                 tab.parent('li').removeClass('active');
-            },1);
+            }, 1);
         }
     });
 
@@ -1113,7 +1114,7 @@ $(window).resize(function () {
         var div = document.getElementById('mobileTabs');
         div.style.display = "block";
     }
-    else{
+    else {
         var div = document.getElementById('websiteTabs');
         div.style.display = "block";
         var div = document.getElementById('mobileTabs');

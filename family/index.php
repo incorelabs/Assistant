@@ -7,28 +7,28 @@ define("ROOT", "../");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Assistant - Family</title>
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
     <?php
-    include_once ROOT.'dist/authenticate.php';
-    include_once ROOT.'dist/bootstrap.php';
+    include_once ROOT . 'dist/authenticate.php';
+    include_once ROOT . 'dist/bootstrap.php';
     ?>
 
-    <link rel="stylesheet" href="../dist/family/css/style.css" />
-    <link rel="stylesheet" href="../dist/css/style.css" />
+    <link rel="stylesheet" href="../dist/family/css/style.css"/>
+    <link rel="stylesheet" href="../dist/css/style.css"/>
     <script src="http://malsup.github.com/jquery.form.js"></script>
 
     <!-- Header Links -->
-    <link type="text/css" rel="stylesheet" href="../dist/css/sidebar.css" />
-    <link type="text/css" rel="stylesheet" href="../dist/css/jquery_sidebar.css" />
+    <link type="text/css" rel="stylesheet" href="../dist/css/sidebar.css"/>
+    <link type="text/css" rel="stylesheet" href="../dist/css/jquery_sidebar.css"/>
     <script type="text/javascript" src="../dist/script/jquery.mmenu.min.all.js"></script>
     <script type="text/javascript">
         var root = "<?php echo ROOT; ?>";
-        $(function() {
+        $(function () {
             $('nav#menu').mmenu();
         });
     </script>
@@ -36,8 +36,8 @@ define("ROOT", "../");
     <script src="../dist/date/script.js"></script>
     <script src="../dist/family/script/script.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            $("#showPassword").click(function() {
+        $(document).ready(function () {
+            $("#showPassword").click(function () {
                 if ($("#password").attr("type") == "password") {
                     $("#password").attr("type", "text");
 
@@ -45,7 +45,7 @@ define("ROOT", "../");
                     $("#password").attr("type", "password");
                 }
             });
-            $("#showOtherPassword").click(function() {
+            $("#showOtherPassword").click(function () {
                 if ($("#confirmPassword").attr("type") == "password") {
                     $("#confirmPassword").attr("type", "text");
 
@@ -61,7 +61,7 @@ define("ROOT", "../");
 <?php
 define('PAGE_TITLE', 'Family');
 $root_location = ROOT;
-include_once ROOT.'dist/navbar.php';
+include_once ROOT . 'dist/navbar.php';
 echo $navbar_str;
 ?>
 <div class="container">
@@ -77,7 +77,7 @@ echo $navbar_str;
         </div>
     </div>
     <div class="text-right button-top-margin">
-        <button class="btn btn-primary" id="btn-addFamily" >
+        <button class="btn btn-primary" id="btn-addFamily">
             <i class="fa fa-plus fa-lg"></i>
         </button>
     </div>
@@ -123,15 +123,18 @@ echo $navbar_str;
                         Add Family
                     </h4>
                 </div>
-                <input type="hidden" id="familyCode" name="familyCode" value="1" />
-                <input type="hidden" id="mode" name="mode" />
+                <input type="hidden" id="familyCode" name="familyCode" value="1"/>
+                <input type="hidden" id="mode" name="mode"/>
+
                 <div class="modal-body">
                     <div class="form-group form-group-margin">
                         <div class="input-group">
                             <span class="input-group-addon input-group-addon-label">Name*</span>
+
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-user fa-size hidden-xs"></i>
-                                <input type="text" name="name" id="firstName" class="form-control name text-field-left-border" placeholder="Name"/>
+                                <input type="text" name="name" id="firstName"
+                                       class="form-control name text-field-left-border" placeholder="Name"/>
                             </div>
                         </div>
                         <div class='info'></div>
@@ -139,9 +142,11 @@ echo $navbar_str;
                     <div class="form-group form-group-margin">
                         <div class="input-group">
                             <span class="input-group-addon input-group-addon-label">Relation*</span>
+
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-star fa-size hidden-xs"></i>
-                                <select name="relation" class="form-control textbox_height text-field-left-border" id="relation">
+                                <select name="relation" class="form-control textbox_height text-field-left-border"
+                                        id="relation">
                                 </select>
                             </div>
                         </div>
@@ -150,9 +155,11 @@ echo $navbar_str;
                     <div class="form-group form-group-margin">
                         <div class="input-group">
                             <span class="input-group-addon input-group-addon-label">Date of Birth*</span>
+
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-calendar fa-size hidden-xs"></i>
-                                <input type="text" name="dob" id="dob" class="form-control date text-field-left-border" placeholder="Date of Birth"/>
+                                <input type="text" name="dob" id="dob" class="form-control date text-field-left-border"
+                                       placeholder="Date of Birth"/>
                             </div>
                         </div>
                         <div class='info'></div>
@@ -160,15 +167,18 @@ echo $navbar_str;
                     <div class="form-group form-group-margin">
                         <div class="input-group">
                             <span class="input-group-addon input-group-addon-label">Mobile</span>
+
                             <div class="inner-addon right-addon">
                                 <i class="glyphicon glyphicon-phone fa-size hidden-xs"></i>
-                                <input type="text" name="mobile" id="mobile" class="form-control text-field-left-border" placeholder="Mobile" />
+                                <input type="text" name="mobile" id="mobile" class="form-control text-field-left-border"
+                                       placeholder="Mobile"/>
                             </div>
                         </div>
                     </div>
                     <div class="form-group form-group-margin">
                         <div class="input-group">
                             <span class="input-group-addon input-group-addon-label">Gender*</span>
+
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-lg fa-size hidden-xs" style="right:12px"></i>
                                 <select name="gender" id='gender' class="form-control select-field-left-border">
@@ -183,6 +193,7 @@ echo $navbar_str;
                     </div>
                     <div class="form-group form-group-margin" id="provideLoginDiv">
                         <label class="col-xs-4 control-label">Provide Login</label>
+
                         <div class="col-xs-7">
                             <div class="radio">
                                 <div class="col-xs-4">
@@ -192,7 +203,7 @@ echo $navbar_str;
                                 </div>
                                 <div class="col-xs-4">
                                     <label>
-                                        <input type="radio" name="access" id="no"  checked="checked" value="2">No</input>
+                                        <input type="radio" name="access" id="no" checked="checked" value="2">No</input>
                                     </label>
                                 </div>
                             </div>
@@ -204,9 +215,11 @@ echo $navbar_str;
                         <div class="form-group form-group-margin">
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-label">Email*</span>
+
                                 <div class="inner-addon right-addon">
                                     <i class="fa fa-envelope-o fa-size hidden-xs"></i>
-                                    <input type="email" name="email" id="email" class="form-control email text-field-left-border" placeholder="Email" />
+                                    <input type="email" name="email" id="email"
+                                           class="form-control email text-field-left-border" placeholder="Email"/>
                                 </div>
                             </div>
                             <div class='info'></div>
@@ -214,25 +227,34 @@ echo $navbar_str;
                         <div class="form-group form-group-margin">
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-label">Password*</span>
-                                <input type="password" name="password" id="password" class="form-control password text-field-left-border" placeholder="Password" />
-                                <span class="input-group-btn"><button class="btn btn-primary button-addon-custom" type="button" id="showPassword"><i class="fa fa-eye fa-lg"></i></button></span>
+                                <input type="password" name="password" id="password"
+                                       class="form-control password text-field-left-border" placeholder="Password"/>
+                                <span class="input-group-btn"><button class="btn btn-primary button-addon-custom"
+                                                                      type="button" id="showPassword"><i
+                                            class="fa fa-eye fa-lg"></i></button></span>
                             </div>
                             <div class='info'></div>
                         </div>
                         <div class="form-group form-group-margin">
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-label">Confirm*</span>
-                                <input type="password" name="confirmPassword" id="confirmPassword" class="form-control c_password text-field-left-border" placeholder="Confirm Password" />
-                                <span class="input-group-btn"><button class="btn btn-primary button-addon-custom" type="button" id="showOtherPassword"><i class="fa fa-eye fa-lg"></i></button></span>
+                                <input type="password" name="confirmPassword" id="confirmPassword"
+                                       class="form-control c_password text-field-left-border"
+                                       placeholder="Confirm Password"/>
+                                <span class="input-group-btn"><button class="btn btn-primary button-addon-custom"
+                                                                      type="button" id="showOtherPassword"><i
+                                            class="fa fa-eye fa-lg"></i></button></span>
                             </div>
                             <div class='info'></div>
                         </div>
                     </div>
                 </div>
-        </div> <!-- Modal Body -->
+        </div>
+        <!-- Modal Body -->
     </div>
     </form>
-</div><!--modal-content-->
+</div>
+<!--modal-content-->
 </div>
 </div><!--modal-->
 <!--Delete Contact Modal-->
@@ -248,9 +270,9 @@ echo $navbar_str;
             <center>
                 <div class="modal-body">
                     <div class="btn-group">
-                        <form method="POST" action="controller.php" id="form-family-delete" >
-                            <input type="hidden" name="familyCode" id="deleteFamilyCode" />
-                            <input type="hidden" name="mode" id="form-delete-mode" />
+                        <form method="POST" action="controller.php" id="form-family-delete">
+                            <input type="hidden" name="familyCode" id="deleteFamilyCode"/>
+                            <input type="hidden" name="mode" id="form-delete-mode"/>
                             <button class="btn btn-danger modal_button" type="submit">
                                 <span class='glyphicon glyphicon-ok'></span>&nbsp
                                 Yes
@@ -269,10 +291,14 @@ echo $navbar_str;
                     <br>
                 </div>
             </center>
-        </div><!--modal-content-->
+        </div>
+        <!--modal-content-->
     </div>
-</div><!--modal-->
+</div>
+<!--modal-->
 </body>
-<div class="cover"><div id="pageLoading"></div></div>
+<div class="cover">
+    <div id="pageLoading"></div>
+</div>
 
 </html>
