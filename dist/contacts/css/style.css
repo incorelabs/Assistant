@@ -102,18 +102,27 @@ li {
 }
 
 .panelHeight {
-    max-height: calc(100vh - 130px);
+    max-height: calc(100vh - 134px);
     overflow-y: auto;
     overflow-x: hidden;
 }
 .panel-height
 {
-    height: calc(100vh - 135px);
+    height: calc(100vh - 134px);
 }
+
+.panel-height-details{
+    height: calc(100vh - 134px);
+}
+
 @media screen and (max-width: 992px){
-    .panel-height
+    .panel-height-details
     {
         height: 100%;
+    }
+    .panel-height
+    {
+        height: calc(100vh - 106px);
     }
     .panel{
         margin-bottom: 0px !important;
@@ -122,9 +131,9 @@ li {
     .row{
         margin-right: 0px !important;
     }
-    .list-group{
-        margin-bottom: 0px !important;
-    }
+}
+.list-group{
+    margin-bottom: 0px !important;
 }
 ::-webkit-scrollbar {
     display: none;
