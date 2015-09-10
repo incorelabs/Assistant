@@ -22,9 +22,6 @@ include_once ROOT.'dist/authenticate.php';
     ?>
     <link rel="stylesheet" type="text/css" href="../dist/css/style.css" />
     <link rel="stylesheet" href="../dist/preferences/css/style.css" />
-	<script>
-		var root = "<?php echo ROOT; ?>";
-	</script>
 	<script src="http://malsup.github.com/jquery.form.js"></script>
 	<script src="../dist/script/script.js"></script>
     <script src="../dist/preferences/script/script.js"></script>

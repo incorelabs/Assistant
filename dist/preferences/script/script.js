@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    //console.log("Hi");
+    localStorage.setItem("websiteRoot", "../");
     $("#change-password").ajaxForm({
         beforeSubmit: function () {
             $(".cover").fadeIn(100);
@@ -9,11 +9,11 @@ $(document).ready(function () {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 0) {
-                showNotificationFailure(response.message);
+                pageIndex.showNotificationFailure(response.message);
             }
             else {
-                showNotificationSuccess(response.message);
-                window.location.href = root;
+                pageIndex.showNotificationSuccess(response.message);
+                window.location.href = localStorage.getItem("websiteRoot");
             }
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);

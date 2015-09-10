@@ -225,9 +225,6 @@
     <link rel="stylesheet" href="dist/homePage/css/style.css" />
     <link rel="stylesheet" href="dist/css/sidebar.css" />
     <link rel="stylesheet" href="dist/css/jquery_sidebar.css" />
-	<script>
-		var root = "<?php echo ROOT; ?>";
-	</script>
 	<script src="http://malsup.github.com/jquery.form.js"></script>
 	<script src="dist/script/script.js"></script>
     <script src="dist/homePage/script/script.js"></script>

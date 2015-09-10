@@ -1,5 +1,4 @@
 var pageContact = {
-    websiteRoot: "",
     currentPageNo: 1,
     localContact: null,
     defContactList: $.Deferred(),
@@ -27,7 +26,7 @@ var pageContact = {
     addBtnWorkPhoneCount: 0,
     addBtnOtherPhoneCount: 0,
     getContactList: function () {
-        var url = pageContact.websiteRoot + "ContactList.php";
+        var url = localStorage.getItem("websiteRoot") + "contacts/ContactList.php";
 
         $.getJSON(url, {
             pageNo: pageContact.currentPageNo
@@ -80,7 +79,7 @@ var pageContact = {
         pageContact.getSearchResults();
     },
     getSearchResults: function () {
-        var url = pageContact.websiteRoot + "ContactList.php";
+        var url = localStorage.getItem("websiteRoot") + "contacts/ContactList.php";
 
         $.getJSON(url, {
             pageNo: pageContact.currentPageNo,
@@ -130,7 +129,7 @@ var pageContact = {
         }
     },
     getContactDetails: function (contactCode) {
-        var url = pageContact.websiteRoot + "ContactDetails.php";
+        var url = localStorage.getItem("websiteRoot") + "contacts/ContactDetails.php";
 
         $.getJSON(url, {
             contactCode: contactCode
@@ -299,7 +298,7 @@ var pageContact = {
         }
     },
     getTitleData: function () {
-        var url = pageContact.websiteRoot + "getMasters.php";
+        var url = localStorage.getItem("websiteRoot") + "contacts/getMasters.php";
 
         $.getJSON(url, {
             type: 'title'
@@ -314,7 +313,7 @@ var pageContact = {
         });
     },
     getGroupData: function () {
-        var url = pageContact.websiteRoot + "getMasters.php";
+        var url = localStorage.getItem("websiteRoot") + "contacts/getMasters.php";
 
         $.getJSON(url, {
             type: 'group'
@@ -329,7 +328,7 @@ var pageContact = {
         });
     },
     getEmergencyData: function () {
-        var url = pageContact.websiteRoot + "getMasters.php";
+        var url = localStorage.getItem("websiteRoot") + "contacts/getMasters.php";
 
         $.getJSON(url, {
             type: 'emergency'
@@ -344,7 +343,7 @@ var pageContact = {
         });
     },
     getCountryData: function () {
-        var url = pageContact.websiteRoot + "getMasters.php";
+        var url = localStorage.getItem("websiteRoot") + "contacts/getMasters.php";
 
         $.getJSON(url, {
             type: 'country'
@@ -360,7 +359,7 @@ var pageContact = {
         });
     },
     getStateData: function () {
-        var url = pageContact.websiteRoot + "getMasters.php";
+        var url = localStorage.getItem("websiteRoot") + "contacts/getMasters.php";
 
         $.getJSON(url, {
             type: 'state'
@@ -376,7 +375,7 @@ var pageContact = {
         });
     },
     getCityData: function () {
-        var url = pageContact.websiteRoot + "getMasters.php";
+        var url = localStorage.getItem("websiteRoot") + "contacts/getMasters.php";
 
         $.getJSON(url, {
             type: 'city'
@@ -392,7 +391,7 @@ var pageContact = {
         });
     },
     getAreaData: function () {
-        var url = pageContact.websiteRoot + "getMasters.php";
+        var url = localStorage.getItem("websiteRoot") + "contacts/getMasters.php";
 
         $.getJSON(url, {
             type: 'area'
@@ -824,16 +823,6 @@ var pageContact = {
             }
         });
     },
-    showNotificationSuccess: function (msg) {
-        $("#notification_success").html(msg);
-        document.getElementById('notification_success').style.display = "block";
-        $("#notification_success").delay(2000).fadeOut("slow");
-    },
-    showNotificationFailure: function (msg) {
-        $("#notification_failure").html(msg);
-        document.getElementById('notification_failure').style.display = "block";
-        $("#notification_failure").delay(2000).fadeOut("slow");
-    },
     showLoadingInContactDetail: function () {
         var contactDetailStr = "<div class='list-group-item loading'></div>";
         $("#contactDetailBody").html(contactDetailStr);
@@ -919,6 +908,8 @@ var pageContact = {
 };
 
 $(document).ready(function (event) {
+    localStorage.setItem("websiteRoot", "../");
+
     pageContact.getContactList();
     pageContact.refreshMasterList();
     if (window.innerWidth < 768) {
@@ -1022,13 +1013,13 @@ $(document).ready(function (event) {
                     $("#contactDetailBody").empty();
                     $("#editContactBtn").remove();
                     $("#deleteContactBtn").remove();
-                    pageContact.showNotificationSuccess(data.message);
+                    pageIndex.showNotificationSuccess(data.message);
                     pageContact.getContactList();
                     $("#deleteModal").modal('hide');
                 }, 500);
             }
             else {
-                pageContact.showNotificationFailure(response.message);
+                pageIndex.showNotificationFailure(response.message);
             }
         }
     });
@@ -1052,12 +1043,12 @@ $(document).ready(function (event) {
                     $("#contactList").empty();
                     pageContact.getContactDetails(data.landing);
                     pageContact.getContactList();
-                    pageContact.showNotificationSuccess(data.message);
+                    pageIndex.showNotificationSuccess(data.message);
                     pageContact.refreshMasterList();
                     $("#contactModal").modal('hide');
                 }, 500);
             } else {
-                pageContact.showNotificationFailure(data.message);
+                pageIndex.showNotificationFailure(data.message);
             }
         }
     });

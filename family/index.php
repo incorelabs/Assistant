@@ -27,7 +27,6 @@ define("ROOT", "../");
     <link type="text/css" rel="stylesheet" href="../dist/css/jquery_sidebar.css"/>
     <script type="text/javascript" src="../dist/script/jquery.mmenu.min.all.js"></script>
     <script type="text/javascript">
-        var root = "<?php echo ROOT; ?>";
         $(function () {
             $('nav#menu').mmenu();
         });

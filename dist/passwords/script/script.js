@@ -8,7 +8,7 @@ var isPasswordTypeSelected = false;
 function getFamilyList() {
     $.ajax({
         method: "GET",
-        url: root + "family/getFamily.php",
+        url: localStorage.getItem("websiteRoot") + "family/getFamily.php",
         data: {
             list: 2
         }
@@ -37,7 +37,7 @@ function setFamilyList(arr) {
 function getPasswordList() {
     $.ajax({
         method: "GET",
-        url: root + "passwords/getPasswordList.php",
+        url: localStorage.getItem("websiteRoot") + "passwords/getPasswordList.php",
         data: {
             list: 1
         }
@@ -262,6 +262,7 @@ function setPasswordTypeAutoComplete(tags) {
 }
 
 $(document).ready(function () {
+    localStorage.setItem("websiteRoot", "../");
 
     getFamilyList();
     getPasswordList();
@@ -287,12 +288,12 @@ $(document).ready(function () {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 0) {
-                showNotificationFailure(response.message);
+                pageIndex.showNotificationFailure(response.message);
             }
             else {
                 getPasswordList();
                 getPasswordTypeList();
-                showNotificationSuccess(response.message);
+                pageIndex.showNotificationSuccess(response.message);
                 $("#addPassword").modal("hide");
             }
             $("#pageLoading").removeClass("loader");
@@ -310,12 +311,12 @@ $(document).ready(function () {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 0) {
-                showNotificationFailure(response.message);
+                pageIndex.showNotificationFailure(response.message);
             }
             else {
                 getPasswordList();
                 getPasswordTypeList();
-                showNotificationSuccess(response.message);
+                pageIndex.showNotificationSuccess(response.message);
                 $("#deletePassword").modal("hide");
             }
             $("#pageLoading").removeClass("loader");

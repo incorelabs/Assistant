@@ -24,7 +24,6 @@ include_once ROOT . 'dist/authenticate.php';
     <link rel="stylesheet" href="../dist/passwords/css/style.css"/>
     <script src="http://malsup.github.com/jquery.form.js"></script>
     <script>
-        var root = "<?php echo ROOT; ?>";
         var familyCode = '<?php echo $_SESSION['familyCode']; ?>';
     </script>
     <script src="../dist/script/script.js"></script>

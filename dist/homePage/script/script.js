@@ -1,37 +1,38 @@
 $(document).ready(function () {
+    localStorage.setItem("websiteRoot", "");
+
     $("#form-signup").ajaxForm({
         beforeSubmit: function () {
-
-            if (email_count == 1 && pwd_count == 1 && c_pwd_count == 1 && name_count == 1 && country_count == 1 && mobile_count == 1 && dob_count == 1) {
+            if (pageIndex.email_count == 1 && pageIndex.pwd_count == 1 && pageIndex.c_pwd_count == 1 && pageIndex.name_count == 1 && pageIndex.country_count == 1 && pageIndex.mobile_count == 1 && pageIndex.dob_count == 1) {
                 $(".cover").fadeIn(100);
                 $("#pageLoading").addClass("loader");
                 return true;
             }
             else {
-                validateEmail(".email");
-                validatePassword(".password");
-                validateConfirmPassword(".password", ".c_password");
-                validateName(".name");
-                validateMobile(".mobile");
-                validateCountry("#country");
-                validateDate(".date");
+                pageIndex.validateEmail(".email");
+                pageIndex.validatePassword(".password");
+                pageIndex.validateConfirmPassword(".password", ".c_password");
+                pageIndex.validateName(".name");
+                pageIndex.validateMobile(".mobile");
+                pageIndex.validateCountry("#country");
+                pageIndex.validateDate(".date");
                 return false;
             }
 
         },
         success: function (responseText, statusText, xhr, $form) {
             console.log(responseText);
-            var response = JSON.parse(responseText);
-            if (response.status == 0) {
-                showNotificationFailure(response.message);
+            var data = JSON.parse(responseText);
+            if (data.status == 0) {
+                pageIndex.showNotificationFailure(data.message);
             }
             else {
-                showNotificationSuccess(response.message);
+                pageIndex.showNotificationSuccess(data.message);
                 window.location.href = "login.php";
             }
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
-        },
+        }
     });
 
     $("#form-login").ajaxForm({
@@ -43,22 +44,22 @@ $(document).ready(function () {
         },
         success: function (responseText, statusText, xhr, $form) {
             console.log(responseText);
-            var response = JSON.parse(responseText);
-            if (response.status == 0) {
-                showNotificationFailure(response.message);
+            var data = JSON.parse(responseText);
+            if (data.status == 0) {
+                pageIndex.showNotificationFailure(data.message);
             }
             else {
-                if (response.status == 1) {
-                    showNotificationSuccess(response.message);
-                    window.location.href = root + "preferences/changePassword.php";
+                if (data.status == 1) {
+                    pageIndex.showNotificationSuccess(data.message);
+                    window.location.href = localStorage.getItem("websiteRoot") + "preferences/changePassword.php";
                 }
                 else {
-                    showNotificationSuccess(response.message);
-                    window.location.href = "index.php";
+                    pageIndex.showNotificationSuccess(data.message);
+                    window.location.href = localStorage.getItem("websiteRoot") + "index.php";
                 }
             }
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
-        },
+        }
     });
 });
