@@ -84,9 +84,16 @@ echo $navbar_str;
                 <div class="list-group-item list-margin">
                     <div class="row">
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                            <div class="">
+                            <div class="input-group">
                                 <input id="searchBox" type="text" class="form-control" placeholder="Search..."
                                        autofocus/>
+                                <div class="input-group-btn">
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-success" onclick="">
+                                            <span class="fa fa-search"></span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div>

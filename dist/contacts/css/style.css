@@ -106,7 +106,10 @@ li {
     overflow-y: auto;
     overflow-x: hidden;
 }
-
+.panel-height
+{
+    height: calc(100vh - 135px);
+}
 ::-webkit-scrollbar {
     display: none;
 }

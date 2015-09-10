@@ -142,8 +142,10 @@ echo $navbar_str;
         <div class="col-md-5 col-sm-12 col-xs-12">
             <div class="panel panel-default panelHeight panel-margin" id="style-3">
                 <!-- List group -->
-                <div id="contactList" class="list-group force-scroll">
+                <div class="panel-height">
+                    <div id="contactList" class="list-group force-scroll">
 
+                    </div>
                 </div>
                 <!--List close-->
             </div>
