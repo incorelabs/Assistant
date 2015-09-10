@@ -89,7 +89,7 @@ echo $navbar_str;
                                        autofocus/>
                                 <div class="input-group-btn">
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-success" onclick="">
+                                        <button type="button" class="btn btn-success" onclick="pagePassword.doSearch();">
                                             <span class="fa fa-search"></span>
                                         </button>
                                     </div>

@@ -42,8 +42,6 @@ var pagePassword = {
             console.log(data);
             pagePassword.defPasswordList.resolve(data);
             pagePassword.setPasswordList(data);
-            //pagePassword.passwordList = data;
-            //pagePassword.setPasswordDetails(pagePassword.detailIndex);
         }).fail(function (error) {
 
         });
@@ -71,6 +69,53 @@ var pagePassword = {
             $("#passwordList").empty();
             $("#passwordList").html(str);
         }
+    },
+    doSearch: function () {
+        pagePassword.currentPageNo = 1;
+        $("#passwordList").empty();
+        pagePassword.getSearchResults();
+    },
+    getSearchResults: function () {
+        var url = localStorage.getItem("websiteRoot") + "passwords/getPasswordList.php";
+
+        $.getJSON(url, {
+            pageNo: pagePassword.currentPageNo,
+            searchType: 1,
+            searchText: $('#searchBox').val()
+        }).done(function (data) {
+            console.log(data);
+
+            console.log(pagePassword.currentPageNo);
+            pagePassword.setSearchResults(data);
+        }).fail(function (error) {
+
+        });
+    },
+    setSearchResults: function (data) {
+        if (data.status == 1) {
+            $('#loadMore').remove();
+            pagePassword.currentPageNo++;
+            var str = "";
+            for (var i = 0; i < data.result.length; i++) {
+                str += "<a onclick='pagePassword.getPasswordDetails(" + data.result[i].PasswordCode + ")' class='list-group-item contacts_font'><h4 class='list-group-item-heading contacts_font'>" + data.result[i].HolderName + " - " + data.result[i].PasswordName + "</h4></a>";
+            }
+            $("#passwordList").append(str);
+            console.log(str);
+            // Print on screen
+            console.log(data.result);
+            if (pagePassword.currentPageNo <= data.pages) {
+                // Show Load More
+                var str = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pagePassword.getSearchResults();'>Load more..</a></div>";
+                $("#passwordList").append(str);
+            }
+
+        } else {
+            var str = "<div class='list-group-item list-border-none'><li class='list-group-item-text header_font'>";
+            str += data.message + "</li></div>";
+            $("#passwordList").empty();
+            $("#passwordList").html(str);
+        }
+
     },
     getPasswordDetails: function (passwordCode) {
         var url = localStorage.getItem("websiteRoot") + "passwords/getPasswordDetail.php";
@@ -209,24 +254,20 @@ var pagePassword = {
         if (pagePassword.localPassword.password.ActiveFlag) {
             if (pagePassword.localPassword.password.ActiveFlag == 1) {
                 $("#addActiveStatus").attr("checked", true);
-            }
-            else {
+            } else {
                 $("#addActiveStatus").attr("checked", false);
             }
-        }
-        else {
+        } else {
             $("#addActiveStatus").attr("checked", false);
         }
 
         if (pagePassword.localPassword.password.PrivateFlag) {
             if (pagePassword.localPassword.password.PrivateFlag == 1) {
                 $("#addPrivacy").attr("checked", true);
-            }
-            else {
+            } else {
                 $("#addPrivacy").attr("checked", false);
             }
-        }
-        else {
+        } else {
             $("#addPrivacy").attr("checked", false);
         }
 
