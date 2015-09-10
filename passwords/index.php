@@ -90,7 +90,8 @@ echo $navbar_str;
                             </div>
                         </div>
                         <div>
-                            <button class="btn btn-primary btn-size" onclick="pagePassword.openAddPasswordModal();"><span
+                            <button class="btn btn-primary btn-size"
+                                    onclick="pagePassword.openAddPasswordModal();"><span
                                     class="glyphicon glyphicon-plus"></span></button>
                         </div>
                     </div>
@@ -129,13 +130,15 @@ echo $navbar_str;
 
         <div class="col-md-7 col-sm-12 col-xs-12 hidden-sm hidden-xs" id="passwordDetailDiv">
             <div id="passwordDetail" class="panel panel-default panelHeight panel-margin">
-                <!-- List group -->
-                <div id="passwordDetailBody" class="list-group">
-                    <div class="list-group-item">
-                        <p class="list-group-item-text">Loading...</p>
+                <div class='panel-height'>
+                    <!-- List group -->
+                    <div class="list-group">
+                        <div id="passwordDetailBody" class='list-group-item list-group-item-border'>
+                            <p class="list-group-item-text">Loading...</p>
+                        </div>
                     </div>
+                    <!--List close-->
                 </div>
-                <!--List close-->
 
             </div>
             <!--Panel-->
@@ -147,7 +150,8 @@ echo $navbar_str;
 <!--Container-->
 
 <!-- Add Password Modal -->
-<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModal" aria-hidden="true">
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModal"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form class="form-horizontal" method="POST" action="controller.php" id="form-passwords" autocomplete="off">
