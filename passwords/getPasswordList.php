@@ -1,16 +1,7 @@
 <?php
-spl_autoload_register(function ($class) {
-    include $class . '.php';
-});
 
-session_start();
-define("ROOT", "../");
-
-require_once ROOT.'dist/authenticate.php';
-require_once ROOT.'db/Connection.php';
-
-$validate;
-$response;
+namespace Assistant\Passwords;
+require 'PasswordAutoload.php';
 
 //General validation
 do{
@@ -36,4 +27,3 @@ if($validate){
 }
 
 echo json_encode($response);
-

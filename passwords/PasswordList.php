@@ -5,6 +5,7 @@
  * Date: 09/09/15
  * Time: 4:21 PM
  */
+namespace Assistant\Passwords;
 
 class PasswordList
 {
@@ -59,7 +60,7 @@ class PasswordList
     }
 
     function setPasswordListQuery(){
-        $this->passwordListQuery = "SELECT Table152.PasswordCode, Table107.FamilyName as 'HolderName', Table130.PasswordTypeName FROM Table152 INNER JOIN Table130 ON Table130.PasswordTypeCode = Table152.PasswordTypeCode LEFT JOIN Table107 ON Table107.RegCode = Table152.RegCode AND Table107.FamilyCode = Table152.HolderCode".$this->whereConstraints." ORDER BY Table107.FamilyName LIMIT ".$this->limit." OFFSET ".$this->getLimits()["lower"].";";
+        $this->passwordListQuery = "SELECT Table152.PasswordCode, Table107.FamilyName as 'HolderName', Table152.PasswordName FROM Table152 INNER JOIN Table130 ON Table130.PasswordTypeCode = Table152.PasswordTypeCode LEFT JOIN Table107 ON Table107.RegCode = Table152.RegCode AND Table107.FamilyCode = Table152.HolderCode".$this->whereConstraints." ORDER BY Table107.FamilyName LIMIT ".$this->limit." OFFSET ".$this->getLimits()["lower"].";";
     }
 
     function setWhereConstraints($parameter = null){
@@ -74,58 +75,9 @@ class PasswordList
         $searchParameters = new SearchParameters();
         switch($this->searchType){
             case 1:
-                $this->searchClause = $searchParameters->getNameClause($searchText);
-                break;
-            case 2:
-                $this->searchClause = $searchParameters->getMobileClause($searchText);
-                break;
-            case 3:
-                $this->searchClause = $searchParameters->getEmailClause($searchText);
-                break;
-            case 4:
-                $this->searchClause = $searchParameters->getCompanyClause($searchText);
-                break;
-            case 5:
-                $this->searchClause = $searchParameters->getDesignationClause($searchText);
-                break;
-            case 6:
-                $this->searchClause = $searchParameters->getGuardianNameClause($searchText);
-                break;
-            case 7:
-                $this->searchClause = $searchParameters->getDobClause($searchText);
-                break;
-            case 8:
-                $this->searchClause = $searchParameters->getDomClause($searchText);
-                break;
-            case 9:
-                $this->searchClause = $searchParameters->getGroupClause($this->regCode,$searchText);
-                break;
-            case 10:
-                $this->searchClause = $searchParameters->getHomeAreaClause($this->regCode,$searchText);
-                break;
-            case 11:
-                $this->searchClause = $searchParameters->getHomeCityClause($this->regCode,$searchText);
-                break;
-            case 12:
-                $this->searchClause = $searchParameters->getHomePhoneClause($this->regCode,$searchText);
-                break;
-            case 13:
-                $this->searchClause = $searchParameters->getWorkAreaClause($this->regCode,$searchText);
-                break;
-            case 14:
-                $this->searchClause = $searchParameters->getWorkCityClause($this->regCode,$searchText);
-                break;
-            case 15:
-                $this->searchClause = $searchParameters->getWorkPhoneClause($this->regCode,$searchText);
-                break;
-            case 16:
-                $this->searchClause = $searchParameters->getOtherAreaClause($this->regCode,$searchText);
-                break;
-            case 17:
-                $this->searchClause = $searchParameters->getOtherCityClause($this->regCode,$searchText);
-                break;
-            case 18:
-                $this->searchClause = $searchParameters->getOtherPhoneClause($this->regCode,$searchText);
+                $holderNameClause = $searchParameters->getHolderNameClause($searchText);
+                $passwordNameClause = $searchParameters->getPasswordNameClause($searchText);
+                $this->searchClause = " ( ".$passwordNameClause." OR ".$holderNameClause." ) ";
                 break;
         }
     }
