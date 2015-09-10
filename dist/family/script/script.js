@@ -18,6 +18,7 @@ var pageFamily = {
         });
     },
     setFamilyList: function (data) {
+        pageFamily.familyList = data;
         var familyTableString = "";
         for (var i = 0; i < data.length; i++) {
             var gender;
