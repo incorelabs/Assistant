@@ -16,6 +16,8 @@ class PasswordController
     var $familyCode;
     var $response;
     var $mysqli;
+    var $active;
+    var $landing;
 
     function __construct($data){
         $this->mysqli = getConnection();
@@ -78,16 +80,18 @@ class PasswordController
         }
 
         if($valid){
-            $this->runMultipleQuery($this->getDeleteQuery());
+            $this->runDeleteQuery($this->getDeleteQuery());
+            $this->setFirstRecordAsLanding();
+            $this->response["landing"] = $this->landing;
         }
     }
 
     function editPassword(){
-        $this->runMultipleQuery($this->getSpTable152Query());
+        $this->runEditOrAdd($this->getSpTable152Query());
     }
 
     function addPassword(){
-        $this->runMultipleQuery($this->getSpTable152Query());
+        $this->runEditOrAdd($this->getSpTable152Query());
     }
 
     function getSpTable152Query(){
@@ -102,19 +106,75 @@ class PasswordController
         $inserted = $this->familyCode;
         $private = (isset($this->data["private"]) ? 1 : 2);
         $active = (isset($this->data["active"]) ? 1 : 2);
+        $this->active = $active;
 
-        $sql = "SET @passwordTypeCode = ".$passwordTypeCode.";";
+        $sql = "set @passwordCode = ".$passwordCode.";";
+        $sql .= "set @passwordTypeCode = ".$passwordTypeCode.";";
 
         if($passwordTypeCode < 1001){
             $sql .= "call spTable130(@passwordTypeCode, ".$passwordTypeName.", ".$this->regCode.", 1);";
         }
 
-        $sql .= "call spTable152(".$this->regCode.",".$passwordCode.",@passwordTypeCode,".$passwordTypeName.",".$holderCode.",".$passwordName.",".$userID.",".$password1.",".$password2.",".$inserted.",".$private.",".$active.",now(),".$this->mode.");";
+        $sql .= "call spTable152(".$this->regCode.", @passwordCode, @passwordTypeCode,".$passwordTypeName.",".$holderCode.",".$passwordName.",".$userID.",".$password1.",".$password2.",".$inserted.",".$private.",".$active.",now(),".$this->mode.");";
+        $sql .= "SELECT @passwordCode as 'PasswordCode';";
 
         return $sql;
     }
 
     function runMultipleQuery($sql){
+        if ($this->mysqli->multi_query($sql) === TRUE) {
+            $this->response = $this->createResponse(1,"Successful");
+        }
+        else{
+            $this->response = $this->createResponse(0,"Error occurred while uploading to the database: ".$this->mysqli->error);
+        }
+    }
+
+    function runEditOrAdd($sql){
+        if ($this->mysqli->multi_query($sql)) {
+            $this->response = createResponse(1,"Successful");
+            if($this->mode == 1 || $this->mode == 2){
+                if($this->active == 1){
+                    for(;;){
+                        if ($result = $this->mysqli->use_result()) {
+                            while ($row = $result->fetch_row()) {
+                                $this->landing = $row[0];
+                            }
+                            $result->close();
+                        }
+
+                        if($this->mysqli->more_results()){
+                            $this->mysqli->next_result();
+                        }
+                        else{
+                            break;
+                        }
+                    }
+                }
+                else{
+                    $this->setFirstRecordAsLanding();
+                }
+            }
+            $this->response["landing"] = $this->landing;
+        }
+        else{
+            $this->response = createResponse(0,"Error occurred while uploading to the database: ".$this->mysqli->error);
+        }
+    }
+
+    function setFirstRecordAsLanding(){
+        $qry = "SELECT PasswordCode FROM Table152 INNER JOIN Table107 ON Table107.FamilyCode = Table152.HolderCode WHERE Table152.RegCode =".$this->regCode." ORDER BY Table107.FamilyName LIMIT 1;";
+        if($result = $this->mysqli->query($qry)){
+            if($result->num_rows == 0){
+                $this->response["landing"] = -1;
+            }
+            else{
+                $this->landing = $result->fetch_assoc()["PasswordCode"];
+            }
+        }
+    }
+
+    function runDeleteQuery($sql){
         if ($this->mysqli->multi_query($sql) === TRUE) {
             $this->response = $this->createResponse(1,"Successful");
         }
