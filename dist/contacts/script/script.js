@@ -1014,6 +1014,7 @@ $(document).ready(function (event) {
                     $("#deleteContactBtn").remove();
                     pageIndex.showNotificationSuccess(response.message);
                     pageContact.getContactList();
+                    pageContact.getContactDetails(response.landing);
                     $("#deleteModal").modal('hide');
                 }, 500);
             }

@@ -333,6 +333,7 @@ $(document).ready(function () {
                     $("#deletePasswordBtn").remove();
                     pageIndex.showNotificationSuccess(response.message);
                     pagePassword.getPasswordList();
+                    pagePassword.getPasswordDetails(response.landing);
                     $("#deleteModal").modal("hide");
                 }, 500);
             } else {
