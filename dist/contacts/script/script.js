@@ -1004,16 +1004,16 @@ $(document).ready(function (event) {
 
     $("#deleteContact").ajaxForm({
         success: function (responseText, statusText, xhr, $form) {
-            var data = JSON.parse(responseText);
-            console.log(data);
-            if (data.status == 1) {
+            var response = JSON.parse(responseText);
+            console.log(response);
+            if (response.status == 1) {
                 setTimeout(function () {
                     pageContact.currentPageNo = 1;
                     $("#contactList").empty();
                     $("#contactDetailBody").empty();
                     $("#editContactBtn").remove();
                     $("#deleteContactBtn").remove();
-                    pageIndex.showNotificationSuccess(data.message);
+                    pageIndex.showNotificationSuccess(response.message);
                     pageContact.getContactList();
                     $("#deleteModal").modal('hide');
                 }, 500);
@@ -1034,21 +1034,21 @@ $(document).ready(function (event) {
             // return false to cancel submit
         },
         success: function (responseText, statusText, xhr, $form) {
-            var data = JSON.parse(responseText);
-            console.log(data);
-            console.log(data.status);
-            if (data.status == 1) {
+            var response = JSON.parse(responseText);
+            console.log(response);
+            console.log(response.status);
+            if (response.status == 1) {
                 setTimeout(function () {
                     pageContact.currentPageNo = 1;
                     $("#contactList").empty();
-                    pageContact.getContactDetails(data.landing);
+                    pageContact.getContactDetails(response.landing);
                     pageContact.getContactList();
-                    pageIndex.showNotificationSuccess(data.message);
+                    pageIndex.showNotificationSuccess(response.message);
                     pageContact.refreshMasterList();
                     $("#contactModal").modal('hide');
                 }, 500);
             } else {
-                pageIndex.showNotificationFailure(data.message);
+                pageIndex.showNotificationFailure(response.message);
             }
         }
     });

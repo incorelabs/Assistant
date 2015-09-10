@@ -22,12 +22,12 @@ $(document).ready(function () {
         },
         success: function (responseText, statusText, xhr, $form) {
             console.log(responseText);
-            var data = JSON.parse(responseText);
-            if (data.status == 0) {
-                pageIndex.showNotificationFailure(data.message);
+            var response = JSON.parse(responseText);
+            if (response.status == 0) {
+                pageIndex.showNotificationFailure(response.message);
             }
             else {
-                pageIndex.showNotificationSuccess(data.message);
+                pageIndex.showNotificationSuccess(response.message);
                 window.location.href = "login.php";
             }
             $("#pageLoading").removeClass("loader");
@@ -44,17 +44,17 @@ $(document).ready(function () {
         },
         success: function (responseText, statusText, xhr, $form) {
             console.log(responseText);
-            var data = JSON.parse(responseText);
-            if (data.status == 0) {
-                pageIndex.showNotificationFailure(data.message);
+            var response = JSON.parse(responseText);
+            if (response.status == 0) {
+                pageIndex.showNotificationFailure(response.message);
             }
             else {
-                if (data.status == 1) {
-                    pageIndex.showNotificationSuccess(data.message);
+                if (response.status == 1) {
+                    pageIndex.showNotificationSuccess(response.message);
                     window.location.href = localStorage.getItem("websiteRoot") + "preferences/changePassword.php";
                 }
                 else {
-                    pageIndex.showNotificationSuccess(data.message);
+                    pageIndex.showNotificationSuccess(response.message);
                     window.location.href = localStorage.getItem("websiteRoot") + "index.php";
                 }
             }
