@@ -10,7 +10,7 @@ include_once ROOT . 'dist/authenticate.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Assist - Contacts</title>
+    <title>Assistant - Contacts</title>
 
     <!-- Bootstrap -->
     <?php
@@ -57,7 +57,7 @@ echo $navbar_str;
     </div>
 
     <div class="row">
-        <div class="col-xs-12 col-md-5 col-padding">
+        <div class="col-xs-12 col-md-5 col-padding" id="searchHeaderDiv">
             <div class="list-group list-margin">
                 <div class="list-group-item list-margin">
                     <div class="row">
@@ -125,7 +125,7 @@ echo $navbar_str;
             </div>
         </div>
 
-        <div class="col-md-7 col-sm-10 hidden-sm hidden-xs col-padding">
+        <div class="col-md-7 col-sm-12 col-xs-12 hidden-sm hidden-xs" id="contactDetailHeaderDiv">
             <div class="panel panel-default panelHeight list-margin" id="style-3">
                 <div id="contactDetailHeader" class="panel-heading text-center">
                     <h12>Contact Details</h12>
@@ -139,8 +139,8 @@ echo $navbar_str;
     <!--row-->
     <div class="row">
 
-        <div class="col-md-5 col-sm-12 col-xs-12 col-padding">
-            <div class="panel panel-default panelHeight panel-margin" id="style-3">
+        <div class="col-md-5 col-sm-12 col-xs-12 col-padding" id="contactListDiv">
+            <div class="panel panel-default panelHeight panel-margin" id="contactListScroll">
                 <!-- List group -->
                 <div class="panel-height">
                     <div id="contactList" class="list-group force-scroll">
@@ -153,7 +153,7 @@ echo $navbar_str;
         </div>
         <!--COL-->
 
-        <div class="col-md-7 col-sm-10 hidden-sm hidden-xs col-padding">
+        <div class="col-md-7 col-sm-12 col-xs-12 hidden-sm hidden-xs" id="contactDetailDiv">
             <div id="contactDetail" class="panel panel-default panelHeight panel-margin" id="style-3">
                 <div class="panel-height">
                 <!-- List group -->

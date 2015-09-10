@@ -110,6 +110,22 @@ li {
 {
     height: calc(100vh - 135px);
 }
+@media screen and (max-width: 992px){
+    .panel-height
+    {
+        height: 100%;
+    }
+    .panel{
+        margin-bottom: 0px !important;
+        width: calc(100vw - 0px);
+    }
+    .row{
+        margin-right: 0px !important;
+    }
+    .list-group{
+        margin-bottom: 0px !important;
+    }
+}
 ::-webkit-scrollbar {
     display: none;
 }
@@ -415,4 +431,18 @@ h5 {
 
 .list-group-item-border {
     border: 0px !important;
+}
+.mobile-list {
+    margin: 0px !important;
+}
+.mobileHeader {
+    z-index: 100 !important;
+    margin-top: -10px !important;
+    position: fixed !important;
+    padding: 0px;
+}
+
+.mobileBody {
+    padding: 0px;
+    margin-top: 45px;
 }

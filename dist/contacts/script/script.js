@@ -145,6 +145,36 @@ var pageContact = {
             var headerStr = "<h12>Contact Details</h12><button id='editContactBtn' class='btn btn-success pull-right' onclick='pageContact.openEditContactModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deleteContactBtn' class='btn btn-danger pull-left' onclick='pageContact.openDeleteContactModal(" + data.detail.contact.ContactCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
             var str = "";
             var imgLocation = "";
+            if (window.innerWidth < 992) {
+                console.log("width less than 992");
+
+                //Show the Details Header and hides the search header
+                $("#searchHeaderDiv").addClass('hidden');
+                $("#contactDetailHeaderDiv").removeClass('hidden-xs hidden-sm');
+
+                //Show the contact Details and hides the contact list
+                $("#contactListDiv").addClass('hidden');
+                $("#contactDetailDiv").removeClass('hidden-xs hidden-sm');
+
+                //Show Hide of menu button with back button
+                $(".menu_img").addClass('hidden');
+                $("#backButton").removeClass('hidden');
+
+                $("#backButton").click(function () {
+                    //Show the contact Details Header and hides the search header
+                    $("#contactDetailHeaderDiv").addClass('hidden-xs hidden-sm');
+                    $("#searchHeaderDiv").removeClass('hidden');
+
+                    //Show the contact Details and hides the contact list
+                    $("#contactListDiv").removeClass('hidden');
+                    $("#contactDetailDiv").addClass('hidden-xs hidden-sm');
+
+                    //Show Hide of menu button with back button
+                    $(".menu_img").removeClass('hidden');
+                    $("#backButton").addClass('hidden');
+
+                });
+            }
             if (data.detail.contact.ImageURL != null) {
                 imgLocation = data.detail.contact.ImageURL;
             }
@@ -152,7 +182,7 @@ var pageContact = {
                 imgLocation = "../img/default/contact/profilePicture.png";
             }
 
-            str += "<div class='list-group-item'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='" + imgLocation + "' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>" + ((data.detail.contact.TitleName) ? data.detail.contact.TitleName + " " : "") + ((data.detail.contact.FullName) ? data.detail.contact.FullName : "") + "</h5></div>";
+            str += "<div class='row contact-details'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop'><img src='" + imgLocation + "' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>" + ((data.detail.contact.TitleName) ? data.detail.contact.TitleName + " " : "") + ((data.detail.contact.FullName) ? data.detail.contact.FullName : "") + "</h5></div>";
 
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Guardian</div><value><div class='col-md-9'>" + ((data.detail.contact.GuardianName) ? data.detail.contact.GuardianName : "") + "</div></value></div></div>";
 
@@ -911,7 +941,7 @@ $(document).ready(function (event) {
 
     pageContact.getContactList();
     pageContact.refreshMasterList();
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 992) {
         var div = document.getElementById('websiteTabs');
         div.style.display = "none";
         var div = document.getElementById('mobileTabs');
@@ -1100,18 +1130,62 @@ $(document).ready(function (event) {
             $("#otherCountry").attr('readonly', false);
         }
     });
+
+    if (window.innerWidth < 992) {
+        $("body").css("overflow", "auto");
+        $("#contactListScroll").removeClass("panelHeight");
+        $("#contactList").addClass("mobile-list");
+        $("#contactListDiv").addClass("mobileBody");
+        $("#searchHeaderDiv").addClass("mobileHeader");
+
+        $("#contactDetail").removeClass("panelHeight");
+        $("#contactDetailDiv").addClass("mobileBody");
+        $("#contactDetailHeaderDiv").addClass("mobileHeader");
+    }
 });
 $(window).resize(function () {
-    if (window.innerWidth < 768) {
-        var div = document.getElementById('websiteTabs');
-        div.style.display = "none";
-        var div = document.getElementById('mobileTabs');
-        div.style.display = "block";
+    if (window.innerWidth < 992) {
+        var websiteTabs = document.getElementById('websiteTabs');
+        websiteTabs.style.display = "none";
+        var mobileTabs = document.getElementById('mobileTabs');
+        mobileTabs.style.display = "block";
+
+        $("body").css("overflow", "auto");
+        $("#contactListScroll").removeClass("panelHeight");
+        $("#contactList").addClass("mobile-list");
+        $("#contactListDiv").addClass("mobileBody");
+        $("#searchHeaderDiv").addClass("mobileHeader");
+
+        $("#contactDetail").removeClass("panelHeight");
+        $("#contactDetailDiv").addClass("mobileBody");
+        $("#contactDetailHeaderDiv").addClass("mobileHeader");
     }
     else {
-        var div = document.getElementById('websiteTabs');
-        div.style.display = "block";
-        var div = document.getElementById('mobileTabs');
-        div.style.display = "none";
+        $("body").css("overflow", "hidden");
+        $("#contactListScroll").addClass("panelHeight");
+        $("#contactList").removeClass("mobile-list");
+        $("#contactListDiv").removeClass("mobileBody");
+        $("#searchHeaderDiv").removeClass("mobileHeader");
+
+        $("#contactDetail").addClass("panelHeight");
+        $("#contactDetailDiv").removeClass("mobileBody");
+        $("#contactDetailHeaderDiv").removeClass("mobileHeader");
+
+        //Show the contact Details Header and hides the search header
+        $("#contactDetailHeaderDiv").addClass('hidden-xs hidden-sm');
+        $("#searchHeaderDiv").removeClass('hidden');
+
+        //Show the contact Details and hides the contact list
+        $("#contactListDiv").removeClass('hidden');
+        $("#contactDetailDiv").addClass('hidden-xs hidden-sm');
+
+        //Show Hide of menu button with back button
+        $(".menu_img").removeClass('hidden');
+        $("#backButton").addClass('hidden');
+
+        var websiteTabs = document.getElementById('websiteTabs');
+        websiteTabs.style.display = "block";
+        var mobileTabs = document.getElementById('mobileTabs');
+        mobileTabs.style.display = "none";
     }
 });

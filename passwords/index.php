@@ -207,7 +207,7 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-size"></i>
-                                <select class="form-control select-field-left-border" id="holderName" name="name">
+                                <select class="form-control select-field-left-border" id="holderName" name="name" tabindex="1">
                                     <option>Select Holder Name</option>
                                 </select>
                             </div>
@@ -220,7 +220,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-key hidden-xs fa-size"></i>
                                 <input type="text" class="form-control text-field-left-border" id="passwordType"
-                                       name="passwordType" placeholder="Password Type"/>
+                                       name="passwordType" placeholder="Password Type" tabindex="2"/>
                             </div>
                         </div>
                     </div>
@@ -231,7 +231,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
                                 <input type="text" class="form-control text-field-left-border" name="description"
-                                       id="description" placeholder="Description"/>
+                                       id="description" placeholder="Description" tabindex="3"/>
                             </div>
                         </div>
                     </div>
@@ -242,7 +242,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-user hidden-xs fa-size"></i>
                                 <input type="text" class="form-control text-field-left-border" id="userID" name="userID"
-                                       placeholder="Login ID" aria-describedby="basic-addon1"/>
+                                       placeholder="Login ID" aria-describedby="basic-addon1" tabindex="4"/>
                             </div>
                         </div>
                     </div>
@@ -251,7 +251,7 @@ echo $navbar_str;
                             <span class="input-group-btn"><span
                                     class="input-group-addon group-addon-text-custom input-group-addon-label">Password*</span></span>
                             <input type="password" class="form-control text-field-left-border" name="password"
-                                   id="password" placeholder="Password"/>
+                                   id="password" placeholder="Password" tabindex="5"/>
                             <span class="input-group-btn"><button class="btn btn-primary button-addon-custom"
                                                                   type="button" id="showPassword"><i
                                         class="fa fa-eye fa-lg"></i></button></span>
@@ -262,7 +262,7 @@ echo $navbar_str;
                             <span class="input-group-btn"><span
                                     class="input-group-addon group-addon-text-custom input-group-addon-label">Other Password</span></span>
                             <input type="password" class="form-control text-field-left-border" name="password1"
-                                   id="otherPassword" placeholder="Other Password (Optional)"/>
+                                   id="otherPassword" placeholder="Other Password (Optional)" tabindex="6"/>
                             <span class="input-group-btn"><button class="btn btn-primary button-addon-custom"
                                                                   type="button" id="showOtherPassword"><i
                                         class="fa fa-eye fa-lg"></i></button></span>
