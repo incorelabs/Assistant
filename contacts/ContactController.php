@@ -64,11 +64,6 @@ class ContactController
     function deleteContact(){
         $contactCode = intval($this->data["contactCode"]);
 
-        $qry = "SELECT ContactCode FROM Table151 WHERE RegCode =".$this->regCode." ORDER BY FullName LIMIT 1;";
-        if($result = $this->mysqli->query($qry)){
-            $this->landing = $result->fetch_assoc()["ContactCode"];
-        }
-
         $qry = "SELECT InsertedBy FROM Table152 WHERE RegCode = ".$this->regCode." AND PasswordCode = ".$contactCode.";";
 
         $valid = false;
@@ -114,6 +109,16 @@ class ContactController
 
         if($valid){
             $this->runDeleteQuery($this->getDeleteQuery());
+            $qry = "SELECT ContactCode FROM Table151 WHERE RegCode =".$this->regCode." ORDER BY FullName LIMIT 1;";
+            if($result = $this->mysqli->query($qry)){
+                if($result->num_rows == 0){
+                    $this->response["landing"] = -1;
+                }
+                else{
+                    $this->landing = $result->fetch_assoc()["ContactCode"];
+                    $this->response["landing"] = $this->landing;
+                }
+            }
         }
     }
 
@@ -368,7 +373,6 @@ class ContactController
     function runDeleteQuery($sql){
         if ($this->mysqli->multi_query($sql) === TRUE) {
             $this->response = $this->createResponse(1,"Successful");
-            $this->response["landing"] = $this->landing;
         }
         else{
             $this->response = $this->createResponse(0,"Error occurred while uploading to the database: ".$this->mysqli->error);
