@@ -26,7 +26,7 @@ var pageContact = {
     addBtnWorkPhoneCount: 0,
     addBtnOtherPhoneCount: 0,
     getContactList: function () {
-        var url = localStorage.getItem("websiteRoot") + "contacts/ContactList.php";
+        var url = localStorage.getItem("websiteRoot") + "contacts/getContactList.php";
 
         $.getJSON(url, {
             pageNo: pageContact.currentPageNo
@@ -55,7 +55,6 @@ var pageContact = {
                 }
                 str += "<a onclick='pageContact.getContactDetails(" + data.result[i].ContactCode + ")' class='list-group-item contacts_font'><h4 class='list-group-item-heading contacts_font'>" + data.result[i].FullName + "</h4></a>";
             }
-            //$("#contactList").empty();
             $("#contactList").append(str);
             console.log(str);
             // Print on screen
@@ -65,7 +64,6 @@ var pageContact = {
                 var str = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pageContact.getContactList();'>Load more..</a></div>";
                 $("#contactList").append(str);
             }
-
         } else {
             var str = "<div class='list-group-item'><li class='list-group-item-text header_font'>";
             str += data.message + "</li></div>";
@@ -79,7 +77,7 @@ var pageContact = {
         pageContact.getSearchResults();
     },
     getSearchResults: function () {
-        var url = localStorage.getItem("websiteRoot") + "contacts/ContactList.php";
+        var url = localStorage.getItem("websiteRoot") + "contacts/getContactList.php";
 
         $.getJSON(url, {
             pageNo: pageContact.currentPageNo,
@@ -129,7 +127,7 @@ var pageContact = {
         }
     },
     getContactDetails: function (contactCode) {
-        var url = localStorage.getItem("websiteRoot") + "contacts/ContactDetail.php";
+        var url = localStorage.getItem("websiteRoot") + "contacts/getContactDetail.php";
 
         $.getJSON(url, {
             contactCode: contactCode
@@ -144,7 +142,7 @@ var pageContact = {
     setContactDetails: function (data) {
         if (data.status == 1) {
             pageContact.localContact = data.detail;
-            var headerStr = "<h12>Contact Details</h12><button id='editContactBtn' class='btn btn-success pull-right' onclick='pageContact.openEditContact();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deleteContactBtn' class='btn btn-danger pull-left' onclick='pageContact.openDeleteModal(" + data.detail.contact.ContactCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
+            var headerStr = "<h12>Contact Details</h12><button id='editContactBtn' class='btn btn-success pull-right' onclick='pageContact.openEditContactModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deleteContactBtn' class='btn btn-danger pull-left' onclick='pageContact.openDeleteContactModal(" + data.detail.contact.ContactCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
             var str = "";
             var imgLocation = "";
             if (data.detail.contact.ImageURL != null) {
@@ -406,14 +404,14 @@ var pageContact = {
 
         });
     },
-    openAddContact: function () {
+    openAddContactModal: function () {
         document.getElementById("contactForm").reset();
 
         $('#addPrivacy').attr('checked', false);
         $('#addActiveStatus').attr('checked', true);
 
         $("#form-add-edit-mode").val("A");
-        $("#form-add-edit-code").val(0);
+        $("#form-add-edit-code").val(1);
 
         $('#contactModalHeading').empty();
         $('#contactModalHeading').html("Add Contact");
@@ -435,6 +433,7 @@ var pageContact = {
         pageContact.addBtnWorkPhoneCount = 0;
         $('.addOtherPhone').empty();
         pageContact.addBtnOtherPhoneCount = 0;
+
         $("#contactModal").modal('show');
 
         // To close the tab pane and to remove the active border
@@ -442,7 +441,7 @@ var pageContact = {
         $(".tab-pane").removeClass('active');
         $("li").removeClass('active');
     },
-    openEditContact: function () {
+    openEditContactModal: function () {
         document.getElementById("contactForm").reset();
         $("#form-add-edit-mode").val("M");
 
@@ -624,9 +623,9 @@ var pageContact = {
     },
     appendMobileString: function () {
         var tabIndexCount = 5;
-        tabIndexCount ++;
+        tabIndexCount++;
         console.log(tabIndexCount);
-        return "<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='text' name='mobile" + (pageContact.addBtnMobileCount + 1) + "' id='addMobile" + (pageContact.addBtnMobileCount + 1) + "' class='form-control text-field-left-border' placeholder='Other Mobile' tabindex='"+tabIndexCount+"'/><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-mobile' type='button' onclick='pageContact.removeBtn(this, 0)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>";
+        return "<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='text' name='mobile" + (pageContact.addBtnMobileCount + 1) + "' id='addMobile" + (pageContact.addBtnMobileCount + 1) + "' class='form-control text-field-left-border' placeholder='Other Mobile' tabindex='" + tabIndexCount + "'/><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-mobile' type='button' onclick='pageContact.removeBtn(this, 0)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>";
     },
     appendEmailString: function () {
         return "<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Other</span><input type='email' name='email" + (pageContact.addBtnEmailCount + 1) + "' id='addEmail" + (pageContact.addBtnEmailCount + 1) + "' class='form-control text-field-left-border' placeholder='Other Email' tabindex='9'/><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-add-email' type='button' onclick='pageContact.removeBtn(this, 1)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>";
@@ -698,7 +697,7 @@ var pageContact = {
             $("#" + type + "Phone2").val(address[type].Phone2);
         }
     },
-    openDeleteModal: function (contactCode) {
+    openDeleteContactModal: function (contactCode) {
         $("#form-delete-code").val(contactCode);
         $("#deleteModal").modal("show");
     },

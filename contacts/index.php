@@ -117,7 +117,7 @@ echo $navbar_str;
                         </div>
                         <div>
                             <!--<button type="button" class="btn btn-info btn-size"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>-->
-                            <button class="btn btn-primary btn-size" onclick="pageContact.openAddContact();"><span
+                            <button class="btn btn-primary btn-size" onclick="pageContact.openAddContactModal();"><span
                                     class="glyphicon glyphicon-plus"></span></button>
                         </div>
                     </div>
@@ -239,7 +239,8 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-user fa-size hidden-xs"></i>
                                 <input type="text" name="firstName" id="addFirstName"
-                                       class="form-control text-field-left-border" placeholder="First Name" tabindex="2"/>
+                                       class="form-control text-field-left-border" placeholder="First Name"
+                                       tabindex="2"/>
                             </div>
                         </div>
                     </div>
@@ -250,7 +251,8 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-user fa-size hidden-xs"></i>
                                 <input type="text" name="middleName" id="addMiddleName"
-                                       class="form-control text-field-left-border" placeholder="Middle Name" tabindex="3"/>
+                                       class="form-control text-field-left-border" placeholder="Middle Name"
+                                       tabindex="3"/>
                             </div>
                         </div>
                     </div>
@@ -261,7 +263,8 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-user fa-size hidden-xs"></i>
                                 <input type="text" name="lastName" id="addLastName"
-                                       class="form-control text-field-left-border" placeholder="Last Name" tabindex="4"/>
+                                       class="form-control text-field-left-border" placeholder="Last Name"
+                                       tabindex="4"/>
                             </div>
                         </div>
                     </div>
@@ -312,18 +315,20 @@ echo $navbar_str;
                         <div class="form-group form-group-margin"
                              style="margin-left:0px !important; margin-right:0px !important">
                             <ul class="nav nav-tabs nav-justified" id="myTab">
-                                <li ><a href="#tab1" data-toggle="tab" tabindex="11"><span class='glyphicon glyphicon-user' ></span><br>Personal
+                                <li><a href="#tab1" data-toggle="tab" tabindex="11"><span
+                                            class='glyphicon glyphicon-user'></span><br>Personal
                                         Details</a></li>
                                 <li><a href="#tab3" data-toggle="tab" tabindex="19"><span
                                             class='glyphicon glyphicon-briefcase'></span><br>Professional Details</a>
                                 </li>
                                 <li><a href="#tab4" data-toggle="tab" tabindex="22"><span
                                             class='glyphicon glyphicon-globe'></span><br>Social Details</a></li>
-                                <li><a href="#home" data-toggle="tab" tabindex="28"><span class='glyphicon glyphicon-home'></span><br>Home
+                                <li><a href="#home" data-toggle="tab" tabindex="28"><span
+                                            class='glyphicon glyphicon-home'></span><br>Home
                                         Address</a></li>
                                 <li><a href="#work" data-toggle="tab" tabindex="41"><span
                                             class='glyphicon glyphicon-briefcase'></span><br>Work Address</a></li>
-                                <li><a href="#other" data-toggle="tab"  tabindex="53"><span
+                                <li><a href="#other" data-toggle="tab" tabindex="53"><span
                                             class='glyphicon glyphicon-road'></span><br>Other Address</a></li>
                             </ul>
                         </div>
@@ -332,12 +337,18 @@ echo $navbar_str;
                     <div id="mobileTabs" class="mobile-panel-hide">
                         <center>
                             <ul class="row nav nav-tabs" id="myTab">
-                                <li class="col-xs-2 panel-padding-remove"><a href="#tab1" data-toggle="tab"><i class='fa fa-user fa-2x'></i></a></li>
-                                <li class="col-xs-2 panel-padding-remove"><a href="#tab3" data-toggle="tab"><i class='fa fa-briefcase fa-2x'></i></a></li>
-                                <li class="col-xs-2 panel-padding-remove"><a href="#tab4" data-toggle="tab"><i class='fa fa-globe fa-2x'></i></a></li>
-                                <li class="col-xs-2 panel-padding-remove"><a href="#home" data-toggle="tab"><i class='fa fa-home fa-2x'></i></a></li>
-                                <li class="col-xs-2 panel-padding-remove"><a href="#work" data-toggle="tab"><i class='fa fa-building fa-2x'></i></a></li>
-                                <li class="col-xs-2 panel-padding-remove"><a href="#other" data-toggle="tab"><i class='fa fa-road fa-2x'></i></a></li>
+                                <li class="col-xs-2 panel-padding-remove"><a href="#tab1" data-toggle="tab"><i
+                                            class='fa fa-user fa-2x'></i></a></li>
+                                <li class="col-xs-2 panel-padding-remove"><a href="#tab3" data-toggle="tab"><i
+                                            class='fa fa-briefcase fa-2x'></i></a></li>
+                                <li class="col-xs-2 panel-padding-remove"><a href="#tab4" data-toggle="tab"><i
+                                            class='fa fa-globe fa-2x'></i></a></li>
+                                <li class="col-xs-2 panel-padding-remove"><a href="#home" data-toggle="tab"><i
+                                            class='fa fa-home fa-2x'></i></a></li>
+                                <li class="col-xs-2 panel-padding-remove"><a href="#work" data-toggle="tab"><i
+                                            class='fa fa-building fa-2x'></i></a></li>
+                                <li class="col-xs-2 panel-padding-remove"><a href="#other" data-toggle="tab"><i
+                                            class='fa fa-road fa-2x'></i></a></li>
                             </ul>
                         </center>
                     </div>
@@ -389,7 +400,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="glyphicon glyphicon-tag fa-size"></i>
                                         <input type="text" name="group" id="addGroup"
-                                               class="form-control text-field-left-border" placeholder="Group" tabindex="15"/>
+                                               class="form-control text-field-left-border" placeholder="Group"
+                                               tabindex="15"/>
                                     </div>
                                 </div>
                             </div>
@@ -414,7 +426,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-comment fa-size"></i>
                                         <input type="text" name="remarks" id="addRemarks"
-                                               class="form-control text-field-left-border" placeholder="Remarks" tabindex="17"/>
+                                               class="form-control text-field-left-border" placeholder="Remarks"
+                                               tabindex="17"/>
                                     </div>
                                 </div>
                             </div>
@@ -425,7 +438,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="glyphicon glyphicon-user fa-size"></i>
                                         <input type="text" name="alias" id="addAlias"
-                                               class="form-control text-field-left-border" placeholder="Alias" tabindex="18"/>
+                                               class="form-control text-field-left-border" placeholder="Alias"
+                                               tabindex="18"/>
                                     </div>
                                 </div>
                             </div>
@@ -440,7 +454,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-home fa-size"></i>
                                         <input type="text" name="address[home][address1]" id="homeAddress1"
-                                               class="form-control text-field-left-border" placeholder="Address 1" tabindex="29"/>
+                                               class="form-control text-field-left-border" placeholder="Address 1"
+                                               tabindex="29"/>
                                     </div>
                                 </div>
                             </div>
@@ -451,7 +466,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-home fa-size"></i>
                                         <input type="text" name="address[home][address2]" id="homeAddress2"
-                                               class="form-control text-field-left-border" placeholder="Address 2" tabindex="30"/>
+                                               class="form-control text-field-left-border" placeholder="Address 2"
+                                               tabindex="30"/>
                                     </div>
                                 </div>
                             </div>
@@ -462,7 +478,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-home fa-size"></i>
                                         <input type="text" name="address[home][address3]" id="homeAddress3"
-                                               class="form-control text-field-left-border" placeholder="Address 3" tabindex="31"/>
+                                               class="form-control text-field-left-border" placeholder="Address 3"
+                                               tabindex="31"/>
                                     </div>
                                 </div>
                             </div>
@@ -473,7 +490,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-home fa-size"></i>
                                         <input type="text" name="address[home][address4]" id="homeAddress4"
-                                               class="form-control text-field-left-border" placeholder="Address 4" tabindex="32"/>
+                                               class="form-control text-field-left-border" placeholder="Address 4"
+                                               tabindex="32"/>
                                     </div>
                                 </div>
                             </div>
@@ -484,7 +502,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-home fa-size"></i>
                                         <input type="text" name="address[home][address5]" id="homeAddress5"
-                                               class="form-control text-field-left-border" placeholder="Address 5" tabindex="33"/>
+                                               class="form-control text-field-left-border" placeholder="Address 5"
+                                               tabindex="33"/>
                                     </div>
                                 </div>
                             </div>
@@ -495,8 +514,10 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
                                         <input type="text" name="address[home][city]" id="homeCity"
-                                               class="form-control text-field-left-border" placeholder="City" tabindex="34"/>
-                                        <input type="text" class="hidden" name="address[home][cityCode]" id="homeCityCode"
+                                               class="form-control text-field-left-border" placeholder="City"
+                                               tabindex="34"/>
+                                        <input type="text" class="hidden" name="address[home][cityCode]"
+                                               id="homeCityCode"
                                                value="0"/>
                                     </div>
                                 </div>
@@ -508,8 +529,10 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
                                         <input type="text" name="address[home][state]" id="homeState"
-                                               class="form-control text-field-left-border" placeholder="State" tabindex="35"/>
-                                        <input type="text" class="hidden" name="address[home][stateCode]" id="homeStateCode"
+                                               class="form-control text-field-left-border" placeholder="State"
+                                               tabindex="35"/>
+                                        <input type="text" class="hidden" name="address[home][stateCode]"
+                                               id="homeStateCode"
                                                value="0"/>
                                     </div>
                                 </div>
@@ -523,7 +546,8 @@ echo $navbar_str;
                                         <input type="text" name="address[home][country]" id="homeCountry"
                                                class="countryText form-control text-field-left-border"
                                                placeholder="Country" tabindex="36"/>
-                                        <input type="text" class="hidden" name="address[home][countryCode]" id="homeCountryCode"
+                                        <input type="text" class="hidden" name="address[home][countryCode]"
+                                               id="homeCountryCode"
                                                value="0"/>
                                     </div>
                                 </div>
@@ -535,7 +559,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
                                         <input type="text" name="address[home][pincode]" id="homePincode"
-                                               class="form-control text-field-left-border" placeholder="Pincode" tabindex="37"/>
+                                               class="form-control text-field-left-border" placeholder="Pincode"
+                                               tabindex="37"/>
                                     </div>
                                 </div>
                             </div>
@@ -546,8 +571,10 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
                                         <input type="text" name="address[home][area]" id="homeArea"
-                                               class="form-control text-field-left-border" placeholder="Area" tabindex="38"/>
-                                        <input type="text" class="hidden" name="address[home][areaCode]" id="homeAreaCode"
+                                               class="form-control text-field-left-border" placeholder="Area"
+                                               tabindex="38"/>
+                                        <input type="text" class="hidden" name="address[home][areaCode]"
+                                               id="homeAreaCode"
                                                value="0"/>
                                     </div>
                                 </div>
@@ -556,7 +583,8 @@ echo $navbar_str;
                                 <div class="input-group">
                                     <span class="input-group-addon input-group-addon-label">Phone</span>
                                     <input type="text" name="address[home][phone1]" id="homePhone1"
-                                           class="form-control text-field-left-border" placeholder="Phone" tabindex="39"/>
+                                           class="form-control text-field-left-border" placeholder="Phone"
+                                           tabindex="39"/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-success button-addon-custom btn-home-phone"
                                                 type="button" onclick="pageContact.addBtn(2)">
@@ -578,7 +606,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-briefcase fa-size"></i>
                                         <input type="text" name="address[work][address1]" id="workAddress1"
-                                               class="form-control text-field-left-border" placeholder="Address 1" tabindex="42"/>
+                                               class="form-control text-field-left-border" placeholder="Address 1"
+                                               tabindex="42"/>
                                     </div>
                                 </div>
                             </div>
@@ -589,7 +618,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-briefcase fa-size"></i>
                                         <input type="text" name="address[work][address2]" id="workAddress2"
-                                               class="form-control text-field-left-border" placeholder="Address 2" tabindex="43"/>
+                                               class="form-control text-field-left-border" placeholder="Address 2"
+                                               tabindex="43"/>
                                     </div>
                                 </div>
                             </div>
@@ -600,7 +630,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-briefcase fa-size"></i>
                                         <input type="text" name="address[work][address3]" id="workAddress3"
-                                               class="form-control text-field-left-border" placeholder="Address 3" tabindex="44"/>
+                                               class="form-control text-field-left-border" placeholder="Address 3"
+                                               tabindex="44"/>
                                     </div>
                                 </div>
                             </div>
@@ -611,7 +642,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-briefcase fa-size"></i>
                                         <input type="text" name="address[work][address4]" id="workAddress4"
-                                               class="form-control text-field-left-border" placeholder="Address 4" tabindex="45"/>
+                                               class="form-control text-field-left-border" placeholder="Address 4"
+                                               tabindex="45"/>
                                     </div>
                                 </div>
                             </div>
@@ -622,7 +654,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-briefcase fa-size"></i>
                                         <input type="text" name="address[work][address5]" id="workAddress5"
-                                               class="form-control text-field-left-border" placeholder="Address 5" tabindex="46"/>
+                                               class="form-control text-field-left-border" placeholder="Address 5"
+                                               tabindex="46"/>
                                     </div>
                                 </div>
                             </div>
@@ -633,8 +666,10 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
                                         <input type="text" name="address[work][city]" id="workCity"
-                                               class="form-control text-field-left-border" placeholder="City" tabindex="47"/>
-                                        <input type="text" class="hidden" name="address[work][cityCode]" id="workCityCode"
+                                               class="form-control text-field-left-border" placeholder="City"
+                                               tabindex="47"/>
+                                        <input type="text" class="hidden" name="address[work][cityCode]"
+                                               id="workCityCode"
                                                value="0"/>
                                     </div>
                                 </div>
@@ -646,8 +681,10 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
                                         <input type="text" name="address[work][state]" id="workState"
-                                               class="form-control text-field-left-border" placeholder="State" tabindex="48"/>
-                                        <input type="text" class="hidden" name="address[work][stateCode]" id="workStateCode"
+                                               class="form-control text-field-left-border" placeholder="State"
+                                               tabindex="48"/>
+                                        <input type="text" class="hidden" name="address[work][stateCode]"
+                                               id="workStateCode"
                                                value="0"/>
                                     </div>
                                 </div>
@@ -661,7 +698,8 @@ echo $navbar_str;
                                         <input type="text" name="address[work][country]" id="workCountry"
                                                class="countryText form-control text-field-left-border"
                                                placeholder="Country" tabindex="49"/>
-                                        <input type="text" class="hidden" name="address[work][countryCode]" id="workCountryCode"
+                                        <input type="text" class="hidden" name="address[work][countryCode]"
+                                               id="workCountryCode"
                                                value="0"/>
                                     </div>
                                 </div>
@@ -673,7 +711,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
                                         <input type="text" name="address[work][pincode]" id="pincode"
-                                               class="form-control text-field-left-border" placeholder="Pincode" tabindex="50"/>
+                                               class="form-control text-field-left-border" placeholder="Pincode"
+                                               tabindex="50"/>
                                     </div>
                                 </div>
                             </div>
@@ -684,8 +723,10 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
                                         <input type="text" name="address[work][area]" id="workArea"
-                                               class="form-control text-field-left-border" placeholder="Area" tabindex="51"/>
-                                        <input type="text" class="hidden" name="address[work][areaCode]" id="workAreaCode"
+                                               class="form-control text-field-left-border" placeholder="Area"
+                                               tabindex="51"/>
+                                        <input type="text" class="hidden" name="address[work][areaCode]"
+                                               id="workAreaCode"
                                                value="0"/>
                                     </div>
                                 </div>
@@ -694,7 +735,8 @@ echo $navbar_str;
                                 <div class="input-group">
                                     <span class="input-group-addon input-group-addon-label">Phone</span>
                                     <input type="text" name="address[work][phone1]" id="workPhone1"
-                                           class="form-control text-field-left-border" placeholder="Phone"  tabindex="52"/>
+                                           class="form-control text-field-left-border" placeholder="Phone"
+                                           tabindex="52"/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-success button-addon-custom btn-work-phone"
                                                 type="button" onclick="pageContact.addBtn(3)">
@@ -715,7 +757,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-road fa-size"></i>
                                         <input type="text" name="address[other][address1]" id="otherAddress1"
-                                               class="form-control text-field-left-border" placeholder="Address 1"  tabindex="54"/>
+                                               class="form-control text-field-left-border" placeholder="Address 1"
+                                               tabindex="54"/>
                                     </div>
                                 </div>
                             </div>
@@ -726,7 +769,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-road fa-size"></i>
                                         <input type="text" name="address[other][address2]" id="otherAddress2"
-                                               class="form-control text-field-left-border" placeholder="Address 2"  tabindex="55"/>
+                                               class="form-control text-field-left-border" placeholder="Address 2"
+                                               tabindex="55"/>
                                     </div>
                                 </div>
                             </div>
@@ -737,7 +781,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-road fa-size"></i>
                                         <input type="text" name="address[other][address3]" id="otherAddress3"
-                                               class="form-control text-field-left-border" placeholder="Address 3"  tabindex="56"/>
+                                               class="form-control text-field-left-border" placeholder="Address 3"
+                                               tabindex="56"/>
                                     </div>
                                 </div>
                             </div>
@@ -748,7 +793,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-road fa-size"></i>
                                         <input type="text" name="address[other][address4]" id="otherAddress4"
-                                               class="form-control text-field-left-border" placeholder="Address 4"  tabindex="57"/>
+                                               class="form-control text-field-left-border" placeholder="Address 4"
+                                               tabindex="57"/>
                                     </div>
                                 </div>
                             </div>
@@ -759,7 +805,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-road fa-size"></i>
                                         <input type="text" name="address[other][address5]" id="otherAddress5"
-                                               class="form-control text-field-left-border" placeholder="Address 5"  tabindex="58"/>
+                                               class="form-control text-field-left-border" placeholder="Address 5"
+                                               tabindex="58"/>
                                     </div>
                                 </div>
                             </div>
@@ -770,8 +817,10 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
                                         <input type="text" name="address[other][city]" id="otherCity"
-                                               class="form-control text-field-left-border" placeholder="City"  tabindex="59"/>
-                                        <input type="text" class="hidden" name="address[other][cityCode]" id="otherCityCode"
+                                               class="form-control text-field-left-border" placeholder="City"
+                                               tabindex="59"/>
+                                        <input type="text" class="hidden" name="address[other][cityCode]"
+                                               id="otherCityCode"
                                                value="0"/>
                                     </div>
                                 </div>
@@ -783,8 +832,10 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
                                         <input type="text" name="address[other][state]" id="otherState"
-                                               class="form-control text-field-left-border" placeholder="State"  tabindex="60"/>
-                                        <input type="text" class="hidden" name="address[other][stateCode]" id="otherStateCode"
+                                               class="form-control text-field-left-border" placeholder="State"
+                                               tabindex="60"/>
+                                        <input type="text" class="hidden" name="address[other][stateCode]"
+                                               id="otherStateCode"
                                                value="0"/>
                                     </div>
                                 </div>
@@ -797,8 +848,9 @@ echo $navbar_str;
                                         <i class="fa fa-globe fa-size"></i>
                                         <input type="text" name="address[other][country]" id="otherCountry"
                                                class="countryText form-control text-field-left-border"
-                                               placeholder="Country"  tabindex="61"/>
-                                        <input type="text" class="hidden" name="address[other][countryCode]" id="otherCountryCode"
+                                               placeholder="Country" tabindex="61"/>
+                                        <input type="text" class="hidden" name="address[other][countryCode]"
+                                               id="otherCountryCode"
                                                value="0"/>
                                     </div>
                                 </div>
@@ -810,7 +862,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
                                         <input type="text" name="address[other][pincode]" id="otherPincode"
-                                               class="form-control text-field-left-border" placeholder="Pincode" tabindex="62"/>
+                                               class="form-control text-field-left-border" placeholder="Pincode"
+                                               tabindex="62"/>
                                     </div>
                                 </div>
                             </div>
@@ -821,8 +874,10 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
                                         <input type="text" name="address[other][area]" id="otherArea"
-                                               class="form-control text-field-left-border" placeholder="Area"  tabindex="63"/>
-                                        <input type="text" class="hidden" name="address[other][areaCode]" id="otherAreaCode"
+                                               class="form-control text-field-left-border" placeholder="Area"
+                                               tabindex="63"/>
+                                        <input type="text" class="hidden" name="address[other][areaCode]"
+                                               id="otherAreaCode"
                                                value="0"/>
                                     </div>
                                 </div>
@@ -831,7 +886,8 @@ echo $navbar_str;
                                 <div class="input-group">
                                     <span class="input-group-addon input-group-addon-label">Phone</span>
                                     <input type="text" name="address[other][phone1]" id="otherPhone1"
-                                           class="form-control text-field-left-border" placeholder="Phone"  tabindex="64"/>
+                                           class="form-control text-field-left-border" placeholder="Phone"
+                                           tabindex="64"/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-success button-addon-custom btn-other-phone"
                                                 type="button" onclick="pageContact.addBtn(4)">
@@ -852,7 +908,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-building-o fa-size"></i>
                                         <input type="text" name="company" id="addCompany"
-                                               class="form-control text-field-left-border" placeholder="Company" tabindex="20"/>
+                                               class="form-control text-field-left-border" placeholder="Company"
+                                               tabindex="20"/>
                                     </div>
                                 </div>
                             </div>
@@ -903,7 +960,8 @@ echo $navbar_str;
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-google-plus fa-size"></i>
                                         <input type="text" name="google" id="addGoogle"
-                                               class="form-control text-field-left-border" placeholder="Google ID" tabindex="24"/>
+                                               class="form-control text-field-left-border" placeholder="Google ID"
+                                               tabindex="24"/>
                                     </div>
                                 </div>
                             </div>

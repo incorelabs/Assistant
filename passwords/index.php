@@ -90,7 +90,7 @@ echo $navbar_str;
                             </div>
                         </div>
                         <div>
-                            <button class="btn btn-primary btn-size" onclick="openAddModal();"><span
+                            <button class="btn btn-primary btn-size" onclick="pagePassword.openAddPasswordModal();"><span
                                     class="glyphicon glyphicon-plus"></span></button>
                         </div>
                     </div>
@@ -116,7 +116,7 @@ echo $navbar_str;
             <div class="panel panel-default panelHeight panel-margin" id="passwordListScroll">
                 <div class="panel-height">
                     <!-- List group -->
-                    <div id="passwordsList" class="list-group force-scroll mobile-list">
+                    <div id="passwordList" class="list-group force-scroll mobile-list">
 
                     </div>
                     <!--List close-->
@@ -126,8 +126,15 @@ echo $navbar_str;
         </div>
         <!--COL-->
 
-        <div class="col-md-7 col-sm-12 col-xs-12 hidden-sm hidden-xs" id="passwordDetails">
-            <div id="password-Detail" class="panel panel-default panelHeight panel-margin">
+        <div class="col-md-7 col-sm-12 col-xs-12 hidden-sm hidden-xs" id="passwordDetailDiv">
+            <div id="passwordDetail" class="panel panel-default panelHeight panel-margin">
+                <!-- List group -->
+                <div id="passwordDetailBody" class="list-group">
+                    <div class="list-group-item">
+                        <p class="list-group-item-text">Loading...</p>
+                    </div>
+                </div>
+                <!--List close-->
 
             </div>
             <!--Panel-->
@@ -139,7 +146,7 @@ echo $navbar_str;
 <!--Container-->
 
 <!-- Add Password Modal -->
-<div class="modal fade" id="addPassword" tabindex="-1" role="dialog" aria-labelledby="addPassword" aria-hidden="true">
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form class="form-horizontal" method="POST" action="controller.php" id="form-passwords" autocomplete="off">
@@ -154,13 +161,14 @@ echo $navbar_str;
                             <span class='glyphicon glyphicon-ok'></span>
                         </button>
                     </div>
-                    <h4 id="modalHeading" class="modal-title text-center">
+                    <h4 id="passwordModalHeading" class="modal-title text-center">
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="passwordTypeCode" id="passwordTypeCode" value="0"/>
-                    <input type="hidden" name="mode" id="mode"/>
-                    <input type="hidden" name="passwordCode" id="passwordCode" value="1"/>
+                    <input type="text" class="hidden" name="passwordTypeCode" id="passwordTypeCode" value="1"/>
+                    <input type="text" class="hidden" name="passwordCode" id="form-add-edit-code"/>
+                    <input type="text" class="hidden" name="mode" id="form-add-edit-mode"/>
+
 
                     <div class="form-group form-group-margin">
                         <label class="col-xs-3 control-label">Private</label>
@@ -258,7 +266,7 @@ echo $navbar_str;
 <!--modal-->
 
 <!--Delete Contact Modal-->
-<div class="modal fade" id="deletePassword" tabindex="-1" role="dialog" aria-labelledby="deletePassword"
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -272,8 +280,8 @@ echo $navbar_str;
                 <div class="modal-body">
                     <div class="btn-group">
                         <form method="POST" action="controller.php" id="form-password-delete">
-                            <input type="hidden" name="passwordCode" id="form-delete-code"/>
-                            <input type="hidden" name="mode" id="form-delete-mode" value="D"/>
+                            <input type="text" class="hidden" name="passwordCode" id="form-delete-code"/>
+                            <input type="text" class="hidden" name="mode" id="form-delete-mode" value="D"/>
                             <button class="btn btn-danger modal_button" type="submit">
                                 <span class='glyphicon glyphicon-ok'></span>&nbsp
                                 Yes
