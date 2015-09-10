@@ -4,17 +4,7 @@
  * Date: 03/09/15
  * Time: 6:13 PM
  */
-session_start();
-define("ROOT", "../");
-include_once ROOT.'dist/authenticate.php';
-require_once ROOT.'db/Connection.php';
-
-function createResponse($status,$message){
-    return array('status' => $status, 'message' => $message);
-}
-
-$validate;
-$response;
+namespace Assistant\Contacts;
 
 class ContactDetail
 {
@@ -163,36 +153,20 @@ class ContactDetail
 
     function getResponse(){
         if($this->successful){
-            $this->response = createResponse(1,"Success");
+            $this->response = $this->createResponse(1,"Success");
             $this->response["detail"] = $this->detail;
         }
         else{
-            $this->response = createResponse(0,$this->errMsg);
+            $this->response = $this->createResponse(0,$this->errMsg);
         }
         return $this->response;
+    }
+
+    function createResponse($status,$message){
+        return array('status' => $status, 'message' => $message);
     }
 
     function __destruct(){
         $this->mysqli->close();
     }
 }
-
-//General Validation
-do{
-    if(!empty($_GET["contactCode"])){
-        $validate = true;
-    }
-    else{
-        $validate = false;
-        $response = createResponse(0,"Invalid Request");
-        break;
-    }
-}while(0);
-
-//Business Logic
-if($validate){
-    $contactCode = intval($_GET["contactCode"]);
-    $detailObj = new ContactDetail($contactCode);
-    $response = $detailObj->getResponse();
-}
-echo json_encode($response);

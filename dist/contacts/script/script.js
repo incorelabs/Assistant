@@ -129,7 +129,7 @@ var pageContact = {
         }
     },
     getContactDetails: function (contactCode) {
-        var url = localStorage.getItem("websiteRoot") + "contacts/ContactDetails.php";
+        var url = localStorage.getItem("websiteRoot") + "contacts/ContactDetail.php";
 
         $.getJSON(url, {
             contactCode: contactCode
