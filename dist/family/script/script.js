@@ -126,6 +126,8 @@ var pageFamily = {
         });
     },
     setRelationList: function (data) {
+        pageFamily.relationList = data;
+
         var relationListString = "<option value=''>Select Relation</option>";
         for (var i = 0; i < data.length; i++) {
             relationListString += "<option value=" + data[i]['RelationCode'] + ">" + data[i]['RelationName'] + "</option>"
