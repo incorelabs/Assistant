@@ -106,30 +106,10 @@ class PasswordController
         $sql = "SET @passwordTypeCode = ".$passwordTypeCode.";";
 
         if($passwordTypeCode < 1001){
-            $sql .= "call spTable130(
-						    @passwordTypeCode,
-						    '".$passwordTypeName."',
-							".$this->regCode.",
-						    1
-						);";
+            $sql .= "call spTable130(@passwordTypeCode, ".$passwordTypeName.", ".$this->regCode.", 1);";
         }
 
-        $sql .= "call spTable152(
-				".$this->regCode.",
-			    ".$passwordCode.",
-			    @passwordTypeCode,
-			    ".$passwordTypeName.",
-			    ".$holderCode.",
-			    ".$passwordName.",
-			    ".$userID.",
-			    ".$password1.",
-			    ".$password2.",
-			    ".$inserted.",
-			    ".$private.",
-			    ".$active.",
-			    now(),
-			    ".$this->mode."
-			);";
+        $sql .= "call spTable152(".$this->regCode.",".$passwordCode.",@passwordTypeCode,".$passwordTypeName.",".$holderCode.",".$passwordName.",".$userID.",".$password1.",".$password2.",".$inserted.",".$private.",".$active.",now(),".$this->mode.");";
 
         return $sql;
     }
