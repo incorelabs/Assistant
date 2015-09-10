@@ -57,7 +57,7 @@ echo $navbar_str;
     </div>
 
     <div class="row">
-        <div class="col-xs-12 col-md-5">
+        <div class="col-xs-12 col-md-5 col-padding">
             <div class="list-group list-margin">
                 <div class="list-group-item list-margin">
                     <div class="row">
@@ -125,7 +125,7 @@ echo $navbar_str;
             </div>
         </div>
 
-        <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
+        <div class="col-md-7 col-sm-10 hidden-sm hidden-xs col-padding">
             <div class="panel panel-default panelHeight list-margin" id="style-3">
                 <div id="contactDetailHeader" class="panel-heading text-center">
                     <h12>Contact Details</h12>
@@ -139,7 +139,7 @@ echo $navbar_str;
     <!--row-->
     <div class="row">
 
-        <div class="col-md-5 col-sm-12 col-xs-12">
+        <div class="col-md-5 col-sm-12 col-xs-12 col-padding">
             <div class="panel panel-default panelHeight panel-margin" id="style-3">
                 <!-- List group -->
                 <div class="panel-height">
@@ -153,15 +153,17 @@ echo $navbar_str;
         </div>
         <!--COL-->
 
-        <div class="col-md-7 col-sm-10 hidden-sm hidden-xs">
+        <div class="col-md-7 col-sm-10 hidden-sm hidden-xs col-padding">
             <div id="contactDetail" class="panel panel-default panelHeight panel-margin" id="style-3">
+                <div class="panel-height">
                 <!-- List group -->
-                <div id="contactDetailBody" class="list-group">
-                    <div class="list-group-item">
-                        <p class="list-group-item-text">Loading...</p>
+                    <div id="contactDetailBody" class="list-group">
+                        <div class="list-group-item list-group-item-border">
+                            <p class="list-group-item-text">Loading...</p>
+                        </div>
                     </div>
-                </div>
                 <!--List close-->
+                </div>
 
             </div>
             <!--Panel-->

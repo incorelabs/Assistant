@@ -65,7 +65,7 @@ var pageContact = {
                 $("#contactList").append(str);
             }
         } else {
-            var str = "<div class='list-group-item'><li class='list-group-item-text header_font'>";
+            var str = "<div class='list-group-item list-border-none'><li class='list-group-item-text header_font'>";
             str += data.message + "</li></div>";
             $("#contactList").empty();
             $("#contactList").html(str);
@@ -120,7 +120,7 @@ var pageContact = {
             }
 
         } else {
-            var str = "<div class='list-group-item'><li class='list-group-item-text header_font'>";
+            var str = "<div class='list-group-item list-border-none'><li class='list-group-item-text header_font'>";
             str += data.message + "</li></div>";
             $("#contactList").empty();
             $("#contactList").html(str);
