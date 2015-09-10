@@ -186,26 +186,28 @@ var pagePassword = {
         $("#passwordModal").modal('show');
     },
     openEditPasswordModal: function (index) {
-        pagePassword.detailIndex = index;
-        var detail = pagePassword.passwordList[index];
-        $("#mode").val("M");
-        pagePassword.modalHeading = "Edit";
-        $("#passwordCode").val(detail["PasswordCode"]);
-        pagePassword.setModalInputFields(detail);
+        document.getElementById("form-passwords").reset();
+        $("#form-add-edit-mode").val("M");
+
+        $('#passwordModalHeading').empty();
+        $('#passwordModalHeading').html("Edit Password");
+
+        $("#form-add-edit-code").val(pagePassword.localPassword.password.PasswordCode);
+        pagePassword.setModalInputFields();
+
         $("#passwordModal").modal('show');
     },
     openDeletePasswordModal: function (passwordCode) {
         $("#form-delete-code").val(passwordCode);
         $("#deleteModal").modal("show");
     },
-    setModalInputFields: function (detail) {
-        document.getElementById("form-passwords").reset();
+    setModalInputFields: function () {
         var temp = familyCode;
-        familyCode = detail["HolderCode"];
+        familyCode = pagePassword.localPassword.password.HolderCode;
         pagePassword.setFamilyList(pagePassword.familyList);
 
-        if (detail["ActiveFlag"]) {
-            if (detail["ActiveFlag"] == 1) {
+        if (pagePassword.localPassword.password.ActiveFlag) {
+            if (pagePassword.localPassword.password.ActiveFlag == 1) {
                 $("#addActiveStatus").attr("checked", true);
             }
             else {
@@ -216,8 +218,8 @@ var pagePassword = {
             $("#addActiveStatus").attr("checked", false);
         }
 
-        if (detail["PrivateFlag"]) {
-            if (detail["PrivateFlag"] == 1) {
+        if (pagePassword.localPassword.password.PrivateFlag) {
+            if (pagePassword.localPassword.password.PrivateFlag == 1) {
                 $("#addPrivacy").attr("checked", true);
             }
             else {
@@ -228,25 +230,25 @@ var pagePassword = {
             $("#addPrivacy").attr("checked", false);
         }
 
-        if (detail["PasswordTypeCode"]) {
-            $("#passwordType").val(detail["PasswordTypeName"]);
-            $("#passwordTypeCode").val(detail["PasswordTypeCode"]);
+        if (pagePassword.localPassword.password.PasswordTypeCode) {
+            $("#passwordType").val(pagePassword.localPassword.password.PasswordTypeName);
+            $("#passwordTypeCode").val(pagePassword.localPassword.password.PasswordTypeCode);
         }
 
-        if (detail["PasswordName"]) {
-            $("#description").val(detail["PasswordName"]);
+        if (pagePassword.localPassword.password.PasswordName) {
+            $("#description").val(pagePassword.localPassword.password.PasswordName);
         }
 
-        if (detail["LoginID"]) {
-            $("#userID").val(detail["LoginID"]);
+        if (pagePassword.localPassword.password.LoginID) {
+            $("#userID").val(pagePassword.localPassword.password.LoginID);
         }
 
-        if (detail["LoginPassword1"]) {
-            $("#password").val(detail["LoginPassword1"]);
+        if (pagePassword.localPassword.password.LoginPassword1) {
+            $("#password").val(pagePassword.localPassword.password.LoginPassword1);
         }
 
-        if (detail["LoginPassword2"]) {
-            $("#otherPassword").val(detail["LoginPassword2"]);
+        if (pagePassword.localPassword.password.LoginPassword2) {
+            $("#otherPassword").val(pagePassword.localPassword.password.LoginPassword2);
         }
         familyCode = temp;
     },
