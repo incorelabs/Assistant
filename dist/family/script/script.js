@@ -18,6 +18,7 @@ var pageFamily = {
         });
     },
     setFamilyList: function (data) {
+        var familyTableString = "";
         for (var i = 0; i < data.length; i++) {
             var gender;
             if (data[i]['Gender']) {
@@ -42,7 +43,7 @@ var pageFamily = {
                 gender = "-";
             }
 
-            var familyTableString = "<tr class='text-left'><td>" + (i + 1) + "</td><td>" + data[i]['FamilyName'] + "</td><td class='hidden-xs hidden-sm'>" + ((data[i]['RelationName']) ? data[i]['RelationName'] : "-") + "</td><td class='hidden-xs hidden-sm'>" + ((data[i]['BirthDate']) ? data[i]['BirthDate'] : "-") + "</td><td class='hidden-xs hidden-sm'>" + ((data[i]['Email']) ? data[i]['Email'] : "-") + "</td><td>" + ((data[i]['Mobile']) ? data[i]['Mobile'] : "-") + "</td><td class='hidden-xs hidden-sm'>" + (gender) + "</td><td>" + ((data[i]['LoginFlag']) ? ((data[i]['LoginFlag'] == 1) ? "Yes" : "No") : "-") + "</td><td><a href='#' onclick='editFamily(" + i + ")'><i class='fa fa-pencil fa-lg fa-green'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='deleteFamily(" + i + ")'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td></tr>";
+            familyTableString += "<tr class='text-left'><td>" + (i + 1) + "</td><td>" + data[i]['FamilyName'] + "</td><td class='hidden-xs hidden-sm'>" + ((data[i]['RelationName']) ? data[i]['RelationName'] : "-") + "</td><td class='hidden-xs hidden-sm'>" + ((data[i]['BirthDate']) ? data[i]['BirthDate'] : "-") + "</td><td class='hidden-xs hidden-sm'>" + ((data[i]['Email']) ? data[i]['Email'] : "-") + "</td><td>" + ((data[i]['Mobile']) ? data[i]['Mobile'] : "-") + "</td><td class='hidden-xs hidden-sm'>" + (gender) + "</td><td>" + ((data[i]['LoginFlag']) ? ((data[i]['LoginFlag'] == 1) ? "Yes" : "No") : "-") + "</td><td><a href='#' onclick='editFamily(" + i + ")'><i class='fa fa-pencil fa-lg fa-green'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='deleteFamily(" + i + ")'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td></tr>";
         }
         $("#table-body").html(familyTableString);
     },
