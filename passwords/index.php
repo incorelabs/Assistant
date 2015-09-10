@@ -101,6 +101,7 @@ echo $navbar_str;
         <div class="col-md-7 col-xs-12 col-sm-12 hidden-sm hidden-xs" id="passwordDetailsHeader">
             <div class="panel panel-default panelHeight list-margin" id="style-3">
                 <div id="passwordDetailHeader" class="panel-heading text-center">
+                    <h12>Password Details</h12>
 
                 </div>
 

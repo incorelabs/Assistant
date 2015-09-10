@@ -95,6 +95,37 @@ var pagePassword = {
 
             pagePassword.localPassword = data.detail;
 
+            if (window.innerWidth < 992 && !pagePassword.firstTime) {
+                console.log("width less than 992");
+                //Show the Password Details Header and hides the search header
+                $("#searchPasswordHeader").addClass('hidden');
+                $("#passwordDetailsHeader").removeClass('hidden-xs hidden-sm');
+
+                //Show the Password Details and hides the password list
+                $("#passwordListDiv").addClass('hidden');
+                $("#passwordDetailDiv").removeClass('hidden-xs hidden-sm');
+
+                //Show Hide of menu button with back button
+                $(".menu_img").addClass('hidden');
+                $("#backButton").removeClass('hidden');
+
+                $("#backButton").click(function () {
+                    //Show the Password Details Header and hides the search header
+                    $("#passwordDetailsHeader").addClass('hidden-xs hidden-sm');
+                    $("#searchPasswordHeader").removeClass('hidden');
+
+                    //Show the Password Details and hides the password list
+                    $("#passwordListDiv").removeClass('hidden');
+                    $("#passwordDetailDiv").addClass('hidden-xs hidden-sm');
+
+                    //Show Hide of menu button with back button
+                    $(".menu_img").removeClass('hidden');
+                    $("#backButton").addClass('hidden');
+
+                });
+            }
+            pagePassword.firstTime = false;
+
             var headerStr = "<h12>Password Details</h12><button id='editPasswordBtn' class='btn btn-success pull-right' onclick='pagePassword.openEditPasswordModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deletePasswordBtn' class='btn btn-danger pull-left' onclick='pagePassword.openDeletePasswordModal(" + data.detail.password.PasswordCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
 
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Holder's Name</div><value><div class='col-md-9'>" + data.detail.password.HolderName + "</div></value></div></div>";
