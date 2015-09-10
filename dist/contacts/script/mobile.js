@@ -22,7 +22,7 @@ var area = [];
 function getContactList(){
   $.ajax({
     method: "GET",
-    url: root+"contacts/getContact.php",
+    url: root+"contacts/getContactDetail.php",
     data: { 
         list: 1
      }
@@ -38,7 +38,7 @@ function getContact(id){
   console.log("Getting contact details of : "+id);
   $.ajax({
     method: "GET",
-    url: root+"contacts/getContact.php",
+    url: root+"contacts/getContactDetail.php",
     data: { 
         id: id
      }

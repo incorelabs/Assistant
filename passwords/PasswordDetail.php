@@ -6,6 +6,8 @@
  * Date: 09/09/15
  * Time: 7:21 PM
  */
+namespace Assistant\Passwords;
+
 class PasswordDetail
 {
 

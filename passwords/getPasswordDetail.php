@@ -5,18 +5,14 @@
  * Time: 7:30 PM
  */
 
-spl_autoload_register(function ($class) {
-    include $class . '.php';
-});
+namespace Assistant\Passwords;
+require 'PasswordAutoload.php';
 
-session_start();
-define("ROOT", "../");
+function createResponse($status,$message){
+    return array('status' => $status, 'message' => $message);
+}
 
-require_once ROOT.'dist/authenticate.php';
-require_once ROOT.'db/Connection.php';
-
-$validate;
-$response;
+$response = createResponse(0,"Initialize");
 
 //General Validation
 do{
