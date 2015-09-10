@@ -1,12 +1,6 @@
 <?php
-spl_autoload_register(function ($class) {
-    include $class . '.php';
-});
 
-session_start();
-define("ROOT", "../");
-include_once ROOT.'dist/authenticate.php';
-require_once ROOT.'db/Connection.php';
+namespace Assistant\Contacts;
 
 class ContactList{
     var $limit;
@@ -134,12 +128,12 @@ class ContactList{
     function getResponse(){
         if($this->successful){
             $this->setPages();
-            $this->response = createResponse(1,"Success");
+            $this->response = $this->createResponse(1,"Success");
             $this->response["pages"] = $this->pages;
             $this->response["result"] = $this->contactList;
         }
         else{
-            $this->response = createResponse(0,"No contacts");
+            $this->response = $this->createResponse(0,"No contacts");
         }
 
         return $this->response;
@@ -215,36 +209,8 @@ class ContactList{
     function __destruct(){
         $this->mysqli->close();
     }
-}
 
-function createResponse($status,$message){
-    return array('status' => $status, 'message' => $message);
-}
-
-$validate;
-$response;
-
-//General validation
-do{
-    if(!empty($_GET['pageNo'])){
-        $validate = true;
+    function createResponse($status,$message){
+        return array('status' => $status, 'message' => $message);
     }
-    else{
-        $validate = false;
-        $response = createResponse(0,"Invalid request");
-        break;
-    }
-}while(0);
-
-if($validate){
-    $limit = 200; //should be greater than 1
-    $requestPage = intval($_GET['pageNo']) - 1;
-    $searchText = (!empty($_GET['searchText']) ? $_GET['searchText'] : null);
-    $searchType = (!empty($_GET['searchType']) ? intval($_GET['searchType']) : null);
-
-    $contactListObj = new ContactList($limit,$requestPage,$searchType,$searchText);
-    //$response = $contactListObj->getContactListQuery();
-    $response = $contactListObj->getResponse();
 }
-
-echo json_encode($response);

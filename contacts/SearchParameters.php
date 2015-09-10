@@ -5,6 +5,8 @@
  * Date: 05/09/15
  * Time: 10:51 AM
  */
+namespace Assistant\Contacts;
+
 class SearchParameters
 {
     function getNameClause($value){
