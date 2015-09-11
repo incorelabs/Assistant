@@ -19,6 +19,7 @@ class ContactController
     var $mysqli;
     var $active;
     var $landing;
+    var $contactCode;
 
     function __construct($data)
     {
@@ -64,7 +65,7 @@ class ContactController
     function deleteContact(){
         $contactCode = intval($this->data["contactCode"]);
 
-        $qry = "SELECT InsertedBy FROM Table152 WHERE RegCode = ".$this->regCode." AND PasswordCode = ".$contactCode.";";
+        $qry = "SELECT InsertedBy FROM Table151 WHERE RegCode = ".$this->regCode." AND ContactCode = ".$contactCode.";";
 
         $valid = false;
 
@@ -108,26 +109,38 @@ class ContactController
         }
 
         if($valid){
-            $this->runDeleteQuery($this->getDeleteQuery());
-            $qry = "SELECT ContactCode FROM Table151 WHERE RegCode =".$this->regCode." ORDER BY FullName LIMIT 1;";
-            if($result = $this->mysqli->query($qry)){
-                if($result->num_rows == 0){
-                    $this->response["landing"] = -1;
-                }
-                else{
-                    $this->landing = $result->fetch_assoc()["ContactCode"];
-                    $this->response["landing"] = $this->landing;
-                }
+            $this->runMultipleQuery($this->getDeleteQuery());
+            if($this->countContactList() == 0){
+                $this->landing = null;
             }
+            else{
+                $this->setFirstRecordAsLanding();
+            }
+            $this->response['landing'] = $this->landing;
         }
     }
 
     function editContact(){
-        $this->runEditOrAdd($this->getSpTable151Query());
+        $this->contactCode = intval($this->data["contactCode"]);
+        $this->runMultipleQuery($this->getSpTable151Query());
+        $count = $this->countContactList();
+        if($count == 0){
+            $this->landing = null;
+        }
+        elseif($this->active == 2){
+            $this->setFirstRecordAsLanding();
+        }
+        else{
+            $this->landing = $this->contactCode;
+        }
+        $this->response['landing'] = $this->landing;
     }
 
     function addContact(){
-        $this->runEditOrAdd($this->getSpTable151Query());
+        $this->contactCode = $this->generateContactCode();
+        $this->landing = $this->contactCode;
+        $this->runMultipleQuery($this->getSpTable151Query());
+        $this->response['landing'] = $this->contactCode;
     }
 
     function runEditOrAdd($sql){
@@ -166,7 +179,7 @@ class ContactController
     }
 
     function getSpTable151Query(){
-        $contactCode = intval($this->data["contactCode"]);
+        $contactCode = $this->contactCode;
         $titleCode = ((!empty($this->data['titleCode'])) ? $this->data['titleCode'] : "NULL");
         $groupCode = ((!empty($this->data['groupCode'])) ? $this->data['groupCode'] : "NULL");
         $emergencyCode = ((!empty($this->data['emergencyCode'])) ? $this->data['emergencyCode'] : "NULL");
@@ -367,7 +380,61 @@ class ContactController
             $sql .= "call spTable157(".$this->regCode.", ".$contactCode.",".$address1.", ".$address2.", ".$address3.", ".$address4.", ".$address5.", ".$pincode.", @sCountryCode, @sStateCode, @sCityCode, @sAreaCode, ".$phone1.", ".$phone2.", NULL, $this->mode);";
         }
 
+        //echo $sql;
         return $sql;
+    }
+
+    function generateContactCode(){
+        $contactCode = 1001;
+        $sql = "SELECT MAX(ContactCode) AS 'ContactCode' FROM Table151 WHERE RegCode = ".$this->regCode.";";
+        if($result = $this->mysqli->query($sql)){
+            $contactCode = intval($result->fetch_assoc()['ContactCode']);
+            $contactCode = (($contactCode == 0) ? 1001 : $contactCode + 1);
+        }
+        else{
+            echo $this->mysqli->error;
+        }
+
+        return $contactCode;
+    }
+
+    function setFirstRecordAsLanding(){
+        $limit = 250;
+        $page = 1;
+        $contactList = new ContactList($limit,$page);
+        $contactList->setWhereConstraints();
+
+        $qry = "SELECT Table151.ContactCode FROM Table151 ".$contactList->whereConstraints." ORDER BY Table151.FullName LIMIT 1;";
+
+        if($result = $this->mysqli->query($qry)){
+            if($result->num_rows == 0){
+                $this->landing = null;
+            }
+            else{
+                $this->landing = $result->fetch_assoc()["ContactCode"];
+            }
+        }
+        else{
+            $this->response = $this->createResponse(0,"Error occurred while uploading to the database: ".$this->mysqli->error);
+        }
+    }
+
+    function countContactList(){
+        $limit = 250;
+        $page = 1;
+        $contactList = new ContactList($limit,$page);
+        $contactList->setWhereConstraints();
+
+        $qry = "SELECT count(*) AS 'count' FROM Table151 ".$contactList->whereConstraints;
+        $count = 0;
+
+        if($result = $this->mysqli->query($qry)){
+            $count = intval($result->fetch_assoc()['count']);
+            return $count;
+        }
+        else{
+            return $count;
+        }
     }
 
     function runDeleteQuery($sql){
@@ -377,6 +444,22 @@ class ContactController
         else{
             $this->response = $this->createResponse(0,"Error occurred while uploading to the database: ".$this->mysqli->error);
         }
+    }
+
+    function runMultipleQuery($sql){
+        if ($this->mysqli->multi_query($sql) === TRUE) {
+            $this->response = $this->createResponse(1,"Successful");
+            while($this->mysqli->more_results()){
+                $this->mysqli->next_result();
+                if($result = $this->mysqli->store_result()){
+                    $result->free();
+                }
+            }
+        }
+        else{
+            $this->response = $this->createResponse(0,"Error occurred while uploading to the database: ".$this->mysqli->error);
+        }
+
     }
 
     function getResponse(){
