@@ -16,15 +16,36 @@ function createResponse($status, $message)
 function createInitialFolders($regCode)
 {
     $path = ROOT . "img/" . $regCode;
-    mkdir($path);
+    if(!file_exists($path)){
+        mkdir($path);
+    }
     $path = ROOT . "img/" . $regCode . "/Contacts";
-    mkdir($path);
+    if(!file_exists($path)){
+        mkdir($path);
+    }
     $path = ROOT . "img/" . $regCode . "/Investments";
-    mkdir($path);
+    if(!file_exists($path)){
+        mkdir($path);
+    }
     $path = ROOT . "img/" . $regCode . "/Assets";
-    mkdir($path);
+    if(!file_exists($path)){
+        mkdir($path);
+    }
     $path = ROOT . "img/" . $regCode . "/Documents";
-    mkdir($path);
+    if(!file_exists($path)){
+        mkdir($path);
+    }
+}
+
+function generateRegCode(){
+    global $mysqli;
+    $regCode = 10001;
+    $sql = "SELECT MAX(RegCode) AS 'regCode' FROM Table109;";
+    if($result = $mysqli->query($sql)){
+        $regCode = intval($result->fetch_assoc()["regCode"]);
+        $regCode = (($regCode == 0) ? 10001 : $regCode + 1);
+    }
+    return $regCode;
 }
 
 //General Validation
@@ -120,7 +141,7 @@ if ($validate) {
 //Business Logic
 if ($validate) {
     do {
-        $regCode = "NULL";
+        $regCode = generateRegCode();
         $familyCode = 1001;
         $name = "'" . $_POST['name'] . "'";
         $relationCode = 1; //Self
@@ -143,9 +164,8 @@ if ($validate) {
         $nextYear->add(new DateInterval('P1Y'));
         $today = new DateTime("now");
 
-        $sql = "SET @regCode = " . $regCode . ";";
-        $sql .= "call createNewUser(
-			@regCode,
+        $sql = "call createNewUser(
+			" . $regCode . ",
 			" . $familyCode . ",
 			" . $name . ",
 			" . $relationCode . ",
@@ -157,37 +177,26 @@ if ($validate) {
 			" . $parentFlag . ",
 			" . $loginFlag . ",
 			" . $activeFlag . ",
-			NOW(),
+			CURDATE(),
 			" . $country . ",
 			" . $renewalNo . ",
-			'" . $today->format("Y-m-d") . "',
-			'" . $nextYear->format("Y-m-d") . "',
+			'". $today->format("Y-m-d") . "',
+			'". $nextYear->format("Y-m-d") . "',
 			" . $familySize . ",
 			" . $feesCollected . ",
 			" . $dataSizeUsed . ",
 			" . $photoUploaded . ",
 			" . $noOfHits . ",
-			'" . $today->format("Y-m-d H:i:s") . "'
+			NOW()
 		);";
-
-        $sql .= "SELECT @regCode;";
 
         //echo $sql;
         if ($mysqli->multi_query($sql) === TRUE) {
-            do {
-                /* store first result set */
-                if ($result = $mysqli->use_result()) {
-                    while ($row = $result->fetch_row()) {
-                        $regCode = $row[0];
-                    }
-                    $result->close();
-                }
-            } while ($mysqli->next_result());
-
+            //echo $regCode;
             createInitialFolders($regCode);
-            $response = createResponse(1, "Successfull");
+            $response = createResponse(1, "Successful");
         } else {
-            $response = createResponse(0, "Error occured while uploading to the database: " . $mysqli->error);
+            $response = createResponse(0, "Error occurred while uploading to the database: " . $mysqli->error);
             break;
         }
 

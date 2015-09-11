@@ -18,6 +18,7 @@ class PasswordController
     var $mysqli;
     var $active;
     var $landing;
+    var $passwordCode;
 
     function __construct($data){
         $this->mysqli = getConnection();
@@ -80,22 +81,25 @@ class PasswordController
         }
 
         if($valid){
-            $this->runDeleteQuery($this->getDeleteQuery());
             $this->setFirstRecordAsLanding();
-            $this->response["landing"] = $this->landing;
+            $this->runMultipleQuery($this->getDeleteQuery());
         }
     }
 
     function editPassword(){
-        $this->runEditOrAdd($this->getSpTable152Query());
+        $this->passwordCode = intval($this->data['passwordCode']);
+        $this->landing = $this->passwordCode;
+        $this->runMultipleQuery($this->getSpTable152Query());
     }
 
     function addPassword(){
-        $this->runEditOrAdd($this->getSpTable152Query());
+        $this->passwordCode = $this->generatePasswordCode();
+        $this->landing = $this->passwordCode;
+        $this->runMultipleQuery($this->getSpTable152Query());
     }
 
     function getSpTable152Query(){
-        $passwordCode = intval($this->data["passwordCode"]);
+        $passwordCode = $this->passwordCode;
         $passwordTypeCode = ((isset($this->data["passwordTypeCode"])) ? intval($this->data['passwordTypeCode']) : 0);
         $passwordTypeName = "'".$this->data["passwordType"]."'";
         $holderCode = intval($this->data['name']);
@@ -116,67 +120,45 @@ class PasswordController
         }
 
         $sql .= "call spTable152(".$this->regCode.", @passwordCode, @passwordTypeCode,".$passwordTypeName.",".$holderCode.",".$passwordName.",".$userID.",".$password1.",".$password2.",".$inserted.",".$private.",".$active.",now(),".$this->mode.");";
-        $sql .= "SELECT @passwordCode as 'PasswordCode';";
 
         return $sql;
+    }
+
+    function generatePasswordCode(){
+        $passwordCode = 1001;
+        $sql = "SELECT MAX(PasswordCode) AS 'PasswordCode' FROM Table152 WHERE RegCode = ".$this->regCode.";";
+        if($result = $this->mysqli->query($sql)){
+            $passwordCode = intval($result->fetch_assoc()['PasswordCode']);
+            $passwordCode = (($passwordCode == 0) ? 1001 : $passwordCode + 1);
+        }
+
+        return $passwordCode;
     }
 
     function runMultipleQuery($sql){
         if ($this->mysqli->multi_query($sql) === TRUE) {
             $this->response = $this->createResponse(1,"Successful");
+            $this->response['landing'] = $this->landing;
         }
         else{
             $this->response = $this->createResponse(0,"Error occurred while uploading to the database: ".$this->mysqli->error);
         }
     }
 
-    function runEditOrAdd($sql){
-        if ($this->mysqli->multi_query($sql)) {
-            $this->response = createResponse(1,"Successful");
-            if($this->mode == 1 || $this->mode == 2){
-                if($this->active == 1){
-                    for(;;){
-                        if ($result = $this->mysqli->use_result()) {
-                            while ($row = $result->fetch_row()) {
-                                $this->landing = $row[0];
-                            }
-                            $result->close();
-                        }
-
-                        if($this->mysqli->more_results()){
-                            $this->mysqli->next_result();
-                        }
-                        else{
-                            break;
-                        }
-                    }
-                }
-                else{
-                    $this->setFirstRecordAsLanding();
-                }
-            }
-            $this->response["landing"] = $this->landing;
-        }
-        else{
-            $this->response = createResponse(0,"Error occurred while uploading to the database: ".$this->mysqli->error);
-        }
-    }
-
     function setFirstRecordAsLanding(){
-        $qry = "SELECT PasswordCode FROM Table152 INNER JOIN Table107 ON Table107.FamilyCode = Table152.HolderCode WHERE Table152.RegCode =".$this->regCode." ORDER BY Table107.FamilyName LIMIT 1;";
+        $limit = 250;
+        $page = 1;
+        $passwordList = new PasswordList($limit,$page);
+        $passwordList->setWhereConstraints();
+
+        $qry = "SELECT PasswordCode FROM Table152 INNER JOIN Table107 ON Table107.FamilyCode = Table152.HolderCode WHERE Table152.RegCode = ".$passwordList->whereConstraints." ORDER BY Table107.FamilyName LIMIT 1;";
         if($result = $this->mysqli->query($qry)){
             if($result->num_rows == 0){
-                $this->response["landing"] = -1;
+                $this->landing = -1;
             }
             else{
                 $this->landing = $result->fetch_assoc()["PasswordCode"];
             }
-        }
-    }
-
-    function runDeleteQuery($sql){
-        if ($this->mysqli->multi_query($sql) === TRUE) {
-            $this->response = $this->createResponse(1,"Successful");
         }
         else{
             $this->response = $this->createResponse(0,"Error occurred while uploading to the database: ".$this->mysqli->error);
