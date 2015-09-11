@@ -70,6 +70,10 @@ li {
 
 .ui-autocomplete {
     z-index: 5000;
+    max-height: 100px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
 }
 
 .header_font {
@@ -239,8 +243,9 @@ value {
     border-top-left-radius: 0px !important;
     border-top: 0px !important;
 }
-@media screen and (max-width: 992px){
-    .panel-margin{
+
+@media screen and (max-width: 992px) {
+    .panel-margin {
         margin-bottom: 0px !important;
     }
 }
@@ -400,7 +405,8 @@ h5 {
 .panel-height {
     height: calc(100vh - 135px);
 }
-@media screen and (max-width: 992px){
+
+@media screen and (max-width: 992px) {
     .panel-height {
         height: calc(100vh - 106px);
     }
@@ -479,6 +485,6 @@ h5 {
     margin: 0px !important;
 }
 
-.list-border-none{
+.list-border-none {
     border: none;
 }
