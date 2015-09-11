@@ -81,21 +81,36 @@ class PasswordController
         }
 
         if($valid){
-            $this->setFirstRecordAsLanding();
             $this->runMultipleQuery($this->getDeleteQuery());
+            if($this->countPasswordList() == 0){
+                $this->landing = null;
+            }
+            else{
+                $this->setFirstRecordAsLanding();
+            }
+            $this->response['landing'] = $this->landing;
         }
     }
 
     function editPassword(){
+
         $this->passwordCode = intval($this->data['passwordCode']);
-        $this->landing = $this->passwordCode;
         $this->runMultipleQuery($this->getSpTable152Query());
+        $count = $this->countPasswordList();
+        if($count == 0){
+            $this->landing = null;
+        }
+        else{
+            $this->landing = $this->passwordCode;
+        }
+        $this->response['landing'] = $this->landing;
     }
 
     function addPassword(){
         $this->passwordCode = $this->generatePasswordCode();
         $this->landing = $this->passwordCode;
         $this->runMultipleQuery($this->getSpTable152Query());
+        $this->response['landing'] = $this->passwordCode;
     }
 
     function getSpTable152Query(){
@@ -138,10 +153,34 @@ class PasswordController
     function runMultipleQuery($sql){
         if ($this->mysqli->multi_query($sql) === TRUE) {
             $this->response = $this->createResponse(1,"Successful");
-            $this->response['landing'] = $this->landing;
+            while($this->mysqli->more_results()){
+                $this->mysqli->next_result();
+                if($result = $this->mysqli->store_result()){
+                    $result->free();
+                }
+            }
         }
         else{
             $this->response = $this->createResponse(0,"Error occurred while uploading to the database: ".$this->mysqli->error);
+        }
+
+    }
+
+    function countPasswordList(){
+        $limit = 250;
+        $page = 1;
+        $passwordList = new PasswordList($limit,$page);
+        $passwordList->setWhereConstraints();
+
+        $qry = "SELECT count(*) AS 'count' FROM Table152 INNER JOIN Table107 ON Table107.FamilyCode = Table152.HolderCode ".$passwordList->whereConstraints;
+        $count = 0;
+
+        if($result = $this->mysqli->query($qry)){
+            $count = intval($result->fetch_assoc()['count']);
+            return $count;
+        }
+        else{
+            return $count;
         }
     }
 
@@ -151,7 +190,8 @@ class PasswordController
         $passwordList = new PasswordList($limit,$page);
         $passwordList->setWhereConstraints();
 
-        $qry = "SELECT PasswordCode FROM Table152 INNER JOIN Table107 ON Table107.FamilyCode = Table152.HolderCode WHERE Table152.RegCode = ".$passwordList->whereConstraints." ORDER BY Table107.FamilyName LIMIT 1;";
+        $qry = "SELECT PasswordCode FROM Table152 INNER JOIN Table107 ON Table107.FamilyCode = Table152.HolderCode ".$passwordList->whereConstraints." ORDER BY Table107.FamilyName LIMIT 1;";
+
         if($result = $this->mysqli->query($qry)){
             if($result->num_rows == 0){
                 $this->landing = -1;
