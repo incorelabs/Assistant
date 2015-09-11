@@ -386,8 +386,6 @@ $(document).ready(function () {
             else {
                 pageIndex.showNotificationFailure(response.message);
             }
-            //$("#pageLoading").removeClass("loader");
-            //$(".cover").fadeOut(100);
         }
     });
 
@@ -395,7 +393,7 @@ $(document).ready(function () {
         $("#pageLoading").removeClass("loader");
         $(".cover").fadeOut(100);
     });
-    
+
     //Password form submit
     $("#form-password-delete").ajaxForm({
         beforeSubmit: function () {
