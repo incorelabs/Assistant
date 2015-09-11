@@ -386,11 +386,16 @@ $(document).ready(function () {
             else {
                 pageIndex.showNotificationFailure(response.message);
             }
-            $("#pageLoading").removeClass("loader");
-            $(".cover").fadeOut(100);
+            //$("#pageLoading").removeClass("loader");
+            //$(".cover").fadeOut(100);
         }
     });
 
+    $('#passwordModal').on('hidden.bs.modal', function (e) {
+        $("#pageLoading").removeClass("loader");
+        $(".cover").fadeOut(100);
+    });
+    
     //Password form submit
     $("#form-password-delete").ajaxForm({
         beforeSubmit: function () {
@@ -415,9 +420,12 @@ $(document).ready(function () {
             } else {
                 pageIndex.showNotificationFailure(response.message);
             }
-            $("#pageLoading").removeClass("loader");
-            $(".cover").fadeOut(100);
         }
+    });
+
+    $('#deleteModal').on('hidden.bs.modal', function (e) {
+        $("#pageLoading").removeClass("loader");
+        $(".cover").fadeOut(100);
     });
 
     $("#searchBox").on('input propertychange', function () {
