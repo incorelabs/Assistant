@@ -135,10 +135,6 @@ var pagePassword = {
     setPasswordDetails: function (data) {
         if (data.status == 1) {
             var str = "";
-            var originalPassword = "";
-            var originalOtherPassword = "";
-            var encryptedPassword = "";
-            var encryptedOtherPassword = "";
 
             pagePassword.localPassword = data.detail;
 
