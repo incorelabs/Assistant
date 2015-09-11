@@ -118,6 +118,8 @@ var pagePassword = {
 
     },
     getPasswordDetails: function (passwordCode) {
+        if (passwordCode == null)
+            return;
         var url = localStorage.getItem("websiteRoot") + "passwords/getPasswordDetail.php";
 
         $.getJSON(url, {
@@ -374,6 +376,9 @@ $(document).ready(function () {
                 setTimeout(function () {
                     pagePassword.currentPageNo = 1;
                     $("#passwordList").empty();
+                    $("#passwordDetailBody").empty();
+                    $("#editPasswordBtn").remove();
+                    $("#deletePasswordBtn").remove();
                     pagePassword.getPasswordDetails(response.landing);
                     pagePassword.getPasswordList();
                     pageIndex.showNotificationSuccess(response.message);

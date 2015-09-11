@@ -156,13 +156,12 @@ echo $navbar_str;
         <div class="col-md-7 col-sm-12 col-xs-12 hidden-sm hidden-xs" id="contactDetailDiv">
             <div id="contactDetail" class="panel panel-default panelHeight panel-margin" id="style-3">
                 <div class="panel-height-details">
-                <!-- List group -->
+                    <!-- List group -->
                     <div id="contactDetailBody" class="list-group">
                         <div class="list-group-item list-group-item-border">
-                            <p class="list-group-item-text">Loading...</p>
                         </div>
                     </div>
-                <!--List close-->
+                    <!--List close-->
                 </div>
 
             </div>

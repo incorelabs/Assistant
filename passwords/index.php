@@ -87,9 +87,11 @@ echo $navbar_str;
                             <div class="input-group">
                                 <input id="searchBox" type="text" class="form-control" placeholder="Search..."
                                        autofocus/>
+
                                 <div class="input-group-btn">
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-success" onclick="pagePassword.doSearch();">
+                                        <button type="button" class="btn btn-success"
+                                                onclick="pagePassword.doSearch();">
                                             <span class="fa fa-search"></span>
                                         </button>
                                     </div>
@@ -141,7 +143,6 @@ echo $navbar_str;
                     <!-- List group -->
                     <div class="list-group">
                         <div id="passwordDetailBody" class='list-group-item list-group-item-border'>
-                            <p class="list-group-item-text">Loading...</p>
                         </div>
                     </div>
                     <!--List close-->
@@ -207,7 +208,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-size"></i>
-                                <select class="form-control select-field-left-border" id="holderName" name="name" tabindex="1">
+                                <select class="form-control select-field-left-border" id="holderName" name="name"
+                                        tabindex="1">
                                     <option>Select Holder Name</option>
                                 </select>
                             </div>
