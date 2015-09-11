@@ -835,11 +835,12 @@ var pageContact = {
         $(autoCompleteId).autocomplete({
             source: autoCompleteArray,
             change: function (event, ui) {
-                if (ui.item) {
-                    var index = $.inArray(ui.item.value, autoCompleteArray);
+                var index = $.inArray($(event.target).val(), autoCompleteArray);
+                if (index > -1) {
+                    console.log("not selected but value is in array");
                     $(changeCodeId).val(changeCodeArray[index]);
-                }
-                else {
+                } else {
+                    console.log("Change triggered");
                     $(changeCodeId).val(-1);
                 }
             },
