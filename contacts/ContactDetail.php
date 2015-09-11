@@ -25,6 +25,7 @@ class ContactDetail
 
     function getContactDetailQuery(){
         $sql = "SELECT Table151.ContactCode, Table114.TitleName, Table151.FirstName, Table151.MiddleName, Table151.LastName, Table151.FullName, Table151.TitleCode, Table151.GuardianName, Table151.Company, Table151.Designation, Table151.Alias, DATE_FORMAT(Table151.Dob,'%d/%m/%Y') AS 'Dob', DATE_FORMAT(Table151.Dom,'%d/%m/%Y') AS 'Dom', Table126.GroupName, Table151.GroupCode, Table128.EmergencyName, Table151.EmergencyCode, Table151.Remarks, Table151.Mobile1, Table151.Mobile2, Table151.Mobile3, Table151.Email1, Table151.Email2, Table151.Facebook, Table151.Twitter, Table151.Google, Table151.Linkedin, Table151.Website, Table151.TotalAddresses, Table151.TotalFamilyMembers, Table151.PhotoUploaded, Table151.CommunicateAddress, Table151.InsertedBy, Table151.PrivateFlag, Table151.ActiveFlag, Table151.LastAccessDateTime FROM assistant.Table151 LEFT JOIN Table114 ON Table114.TitleCode = Table151.TitleCode LEFT JOIN Table126 ON Table126.GroupCode = Table151.GroupCode LEFT JOIN Table128 ON Table128.EmergencyCode = Table151.EmergencyCode WHERE Table151.RegCode = ".$this->regCode." AND Table151.ContactCode = ".$this->contactCode."; ";
+
         return $sql;
     }
 
@@ -85,7 +86,7 @@ class ContactDetail
     }
 
     function getImagePathQuery(){
-        $sql = "SELECT ImagePathFROM Table159 WHERE RegCode = ".$this->regCode." AND ContactCode = ".$this->contactCode." AND SerialNo = 1;";
+        $sql = "SELECT ImagePath FROM Table159 WHERE RegCode = ".$this->regCode." AND ContactCode = ".$this->contactCode." AND SerialNo = 1;";
         return $sql;
     }
 
