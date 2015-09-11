@@ -6,7 +6,8 @@ var pagePassword = {
     passwordList: null,
     modalHeading: null,
     firstTime: true,
-    detailIndex: 0,
+    stateEncryptLoginPassword1: false,
+    stateEncryptLoginPassword2: false,
     getFamilyList: function () {
         var url = localStorage.getItem("websiteRoot") + "family/getFamily.php";
 
@@ -182,40 +183,51 @@ var pagePassword = {
 
             str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Login ID</div><value><div class='col-md-9'>" + data.detail.password.LoginID + "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Password</div><value><div class='col-md-8 col-sm-8 col-xs-8'><div class='textShow'>" + data.detail.password.LoginPassword1 + "</div></div><div class='col-md-1 pull-right'><a href='#' id='passwordEncrypt'><i class='fa fa-eye fa-lg'></i></a></div></value></div></div>";
+            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Password</div><value><div class='col-md-8 col-sm-8 col-xs-8' id='loginPassword1'>" + pagePassword.morphPassword(data.detail.password.LoginPassword1, 1) + "</div><div class='col-md-1 pull-right'><a href='#' onclick='pagePassword.togglePassword(1)'><i class='fa fa-eye fa-lg'></i></a></div></value></div></div>";
 
-            str += "<div class='row contact-details' id='optionalPasswordRow'><div class='list-group-item-heading header_font'><div class='col-md-3'>Optional Password</div><value><div class='col-md-8 col-sm-8 col-xs-8'><div class='textShow1'>" + data.detail.password.LoginPassword2 + "</div></div><div class='col-md-1 pull-right'><a href='#' id='passwordEncrypt1'><i class='fa fa-eye fa-lg'></i></a></div></value></div></div>";
+            if (data.detail.password.LoginPassword2 != null) {
+                str += "<div class='row contact-details' id='optionalPasswordRow'><div class='list-group-item-heading header_font'><div class='col-md-3'>Optional Password</div><value><div class='col-md-8 col-sm-8 col-xs-8' id='loginPassword2'>" + pagePassword.morphPassword(data.detail.password.LoginPassword2, 2) + "</div><div class='col-md-1 pull-right'><a href='#' onclick='pagePassword.togglePassword(2)'><i class='fa fa-eye fa-lg'></i></a></div></value></div></div>";
+            } else
+                pagePassword.stateEncryptLoginPassword2 = false;
 
             $("#passwordDetailHeader").html(headerStr);
             $("#passwordDetailBody").html(str);
-            originalPassword = $(".textShow").html();
-            encryptedPassword = originalPassword.replace(/./gi, "*");  // replace each character by an *
-            $(".textShow").text(encryptedPassword);
-            $("#passwordEncrypt").click(function () {
-                $(".textShow").text(function (original, encrypted) {
-                    return encrypted == originalPassword ? encryptedPassword : originalPassword
-                });
-            });
-
-            originalOtherPassword = $(".textShow1").html();
-            if (originalOtherPassword.length > 0) {
-                encryptedOtherPassword = originalOtherPassword.replace(/./gi, "*");
-            }
-            else {
-                $("#optionalPasswordRow").addClass("hidden");
-                encryptedOtherPassword = originalOtherPassword;
-            }
-            $(".textShow1").text(encryptedOtherPassword);
-            $("#passwordEncrypt1").click(function () {
-                $(".textShow1").text(function (original, encrypted) {
-                    return encrypted == originalOtherPassword ? encryptedOtherPassword : originalOtherPassword
-                });
-            });
-
         } else {
             pagePassword.localPassword = null;
         }
 
+    },
+    morphPassword: function (passwordText, passwordType) {
+        switch (passwordType) {
+            case 1:
+                pagePassword.stateEncryptLoginPassword1 = true;
+                break;
+            case 2:
+                pagePassword.stateEncryptLoginPassword2 = true;
+                break;
+        }
+        return passwordText.replace(/./gi, "*");
+    },
+    togglePassword: function (btnType) {
+        console.log(btnType);
+        switch (btnType) {
+            case 1:
+                if (pagePassword.stateEncryptLoginPassword1) {
+                    $("#loginPassword1").html(pagePassword.localPassword.password.LoginPassword1);
+                    pagePassword.stateEncryptLoginPassword1 = false;
+                } else {
+                    $("#loginPassword1").html(pagePassword.morphPassword(pagePassword.localPassword.password.LoginPassword1, 1));
+                }
+                break;
+            case 2:
+                if (pagePassword.stateEncryptLoginPassword2) {
+                    $("#loginPassword2").html(pagePassword.localPassword.password.LoginPassword2);
+                    pagePassword.stateEncryptLoginPassword2 = false;
+                } else {
+                    $("#loginPassword2").html(pagePassword.morphPassword(pagePassword.localPassword.password.LoginPassword2, 2));
+                }
+                break;
+        }
     },
     openAddPasswordModal: function () {
         document.getElementById("form-passwords").reset();
