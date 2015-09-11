@@ -10,7 +10,6 @@ function createResponse($status,$message){
 
 $response = array(0,"Initialize");
 $validate = false;
-print_r($_POST);
 
 //General Validation
 do {
