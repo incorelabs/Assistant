@@ -222,7 +222,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-key hidden-xs fa-size"></i>
                                 <input type="text" class="form-control text-field-left-border" id="passwordType"
-                                       name="passwordType" placeholder="Password Type" tabindex="2"/>
+                                       name="passwordType" placeholder="Password Type" tabindex="2" required/>
                             </div>
                         </div>
                     </div>
@@ -233,7 +233,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
                                 <input type="text" class="form-control text-field-left-border" name="description"
-                                       id="description" placeholder="Description" tabindex="3"/>
+                                       id="description" placeholder="Description" tabindex="3" required/>
                             </div>
                         </div>
                     </div>
@@ -244,7 +244,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-user hidden-xs fa-size"></i>
                                 <input type="text" class="form-control text-field-left-border" id="userID" name="userID"
-                                       placeholder="Login ID" aria-describedby="basic-addon1" tabindex="4"/>
+                                       placeholder="Login ID" aria-describedby="basic-addon1" tabindex="4" required/>
                             </div>
                         </div>
                     </div>
@@ -253,7 +253,7 @@ echo $navbar_str;
                             <span class="input-group-btn"><span
                                     class="input-group-addon group-addon-text-custom input-group-addon-label">Password*</span></span>
                             <input type="password" class="form-control text-field-left-border" name="password"
-                                   id="password" placeholder="Password" tabindex="5"/>
+                                   id="password" placeholder="Password" tabindex="5" required/>
                             <span class="input-group-btn"><button class="btn btn-primary button-addon-custom"
                                                                   type="button" id="showPassword"><i
                                         class="fa fa-eye fa-lg"></i></button></span>

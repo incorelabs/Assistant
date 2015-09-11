@@ -361,8 +361,13 @@ $(document).ready(function () {
 
     //Password form submit
     $("#form-passwords").ajaxForm({
-        beforeSubmit: function (arr) {
-            console.log(arr);
+        beforeSubmit: function (formData) {
+            for (var i = 0; i < formData.length; i++) {
+                if (formData[i].required && formData[i].value.trim() == "") {
+                    pageIndex.showNotificationFailure("Required fields are empty");
+                    return false;
+                }
+            }
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
         },
@@ -386,6 +391,10 @@ $(document).ready(function () {
             else {
                 pageIndex.showNotificationFailure(response.message);
             }
+        },
+        error: function () {
+            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            $("#passwordModal").modal("hide");
         }
     });
 
@@ -418,6 +427,10 @@ $(document).ready(function () {
             } else {
                 pageIndex.showNotificationFailure(response.message);
             }
+        },
+        error: function () {
+            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            $("#deleteModal").modal("hide");
         }
     });
 
