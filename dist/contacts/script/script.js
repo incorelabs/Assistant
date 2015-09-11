@@ -1023,6 +1023,11 @@ $(document).ready(function (event) {
                 pageContact.localContact.contact.ImageURL = response.location;
                 $(".progress").hide();
             }
+        },
+        error: function () {
+            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            $("#imageModal").modal('hide');
+            $(".progress").hide();
         }
     });
 
@@ -1052,6 +1057,10 @@ $(document).ready(function (event) {
             else {
                 pageIndex.showNotificationFailure(response.message);
             }
+        },
+        error: function () {
+            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            $("#deleteModal").modal("hide");
         }
     });
 
@@ -1081,6 +1090,10 @@ $(document).ready(function (event) {
             } else {
                 pageIndex.showNotificationFailure(response.message);
             }
+        },
+        error: function () {
+            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            $("#contactModal").modal("hide");
         }
     });
 
