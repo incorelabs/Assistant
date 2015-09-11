@@ -1045,6 +1045,7 @@ $(document).ready(function (event) {
 
     $("#deleteContact").ajaxForm({
         success: function (responseText, statusText, xhr, $form) {
+            console.log(responseText);
             var response = JSON.parse(responseText);
             console.log(response);
             if (response.status == 1) {
@@ -1080,6 +1081,7 @@ $(document).ready(function (event) {
             }
         },
         success: function (responseText, statusText, xhr, $form) {
+            console.log(responseText);
             var response = JSON.parse(responseText);
             console.log(response);
             console.log(response.status);
