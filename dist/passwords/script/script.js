@@ -80,7 +80,7 @@ var pagePassword = {
         $.getJSON(url, {
             pageNo: pagePassword.currentPageNo,
             searchType: 1,
-            searchText: $('#searchBox').val()
+            searchText: $('#searchBox').val().trim()
         }).done(function (data) {
             console.log(data);
 
@@ -417,6 +417,14 @@ $(document).ready(function () {
             }
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
+        }
+    });
+
+    $("#searchBox").on('input propertychange', function () {
+        if ($(this).val().trim() == "") {
+            $("#passwordList").empty();
+            pagePassword.currentPageNo = 1;
+            pagePassword.getPasswordList();
         }
     });
 

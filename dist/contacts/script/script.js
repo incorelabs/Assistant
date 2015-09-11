@@ -82,7 +82,7 @@ var pageContact = {
         $.getJSON(url, {
             pageNo: pageContact.currentPageNo,
             searchType: $('#filter').val(),
-            searchText: $('#searchBox').val()
+            searchText: $('#searchBox').val().trim()
         }).done(function (data) {
             console.log(data);
 
@@ -1081,6 +1081,14 @@ $(document).ready(function (event) {
             } else {
                 pageIndex.showNotificationFailure(response.message);
             }
+        }
+    });
+
+    $("#searchBox").on('input propertychange', function () {
+        if ($(this).val().trim() == "") {
+            $("#contactList").empty();
+            pageContact.currentPageNo = 1;
+            pageContact.getContactList();
         }
     });
 
