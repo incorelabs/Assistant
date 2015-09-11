@@ -103,19 +103,6 @@ do {
         break;
     }
 
-    //Date validation
-    $dob = explode("/", $_POST['dob']);
-    $dob = array($dob[2], $dob[1], $dob[0]);
-    $_POST['dob'] = implode("-", $dob);
-
-    if ($validate && strlen($dob[0]) == 4 && $dob[1] < 13 && $dob[2] < 32) {
-        $validate = true;
-    } else {
-        $validate = false;
-        $response = createResponse(0, "Invalid date");
-        break;
-    }
-
 } while (0);
 
 $_POST = safeStringForSQL($_POST);
