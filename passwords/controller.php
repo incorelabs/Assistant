@@ -35,7 +35,6 @@ do {
 
 	//Validate required fields
     if (empty($_POST["name"]) || empty($_POST["mode"]) || empty($_POST["passwordType"]) || empty($_POST["passwordTypeCode"]) || empty($_POST["description"]) || empty($_POST["userID"]) || empty($_POST["password"])) {
-        echo "Empty";
         $validate = false;
         $response = createResponse(0,"Required fields are empty");
         break;

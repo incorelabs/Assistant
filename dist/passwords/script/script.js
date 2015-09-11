@@ -390,6 +390,8 @@ $(document).ready(function () {
             }
             else {
                 pageIndex.showNotificationFailure(response.message);
+                $("#pageLoading").removeClass("loader");
+                $(".cover").fadeOut(100);
             }
         },
         error: function () {
@@ -426,6 +428,7 @@ $(document).ready(function () {
                 }, 500);
             } else {
                 pageIndex.showNotificationFailure(response.message);
+                $("#deleteModal").modal("hide");
             }
         },
         error: function () {
