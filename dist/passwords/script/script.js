@@ -7,7 +7,6 @@ var pagePassword = {
     modalHeading: null,
     firstTime: true,
     detailIndex: 0,
-    isPasswordTypeSelected: false,
     getFamilyList: function () {
         var url = localStorage.getItem("websiteRoot") + "family/getFamily.php";
 
@@ -316,24 +315,22 @@ var pagePassword = {
             dataIndex.push(arr[0]);
         }
 
-        //console.log(data);
         $("#passwordType").autocomplete({
             source: data,
             select: function (event, ui) {
+                console.log("selected");
                 var index = $.inArray(ui.item.value, data);
                 $("#passwordTypeCode").val(dataIndex[index]);
-                pagePassword.isPasswordTypeSelected = true;
-                //console.log("ON SELECT: " + ($("#passwordTypeCode").val()));
-
             },
             change: function (event, ui) {
-                console.log("Change triggered");
-                //$("#passwordTypeCode").val("1");
-                if (!pagePassword.isPasswordTypeSelected) {
+                var index = $.inArray($(event.target).val(), data);
+                if (index > -1) {
+                    console.log("not selected but value is in array");
+                    $("#passwordTypeCode").val(dataIndex[index]);
+                } else {
+                    console.log("Change triggered");
                     $("#passwordTypeCode").val("1");
                 }
-                pagePassword.isPasswordTypeSelected = false;
-                //console.log("ON Change: " + ($("#passwordTypeCode").val()));
             }
         });
     }
