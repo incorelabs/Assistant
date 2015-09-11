@@ -197,7 +197,7 @@ class PasswordController
 
         if($result = $this->mysqli->query($qry)){
             if($result->num_rows == 0){
-                $this->landing = -1;
+                $this->landing = null;
             }
             else{
                 $this->landing = $result->fetch_assoc()["PasswordCode"];
