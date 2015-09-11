@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     $("#form-signup").ajaxForm({
         beforeSubmit: function () {
-            if (pageIndex.email_count == 1 && pageIndex.pwd_count == 1 && pageIndex.c_pwd_count == 1 && pageIndex.name_count == 1 && pageIndex.country_count == 1 && pageIndex.mobile_count == 1 && pageIndex.dob_count == 1) {
+            if (pageIndex.email_count == 1 && pageIndex.pwd_count == 1 && pageIndex.c_pwd_count == 1 && pageIndex.name_count == 1 && pageIndex.country_count == 1 && pageIndex.mobile_count == 1) {
                 $(".cover").fadeIn(100);
                 $("#pageLoading").addClass("loader");
                 return true;
@@ -15,7 +15,6 @@ $(document).ready(function () {
                 pageIndex.validateName(".name");
                 pageIndex.validateMobile(".mobile");
                 pageIndex.validateCountry("#country");
-                pageIndex.validateDate(".date");
                 return false;
             }
 
