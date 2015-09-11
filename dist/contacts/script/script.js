@@ -853,10 +853,6 @@ var pageContact = {
             }
         });
     },
-    showLoadingInContactDetail: function () {
-        var contactDetailStr = "<div class='list-group-item loading'></div>";
-        $("#contactDetailBody").html(contactDetailStr);
-    },
     refreshMasterList: function () {
         pageContact.getTitleData();
         pageContact.getGroupData();
@@ -1007,7 +1003,17 @@ $(document).ready(function (event) {
     });
 
     $("#profileForm").ajaxForm({
-        beforeSubmit: function () {
+        beforeSubmit: function (formData) {
+            console.log(formData);
+            for (var i = 0; i < formData.length; i++) {
+                console.log(formData[i]);
+                if (formData[i].name == "fileToUpload") {
+                    if (formData[i].value == "") {
+                        pageIndex.showNotificationFailure("No Image Selected");
+                        return false;
+                    }
+                }
+            }
             $(".progress").show();
         },
         uploadProgress: function (event, position, total, percentComplete) {
@@ -1065,13 +1071,13 @@ $(document).ready(function (event) {
     });
 
     $("#contactForm").ajaxForm({
-        beforeSubmit: function (arr, $form, options) {
-            console.log(arr);
-            pageContact.showLoadingInContactDetail();
-            // The array of form data takes the following form:
-            // [ { name: 'username', value: 'jresig' }, { name: 'password', value: 'secret' } ]
-
-            // return false to cancel submit
+        beforeSubmit: function (formData, $form, options) {
+            for (var i = 0; i < formData.length; i++) {
+                if (formData[i].required && formData[i].value.trim() == "") {
+                    pageIndex.showNotificationFailure("Required fields are empty");
+                    return false;
+                }
+            }
         },
         success: function (responseText, statusText, xhr, $form) {
             var response = JSON.parse(responseText);

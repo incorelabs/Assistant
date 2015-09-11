@@ -229,7 +229,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="glyphicon glyphicon-star fa-size hidden-xs"></i>
                                 <input type="text" name="title" class="form-control text-field-left-border"
-                                       id="addTitle" placeholder="Title" autofocus tabindex="1"/>
+                                       id="addTitle" placeholder="Title" autofocus tabindex="1" required/>
                             </div>
                         </div>
                     </div>
@@ -243,7 +243,7 @@ echo $navbar_str;
                                 <i class="fa fa-user fa-size hidden-xs"></i>
                                 <input type="text" name="firstName" id="addFirstName"
                                        class="form-control text-field-left-border" placeholder="First Name"
-                                       tabindex="2"/>
+                                       tabindex="2" required/>
                             </div>
                         </div>
                     </div>
@@ -1083,7 +1083,7 @@ echo $navbar_str;
                                     <br>
                                     <br>
                                     <input type='file' id="imgInp" name="fileToUpload"
-                                           style="padding-bottom:10px;"/>
+                                           style="padding-bottom:10px;" required/>
 
                                     <p id="imageErrorMsg"></p>
                                 </div>
