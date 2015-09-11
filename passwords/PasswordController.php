@@ -100,6 +100,9 @@ class PasswordController
         if($count == 0){
             $this->landing = null;
         }
+        elseif($this->active == 2){
+            $this->setFirstRecordAsLanding();
+        }
         else{
             $this->landing = $this->passwordCode;
         }
@@ -115,13 +118,13 @@ class PasswordController
 
     function getSpTable152Query(){
         $passwordCode = $this->passwordCode;
-        $passwordTypeCode = ((isset($this->data["passwordTypeCode"])) ? intval($this->data['passwordTypeCode']) : 0);
+        $passwordTypeCode = ((!empty($this->data["passwordTypeCode"])) ? intval($this->data['passwordTypeCode']) : 0);
         $passwordTypeName = "'".$this->data["passwordType"]."'";
         $holderCode = intval($this->data['name']);
         $passwordName = "'".$this->data["description"]."'";
         $userID = "'".$this->data["userID"]."'";
-        $password1 = ((isset($this->data["password"])) ? "'".$this->data["password"]."'" : "NULL");
-        $password2 = ((isset($this->data["password1"])) ? "'".$this->data["password1"]."'" : "NULL");
+        $password1 = ((!empty($this->data["password"])) ? "'".$this->data["password"]."'" : "NULL");
+        $password2 = ((!empty($this->data["password1"])) ? "'".$this->data["password1"]."'" : "NULL");
         $inserted = $this->familyCode;
         $private = (isset($this->data["private"]) ? 1 : 2);
         $active = (isset($this->data["active"]) ? 1 : 2);
