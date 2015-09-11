@@ -432,6 +432,7 @@ h5 {
     border-bottom-left-radius: 0px !important;
     height: 40px;
     -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 .group-addon-text-custom {
