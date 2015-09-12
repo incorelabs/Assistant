@@ -755,13 +755,18 @@ var pageContact = {
     setStateAutoCompleteWithOptions: function (autoCompleteId, changeCodeId, countryId, countryCodeId) {
         $(autoCompleteId).autocomplete({
             source: pageContact.stateTag,
-            change: function (event, ui) {
-                if (ui.item) {
-                    var index = $.inArray(ui.item.value, pageContact.stateTag);
+            response: function (event, ui) {
+                console.log($(event.target).val());
+                var index = $.inArray($(event.target).val(), pageContact.stateTag);
+                if (index > -1) {
+                    console.log("not selected but value is in array");
                     $(changeCodeId).val(pageContact.stateCode[index]);
-                }
-                else {
-                    $(changeCodeId).val(-1);
+                } else {
+                    $(countryId).val('');
+                    $(countryCodeId).val(0);
+                    $(countryId).attr('readonly', false);
+                    console.log("Different Value");
+                    $(changeCodeId).val(1);
                 }
             },
             select: function (event, ui) {
@@ -779,7 +784,6 @@ var pageContact = {
                 var countryIndex = $.inArray(countryCodeValue, pageContact.countryCode);
                 $(countryId).val(pageContact.countryTag[countryIndex]);
                 $(countryId).attr('readonly', true);
-                console.log($(changeCodeId).val());
             }
         });
     },
@@ -791,13 +795,21 @@ var pageContact = {
     setCityAutoCompleteWithOptions: function (autoCompleteId, changeCodeId, countryId, countryCodeId, stateId, stateCodeId) {
         $(autoCompleteId).autocomplete({
             source: pageContact.cityTag,
-            change: function (event, ui) {
-                if (ui.item) {
-                    var index = $.inArray(ui.item.value, pageContact.cityTag);
+            response: function (event, ui) {
+                console.log($(event.target).val());
+                var index = $.inArray($(event.target).val(), pageContact.cityTag);
+                if (index > -1) {
+                    console.log("not selected but value is in array");
                     $(changeCodeId).val(pageContact.cityCode[index]);
-                }
-                else {
-                    $(changeCodeId).val(-1);
+                } else {
+                    $(stateId).val('');
+                    $(stateCodeId).val(0);
+                    $(stateId).attr('readonly', false);
+                    $(countryId).val('');
+                    $(countryCodeId).val(0);
+                    $(countryId).attr('readonly', false);
+                    console.log("Different Value");
+                    $(changeCodeId).val(1);
                 }
             },
             select: function (event, ui) {
@@ -823,8 +835,6 @@ var pageContact = {
                 var countryIndex = $.inArray(countryCodeValue, pageContact.countryCode);
                 $(countryId).val(pageContact.countryTag[countryIndex]);
                 $(countryId).attr('readonly', true);
-
-                //console.log($("#homeStateCode").val());
             }
         });
     },
@@ -843,7 +853,7 @@ var pageContact = {
                     $(changeCodeId).val(changeCodeArray[index]);
                 } else {
                     console.log("Change triggered");
-                    $(changeCodeId).val(-1);
+                    $(changeCodeId).val(1);
                 }
             },
             select: function (event, ui) {
@@ -1088,6 +1098,7 @@ $(document).ready(function (event) {
 
     $("#contactForm").ajaxForm({
         beforeSubmit: function (formData, $form, options) {
+            console.log(formData);
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
                     pageIndex.showNotificationFailure("Required fields are empty");
@@ -1142,8 +1153,10 @@ $(document).ready(function (event) {
     $("#homeCity").on('input propertychange', function () {
         if ($(this).val().trim() == "") {
             $("#homeState").val('');
+            $("#homeStateCode").val(0);
             $("#homeState").attr('readonly', false);
             $("#homeCountry").val('');
+            $("#homeCountryCode").val(0);
             $("#homeCountry").attr('readonly', false);
         }
     });
@@ -1151,6 +1164,7 @@ $(document).ready(function (event) {
     $("#homeState").on('input propertychange', function () {
         if ($(this).val().trim() == "") {
             $("#homeCountry").val('');
+            $("#homeCountryCode").val(0);
             $("#homeCountry").attr('readonly', false);
         }
     });
@@ -1158,8 +1172,10 @@ $(document).ready(function (event) {
     $("#workCity").on('input propertychange', function () {
         if ($(this).val().trim() == "") {
             $("#workState").val('');
+            $("#workStateCode").val(0);
             $("#workState").attr('readonly', false);
             $("#workCountry").val('');
+            $("#workCountryCode").val(0);
             $("#workCountry").attr('readonly', false);
         }
     });
@@ -1167,6 +1183,7 @@ $(document).ready(function (event) {
     $("#workState").on('input propertychange', function () {
         if ($(this).val().trim() == "") {
             $("#workCountry").val('');
+            $("#workCountryCode").val(0);
             $("#workCountry").attr('readonly', false);
         }
     });
@@ -1174,8 +1191,10 @@ $(document).ready(function (event) {
     $("#otherCity").on('input propertychange', function () {
         if ($(this).val().trim() == "") {
             $("#otherState").val('');
+            $("#otherStateCode").val(0);
             $("#otherState").attr('readonly', false);
             $("#otherCountry").val('');
+            $("#otherCountryCode").val(0);
             $("#otherCountry").attr('readonly', false);
         }
     });
@@ -1183,6 +1202,7 @@ $(document).ready(function (event) {
     $("#otherState").on('input propertychange', function () {
         if ($(this).val().trim() == "") {
             $("#otherCountry").val('');
+            $("#otherCountryCode").val(0);
             $("#otherCountry").attr('readonly', false);
         }
     });
