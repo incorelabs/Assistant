@@ -2,6 +2,7 @@ var pagePassword = {
     currentPageNo: 1,
     localPassword: null,
     defPasswordList: $.Deferred(),
+    defSearchResult: $.Deferred(),
     familyList: null,
     passwordList: null,
     modalHeading: null,
@@ -14,7 +15,6 @@ var pagePassword = {
         $.getJSON(url, {
             list: 2
         }).done(function (data) {
-            console.log(data);
             pagePassword.setFamilyList(data);
         }).fail(function (error) {
 
@@ -39,7 +39,6 @@ var pagePassword = {
         $.getJSON(url, {
             pageNo: pagePassword.currentPageNo
         }).done(function (data) {
-            console.log(data);
             pagePassword.defPasswordList.resolve(data);
             pagePassword.setPasswordList(data);
         }).fail(function (error) {
@@ -55,9 +54,7 @@ var pagePassword = {
                 str += "<a onclick='pagePassword.getPasswordDetails(" + data.result[i].PasswordCode + ")' class='list-group-item contacts_font'><h4 class='list-group-item-heading contacts_font'>" + data.result[i].HolderName + " - " + data.result[i].PasswordName + "</h4></a>";
             }
             $("#passwordList").append(str);
-            console.log(str);
             // Print on screen
-            console.log(data.result);
             if (pagePassword.currentPageNo <= data.pages) {
                 // Show Load More
                 var str = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pagePassword.getPasswordList();'>Load more..</a></div>";
@@ -73,7 +70,12 @@ var pagePassword = {
     doSearch: function () {
         pagePassword.currentPageNo = 1;
         $("#passwordList").empty();
+        pagePassword.defSearchResult = $.Deferred();
         pagePassword.getSearchResults();
+        $.when(pagePassword.defSearchResult).done(function (data) {
+            if (data.status == 1)
+                pagePassword.getPasswordDetails(data.result[0].PasswordCode);
+        });
     },
     getSearchResults: function () {
         var url = localStorage.getItem("websiteRoot") + "passwords/getPasswordList.php";
@@ -83,9 +85,7 @@ var pagePassword = {
             searchType: 1,
             searchText: $('#searchBox').val().trim()
         }).done(function (data) {
-            console.log(data);
-
-            console.log(pagePassword.currentPageNo);
+            pagePassword.defSearchResult.resolve(data);
             pagePassword.setSearchResults(data);
         }).fail(function (error) {
 
@@ -100,9 +100,7 @@ var pagePassword = {
                 str += "<a onclick='pagePassword.getPasswordDetails(" + data.result[i].PasswordCode + ")' class='list-group-item contacts_font'><h4 class='list-group-item-heading contacts_font'>" + data.result[i].HolderName + " - " + data.result[i].PasswordName + "</h4></a>";
             }
             $("#passwordList").append(str);
-            console.log(str);
             // Print on screen
-            console.log(data.result);
             if (pagePassword.currentPageNo <= data.pages) {
                 // Show Load More
                 var str = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pagePassword.getSearchResults();'>Load more..</a></div>";
@@ -114,8 +112,10 @@ var pagePassword = {
             str += data.message + "</li></div>";
             $("#passwordList").empty();
             $("#passwordList").html(str);
+            $("#passwordDetailBody").empty();
+            $("#editPasswordBtn").remove();
+            $("#deletePasswordBtn").remove();
         }
-
     },
     getPasswordDetails: function (passwordCode) {
         if (passwordCode == null)
@@ -125,8 +125,6 @@ var pagePassword = {
         $.getJSON(url, {
             passwordCode: passwordCode
         }).done(function (data) {
-            console.log(data);
-            console.log(data.detail.password);
             pagePassword.setPasswordDetails(data);
         }).fail(function (error) {
 
@@ -139,7 +137,6 @@ var pagePassword = {
             pagePassword.localPassword = data.detail;
 
             if (window.innerWidth < 992 && !pagePassword.firstTime) {
-                console.log("width less than 992");
                 //Show the Password Details Header and hides the search header
                 $("#searchPasswordHeader").addClass('hidden');
                 $("#passwordDetailsHeader").removeClass('hidden-xs hidden-sm');
@@ -205,7 +202,6 @@ var pagePassword = {
         return passwordText.replace(/./gi, "*");
     },
     togglePassword: function (btnType) {
-        console.log(btnType);
         switch (btnType) {
             case 1:
                 if (pagePassword.stateEncryptLoginPassword1) {
@@ -308,7 +304,6 @@ var pagePassword = {
         $.getJSON(url, {
             passwordType: 1
         }).done(function (data) {
-            console.log(data);
             pagePassword.setPasswordTypeAutoComplete(data);
         }).fail(function (error) {
 
@@ -326,17 +321,14 @@ var pagePassword = {
         $("#passwordType").autocomplete({
             source: data,
             select: function (event, ui) {
-                console.log("selected");
                 var index = $.inArray(ui.item.value, data);
                 $("#passwordTypeCode").val(dataIndex[index]);
             },
             change: function (event, ui) {
                 var index = $.inArray($(event.target).val(), data);
                 if (index > -1) {
-                    console.log("not selected but value is in array");
                     $("#passwordTypeCode").val(dataIndex[index]);
                 } else {
-                    console.log("Change triggered");
                     $("#passwordTypeCode").val("1");
                 }
             }
@@ -348,7 +340,6 @@ $(document).ready(function () {
     localStorage.setItem("websiteRoot", "../");
 
     $.when(pagePassword.defPasswordList).done(function (data) {
-        console.log(data.status);
         if (data.status == 1)
             pagePassword.getPasswordDetails(data.result[0].PasswordCode);
     });
@@ -380,7 +371,6 @@ $(document).ready(function () {
             $("#pageLoading").addClass("loader");
         },
         success: function (responseText, statusText, xhr, $form) {
-            console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 1) {
                 setTimeout(function () {
@@ -421,7 +411,6 @@ $(document).ready(function () {
             $("#pageLoading").addClass("loader");
         },
         success: function (responseText, statusText, xhr, $form) {
-            console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 1) {
                 setTimeout(function () {
@@ -457,7 +446,12 @@ $(document).ready(function () {
         if ($(this).val().trim() == "") {
             $("#passwordList").empty();
             pagePassword.currentPageNo = 1;
+            pagePassword.defPasswordList = $.Deferred();
             pagePassword.getPasswordList();
+            $.when(pagePassword.defPasswordList).done(function (data) {
+                if (data.status == 1)
+                    pagePassword.getPasswordDetails(data.result[0].PasswordCode);
+            });
         }
     });
 
@@ -474,7 +468,6 @@ $(document).ready(function () {
     }
 });
 $(window).resize(function () {
-    console.log(window.innerWidth);
     if (window.innerWidth < 992) {
         $("body").css("overflow", "auto");
         $("#passwordListScroll").removeClass("panelHeight");
