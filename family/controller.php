@@ -62,7 +62,7 @@ class FamilyController
             return;
         }
         elseif($this->familyCode == intval($this->data["familyCode"])){
-            $this->response = createResponse(0,"You cannot delete yourself");
+            $this->response = createResponse(0,"SELF cannot be deleted");
             return;
         }
         else{

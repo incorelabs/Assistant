@@ -164,6 +164,7 @@ body {
     border-bottom-left-radius: 0 !important;
     height: 40px;
     -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 .button-addon-custom {

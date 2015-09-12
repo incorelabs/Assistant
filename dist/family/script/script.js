@@ -256,12 +256,13 @@ $(document).ready(function () {
             var response = JSON.parse(responseText);
             if (response.status == 0) {
                 pageIndex.showNotificationFailure(response.message);
+                $("#addFamily").modal('show');
             }
             else {
                 pageIndex.showNotificationSuccess(response.message);
                 setTimeout(pageFamily.getFamilyList(), 200);
+                $("#addFamily").modal('hide');
             }
-            $("#addFamily").modal('hide');
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }

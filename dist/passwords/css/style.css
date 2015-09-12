@@ -427,14 +427,6 @@ h5 {
     height: 40px;
 }
 
-.select-field-left-border {
-    border-top-left-radius: 0px !important;
-    border-bottom-left-radius: 0px !important;
-    height: 40px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-
 .group-addon-text-custom {
     height: 40px;
     border-top-left-radius: 4px !important;

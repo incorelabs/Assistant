@@ -103,18 +103,18 @@ echo $navbar_str;
 </div>
 
 <!-- Add Member Modal -->
-<div class="modal fade" id="addFamily" tabindex="-1" role="dialog" aria-labelledby="addFamily" aria-hidden="true">
+<div class="modal fade" id="addFamily" tabindex="-1" role="dialog" aria-labelledby="addFamily" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <form class="form-horizontal" method="POST" action="controller.php" id="form-family" autocomplete="off">
                 <div class="modal-header">
                     <div class="form-group pull-left" style="padding-left:15px">
-                        <button class="btn btn-danger button-top-remove" data-dismiss="modal">
+                        <button class="btn btn-danger button-top-remove" data-dismiss="modal" tabindex="11">
                             <span class='glyphicon glyphicon-remove'></span>
                         </button>
                     </div>
                     <div class="form-group pull-right" style="padding-right:15px">
-                        <button type="submit" class="btn btn-success button-top-remove">
+                        <button type="submit" class="btn btn-success button-top-remove" tabindex="10">
                             <span class='glyphicon glyphicon-ok'></span>
                         </button>
                     </div>
@@ -133,7 +133,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-user fa-size hidden-xs"></i>
                                 <input type="text" name="name" id="firstName"
-                                       class="form-control name text-field-left-border" placeholder="Name"/>
+                                       class="form-control name text-field-left-border" placeholder="Name" tabindex="1"/>
                             </div>
                         </div>
                         <div class='info'></div>
@@ -145,7 +145,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-star fa-size hidden-xs"></i>
                                 <select name="relation" class="form-control textbox_height text-field-left-border"
-                                        id="relation">
+                                        id="relation" tabindex="2">
                                 </select>
                             </div>
                         </div>
@@ -158,7 +158,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-calendar fa-size hidden-xs"></i>
                                 <input type="text" name="dob" id="dob" class="form-control date text-field-left-border"
-                                       placeholder="Date of Birth"/>
+                                       placeholder="Date of Birth" tabindex="3"/>
                             </div>
                         </div>
                         <div class='info'></div>
@@ -170,7 +170,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="glyphicon glyphicon-phone fa-size hidden-xs"></i>
                                 <input type="text" name="mobile" id="mobile" class="form-control text-field-left-border"
-                                       placeholder="Mobile"/>
+                                       placeholder="Mobile" tabindex="4"/>
                             </div>
                         </div>
                     </div>
@@ -180,7 +180,7 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-lg fa-size hidden-xs" style="right:12px"></i>
-                                <select name="gender" id='gender' class="form-control select-field-left-border">
+                                <select name="gender" id='gender' class="form-control select-field-left-border" tabindex="5">
                                     <option value="">Select a Gender</option>
                                     <option value="2">Female</option>
                                     <option value="1">Male</option>
@@ -197,12 +197,12 @@ echo $navbar_str;
                             <div class="radio">
                                 <div class="col-xs-4">
                                     <label>
-                                        <input type="radio" name="access" id="yes" value="1">Yes</input>
+                                        <input type="radio" name="access" id="yes" value="1" tabindex="6">Yes</input>
                                     </label>
                                 </div>
                                 <div class="col-xs-4">
                                     <label>
-                                        <input type="radio" name="access" id="no" checked="checked" value="2">No</input>
+                                        <input type="radio" name="access" id="no" checked="checked" value="2" tabindex="6">No</input>
                                     </label>
                                 </div>
                             </div>
@@ -218,7 +218,7 @@ echo $navbar_str;
                                 <div class="inner-addon right-addon">
                                     <i class="fa fa-envelope-o fa-size hidden-xs"></i>
                                     <input type="email" name="email" id="email"
-                                           class="form-control email text-field-left-border" placeholder="Email"/>
+                                           class="form-control email text-field-left-border" placeholder="Email" tabindex="7"/>
                                 </div>
                             </div>
                             <div class='info'></div>
@@ -227,7 +227,7 @@ echo $navbar_str;
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-label">Password*</span>
                                 <input type="password" name="password" id="password"
-                                       class="form-control password text-field-left-border" placeholder="Password"/>
+                                       class="form-control password text-field-left-border" placeholder="Password" tabindex="8"/>
                                 <span class="input-group-btn"><button class="btn btn-primary button-addon-custom"
                                                                       type="button" id="showPassword"><i
                                             class="fa fa-eye fa-lg"></i></button></span>
@@ -239,7 +239,7 @@ echo $navbar_str;
                                 <span class="input-group-addon input-group-addon-label">Confirm*</span>
                                 <input type="password" name="confirmPassword" id="confirmPassword"
                                        class="form-control c_password text-field-left-border"
-                                       placeholder="Confirm Password"/>
+                                       placeholder="Confirm Password" tabindex="9"/>
                                 <span class="input-group-btn"><button class="btn btn-primary button-addon-custom"
                                                                       type="button" id="showOtherPassword"><i
                                             class="fa fa-eye fa-lg"></i></button></span>
@@ -257,7 +257,7 @@ echo $navbar_str;
 </div>
 </div><!--modal-->
 <!--Delete Contact Modal-->
-<div class="modal fade" id="deleteFamily" tabindex="-1" role="dialog" aria-labelledby="deleteFamily" aria-hidden="true">
+<div class="modal fade" id="deleteFamily" tabindex="-1" role="dialog" aria-labelledby="deleteFamily" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
