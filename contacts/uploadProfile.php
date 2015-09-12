@@ -85,7 +85,7 @@ if ($uploadOk == 0) {
 
         $sql = "UPDATE `Table151` SET `PhotoUploaded` = 1 WHERE ContactCode = ".$contactCode." AND RegCode = ".$regCode.";";
         $sql .= "DELETE FROM Table159 WHERE ContactCode = ".$contactCode." AND RegCode =".$regCode." AND SerialNo = 1;";
-        $sql .= "INSERT INTO `assistant`.`Table159`
+        $sql .= "INSERT INTO `Table159`
                 VALUES
                 (".$regCode.",
                 ".$contactCode.",
