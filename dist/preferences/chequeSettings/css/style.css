@@ -76,9 +76,7 @@
 .second-col-left-padding{
     padding-right: 0;
 }
-a:focus {
-    outline:none;
-}
+
 hr{
     margin-top: 0;
     margin-bottom: 0;

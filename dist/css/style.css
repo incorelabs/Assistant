@@ -248,3 +248,11 @@ body {
     z-index: 1050;
     display: none;
 }
+
+a:focus{
+    outline: 0;
+}
+
+button:focus {
+    outline: 0;
+}

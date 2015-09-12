@@ -143,8 +143,8 @@ echo $navbar_str;
                             <span class="input-group-addon input-group-addon-label">Relation*</span>
 
                             <div class="inner-addon right-addon">
-                                <i class="fa fa-star fa-size hidden-xs"></i>
-                                <select name="relation" class="form-control textbox_height text-field-left-border"
+                                <i class="fa fa-caret-down fa-size hidden-xs"></i>
+                                <select name="relation" class="form-control textbox_height select-field-left-border"
                                         id="relation" tabindex="2">
                                 </select>
                             </div>

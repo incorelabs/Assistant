@@ -472,3 +472,12 @@ h5 {
     padding: 0px;
     margin-top: 45px;
 }
+
+.contact-focus{
+    background-color: #718bff;
+    color: white !important;
+}
+
+.contact-focus:hover{
+    color: #555 !important;
+}

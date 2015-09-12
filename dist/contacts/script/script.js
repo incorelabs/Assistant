@@ -54,7 +54,7 @@ var pageContact = {
                     letterIndex = letter;
                     console.log(letterIndex);
                 }
-                str += "<a onclick='pageContact.getContactDetails(" + data.result[i].ContactCode + ")' class='list-group-item contacts_font'><h4 class='list-group-item-heading contacts_font'>" + data.result[i].FullName + "</h4></a>";
+                str += "<a onclick='pageContact.getContactDetails(" + data.result[i].ContactCode + ")' class='list-group-item contacts_font'>" + data.result[i].FullName + "</a>";
             }
             $("#contactList").append(str);
             console.log(str);
@@ -107,7 +107,7 @@ var pageContact = {
                     letterIndex = letter;
                     console.log(letterIndex);
                 }
-                str += "<a onclick='pageContact.getContactDetails(" + data.result[i].ContactCode + ")' class='list-group-item contacts_font'><h4 class='list-group-item-heading contacts_font'>" + data.result[i].FullName + "</h4></a>";
+                str += "<a onclick='pageContact.getContactDetails(" + data.result[i].ContactCode + ")' class='list-group-item contacts_font'>" + data.result[i].FullName + "</a>";
             }
             //$("#contactList").empty();
             $("#contactList").append(str);
