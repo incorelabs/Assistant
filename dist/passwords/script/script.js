@@ -68,8 +68,9 @@ var pagePassword = {
         }
     },
     doSearch: function () {
-        pagePassword.currentPageNo = 1;
         $("#passwordList").empty();
+        pagePassword.currentPageNo = 1;
+        pagePassword.firstTime = true;
         pagePassword.defSearchResult = $.Deferred();
         pagePassword.getSearchResults();
         $.when(pagePassword.defSearchResult).done(function (data) {
@@ -339,6 +340,17 @@ var pagePassword = {
 $(document).ready(function () {
     localStorage.setItem("websiteRoot", "../");
 
+    document.getElementById('searchBox').onkeypress = function (e) {
+        if (!e)
+            e = window.event;
+        console.log(e);
+        var keyCode = e.keyCode || e.which;
+        if (keyCode == '13') {
+            // Enter pressed
+            pagePassword.doSearch();
+        }
+    }
+
     $.when(pagePassword.defPasswordList).done(function (data) {
         if (data.status == 1)
             pagePassword.getPasswordDetails(data.result[0].PasswordCode);
@@ -446,6 +458,7 @@ $(document).ready(function () {
         if ($(this).val().trim() == "") {
             $("#passwordList").empty();
             pagePassword.currentPageNo = 1;
+            pagePassword.firstTime = true;
             pagePassword.defPasswordList = $.Deferred();
             pagePassword.getPasswordList();
             $.when(pagePassword.defPasswordList).done(function (data) {
