@@ -4,44 +4,6 @@ body {
     background-color: #ecf0f1;
 }
 
-.navbar-default {
-    background-color: #34495e;
-}
-
-.navbar-default .navbar-brand {
-    color: white;
-}
-
-.navbar-default .navbar-brand:hover {
-    color: #a1a1a1 !important;
-}
-
-.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
-    background-color: #34495e;
-}
-
-.navbar-default .navbar-toggle {
-    border-color: #ddd;
-}
-
-.navbar-default .navbar-nav > li > a {
-    color: white;
-}
-
-.navbar-default .navbar-nav > li > a:hover {
-    color: #a1a1a1 !important;
-    background-color: #34495e;
-}
-
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
-    color: #a1a1a1 !important;
-    background-color: #34495e !important;
-}
-
-.dropdown-toggle {
-    color: white;
-}
-
 .ul_margin {
     margin: 0px;
     padding: 0px;
