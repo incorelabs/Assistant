@@ -404,7 +404,8 @@ $(document).ready(function () {
         },
         error: function () {
             pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
-            $("#passwordModal").modal("hide");
+            $("#pageLoading").removeClass("loader");
+            $(".cover").fadeOut(100);
         }
     });
 
@@ -436,12 +437,14 @@ $(document).ready(function () {
                 }, 500);
             } else {
                 pageIndex.showNotificationFailure(response.message);
-                $("#deleteModal").modal("hide");
+                $("#pageLoading").removeClass("loader");
+                $(".cover").fadeOut(100);
             }
         },
         error: function () {
             pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
-            $("#deleteModal").modal("hide");
+            $("#pageLoading").removeClass("loader");
+            $(".cover").fadeOut(100);
         }
     });
 

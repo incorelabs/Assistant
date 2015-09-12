@@ -25,6 +25,7 @@ var pageContact = {
     addBtnHomePhoneCount: 0,
     addBtnWorkPhoneCount: 0,
     addBtnOtherPhoneCount: 0,
+    firstTime: true,
     getContactList: function () {
         var url = localStorage.getItem("websiteRoot") + "contacts/getContactList.php";
 
@@ -145,7 +146,7 @@ var pageContact = {
             var headerStr = "<h12>Contact Details</h12><button id='editContactBtn' class='btn btn-success pull-right' onclick='pageContact.openEditContactModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deleteContactBtn' class='btn btn-danger pull-left' onclick='pageContact.openDeleteContactModal(" + data.detail.contact.ContactCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
             var str = "";
             var imgLocation = "";
-            if (window.innerWidth < 992) {
+            if (window.innerWidth < 992 && !pageContact.firstTime) {
                 console.log("width less than 992");
 
                 //Show the Details Header and hides the search header
@@ -175,6 +176,7 @@ var pageContact = {
 
                 });
             }
+            pageContact.firstTime = false;
             if (data.detail.contact.ImageURL != null) {
                 imgLocation = data.detail.contact.ImageURL;
             }
@@ -1028,11 +1030,13 @@ $(document).ready(function (event) {
                 $("#imageresource").attr("src", response.location);
                 pageContact.localContact.contact.ImageURL = response.location;
                 $(".progress").hide();
+            } else {
+                pageIndex.showNotificationFailure(response.message);
+                $(".progress").hide();
             }
         },
         error: function () {
             pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
-            $("#imageModal").modal('hide');
             $(".progress").hide();
         }
     });
@@ -1044,6 +1048,10 @@ $(document).ready(function (event) {
     $(".progress").hide();
 
     $("#deleteContact").ajaxForm({
+        beforeSubmit: function (formData, $form, options) {
+            $(".cover").fadeIn(100);
+            $("#pageLoading").addClass("loader");
+        },
         success: function (responseText, statusText, xhr, $form) {
             console.log(responseText);
             var response = JSON.parse(responseText);
@@ -1060,15 +1068,22 @@ $(document).ready(function (event) {
                     pageContact.getContactDetails(response.landing);
                     $("#deleteModal").modal('hide');
                 }, 500);
-            }
-            else {
+            } else {
                 pageIndex.showNotificationFailure(response.message);
+                $("#pageLoading").removeClass("loader");
+                $(".cover").fadeOut(100);
             }
         },
         error: function () {
             pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
-            $("#deleteModal").modal("hide");
+            $("#pageLoading").removeClass("loader");
+            $(".cover").fadeOut(100);
         }
+    });
+
+    $('#deleteModal').on('hidden.bs.modal', function (e) {
+        $("#pageLoading").removeClass("loader");
+        $(".cover").fadeOut(100);
     });
 
     $("#contactForm").ajaxForm({
@@ -1079,6 +1094,8 @@ $(document).ready(function (event) {
                     return false;
                 }
             }
+            $(".cover").fadeIn(100);
+            $("#pageLoading").addClass("loader");
         },
         success: function (responseText, statusText, xhr, $form) {
             console.log(responseText);
@@ -1097,12 +1114,21 @@ $(document).ready(function (event) {
                 }, 500);
             } else {
                 pageIndex.showNotificationFailure(response.message);
+                $("#pageLoading").removeClass("loader");
+                $(".cover").fadeOut(100);
             }
         },
         error: function () {
             pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
-            $("#contactModal").modal("hide");
+            $("#pageLoading").removeClass("loader");
+            $(".cover").fadeOut(100);
         }
+    });
+
+    //remove loading cover after modal closes
+    $('#contactModal').on('hidden.bs.modal', function (e) {
+        $("#pageLoading").removeClass("loader");
+        $(".cover").fadeOut(100);
     });
 
     $("#searchBox").on('input propertychange', function () {

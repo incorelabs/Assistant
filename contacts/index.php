@@ -1112,4 +1112,7 @@ echo $navbar_str;
 <!--modal-->
 
 </body>
+<div class="cover">
+    <div id="pageLoading"></div>
+</div>
 </html>
