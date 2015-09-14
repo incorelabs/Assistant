@@ -36,7 +36,7 @@
     font-size: 20px;
 }
 .input-group-addon-label{
-    min-width: 65px;
+    min-width: 70px;
     font-size: 10px;
     text-align: left;
 }
@@ -44,7 +44,7 @@
     .input-group-addon-label
     {
         font-size: 14px;
-        min-width: 84px;
+        min-width: 89px;
         text-align: left;
     }
 }

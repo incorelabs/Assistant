@@ -34,37 +34,6 @@ define("ROOT", "../../");
     <script src="../../dist/script/script.js"></script>
     <script src="../../dist/date/script.js"></script>
     <script src="../../dist/preferences/envelopeSettings/script/script.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#envelopeFrom').change(function () {
-                if ($("#envelopeFrom").val() == "0") {
-                    $("#fromDiv").css("display", "block");
-                }
-                else {
-                    $("#fromDiv").css("display", "none");
-                }
-            });
-            $('#logoPrint').change(function () {
-                if ($("#logoPrint").val() == "0") {
-                    $("#logoDiv").css("display", "block");
-                }
-                else {
-                    $("#logoDiv").css("display", "none");
-                }
-            });
-            $('#envelopeTitleSelect').change(function () {
-                if ($("#envelopeTitleSelect").val() == "0") {
-                    $("")
-                    $("#envelopeCaptionDiv").css("display", "block");
-                    $("#envelopeTitle").addClass("col-md-6 col-sm-6 col-xs-6 first-col-left-padding first-col-right-padding");
-                }
-                else {
-                    $("#envelopeCaptionDiv").css("display", "none");
-                    $("#envelopeTitle").removeClass("col-md-6 col-sm-6 col-xs-6 first-col-left-padding first-col-right-padding");
-                }
-            });
-        });
-    </script>
 </head>
 <body>
 <!-- fixed top navbar -->
@@ -99,8 +68,8 @@ echo $navbar_str;
                 <th class="text-center col-md-1 col-sm-1 col-xs-1">Name</th>
                 <th class="text-center col-md-1 col-sm-1 hidden-xs">From</th>
                 <th class="text-center col-md-1 col-sm-1 hidden-xs">Caption</th>
-                <th class="text-center col-md-1 col-sm-1 col-xs-1">Logo</th>
                 <th class="text-center col-md-1 col-sm-1 col-xs-1">Print Feed</th>
+                <th class="text-center col-md-1 col-sm-1 col-xs-1">Logo</th>
                 <th class="text-center col-md-1 col-sm-1 col-xs-1">Actions</th>
             </tr>
             </thead>
@@ -112,12 +81,9 @@ echo $navbar_str;
                 <td class="text-center col-md-1 col-sm-1 hidden-xs">Test</td>
                 <td class="text-center col-md-1 col-sm-1 col-xs-1">Left</td>
                 <td class="text-center col-md-1 col-sm-1 col-xs-1">No</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1"><a href="#" data-toggle="modal"
-                                                                      data-target="#envelopeModal"><i
-                            class="fa fa-pencil fa-lg fa-green"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"
-                                                                                                         data-toggle="modal"
-                                                                                                         data-target="#deleteLabel"><i
-                            class="fa fa-trash-o fa-lg fa-red"></i></a></td>
+                <td class="text-center col-md-1 col-sm-1 col-xs-1"><a href="#" data-toggle="modal" data-target="#envelopeModal"><i class="fa fa-pencil fa-lg fa-green"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#deleteLabel"><i class="fa fa-trash-o fa-lg fa-red"></i></a>&nbsp;&nbsp;&nbsp;<a
+                        href="#" data-toggle="modal" data-target="#logoImage" class="imageLogo hidden"><i
+                            class="fa fa-picture-o fa-lg fa-green"></i></a></td>
             </tr>
             <tr>
                 <td class="text-center col-md-1 col-sm-1 col-xs-1">2</td>
@@ -126,20 +92,15 @@ echo $navbar_str;
                 <td class="text-center col-md-1 col-sm-1 hidden-xs">Test123</td>
                 <td class="text-center col-md-1 col-sm-1 col-xs-1">Right</td>
                 <td class="text-center col-md-1 col-sm-1 col-xs-1">Yes</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1"><a href="#" data-toggle="modal"
-                                                                      data-target="#envelopeModal"><i
-                            class="fa fa-pencil fa-lg fa-green"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"
-                                                                                                         data-toggle="modal"
-                                                                                                         data-target="#deleteLabel"><i
-                            class="fa fa-trash-o fa-lg fa-red"></i></a></td>
+                <td class="text-center col-md-1 col-sm-1 col-xs-1"><a href="#" data-toggle="modal" data-target="#envelopeModal"><i class="fa fa-pencil fa-lg fa-green"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#deleteLabel"><i class="fa fa-trash-o fa-lg fa-red"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#logoImage" class="imageLogo"><i class="fa fa-picture-o fa-lg fa-green"></i></a></td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
 
-<!-- Add Member Modal -->
-<div class="modal fade" id="envelopeModal" tabindex="-1" role="dialog" aria-labelledby="envelopeModal">
+<!-- Add Modal -->
+<div class="modal fade" id="envelopeModal" tabindex="-1" role="dialog" aria-labelledby="envelopeModal" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <form class="form-horizontal" method="POST" action="" id="form-label" autocomplete="off">
@@ -161,7 +122,7 @@ echo $navbar_str;
                 <div class="modal-body">
                     <div class="info text-center">*Please enter all the values in "mm" only</div>
                     <div class="form-group form-group-margin">
-                        <div class="col-md-6 col-sm-6 col-xs-6 first-col-left-padding first-col-right-padding">
+                        <div class="col-md-12 col-sm-12 col-xs-12 first-col-left-padding first-col-right-padding">
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-label">Name</span>
                                 <input type="text" name="envelopeName" id="envelopeName"
@@ -169,18 +130,18 @@ echo $navbar_str;
                             </div>
                             <div class='info'></div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6 second-col-left-padding second-col-right-padding">
+                    </div>
+                    <hr/>
+                    <div class="form-group form-group-margin">
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-label">From Req</span>
                                 <div class="inner-addon right-addon">
                                     <i class="fa fa-caret-down fa-size"></i>
                                     <select class="form-control select-field-left-border" id="envelopeFrom">
-                                        <option value="">From Required?</option>
                                         <option value="0">Yes</option>
-                                        <option value="1">No</option>
+                                        <option value="1" selected="selected">No</option>
                                     </select>
                                 </div>
-                            </div>
                         </div>
                     </div>
                     <div id="fromDiv" style="display:none">
@@ -204,9 +165,9 @@ echo $navbar_str;
                         </div>
                         <div class="form-group form-group-margin">
                             <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Address</span>
-                                <input type="text" name="fromAddress" id="fromAddress"
-                                       class="form-control text-field-left-border" placeholder="From Address"/>
+                                <span class="input-group-addon input-group-addon-label">Name</span>
+                                <input type="text" name="fromName" id="fromName"
+                                       class="form-control text-field-left-border" placeholder="From Name"/>
                             </div>
                             <div class='info'></div>
                         </div>
@@ -273,9 +234,8 @@ echo $navbar_str;
                                 <div class="inner-addon right-addon">
                                     <i class="fa fa-caret-down fa-size"></i>
                                     <select class="form-control select-field-left-border" id="envelopeTitleSelect">
-                                        <option value="">Title Required?</option>
                                         <option value="0">Yes</option>
-                                        <option value="1">No</option>
+                                        <option value="1" selected="selected">No</option>
                                     </select>
                                 </div>
                             </div>
@@ -298,9 +258,8 @@ echo $navbar_str;
                                 <div class="inner-addon right-addon">
                                     <i class="fa fa-caret-down fa-size"></i>
                                     <select id="logoPrint" class="form-control select-field-left-border">
-                                        <option value="">Include Logo?</option>
                                         <option value="0">Yes</option>
-                                        <option value="1">No</option>
+                                        <option value="1" selected="selected">No</option>
                                     </select>
                                 </div>
                             </div>
@@ -343,15 +302,6 @@ echo $navbar_str;
                                 <div class='info'></div>
                             </div>
                         </div>
-                        <div class="form-group form-group-margin">
-                            <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Upload</span>
-                                <input type="file" name="nextTop" id="nextTop"
-                                       class="form-control text-field-left-border custom-file-input"
-                                       placeholder=""/>
-                            </div>
-                            <div class='info'></div>
-                        </div>
                         <hr/>
                     </div>
                     <div class="form-group form-group-margin">
@@ -379,13 +329,14 @@ echo $navbar_str;
 <!--modal-content-->
 </div>
 </div><!--modal-->
-<!--Delete Contact Modal-->
-<div class="modal fade" id="deleteLabel" tabindex="-1" role="dialog" aria-labelledby="deleteLabel" aria-hidden="true">
+
+<!--Delete Modal-->
+<div class="modal fade" id="deleteLabel" tabindex="-1" role="dialog" aria-labelledby="deleteLabel" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title text-center">
-                    Are you sure, you want to DELETE this Contact?
+                    Are you sure, you want to DELETE this Envelope?
                 </h4>
             </div>
             <br>
@@ -418,5 +369,72 @@ echo $navbar_str;
     </div>
 </div>
 <!--modal-->
+
+<!-- Image Modal -->
+<div class="modal fade" id="logoImage" tabindex="-1" role="dialog" aria-labelledby="logoImage" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <form class="form-horizontal" method="" action="" enctype="multipart/form-data" id="" runat="server">
+
+                <div class="modal-header">
+
+                    <div class="btn-group pull-left">
+                        <button class="btn btn-danger" data-dismiss="modal">
+                            <span class='glyphicon glyphicon-remove'></span>
+
+                        </button>
+                    </div>
+
+                    <div class="btn-group pull-right">
+                        <button type="submit" class="btn btn-success">
+                            <span class='glyphicon glyphicon-ok'></span>
+
+                        </button>
+                    </div>
+
+                    <h4 class="modal-title text-center">
+                        Edit Image
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+                    <input type="text" class="hidden" name="" id='photoId'/>
+
+                    <div class="form-group row">
+                        <center>
+                            <div class="col-sm-12 col-md-12">
+                                <div class="col-lg-6 col-md-6 col-sm-5">
+                                    <label class="control-label">Select Image</label>
+                                    <br>
+                                    <br>
+                                    <input type='file' id="imgInp" name="fileToUpload"
+                                           style="padding-bottom:10px;" required/>
+
+                                    <p id="imageErrorMsg"></p>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-4">
+                                    <label class="control-label">Image Preview</label>
+                                    <br>
+                                    <br>
+                                    <img src="../../img/default/contact/profilePicture.png" id="imagepreview" class="addImage">
+                                </div>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+            </form>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+                     style="width: 0%;">
+                    <span class="sr-only" id="progressValue">0% Complete</span>
+                </div>
+            </div>
+        </div>
+        <!--modal-content-->
+    </div>
+</div>
+<!--modal-->
+
 </body>
 </html>
