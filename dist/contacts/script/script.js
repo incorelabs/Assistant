@@ -942,6 +942,16 @@ var pageContact = {
                 pageContact.addBtnOtherPhoneCount--;
                 break;
         }
+    },
+    showNotificationSuccess: function (successMessage) {
+        $("#notification_success").html(successMessage);
+        document.getElementById('notification_success').style.display = "block";
+        $("#notification_success").delay(2000).fadeOut("slow");
+    },
+    showNotificationFailure: function (failureMessage) {
+        $("#notification_failure").html(failureMessage);
+        document.getElementById('notification_failure').style.display = "block";
+        $("#notification_failure").delay(2000).fadeOut("slow");
     }
 };
 
@@ -1031,7 +1041,7 @@ $(document).ready(function (event) {
                 console.log(formData[i]);
                 if (formData[i].name == "fileToUpload") {
                     if (formData[i].value == "") {
-                        pageIndex.showNotificationFailure("No Image Selected");
+                        pageContact.showNotificationFailure("No Image Selected");
                         return false;
                     }
                 }
@@ -1051,12 +1061,12 @@ $(document).ready(function (event) {
                 pageContact.localContact.contact.ImageURL = response.location;
                 $(".progress").hide();
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                pageContact.showNotificationFailure(response.message);
                 $(".progress").hide();
             }
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            pageContact.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $(".progress").hide();
         }
     });
@@ -1083,19 +1093,19 @@ $(document).ready(function (event) {
                     $("#contactDetailBody").empty();
                     $("#editContactBtn").remove();
                     $("#deleteContactBtn").remove();
-                    pageIndex.showNotificationSuccess(response.message);
+                    pageContact.showNotificationSuccess(response.message);
                     pageContact.getContactList();
                     pageContact.getContactDetails(response.landing);
                     $("#deleteModal").modal('hide');
                 }, 500);
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                pageContact.showNotificationFailure(response.message);
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
             }
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            pageContact.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }
@@ -1111,24 +1121,24 @@ $(document).ready(function (event) {
             console.log(formData);
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
-                    pageIndex.showNotificationFailure("Required fields are empty");
+                    pageContact.showNotificationFailure("Required fields are empty");
                     return false;
                 }
             }
             if ($("#homeCity").val().trim() != "") {
                 // If city has a value then state and country also should
                 if ($("#homeState").val().trim() == "") {
-                    pageIndex.showNotificationFailure("The \"Home\" state field is empty");
+                    pageContact.showNotificationFailure("The \"Home\" state field is empty");
                     return false;
                 } else if ($("#homeCountry").val().trim() == "") {
-                    pageIndex.showNotificationFailure("The \"Home\" country field is empty");
+                    pageContact.showNotificationFailure("The \"Home\" country field is empty");
                     return false;
                 }
             } else if ($("#homeState").val().trim() != "") {
                 // If city does not have a value check if state has a value
                 // If state does then country should also
                 if ($("#homeCountry").val().trim() == "") {
-                    pageIndex.showNotificationFailure("The \"Home\" country field is empty");
+                    pageContact.showNotificationFailure("The \"Home\" country field is empty");
                     return false;
                 }
             }
@@ -1136,17 +1146,17 @@ $(document).ready(function (event) {
             if ($("#workCity").val().trim() != "") {
                 // If city has a value then state and country also should
                 if ($("#workState").val().trim() == "") {
-                    pageIndex.showNotificationFailure("The \"Work\" state field is empty");
+                    pageContact.showNotificationFailure("The \"Work\" state field is empty");
                     return false;
                 } else if ($("#workCountry").val().trim() == "") {
-                    pageIndex.showNotificationFailure("The \"Work\" country field is empty");
+                    pageContact.showNotificationFailure("The \"Work\" country field is empty");
                     return false;
                 }
             } else if ($("#workState").val().trim() != "") {
                 // If city does not have a value check if state has a value
                 // If state does then country should also
                 if ($("#workCountry").val().trim() == "") {
-                    pageIndex.showNotificationFailure("The \"Work\" country field is empty");
+                    pageContact.showNotificationFailure("The \"Work\" country field is empty");
                     return false;
                 }
             }
@@ -1154,17 +1164,17 @@ $(document).ready(function (event) {
             if ($("#otherCity").val().trim() != "") {
                 // If city has a value then state and country also should
                 if ($("#otherState").val().trim() == "") {
-                    pageIndex.showNotificationFailure("The \"Other\" state field is empty");
+                    pageContact.showNotificationFailure("The \"Other\" state field is empty");
                     return false;
                 } else if ($("#otherCountry").val().trim() == "") {
-                    pageIndex.showNotificationFailure("The \"Other\" country field is empty");
+                    pageContact.showNotificationFailure("The \"Other\" country field is empty");
                     return false;
                 }
             } else if ($("#otherState").val().trim() != "") {
                 // If city does not have a value check if state has a value
                 // If state does then country should also
                 if ($("#otherCountry").val().trim() == "") {
-                    pageIndex.showNotificationFailure("The \"Other\" country field is empty");
+                    pageContact.showNotificationFailure("The \"Other\" country field is empty");
                     return false;
                 }
             }
@@ -1185,18 +1195,18 @@ $(document).ready(function (event) {
                     $("#deleteContactBtn").remove();
                     pageContact.getContactDetails(response.landing);
                     pageContact.getContactList();
-                    pageIndex.showNotificationSuccess(response.message);
+                    pageContact.showNotificationSuccess(response.message);
                     pageContact.refreshMasterList();
                     $("#contactModal").modal('hide');
                 }, 500);
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                pageContact.showNotificationFailure(response.message);
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
             }
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            pageContact.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }

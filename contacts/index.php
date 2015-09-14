@@ -19,7 +19,6 @@ include_once ROOT . 'dist/authenticate.php';
     <link rel="stylesheet" type="text/css" href="../dist/css/style.css"/>
     <link rel="stylesheet" href="../dist/contacts/css/style.css">
     <script src="http://malsup.github.com/jquery.form.js"></script>
-    <script src="../dist/script/script.js"></script>
     <script src="../dist/contacts/script/script.js"></script>
     <script src="../dist/contacts/script/validation.js"></script>
     <script src="../dist/date/script.js"></script>
@@ -1003,7 +1002,8 @@ echo $navbar_str;
 <!--modal-->
 
 <!--Delete Contact Modal-->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true" data-backdrop="static">
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true"
+     data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
