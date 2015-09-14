@@ -338,7 +338,9 @@ $(document).ready(function () {
             }
             else {
                 pageIndex.showNotificationSuccess(response.message);
-                setTimeout(pageFamily.getFamilyList(), 200);
+                setTimeout(function () {
+                    pageFamily.getFamilyList();
+                }, 200);
                 $("#familyModal").modal('hide');
             }
             $("#pageLoading").removeClass("loader");
@@ -359,7 +361,9 @@ $(document).ready(function () {
             }
             else {
                 pageIndex.showNotificationSuccess(response.message);
-                setTimeout(pageFamily.getFamilyList(), 200);
+                setTimeout(function () {
+                    pageFamily.getFamilyList();
+                }, 200);
             }
             $("#deleteModal").modal('hide');
             $("#pageLoading").removeClass("loader");
