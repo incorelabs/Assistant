@@ -21,16 +21,16 @@ var pagePassword = {
     },
     setFamilyList: function (data) {
         pagePassword.familyList = data;
-        var str = "";
+        var familyListString = "";
         for (var i = 0; i < data.length; i++) {
             if (data[i].FamilyCode == familyCode) {
-                str += "<option value = " + data[i].FamilyCode + " selected = 'selected'>" + data[i].FamilyName + "</option>";
+                familyListString += "<option value = " + data[i].FamilyCode + " selected = 'selected'>" + data[i].FamilyName + "</option>";
             }
             else {
-                str += "<option value = " + data[i].FamilyCode + ">" + data[i].FamilyName + "</option>";
+                familyListString += "<option value = " + data[i].FamilyCode + ">" + data[i].FamilyName + "</option>";
             }
         }
-        $("#holderName").html(str);
+        $("#holderName").html(familyListString);
     },
     getPasswordList: function () {
         var url = localStorage.getItem("websiteRoot") + "passwords/getPasswordList.php";
@@ -48,21 +48,21 @@ var pagePassword = {
         if (data.status == 1) {
             $('#loadMore').remove();
             pagePassword.currentPageNo++;
-            var str = "";
+            var passwordListString = "";
             for (var i = 0; i < data.result.length; i++) {
-                str += "<a onclick='pagePassword.getPasswordDetails(" + data.result[i].PasswordCode + ")' class='list-group-item contacts_font'><h4 class='list-group-item-heading contacts_font'>" + data.result[i].HolderName + " - " + data.result[i].PasswordName + "</h4></a>";
+                passwordListString += "<a onclick='pagePassword.getPasswordDetails(" + data.result[i].PasswordCode + ")' class='list-group-item contacts_font'><h4 class='list-group-item-heading contacts_font'>" + data.result[i].HolderName + " - " + data.result[i].PasswordName + "</h4></a>";
             }
-            $("#passwordList").append(str);
+            $("#passwordList").append(passwordListString);
             if (pagePassword.currentPageNo <= data.pages) {
                 // Show Load More
-                var str = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pagePassword.getPasswordList();'>Load more..</a></div>";
-                $("#passwordList").append(str);
+                var loadMoreString = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pagePassword.getPasswordList();'>Load more..</a></div>";
+                $("#passwordList").append(loadMoreString);
             }
         } else {
-            var str = "<div class='list-group-item list-border-none'><li class='list-group-item-text header_font'>";
-            str += data.message + "</li></div>";
+            var noMoreDataString = "<div class='list-group-item list-border-none'><li class='list-group-item-text header_font'>";
+            noMoreDataString += data.message + "</li></div>";
             $("#passwordList").empty();
-            $("#passwordList").html(str);
+            $("#passwordList").html(noMoreDataString);
         }
     },
     doSearch: function () {
@@ -94,22 +94,22 @@ var pagePassword = {
         if (data.status == 1) {
             $('#loadMore').remove();
             pagePassword.currentPageNo++;
-            var str = "";
+            var searchResultsString = "";
             for (var i = 0; i < data.result.length; i++) {
-                str += "<a onclick='pagePassword.getPasswordDetails(" + data.result[i].PasswordCode + ")' class='list-group-item contacts_font'><h4 class='list-group-item-heading contacts_font'>" + data.result[i].HolderName + " - " + data.result[i].PasswordName + "</h4></a>";
+                searchResultsString += "<a onclick='pagePassword.getPasswordDetails(" + data.result[i].PasswordCode + ")' class='list-group-item contacts_font'><h4 class='list-group-item-heading contacts_font'>" + data.result[i].HolderName + " - " + data.result[i].PasswordName + "</h4></a>";
             }
-            $("#passwordList").append(str);
+            $("#passwordList").append(searchResultsString);
             if (pagePassword.currentPageNo <= data.pages) {
                 // Show Load More
-                var str = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pagePassword.getSearchResults();'>Load more..</a></div>";
-                $("#passwordList").append(str);
+                var loadMoreString = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pagePassword.getSearchResults();'>Load more..</a></div>";
+                $("#passwordList").append(loadMoreString);
             }
 
         } else {
-            var str = "<div class='list-group-item list-border-none'><li class='list-group-item-text header_font'>";
-            str += data.message + "</li></div>";
+            var noMoreDataString = "<div class='list-group-item list-border-none'><li class='list-group-item-text header_font'>";
+            noMoreDataString += data.message + "</li></div>";
             $("#passwordList").empty();
-            $("#passwordList").html(str);
+            $("#passwordList").html(noMoreDataString);
             $("#passwordDetailBody").empty();
             $("#editPasswordBtn").remove();
             $("#deletePasswordBtn").remove();
@@ -132,8 +132,8 @@ var pagePassword = {
         if (data.status == 1) {
             pagePassword.localPassword = data.detail;
 
-            var headerStr = "<h12>Password Details</h12><button id='editPasswordBtn' class='btn btn-success pull-right' onclick='pagePassword.openEditPasswordModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deletePasswordBtn' class='btn btn-danger pull-left' onclick='pagePassword.openDeletePasswordModal(" + data.detail.password.PasswordCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
-            var str = "";
+            var passwordHeaderString = "<h12>Password Details</h12><button id='editPasswordBtn' class='btn btn-success pull-right' onclick='pagePassword.openEditPasswordModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deletePasswordBtn' class='btn btn-danger pull-left' onclick='pagePassword.openDeletePasswordModal(" + data.detail.password.PasswordCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
+            var passwordDetailsString = "";
 
             if (window.innerWidth < 992 && !pagePassword.firstTime) {
                 //Show the Password Details Header and hides the search header
@@ -165,23 +165,23 @@ var pagePassword = {
             }
             pagePassword.firstTime = false;
 
-            str += "<div class='row contact-details' style='padding-top:0px'><div class='list-group-item-heading header_font'><div class='col-md-3'>Holder's Name</div><value><div class='col-md-9'>" + data.detail.password.HolderName + "</div></value></div></div>";
+            passwordDetailsString += "<div class='row contact-details' style='padding-top:0px'><div class='list-group-item-heading header_font'><div class='col-md-3'>Holder's Name</div><value><div class='col-md-9'>" + data.detail.password.HolderName + "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Password Type</div><value><div class='col-md-9'>" + data.detail.password.PasswordTypeName + "</div></value></div></div>";
+            passwordDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Password Type</div><value><div class='col-md-9'>" + data.detail.password.PasswordTypeName + "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Description</div><value><div class='col-md-9'>" + data.detail.password.PasswordName + "</div></value></div></div>";
+            passwordDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Description</div><value><div class='col-md-9'>" + data.detail.password.PasswordName + "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Login ID</div><value><div class='col-md-9'>" + data.detail.password.LoginID + "</div></value></div></div>";
+            passwordDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Login ID</div><value><div class='col-md-9'>" + data.detail.password.LoginID + "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Password</div><value><div class='col-md-8 col-sm-8 col-xs-8' id='loginPassword1'>" + pagePassword.morphPassword(data.detail.password.LoginPassword1, 1) + "</div><div class='col-md-1 pull-right'><a href='#' onclick='pagePassword.togglePassword(1)'><i class='fa fa-eye fa-lg'></i></a></div></value></div></div>";
+            passwordDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Password</div><value><div class='col-md-8 col-sm-8 col-xs-8' id='loginPassword1'>" + pagePassword.morphPassword(data.detail.password.LoginPassword1, 1) + "</div><div class='col-md-1 pull-right'><a href='#' onclick='pagePassword.togglePassword(1)'><i class='fa fa-eye fa-lg'></i></a></div></value></div></div>";
 
             if (data.detail.password.LoginPassword2 != null) {
-                str += "<div class='row contact-details' id='optionalPasswordRow'><div class='list-group-item-heading header_font'><div class='col-md-3'>Optional Password</div><value><div class='col-md-8 col-sm-8 col-xs-8' id='loginPassword2'>" + pagePassword.morphPassword(data.detail.password.LoginPassword2, 2) + "</div><div class='col-md-1 pull-right'><a href='#' onclick='pagePassword.togglePassword(2)'><i class='fa fa-eye fa-lg'></i></a></div></value></div></div>";
+                passwordDetailsString += "<div class='row contact-details' id='optionalPasswordRow'><div class='list-group-item-heading header_font'><div class='col-md-3'>Optional Password</div><value><div class='col-md-8 col-sm-8 col-xs-8' id='loginPassword2'>" + pagePassword.morphPassword(data.detail.password.LoginPassword2, 2) + "</div><div class='col-md-1 pull-right'><a href='#' onclick='pagePassword.togglePassword(2)'><i class='fa fa-eye fa-lg'></i></a></div></value></div></div>";
             } else
                 pagePassword.stateEncryptLoginPassword2 = false;
 
-            $("#passwordDetailHeader").html(headerStr);
-            $("#passwordDetailBody").html(str);
+            $("#passwordDetailHeader").html(passwordHeaderString);
+            $("#passwordDetailBody").html(passwordDetailsString);
         } else {
             pagePassword.localPassword = null;
         }

@@ -44,28 +44,28 @@ var pageContact = {
             $('#loadMore').remove();
             pageContact.currentPageNo++;
             var letterIndex = "";
-            var str = "";
+            var contactListString = "";
             for (var i = 0; i < data.result.length; i++) {
                 var letter = data.result[i].FullName.toUpperCase()[0];
                 console.log(letter);
                 if (letter != letterIndex) {
-                    str += "<li class='list-group-item-info li-pad'>" + letter + "</li>";
+                    contactListString += "<li class='list-group-item-info li-pad'>" + letter + "</li>";
                     letterIndex = letter;
                     console.log(letterIndex);
                 }
-                str += "<a onclick='pageContact.getContactDetails(" + data.result[i].ContactCode + ")' class='list-group-item contacts_font'>" + data.result[i].FullName + "</a>";
+                contactListString += "<a onclick='pageContact.getContactDetails(" + data.result[i].ContactCode + ")' class='list-group-item contacts_font'>" + data.result[i].FullName + "</a>";
             }
-            $("#contactList").append(str);
+            $("#contactList").append(contactListString);
             if (pageContact.currentPageNo <= data.pages) {
                 // Show Load More
-                var str = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pageContact.getContactList();'>Load more..</a></div>";
-                $("#contactList").append(str);
+                var loadMoreString = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pageContact.getContactList();'>Load more..</a></div>";
+                $("#contactList").append(loadMoreString);
             }
         } else {
-            var str = "<div class='list-group-item list-border-none'><li class='list-group-item-text header_font'>";
-            str += data.message + "</li></div>";
+            var noMoreDataString = "<div class='list-group-item list-border-none'><li class='list-group-item-text header_font'>";
+            noMoreDataString += data.message + "</li></div>";
             $("#contactList").empty();
-            $("#contactList").html(str);
+            $("#contactList").html(noMoreDataString);
         }
     },
     doSearch: function () {
@@ -98,29 +98,32 @@ var pageContact = {
             $('#loadMore').remove();
             pageContact.currentPageNo++;
             var letterIndex = "";
-            var str = "";
+            var searchResultsString = "";
             for (var i = 0; i < data.result.length; i++) {
                 var letter = data.result[i].FullName.toUpperCase()[0];
                 console.log(letter);
                 if (letter != letterIndex) {
-                    str += "<li class='list-group-item-info li-pad'>" + letter + "</li>";
+                    searchResultsString += "<li class='list-group-item-info li-pad'>" + letter + "</li>";
                     letterIndex = letter;
                     console.log(letterIndex);
                 }
-                str += "<a onclick='pageContact.getContactDetails(" + data.result[i].ContactCode + ")' class='list-group-item contacts_font'>" + data.result[i].FullName + "</a>";
+                searchResultsString += "<a onclick='pageContact.getContactDetails(" + data.result[i].ContactCode + ")' class='list-group-item contacts_font'>" + data.result[i].FullName + "</a>";
             }
-            $("#contactList").append(str);
+            $("#contactList").append(searchResultsString);
             if (pageContact.currentPageNo <= data.pages) {
                 // Show Load More
-                var str = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pageContact.getSearchResults();'>Load more..</a></div>";
-                $("#contactList").append(str);
+                var loadMoreString = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pageContact.getSearchResults();'>Load more..</a></div>";
+                $("#contactList").append(loadMoreString);
             }
 
         } else {
-            var str = "<div class='list-group-item list-border-none'><li class='list-group-item-text header_font'>";
-            str += data.message + "</li></div>";
+            var noMoreDataString = "<div class='list-group-item list-border-none'><li class='list-group-item-text header_font'>";
+            noMoreDataString += data.message + "</li></div>";
             $("#contactList").empty();
-            $("#contactList").html(str);
+            $("#contactList").html(noMoreDataString);
+            $("#contactDetailBody").empty();
+            $("#editContactBtn").remove();
+            $("#deleteContactBtn").remove();
         }
     },
     getContactDetails: function (contactCode) {
@@ -140,8 +143,8 @@ var pageContact = {
         if (data.status == 1) {
             pageContact.localContact = data.detail;
 
-            var headerStr = "<h12>Contact Details</h12><button id='editContactBtn' class='btn btn-success pull-right' onclick='pageContact.openEditContactModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deleteContactBtn' class='btn btn-danger pull-left' onclick='pageContact.openDeleteContactModal(" + data.detail.contact.ContactCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
-            var str = "";
+            var contactHeaderString = "<h12>Contact Details</h12><button id='editContactBtn' class='btn btn-success pull-right' onclick='pageContact.openEditContactModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deleteContactBtn' class='btn btn-danger pull-left' onclick='pageContact.openDeleteContactModal(" + data.detail.contact.ContactCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
+            var contactDetailsString = "";
             var imgLocation = "";
 
             if (window.innerWidth < 992 && !pageContact.firstTime) {
@@ -181,64 +184,64 @@ var pageContact = {
                 imgLocation = "../img/default/contact/profilePicture.png";
             }
 
-            str += "<div class='row contact-details'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop' onclick=''><img src='" + imgLocation + "' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>" + ((data.detail.contact.TitleName) ? data.detail.contact.TitleName + " " : "") + ((data.detail.contact.FullName) ? data.detail.contact.FullName : "") + "</h5></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop' onclick=''><img src='" + imgLocation + "' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>" + ((data.detail.contact.TitleName) ? data.detail.contact.TitleName + " " : "") + ((data.detail.contact.FullName) ? data.detail.contact.FullName : "") + "</h5></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Guardian</div><value><div class='col-md-9'>" + ((data.detail.contact.GuardianName) ? data.detail.contact.GuardianName : "") + "</div></value></div></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Guardian</div><value><div class='col-md-9'>" + ((data.detail.contact.GuardianName) ? data.detail.contact.GuardianName : "") + "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Company</div><value><div class='col-md-9'>" + ((data.detail.contact.Company) ? data.detail.contact.Company : "" ) + "</div></value></div></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Company</div><value><div class='col-md-9'>" + ((data.detail.contact.Company) ? data.detail.contact.Company : "" ) + "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Designation</div><value><div class='col-md-9'>" + ((data.detail.contact.Designation) ? data.detail.contact.Designation : "") + "</div></value></div></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Designation</div><value><div class='col-md-9'>" + ((data.detail.contact.Designation) ? data.detail.contact.Designation : "") + "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Alias</div><value><div class='col-md-9'>" + ((data.detail.contact.Alias) ? data.detail.contact.Alias : "") + "</div></value></div></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Alias</div><value><div class='col-md-9'>" + ((data.detail.contact.Alias) ? data.detail.contact.Alias : "") + "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.B</div><value><div class='col-md-9'>" + ((data.detail.contact.Dob) ? data.detail.contact.Dob : "") + "</div></value></div></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.B</div><value><div class='col-md-9'>" + ((data.detail.contact.Dob) ? data.detail.contact.Dob : "") + "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.M</div><value><div class='col-md-9'>" + ((data.detail.contact.Dom) ? data.detail.contact.Dom : "") + "</div></value></div></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>D.O.M</div><value><div class='col-md-9'>" + ((data.detail.contact.Dom) ? data.detail.contact.Dom : "") + "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Group</div><value><div class='col-md-9'>" + ((data.detail.contact.GroupName) ? data.detail.contact.GroupName : "") + "</div></value></div></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Group</div><value><div class='col-md-9'>" + ((data.detail.contact.GroupName) ? data.detail.contact.GroupName : "") + "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Emergency</div><value><div class='col-md-9'>" + ((data.detail.contact.EmergencyName) ? data.detail.contact.EmergencyName : "") + "</div></value></div></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Emergency</div><value><div class='col-md-9'>" + ((data.detail.contact.EmergencyName) ? data.detail.contact.EmergencyName : "") + "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Remarks</div><value><div class='col-md-9'>" + ((data.detail.contact.Remarks) ? data.detail.contact.Remarks : "") + "</div></value></div></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Remarks</div><value><div class='col-md-9'>" + ((data.detail.contact.Remarks) ? data.detail.contact.Remarks : "") + "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile</div><value><div class='col-md-9'>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile</div><value><div class='col-md-9'>";
 
             if (data.detail.contact.Mobile1 != null || data.detail.contact.Mobile2 != null || data.detail.contact.Mobile3) {
                 if (data.detail.contact.Mobile1 != null)
-                    str += "<a href='tel:" + data.detail.contact.Mobile1 + "'>" + data.detail.contact.Mobile1 + "</a>";
+                    contactDetailsString += "<a href='tel:" + data.detail.contact.Mobile1 + "'>" + data.detail.contact.Mobile1 + "</a>";
                 if (data.detail.contact.Mobile1 != null && data.detail.contact.Mobile2 !== null)
-                    str += "<br/>";
+                    contactDetailsString += "<br/>";
 
                 if (data.detail.contact.Mobile1 != null && data.detail.contact.Mobile2 == null && data.detail.contact.Mobile3 !== null)
-                    str += "<br/>";
+                    contactDetailsString += "<br/>";
 
                 if (data.detail.contact.Mobile2 != null)
-                    str += "<a href='tel:" + data.detail.contact.Mobile2 + "'>" + data.detail.contact.Mobile2 + "</a>";
+                    contactDetailsString += "<a href='tel:" + data.detail.contact.Mobile2 + "'>" + data.detail.contact.Mobile2 + "</a>";
 
                 if (data.detail.contact.Mobile2 != null && data.detail.contact.Mobile3 !== null)
-                    str += "<br/>";
+                    contactDetailsString += "<br/>";
 
                 if (data.detail.contact.Mobile3 != null)
-                    str += "<a href='tel:" + data.detail.contact.Mobile3 + "'>" + data.detail.contact.Mobile3 + "</a>";
+                    contactDetailsString += "<a href='tel:" + data.detail.contact.Mobile3 + "'>" + data.detail.contact.Mobile3 + "</a>";
             }
 
-            str += "</div></value></div></div>";
+            contactDetailsString += "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Email</div><value><div class='col-md-9'>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Email</div><value><div class='col-md-9'>";
 
             if (data.detail.contact.Email1 != null || data.detail.contact.Email2 != null) {
 
                 if (data.detail.contact.Email1 != null)
-                    str += "<a href= 'mailto:" + data.detail.contact.Email1 + "'>" + data.detail.contact.Email1 + "</a>";
+                    contactDetailsString += "<a href= 'mailto:" + data.detail.contact.Email1 + "'>" + data.detail.contact.Email1 + "</a>";
 
                 if (data.detail.contact.Email1 != null && data.detail.contact.Email2 != null)
-                    str += "<br/>";
+                    contactDetailsString += "<br/>";
 
                 if (data.detail.contact.Email2 != null)
-                    str += "<a href= 'mailto:" + data.detail.contact.Email2 + "'>" + data.detail.contact.Email2 + "</a>";
+                    contactDetailsString += "<a href= 'mailto:" + data.detail.contact.Email2 + "'>" + data.detail.contact.Email2 + "</a>";
             }
 
-            str += "</div></value></div></div>";
+            contactDetailsString += "</div></value></div></div>";
 
             var homeAddress = "";
             var workAddress = "";
@@ -299,26 +302,26 @@ var pageContact = {
                 }
             }
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Address</div><value><div class='col-md-9'>" + homeAddress + "</div></value></div></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Address</div><value><div class='col-md-9'>" + homeAddress + "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Work Address</div><value><div class='col-md-9'>" + workAddress + "</div></value></div></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Work Address</div><value><div class='col-md-9'>" + workAddress + "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Other Address</div><value><div class='col-md-9'>" + otherAddress + "</div></value></div></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Other Address</div><value><div class='col-md-9'>" + otherAddress + "</div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Facebook</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Facebook) ? data.detail.contact.Facebook : "") + "' target='_blank'>" + ((data.detail.contact.Facebook) ? data.detail.contact.Facebook : "") + "</a></div></value></div></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Facebook</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Facebook) ? data.detail.contact.Facebook : "") + "' target='_blank'>" + ((data.detail.contact.Facebook) ? data.detail.contact.Facebook : "") + "</a></div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Twitter</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Twitter) ? data.detail.contact.Twitter : "") + "' target='_blank'>" + ((data.detail.contact.Twitter) ? data.detail.contact.Twitter : "") + "</a></div></value></div></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Twitter</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Twitter) ? data.detail.contact.Twitter : "") + "' target='_blank'>" + ((data.detail.contact.Twitter) ? data.detail.contact.Twitter : "") + "</a></div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Google</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Google) ? data.detail.contact.Google : "") + "' target='_blank'>" + ((data.detail.contact.Google) ? data.detail.contact.Google : "") + "</a></div></value></div></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Google</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Google) ? data.detail.contact.Google : "") + "' target='_blank'>" + ((data.detail.contact.Google) ? data.detail.contact.Google : "") + "</a></div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Linkedin</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Linkedin) ? data.detail.contact.Linkedin : "") + "' target='_blank'>" + ((data.detail.contact.Linkedin) ? data.detail.contact.Linkedin : "") + "</a></div></value></div></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Linkedin</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Linkedin) ? data.detail.contact.Linkedin : "") + "' target='_blank'>" + ((data.detail.contact.Linkedin) ? data.detail.contact.Linkedin : "") + "</a></div></value></div></div>";
 
-            str += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Website) ? data.detail.contact.Website : "") + "' target='_blank'>" + ((data.detail.contact.Website) ? data.detail.contact.Website : "") + "</a></div></value></div></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Website) ? data.detail.contact.Website : "") + "' target='_blank'>" + ((data.detail.contact.Website) ? data.detail.contact.Website : "") + "</a></div></value></div></div>";
 
             $("#contactDetailHeader").empty();
-            $("#contactDetailHeader").html(headerStr);
+            $("#contactDetailHeader").html(contactHeaderString);
             $("#contactDetailBody").empty();
-            $("#contactDetailBody").html(str);
+            $("#contactDetailBody").html(contactDetailsString);
 
         } else {
             pageContact.localContact = null;
