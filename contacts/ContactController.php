@@ -178,6 +178,17 @@ class ContactController
         }
     }
 
+    function checkAndReplaceLink($link){
+        $subString = substr($link,0,4);
+        if($subString == "http" || $subString == "HTTP"){
+            return $link;
+        }
+        else{
+            $link = "http://".$link;
+            return $link;
+        }
+    }
+
     function getSpTable151Query(){
         $contactCode = $this->contactCode;
         $titleCode = ((!empty($this->data['titleCode'])) ? $this->data['titleCode'] : "NULL");
@@ -215,11 +226,11 @@ class ContactController
         $alias = (!empty($this->data['alias']) ? "'".$this->data['alias']."'" : "NULL");
         $company = (!empty($this->data['company']) ? "'".$this->data['company']."'" : "NULL");
         $designation = (!empty($this->data['designation']) ? "'".$this->data['designation']."'" : "NULL");
-        $facebook = (!empty($this->data['facebook']) ? "'".$this->data['facebook']."'" : "NULL");
-        $twitter = (!empty($this->data['twitter']) ? "'".$this->data['twitter']."'" : "NULL");
-        $googlePlus = (!empty($this->data['google']) ? "'".$this->data['google']."'" : "NULL");
-        $linkedin = (!empty($this->data['linkedin']) ? "'".$this->data['linkedin']."'" : "NULL");
-        $website = (!empty($this->data['website']) ? "'".$this->data['website']."'" : "NULL");
+        $facebook = (!empty($this->data['facebook']) ? "'".$this->checkAndReplaceLink($this->data['facebook'])."'" : "NULL");
+        $twitter = (!empty($this->data['twitter']) ? "'".$this->checkAndReplaceLink($this->data['twitter'])."'" : "NULL");
+        $googlePlus = (!empty($this->data['google']) ? "'".$this->checkAndReplaceLink($this->data['google'])."'" : "NULL");
+        $linkedin = (!empty($this->data['linkedin']) ? "'".$this->checkAndReplaceLink($this->data['linkedin'])."'" : "NULL");
+        $website = (!empty($this->data['website']) ? "'".$this->checkAndReplaceLink($this->data['website'])."'" : "NULL");
         $private = (isset($this->data["private"]) ? 1 : 2);
         $active = (isset($this->data["active"]) ? 1 : 2);
         $this->active = $active;
