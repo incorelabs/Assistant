@@ -88,8 +88,7 @@ if ($validate) {
 
 //Business Logic
 if ($validate) {
-	require ROOT."PHPMailer/PHPMailerAutoload.php";
-	include_once ROOT.'mail/config.php';
+	require ROOT."mail/MailerAutoload.php";
 	include_once ROOT.'modules/random_string_generator.php';
 
 	do {
@@ -105,17 +104,7 @@ if ($validate) {
 			break;
 		}
 
-		$mail = new PHPMailer;
-		$mail->isSMTP();                                      // Set mailer to use SMTP
-		$mail->Host = MAIL_HOST;  // Specify main and backup SMTP servers
-		$mail->SMTPAuth = true;                               // Enable SMTP authentication
-		$mail->Username = MAIL_USERNAME;                 // SMTP username
-		$mail->Password = MAIL_PASSWORD;                           // SMTP password
-		$mail->SMTPSecure = 'ssl';
-		$mail->Port = MAIL_PORT;
-
-		$mail->From = MAIL_FROM;
-		$mail->FromName = MAIL_FROM_NAME;
+		$mail = new \Assistant\Mail\Mailer();
 		$mail->addAddress($email, $name);
 		
 		$mail->Subject = "[ASSISTANT] Your new password";

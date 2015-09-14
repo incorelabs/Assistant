@@ -5,6 +5,8 @@ define("ROOT", "../");
 include_once ROOT.'dist/authenticate.php';
 require_once ROOT.'db/Connection.php';
 require_once ROOT.'modules/functions.php';
+require ROOT."mail/MailerAutoload.php";
+
 $mysqli = getConnection();
 
 $familyCode = 0;
@@ -170,9 +172,27 @@ if ($validate) {
 		}
 		else{
 			$validate = false;
-			$response = createResponse(0,"Error occured while uploading to the database: ".$mysqli->error);
+			$response = createResponse(0,"Error occurred while uploading to the database: ".$mysqli->error);
 			break;
 		}
+
+        $email = $_SESSION['email'];
+        $name = $_SESSION['name'];
+
+        $mail = new \Assistant\Mail\Mailer();
+        $mail->addAddress($email, $name);
+
+        $mail->Subject = "[ASSISTANT] Password Changed";
+        $mail->Body    = "Hi ".$name."\n\nYour password has been changed.";
+
+        if(!$mail->send()) {
+            $validate = false;
+            $response = createResponse(0,"Mailer Error: " . $mail->ErrorInfo);
+            break;
+        } else {
+            $validate = true;
+        }
+
 	} while (0);
 }
 

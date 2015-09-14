@@ -3,6 +3,7 @@ define("ROOT", "../");
 
 require_once ROOT . 'db/Connection.php';
 require_once ROOT . 'modules/functions.php';
+require ROOT."mail/MailerAutoload.php";
 $mysqli = getConnection();
 
 $response = array();
@@ -182,9 +183,28 @@ if ($validate) {
             //echo $regCode;
             createInitialFolders($regCode);
             $response = createResponse(1, "Successful");
+            $validate = true;
         } else {
             $response = createResponse(0, "Error occurred while uploading to the database: " . $mysqli->error);
             break;
+        }
+
+        $email = $_POST['email'];
+        $name = $_POST['name'];
+
+        $mail = new \Assistant\Mail\Mailer();
+        $mail->addAddress($email, $name);
+
+        $mail->Subject = "[ASSISTANT] Welcome";
+        $mail->Body    = "Hi ".$name."\n\nWe are have excited to have you here.";
+
+        if(!$mail->send()) {
+            $validate = false;
+            $response = createResponse(0,"Mailer Error: " . $mail->ErrorInfo);
+            break;
+        } else {
+            $validate = true;
+            $response = createResponse(1,"Your account has been created");
         }
 
     } while (0);
