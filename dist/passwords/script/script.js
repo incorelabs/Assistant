@@ -330,6 +330,22 @@ var pagePassword = {
                 }
             }
         });
+    },
+    toggleInputFieldPassword: function (typeOfPassword) {
+        switch (typeOfPassword) {
+            case 0:
+                if ($("#password").attr("type") == "password")
+                    $("#password").attr("type", "text");
+                else
+                    $("#password").attr("type", "password");
+                break;
+            case 1:
+                if ($("#otherPassword").attr("type") == "password")
+                    $("#otherPassword").attr("type", "text");
+                else
+                    $("#otherPassword").attr("type", "password");
+                break;
+        }
     }
 };
 

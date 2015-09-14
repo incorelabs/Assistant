@@ -76,17 +76,11 @@ var pageFamily = {
         }
         $("#table-body").html(familyTableString);
     },
-    getPasswordDivString: function () {
-        return "<div class='input-group'><span class='input-group-addon input-group-addon-label'>Password*</span><input type='password' name='password' id='password' class='form-control password text-field-left-border' placeholder='Password' tabindex='8'/><span class='input-group-btn'><button class='btn btn-primary button-addon-custom' type='button' id='showPassword'><i class='fa fa-eye fa-lg'></i></button></span></div><div class='info'></div>";
-    },
-    getConfirmPasswordDivString: function () {
-        return "<div class='input-group'><span class='input-group-addon input-group-addon-label'>Confirm*</span><input type='password' name='confirmPassword' id='confirmPassword' class='form-control c_password text-field-left-border' placeholder='Confirm Password' tabindex='9'/><span class='input-group-btn'><button class='btn btn-primary button-addon-custom' type='button' id='showOtherPassword'><i class='fa fa-eye fa-lg'></i></button></span></div><div class='info'></div>";
-    },
     openAddFamilyModal: function () {
         document.getElementById("familyForm").reset();
 
-        $("#password").attr("type", "password");
-        $("#confirmPassword").attr("type", "password");
+        $("#passwordDiv").empty();
+        $("#confirmPasswordDiv").empty();
 
         initializeDate();
 
@@ -102,6 +96,10 @@ var pageFamily = {
         $("#email").removeAttr("readonly");
         $("#passwordDiv").html(pageFamily.getPasswordDivString());
         $("#confirmPasswordDiv").html(pageFamily.getConfirmPasswordDivString());
+
+        /*$("#password").attr("type", "password");
+         $("#confirmPassword").attr("type", "password");*/
+
         $("#loginAccess").addClass("hidden");
 
         $("#familyModal").modal('show');
@@ -162,28 +160,26 @@ var pageFamily = {
                 if (personDetail["LoginFlag"]) {
                     if (personDetail["LoginFlag"] == 1) {
                         $('input:radio[name=access]')[0].checked = true;
-                        $("#provideLoginDiv").removeClass("hidden");
                         $("#loginAccess").removeClass("hidden");
                         $("#passwordDiv").empty();
                         $("#confirmPasswordDiv").empty();
-                        //pageFamily.isYesEnabled = false;
-                        //pageFamily.isNoEnabled = true;
                         $("#email").attr("readonly", true);
                     } else {
                         $('input:radio[name=access]')[1].checked = true;
                         $("#loginAccess").addClass("hidden");
-                        //pageFamily.isYesEnabled = true;
-                        //pageFamily.isNoEnabled = false;
                         $("#email").removeAttr("readonly");
+                        $("#passwordDiv").html(pageFamily.getPasswordDivString());
+                        $("#confirmPasswordDiv").html(pageFamily.getConfirmPasswordDivString());
                     }
                 }
             }
         } else {
             $("#provideLoginDiv").addClass("hidden");
+            $("#loginAccess").addClass("hidden");
         }
-
-        $("#password").val("");
-        $("#confirmPassword").val("");
+        /*
+         $("#password").val("");
+         $("#confirmPassword").val("");*/
     },
     getRelationList: function () {
         var url = localStorage.getItem("websiteRoot") + "family/getRelation.php";
@@ -205,6 +201,28 @@ var pageFamily = {
             relationListString += "<option value=" + data[i]['RelationCode'] + ">" + data[i]['RelationName'] + "</option>"
         }
         $("#relation").html(relationListString);
+    },
+    getPasswordDivString: function () {
+        return "<div class='input-group'><span class='input-group-addon input-group-addon-label'>Password*</span><input type='password' name='password' id='password' class='form-control password text-field-left-border' placeholder='Password' tabindex='8'/><span class='input-group-btn'><button class='btn btn-primary button-addon-custom' type='button' onclick='pageFamily.toggleInputFieldPassword(0)'><i class='fa fa-eye fa-lg'></i></button></span></div><div class='info'></div>";
+    },
+    getConfirmPasswordDivString: function () {
+        return "<div class='input-group'><span class='input-group-addon input-group-addon-label'>Confirm*</span><input type='password' name='confirmPassword' id='confirmPassword' class='form-control c_password text-field-left-border' placeholder='Confirm Password' tabindex='9'/><span class='input-group-btn'><button class='btn btn-primary button-addon-custom' type='button' onclick='pageFamily.toggleInputFieldPassword(1)'><i class='fa fa-eye fa-lg'></i></button></span></div><div class='info'></div>";
+    },
+    toggleInputFieldPassword: function (typeOfPassword) {
+        switch (typeOfPassword) {
+            case 0:
+                if ($("#password").attr("type") == "password")
+                    $("#password").attr("type", "text");
+                else
+                    $("#password").attr("type", "password");
+                break;
+            case 1:
+                if ($("#confirmPassword").attr("type") == "password")
+                    $("#confirmPassword").attr("type", "text");
+                else
+                    $("#confirmPassword").attr("type", "password");
+                break;
+        }
     },
     showLoginAccess: function () {
         $("#loginAccess").removeClass("hidden");

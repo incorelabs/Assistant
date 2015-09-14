@@ -36,27 +36,6 @@ include_once ROOT . 'dist/authenticate.php';
             $('nav#menu').mmenu();
         });
     </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#showPassword").click(function () {
-                if ($("#password").attr("type") == "password") {
-                    $("#password").attr("type", "text");
-
-                } else {
-                    $("#password").attr("type", "password");
-                }
-            });
-            $("#showOtherPassword").click(function () {
-                if ($("#otherPassword").attr("type") == "password") {
-                    $("#otherPassword").attr("type", "text");
-
-                } else {
-                    $("#otherPassword").attr("type", "password");
-                }
-            });
-            console.log(familyCode);
-        });
-    </script>
 </head>
 
 <body>
@@ -254,20 +233,26 @@ echo $navbar_str;
                                     class="input-group-addon group-addon-text-custom input-group-addon-label">Password*</span></span>
                             <input type="password" class="form-control text-field-left-border" name="password"
                                    id="password" placeholder="Password" tabindex="5" required/>
-                            <span class="input-group-btn"><button class="btn btn-primary button-addon-custom"
-                                                                  type="button" id="showPassword"><i
-                                        class="fa fa-eye fa-lg"></i></button></span>
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary button-addon-custom"
+                                        type="button"
+                                        onclick="pagePassword.toggleInputFieldPassword(0);"><i
+                                        class="fa fa-eye fa-lg"></i></button>
+                            </span>
                         </div>
                     </div>
                     <div class="form-group form-group-margin">
                         <div class="input-group">
-                            <span class="input-group-btn"><span
-                                    class="input-group-addon group-addon-text-custom input-group-addon-label">Other Password</span></span>
+                            <span class="input-group-btn">
+                                <span
+                                    class="input-group-addon group-addon-text-custom input-group-addon-label">Other Password</span>
+                            </span>
                             <input type="password" class="form-control text-field-left-border" name="password1"
                                    id="otherPassword" placeholder="Other Password (Optional)" tabindex="6"/>
-                            <span class="input-group-btn"><button class="btn btn-primary button-addon-custom"
-                                                                  type="button" id="showOtherPassword"><i
-                                        class="fa fa-eye fa-lg"></i></button></span>
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary button-addon-custom"
+                                        type="button" onclick="pagePassword.toggleInputFieldPassword(1);"><i
+                                        class=" fa fa-eye fa-lg"></i></button></span>
                         </div>
                     </div>
                 </div>

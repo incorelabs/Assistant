@@ -37,26 +37,6 @@ define("ROOT", "../");
     <script src="../dist/script/script.js"></script>
     <script src="../dist/date/script.js"></script>
     <script src="../dist/family/script/script.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#showPassword").click(function () {
-                if ($("#password").attr("type") == "password") {
-                    $("#password").attr("type", "text");
-
-                } else {
-                    $("#password").attr("type", "password");
-                }
-            });
-            $("#showOtherPassword").click(function () {
-                if ($("#confirmPassword").attr("type") == "password") {
-                    $("#confirmPassword").attr("type", "text");
-
-                } else {
-                    $("#confirmPassword").attr("type", "password");
-                }
-            });
-        });
-    </script>
 </head>
 <body>
 <!-- fixed top navbar -->
