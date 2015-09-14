@@ -219,7 +219,7 @@ var pagePassword = {
         }
     },
     openAddPasswordModal: function () {
-        document.getElementById("form-passwords").reset();
+        document.getElementById("passwordForm").reset();
 
         $('#addPrivacy').attr('checked', false);
         $('#addActiveStatus').attr('checked', true);
@@ -232,8 +232,8 @@ var pagePassword = {
 
         $("#passwordModal").modal('show');
     },
-    openEditPasswordModal: function (index) {
-        document.getElementById("form-passwords").reset();
+    openEditPasswordModal: function () {
+        document.getElementById("passwordForm").reset();
         $("#form-add-edit-mode").val("M");
 
         $('#passwordModalHeading').empty();
@@ -362,7 +362,7 @@ $(document).ready(function () {
     });
 
     //Password form submit
-    $("#form-passwords").ajaxForm({
+    $("#passwordForm").ajaxForm({
         beforeSubmit: function (formData) {
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
@@ -408,7 +408,7 @@ $(document).ready(function () {
     });
 
     //Password form submit
-    $("#form-password-delete").ajaxForm({
+    $("#deletePasswordForm").ajaxForm({
         beforeSubmit: function () {
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");

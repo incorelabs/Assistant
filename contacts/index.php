@@ -1015,7 +1015,7 @@ echo $navbar_str;
             <center>
                 <div class="modal-body">
                     <div class="btn-group">
-                        <form action="controller.php" id="deleteContact" method="POST">
+                        <form method="POST" action="controller.php" id="deleteContactForm">
                             <input type="text" class="hidden" name="contactCode" id="form-delete-code"/>
                             <input type="text" class="hidden" name="mode" id="form-delete-mode" value="D"/>
                             <button class="btn btn-danger modal_button" type="submit">

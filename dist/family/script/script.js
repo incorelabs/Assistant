@@ -1,8 +1,8 @@
 var pageFamily = {
+    isParentLoggedIn: false,
     familyList: null,
     relationList: null,
     personDetail: null,
-    mode: 1,
     isYesEnabled: true,
     isNoEnabled: true,
     getFamilyList: function () {
@@ -44,27 +44,91 @@ var pageFamily = {
                 gender = "-";
             }
 
-            familyTableString += "<tr class='text-left'><td>" + (i + 1) + "</td><td>" + data[i]['FamilyName'] + "</td><td class='hidden-xs hidden-sm'>" + ((data[i]['RelationName']) ? data[i]['RelationName'] : "-") + "</td><td class='hidden-xs hidden-sm'>" + ((data[i]['BirthDate']) ? data[i]['BirthDate'] : "-") + "</td><td class='hidden-xs hidden-sm'>" + ((data[i]['Email']) ? data[i]['Email'] : "-") + "</td><td>" + ((data[i]['Mobile']) ? data[i]['Mobile'] : "-") + "</td><td class='hidden-xs hidden-sm'>" + (gender) + "</td><td>" + ((data[i]['LoginFlag']) ? ((data[i]['LoginFlag'] == 1) ? "Yes" : "No") : "-") + "</td><td><a href='#' onclick='pageFamily.editFamily(" + i + ")'><i class='fa fa-pencil fa-lg fa-green'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageFamily.deleteFamily(" + i + ")'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td></tr>";
+            familyTableString += "<tr class='text-left'>";
+            familyTableString += "<td>" + (i + 1) + "</td><td>" + data[i]['FamilyName'] + "</td>";
+            familyTableString += "<td class='hidden-xs hidden-sm'>" + ((data[i]['RelationName']) ? data[i]['RelationName'] : "-") + "</td>";
+            familyTableString += "<td class='hidden-xs hidden-sm'>" + ((data[i]['BirthDate']) ? data[i]['BirthDate'] : "-") + "</td>";
+
+            familyTableString += "<td class='hidden-xs hidden-sm'>" + ((data[i]['Email']) ? data[i]['Email'] : "-") + "</td>";
+
+            familyTableString += "<td>" + ((data[i]['Mobile']) ? data[i]['Mobile'] : "-") + "</td>";
+
+            familyTableString += "<td class='hidden-xs hidden-sm'>" + (gender) + "</td>";
+
+            familyTableString += "<td>" + ((data[i]['LoginFlag']) ? ((data[i]['LoginFlag'] == 1) ? "Yes" : "No") : "-") + "</td>";
+
+            if (pageFamily.isParentLoggedIn) {
+                // This is the parent, so show only edit for him and for the rest show edit and delete.
+                if (data[i]['FamilyCode'] == familyCode) {
+                    familyTableString += "<td><a href='#' onclick='pageFamily.openEditFamilyModal(" + i + ")'><i class='fa fa-pencil fa-lg fa-green'></i></a></td>";
+                } else {
+                    familyTableString += "<td><a href='#' onclick='pageFamily.openEditFamilyModal(" + i + ")'><i class='fa fa-pencil fa-lg fa-green'></i></a>";
+                    familyTableString += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageFamily.openDeleteFamilyModal(" + data[i].FamilyCode + ")'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td>";
+                }
+            } else {
+                // This is the child, so show only edit for his.
+                if (data[i]['FamilyCode'] == familyCode) {
+                    familyTableString += "<td><a href='#' onclick='pageFamily.openEditFamilyModal(" + i + ")'><i class='fa fa-pencil fa-lg fa-green'></i></a></td>";
+                }
+            }
+
+            familyTableString += "</tr>";
         }
         $("#table-body").html(familyTableString);
     },
-    editFamily: function (index) {
-        //console.log(familyList[index]);
-        initializeDate();
-        pageFamily.mode = 2;
-        $("#familyModalHeading").html("Edit");
-        pageFamily.personDetail = pageFamily.familyList[index];
-        pageFamily.setInputFields(pageFamily.personDetail);
-        $("#familyCode").val(pageFamily.personDetail["FamilyCode"]);
-        //$("#form-family").attr("action","edit.php");
-        $("#mode").val('M');
-        $("#addFamily").modal('show');
+    getPasswordDivString: function () {
+        return "<div class='input-group'><span class='input-group-addon input-group-addon-label'>Password*</span><input type='password' name='password' id='password' class='form-control password text-field-left-border' placeholder='Password' tabindex='8'/><span class='input-group-btn'><button class='btn btn-primary button-addon-custom' type='button' id='showPassword'><i class='fa fa-eye fa-lg'></i></button></span></div><div class='info'></div>";
     },
-    deleteFamily: function (index) {
-        pageFamily.personDetail = pageFamily.familyList[index];
-        $("#deleteFamilyCode").val(pageFamily.personDetail['FamilyCode']);
-        $("#form-delete-mode").val("D");
-        $("#deleteFamily").modal('show');
+    getConfirmPasswordDivString: function () {
+        return "<div class='input-group'><span class='input-group-addon input-group-addon-label'>Confirm*</span><input type='password' name='confirmPassword' id='confirmPassword' class='form-control c_password text-field-left-border' placeholder='Confirm Password' tabindex='9'/><span class='input-group-btn'><button class='btn btn-primary button-addon-custom' type='button' id='showOtherPassword'><i class='fa fa-eye fa-lg'></i></button></span></div><div class='info'></div>";
+    },
+    openAddFamilyModal: function () {
+        document.getElementById("familyForm").reset();
+
+        $("#password").attr("type", "password");
+        $("#confirmPassword").attr("type", "password");
+
+        initializeDate();
+
+        $("#form-add-edit-mode").val('A');
+        $("#form-add-edit-code").val(1);
+
+        $('#familyModalHeading').empty();
+        $('#familyModalHeading').html("Add Family Member");
+
+        if (pageFamily.isParentLoggedIn)
+            $("#provideLoginDiv").removeClass("hidden");
+
+        $("#email").removeAttr("readonly");
+        $("#passwordDiv").html(pageFamily.getPasswordDivString());
+        $("#confirmPasswordDiv").html(pageFamily.getConfirmPasswordDivString());
+        $("#loginAccess").addClass("hidden");
+
+        $("#familyModal").modal('show');
+        //document.getElementById('loginAccess').style.display = 'none';
+    },
+    openEditFamilyModal: function (memberIndex) {
+        pageFamily.personDetail = pageFamily.familyList[memberIndex];
+
+        document.getElementById("familyForm").reset();
+        $("#form-add-edit-mode").val('M');
+
+        $('#familyModalHeading').empty();
+        $('#familyModalHeading').html("Edit Family Member");
+
+        console.log(pageFamily.familyList[memberIndex]);
+        initializeDate();
+
+        pageFamily.setInputFields(pageFamily.personDetail);
+        $("#form-add-edit-code").val(pageFamily.personDetail["FamilyCode"]);
+        console.log(pageFamily.personDetail["FamilyCode"]);
+
+        $("#familyModal").modal('show');
+    },
+    openDeleteFamilyModal: function (familyCode) {
+        console.log(familyCode);
+        $("#form-delete-code").val(familyCode);
+        $("#deleteModal").modal('show');
     },
     setInputFields: function (personDetail) {
         if (personDetail["FamilyName"]) {
@@ -81,35 +145,43 @@ var pageFamily = {
         }
         if (personDetail["Mobile"]) {
             $("#mobile").val(personDetail["Mobile"]);
-        }
-        else {
+        } else {
             $("#mobile").val("");
         }
         if (personDetail["Gender"]) {
             $("#gender").val(personDetail["Gender"]);
         }
-        if (personDetail["FamilyCode"] == 1001) {
+        if (pageFamily.isParentLoggedIn) {
+            if (personDetail["FamilyCode"] == familyCode) {
+                $("#provideLoginDiv").addClass("hidden");
+                $("#loginAccess").addClass("hidden");
+                $("#passwordDiv").empty();
+                $("#confirmPasswordDiv").empty();
+            } else {
+                $("#provideLoginDiv").removeClass("hidden");
+                if (personDetail["LoginFlag"]) {
+                    if (personDetail["LoginFlag"] == 1) {
+                        $('input:radio[name=access]')[0].checked = true;
+                        $("#provideLoginDiv").removeClass("hidden");
+                        $("#loginAccess").removeClass("hidden");
+                        $("#passwordDiv").empty();
+                        $("#confirmPasswordDiv").empty();
+                        //pageFamily.isYesEnabled = false;
+                        //pageFamily.isNoEnabled = true;
+                        $("#email").attr("readonly", true);
+                    } else {
+                        $('input:radio[name=access]')[1].checked = true;
+                        $("#loginAccess").addClass("hidden");
+                        //pageFamily.isYesEnabled = true;
+                        //pageFamily.isNoEnabled = false;
+                        $("#email").removeAttr("readonly");
+                    }
+                }
+            }
+        } else {
             $("#provideLoginDiv").addClass("hidden");
         }
-        else {
-            $("#provideLoginDiv").removeClass("hidden");
-        }
-        if (personDetail["LoginFlag"]) {
-            if (personDetail["LoginFlag"] == 1) {
-                $('input:radio[name=access]')[0].checked = true;
-                pageFamily.isYesEnabled = false;
-                pageFamily.isNoEnabled = true;
-                $("#email").attr("readonly", true);
-            }
-            else {
-                $('input:radio[name=access]')[1].checked = true;
-                pageFamily.isYesEnabled = true;
-                pageFamily.isNoEnabled = false;
-                $("#email").removeAttr("readonly");
-            }
-        }
 
-        document.getElementById('loginAccess').style.display = 'none';
         $("#password").val("");
         $("#confirmPassword").val("");
     },
@@ -134,10 +206,11 @@ var pageFamily = {
         }
         $("#relation").html(relationListString);
     },
-    showHideDiv: function (radioCheckBox) {
-        var radioCheckBoxName = document.getElementsByName(radioCheckBox.name);
-        document.getElementById('loginAccess').style.display = ( radioCheckBoxName[0].checked ) ? 'block' : 'none';
-        document.getElementById('loginAccess').style.display = ( radioCheckBoxName[1].checked ) ? 'none' : 'block';
+    showLoginAccess: function () {
+        $("#loginAccess").removeClass("hidden");
+    },
+    hideLoginAccess: function () {
+        $("#loginAccess").addClass("hidden");
     },
     validateGender: function (element) {
         var gender = $(element).val();
@@ -176,6 +249,15 @@ var pageFamily = {
 $(document).ready(function () {
     localStorage.setItem("websiteRoot", "../");
 
+    if (familyCode == 1001) {
+        // isParentLoggedIn = true; Implies Parent
+        pageFamily.isParentLoggedIn = true;
+    } else {
+        $("#btnAddFamilyMember").remove();
+        // isParentLoggedIn = false; Implies Child
+        pageFamily.isParentLoggedIn = false;
+    }
+
     pageFamily.getFamilyList();
     pageFamily.getRelationList();
 
@@ -201,32 +283,10 @@ $(document).ready(function () {
         $(this).closest('.form-group').find('.info').empty();
     });
 
-    $("#btn-addFamily").click(function (event) {
-        document.getElementById("form-family").reset();
-        $("#password").attr("type", "password");
-        $("#confirmPassword").attr("type", "password");
-        //$("#familyCode").val(personDetail["FamilyCode"]);
-        initializeDate();
-        pageFamily.mode = 1;
-        //$("#form-family").attr("action","add.php");
-        $("#mode").val('A');
-        $("#addFamily").modal('show');
-        document.getElementById('loginAccess').style.display = 'none';
-    });
-
-    $('#addFamily').on('show.bs.modal', function (e) {
+    $('#familyModal').on('show.bs.modal', function (e) {
         $('.info').empty();
         $('.form-group').removeClass("has-success");
         $('.form-group').removeClass("has-error");
-        $("#familyModalHeading").html("Edit");
-        if (pageFamily.mode == 2) {
-            $("#familyModalHeading").html("Edit");
-        } else {
-            $("#familyModalHeading").html("Add");
-        }
-
-        //var rads = document.getElementsByName( 'access' );
-        //document.getElementById( 'loginAccess' ).style.display = ( rads[1].checked ) ? 'none' : 'block';
     });
 
     $("#relation").change(function (event) {
@@ -246,7 +306,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#form-family").ajaxForm({
+    $("#familyForm").ajaxForm({
         beforeSubmit: function () {
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
@@ -256,19 +316,19 @@ $(document).ready(function () {
             var response = JSON.parse(responseText);
             if (response.status == 0) {
                 pageIndex.showNotificationFailure(response.message);
-                $("#addFamily").modal('show');
+                $("#familyModal").modal('show');
             }
             else {
                 pageIndex.showNotificationSuccess(response.message);
                 setTimeout(pageFamily.getFamilyList(), 200);
-                $("#addFamily").modal('hide');
+                $("#familyModal").modal('hide');
             }
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }
     });
 
-    $("#form-family-delete").ajaxForm({
+    $("#deleteFamilyForm").ajaxForm({
         beforeSubmit: function () {
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
@@ -283,23 +343,9 @@ $(document).ready(function () {
                 pageIndex.showNotificationSuccess(response.message);
                 setTimeout(pageFamily.getFamilyList(), 200);
             }
-            $("#deleteFamily").modal('hide');
+            $("#deleteModal").modal('hide');
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }
-    });
-
-    $("#yes").click(function (event) {
-        if (pageFamily.isYesEnabled) {
-            pageFamily.showHideDiv(this);
-        }
-        return pageFamily.isYesEnabled;
-    });
-
-    $("#no").click(function (event) {
-        if (pageFamily.isNoEnabled) {
-            pageFamily.showHideDiv(this);
-        }
-        return pageFamily.isNoEnabled;
     });
 });

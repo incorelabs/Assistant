@@ -1077,7 +1077,7 @@ $(document).ready(function (event) {
 
     $(".progress").hide();
 
-    $("#deleteContact").ajaxForm({
+    $("#deleteContactForm").ajaxForm({
         beforeSubmit: function (formData, $form, options) {
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");

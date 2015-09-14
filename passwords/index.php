@@ -162,7 +162,7 @@ echo $navbar_str;
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" method="POST" action="controller.php" id="form-passwords" autocomplete="off">
+            <form class="form-horizontal" method="POST" action="controller.php" id="passwordForm" autocomplete="off">
                 <div class="modal-header">
                     <div class="form-group pull-left" style="margin-top:-5px">
                         <button class="btn btn-danger button-top-remove" data-dismiss="modal">
@@ -293,7 +293,7 @@ echo $navbar_str;
             <center>
                 <div class="modal-body">
                     <div class="btn-group">
-                        <form method="POST" action="controller.php" id="form-password-delete">
+                        <form method="POST" action="controller.php" id="deletePasswordForm">
                             <input type="text" class="hidden" name="passwordCode" id="form-delete-code"/>
                             <input type="text" class="hidden" name="mode" id="form-delete-mode" value="D"/>
                             <button class="btn btn-danger modal_button" type="submit">
