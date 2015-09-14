@@ -184,7 +184,7 @@ var pageContact = {
                 imgLocation = "../img/default/contact/profilePicture.png";
             }
 
-            contactDetailsString += "<div class='row contact-details'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop' onclick=''><img src='" + imgLocation + "' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>" + ((data.detail.contact.TitleName) ? data.detail.contact.TitleName + " " : "") + ((data.detail.contact.FullName) ? data.detail.contact.FullName : "") + "</h5></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop' class='clickable'><img src='" + imgLocation + "' id='imageresource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>" + ((data.detail.contact.TitleName) ? data.detail.contact.TitleName + " " : "") + ((data.detail.contact.FullName) ? data.detail.contact.FullName : "") + "</h5></div>";
 
             contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Guardian</div><value><div class='col-md-9'>" + ((data.detail.contact.GuardianName) ? data.detail.contact.GuardianName : "") + "</div></value></div></div>";
 
@@ -1072,7 +1072,10 @@ $(document).ready(function (event) {
     });
 
     $('#contactModal').on('shown.bs.modal', function () {
-        $('#addTitle').focus();
+        if (window.innerWidth > 992)
+        {
+            $('#addTitle').focus();
+        }
     });
 
     $(".progress").hide();
