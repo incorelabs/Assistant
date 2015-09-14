@@ -90,7 +90,7 @@ class FamilyController
         $sql = "";
 
         //if login access is changed then check the state
-        if($isChanged){
+        if($isChanged && intval($this->data["familyCode"]) != $this->familyCode){
             if(intval($this->data["access"]) == 1){
                 if($this->isMailIdAvailable() && validatePassword()){
                     $validate = true;
