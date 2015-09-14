@@ -151,35 +151,33 @@ var pageFamily = {
         }
         if (pageFamily.isParentLoggedIn) {
             if (personDetail["FamilyCode"] == familyCode) {
+                $('input:radio[name=access]')[0].checked = true;
                 $("#provideLoginDiv").addClass("hidden");
                 $("#loginAccess").addClass("hidden");
                 $("#passwordDiv").empty();
                 $("#confirmPasswordDiv").empty();
             } else {
                 $("#provideLoginDiv").removeClass("hidden");
-                if (personDetail["LoginFlag"]) {
-                    if (personDetail["LoginFlag"] == 1) {
-                        $('input:radio[name=access]')[0].checked = true;
-                        $("#loginAccess").removeClass("hidden");
-                        $("#passwordDiv").empty();
-                        $("#confirmPasswordDiv").empty();
-                        $("#email").attr("readonly", true);
-                    } else {
-                        $('input:radio[name=access]')[1].checked = true;
-                        $("#loginAccess").addClass("hidden");
-                        $("#email").removeAttr("readonly");
-                        $("#passwordDiv").html(pageFamily.getPasswordDivString());
-                        $("#confirmPasswordDiv").html(pageFamily.getConfirmPasswordDivString());
-                    }
+                if (personDetail["LoginFlag"] == 1) {
+                    $('input:radio[name=access]')[0].checked = true;
+                    $("#loginAccess").removeClass("hidden");
+                    $("#passwordDiv").empty();
+                    $("#confirmPasswordDiv").empty();
+                    $("#email").attr("readonly", true);
+                } else {
+                    $('input:radio[name=access]')[1].checked = true;
+                    $("#loginAccess").addClass("hidden");
+                    $("#email").removeAttr("readonly");
+                    $("#passwordDiv").html(pageFamily.getPasswordDivString());
+                    $("#confirmPasswordDiv").html(pageFamily.getConfirmPasswordDivString());
                 }
             }
         } else {
-            $("#provideLoginDiv").addClass("hidden");
-            $("#loginAccess").addClass("hidden");
+            if (personDetail["LoginFlag"] == 1)
+                $('input:radio[name=access]')[0].checked = true;
+            else
+                $('input:radio[name=access]')[1].checked = true;
         }
-        /*
-         $("#password").val("");
-         $("#confirmPassword").val("");*/
     },
     getRelationList: function () {
         var url = localStorage.getItem("websiteRoot") + "family/getRelation.php";
@@ -325,7 +323,8 @@ $(document).ready(function () {
     });
 
     $("#familyForm").ajaxForm({
-        beforeSubmit: function () {
+        beforeSubmit: function (formData) {
+            console.log(formData);
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
         },
