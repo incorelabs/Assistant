@@ -5,7 +5,6 @@ var pagePassword = {
     defSearchResult: $.Deferred(),
     familyList: null,
     passwordList: null,
-    modalHeading: null,
     firstTime: true,
     stateEncryptLoginPassword1: false,
     stateEncryptLoginPassword2: false,
@@ -54,7 +53,6 @@ var pagePassword = {
                 str += "<a onclick='pagePassword.getPasswordDetails(" + data.result[i].PasswordCode + ")' class='list-group-item contacts_font'><h4 class='list-group-item-heading contacts_font'>" + data.result[i].HolderName + " - " + data.result[i].PasswordName + "</h4></a>";
             }
             $("#passwordList").append(str);
-            // Print on screen
             if (pagePassword.currentPageNo <= data.pages) {
                 // Show Load More
                 var str = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pagePassword.getPasswordList();'>Load more..</a></div>";
@@ -101,7 +99,6 @@ var pagePassword = {
                 str += "<a onclick='pagePassword.getPasswordDetails(" + data.result[i].PasswordCode + ")' class='list-group-item contacts_font'><h4 class='list-group-item-heading contacts_font'>" + data.result[i].HolderName + " - " + data.result[i].PasswordName + "</h4></a>";
             }
             $("#passwordList").append(str);
-            // Print on screen
             if (pagePassword.currentPageNo <= data.pages) {
                 // Show Load More
                 var str = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pagePassword.getSearchResults();'>Load more..</a></div>";
@@ -133,9 +130,10 @@ var pagePassword = {
     },
     setPasswordDetails: function (data) {
         if (data.status == 1) {
-            var str = "";
-
             pagePassword.localPassword = data.detail;
+
+            var headerStr = "<h12>Password Details</h12><button id='editPasswordBtn' class='btn btn-success pull-right' onclick='pagePassword.openEditPasswordModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deletePasswordBtn' class='btn btn-danger pull-left' onclick='pagePassword.openDeletePasswordModal(" + data.detail.password.PasswordCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
+            var str = "";
 
             if (window.innerWidth < 992 && !pagePassword.firstTime) {
                 //Show the Password Details Header and hides the search header
@@ -166,8 +164,6 @@ var pagePassword = {
                 });
             }
             pagePassword.firstTime = false;
-
-            var headerStr = "<h12>Password Details</h12><button id='editPasswordBtn' class='btn btn-success pull-right' onclick='pagePassword.openEditPasswordModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deletePasswordBtn' class='btn btn-danger pull-left' onclick='pagePassword.openDeletePasswordModal(" + data.detail.password.PasswordCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
 
             str += "<div class='row contact-details' style='padding-top:0px'><div class='list-group-item-heading header_font'><div class='col-md-3'>Holder's Name</div><value><div class='col-md-9'>" + data.detail.password.HolderName + "</div></value></div></div>";
 
@@ -349,7 +345,7 @@ $(document).ready(function () {
             // Enter pressed
             pagePassword.doSearch();
         }
-    }
+    };
 
     $.when(pagePassword.defPasswordList).done(function (data) {
         if (data.status == 1)
@@ -359,11 +355,6 @@ $(document).ready(function () {
     pagePassword.getFamilyList();
     pagePassword.getPasswordList();
     pagePassword.getPasswordTypeList();
-
-
-    $('#passwordModal').on('shown.bs.modal', function () {
-        $("#modalHeading").html(pagePassword.modalHeading);
-    });
 
     $('#passwordModal').on('show.bs.modal', function () {
         $("#password").attr("type", "password");

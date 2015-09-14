@@ -2,6 +2,7 @@ var pageContact = {
     currentPageNo: 1,
     localContact: null,
     defContactList: $.Deferred(),
+    defSearchResult: $.Deferred(),
     titleTag: [],
     titleCode: [],
     groupTag: [],
@@ -32,9 +33,7 @@ var pageContact = {
         $.getJSON(url, {
             pageNo: pageContact.currentPageNo
         }).done(function (data) {
-            console.log(data);
             pageContact.defContactList.resolve(data);
-            console.log(pageContact.currentPageNo);
             pageContact.setContactList(data);
         }).fail(function (error) {
 
@@ -57,9 +56,6 @@ var pageContact = {
                 str += "<a onclick='pageContact.getContactDetails(" + data.result[i].ContactCode + ")' class='list-group-item contacts_font'>" + data.result[i].FullName + "</a>";
             }
             $("#contactList").append(str);
-            console.log(str);
-            // Print on screen
-            console.log(data.result);
             if (pageContact.currentPageNo <= data.pages) {
                 // Show Load More
                 var str = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pageContact.getContactList();'>Load more..</a></div>";
@@ -73,9 +69,15 @@ var pageContact = {
         }
     },
     doSearch: function () {
-        pageContact.currentPageNo = 1;
         $("#contactList").empty();
+        pageContact.currentPageNo = 1;
+        pageContact.firstTime = true;
+        pageContact.defSearchResult = $.Deferred();
         pageContact.getSearchResults();
+        $.when(pageContact.defSearchResult).done(function (data) {
+            if (data.status == 1)
+                pageContact.getContactDetails(data.result[0].ContactCode);
+        });
     },
     getSearchResults: function () {
         var url = localStorage.getItem("websiteRoot") + "contacts/getContactList.php";
@@ -85,9 +87,7 @@ var pageContact = {
             searchType: $('#filter').val(),
             searchText: $('#searchBox').val().trim()
         }).done(function (data) {
-            console.log(data);
-
-            console.log(pageContact.currentPageNo);
+            pageContact.defSearchResult.resolve(data);
             pageContact.setSearchResults(data);
         }).fail(function (error) {
 
@@ -109,11 +109,7 @@ var pageContact = {
                 }
                 str += "<a onclick='pageContact.getContactDetails(" + data.result[i].ContactCode + ")' class='list-group-item contacts_font'>" + data.result[i].FullName + "</a>";
             }
-            //$("#contactList").empty();
             $("#contactList").append(str);
-            console.log(str);
-            // Print on screen
-            console.log(data.result);
             if (pageContact.currentPageNo <= data.pages) {
                 // Show Load More
                 var str = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pageContact.getSearchResults();'>Load more..</a></div>";
@@ -128,13 +124,13 @@ var pageContact = {
         }
     },
     getContactDetails: function (contactCode) {
+        if (contactCode == null)
+            return;
         var url = localStorage.getItem("websiteRoot") + "contacts/getContactDetail.php";
 
         $.getJSON(url, {
             contactCode: contactCode
         }).done(function (data) {
-            console.log(data);
-            console.log(data.detail.contact);
             pageContact.setContactDetails(data);
         }).fail(function (error) {
 
@@ -143,9 +139,11 @@ var pageContact = {
     setContactDetails: function (data) {
         if (data.status == 1) {
             pageContact.localContact = data.detail;
+
             var headerStr = "<h12>Contact Details</h12><button id='editContactBtn' class='btn btn-success pull-right' onclick='pageContact.openEditContactModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deleteContactBtn' class='btn btn-danger pull-left' onclick='pageContact.openDeleteContactModal(" + data.detail.contact.ContactCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
             var str = "";
             var imgLocation = "";
+
             if (window.innerWidth < 992 && !pageContact.firstTime) {
                 console.log("width less than 992");
 
@@ -947,8 +945,25 @@ var pageContact = {
 $(document).ready(function (event) {
     localStorage.setItem("websiteRoot", "../");
 
+    document.getElementById('searchBox').onkeypress = function (e) {
+        if (!e)
+            e = window.event;
+        console.log(e);
+        var keyCode = e.keyCode || e.which;
+        if (keyCode == '13') {
+            // Enter pressed
+            pageContact.doSearch();
+        }
+    };
+
+    $.when(pageContact.defContactList).done(function (data) {
+        if (data.status == 1)
+            pageContact.getContactDetails(data.result[0].ContactCode);
+    });
+
     pageContact.getContactList();
     pageContact.refreshMasterList();
+
     if (window.innerWidth < 992) {
         var div = document.getElementById('websiteTabs');
         div.style.display = "none";
@@ -960,11 +975,7 @@ $(document).ready(function (event) {
         var div = document.getElementById('mobileTabs');
         div.style.display = "none";
     }
-    $.when(pageContact.defContactList).done(function (data) {
-        console.log(data.status);
-        if (data.status == 1)
-            pageContact.getContactDetails(data.result[0].ContactCode);
-    });
+
 
     $('#filter').change(function () {
         if ($(this).val() != "0") {
@@ -1195,7 +1206,13 @@ $(document).ready(function (event) {
         if ($(this).val().trim() == "") {
             $("#contactList").empty();
             pageContact.currentPageNo = 1;
+            pageContact.firstTime = true;
+            pageContact.defContactList = $.Deferred();
             pageContact.getContactList();
+            $.when(pageContact.defContactList).done(function (data) {
+                if (data.status == 1)
+                    pageContact.getContactDetails(data.result[0].ContactCode);
+            });
         }
     });
 
