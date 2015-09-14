@@ -1180,6 +1180,9 @@ $(document).ready(function (event) {
                 setTimeout(function () {
                     pageContact.currentPageNo = 1;
                     $("#contactList").empty();
+                    $("#contactDetailBody").empty();
+                    $("#editContactBtn").remove();
+                    $("#deleteContactBtn").remove();
                     pageContact.getContactDetails(response.landing);
                     pageContact.getContactList();
                     pageIndex.showNotificationSuccess(response.message);
