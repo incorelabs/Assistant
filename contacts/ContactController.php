@@ -122,60 +122,55 @@ class ContactController
 
     function editContact(){
         $this->contactCode = intval($this->data["contactCode"]);
-        $this->runMultipleQuery($this->getSpTable151Query());
-        $count = $this->countContactList();
-        if($count == 0){
-            $this->landing = null;
+        if($this->validateAddress("home") && $this->validateAddress("work") && $this->validateAddress("other")) {
+            $this->runMultipleQuery($this->getSpTable151Query());
+            $count = $this->countContactList();
+            if ($count == 0) {
+                $this->landing = null;
+            } elseif ($this->active == 2) {
+                $this->setFirstRecordAsLanding();
+            } else {
+                $this->landing = $this->contactCode;
+            }
+            $this->response['landing'] = $this->landing;
         }
-        elseif($this->active == 2){
-            $this->setFirstRecordAsLanding();
-        }
-        else{
-            $this->landing = $this->contactCode;
-        }
-        $this->response['landing'] = $this->landing;
     }
 
     function addContact(){
         $this->contactCode = $this->generateContactCode();
         $this->landing = $this->contactCode;
-        $this->runMultipleQuery($this->getSpTable151Query());
-        $this->response['landing'] = $this->contactCode;
+        if($this->validateAddress("home") && $this->validateAddress("work") && $this->validateAddress("other")){
+            $this->runMultipleQuery($this->getSpTable151Query());
+            $this->response['landing'] = $this->contactCode;
+        }
     }
 
-    function runEditOrAdd($sql){
-        if ($this->mysqli->multi_query($sql)) {
-            $this->response = createResponse(1,"Successful");
-            if($this->mode == 1 || $this->mode == 2){
-                if($this->active == 1){
-                    for(;;){
-                        if ($result = $this->mysqli->use_result()) {
-                            while ($row = $result->fetch_row()) {
-                                $this->landing = $row[0];
-                            }
-                            $result->close();
-                        }
+    function validateAddress($type){
+        $status = true;
+        if(!empty($this->data["address"][$type])) {
+            $address = $this->data["address"][$type];
 
-                        if($this->mysqli->more_results()){
-                            $this->mysqli->next_result();
-                        }
-                        else{
-                            break;
-                        }
-                    }
+            if(!empty($address['state'])){
+                if(!empty($address['country'])){
+                    $status = true;
                 }
                 else{
-                    $qry = "SELECT ContactCode FROM Table151 WHERE RegCode =".$this->regCode." ORDER BY FullName LIMIT 1;";
-                    if($result = $this->mysqli->query($qry)){
-                        $this->landing = $result->fetch_assoc()["ContactCode"];
-                    }
+                    $status = false;
+                    $this->response = $this->createResponse(0,"To add state it's important to country");
                 }
             }
-            $this->response["landing"] = $this->landing;
+
+            if(!empty($address['city'])){
+                if(!empty($address['state']) && !empty($address['country'])){
+                    $status = true;
+                }
+                else{
+                    $status = false;
+                    $this->response = $this->createResponse(0,"To add city it's important to add state and country");
+                }
+            }
         }
-        else{
-            $this->response = createResponse(0,"Error occurred while uploading to the database: ".$this->mysqli->error);
-        }
+        return $status;
     }
 
     function checkAndReplaceLink($link){
