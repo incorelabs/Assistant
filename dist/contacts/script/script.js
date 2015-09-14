@@ -179,8 +179,7 @@ var pageContact = {
             pageContact.firstTime = false;
             if (data.detail.contact.ImageURL != null) {
                 imgLocation = data.detail.contact.ImageURL;
-            }
-            else {
+            } else {
                 imgLocation = "../img/default/contact/profilePicture.png";
             }
 
@@ -955,8 +954,7 @@ $(document).ready(function (event) {
         div.style.display = "none";
         var div = document.getElementById('mobileTabs');
         div.style.display = "block";
-    }
-    else {
+    } else {
         var div = document.getElementById('websiteTabs');
         div.style.display = "block";
         var div = document.getElementById('mobileTabs');
@@ -996,8 +994,7 @@ $(document).ready(function (event) {
             }
             reader.readAsDataURL(image);
             $("#imageErrorMsg").html("");
-        }
-        else {
+        } else {
             $("#imageErrorMsg").html("Image size is greater than 1MB");
             document.getElementById("profileForm").reset();
         }
@@ -1008,8 +1005,7 @@ $(document).ready(function (event) {
         $('#photoId').val(pageContact.localContact.contact.ContactCode);
         if (pageContact.localContact.contact.ImageURL) {
             $("#imagepreview").attr("src", pageContact.localContact.contact.ImageURL);
-        }
-        else {
+        } else {
             $("#imagepreview").attr("src", "../img/default/contact/profilePicture.png");
         }
     });
@@ -1102,6 +1098,59 @@ $(document).ready(function (event) {
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
                     pageIndex.showNotificationFailure("Required fields are empty");
+                    return false;
+                }
+            }
+            if ($("#homeCity").val().trim() != "") {
+                // If city has a value then state and country also should
+                if ($("#homeState").val().trim() == "") {
+                    pageIndex.showNotificationFailure("The \"Home\" state field is empty");
+                    return false;
+                } else if ($("#homeCountry").val().trim() == "") {
+                    pageIndex.showNotificationFailure("The \"Home\" country field is empty");
+                    return false;
+                }
+            } else if ($("#homeState").val().trim() != "") {
+                // If city does not have a value check if state has a value
+                // If state does then country should also
+                if ($("#homeCountry").val().trim() == "") {
+                    pageIndex.showNotificationFailure("The \"Home\" country field is empty");
+                    return false;
+                }
+            }
+
+            if ($("#workCity").val().trim() != "") {
+                // If city has a value then state and country also should
+                if ($("#workState").val().trim() == "") {
+                    pageIndex.showNotificationFailure("The \"Work\" state field is empty");
+                    return false;
+                } else if ($("#workCountry").val().trim() == "") {
+                    pageIndex.showNotificationFailure("The \"Work\" country field is empty");
+                    return false;
+                }
+            } else if ($("#workState").val().trim() != "") {
+                // If city does not have a value check if state has a value
+                // If state does then country should also
+                if ($("#workCountry").val().trim() == "") {
+                    pageIndex.showNotificationFailure("The \"Work\" country field is empty");
+                    return false;
+                }
+            }
+
+            if ($("#otherCity").val().trim() != "") {
+                // If city has a value then state and country also should
+                if ($("#otherState").val().trim() == "") {
+                    pageIndex.showNotificationFailure("The \"Other\" state field is empty");
+                    return false;
+                } else if ($("#otherCountry").val().trim() == "") {
+                    pageIndex.showNotificationFailure("The \"Other\" country field is empty");
+                    return false;
+                }
+            } else if ($("#otherState").val().trim() != "") {
+                // If city does not have a value check if state has a value
+                // If state does then country should also
+                if ($("#otherCountry").val().trim() == "") {
+                    pageIndex.showNotificationFailure("The \"Other\" country field is empty");
                     return false;
                 }
             }
@@ -1235,8 +1284,7 @@ $(window).resize(function () {
         $("#contactDetail").removeClass("panelHeight");
         $("#contactDetailDiv").addClass("mobileBody");
         $("#contactDetailHeaderDiv").addClass("mobileHeader");
-    }
-    else {
+    } else {
         $("body").css("overflow", "hidden");
         $("#contactListScroll").addClass("panelHeight");
         $("#contactList").removeClass("mobile-list");
