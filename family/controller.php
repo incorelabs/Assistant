@@ -105,10 +105,21 @@ class FamilyController
                 $sql .= "DELETE FROM Table109 WHERE RegCode = ".$this->regCode." AND FamilyCode = ".intval($this->data["familyCode"]).";";
                 $sql .= "UPDATE Table107 SET Email = NULL WHERE RegCode = ".$this->regCode." AND FamilyCode = ".intval($this->data["familyCode"]).";";
             }
+            $sql .= $this->getSpTable107Query();
+        }
+        else{
+            $name = "'".$this->data['name']."'";
+            $relationCode = $this->data['relation'];
+            $dob = "'".$this->data['dob']."'";
+            $mobile = ((!empty($this->data['mobile'])) ? "'".$this->data['mobile']."'" : "NULL");
+            $gender = intval($this->data['gender']);
+
+            $sql .= "UPDATE `Table107` SET `FamilyName` = ".$name.", `RelationCode` = ".$relationCode.",  `BirthDate` = ".$dob.", `Mobile` = ".$mobile.", `Gender` = ".$gender." WHERE `RegCode` = ".$this->regCode." AND `FamilyCode` = ".intval($this->data["familyCode"]).";";
+            $sql .= "UPDATE `Table109` SET `RegName` = ".$name.", `RegMobile` = ".$mobile."
+                    WHERE `RegCode` = ".$this->regCode." AND `FamilyCode` = ".intval($this->data["familyCode"]).";";
         }
 
         if($validate){
-            $sql .= $this->getSpTable107Query();
             $this->runMultipleQuery($sql);
         }
     }
