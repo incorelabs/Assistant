@@ -1,6 +1,7 @@
 <?php
 session_start();
 define("ROOT", "../../");
+include_once ROOT . 'dist/authenticate.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +15,7 @@ define("ROOT", "../../");
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
     <?php
-    include_once ROOT . 'dist/authenticate.php';
+
     include_once ROOT . 'dist/bootstrap.php';
     ?>
 
@@ -81,7 +82,12 @@ echo $navbar_str;
                 <td class="text-center col-md-1 col-sm-1 hidden-xs">Test</td>
                 <td class="text-center col-md-1 col-sm-1 col-xs-1">Left</td>
                 <td class="text-center col-md-1 col-sm-1 col-xs-1">No</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1"><a href="#" data-toggle="modal" data-target="#envelopeModal"><i class="fa fa-pencil fa-lg fa-green"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#deleteLabel"><i class="fa fa-trash-o fa-lg fa-red"></i></a>&nbsp;&nbsp;&nbsp;<a
+                <td class="text-center col-md-1 col-sm-1 col-xs-1"><a href="#" data-toggle="modal"
+                                                                      data-target="#envelopeModal"><i
+                            class="fa fa-pencil fa-lg fa-green"></i></a>&nbsp;&nbsp;&nbsp;<a href="#"
+                                                                                             data-toggle="modal"
+                                                                                             data-target="#deleteLabel"><i
+                            class="fa fa-trash-o fa-lg fa-red"></i></a>&nbsp;&nbsp;&nbsp;<a
                         href="#" data-toggle="modal" data-target="#logoImage" class="imageLogo hidden"><i
                             class="fa fa-picture-o fa-lg fa-green"></i></a></td>
             </tr>
@@ -92,7 +98,15 @@ echo $navbar_str;
                 <td class="text-center col-md-1 col-sm-1 hidden-xs">Test123</td>
                 <td class="text-center col-md-1 col-sm-1 col-xs-1">Right</td>
                 <td class="text-center col-md-1 col-sm-1 col-xs-1">Yes</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1"><a href="#" data-toggle="modal" data-target="#envelopeModal"><i class="fa fa-pencil fa-lg fa-green"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#deleteLabel"><i class="fa fa-trash-o fa-lg fa-red"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#logoImage" class="imageLogo"><i class="fa fa-picture-o fa-lg fa-green"></i></a></td>
+                <td class="text-center col-md-1 col-sm-1 col-xs-1"><a href="#" data-toggle="modal"
+                                                                      data-target="#envelopeModal"><i
+                            class="fa fa-pencil fa-lg fa-green"></i></a>&nbsp;&nbsp;&nbsp;<a href="#"
+                                                                                             data-toggle="modal"
+                                                                                             data-target="#deleteLabel"><i
+                            class="fa fa-trash-o fa-lg fa-red"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal"
+                                                                                            data-target="#logoImage"
+                                                                                            class="imageLogo"><i
+                            class="fa fa-picture-o fa-lg fa-green"></i></a></td>
             </tr>
             </tbody>
         </table>
@@ -100,10 +114,11 @@ echo $navbar_str;
 </div>
 
 <!-- Add Modal -->
-<div class="modal fade" id="envelopeModal" tabindex="-1" role="dialog" aria-labelledby="envelopeModal" data-backdrop="static">
+<div class="modal fade" id="envelopeModal" tabindex="-1" role="dialog" aria-labelledby="envelopeModal"
+     data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" method="POST" action="" id="form-label" autocomplete="off">
+            <form class="form-horizontal" method="POST" action="" id="envelopeSettingsForm" autocomplete="off">
                 <div class="modal-header">
                     <div class="form-group pull-left" style="padding-left:15px">
                         <button class="btn btn-danger button-top-remove" data-dismiss="modal">
@@ -133,15 +148,16 @@ echo $navbar_str;
                     </div>
                     <hr/>
                     <div class="form-group form-group-margin">
-                            <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">From Req</span>
-                                <div class="inner-addon right-addon">
-                                    <i class="fa fa-caret-down fa-size"></i>
-                                    <select class="form-control select-field-left-border" id="envelopeFrom">
-                                        <option value="0">Yes</option>
-                                        <option value="1" selected="selected">No</option>
-                                    </select>
-                                </div>
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">From Req</span>
+
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-caret-down fa-size"></i>
+                                <select class="form-control select-field-left-border" id="envelopeFrom">
+                                    <option value="0">Yes</option>
+                                    <option value="1" selected="selected">No</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div id="fromDiv" style="display:none">
@@ -231,6 +247,7 @@ echo $navbar_str;
                         <div id="envelopeTitle">
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-label">Title</span>
+
                                 <div class="inner-addon right-addon">
                                     <i class="fa fa-caret-down fa-size"></i>
                                     <select class="form-control select-field-left-border" id="envelopeTitleSelect">
@@ -241,7 +258,8 @@ echo $navbar_str;
                             </div>
                             <div class='info'></div>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6 second-col-left-padding second-col-right-padding" id="envelopeCaptionDiv" style="display: none">
+                        <div class="col-md-6 col-sm-6 col-xs-6 second-col-left-padding second-col-right-padding"
+                             id="envelopeCaptionDiv" style="display: none">
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-label">Caption</span>
                                 <input type="text" name="envelopeCaption" id="envelopeCaption"
@@ -252,18 +270,18 @@ echo $navbar_str;
                     </div>
                     <hr/>
                     <div class="form-group form-group-margin">
-                            <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Logo</span>
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Logo</span>
 
-                                <div class="inner-addon right-addon">
-                                    <i class="fa fa-caret-down fa-size"></i>
-                                    <select id="logoPrint" class="form-control select-field-left-border">
-                                        <option value="0">Yes</option>
-                                        <option value="1" selected="selected">No</option>
-                                    </select>
-                                </div>
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-caret-down fa-size"></i>
+                                <select id="logoPrint" class="form-control select-field-left-border">
+                                    <option value="0">Yes</option>
+                                    <option value="1" selected="selected">No</option>
+                                </select>
                             </div>
-                            <div class='info'></div>
+                        </div>
+                        <div class='info'></div>
                     </div>
                     <div id="logoDiv" style="display:none">
                         <div class="form-group form-group-margin">
@@ -331,7 +349,8 @@ echo $navbar_str;
 </div><!--modal-->
 
 <!--Delete Modal-->
-<div class="modal fade" id="deleteLabel" tabindex="-1" role="dialog" aria-labelledby="deleteLabel" aria-hidden="true" data-backdrop="static">
+<div class="modal fade" id="deleteLabel" tabindex="-1" role="dialog" aria-labelledby="deleteLabel" aria-hidden="true"
+     data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -343,7 +362,7 @@ echo $navbar_str;
             <center>
                 <div class="modal-body">
                     <div class="btn-group">
-                        <form method="POST" action="controller.php" id="form-family-delete">
+                        <form method="POST" action="controller.php" id="deleteEnvelopeSettingsForm">
                             <input type="hidden" name="familyCode" id="deleteFamilyCode"/>
                             <input type="hidden" name="mode" id="form-delete-mode"/>
                             <button class="btn btn-danger modal_button" type="submit">
@@ -371,7 +390,8 @@ echo $navbar_str;
 <!--modal-->
 
 <!-- Image Modal -->
-<div class="modal fade" id="logoImage" tabindex="-1" role="dialog" aria-labelledby="logoImage" aria-hidden="true" data-backdrop="static">
+<div class="modal fade" id="logoImage" tabindex="-1" role="dialog" aria-labelledby="logoImage" aria-hidden="true"
+     data-backdrop="static">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
 
@@ -417,7 +437,8 @@ echo $navbar_str;
                                     <label class="control-label">Image Preview</label>
                                     <br>
                                     <br>
-                                    <img src="../../img/default/contact/profilePicture.png" id="imagepreview" class="addImage">
+                                    <img src="../../img/default/contact/profilePicture.png" id="imagepreview"
+                                         class="addImage">
                                 </div>
                             </div>
                         </center>

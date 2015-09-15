@@ -1,6 +1,7 @@
 <?php
 session_start();
 define("ROOT", "../../");
+include_once ROOT . 'dist/authenticate.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +15,6 @@ define("ROOT", "../../");
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
     <?php
-    include_once ROOT . 'dist/authenticate.php';
     include_once ROOT . 'dist/bootstrap.php';
     ?>
 
@@ -116,7 +116,7 @@ echo $navbar_str;
 <div class="modal fade" id="chequeModal" tabindex="-1" role="dialog" aria-labelledby="chequeModal">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" method="POST" action="" id="form-label" autocomplete="off">
+            <form class="form-horizontal" method="POST" action="" id="chequeSettingsForm" autocomplete="off">
                 <div class="modal-header">
                     <div class="form-group pull-left modal-header-btn-left">
                         <button class="btn btn-danger button-top-remove" data-dismiss="modal">
@@ -417,7 +417,7 @@ echo $navbar_str;
             <center>
                 <div class="modal-body">
                     <div class="btn-group">
-                        <form method="POST" action="controller.php" id="form-family-delete">
+                        <form method="POST" action="controller.php" id="deleteChequeSettingsForm">
                             <input type="hidden" name="familyCode" id="deleteFamilyCode"/>
                             <input type="hidden" name="mode" id="form-delete-mode"/>
                             <button class="btn btn-danger modal_button" type="submit">
