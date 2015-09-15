@@ -366,6 +366,11 @@ $(document).ready(function () {
             }
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
+        },
+        error: function () {
+            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            $("#pageLoading").removeClass("loader");
+            $(".cover").fadeOut(100);
         }
     });
 
@@ -387,6 +392,11 @@ $(document).ready(function () {
                 }, 200);
             }
             $("#deleteModal").modal('hide');
+            $("#pageLoading").removeClass("loader");
+            $(".cover").fadeOut(100);
+        },
+        error: function () {
+            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }

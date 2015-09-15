@@ -78,7 +78,7 @@ var pageEnvelopeSettings = {
         $("#deleteModal").modal('show');
     },
     setInputFields: function (envelopeDetails) {
-
+        console.log(envelopeDetails);
     }
 };
 $(document).ready(function () {
@@ -94,6 +94,7 @@ $(document).ready(function () {
             $("#fromDiv").css("display", "none");
         }
     });
+
     $('#logoPrint').change(function () {
         if ($("#logoPrint").val() == "1") {
             $("#logoDiv").css("display", "block");
@@ -102,6 +103,7 @@ $(document).ready(function () {
             $("#logoDiv").css("display", "none");
         }
     });
+
     $('#envelopeTitleSelect').change(function () {
         if ($("#envelopeTitleSelect").val() == "1") {
             $("#envelopeCaptionDiv").css("display", "block");
@@ -110,6 +112,18 @@ $(document).ready(function () {
         else {
             $("#envelopeCaptionDiv").css("display", "none");
             $("#envelopeTitle").removeClass("col-md-6 col-sm-6 col-xs-6 first-col-left-padding first-col-right-padding");
+        }
+    });
+
+    $("#envelopeSettingsForm").ajaxForm({
+        beforeSubmit: function (formData) {
+
+        },
+        success: function (responseText, statusText, xhr, $form) {
+
+        },
+        error: function () {
+
         }
     });
 });
