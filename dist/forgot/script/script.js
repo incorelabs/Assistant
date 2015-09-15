@@ -1,6 +1,6 @@
 $(document).ready(function () {
     localStorage.setItem("websiteRoot", "../");
-    $("#form-forgot").ajaxForm({
+    $("#forgotPasswordForm").ajaxForm({
         beforeSubmit: function () {
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");

@@ -74,7 +74,7 @@ echo $navbar_str;
                 <div class="panel-heading panel-header-height">
                     <h1 class="panel-title text-center" style="font-size: 20px;">Forgot Password</h1>
                 </div>
-                <form action="controller.php" method="POST" id="form-forgot">
+                <form action="controller.php" method="POST" id="forgotPasswordForm">
                     <div class="panel-body">
                         <div class="form-group">
                             <div class="inner-addon left-addon">

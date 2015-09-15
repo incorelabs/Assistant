@@ -60,7 +60,7 @@
                		<div class="panel-heading panel-header-height">
                 		<h1 class="panel-title text-center" style="font-size: 24px;">Sign In</h1>
                		</div>
-               		<form action="api/login.php" method="POST" id="form-login">
+               		<form action="api/login.php" method="POST" id="loginForm">
                			<div class="panel-body">
 							<div class="form-group">
 								<div class="inner-addon left-addon">

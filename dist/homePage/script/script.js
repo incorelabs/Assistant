@@ -1,7 +1,7 @@
 $(document).ready(function () {
     localStorage.setItem("websiteRoot", "");
 
-    $("#form-signup").ajaxForm({
+    $("#signUpForm").ajaxForm({
         beforeSubmit: function () {
             if (pageIndex.email_count == 1 && pageIndex.pwd_count == 1 && pageIndex.c_pwd_count == 1 && pageIndex.name_count == 1 && pageIndex.country_count == 1 && pageIndex.mobile_count == 1) {
                 $(".cover").fadeIn(100);
@@ -34,7 +34,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#form-login").ajaxForm({
+    $("#loginForm").ajaxForm({
         beforeSubmit: function () {
             console.log("Test");
             $(".cover").fadeIn(100);

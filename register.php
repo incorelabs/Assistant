@@ -58,7 +58,7 @@ echo $navbar_str;
                 <div class="panel-heading panel-header-height">
                     <h1 class="panel-title text-center" style="font-size: 24px;">Sign Up</h1>
                 </div>
-                <form action="api/signup.php" method="POST" id="form-signup">
+                <form action="api/signup.php" method="POST" id="signUpForm">
                     <div class="panel-body">
                         <div class="form-group">
                             <div class="inner-addon right-addon">
