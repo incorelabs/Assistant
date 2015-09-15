@@ -2,7 +2,7 @@ var pageFamily = {
     isParentLoggedIn: false,
     familyList: null,
     relationList: null,
-    personDetail: null,
+    personDetails: null,
     isYesEnabled: true,
     isNoEnabled: true,
     getFamilyList: function () {
@@ -98,16 +98,12 @@ var pageFamily = {
         $("#passwordDiv").html(pageFamily.getPasswordDivString());
         $("#confirmPasswordDiv").html(pageFamily.getConfirmPasswordDivString());
 
-        /*$("#password").attr("type", "password");
-         $("#confirmPassword").attr("type", "password");*/
-
         $("#loginAccess").addClass("hidden");
 
         $("#familyModal").modal('show');
-        //document.getElementById('loginAccess').style.display = 'none';
     },
     openEditFamilyModal: function (memberIndex) {
-        pageFamily.personDetail = pageFamily.familyList[memberIndex];
+        pageFamily.personDetails = pageFamily.familyList[memberIndex];
 
         document.getElementById("familyForm").reset();
         $("#form-add-edit-mode").val('M');
@@ -118,9 +114,9 @@ var pageFamily = {
         console.log(pageFamily.familyList[memberIndex]);
         initializeDate();
 
-        pageFamily.setInputFields(pageFamily.personDetail);
-        $("#form-add-edit-code").val(pageFamily.personDetail["FamilyCode"]);
-        console.log(pageFamily.personDetail["FamilyCode"]);
+        pageFamily.setInputFields(pageFamily.personDetails);
+        $("#form-add-edit-code").val(pageFamily.personDetails["FamilyCode"]);
+        console.log(pageFamily.personDetails["FamilyCode"]);
 
         $("#familyModal").modal('show');
     },
@@ -129,32 +125,32 @@ var pageFamily = {
         $("#form-delete-code").val(familyCode);
         $("#deleteModal").modal('show');
     },
-    setInputFields: function (personDetail) {
-        if (personDetail["FamilyName"]) {
-            $("#firstName").val(personDetail["FamilyName"]);
+    setInputFields: function (personDetails) {
+        if (personDetails["FamilyName"]) {
+            $("#firstName").val(personDetails["FamilyName"]);
         }
-        if (personDetail["RelationCode"]) {
-            $("#relation").val(personDetail["RelationCode"]);
+        if (personDetails["RelationCode"]) {
+            $("#relation").val(personDetails["RelationCode"]);
         }
-        if (personDetail["BirthDate"]) {
-            $("#dob").val(personDetail["BirthDate"]);
+        if (personDetails["BirthDate"]) {
+            $("#dob").val(personDetails["BirthDate"]);
         }
-        if (personDetail["Email"]) {
-            $("#email").val(personDetail["Email"]);
+        if (personDetails["Email"]) {
+            $("#email").val(personDetails["Email"]);
         }
-        if (personDetail["Mobile"]) {
-            $("#mobile").val(personDetail["Mobile"]);
+        if (personDetails["Mobile"]) {
+            $("#mobile").val(personDetails["Mobile"]);
         } else {
             $("#mobile").val("");
         }
-        if (personDetail["Gender"]) {
-            if (personDetail["Gender"] == "0")
+        if (personDetails["Gender"]) {
+            if (personDetails["Gender"] == "0")
                 $("#gender").val("");
             else
-                $("#gender").val(personDetail["Gender"]);
+                $("#gender").val(personDetails["Gender"]);
         }
         if (pageFamily.isParentLoggedIn) {
-            if (personDetail["FamilyCode"] == familyCode) {
+            if (personDetails["FamilyCode"] == familyCode) {
                 $('input:radio[name=access]')[0].checked = true;
                 $("#provideLoginDiv").addClass("hidden");
                 $("#loginAccess").addClass("hidden");
@@ -162,7 +158,7 @@ var pageFamily = {
                 $("#confirmPasswordDiv").empty();
             } else {
                 $("#provideLoginDiv").removeClass("hidden");
-                if (personDetail["LoginFlag"] == 1) {
+                if (personDetails["LoginFlag"] == 1) {
                     $('input:radio[name=access]')[0].checked = true;
                     $("#loginAccess").removeClass("hidden");
                     $("#passwordDiv").empty();
@@ -177,7 +173,7 @@ var pageFamily = {
                 }
             }
         } else {
-            if (personDetail["LoginFlag"] == 1)
+            if (personDetails["LoginFlag"] == 1)
                 $('input:radio[name=access]')[0].checked = true;
             else
                 $('input:radio[name=access]')[1].checked = true;
@@ -334,7 +330,7 @@ $(document).ready(function () {
                     pageIndex.showNotificationFailure("Required fields are empty");
                     return false;
                 }
-                if (pageFamily.personDetail["FamilyCode"] != familyCode) {
+                if (pageFamily.personDetails["FamilyCode"] != familyCode) {
                     if (formData[i].name == "access") {
                         if (formData[i].value == 1) {
                             if ($("#email").val().trim() == "") {

@@ -51,16 +51,33 @@ var pageEnvelopeSettings = {
         $("#table-body").html(envelopeSettingsTableString);
     },
     openAddEnvelopeSettingsModal: function () {
+        document.getElementById("envelopeSettingsForm").reset();
+
+        $("#form-add-edit-mode").val('A');
+        $("#form-add-edit-code").val(1);
+
+        $('#envelopeSettingsModalHeading').empty();
+        $('#envelopeSettingsModalHeading').html("Add Family Member");
+
         $("#envelopeSettingsModal").modal('show');
     },
     openEditEnvelopeSettingsModal: function (envelopeSettingsIndex) {
         pageEnvelopeSettings.envelopeDetails = pageEnvelopeSettings.envelopeSettingList[envelopeSettingsIndex];
+
+        document.getElementById("envelopeSettingsForm").reset();
+        $("#form-add-edit-mode").val('M');
+
+        pageEnvelopeSettings.setInputFields(pageEnvelopeSettings.envelopeDetails);
+        $("#form-add-edit-code").val(pageEnvelopeSettings.envelopeDetails["FamilyCode"]);
+
         $("#envelopeSettingsModal").modal('show');
     },
-    openDeleteEnvelopeSettingsModal: function () {
+    openDeleteEnvelopeSettingsModal: function (coverCode) {
+        console.log(coverCode);
+        $("#form-delete-code").val(coverCode);
         $("#deleteModal").modal('show');
     },
-    setInputFields: function () {
+    setInputFields: function (envelopeDetails) {
 
     }
 };

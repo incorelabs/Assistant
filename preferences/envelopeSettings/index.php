@@ -97,10 +97,12 @@ echo $navbar_str;
                             <span class='glyphicon glyphicon-ok'></span>
                         </button>
                     </div>
-                    <h4 id="familyModalHeading" class="modal-title text-center">
-                        Add Envelope
+                    <h4 id="envelopeSettingsModalHeading" class="modal-title text-center">
                     </h4>
                 </div>
+                <input type="text" class="hidden" name="coverCode" id="form-add-edit-code"/>
+                <input type="text" class="hidden" name="mode" id="form-add-edit-mode"/>
+
                 <div class="modal-body">
                     <div class="info text-center">*Please enter all the values in "mm" only</div>
                     <div class="form-group form-group-margin">
@@ -329,8 +331,8 @@ echo $navbar_str;
                 <div class="modal-body">
                     <div class="btn-group">
                         <form method="POST" action="controller.php" id="deleteEnvelopeSettingsForm">
-                            <input type="hidden" name="familyCode" id="deleteFamilyCode"/>
-                            <input type="hidden" name="mode" id="form-delete-mode"/>
+                            <input type="text" class="hidden" name="coverCode" id="form-delete-code"/>
+                            <input type="text" class="hidden" name="mode" id="form-delete-mode" value="D"/>
                             <button class="btn btn-danger modal_button" type="submit">
                                 <span class='glyphicon glyphicon-ok'></span>&nbsp
                                 Yes
