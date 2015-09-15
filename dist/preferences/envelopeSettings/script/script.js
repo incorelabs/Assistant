@@ -117,13 +117,64 @@ $(document).ready(function () {
 
     $("#envelopeSettingsForm").ajaxForm({
         beforeSubmit: function (formData) {
-
+            console.log(formData);
+            for (var i = 0; i < formData.length; i++) {
+                if (formData[i].required && formData[i].value.trim() == "") {
+                    pageIndex.showNotificationFailure("Required fields are empty");
+                    return false;
+                }
+            }
+            return false;
+            $(".cover").fadeIn(100);
+            $("#pageLoading").addClass("loader");
         },
         success: function (responseText, statusText, xhr, $form) {
-
+            console.log(responseText);
+            var response = JSON.parse(responseText);
+            if (response.status == 1) {
+                pageIndex.showNotificationSuccess(response.message);
+                setTimeout(function () {
+                    pageEnvelopeSettings.getEnvelopeList();
+                }, 200);
+                $("#envelopeSettingsModal").modal('hide');
+            } else {
+                pageIndex.showNotificationFailure(response.message);
+                $("#envelopeSettingsModal").modal('show');
+            }
+            $("#pageLoading").removeClass("loader");
+            $(".cover").fadeOut(100);
         },
         error: function () {
+            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            $("#pageLoading").removeClass("loader");
+            $(".cover").fadeOut(100);
+        }
+    });
 
+    $("#deleteEnvelopeSettingsForm").ajaxForm({
+        beforeSubmit: function () {
+            $(".cover").fadeIn(100);
+            $("#pageLoading").addClass("loader");
+        },
+        success: function (responseText, statusText, xhr, $form) {
+            console.log(responseText);
+            var response = JSON.parse(responseText);
+            if (response.status == 1) {
+                pageIndex.showNotificationSuccess(response.message);
+                setTimeout(function () {
+                    pageEnvelopeSettings.getEnvelopeList();
+                }, 200);
+            } else {
+                pageIndex.showNotificationFailure(response.message);
+            }
+            $("#deleteModal").modal('hide');
+            $("#pageLoading").removeClass("loader");
+            $(".cover").fadeOut(100);
+        },
+        error: function () {
+            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            $("#pageLoading").removeClass("loader");
+            $(".cover").fadeOut(100);
         }
     });
 });

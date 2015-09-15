@@ -353,16 +353,15 @@ $(document).ready(function () {
         success: function (responseText, statusText, xhr, $form) {
             console.log(responseText);
             var response = JSON.parse(responseText);
-            if (response.status == 0) {
-                pageIndex.showNotificationFailure(response.message);
-                $("#familyModal").modal('show');
-            }
-            else {
+            if (response.status == 1) {
                 pageIndex.showNotificationSuccess(response.message);
                 setTimeout(function () {
                     pageFamily.getFamilyList();
                 }, 200);
                 $("#familyModal").modal('hide');
+            } else {
+                pageIndex.showNotificationFailure(response.message);
+                $("#familyModal").modal('show');
             }
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
@@ -382,14 +381,13 @@ $(document).ready(function () {
         success: function (responseText, statusText, xhr, $form) {
             console.log(responseText);
             var response = JSON.parse(responseText);
-            if (response.status == 0) {
-                pageIndex.showNotificationFailure(response.message);
-            }
-            else {
+            if (response.status == 1) {
                 pageIndex.showNotificationSuccess(response.message);
                 setTimeout(function () {
                     pageFamily.getFamilyList();
                 }, 200);
+            } else {
+                pageIndex.showNotificationFailure(response.message);
             }
             $("#deleteModal").modal('hide');
             $("#pageLoading").removeClass("loader");

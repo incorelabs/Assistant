@@ -404,8 +404,7 @@ $(document).ready(function () {
                     pagePassword.getPasswordTypeList();
                     $("#passwordModal").modal("hide");
                 }, 500);
-            }
-            else {
+            } else {
                 pageIndex.showNotificationFailure(response.message);
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
