@@ -45,7 +45,8 @@ var pageFamily = {
             }
 
             familyTableString += "<tr class='text-left'>";
-            familyTableString += "<td>" + (i + 1) + "</td><td>" + data[i]['FamilyName'] + "</td>";
+            familyTableString += "<td>" + (i + 1) + "</td>";
+            familyTableString += "<td>" + data[i]['FamilyName'] + "</td>";
             familyTableString += "<td class='hidden-xs hidden-sm'>" + ((data[i]['RelationName']) ? data[i]['RelationName'] : "-") + "</td>";
             familyTableString += "<td class='hidden-xs hidden-sm'>" + ((data[i]['BirthDate']) ? data[i]['BirthDate'] : "-") + "</td>";
 

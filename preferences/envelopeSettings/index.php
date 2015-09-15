@@ -56,7 +56,7 @@ echo $navbar_str;
         </div>
     </div>
     <div class="text-right button-top-margin">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#envelopeModal">
+        <button class="btn btn-primary" onclick="pageEnvelopeSettings.openAddEnvelopeSettingsModal();">
             <i class="fa fa-plus fa-lg"></i>
         </button>
     </div>
@@ -74,46 +74,14 @@ echo $navbar_str;
             </tr>
             </thead>
             <tbody id="table-body">
-            <tr>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">1</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">Test</td>
-                <td class="text-center col-md-1 col-sm-1 hidden-xs">No</td>
-                <td class="text-center col-md-1 col-sm-1 hidden-xs">Test</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">Left</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">No</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1"><a href="#" data-toggle="modal"
-                                                                      data-target="#envelopeModal"><i
-                            class="fa fa-pencil fa-lg fa-green"></i></a>&nbsp;&nbsp;&nbsp;<a href="#"
-                                                                                             data-toggle="modal"
-                                                                                             data-target="#deleteLabel"><i
-                            class="fa fa-trash-o fa-lg fa-red"></i></a>&nbsp;&nbsp;&nbsp;<a
-                        href="#" data-toggle="modal" data-target="#logoImage" class="imageLogo hidden"><i
-                            class="fa fa-picture-o fa-lg fa-green"></i></a></td>
-            </tr>
-            <tr>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">2</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">Test1</td>
-                <td class="text-center col-md-1 col-sm-1 hidden-xs">Yes</td>
-                <td class="text-center col-md-1 col-sm-1 hidden-xs">Test123</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">Right</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">Yes</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1"><a href="#" data-toggle="modal"
-                                                                      data-target="#envelopeModal"><i
-                            class="fa fa-pencil fa-lg fa-green"></i></a>&nbsp;&nbsp;&nbsp;<a href="#"
-                                                                                             data-toggle="modal"
-                                                                                             data-target="#deleteLabel"><i
-                            class="fa fa-trash-o fa-lg fa-red"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal"
-                                                                                            data-target="#logoImage"
-                                                                                            class="imageLogo"><i
-                            class="fa fa-picture-o fa-lg fa-green"></i></a></td>
-            </tr>
+
             </tbody>
         </table>
     </div>
 </div>
 
 <!-- Add Modal -->
-<div class="modal fade" id="envelopeModal" tabindex="-1" role="dialog" aria-labelledby="envelopeModal"
+<div class="modal fade" id="envelopeSettingsModal" tabindex="-1" role="dialog" aria-labelledby="envelopeSettingsModal"
      data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -139,7 +107,7 @@ echo $navbar_str;
                         <div class="col-md-12 col-sm-12 col-xs-12 first-col-left-padding first-col-right-padding">
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-label">Name</span>
-                                <input type="text" name="envelopeName" id="envelopeName"
+                                <input type="text" name="coverName" id="coverName"
                                        class="form-control text-field-left-border" placeholder="Envelope Name"/>
                             </div>
                             <div class='info'></div>
@@ -153,8 +121,8 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-size"></i>
                                 <select class="form-control select-field-left-border" id="envelopeFrom">
-                                    <option value="0">Yes</option>
-                                    <option value="1" selected="selected">No</option>
+                                    <option value="1">Yes</option>
+                                    <option value="2" selected="selected">No</option>
                                 </select>
                             </div>
                         </div>
@@ -190,7 +158,7 @@ echo $navbar_str;
                             <div class="col-md-6 col-sm-6 col-xs-6 first-col-left-padding first-col-right-padding">
                                 <div class="input-group">
                                     <span class="input-group-addon input-group-addon-label">Line 1</span>
-                                    <input type="text" name="fromLine1" id="fromLine1"
+                                    <input type="text" name="fromAdd1" id="fromAdd1"
                                            class="form-control text-field-left-border" placeholder="Line 1"/>
                                 </div>
                                 <div class='info'></div>
@@ -199,7 +167,7 @@ echo $navbar_str;
                             <div class="col-md-6 col-sm-6 col-xs-6 second-col-left-padding second-col-right-padding">
                                 <div class="input-group">
                                     <span class="input-group-addon input-group-addon-label">Line 2</span>
-                                    <input type="text" name="fromLine2" id="fromLine2"
+                                    <input type="text" name="fromAdd2" id="fromAdd2"
                                            class="form-control text-field-left-border" placeholder="Line 2"/>
                                 </div>
                                 <div class='info'></div>
@@ -209,7 +177,7 @@ echo $navbar_str;
                             <div class="col-md-6 col-sm-6 col-xs-6 first-col-left-padding first-col-right-padding">
                                 <div class="input-group">
                                     <span class="input-group-addon input-group-addon-label">Line 3</span>
-                                    <input type="text" name="fromLine3" id="fromLine3"
+                                    <input type="text" name="fromAdd3" id="fromAdd3"
                                            class="form-control text-field-left-border" placeholder="Line 3"/>
                                 </div>
                                 <div class='info'></div>
@@ -217,7 +185,7 @@ echo $navbar_str;
                             <div class="col-md-6 col-sm-6 col-xs-6 second-col-left-padding second-col-right-padding">
                                 <div class="input-group">
                                     <span class="input-group-addon input-group-addon-label">Line 4</span>
-                                    <input type="text" name="fromLine4" id="fromLine4"
+                                    <input type="text" name="fromAdd4" id="fromAdd4"
                                            class="form-control text-field-left-border" placeholder="Line 4"/>
                                 </div>
                                 <div class='info'></div>
@@ -229,7 +197,7 @@ echo $navbar_str;
                         <div class="col-md-6 col-sm-6 col-xs-6 first-col-left-padding first-col-right-padding">
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-label">To Top</span>
-                                <input type="number" name="topTop" id="toTop"
+                                <input type="number" name="toTop" id="toTop"
                                        class="form-control text-field-left-border" placeholder="To Top"/>
                             </div>
                             <div class='info'></div>
@@ -250,8 +218,8 @@ echo $navbar_str;
                                 <div class="inner-addon right-addon">
                                     <i class="fa fa-caret-down fa-size"></i>
                                     <select class="form-control select-field-left-border" id="envelopeTitleSelect">
-                                        <option value="0">Yes</option>
-                                        <option value="1" selected="selected">No</option>
+                                        <option value="1">Yes</option>
+                                        <option value="2" selected="selected">No</option>
                                     </select>
                                 </div>
                             </div>
@@ -261,7 +229,7 @@ echo $navbar_str;
                              id="envelopeCaptionDiv" style="display: none">
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-label">Caption</span>
-                                <input type="text" name="envelopeCaption" id="envelopeCaption"
+                                <input type="text" name="caption" id="caption"
                                        class="form-control text-field-left-border" placeholder="Envelope Caption"/>
                             </div>
                             <div class='info'></div>
@@ -275,8 +243,8 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-size"></i>
                                 <select id="logoPrint" class="form-control select-field-left-border">
-                                    <option value="0">Yes</option>
-                                    <option value="1" selected="selected">No</option>
+                                    <option value="1">Yes</option>
+                                    <option value="2" selected="selected">No</option>
                                 </select>
                             </div>
                         </div>
@@ -328,9 +296,9 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-size"></i>
                                 <select id="logoPrint" class="form-control select-field-left-border">
-                                    <option value="0">Left</option>
-                                    <option value="1">Center</option>
-                                    <option value="2">Right</option>
+                                    <option value="1">Left</option>
+                                    <option value="2">Center</option>
+                                    <option value="3">Right</option>
                                 </select>
                             </div>
                         </div>
@@ -347,7 +315,7 @@ echo $navbar_str;
 </div><!--modal-->
 
 <!--Delete Modal-->
-<div class="modal fade" id="deleteLabel" tabindex="-1" role="dialog" aria-labelledby="deleteLabel" aria-hidden="true"
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true"
      data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -388,7 +356,7 @@ echo $navbar_str;
 <!--modal-->
 
 <!-- Image Modal -->
-<div class="modal fade" id="logoImage" tabindex="-1" role="dialog" aria-labelledby="logoImage" aria-hidden="true"
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true"
      data-backdrop="static">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
