@@ -122,7 +122,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-size"></i>
-                                <select class="form-control select-field-left-border" id="envelopeFrom">
+                                <select class="form-control select-field-left-border" name="fromRequired"
+                                        id="fromRequired">
                                     <option value="1">Yes</option>
                                     <option value="2" selected="selected">No</option>
                                 </select>
@@ -213,13 +214,13 @@ echo $navbar_str;
                         </div>
                     </div>
                     <div class="form-group form-group-margin">
-                            <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Caption</span>
-                                <input type="text" name="caption" id="caption"
-                                       class="form-control text-field-left-border" placeholder="Envelope Caption"/>
-                            </div>
-                            <div class='info'></div>
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Caption</span>
+                            <input type="text" name="caption" id="caption"
+                                   class="form-control text-field-left-border" placeholder="Envelope Caption"/>
                         </div>
+                        <div class='info'></div>
+                    </div>
                     <hr/>
                     <div class="form-group form-group-margin">
                         <div class="input-group">
@@ -227,7 +228,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-size"></i>
-                                <select id="logoAvailable" class="form-control select-field-left-border">
+                                <select class="form-control select-field-left-border" name="logoAvailable"
+                                        id="logoAvailable">
                                     <option value="1">Yes</option>
                                     <option value="2" selected="selected">No</option>
                                 </select>
@@ -280,7 +282,7 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-size"></i>
-                                <select id="coverFeed" class="form-control select-field-left-border">
+                                <select class="form-control select-field-left-border" name="coverFeed" id="coverFeed">
                                     <option value="1">Left</option>
                                     <option value="2">Center</option>
                                     <option value="3">Right</option>

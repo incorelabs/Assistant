@@ -57,7 +57,7 @@ var pageEnvelopeSettings = {
         $("#form-add-edit-code").val(1);
 
         $('#envelopeSettingsModalHeading').empty();
-        $('#envelopeSettingsModalHeading').html("Add Envelope");
+        $('#envelopeSettingsModalHeading').html("Add Envelope Settings");
 
         $("#envelopeSettingsModal").modal('show');
     },
@@ -67,8 +67,11 @@ var pageEnvelopeSettings = {
         document.getElementById("envelopeSettingsForm").reset();
         $("#form-add-edit-mode").val('M');
 
+        $('#envelopeSettingsModalHeading').empty();
+        $('#envelopeSettingsModalHeading').html("Edit Envelope Settings");
+
         pageEnvelopeSettings.setInputFields(pageEnvelopeSettings.envelopeDetails);
-        $("#form-add-edit-code").val(pageEnvelopeSettings.envelopeDetails["FamilyCode"]);
+        $("#form-add-edit-code").val(pageEnvelopeSettings.envelopeDetails["CoverCode"]);
 
         $("#envelopeSettingsModal").modal('show');
     },
@@ -79,6 +82,79 @@ var pageEnvelopeSettings = {
     },
     setInputFields: function (envelopeDetails) {
         console.log(envelopeDetails);
+        if (envelopeDetails["CoverName"]) {
+            $("#coverName").val(envelopeDetails["CoverName"]);
+        }
+
+        if (envelopeDetails["FromRequired"] && envelopeDetails["FromRequired"] == "1") {
+
+            $("#fromRequired").val(envelopeDetails["FromRequired"]);
+
+            if (envelopeDetails["FromTop"]) {
+                $("#fromTop").val(envelopeDetails["FromTop"]);
+            }
+
+            if (envelopeDetails["FromLeft"]) {
+                $("#fromLeft").val(envelopeDetails["FromLeft"]);
+            }
+
+            if (envelopeDetails["FromName"]) {
+                $("#fromName").val(envelopeDetails["FromName"]);
+            }
+
+            if (envelopeDetails["FromAdd1"]) {
+                $("#fromAdd1").val(envelopeDetails["FromAdd1"]);
+            }
+
+            if (envelopeDetails["FromAdd2"]) {
+                $("#fromAdd2").val(envelopeDetails["FromAdd2"]);
+            }
+
+            if (envelopeDetails["FromAdd3"]) {
+                $("#fromAdd3").val(envelopeDetails["FromAdd3"]);
+            }
+
+            if (envelopeDetails["FromAdd4"]) {
+                $("#fromAdd4").val(envelopeDetails["FromAdd4"]);
+            }
+        }
+
+        if (envelopeDetails["ToTop"]) {
+            $("#toTop").val(envelopeDetails["ToTop"]);
+        }
+
+        if (envelopeDetails["ToLeft"]) {
+            $("#toLeft").val(envelopeDetails["ToLeft"]);
+        }
+
+        if (envelopeDetails["Caption"]) {
+            $("#caption").val(envelopeDetails["Caption"]);
+        }
+
+        if (envelopeDetails["LogoAvailable"] && envelopeDetails["LogoAvailable"] == "1") {
+
+            $("#logoAvailable").val(envelopeDetails["LogoAvailable"]);
+
+            if (envelopeDetails["LogoTop"]) {
+                $("#logoTop").val(envelopeDetails["LogoTop"]);
+            }
+
+            if (envelopeDetails["LogoLeft"]) {
+                $("#logoLeft").val(envelopeDetails["LogoLeft"]);
+            }
+
+            if (envelopeDetails["LogoHeight"]) {
+                $("#logoHeight").val(envelopeDetails["LogoHeight"]);
+            }
+
+            if (envelopeDetails["LogoWidth"]) {
+                $("#logoWidth").val(envelopeDetails["LogoWidth"]);
+            }
+        }
+
+        if (envelopeDetails["CoverFeed"]) {
+            $("#coverFeed").val(envelopeDetails["CoverFeed"]);
+        }
     }
 };
 $(document).ready(function () {
@@ -86,8 +162,8 @@ $(document).ready(function () {
 
     pageEnvelopeSettings.getEnvelopeList();
 
-    $('#envelopeFrom').change(function () {
-        if ($("#envelopeFrom").val() == "1") {
+    $('#fromRequired').change(function () {
+        if ($("#fromRequired").val() == "1") {
             $("#fromDiv").css("display", "block");
         }
         else {
@@ -95,8 +171,8 @@ $(document).ready(function () {
         }
     });
 
-    $('#logoPrint').change(function () {
-        if ($("#logoPrint").val() == "1") {
+    $('#logoAvailable').change(function () {
+        if ($("#logoAvailable").val() == "1") {
             $("#logoDiv").css("display", "block");
         }
         else {
