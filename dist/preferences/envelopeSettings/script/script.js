@@ -57,7 +57,7 @@ var pageEnvelopeSettings = {
         $("#form-add-edit-code").val(1);
 
         $('#envelopeSettingsModalHeading').empty();
-        $('#envelopeSettingsModalHeading').html("Add Family Member");
+        $('#envelopeSettingsModalHeading').html("Add Envelope");
 
         $("#envelopeSettingsModal").modal('show');
     },
@@ -101,17 +101,6 @@ $(document).ready(function () {
         }
         else {
             $("#logoDiv").css("display", "none");
-        }
-    });
-
-    $('#envelopeTitleSelect').change(function () {
-        if ($("#envelopeTitleSelect").val() == "1") {
-            $("#envelopeCaptionDiv").css("display", "block");
-            $("#envelopeTitle").addClass("col-md-6 col-sm-6 col-xs-6 first-col-left-padding first-col-right-padding");
-        }
-        else {
-            $("#envelopeCaptionDiv").css("display", "none");
-            $("#envelopeTitle").removeClass("col-md-6 col-sm-6 col-xs-6 first-col-left-padding first-col-right-padding");
         }
     });
 

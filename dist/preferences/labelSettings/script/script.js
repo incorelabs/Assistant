@@ -9,4 +9,5 @@ $(document).ready(function () {
             $("#logoDiv").css("display", "none");
         }
     });
+    $(".disabledLogo *").attr("disabled", "disabled").off('click');
 });

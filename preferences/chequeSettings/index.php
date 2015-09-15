@@ -105,7 +105,7 @@ echo $navbar_str;
 </div>
 
 <!-- Add Member Modal -->
-<div class="modal fade" id="chequeModal" tabindex="-1" role="dialog" aria-labelledby="chequeModal">
+<div class="modal fade" id="chequeSettingsModal" tabindex="-1" role="dialog" aria-labelledby="chequeSettingsModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <form class="form-horizontal" method="POST" action="" id="chequeSettingsForm" autocomplete="off">
@@ -397,7 +397,7 @@ echo $navbar_str;
 </div>
 <!--modal start-->
 <!--Delete Contact Modal-->
-<div class="modal fade" id="deleteCheque" tabindex="-1" role="dialog" aria-labelledby="deleteCheque" aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -410,7 +410,7 @@ echo $navbar_str;
                 <div class="modal-body">
                     <div class="btn-group">
                         <form method="POST" action="controller.php" id="deleteChequeSettingsForm">
-                            <input type="hidden" name="familyCode" id="deleteFamilyCode"/>
+                            <input type="hidden" name="chequeCode" id="deleteFamilyCode"/>
                             <input type="hidden" name="mode" id="form-delete-mode"/>
                             <button class="btn btn-danger modal_button" type="submit">
                                 <span class='glyphicon glyphicon-ok'></span>&nbsp

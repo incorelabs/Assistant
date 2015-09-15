@@ -55,7 +55,7 @@ echo $navbar_str;
         </div>
     </div>
     <div class="text-right button-top-margin">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#addLabel">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#labelSettingsModal">
             <i class="fa fa-plus fa-lg"></i>
         </button>
     </div>
@@ -64,54 +64,59 @@ echo $navbar_str;
             <thead>
             <tr>
                 <th class="text-center col-md-1 col-sm-1 col-xs-1">#</th>
-                <th class="text-center col-md-1 col-sm-1 col-xs-1">Name</th>
+                <th class="text-center col-md-1 col-sm-1 col-xs-3">Logo</th>
+                <th class="text-center col-md-1 col-sm-1 col-xs-3">Name</th>
                 <th class="text-center col-md-1 col-sm-1 hidden-xs">Rows</th>
                 <th class="text-center col-md-1 col-sm-1 hidden-xs">Columns</th>
                 <th class="text-center col-md-1 col-sm-1 hidden-xs">Lines in Label</th>
                 <th class="text-center col-md-1 col-sm-1 hidden-xs">Single Content</th>
-                <th class="text-center col-md-1 col-sm-1 col-xs-1">Logo</th>
-                <th class="text-center col-md-1 col-sm-1 col-xs-1">Orientation</th>
-                <th class="text-center col-md-1 col-sm-1 col-xs-1">Actions</th>
+                <th class="text-center col-md-1 col-sm-1 hidden-xs">Orientation</th>
+                <th class="text-center col-md-1 col-sm-1 col-xs-3">Actions</th>
             </tr>
             </thead>
             <tbody id="table-body">
             <tr>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">1</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">Test</td>
-                <td class="text-center col-md-1 col-sm-1 hidden-xs">7</td>
-                <td class="text-center col-md-1 col-sm-1 hidden-xs">3</td>
-                <td class="text-center col-md-1 col-sm-1 hidden-xs">5</td>
-                <td class="text-center col-md-1 col-sm-1 hidden-xs">No</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">Yes</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">Portrait</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1"><a href="#" data-toggle="modal"
-                                                                      data-target="#addLabel"><i
-                            class="fa fa-pencil fa-lg fa-green"></i></a>&nbsp;&nbsp;&nbsp;<a href="#"
-                                                                                             data-toggle="modal"
-                                                                                             data-target="#deleteLabel"><i
-                            class="fa fa-trash-o fa-lg fa-red"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal"
-                                                                                            data-target="#logoImage"
-                                                                                            class="imageLogo"><i
-                            class="fa fa-picture-o fa-lg fa-green"></i></a></td>
+                <td class="text-center text-middle col-md-1 col-sm-1 col-xs-1">1</td>
+                <td class="text-center text-middle col-md-1 col-sm-1 col-xs-3">
+                    <div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop' class='clickable'><img
+                                src='../../img/default/preferences/logo.png' id='imageresource' alt='...'
+                                class='img-rounded'/>
+
+                            <div class='overlay img-rounded'><span
+                                    class='glyphicon glyphicon-pencil overlay-icon'></span></div>
+                        </a></div>
+                </td>
+                <td class="text-center text-middle col-md-1 col-sm-1 col-xs-3">Test</td>
+                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">7</td>
+                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">3</td>
+                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">5</td>
+                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">No</td>
+                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">Portrait</td>
+                <td class="text-center text-middle col-md-1 col-sm-1 col-xs-3"><a href="#" data-toggle="modal"
+                                                                                  data-target="#labelSettingsModal"><i
+                            class="fa fa-pencil fa-lg fa-green"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#deleteModal"><i
+                            class="fa fa-trash-o fa-lg fa-red"></i></a></td>
             </tr>
             <tr>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">2</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">Test1</td>
-                <td class="text-center col-md-1 col-sm-1 hidden-xs">21</td>
-                <td class="text-center col-md-1 col-sm-1 hidden-xs">7</td>
-                <td class="text-center col-md-1 col-sm-1 hidden-xs">2</td>
-                <td class="text-center col-md-1 col-sm-1 hidden-xs">Yes</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">No</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1">Landscape</td>
-                <td class="text-center col-md-1 col-sm-1 col-xs-1"><a href="#" data-toggle="modal"
-                                                                      data-target="#addLabel"><i
-                            class="fa fa-pencil fa-lg fa-green"></i></a>&nbsp;&nbsp;&nbsp;<a href="#"
-                                                                                             data-toggle="modal"
-                                                                                             data-target="#deleteLabel"><i
-                            class="fa fa-trash-o fa-lg fa-red"></i></a>&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal"
-                                                                                            data-target="#logoImage"
-                                                                                            class="imageLogo hidden"><i
-                            class="fa fa-picture-o fa-lg fa-green"></i></a></td>
+                <td class="text-center text-middle col-md-1 col-sm-1 col-xs-1">2</td>
+                <td class="text-center text-middle col-md-1 col-sm-1 col-xs-3">
+                    <div class='image disabledLogo'><a data-toggle='modal' data-target='#imageModal' id='pop' class='clickable disbale-anchor'><img
+                                src='../../img/default/preferences/logo.png' id='imageresource' alt='...' class='img-rounded'/>
+
+                            <div class='overlay-default img-rounded'><span
+                                    class='glyphicon glyphicon-remove overlay-icon'></span></div>
+                        </a></div>
+                </td>
+                <td class="text-center text-middle col-md-1 col-sm-1 col-xs-3">Test1</td>
+                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">21</td>
+                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">7</td>
+                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">2</td>
+                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">Yes</td>
+                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">Landscape</td>
+                <td class="text-center text-middle col-md-1 col-sm-1 col-xs-3"><a href="#" data-toggle="modal"
+                                                                                  data-target="#labelSettingsModal"><i
+                            class="fa fa-pencil fa-lg fa-green"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="modal" data-target="#deleteModal"><i
+                            class="fa fa-trash-o fa-lg fa-red"></i></a></td>
             </tr>
             </tbody>
         </table>
@@ -119,7 +124,8 @@ echo $navbar_str;
 </div>
 
 <!-- Add Label Modal -->
-<div class="modal fade" id="addLabel" tabindex="-1" role="dialog" aria-labelledby="labelModal" data-backdrop="static">
+<div class="modal fade" id="labelSettingsModal" tabindex="-1" role="dialog" aria-labelledby="labelSettingsModal"
+     data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <form class="form-horizontal" method="POST" action="" id="labelSettingsForm" autocomplete="off">
@@ -138,6 +144,9 @@ echo $navbar_str;
                         Add Label
                     </h4>
                 </div>
+                <input type="text" class="hidden" name="labelCode" id="form-add-edit-code"/>
+                <input type="text" class="hidden" name="mode" id="form-add-edit-mode"/>
+
                 <div class="modal-body">
                     <div class="info text-center">*Please enter all the values in "mm" only</div>
                     <div class="form-group form-group-margin">
@@ -328,7 +337,7 @@ echo $navbar_str;
 </div><!--modal-->
 
 <!--Delete Label Modal-->
-<div class="modal fade" id="deleteLabel" tabindex="-1" role="dialog" aria-labelledby="deleteLabel" aria-hidden="true"
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true"
      data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -342,8 +351,8 @@ echo $navbar_str;
                 <div class="modal-body">
                     <div class="btn-group">
                         <form method="POST" action="controller.php" id="deleteLabelSettingsForm">
-                            <input type="hidden" name="familyCode" id="deleteFamilyCode"/>
-                            <input type="hidden" name="mode" id="form-delete-mode"/>
+                            <input type="text" class="hidden" name="labelCode" id="form-delete-code"/>
+                            <input type="text" class="hidden" name="mode" id="form-delete-mode" value="D"/>
                             <button class="btn btn-danger modal_button" type="submit">
                                 <span class='glyphicon glyphicon-ok'></span>&nbsp
                                 Yes
@@ -369,7 +378,7 @@ echo $navbar_str;
 <!--modal-->
 
 <!-- Image Modal -->
-<div class="modal fade" id="logoImage" tabindex="-1" role="dialog" aria-labelledby="logoImage" aria-hidden="true"
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true"
      data-backdrop="static">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
@@ -416,7 +425,7 @@ echo $navbar_str;
                                     <label class="control-label">Image Preview</label>
                                     <br>
                                     <br>
-                                    <img src="../../img/default/contact/profilePicture.png" id="imagepreview"
+                                    <img src="../../img/default/preferences/logo.png" id="imagepreview"
                                          class="addImage">
                                 </div>
                             </div>
