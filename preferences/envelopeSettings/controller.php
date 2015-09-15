@@ -26,7 +26,7 @@ do{
         break;
     }
 
-    if(empty($_POST['mode']) || empty($_POST["coverCode"]) || empty($_POST["fromRequired"]) || empty($_POST["logoAvailable"]) || empty($_POST["coverFeed"]) || empty($_POST["coverName"]) ) {
+    if(empty($_POST['mode']) || empty($_POST["coverCode"]) ) {
         $validate = false;
         $response = createResponse(0,"Invalid Request");
         break;
@@ -34,6 +34,12 @@ do{
 
     //Delete mode
     if ($_POST["mode"] == "D") {
+        break;
+    }
+
+    if(empty($_POST["fromRequired"]) || empty($_POST["logoAvailable"]) || empty($_POST["coverFeed"]) || empty($_POST["coverName"])){
+        $validate = false;
+        $response = createResponse(0,"Required Fields are empty");
         break;
     }
 
