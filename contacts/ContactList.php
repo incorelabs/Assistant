@@ -54,7 +54,7 @@ class ContactList{
     }
 
     function setContactListQuery(){
-        $this->contactListQuery = "SELECT Table151.ContactCode, Table151.FullName FROM Table151".$this->whereConstraints." ORDER BY Table151.FullName LIMIT ".$this->limit." OFFSET ".$this->getLimits()["lower"].";";
+        $this->contactListQuery = "SELECT Table151.ContactCode, Table151.FullName FROM Table151".$this->whereConstraints." ORDER BY LOWER(Table151.FullName) LIMIT ".$this->limit." OFFSET ".$this->getLimits()["lower"].";";
     }
 
     function setWhereConstraints($parameter = null){
