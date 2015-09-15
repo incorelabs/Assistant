@@ -117,7 +117,7 @@ echo $navbar_str;
                                 <i class="fa fa-user fa-size hidden-xs"></i>
                                 <input type="text" name="name" id="firstName"
                                        class="form-control name text-field-left-border" placeholder="Name"
-                                       tabindex="1"/>
+                                       tabindex="1" required/>
                             </div>
                         </div>
                         <div class='info'></div>
@@ -129,7 +129,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-size hidden-xs"></i>
                                 <select name="relation" class="form-control textbox_height select-field-left-border"
-                                        id="relation" tabindex="2">
+                                        id="relation" tabindex="2" required>
                                 </select>
                             </div>
                         </div>
@@ -142,7 +142,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-calendar fa-size hidden-xs"></i>
                                 <input type="text" name="dob" id="dob" class="form-control date text-field-left-border"
-                                       placeholder="Date of Birth" tabindex="3"/>
+                                       placeholder="Date of Birth" tabindex="3" required/>
                             </div>
                         </div>
                         <div class='info'></div>
@@ -165,7 +165,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-lg fa-size hidden-xs" style="right:12px"></i>
                                 <select name="gender" id='gender' class="form-control select-field-left-border"
-                                        tabindex="5">
+                                        tabindex="5" required>
                                     <option value="">Select a Gender</option>
                                     <option value="2">Female</option>
                                     <option value="1">Male</option>

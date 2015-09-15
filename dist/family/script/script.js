@@ -324,7 +324,26 @@ $(document).ready(function () {
 
     $("#familyForm").ajaxForm({
         beforeSubmit: function (formData) {
-            console.log(formData);
+            for (var i = 0; i < formData.length; i++) {
+                if (formData[i].required && formData[i].value.trim() == "") {
+                    pageIndex.showNotificationFailure("Required fields are empty");
+                    return false;
+                }
+                if (formData[i].name == "access") {
+                    if (formData[i].value == 1) {
+                        if ($("#email").val().trim() == "") {
+                            pageIndex.showNotificationFailure("The \"Email\" field is empty");
+                            return false;
+                        } else if ($("#password").val().trim() == "") {
+                            pageIndex.showNotificationFailure("The \"Password\" field is empty");
+                            return false;
+                        } else if ($("#confirmPassword").val().trim() == "") {
+                            pageIndex.showNotificationFailure("The \"Confirm Password\" field is empty");
+                            return false;
+                        }
+                    }
+                }
+            }
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
         },
