@@ -1,3 +1,6 @@
+var pageEnvelopeSettings = {
+
+};
 $(document).ready(function () {
     localStorage.setItem("websiteRoot", "../../");
 

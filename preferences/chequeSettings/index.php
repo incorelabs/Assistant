@@ -34,14 +34,6 @@ include_once ROOT . 'dist/authenticate.php';
     <script src="../../dist/script/script.js"></script>
     <script src="../../dist/date/script.js"></script>
     <script src="../../dist/preferences/chequeSettings/script/script.js"></script>
-    <script>
-        $(document).ready(function () {
-            console.log(window.innerWidth);
-            if (window.innerWidth < 500) {
-                $(':input').removeAttr('placeholder');
-            }
-        });
-    </script>
 </head>
 <body>
 <!-- fixed top navbar -->

@@ -33,7 +33,6 @@ include_once ROOT . 'dist/authenticate.php';
         });
     </script>
     <script src="../../dist/script/script.js"></script>
-    <script src="../../dist/date/script.js"></script>
     <script src="../../dist/preferences/envelopeSettings/script/script.js"></script>
 </head>
 <body>
@@ -329,7 +328,6 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-size"></i>
                                 <select id="logoPrint" class="form-control select-field-left-border">
-                                    <option value="">Envelope Feed</option>
                                     <option value="0">Left</option>
                                     <option value="1">Center</option>
                                     <option value="2">Right</option>

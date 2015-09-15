@@ -32,20 +32,7 @@ include_once ROOT . 'dist/authenticate.php';
         });
     </script>
     <script src="../../dist/script/script.js"></script>
-    <script src="../../dist/date/script.js"></script>
     <script src="../../dist/preferences/labelSettings/script/script.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#logoPrint').change(function () {
-                if ($("#logoPrint").val() == "0") {
-                    $("#logoDiv").css("display", "block");
-                }
-                else {
-                    $("#logoDiv").css("display", "none");
-                }
-            });
-        });
-    </script>
 </head>
 <body>
 <!-- fixed top navbar -->
