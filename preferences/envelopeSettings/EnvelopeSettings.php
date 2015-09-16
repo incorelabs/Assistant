@@ -56,7 +56,7 @@ class EnvelopeSettings
     }
 
     function getUpdateQuery(){
-        $sql = "UPDATE `Table135` SET `CoverName` = ".$this->data['coverName'].", `FromRequired` = ".$this->data['fromRequired'].", `FromTop` = ".$this->data['fromTop'].", `FromLeft` = ".$this->data['fromLeft'].", `ToTop` = ".$this->data['toTop'].", `ToLeft` = ".$this->data['toLeft'].", `FromName` = ".$this->data['fromName'].", `FromAdd1` = ".$this->data['fromAdd1'].", `FromAdd2` = ".$this->data['fromAdd2'].", `FromAdd3` = ".$this->data['fromAdd3'].", `FromAdd4` = ".$this->data['fromAdd4'].", `LogoAvailable` = ".$this->data['logoAvailable'].", `LogoPath` = ".$this->data['logoPath'].", `LogoTop` = ".$this->data['logoTop'].", `LogoLeft` = ".$this->data['logoLeft'].", `LogoHeight` = ".$this->data["logoHeight"].", `LogoWidth` = ".$this->data['logoWidth'].", `Caption` = ".$this->data['caption'].", `CoverFeed` = ".$this->data['coverFeed']." WHERE `CoverCode` = ".$this->data['coverCode']." AND `RegCode` = ".$this->regCode;
+        $sql = "UPDATE `Table135` SET `CoverName` = ".$this->data['coverName'].", `FromRequired` = ".$this->data['fromRequired'].", `FromTop` = ".$this->data['fromTop'].", `FromLeft` = ".$this->data['fromLeft'].", `ToTop` = ".$this->data['toTop'].", `ToLeft` = ".$this->data['toLeft'].", `FromName` = ".$this->data['fromName'].", `FromAdd1` = ".$this->data['fromAdd1'].", `FromAdd2` = ".$this->data['fromAdd2'].", `FromAdd3` = ".$this->data['fromAdd3'].", `FromAdd4` = ".$this->data['fromAdd4'].", `LogoAvailable` = ".$this->data['logoAvailable'].", `LogoTop` = ".$this->data['logoTop'].", `LogoLeft` = ".$this->data['logoLeft'].", `LogoHeight` = ".$this->data["logoHeight"].", `LogoWidth` = ".$this->data['logoWidth'].", `Caption` = ".$this->data['caption'].", `CoverFeed` = ".$this->data['coverFeed']." WHERE `CoverCode` = ".$this->data['coverCode']." AND `RegCode` = ".$this->regCode;
 
         return $sql;
     }
@@ -101,7 +101,6 @@ class EnvelopeSettings
         $this->data['logoWidth'] = ((!empty($this->data['logoWidth'])) ? $this->data['logoWidth'] : NULL);
         $this->data['caption'] = ((!empty($this->data['caption'])) ? $this->data['caption'] : NULL);
         $this->data['coverFeed'] = ((!empty($this->data['coverFeed'])) ? $this->data['coverFeed'] : NULL);
-        $this->data['coverCode'] = ((!empty($this->data['coverCode'])) ? $this->data['coverCode'] : NULL);
 
         foreach ($this->data as $key=>$value) {
             if(is_numeric($value)){
