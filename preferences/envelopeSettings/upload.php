@@ -38,8 +38,13 @@ if($validate) {
         $logo->file_new_name_body = $_POST["coverCode"];
         $logo->image_convert = 'jpg';
         $logo->file_overwrite = true;
-        $logo->process(ROOT."../Assistant_Users/".$_SESSION['s_id']."/preferences/envelope");
+        $path = ROOT."../Assistant_Users/".$_SESSION['s_id']."/preferences/envelope";
+        $logo->process($path);
         if($logo->processed){
+            $path = $logo->file_dst_pathname;
+            $settings = new EnvelopeSettings();
+            $settings->setImagePath($_POST['coverCode'],$path);
+            print_r($settings->response);
             $response = createResponse(1,"Logo uploaded successfully");
             $logo->clean();
         }

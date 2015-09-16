@@ -65,6 +65,11 @@ class EnvelopeSettings
         $this->runQuery($this->getUpdateQuery());
     }
 
+    function setImagePath($coverCode,$path){
+        $sql = "UPDATE `Table135` SET `LogoPath` = '".$path."' WHERE `CoverCode` = ".$coverCode." AND `RegCode` = ".$this->regCode.";";
+        $this->runQuery($sql);
+    }
+
     function getInsertQuery(){
         $coverCode = $this->generateCoverCode();
         $sql = "INSERT INTO Table135 (`CoverCode`,`CoverName`,`FromRequired`,`FromTop`,`FromLeft`,`ToTop`,`ToLeft`,`FromName`,`FromAdd1`,`FromAdd2`,`FromAdd3`,`FromAdd4`,`LogoAvailable`,`LogoPath`,`LogoTop`,`LogoLeft`,`LogoWidth`,`Caption`,`CoverFeed`,`RegCode`) VALUES (".$coverCode.",".$this->data['coverName'].",".$this->data['fromRequired'].",".$this->data['fromTop'].",".$this->data['fromLeft'].",".$this->data['toTop'].",".$this->data['toLeft'].",".$this->data['fromName'].",".$this->data['fromAdd1'].",".$this->data['fromAdd2'].",".$this->data['fromAdd3'].",".$this->data['fromAdd4'].",".$this->data['logoAvailable'].",".$this->data['logoPath'].",".$this->data['logoTop'].",".$this->data['logoLeft'].",".$this->data['logoWidth'].",".$this->data['caption'].",".$this->data['coverFeed'].",".$this->regCode.")";
