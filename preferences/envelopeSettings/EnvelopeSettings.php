@@ -65,8 +65,8 @@ class EnvelopeSettings
         $this->runQuery($this->getUpdateQuery());
     }
 
-    function setImagePath($coverCode,$path){
-        $sql = "UPDATE `Table135` SET `LogoPath` = '".$path."' WHERE `CoverCode` = ".$coverCode." AND `RegCode` = ".$this->regCode.";";
+    function setImagePath($code,$path){
+        $sql = "UPDATE `Table135` SET `LogoPath` = '".$path."' WHERE `CoverCode` = ".$code." AND `RegCode` = ".$this->regCode.";";
         $this->runQuery($sql);
     }
 
