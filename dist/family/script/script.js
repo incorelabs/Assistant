@@ -80,25 +80,24 @@ var pageFamily = {
     openAddFamilyModal: function () {
         document.getElementById("familyForm").reset();
 
-        $("#passwordDiv").empty();
-        $("#confirmPasswordDiv").empty();
-
         initializeDate();
 
         $("#form-add-edit-mode").val('A');
         $("#form-add-edit-code").val(1);
 
-        $('#familyModalHeading').empty();
-        $('#familyModalHeading').html("Add Family Member");
+        $('#familyModalHeading').empty().html("Add Family Member");
 
         if (pageFamily.isParentLoggedIn)
             $("#provideLoginDiv").removeClass("hidden");
 
-        $("#email").removeAttr("readonly");
-        $("#passwordDiv").html(pageFamily.getPasswordDivString());
-        $("#confirmPasswordDiv").html(pageFamily.getConfirmPasswordDivString());
+        $("#passwordDiv").empty().html(pageFamily.getPasswordDivString());
+        $("#confirmPasswordDiv").empty().html(pageFamily.getConfirmPasswordDivString());
 
         $("#loginAccess").addClass("hidden");
+
+        $("#email").removeAttr("readonly").removeAttr("required");
+        $("#password").removeAttr("required");
+        $("#confirmPassword").removeAttr("required");
 
         $("#familyModal").modal('show');
     },
@@ -108,8 +107,7 @@ var pageFamily = {
         document.getElementById("familyForm").reset();
         $("#form-add-edit-mode").val('M');
 
-        $('#familyModalHeading').empty();
-        $('#familyModalHeading').html("Edit Family Member");
+        $('#familyModalHeading').empty().html("Edit Family Member");
 
         console.log(pageFamily.familyList[memberIndex]);
         initializeDate();
@@ -154,6 +152,9 @@ var pageFamily = {
                 $('input:radio[name=access]')[0].checked = true;
                 $("#provideLoginDiv").addClass("hidden");
                 $("#loginAccess").addClass("hidden");
+
+                $("#email").attr("required", "");
+
                 $("#passwordDiv").empty();
                 $("#confirmPasswordDiv").empty();
             } else {
@@ -163,13 +164,20 @@ var pageFamily = {
                     $("#loginAccess").removeClass("hidden");
                     $("#passwordDiv").empty();
                     $("#confirmPasswordDiv").empty();
-                    $("#email").attr("readonly", true);
+
+                    $("#email").attr({
+                        "readonly": true,
+                        "required": ""
+                    });
                 } else {
                     $('input:radio[name=access]')[1].checked = true;
                     $("#loginAccess").addClass("hidden");
-                    $("#email").removeAttr("readonly");
                     $("#passwordDiv").html(pageFamily.getPasswordDivString());
                     $("#confirmPasswordDiv").html(pageFamily.getConfirmPasswordDivString());
+
+                    $("#email").removeAttr("readonly").removeAttr("required");
+                    $("#password").removeAttr("required");
+                    $("#confirmPassword").removeAttr("required");
                 }
             }
         } else {
@@ -224,9 +232,17 @@ var pageFamily = {
     },
     showLoginAccess: function () {
         $("#loginAccess").removeClass("hidden");
+
+        $("#email").attr("required", "");
+        $("#password").attr("required", "");
+        $("#confirmPassword").attr("required", "");
     },
     hideLoginAccess: function () {
         $("#loginAccess").addClass("hidden");
+
+        $("#email").removeAttr("required");
+        $("#password").removeAttr("required");
+        $("#confirmPassword").removeAttr("required");
     },
     validateGender: function (element) {
         var gender = $(element).val();
@@ -329,22 +345,6 @@ $(document).ready(function () {
                 if (formData[i].required && formData[i].value.trim() == "") {
                     pageIndex.showNotificationFailure("Required fields are empty");
                     return false;
-                }
-                if (pageFamily.personDetails["FamilyCode"] != familyCode) {
-                    if (formData[i].name == "access") {
-                        if (formData[i].value == 1) {
-                            if ($("#email").val().trim() == "") {
-                                pageIndex.showNotificationFailure("The \"Email\" field is empty");
-                                return false;
-                            } else if ($("#password").val().trim() == "") {
-                                pageIndex.showNotificationFailure("The \"Password\" field is empty");
-                                return false;
-                            } else if ($("#confirmPassword").val().trim() == "") {
-                                pageIndex.showNotificationFailure("The \"Confirm Password\" field is empty");
-                                return false;
-                            }
-                        }
-                    }
                 }
             }
             $(".cover").fadeIn(100);

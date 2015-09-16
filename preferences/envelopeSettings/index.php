@@ -85,7 +85,8 @@ echo $navbar_str;
      data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" method="POST" action="" id="envelopeSettingsForm" autocomplete="off">
+            <form class="form-horizontal" method="POST" action="controller.php" id="envelopeSettingsForm"
+                  autocomplete="off">
                 <div class="modal-header">
                     <div class="form-group pull-left" style="padding-left:15px">
                         <button class="btn btn-danger button-top-remove" data-dismiss="modal">
@@ -108,9 +109,10 @@ echo $navbar_str;
                     <div class="form-group form-group-margin">
                         <div class="col-md-12 col-sm-12 col-xs-12 first-col-left-padding first-col-right-padding">
                             <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Name</span>
+                                <span class="input-group-addon input-group-addon-label">Name*</span>
                                 <input type="text" name="coverName" id="coverName"
-                                       class="form-control text-field-left-border" placeholder="Envelope Name"/>
+                                       class="form-control text-field-left-border" placeholder="Envelope Name"
+                                       required/>
                             </div>
                             <div class='info'></div>
                         </div>
@@ -130,11 +132,11 @@ echo $navbar_str;
                             </div>
                         </div>
                     </div>
-                    <div id="fromDiv" style="display:none">
+                    <div class="hidden" id="fromDiv">
                         <div class="form-group form-group-margin">
                             <div class="col-md-6 col-sm-6 col-xs-6 first-col-left-padding first-col-right-padding">
                                 <div class="input-group">
-                                    <span class="input-group-addon input-group-addon-label">Top</span>
+                                    <span class="input-group-addon input-group-addon-label">Top*</span>
                                     <input type="number" name="fromTop" id="fromTop"
                                            class="form-control text-field-left-border" placeholder="From Top"/>
                                 </div>
@@ -142,7 +144,7 @@ echo $navbar_str;
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-6 second-col-left-padding second-col-right-padding">
                                 <div class="input-group">
-                                    <span class="input-group-addon input-group-addon-label">Left</span>
+                                    <span class="input-group-addon input-group-addon-label">Left*</span>
                                     <input type="number" name="fromLeft" id="fromLeft"
                                            class="form-control text-field-left-border" placeholder="From Left"/>
                                 </div>
@@ -151,7 +153,7 @@ echo $navbar_str;
                         </div>
                         <div class="form-group form-group-margin">
                             <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Name</span>
+                                <span class="input-group-addon input-group-addon-label">Name*</span>
                                 <input type="text" name="fromName" id="fromName"
                                        class="form-control text-field-left-border" placeholder="From Name"/>
                             </div>
@@ -237,11 +239,11 @@ echo $navbar_str;
                         </div>
                         <div class='info'></div>
                     </div>
-                    <div id="logoDiv" style="display:none">
+                    <div class="hidden" id="logoDiv">
                         <div class="form-group form-group-margin">
                             <div class="col-md-6 col-sm-6 col-xs-6 first-col-left-padding first-col-right-padding">
                                 <div class="input-group">
-                                    <span class="input-group-addon input-group-addon-label">Top</span>
+                                    <span class="input-group-addon input-group-addon-label">Top*</span>
                                     <input type="number" name="logoTop" id="logoTop"
                                            class="form-control text-field-left-border" placeholder="Logo Top"/>
                                 </div>
@@ -249,7 +251,7 @@ echo $navbar_str;
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-6 second-col-left-padding second-col-right-padding">
                                 <div class="input-group">
-                                    <span class="input-group-addon input-group-addon-label">Left</span>
+                                    <span class="input-group-addon input-group-addon-label">Left*</span>
                                     <input type="number" name="logoLeft" id="logoLeft"
                                            class="form-control text-field-left-border" placeholder="Logo Left"/>
                                 </div>
@@ -259,7 +261,7 @@ echo $navbar_str;
                         <div class="form-group form-group-margin">
                             <div class="col-md-6 col-sm-6 col-xs-6 first-col-left-padding first-col-right-padding">
                                 <div class="input-group">
-                                    <span class="input-group-addon input-group-addon-label">Height</span>
+                                    <span class="input-group-addon input-group-addon-label">Height*</span>
                                     <input type="number" name="logoHeight" id="logoHeight"
                                            class="form-control text-field-left-border" placeholder="Logo Height"/>
                                 </div>
@@ -267,7 +269,7 @@ echo $navbar_str;
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-6 second-col-left-padding second-col-right-padding">
                                 <div class="input-group">
-                                    <span class="input-group-addon input-group-addon-label">Width</span>
+                                    <span class="input-group-addon input-group-addon-label">Width*</span>
                                     <input type="number" name="logoWidth" id="logoWidth"
                                            class="form-control text-field-left-border" placeholder="Logo Width"/>
                                 </div>
@@ -348,7 +350,9 @@ echo $navbar_str;
     <div class="modal-dialog modal-md">
         <div class="modal-content">
 
-            <form class="form-horizontal" method="" action="" enctype="multipart/form-data" id="" runat="server">
+            <form class="form-horizontal" method="POST" action="uploadProfile.php" enctype="multipart/form-data"
+                  id="profileForm"
+                  runat="server">
 
                 <div class="modal-header">
 
@@ -372,7 +376,7 @@ echo $navbar_str;
                 </div>
 
                 <div class="modal-body">
-                    <input type="text" class="hidden" name="" id='photoId'/>
+                    <input type="text" class="hidden" name="coverCode" id='photoId'/>
 
                     <div class="form-group row">
                         <center>

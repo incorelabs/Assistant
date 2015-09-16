@@ -61,8 +61,7 @@ var pagePassword = {
         } else {
             var noMoreDataString = "<div class='list-group-item list-border-none'><li class='list-group-item-text header_font'>";
             noMoreDataString += data.message + "</li></div>";
-            $("#passwordList").empty();
-            $("#passwordList").html(noMoreDataString);
+            $("#passwordList").empty().html(noMoreDataString);
         }
     },
     doSearch: function () {
@@ -108,8 +107,7 @@ var pagePassword = {
         } else {
             var noMoreDataString = "<div class='list-group-item list-border-none'><li class='list-group-item-text header_font'>";
             noMoreDataString += data.message + "</li></div>";
-            $("#passwordList").empty();
-            $("#passwordList").html(noMoreDataString);
+            $("#passwordList").empty().html(noMoreDataString);
             $("#passwordDetailBody").empty();
             $("#editPasswordBtn").remove();
             $("#deletePasswordBtn").remove();
@@ -227,8 +225,7 @@ var pagePassword = {
         $("#form-add-edit-mode").val("A");
         $("#form-add-edit-code").val(1);
 
-        $('#passwordModalHeading').empty();
-        $('#passwordModalHeading').html("Add Password");
+        $('#passwordModalHeading').empty().html("Add Password");
 
         $("#passwordModal").modal('show');
     },
@@ -236,8 +233,7 @@ var pagePassword = {
         document.getElementById("passwordForm").reset();
         $("#form-add-edit-mode").val("M");
 
-        $('#passwordModalHeading').empty();
-        $('#passwordModalHeading').html("Edit Password");
+        $('#passwordModalHeading').empty().html("Edit Password");
 
         $("#form-add-edit-code").val(pagePassword.localPassword.password.PasswordCode);
         pagePassword.setModalInputFields();

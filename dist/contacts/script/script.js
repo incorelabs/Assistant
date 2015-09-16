@@ -64,8 +64,7 @@ var pageContact = {
         } else {
             var noMoreDataString = "<div class='list-group-item list-border-none'><li class='list-group-item-text header_font'>";
             noMoreDataString += data.message + "</li></div>";
-            $("#contactList").empty();
-            $("#contactList").html(noMoreDataString);
+            $("#contactList").empty().html(noMoreDataString);
         }
     },
     doSearch: function () {
@@ -119,8 +118,7 @@ var pageContact = {
         } else {
             var noMoreDataString = "<div class='list-group-item list-border-none'><li class='list-group-item-text header_font'>";
             noMoreDataString += data.message + "</li></div>";
-            $("#contactList").empty();
-            $("#contactList").html(noMoreDataString);
+            $("#contactList").empty().html(noMoreDataString);
             $("#contactDetailBody").empty();
             $("#editContactBtn").remove();
             $("#deleteContactBtn").remove();
@@ -318,10 +316,8 @@ var pageContact = {
 
             contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Website</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Website) ? data.detail.contact.Website : "") + "' target='_blank'>" + ((data.detail.contact.Website) ? data.detail.contact.Website : "") + "</a></div></value></div></div>";
 
-            $("#contactDetailHeader").empty();
-            $("#contactDetailHeader").html(contactHeaderString);
-            $("#contactDetailBody").empty();
-            $("#contactDetailBody").html(contactDetailsString);
+            $("#contactDetailHeader").empty().html(contactHeaderString);
+            $("#contactDetailBody").empty().html(contactDetailsString);
 
         } else {
             pageContact.localContact = null;
@@ -445,8 +441,7 @@ var pageContact = {
         $("#form-add-edit-mode").val("A");
         $("#form-add-edit-code").val(1);
 
-        $('#contactModalHeading').empty();
-        $('#contactModalHeading').html("Add Contact");
+        $('#contactModalHeading').empty().html("Add Contact");
 
         $("#homeState").attr('readonly', false);
         $("#workState").attr('readonly', false);
@@ -477,8 +472,7 @@ var pageContact = {
         document.getElementById("contactForm").reset();
         $("#form-add-edit-mode").val("M");
 
-        $('#contactModalHeading').empty();
-        $('#contactModalHeading').html("Edit Contact");
+        $('#contactModalHeading').empty().html("Edit Contact");
 
         $('.addMobileDiv').empty();
         pageContact.addBtnMobileCount = 0;

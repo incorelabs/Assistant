@@ -56,8 +56,20 @@ var pageEnvelopeSettings = {
         $("#form-add-edit-mode").val('A');
         $("#form-add-edit-code").val(1);
 
-        $('#envelopeSettingsModalHeading').empty();
-        $('#envelopeSettingsModalHeading').html("Add Envelope Settings");
+        $('#envelopeSettingsModalHeading').empty().html("Add Envelope Settings");
+
+        $("#fromDiv").addClass("hidden");
+
+        $("#fromTop").removeAttr("required");
+        $("#fromLeft").removeAttr("required");
+        $("#fromName").removeAttr("required");
+
+        $("#logoDiv").addClass("hidden");
+
+        $("#logoTop").removeAttr("required");
+        $("#logoLeft").removeAttr("required");
+        $("#logoHeight").removeAttr("required");
+        $("#logoWidth").removeAttr("required");
 
         $("#envelopeSettingsModal").modal('show');
     },
@@ -67,8 +79,7 @@ var pageEnvelopeSettings = {
         document.getElementById("envelopeSettingsForm").reset();
         $("#form-add-edit-mode").val('M');
 
-        $('#envelopeSettingsModalHeading').empty();
-        $('#envelopeSettingsModalHeading').html("Edit Envelope Settings");
+        $('#envelopeSettingsModalHeading').empty().html("Edit Envelope Settings");
 
         pageEnvelopeSettings.setInputFields(pageEnvelopeSettings.envelopeDetails);
         $("#form-add-edit-code").val(pageEnvelopeSettings.envelopeDetails["CoverCode"]);
@@ -90,33 +101,45 @@ var pageEnvelopeSettings = {
 
             $("#fromRequired").val(envelopeDetails["FromRequired"]);
 
-            if (envelopeDetails["FromTop"]) {
-                $("#fromTop").val(envelopeDetails["FromTop"]);
-            }
+            $("#fromDiv").removeClass("hidden");
 
-            if (envelopeDetails["FromLeft"]) {
-                $("#fromLeft").val(envelopeDetails["FromLeft"]);
-            }
+            $("#fromTop").attr("required", "");
+            $("#fromLeft").attr("required", "");
+            $("#fromName").attr("required", "");
+        } else {
+            $("#fromDiv").addClass("hidden");
 
-            if (envelopeDetails["FromName"]) {
-                $("#fromName").val(envelopeDetails["FromName"]);
-            }
+            $("#fromTop").removeAttr("required");
+            $("#fromLeft").removeAttr("required");
+            $("#fromName").removeAttr("required");
+        }
 
-            if (envelopeDetails["FromAdd1"]) {
-                $("#fromAdd1").val(envelopeDetails["FromAdd1"]);
-            }
+        if (envelopeDetails["FromTop"]) {
+            $("#fromTop").val(envelopeDetails["FromTop"]);
+        }
 
-            if (envelopeDetails["FromAdd2"]) {
-                $("#fromAdd2").val(envelopeDetails["FromAdd2"]);
-            }
+        if (envelopeDetails["FromLeft"]) {
+            $("#fromLeft").val(envelopeDetails["FromLeft"]);
+        }
 
-            if (envelopeDetails["FromAdd3"]) {
-                $("#fromAdd3").val(envelopeDetails["FromAdd3"]);
-            }
+        if (envelopeDetails["FromName"]) {
+            $("#fromName").val(envelopeDetails["FromName"]);
+        }
 
-            if (envelopeDetails["FromAdd4"]) {
-                $("#fromAdd4").val(envelopeDetails["FromAdd4"]);
-            }
+        if (envelopeDetails["FromAdd1"]) {
+            $("#fromAdd1").val(envelopeDetails["FromAdd1"]);
+        }
+
+        if (envelopeDetails["FromAdd2"]) {
+            $("#fromAdd2").val(envelopeDetails["FromAdd2"]);
+        }
+
+        if (envelopeDetails["FromAdd3"]) {
+            $("#fromAdd3").val(envelopeDetails["FromAdd3"]);
+        }
+
+        if (envelopeDetails["FromAdd4"]) {
+            $("#fromAdd4").val(envelopeDetails["FromAdd4"]);
         }
 
         if (envelopeDetails["ToTop"]) {
@@ -135,21 +158,35 @@ var pageEnvelopeSettings = {
 
             $("#logoAvailable").val(envelopeDetails["LogoAvailable"]);
 
-            if (envelopeDetails["LogoTop"]) {
-                $("#logoTop").val(envelopeDetails["LogoTop"]);
-            }
+            $("#logoDiv").removeClass("hidden");
 
-            if (envelopeDetails["LogoLeft"]) {
-                $("#logoLeft").val(envelopeDetails["LogoLeft"]);
-            }
+            $("#logoTop").attr("required", "");
+            $("#logoLeft").attr("required", "");
+            $("#logoHeight").attr("required", "");
+            $("#logoWidth").attr("required", "");
+        } else {
+            $("#logoDiv").addClass("hidden");
 
-            if (envelopeDetails["LogoHeight"]) {
-                $("#logoHeight").val(envelopeDetails["LogoHeight"]);
-            }
+            $("#logoTop").removeAttr("required");
+            $("#logoLeft").removeAttr("required");
+            $("#logoHeight").removeAttr("required");
+            $("#logoWidth").removeAttr("required");
+        }
 
-            if (envelopeDetails["LogoWidth"]) {
-                $("#logoWidth").val(envelopeDetails["LogoWidth"]);
-            }
+        if (envelopeDetails["LogoTop"]) {
+            $("#logoTop").val(envelopeDetails["LogoTop"]);
+        }
+
+        if (envelopeDetails["LogoLeft"]) {
+            $("#logoLeft").val(envelopeDetails["LogoLeft"]);
+        }
+
+        if (envelopeDetails["LogoHeight"]) {
+            $("#logoHeight").val(envelopeDetails["LogoHeight"]);
+        }
+
+        if (envelopeDetails["LogoWidth"]) {
+            $("#logoWidth").val(envelopeDetails["LogoWidth"]);
         }
 
         if (envelopeDetails["CoverFeed"]) {
@@ -164,19 +201,37 @@ $(document).ready(function () {
 
     $('#fromRequired').change(function () {
         if ($("#fromRequired").val() == "1") {
-            $("#fromDiv").css("display", "block");
+            $("#fromDiv").removeClass("hidden");
+
+            $("#fromTop").attr("required", "");
+            $("#fromLeft").attr("required", "");
+            $("#fromName").attr("required", "");
         }
         else {
-            $("#fromDiv").css("display", "none");
+            $("#fromDiv").addClass("hidden");
+
+            $("#fromTop").removeAttr("required");
+            $("#fromLeft").removeAttr("required");
+            $("#fromName").removeAttr("required");
         }
     });
 
     $('#logoAvailable').change(function () {
         if ($("#logoAvailable").val() == "1") {
-            $("#logoDiv").css("display", "block");
+            $("#logoDiv").removeClass("hidden");
+
+            $("#logoTop").attr("required", "");
+            $("#logoLeft").attr("required", "");
+            $("#logoHeight").attr("required", "");
+            $("#logoWidth").attr("required", "");
         }
         else {
-            $("#logoDiv").css("display", "none");
+            $("#logoDiv").addClass("hidden");
+
+            $("#logoTop").removeAttr("required");
+            $("#logoLeft").removeAttr("required");
+            $("#logoHeight").removeAttr("required");
+            $("#logoWidth").removeAttr("required");
         }
     });
 
@@ -189,7 +244,6 @@ $(document).ready(function () {
                     return false;
                 }
             }
-            return false;
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
         },
