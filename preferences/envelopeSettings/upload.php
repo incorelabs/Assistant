@@ -44,7 +44,6 @@ if($validate) {
             $path = $logo->file_dst_pathname;
             $settings = new EnvelopeSettings();
             $settings->setImagePath($_POST['coverCode'],$path);
-            print_r($settings->response);
             $response = createResponse(1,"Logo uploaded successfully");
             $logo->clean();
         }
