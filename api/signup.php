@@ -16,25 +16,18 @@ function createResponse($status, $message)
 
 function createInitialFolders($regCode)
 {
-    $path = ROOT . "img/" . $regCode;
+    $path = "../../Assistant_Users/". $regCode;
     if(!file_exists($path)){
-        mkdir($path);
-    }
-    $path = ROOT . "img/" . $regCode . "/Contacts";
-    if(!file_exists($path)){
-        mkdir($path);
-    }
-    $path = ROOT . "img/" . $regCode . "/Investments";
-    if(!file_exists($path)){
-        mkdir($path);
-    }
-    $path = ROOT . "img/" . $regCode . "/Assets";
-    if(!file_exists($path)){
-        mkdir($path);
-    }
-    $path = ROOT . "img/" . $regCode . "/Documents";
-    if(!file_exists($path)){
-        mkdir($path);
+        if(mkdir($path)){
+            $folders = array("contacts","investments","assets","documents","preferences","preferences/envelope","preferences/cheque","preferences/label");
+
+            foreach($folders as $value){
+                $path = "../../Assistant_Users/". $regCode . "/".$value;
+                if(!file_exists($path)){
+                    mkdir($path);
+                }
+            }
+        }
     }
 }
 
