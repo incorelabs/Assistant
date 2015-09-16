@@ -65,11 +65,11 @@ echo $navbar_str;
             <thead>
             <tr>
                 <th class="text-center col-md-1 col-sm-1 col-xs-1">#</th>
+                <th class="text-center col-md-1 col-sm-1 col-xs-1">Logo</th>
                 <th class="text-center col-md-1 col-sm-1 col-xs-1">Name</th>
                 <th class="text-center col-md-1 col-sm-1 hidden-xs">From</th>
                 <th class="text-center col-md-1 col-sm-1 hidden-xs">Caption</th>
                 <th class="text-center col-md-1 col-sm-1 col-xs-1">Print Feed</th>
-                <th class="text-center col-md-1 col-sm-1 col-xs-1">Logo</th>
                 <th class="text-center col-md-1 col-sm-1 col-xs-1">Actions</th>
             </tr>
             </thead>
@@ -347,7 +347,7 @@ echo $navbar_str;
         <div class="modal-content">
 
             <form class="form-horizontal" method="POST" action="uploadProfile.php" enctype="multipart/form-data"
-                  id="profileForm"
+                  id="logoForm"
                   runat="server">
 
                 <div class="modal-header">
@@ -381,7 +381,7 @@ echo $navbar_str;
                                     <label class="control-label">Select Image</label>
                                     <br>
                                     <br>
-                                    <input type='file' id="imgInp" name="fileToUpload"
+                                    <input type='file' id="imgInput" name="fileToUpload"
                                            style="padding-bottom:10px;" required/>
 
                                     <p id="imageErrorMsg"></p>
@@ -390,7 +390,7 @@ echo $navbar_str;
                                     <label class="control-label">Image Preview</label>
                                     <br>
                                     <br>
-                                    <img src="../../img/default/contact/profilePicture.png" id="imagepreview"
+                                    <img src="../../img/default/preferences/logo.png" id="imagePreview"
                                          class="addImage">
                                 </div>
                             </div>

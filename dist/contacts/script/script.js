@@ -182,7 +182,7 @@ var pageContact = {
                 imgLocation = "../img/default/contact/profilePicture.png";
             }
 
-            contactDetailsString += "<div class='row contact-details'><div class='image'><a data-toggle='modal' data-target='#imageModal' id='pop' class='clickable'><img src='" + imgLocation + "' id='imageResource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>" + ((data.detail.contact.TitleName) ? data.detail.contact.TitleName + " " : "") + ((data.detail.contact.FullName) ? data.detail.contact.FullName : "") + "</h5></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='image'><a data-toggle='modal' data-target='#imageModal' class='clickable'><img src='" + imgLocation + "' id='imageResource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>" + ((data.detail.contact.TitleName) ? data.detail.contact.TitleName + " " : "") + ((data.detail.contact.FullName) ? data.detail.contact.FullName : "") + "</h5></div>";
 
             contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Guardian</div><value><div class='col-md-9'>" + ((data.detail.contact.GuardianName) ? data.detail.contact.GuardianName : "") + "</div></value></div></div>";
 
@@ -1000,11 +1000,11 @@ $(document).ready(function (event) {
         }
     });
 
-    $('#imgInp').change(function () {
+    $('#imgInput').change(function () {
         var image = this.files[0];
         if ((image.size || image.fileSize) < 1 * 1000 * 1000) {
             console.log(image);
-            var img = $("#imagepreview");
+            var img = $("#imagePreview");
             var reader = new FileReader();
             reader.onloadend = function () {
                 //img.src = reader.result;
@@ -1022,9 +1022,9 @@ $(document).ready(function (event) {
         document.getElementById("profileForm").reset();
         $('#photoId').val(pageContact.localContact.contact.ContactCode);
         if (pageContact.localContact.contact.ImageURL) {
-            $("#imagepreview").attr("src", pageContact.localContact.contact.ImageURL);
+            $("#imagePreview").attr("src", pageContact.localContact.contact.ImageURL);
         } else {
-            $("#imagepreview").attr("src", "../img/default/contact/profilePicture.png");
+            $("#imagePreview").attr("src", "../img/default/contact/profilePicture.png");
         }
     });
 

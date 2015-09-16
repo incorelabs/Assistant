@@ -79,7 +79,7 @@ echo $navbar_str;
                 <td class="text-center text-middle col-md-1 col-sm-1 col-xs-1">1</td>
                 <td class="text-center text-middle col-md-1 col-sm-1 col-xs-3">
                     <div class='image'>
-                        <a data-toggle='modal' data-target='#imageModal' id='pop' class='clickable'>
+                        <a data-toggle='modal' data-target='#imageModal' class='clickable'>
                             <img src='../../img/default/preferences/logo.png' id='imageResource' alt='...'
                                  class='img-rounded'/>
 
@@ -108,7 +108,7 @@ echo $navbar_str;
                 <td class="text-center text-middle col-md-1 col-sm-1 col-xs-1">2</td>
                 <td class="text-center text-middle col-md-1 col-sm-1 col-xs-3">
                     <div class='image disabledLogo'>
-                        <a data-toggle='modal' data-target='#imageModal' id='pop' class='clickable disable-anchor'>
+                        <a data-toggle='modal' data-target='#imageModal' class='clickable disable-anchor'>
                             <img src='../../img/default/preferences/logo.png' id='imageResource' alt='...'
                                  class='img-rounded'/>
 
@@ -427,7 +427,7 @@ echo $navbar_str;
                                     <label class="control-label">Select Image</label>
                                     <br>
                                     <br>
-                                    <input type='file' id="imgInp" name="fileToUpload"
+                                    <input type='file' id="imgInput" name="fileToUpload"
                                            style="padding-bottom:10px;" required/>
 
                                     <p id="imageErrorMsg"></p>
@@ -436,7 +436,7 @@ echo $navbar_str;
                                     <label class="control-label">Image Preview</label>
                                     <br>
                                     <br>
-                                    <img src="../../img/default/preferences/logo.png" id="imagepreview"
+                                    <img src="../../img/default/preferences/logo.png" id="imagePreview"
                                          class="addImage">
                                 </div>
                             </div>

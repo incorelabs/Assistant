@@ -19,6 +19,12 @@ var pageEnvelopeSettings = {
 
             envelopeSettingsTableString += "<td class='text-center col-md-1 col-sm-1 col-xs-1'>" + (i + 1) + "</td>";
 
+            if (data[i]['LogoAvailable'] == 1) {
+                envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image'><a onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");' class='clickable'><img src='../../img/default/preferences/logo.png' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'><span class='glyphicon glyphicon-pencil overlay-icon'></span></div></a></div></td>";
+            } else {
+                envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image disabledLogo'><a onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");' class='clickable disable-anchor'><img src='../../img/default/preferences/logo.png' id='imageResource' alt='...' class='img-rounded'/><div class='overlay-default img-rounded'><span class='glyphicon glyphicon-remove overlay-icon'></span></div></a></div></td>";
+            }
+
             envelopeSettingsTableString += "<td class='text-center col-md-1 col-sm-1 col-xs-1'>" + ((data[i]['CoverName']) ? data[i]['CoverName'] : "-") + "</td>";
 
             envelopeSettingsTableString += "<td class='text-center col-md-1 col-sm-1 hidden-xs'>" + ((data[i]['FromRequired'] == 1) ? "Yes" : "No") + "</td>";
@@ -39,8 +45,6 @@ var pageEnvelopeSettings = {
                     break;
             }
             envelopeSettingsTableString += "<td class='text-center col-md-1 col-sm-1 col-xs-1'>" + coverFeedDirection + "</td>";
-
-            envelopeSettingsTableString += "<td class='text-center col-md-1 col-sm-1 col-xs-1'>" + ((data[i]['LogoAvailable'] == 1) ? "Yes" : "No") + "</td>";
 
             envelopeSettingsTableString += "<td class='text-center col-md-1 col-sm-1 col-xs-1'><a href='#' onclick='pageEnvelopeSettings.openEditEnvelopeSettingsModal(" + i + ")'><i class='fa fa-pencil fa-lg fa-green'></i></a>";
 
@@ -90,6 +94,10 @@ var pageEnvelopeSettings = {
         console.log(coverCode);
         $("#form-delete-code").val(coverCode);
         $("#deleteModal").modal('show');
+    },
+    openLogoEnvelopeSettingsModal: function (envelopeSettingsIndex) {
+        pageEnvelopeSettings.envelopeDetails = pageEnvelopeSettings.envelopeSettingList[envelopeSettingsIndex];
+        $("#imageModal").modal('show');
     },
     setInputFields: function (envelopeDetails) {
         console.log(envelopeDetails);
@@ -232,6 +240,17 @@ $(document).ready(function () {
             $("#logoLeft").removeAttr("required");
             $("#logoHeight").removeAttr("required");
             $("#logoWidth").removeAttr("required");
+        }
+    });
+
+    $('#imageModal').on('show.bs.modal', function () {
+        console.log(pageEnvelopeSettings.envelopeDetails);
+        document.getElementById("logoForm").reset();
+        $('#photoId').val(pageEnvelopeSettings.envelopeDetails.CoverCode);
+        if (pageEnvelopeSettings.envelopeDetails.LogoPath) {
+            $("#imagePreview").attr("src", pageEnvelopeSettings.envelopeDetails.LogoPath);
+        } else {
+            $("#imagePreview").attr("src", "../../img/default/preferences/logo.png");
         }
     });
 

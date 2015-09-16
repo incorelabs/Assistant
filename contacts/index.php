@@ -1081,7 +1081,7 @@ echo $navbar_str;
                                     <label class="control-label">Select Image</label>
                                     <br>
                                     <br>
-                                    <input type='file' id="imgInp" name="fileToUpload"
+                                    <input type='file' id="imgInput" name="fileToUpload"
                                            style="padding-bottom:10px;" required/>
 
                                     <p id="imageErrorMsg"></p>
@@ -1090,7 +1090,7 @@ echo $navbar_str;
                                     <label class="control-label">Image Preview</label>
                                     <br>
                                     <br>
-                                    <img src="../img/default/contact/profilePicture.png" id="imagepreview"
+                                    <img src="../img/default/contact/profilePicture.png" id="imagePreview"
                                          class="addImage">
                                 </div>
                             </div>
