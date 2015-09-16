@@ -78,6 +78,11 @@ class LabelSettings
         return $labelCode;
     }
 
+    function setImagePath($code,$path){
+        $sql = "UPDATE `Table139` SET `LogoPath` = '".$path."' WHERE `LabelCode` = ".$code." AND `RegCode` = ".$this->regCode.";";
+        $this->runQuery($sql);
+    }
+
     function getInsertQuery(){
         $labelCode = $this->generateLabelCode();
         $sql = "INSERT INTO `Table139` VALUES (".$labelCode.", ".$this->data['labelName'].", ".$this->data['linesPerLabel'].", ".$this->data['labelInRow'].", ".$this->data['labelInColumn'].", ".$this->data['labelHeight'].", ".$this->data['labelWidth'].", ".$this->data['labelStartLeft'].", ".$this->data['labelNextLeft'].", ".$this->data['labelStartTop'].", ".$this->data['labelNextTop'].", ".$this->data['singleContent'].", ".$this->data['logoAvailable'].", ".$this->data['logoPath'].", ".$this->data['logoTop'].", ".$this->data['logoLeft'].", ".$this->data['logoHeight'].", ".$this->data['logoWidth'].", ".$this->data['labelOrientation'].", ".$this->regCode.")";

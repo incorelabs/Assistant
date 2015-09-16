@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: kbokdia
  * Date: 16/09/15
- * Time: 2:56 PM
+ * Time: 7:14 PM
  */
-
-namespace Assistant\Preferences\Envelope;
-require 'EnvelopeAutoload.php';
+namespace Assistant\Preferences\Label;
+require 'LabelAutoload.php';
 require ROOT."external/class.upload.php";
 
 function createResponse($status,$message){
@@ -17,7 +16,7 @@ function createResponse($status,$message){
 $response = createResponse(0,"Initialize");
 $validate = true;
 do{
-    if(empty($_POST['coverCode'])){
+    if(empty($_POST['labelCode'])){
         $validate = false;
         $response = createResponse(0,"Invalid Request");
     }
@@ -35,15 +34,15 @@ if($validate) {
         $logo->forbidden = array('application/*');
 
         //upload
-        $logo->file_new_name_body = $_POST["coverCode"];
+        $logo->file_new_name_body = $_POST["labelCode"];
         $logo->image_convert = 'jpg';
         $logo->file_overwrite = true;
-        $path = ROOT."../Assistant_Users/".$_SESSION['s_id']."/preferences/envelope";
+        $path = ROOT."../Assistant_Users/".$_SESSION['s_id']."/preferences/label";
         $logo->process($path);
         if($logo->processed){
             $path = $logo->file_dst_pathname;
-            $settings = new EnvelopeSettings();
-            $settings->setImagePath($_POST['coverCode'],$path);
+            $settings = new LabelSettings();
+            $settings->setImagePath($_POST['labelCode'],$path);
             $response = createResponse(1,"Logo uploaded successfully");
             $logo->clean();
         }
