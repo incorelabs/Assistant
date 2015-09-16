@@ -346,7 +346,7 @@ echo $navbar_str;
     <div class="modal-dialog modal-md">
         <div class="modal-content">
 
-            <form class="form-horizontal" method="POST" action="uploadProfile.php" enctype="multipart/form-data"
+            <form class="form-horizontal" method="POST" action="upload.php" enctype="multipart/form-data"
                   id="logoForm"
                   runat="server">
 

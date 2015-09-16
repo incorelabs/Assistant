@@ -1007,9 +1007,8 @@ $(document).ready(function (event) {
             var img = $("#imagePreview");
             var reader = new FileReader();
             reader.onloadend = function () {
-                //img.src = reader.result;
                 img.attr("src", reader.result);
-            }
+            };
             reader.readAsDataURL(image);
             $("#imageErrorMsg").html("");
         } else {

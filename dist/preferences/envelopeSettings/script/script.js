@@ -19,10 +19,19 @@ var pageEnvelopeSettings = {
 
             envelopeSettingsTableString += "<td class='text-center col-md-1 col-sm-1 col-xs-1'>" + (i + 1) + "</td>";
 
+            var imageURL = "../../img/default/preferences/logo.png";
+
+            if (data[i]['LogoPath']) {
+                imageURL = data[i]['LogoPath'];
+            }
+
+            var timeNow = new Date();
+            imageURL += "?" + timeNow;
+
             if (data[i]['LogoAvailable'] == 1) {
-                envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image'><a onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");' class='clickable'><img src='../../img/default/preferences/logo.png' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'><span class='glyphicon glyphicon-pencil overlay-icon'></span></div></a></div></td>";
+                envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image'><a onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");' class='clickable'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'><span class='glyphicon glyphicon-pencil overlay-icon'></span></div></a></div></td>";
             } else {
-                envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image disabledLogo'><a onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");' class='clickable disable-anchor'><img src='../../img/default/preferences/logo.png' id='imageResource' alt='...' class='img-rounded'/><div class='overlay-default img-rounded'><span class='glyphicon glyphicon-remove overlay-icon'></span></div></a></div></td>";
+                envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image disabledLogo'><a onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");' class='clickable disable-anchor'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded'/><div class='overlay-default img-rounded'><span class='glyphicon glyphicon-remove overlay-icon'></span></div></a></div></td>";
             }
 
             envelopeSettingsTableString += "<td class='text-center col-md-1 col-sm-1 col-xs-1'>" + ((data[i]['CoverName']) ? data[i]['CoverName'] : "-") + "</td>";
@@ -243,6 +252,23 @@ $(document).ready(function () {
         }
     });
 
+    $('#imgInput').change(function () {
+        var image = this.files[0];
+        if ((image.size || image.fileSize) < 1 * 1000 * 1000) {
+            console.log(image);
+            var img = $("#imagePreview");
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                img.attr("src", reader.result);
+            };
+            reader.readAsDataURL(image);
+            $("#imageErrorMsg").html("");
+        } else {
+            $("#imageErrorMsg").html("Image size is greater than 1MB");
+            document.getElementById("logoForm").reset();
+        }
+    });
+
     $('#imageModal').on('show.bs.modal', function () {
         console.log(pageEnvelopeSettings.envelopeDetails);
         document.getElementById("logoForm").reset();
@@ -253,6 +279,46 @@ $(document).ready(function () {
             $("#imagePreview").attr("src", "../../img/default/preferences/logo.png");
         }
     });
+
+    $("#logoForm").ajaxForm({
+        beforeSubmit: function (formData) {
+            console.log(formData);
+            for (var i = 0; i < formData.length; i++) {
+                console.log(formData[i]);
+                if (formData[i].name == "fileToUpload") {
+                    if (formData[i].value == "") {
+                        pageIndex.showNotificationFailure("No Image Selected");
+                        return false;
+                    }
+                }
+            }
+            $(".progress").show();
+        },
+        uploadProgress: function (event, position, total, percentComplete) {
+            $(".progress-bar").width(percentComplete + "%");
+            $("#progressValue").html(percentComplete + "% complete");
+        },
+        success: function (responseText, statusText, xhr, $form) {
+            console.log(responseText);
+            var response = JSON.parse(responseText);
+            if (response.status == 1) {
+                $("#imageModal").modal('hide');
+                setTimeout(function () {
+                    pageEnvelopeSettings.getEnvelopeList();
+                }, 200);
+                $(".progress").hide();
+            } else {
+                pageIndex.showNotificationFailure(response.message);
+                $(".progress").hide();
+            }
+        },
+        error: function () {
+            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            $(".progress").hide();
+        }
+    });
+
+    $(".progress").hide();
 
     $("#envelopeSettingsForm").ajaxForm({
         beforeSubmit: function (formData) {
