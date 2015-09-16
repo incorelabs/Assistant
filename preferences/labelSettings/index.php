@@ -108,7 +108,7 @@ echo $navbar_str;
                 <td class="text-center text-middle col-md-1 col-sm-1 col-xs-1">2</td>
                 <td class="text-center text-middle col-md-1 col-sm-1 col-xs-3">
                     <div class='image disabledLogo'>
-                        <a data-toggle='modal' data-target='#imageModal' id='pop' class='clickable disbale-anchor'>
+                        <a data-toggle='modal' data-target='#imageModal' id='pop' class='clickable disable-anchor'>
                             <img src='../../img/default/preferences/logo.png' id='imageResource' alt='...'
                                  class='img-rounded'/>
 
@@ -342,14 +342,10 @@ echo $navbar_str;
                         <div class='info'></div>
                     </div>
                 </div>
+            </form>
         </div>
-        <!-- Modal Body -->
     </div>
-    </form>
 </div>
-<!--modal-content-->
-</div>
-</div><!--modal-->
 
 <!--Delete Label Modal-->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true"

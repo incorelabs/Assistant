@@ -74,3 +74,60 @@ hr{
     margin-top: 0;
     margin-bottom: 0;
 }
+
+img {
+    height: 40px;
+    width: 40px;
+}
+
+.overlay {
+    background:#f1f1f1;
+    text-align:center;
+    opacity:0;
+    -webkit-transition: opacity .25s ease;
+    -moz-transition: opacity .25s ease;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    display: inline-table;
+    margin-left: -40px;
+}
+
+.overlay-default {
+    background:#f1f1f1;
+    text-align:center;
+    opacity:0.8;
+    -webkit-transition: opacity .25s ease;
+    -moz-transition: opacity .25s ease;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    display: inline-table;
+    margin-left: -40px;
+}
+
+.disable-anchor{
+    pointer-events:none !important;
+    cursor: default !important;
+}
+
+
+.image:hover .overlay {
+    opacity:0.8;
+}
+
+.addImage {
+    display: block;
+    max-width:200px;
+    max-height:200px;
+    width: auto;
+    height: auto;
+}
+
+.text-middle{
+    vertical-align: middle !important;
+}
+
+.overlay-icon{
+    padding-top: 10px;
+}

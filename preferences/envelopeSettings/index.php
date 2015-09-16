@@ -294,14 +294,10 @@ echo $navbar_str;
                         <div class='info'></div>
                     </div>
                 </div>
+            </form>
         </div>
-        <!-- Modal Body -->
     </div>
-    </form>
 </div>
-<!--modal-content-->
-</div>
-</div><!--modal-->
 
 <!--Delete Modal-->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true"
