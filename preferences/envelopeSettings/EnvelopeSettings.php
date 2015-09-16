@@ -56,7 +56,7 @@ class EnvelopeSettings
     }
 
     function getUpdateQuery(){
-        $sql = "UPDATE `Table135` SET `CoverName` = ".$this->data['coverName'].", `FromRequired` = ".$this->data['fromRequired'].", `FromTop` = ".$this->data['fromTop'].", `FromLeft` = ".$this->data['fromLeft'].", `ToTop` = ".$this->data['toTop'].", `ToLeft` = ".$this->data['toLeft'].", `FromName` = ".$this->data['fromName'].", `FromAdd1` = ".$this->data['fromAdd1'].", `FromAdd2` = ".$this->data['fromAdd2'].", `FromAdd3` = ".$this->data['fromAdd3'].", `FromAdd4` = ".$this->data['fromAdd4'].", `LogoAvailable` = ".$this->data['logoAvailable'].", `LogoPath` = ".$this->data['logoPath'].", `LogoTop` = ".$this->data['logoTop'].", `LogoLeft` = ".$this->data['logoLeft'].", `LogoWidth` = ".$this->data['logoWidth'].", `Caption` = ".$this->data['caption'].", `CoverFeed` = ".$this->data['coverFeed']." WHERE `CoverCode` = ".$this->data['coverCode']." AND `RegCode` = ".$this->regCode;
+        $sql = "UPDATE `Table135` SET `CoverName` = ".$this->data['coverName'].", `FromRequired` = ".$this->data['fromRequired'].", `FromTop` = ".$this->data['fromTop'].", `FromLeft` = ".$this->data['fromLeft'].", `ToTop` = ".$this->data['toTop'].", `ToLeft` = ".$this->data['toLeft'].", `FromName` = ".$this->data['fromName'].", `FromAdd1` = ".$this->data['fromAdd1'].", `FromAdd2` = ".$this->data['fromAdd2'].", `FromAdd3` = ".$this->data['fromAdd3'].", `FromAdd4` = ".$this->data['fromAdd4'].", `LogoAvailable` = ".$this->data['logoAvailable'].", `LogoPath` = ".$this->data['logoPath'].", `LogoTop` = ".$this->data['logoTop'].", `LogoLeft` = ".$this->data['logoLeft'].", `LogoHeight` = ".$this->data["logoHeight"].", `LogoWidth` = ".$this->data['logoWidth'].", `Caption` = ".$this->data['caption'].", `CoverFeed` = ".$this->data['coverFeed']." WHERE `CoverCode` = ".$this->data['coverCode']." AND `RegCode` = ".$this->regCode;
 
         return $sql;
     }
@@ -72,7 +72,7 @@ class EnvelopeSettings
 
     function getInsertQuery(){
         $coverCode = $this->generateCoverCode();
-        $sql = "INSERT INTO Table135 (`CoverCode`,`CoverName`,`FromRequired`,`FromTop`,`FromLeft`,`ToTop`,`ToLeft`,`FromName`,`FromAdd1`,`FromAdd2`,`FromAdd3`,`FromAdd4`,`LogoAvailable`,`LogoPath`,`LogoTop`,`LogoLeft`,`LogoWidth`,`Caption`,`CoverFeed`,`RegCode`) VALUES (".$coverCode.",".$this->data['coverName'].",".$this->data['fromRequired'].",".$this->data['fromTop'].",".$this->data['fromLeft'].",".$this->data['toTop'].",".$this->data['toLeft'].",".$this->data['fromName'].",".$this->data['fromAdd1'].",".$this->data['fromAdd2'].",".$this->data['fromAdd3'].",".$this->data['fromAdd4'].",".$this->data['logoAvailable'].",".$this->data['logoPath'].",".$this->data['logoTop'].",".$this->data['logoLeft'].",".$this->data['logoWidth'].",".$this->data['caption'].",".$this->data['coverFeed'].",".$this->regCode.")";
+        $sql = "INSERT INTO Table135 (`CoverCode`,`CoverName`,`FromRequired`,`FromTop`,`FromLeft`,`ToTop`,`ToLeft`,`FromName`,`FromAdd1`,`FromAdd2`,`FromAdd3`,`FromAdd4`,`LogoAvailable`,`LogoPath`,`LogoTop`,`LogoLeft`,`LogoHeight`,`LogoWidth`,`Caption`,`CoverFeed`,`RegCode`) VALUES (".$coverCode.",".$this->data['coverName'].",".$this->data['fromRequired'].",".$this->data['fromTop'].",".$this->data['fromLeft'].",".$this->data['toTop'].",".$this->data['toLeft'].",".$this->data['fromName'].",".$this->data['fromAdd1'].",".$this->data['fromAdd2'].",".$this->data['fromAdd3'].",".$this->data['fromAdd4'].",".$this->data['logoAvailable'].",".$this->data['logoPath'].",".$this->data['logoTop'].",".$this->data['logoLeft'].",".$this->data['logoHeight'].",".$this->data['logoWidth'].",".$this->data['caption'].",".$this->data['coverFeed'].",".$this->regCode.")";
 
         return $sql;
     }
@@ -97,6 +97,7 @@ class EnvelopeSettings
         $this->data['logoPath'] = ((!empty($this->data['logoPath'])) ? $this->data['logoPath'] : NULL);
         $this->data['logoTop'] = ((!empty($this->data['logoTop'])) ? $this->data['logoTop'] : NULL);
         $this->data['logoLeft'] = ((!empty($this->data['logoLeft'])) ? $this->data['logoLeft'] : NULL);
+        $this->data['logoHeight'] = ((!empty($this->data['logoHeight'])) ? $this->data['logoHeight'] : NULL);
         $this->data['logoWidth'] = ((!empty($this->data['logoWidth'])) ? $this->data['logoWidth'] : NULL);
         $this->data['caption'] = ((!empty($this->data['caption'])) ? $this->data['caption'] : NULL);
         $this->data['coverFeed'] = ((!empty($this->data['coverFeed'])) ? $this->data['coverFeed'] : NULL);
