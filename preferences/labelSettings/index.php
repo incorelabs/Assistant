@@ -55,7 +55,7 @@ echo $navbar_str;
         </div>
     </div>
     <div class="text-right button-top-margin">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#labelSettingsModal">
+        <button class="btn btn-primary" onclick="pageLabelSettings.openAddLabelSettingsModal();">
             <i class="fa fa-plus fa-lg"></i>
         </button>
     </div>
@@ -75,64 +75,6 @@ echo $navbar_str;
             </tr>
             </thead>
             <tbody id="table-body">
-            <tr>
-                <td class="text-center text-middle col-md-1 col-sm-1 col-xs-1">1</td>
-                <td class="text-center text-middle col-md-1 col-sm-1 col-xs-3">
-                    <div class='image'>
-                        <a data-toggle='modal' data-target='#imageModal' class='clickable'>
-                            <img src='../../img/default/preferences/logo.png' id='imageResource' alt='...'
-                                 class='img-rounded'/>
-
-                            <div class='overlay img-rounded'>
-                                <span class='glyphicon glyphicon-pencil overlay-icon'></span>
-                            </div>
-                        </a>
-                    </div>
-                </td>
-                <td class="text-center text-middle col-md-1 col-sm-1 col-xs-3">Test</td>
-                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">7</td>
-                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">3</td>
-                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">5</td>
-                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">No</td>
-                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">Portrait</td>
-                <td class="text-center text-middle col-md-1 col-sm-1 col-xs-3">
-                    <a href="#" data-toggle="modal" data-target="#labelSettingsModal">
-                        <i class="fa fa-pencil fa-lg fa-green"></i>
-                    </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="#" data-toggle="modal" data-target="#deleteModal">
-                        <i class="fa fa-trash-o fa-lg fa-red"></i>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-center text-middle col-md-1 col-sm-1 col-xs-1">2</td>
-                <td class="text-center text-middle col-md-1 col-sm-1 col-xs-3">
-                    <div class='image disabledLogo'>
-                        <a data-toggle='modal' data-target='#imageModal' class='clickable disable-anchor'>
-                            <img src='../../img/default/preferences/logo.png' id='imageResource' alt='...'
-                                 class='img-rounded'/>
-
-                            <div class='overlay-default img-rounded'>
-                                <span class='glyphicon glyphicon-remove overlay-icon'></span>
-                            </div>
-                        </a>
-                    </div>
-                </td>
-                <td class="text-center text-middle col-md-1 col-sm-1 col-xs-3">Test1</td>
-                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">21</td>
-                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">7</td>
-                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">2</td>
-                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">Yes</td>
-                <td class="text-center text-middle col-md-1 col-sm-1 hidden-xs">Landscape</td>
-                <td class="text-center text-middle col-md-1 col-sm-1 col-xs-3">
-                    <a href="#" data-toggle="modal" data-target="#labelSettingsModal">
-                        <i class="fa fa-pencil fa-lg fa-green"></i>
-                    </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="#" data-toggle="modal" data-target="#deleteModal">
-                        <i class="fa fa-trash-o fa-lg fa-red"></i>
-                    </a>
-                </td>
-            </tr>
             </tbody>
         </table>
     </div>
@@ -143,7 +85,8 @@ echo $navbar_str;
      data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" method="POST" action="" id="labelSettingsForm" autocomplete="off">
+            <form class="form-horizontal" method="POST" action="controller.php" id="labelSettingsForm"
+                  autocomplete="off">
                 <div class="modal-header">
                     <div class="form-group pull-left" style="padding-left:15px">
                         <button class="btn btn-danger button-top-remove" data-dismiss="modal">
@@ -155,8 +98,7 @@ echo $navbar_str;
                             <span class='glyphicon glyphicon-ok'></span>
                         </button>
                     </div>
-                    <h4 id="" class="modal-title text-center">
-                        Add Label
+                    <h4 id="labelSettingsModalHeading" class="modal-title text-center">
                     </h4>
                 </div>
                 <input type="text" class="hidden" name="labelCode" id="form-add-edit-code"/>
@@ -166,56 +108,52 @@ echo $navbar_str;
                     <div class="info text-center">*Please enter all the values in "mm" only</div>
                     <div class="form-group form-group-margin">
                         <div class="input-group">
-                            <span class="input-group-addon input-group-addon-label">Name</span>
+                            <span class="input-group-addon input-group-addon-label">Name*</span>
                             <input type="text" name="labelName" id="labelName"
-                                   class="form-control text-field-left-border" placeholder="Label Name"/>
+                                   class="form-control text-field-left-border" placeholder="Label Name" required/>
                         </div>
                         <div class='info'></div>
                     </div>
                     <hr/>
                     <div class="form-group form-group-margin">
                         <div class="input-group">
-                            <span class="input-group-addon input-group-addon-label">Lines</span>
-                            <input type="number" name="labelLines" id="labelLines"
-                                   class="form-control text-field-left-border" placeholder="No. of Lines"/>
+                            <span class="input-group-addon input-group-addon-label">Lines*</span>
+                            <input type="number" name="linesPerLabel" id="linesPerLabel"
+                                   class="form-control text-field-left-border" placeholder="No. of Lines" required/>
                         </div>
                         <div class='info'></div>
                     </div>
                     <div class="form-group form-group-margin">
                         <div class="col-md-6 col-sm-6 col-xs-6 first-col-left-padding first-col-right-padding">
                             <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Rows</span>
-                                <input type="number" name="rowLabel" id="rowLabel"
-                                       class="form-control text-field-left-border" placeholder="No. of Rows"/>
+                                <span class="input-group-addon input-group-addon-label">Rows*</span>
+                                <input type="number" name="labelInRow" id="labelInRow"
+                                       class="form-control text-field-left-border" placeholder="No. of Rows" required/>
                             </div>
                             <div class='info'></div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6 second-col-left-padding second-col-right-padding">
                             <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Columns</span>
-
-
-                                <input type="number" name="columnLabel" id="columnLabel"
-                                       class="form-control text-field-left-border" placeholder="No. of Cols"/>
+                                <span class="input-group-addon input-group-addon-label">Columns*</span>
+                                <input type="number" name="labelInColumn" id="labelInColumn"
+                                       class="form-control text-field-left-border" placeholder="No. of Cols" required/>
                             </div>
                         </div>
                     </div>
                     <div class="form-group form-group-margin">
                         <div class="col-md-6 col-sm-6 col-xs-6 first-col-left-padding first-col-right-padding">
                             <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Height</span>
-
-
+                                <span class="input-group-addon input-group-addon-label">Height*</span>
                                 <input type="number" name="labelHeight" id="labelHeight"
-                                       class="form-control text-field-left-border" placeholder="Label Height"/>
+                                       class="form-control text-field-left-border" placeholder="Label Height" required/>
                             </div>
                             <div class='info'></div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6 second-col-left-padding second-col-right-padding">
                             <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Width</span>
-                                <input type="number" name="labelWidth" id="labelHeight"
-                                       class="form-control text-field-left-border" placeholder="Label Width"/>
+                                <span class="input-group-addon input-group-addon-label">Width*</span>
+                                <input type="number" name="labelWidth" id="labelWidth"
+                                       class="form-control text-field-left-border" placeholder="Label Width" required/>
                             </div>
                             <div class='info'></div>
                         </div>
@@ -224,17 +162,17 @@ echo $navbar_str;
                     <div class="form-group form-group-margin">
                         <div class="col-md-6 col-sm-6 col-xs-6 first-col-left-padding first-col-right-padding">
                             <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Start Left</span>
-                                <input type="number" name="startLeft" id="startLeft"
-                                       class="form-control text-field-left-border" placeholder="Start Left"/>
+                                <span class="input-group-addon input-group-addon-label">Start Left*</span>
+                                <input type="number" name="labelStartLeft" id="labelStartLeft"
+                                       class="form-control text-field-left-border" placeholder="Start Left" required/>
                             </div>
                             <div class='info'></div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6 second-col-left-padding second-col-right-padding">
                             <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Next Left</span>
-                                <input type="number" name="nextLeft" id="nextLeft"
-                                       class="form-control text-field-left-border" placeholder="Next Left"/>
+                                <span class="input-group-addon input-group-addon-label">Next Left*</span>
+                                <input type="number" name="labelNextLeft" id="labelNextLeft"
+                                       class="form-control text-field-left-border" placeholder="Next Left" required/>
                             </div>
                             <div class='info'></div>
                         </div>
@@ -242,17 +180,17 @@ echo $navbar_str;
                     <div class="form-group form-group-margin">
                         <div class="col-md-6 col-sm-6 col-xs-6 first-col-left-padding first-col-right-padding">
                             <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Start Top</span>
-                                <input type="number" name="startTop" id="startTop"
-                                       class="form-control text-field-left-border" placeholder="Start Top"/>
+                                <span class="input-group-addon input-group-addon-label">Start Top*</span>
+                                <input type="number" name="labelStartTop" id="labelStartTop"
+                                       class="form-control text-field-left-border" placeholder="Start Top" required/>
                             </div>
                             <div class='info'></div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6 second-col-left-padding second-col-right-padding">
                             <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Next Top</span>
-                                <input type="number" name="nextTop" id="nextTop"
-                                       class="form-control text-field-left-border" placeholder="Next Top"/>
+                                <span class="input-group-addon input-group-addon-label">Next Top*</span>
+                                <input type="number" name="labelNextTop" id="labelNextTop"
+                                       class="form-control text-field-left-border" placeholder="Next Top" required/>
                             </div>
                             <div class='info'></div>
                         </div>
@@ -265,9 +203,10 @@ echo $navbar_str;
 
                                 <div class="inner-addon right-addon">
                                     <i class="fa fa-caret-down fa-size"></i>
-                                    <select id="singleContent" class="form-control select-field-left-border">
-                                        <option value="Single Content">Single Content</option>
-                                        <option value="Multiple Content">Multiple Content</option>
+                                    <select class="form-control select-field-left-border" name="singleContent"
+                                            id="singleContent">
+                                        <option value="1" selected="selected">Multiple Content</option>
+                                        <option value="2">Single Content</option>
                                     </select>
                                 </div>
                             </div>
@@ -279,20 +218,21 @@ echo $navbar_str;
 
                                 <div class="inner-addon right-addon">
                                     <i class="fa fa-caret-down fa-size"></i>
-                                    <select id="logoPrint" class="form-control select-field-left-border">
-                                        <option value="0">Yes</option>
-                                        <option value="1" selected="selected">No</option>
+                                    <select class="form-control select-field-left-border" name="logoAvailable"
+                                            id="logoAvailable">
+                                        <option value="1">Yes</option>
+                                        <option value="2" selected="selected">No</option>
                                     </select>
                                 </div>
                             </div>
                             <div class='info'></div>
                         </div>
                     </div>
-                    <div id="logoDiv" style="display:none">
+                    <div class="hidden" id="logoDiv">
                         <div class="form-group form-group-margin">
                             <div class="col-md-6 col-sm-6 col-xs-6 first-col-left-padding first-col-right-padding">
                                 <div class="input-group">
-                                    <span class="input-group-addon input-group-addon-label">Top</span>
+                                    <span class="input-group-addon input-group-addon-label">Top*</span>
                                     <input type="number" name="logoTop" id="logoTop"
                                            class="form-control text-field-left-border" placeholder="Logo Top"/>
                                 </div>
@@ -300,7 +240,7 @@ echo $navbar_str;
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-6 second-col-left-padding second-col-right-padding">
                                 <div class="input-group">
-                                    <span class="input-group-addon input-group-addon-label">Left</span>
+                                    <span class="input-group-addon input-group-addon-label">Left*</span>
                                     <input type="number" name="logoLeft" id="logoLeft"
                                            class="form-control text-field-left-border" placeholder="Logo Left"/>
                                 </div>
@@ -310,7 +250,7 @@ echo $navbar_str;
                         <div class="form-group form-group-margin">
                             <div class="col-md-6 col-sm-6 col-xs-6 first-col-left-padding first-col-right-padding">
                                 <div class="input-group">
-                                    <span class="input-group-addon input-group-addon-label">Height</span>
+                                    <span class="input-group-addon input-group-addon-label">Height*</span>
                                     <input type="number" name="logoHeight" id="logoHeight"
                                            class="form-control text-field-left-border" placeholder="Logo Height"/>
                                 </div>
@@ -318,7 +258,7 @@ echo $navbar_str;
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-6 second-col-left-padding second-col-right-padding">
                                 <div class="input-group">
-                                    <span class="input-group-addon input-group-addon-label">Width</span>
+                                    <span class="input-group-addon input-group-addon-label">Width*</span>
                                     <input type="number" name="logoWidth" id="logoWidth"
                                            class="form-control text-field-left-border" placeholder="Logo Width"/>
                                 </div>
@@ -333,9 +273,10 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-size"></i>
-                                <select id="logoPrint" class="form-control select-field-left-border">
-                                    <option value="0">Portrait</option>
-                                    <option value="1">Landscape</option>
+                                <select class="form-control select-field-left-border" name="labelOrientation"
+                                        id="labelOrientation">
+                                    <option value="1" selected="selected">Portrait</option>
+                                    <option value="2">Landscape</option>
                                 </select>
                             </div>
                         </div>
@@ -354,7 +295,7 @@ echo $navbar_str;
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title text-center">
-                    Are you sure, you want to DELETE this Contact?
+                    Are you sure, you want to DELETE this Label?
                 </h4>
             </div>
             <br>
@@ -394,7 +335,8 @@ echo $navbar_str;
     <div class="modal-dialog modal-md">
         <div class="modal-content">
 
-            <form class="form-horizontal" method="" action="" enctype="multipart/form-data" id="" runat="server">
+            <form class="form-horizontal" method="POST" action="upload.php" enctype="multipart/form-data" id="logoForm"
+                  runat="server">
 
                 <div class="modal-header">
 
@@ -418,7 +360,7 @@ echo $navbar_str;
                 </div>
 
                 <div class="modal-body">
-                    <input type="text" class="hidden" name="" id='photoId'/>
+                    <input type="text" class="hidden" name="labelCode" id='photoId'/>
 
                     <div class="form-group row">
                         <center>

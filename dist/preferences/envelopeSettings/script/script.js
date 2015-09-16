@@ -15,9 +15,9 @@ var pageEnvelopeSettings = {
         pageEnvelopeSettings.envelopeSettingList = data;
         var envelopeSettingsTableString = "";
         for (var i = 0; i < data.length; i++) {
-            envelopeSettingsTableString += "<tr class='text-left'>";
+            envelopeSettingsTableString += "<tr>";
 
-            envelopeSettingsTableString += "<td class='text-center col-md-1 col-sm-1 col-xs-1'>" + (i + 1) + "</td>";
+            envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'>" + (i + 1) + "</td>";
 
             var imageURL = "../../img/default/preferences/logo.png";
 
@@ -33,11 +33,11 @@ var pageEnvelopeSettings = {
                 envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image disabledLogo'><a onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");' class='clickable disable-anchor'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded'/><div class='overlay-default img-rounded'><span class='glyphicon glyphicon-remove overlay-icon'></span></div></a></div></td>";
             }
 
-            envelopeSettingsTableString += "<td class='text-center col-md-1 col-sm-1 col-xs-1'>" + ((data[i]['CoverName']) ? data[i]['CoverName'] : "-") + "</td>";
+            envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'>" + ((data[i]['CoverName']) ? data[i]['CoverName'] : "-") + "</td>";
 
-            envelopeSettingsTableString += "<td class='text-center col-md-1 col-sm-1 hidden-xs'>" + ((data[i]['FromRequired'] == 1) ? "Yes" : "No") + "</td>";
+            envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 hidden-xs'>" + ((data[i]['FromRequired'] == 1) ? "Yes" : "No") + "</td>";
 
-            envelopeSettingsTableString += "<td class='text-center col-md-1 col-sm-1 hidden-xs'>" + ((data[i]['Caption']) ? data[i]['Caption'] : "-") + "</td>";
+            envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 hidden-xs'>" + ((data[i]['Caption']) ? data[i]['Caption'] : "-") + "</td>";
 
             var coverFeedDirection = "";
 
@@ -52,9 +52,9 @@ var pageEnvelopeSettings = {
                     coverFeedDirection = "Right";
                     break;
             }
-            envelopeSettingsTableString += "<td class='text-center col-md-1 col-sm-1 col-xs-1'>" + coverFeedDirection + "</td>";
+            envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'>" + coverFeedDirection + "</td>";
 
-            envelopeSettingsTableString += "<td class='text-center col-md-1 col-sm-1 col-xs-1'><a href='#' onclick='pageEnvelopeSettings.openEditEnvelopeSettingsModal(" + i + ")'><i class='fa fa-pencil fa-lg fa-green'></i></a>";
+            envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'><a href='#' onclick='pageEnvelopeSettings.openEditEnvelopeSettingsModal(" + i + ")'><i class='fa fa-pencil fa-lg fa-green'></i></a>";
 
             envelopeSettingsTableString += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageEnvelopeSettings.openDeleteEnvelopeSettingsModal(" + data[i].CoverCode + ")'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td>";
 
