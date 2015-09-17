@@ -43,15 +43,15 @@
 					<li><a href='#'>Document Status</a></li>
 				</ul>
 			</li>
-			<li><a href='#mm-6' data-target='#mm-6'>Expense</a>
+			<li><a href='#mm-6' data-target='#mm-6'>expense</a>
 				<ul>
-					<li><a href='#'>Expense Details</a></li>
-					<li><a href='#'>Expense Status</a></li>
+					<li><a href='".$root_location."expense'>expense Details</a></li>
+					<li><a href='#'>expense Status</a></li>
 				</ul>
 			</li>
 			<li><a href='#mm-7' data-target='#mm-7'>Income</a>
 				<ul>
-					<li><a href='#'>Income Details</a></li>
+					<li><a href='".$root_location."income'>Income Details</a></li>
 					<li><a href='#'>Income Status</a></li>
 				</ul>
 			</li>

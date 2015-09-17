@@ -64,13 +64,13 @@ echo $navbar_str;
         <table class="table table-top-margin borderless">
             <thead>
             <tr>
-                <th class="text-center col-md-1 col-sm-1 col-xs-1">#</th>
-                <th class="text-center col-md-1 col-sm-1 col-xs-1">Logo</th>
-                <th class="text-center col-md-1 col-sm-1 col-xs-1">Name</th>
-                <th class="text-center col-md-1 col-sm-1 hidden-xs">From</th>
-                <th class="text-center col-md-1 col-sm-1 hidden-xs">Caption</th>
-                <th class="text-center col-md-1 col-sm-1 col-xs-1">Print Feed</th>
-                <th class="text-center col-md-1 col-sm-1 col-xs-1">Actions</th>
+                <th class="text-center col-md-1 col-sm-2 col-xs-2">#</th>
+                <th class="text-center col-md-1 col-sm-3 col-xs-3">Logo</th>
+                <th class="text-center col-md-1 col-sm-3 col-xs-3">Name</th>
+                <th class="text-center col-md-1 hidden-sm hidden-xs">From</th>
+                <th class="text-center col-md-1 hidden-sm hidden-xs">Caption</th>
+                <th class="text-center col-md-1 hidden-sm hidden-xs">Print Feed</th>
+                <th class="text-center col-md-1 col-sm-3 col-xs-3">Actions</th>
             </tr>
             </thead>
             <tbody id="table-body">
