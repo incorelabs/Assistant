@@ -89,7 +89,7 @@ img {
     height: 40px;
     width: 40px;
     position: absolute;
-    display: inline-table;
+    display: inline-block;
     margin-left: -40px;
 }
 
@@ -102,7 +102,7 @@ img {
     height: 40px;
     width: 40px;
     position: absolute;
-    display: inline-table;
+    display: inline-block;
     margin-left: -40px;
 }
 

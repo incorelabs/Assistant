@@ -31,27 +31,33 @@ var pageExpense = {
         $("#deleteModal").modal("show");
     },
     openVoucherExpenseModal: function (){
-        $("#voucherModal").modal("show");
+        window.location.href = "../voucher/";
     }
 };
 
 $(document).ready(function () {
-    $("#paymentMode").change(function () {
-        var online = $("#paymentMode").val();
-        if(online == 2) {
-            $("#paymentSiteDiv").removeClass("hidden");
-        } else{
-            $("#paymentSiteDiv").addClass("hidden");
-        }
-    });
-    $("#voucherPaymentMode").change(function () {
-        var voucherPaymentMode = $("#voucherPaymentMode").val();
-        if(voucherPaymentMode == 3 || voucherPaymentMode == 4) {
-            $("#receiptNumberDiv").removeClass("hidden");
-            $("#receiptDateDiv").removeClass("hidden");
-        } else{
-            $("#receiptNumberDiv").addClass("hidden");
-            $("#receiptDateDiv").addClass("hidden");
-        }
-    });
+    if(window.innerWidth < 992)
+    {
+        $("#billingDayDiv").removeClass("first-col-left-padding first-col-right-padding");
+        $("#dueDayDiv").removeClass("second-col-left-padding second-col-right-padding");
+
+        $("#billingDayDiv").addClass("mobile-col-padding-remove");
+        $("#dueDayDiv").addClass("mobile-col-top-padding mobile-col-padding-remove");
+    }
+});
+
+$(window).resize(function(){
+    if(window.innerWidth < 992) {
+        $("#billingDayDiv").removeClass("first-col-left-padding first-col-right-padding");
+        $("#dueDayDiv").removeClass("second-col-left-padding second-col-right-padding");
+
+        $("#billingDayDiv").addClass("mobile-col-padding-remove");
+        $("#dueDayDiv").addClass("mobile-col-top-padding mobile-col-padding-remove");
+    } else{
+        $("#billingDayDiv").addClass("first-col-left-padding first-col-right-padding");
+        $("#dueDayDiv").addClass("second-col-left-padding second-col-right-padding");
+
+        $("#billingDayDiv").removeClass("mobile-col-padding-remove");
+        $("#dueDayDiv").removeClass("mobile-col-top-padding mobile-col-padding-remove");
+    }
 });
