@@ -22,10 +22,8 @@ var pageEnvelopeSettings = {
             var imageURL = "../../img/default/preferences/logo.png";
 
             if (data[i]['LogoPath']) {
-                imageURL = data[i]['LogoPath'];
+                imageURL = localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + data[i]['LogoPath'];
             }
-
-            imageURL += "?" + new Date().getTime();
 
             if (data[i]['LogoAvailable'] == 1) {
                 envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image'><a onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");' class='clickable'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'><span class='glyphicon glyphicon-pencil overlay-icon'></span></div></a></div></td>";
@@ -273,7 +271,7 @@ $(document).ready(function () {
         document.getElementById("logoForm").reset();
         $('#photoId').val(pageEnvelopeSettings.envelopeDetails.CoverCode);
         if (pageEnvelopeSettings.envelopeDetails.LogoPath) {
-            $("#imagePreview").attr("src", pageEnvelopeSettings.envelopeDetails.LogoPath);
+            $("#imagePreview").attr("src", localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + pageEnvelopeSettings.envelopeDetails.LogoPath);
         } else {
             $("#imagePreview").attr("src", "../../img/default/preferences/logo.png");
         }
