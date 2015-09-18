@@ -28,7 +28,7 @@ class ChequeSettings
     }
 
     function getSelectQuery(){
-        return "SELECT * FROM TABLE137".$this->where;
+        return "SELECT * FROM Table137".$this->where;
     }
 
     function getChequeList(){

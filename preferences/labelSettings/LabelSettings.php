@@ -28,7 +28,7 @@ class LabelSettings
     }
 
     function getSelectQuery(){
-        return "SELECT * FROM TABLE139".$this->where;
+        return "SELECT * FROM Table139".$this->where;
     }
 
     function getLabelList(){

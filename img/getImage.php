@@ -3,12 +3,12 @@
  * Created by PhpStorm.
  * User: kbokdia
  * Date: 18/09/15
- * Time: 11:44 AM
+ * Time: 12:42 PM
  */
 session_start();
 define("ROOT", "../");
-
 require ROOT.'dist/authenticate.php';
+
 $regCode = intval($_SESSION['s_id']);
 
 $file = urldecode($_GET['file']);
