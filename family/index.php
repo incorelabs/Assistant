@@ -122,7 +122,7 @@ echo $navbar_str;
                         </div>
                         <div class='info'></div>
                     </div>
-                    <div class="form-group form-group-margin">
+                    <div class="form-group form-group-margin" id="selectRelationDiv">
                         <div class="input-group">
                             <span class="input-group-addon input-group-addon-label">Relation*</span>
 

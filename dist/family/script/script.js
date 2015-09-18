@@ -95,6 +95,7 @@ var pageFamily = {
 
         $("#loginAccess").addClass("hidden");
 
+        $("#selectRelationDiv").removeClass("hidden");
         $("#email").removeAttr("readonly").removeAttr("required");
         $("#password").removeAttr("required");
         $("#confirmPassword").removeAttr("required");
@@ -111,6 +112,8 @@ var pageFamily = {
 
         console.log(pageFamily.familyList[memberIndex]);
         initializeDate();
+
+        $("#selectRelationDiv").removeClass("hidden");
 
         pageFamily.setInputFields(pageFamily.personDetails);
         $("#form-add-edit-code").val(pageFamily.personDetails["FamilyCode"]);
@@ -153,6 +156,7 @@ var pageFamily = {
                 $("#provideLoginDiv").addClass("hidden");
                 $("#loginAccess").addClass("hidden");
 
+                $("#selectRelationDiv").addClass("hidden");
                 $("#email").attr("required", "");
 
                 $("#passwordDiv").empty();
@@ -181,6 +185,7 @@ var pageFamily = {
                 }
             }
         } else {
+            $("#relation option[value='1']").remove();
             if (personDetails["LoginFlag"] == 1)
                 $('input:radio[name=access]')[0].checked = true;
             else
@@ -293,19 +298,13 @@ $(document).ready(function () {
     pageFamily.getFamilyList();
     pageFamily.getRelationList();
 
-    $("#gender").focusout(function () {
-        pageFamily.validateGender(this);
-    });
-
     $("#gender").focusin(function () {
         var gender = $(this).val();
         var formGroup = $(this).closest(".form-group");
         formGroup.removeClass("has-error");
         $(this).closest('.form-group').find('.info').empty();
-    });
-
-    $("#relation").focusout(function () {
-        pageFamily.validateRelation(this);
+    }).focusout(function () {
+        pageFamily.validateGender(this);
     });
 
     $("#relation").focusin(function () {
@@ -313,6 +312,8 @@ $(document).ready(function () {
         var formGroup = $(this).closest(".form-group");
         formGroup.removeClass("has-error");
         $(this).closest('.form-group').find('.info').empty();
+    }).focusout(function () {
+        pageFamily.validateRelation(this);
     });
 
     $('#familyModal').on('show.bs.modal', function (e) {
