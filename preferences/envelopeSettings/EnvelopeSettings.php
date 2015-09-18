@@ -28,7 +28,7 @@ class EnvelopeSettings
     }
 
     function getSelectQuery(){
-        return "SELECT * FROM TABLE135".$this->where;
+        return "SELECT * FROM Table135".$this->where;
     }
 
     function getEnvelopeList(){
