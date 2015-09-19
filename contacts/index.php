@@ -1087,7 +1087,8 @@ echo $navbar_str;
                                     <p id="imageErrorMsg"></p>
 
                                     <div class="delete-btn-padding">
-                                        <button type="button" class="btn btn-danger" id="deleteImageBtn">
+                                        <button type="button" class="btn btn-danger" id="deleteImageBtn"
+                                                onclick="pageContact.deleteProfilePic();">
                                             Delete Image
                                         </button>
                                     </div>

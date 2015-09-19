@@ -728,6 +728,40 @@ var pageContact = {
     openProfilePicModal: function () {
         $("#imageModal").modal('show');
     },
+    deleteProfilePic: function () {
+        var deletePic = confirm("Do you REALLY want to DELETE the Profile Picture?");
+        if (deletePic) {
+            var url = localStorage.getItem("websiteRoot") + "contacts/controller.php";
+
+            $(".cover").fadeIn(100);
+            $("#pageLoading").addClass("loader");
+
+            $.post(url, {
+                contactCode: pageContact.localContact.contact.ContactCode,
+                mode: "DI"
+            }).done(function (data) {
+                console.log(data);
+                var response = JSON.parse(data);
+                if (response.status == 1) {
+                    pageContact.showNotificationSuccess(response.message);
+                    pageContact.localContact.contact.ImageURL = null;
+                    $("#imageResource").attr("src", "../img/default/contact/profilePicture.png");
+                } else {
+                    pageContact.showNotificationFailure(response.message);
+                }
+                $("#imageModal").modal('hide');
+                $("#pageLoading").removeClass("loader");
+                $(".cover").fadeOut(100);
+            }).fail(function () {
+                pageContact.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+                $("#pageLoading").removeClass("loader");
+                $(".cover").fadeOut(100);
+            });
+
+        } else {
+            return;
+        }
+    },
     setTitleAutoComplete: function () {
         pageContact.setAutoComplete("#addTitle", "#titleCode", pageContact.titleTag, pageContact.titleCode);
     },
@@ -1023,8 +1057,10 @@ $(document).ready(function (event) {
         $('#photoId').val(pageContact.localContact.contact.ContactCode);
         if (pageContact.localContact.contact.ImageURL) {
             $("#imagePreview").attr("src", localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + pageContact.localContact.contact.ImageURL);
+            $("#deleteImageBtn").removeClass("hidden");
         } else {
             $("#imagePreview").attr("src", "../img/default/contact/profilePicture.png");
+            $("#deleteImageBtn").addClass("hidden");
         }
     });
 
