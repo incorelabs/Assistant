@@ -1017,7 +1017,7 @@ echo $navbar_str;
                     <div class="btn-group">
                         <form method="POST" action="controller.php" id="deleteContactForm">
                             <input type="text" class="hidden" name="contactCode" id="form-delete-code"/>
-                            <input type="text" class="hidden" name="mode" id="form-delete-mode"/>
+                            <input type="text" class="hidden" name="mode" id="form-delete-mode" value="D"/>
                             <button class="btn btn-danger modal_button" type="submit">
                                 <span class='glyphicon glyphicon-ok'></span>&nbsp
                                 Yes
@@ -1085,8 +1085,11 @@ echo $navbar_str;
                                            style="padding-bottom:10px;" required/>
 
                                     <p id="imageErrorMsg"></p>
+
                                     <div class="delete-btn-padding">
-                                        <button type="button" class="btn btn-danger">Delete Image</button>
+                                        <button type="button" class="btn btn-danger" id="deleteImageBtn">
+                                            Delete Image
+                                        </button>
                                     </div>
                                 </div>
 

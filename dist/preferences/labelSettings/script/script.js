@@ -92,6 +92,41 @@ var pageLabelSettings = {
         pageLabelSettings.labelDetails = pageLabelSettings.labelSettingList[labelSettingsIndex];
         $("#imageModal").modal('show');
     },
+    deleteCurrentLogo: function () {
+        var deleteLogo = confirm("Do you REALLY want to DELETE the LOGO?");
+        if (deleteLogo) {
+            var url = localStorage.getItem("websiteRoot") + "preferences/labelSettings/controller.php";
+
+            $(".cover").fadeIn(100);
+            $("#pageLoading").addClass("loader");
+
+            $.post(url, {
+                labelCode: pageLabelSettings.labelDetails.LabelCode,
+                mode: "DI"
+            }).done(function (data) {
+                console.log(data);
+                var response = JSON.parse(data);
+                if (response.status == 1) {
+                    pageIndex.showNotificationSuccess(response.message);
+                    setTimeout(function () {
+                        pageLabelSettings.getLabelList();
+                    }, 200);
+                } else {
+                    pageIndex.showNotificationFailure(response.message);
+                }
+                $("#imageModal").modal('hide');
+                $("#pageLoading").removeClass("loader");
+                $(".cover").fadeOut(100);
+            }).fail(function () {
+                pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+                $("#pageLoading").removeClass("loader");
+                $(".cover").fadeOut(100);
+            });
+
+        } else {
+            return;
+        }
+    },
     setInputFields: function (labelDetails) {
         console.log(labelDetails);
         if (labelDetails["LabelName"]) {
@@ -225,8 +260,10 @@ $(document).ready(function () {
         $('#photoId').val(pageLabelSettings.labelDetails.LabelCode);
         if (pageLabelSettings.labelDetails.LogoPath) {
             $("#imagePreview").attr("src", localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + pageLabelSettings.labelDetails.LogoPath);
+            $("#deleteImageBtn").removeClass("hidden");
         } else {
             $("#imagePreview").attr("src", "../../img/default/preferences/logo.png");
+            $("#deleteImageBtn").addClass("hidden");
         }
     });
 

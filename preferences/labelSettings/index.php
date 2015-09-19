@@ -304,7 +304,7 @@ echo $navbar_str;
                     <div class="btn-group">
                         <form method="POST" action="controller.php" id="deleteLabelSettingsForm">
                             <input type="text" class="hidden" name="labelCode" id="form-delete-code"/>
-                            <input type="text" class="hidden" name="mode" id="form-delete-mode"/>
+                            <input type="text" class="hidden" name="mode" id="form-delete-mode" value="D"/>
                             <button class="btn btn-danger modal_button" type="submit">
                                 <span class='glyphicon glyphicon-ok'></span>&nbsp
                                 Yes
@@ -375,7 +375,10 @@ echo $navbar_str;
                                     <p id="imageErrorMsg"></p>
 
                                     <div class="delete-btn-padding">
-                                        <button type="button" class="btn btn-danger">Delete Image</button>
+                                        <button type="button" class="btn btn-danger" id="deleteImageBtn"
+                                                onclick="pageLabelSettings.deleteCurrentLogo();">
+                                            Delete Image
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-4">

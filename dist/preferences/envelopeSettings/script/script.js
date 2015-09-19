@@ -107,6 +107,41 @@ var pageEnvelopeSettings = {
         pageEnvelopeSettings.envelopeDetails = pageEnvelopeSettings.envelopeSettingList[envelopeSettingsIndex];
         $("#imageModal").modal('show');
     },
+    deleteCurrentLogo: function () {
+        var deleteLogo = confirm("Do you REALLY want to DELETE the LOGO?");
+        if (deleteLogo) {
+            var url = localStorage.getItem("websiteRoot") + "preferences/envelopeSettings/controller.php";
+
+            $(".cover").fadeIn(100);
+            $("#pageLoading").addClass("loader");
+
+            $.post(url, {
+                labelCode: pageEnvelopeSettings.envelopeDetails.CoverCode,
+                mode: "DI"
+            }).done(function (data) {
+                console.log(data);
+                var response = JSON.parse(data);
+                if (response.status == 1) {
+                    pageIndex.showNotificationSuccess(response.message);
+                    setTimeout(function () {
+                        pageEnvelopeSettings.getEnvelopeList();
+                    }, 200);
+                } else {
+                    pageIndex.showNotificationFailure(response.message);
+                }
+                $("#imageModal").modal('hide');
+                $("#pageLoading").removeClass("loader");
+                $(".cover").fadeOut(100);
+            }).fail(function () {
+                pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+                $("#pageLoading").removeClass("loader");
+                $(".cover").fadeOut(100);
+            });
+
+        } else {
+            return;
+        }
+    },
     setInputFields: function (envelopeDetails) {
         console.log(envelopeDetails);
         if (envelopeDetails["CoverName"]) {
@@ -274,8 +309,10 @@ $(document).ready(function () {
         $('#photoId').val(pageEnvelopeSettings.envelopeDetails.CoverCode);
         if (pageEnvelopeSettings.envelopeDetails.LogoPath) {
             $("#imagePreview").attr("src", localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + pageEnvelopeSettings.envelopeDetails.LogoPath);
+            $("#deleteImageBtn").removeClass("hidden");
         } else {
             $("#imagePreview").attr("src", "../../img/default/preferences/logo.png");
+            $("#deleteImageBtn").addClass("hidden");
         }
     });
 
