@@ -5,9 +5,13 @@
  * Date: 16/09/15
  * Time: 7:14 PM
  */
-namespace Assistant\Preferences\Label;
-require 'LabelAutoload.php';
-require ROOT."external/class.upload.php";
+session_start();
+define("ROOT", "../../");
+
+require ROOT.'dist/authenticate.php';
+require ROOT.'db/Connection.php';
+require 'LabelSettings.php';
+include("../../external/class.upload.php");
 
 function createResponse($status,$message){
     return array('status' => $status, 'message' => $message);
@@ -23,7 +27,7 @@ do{
 }while(0);
 
 if($validate) {
-    $logo = new \upload($_FILES["fileToUpload"]);
+    $logo = new upload($_FILES["fileToUpload"]);
     if($logo->uploaded){
         //check upload size
         $logo->file_max_size = 1024 * 1024; // 1 MB
@@ -38,17 +42,17 @@ if($validate) {
         $logo->image_convert = 'jpg';
         $logo->file_overwrite = true;
         $path = ROOT."../Assistant_Users/".$_SESSION['s_id']."/preferences/label";
-        $logo->process($path);
+        $logo->Process($path);
         if($logo->processed){
-            $path = $logo->file_dst_pathname;
-            $settings = new LabelSettings();
+            $path = "preferences/label/".$logo->file_dst_name;
+            $settings = new \Assistant\Preferences\Label\LabelSettings();
             $settings->setImagePath($_POST['labelCode'],$path);
             $response = createResponse(1,"Logo uploaded successfully");
-            $logo->clean();
         }
         else{
             $response = createResponse(0,$logo->error);
         }
+        $logo->Clean();
     }
     else{
         $response = createResponse(0,"Please try some other image");
