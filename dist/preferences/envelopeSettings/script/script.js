@@ -60,8 +60,6 @@ var pageEnvelopeSettings = {
             envelopeSettingsTableString += "</tr>";
         }
         $("#table-body").html(envelopeSettingsTableString);
-
-        $('[data-toggle="popover"]').popover();
     },
     openAddEnvelopeSettingsModal: function () {
         document.getElementById("envelopeSettingsForm").reset();

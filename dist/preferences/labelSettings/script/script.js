@@ -51,8 +51,6 @@ var pageLabelSettings = {
             labelSettingsTableString += "</tr>";
         }
         $("#table-body").html(labelSettingsTableString);
-
-        $('[data-toggle="popover"]').popover();
     },
     openAddLabelSettingsModal: function () {
         document.getElementById("labelSettingsForm").reset();

@@ -317,8 +317,6 @@ var pageContact = {
 
             $("#contactDetailHeader").empty().html(contactHeaderString);
             $("#contactDetailBody").empty().html(contactDetailsString);
-
-            $('[data-toggle="popover"]').popover();
         } else {
             pageContact.localContact = null;
         }
