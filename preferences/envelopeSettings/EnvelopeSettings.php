@@ -55,6 +55,16 @@ class EnvelopeSettings
         $this->runQuery($this->getDeleteQuery());
     }
 
+    function deleteEnvelopeLogo(){
+        $fileName = "../../../Assistant_Users/".$this->regCode."/preferences/envelope/".$this->data['coverCode'].".jpg";
+        if(file_exists($fileName)){
+            unlink($fileName);
+        }
+
+        $sql = "UPDATE Table135 SET LogoPath = NULL WHERE CoverCode = ".$this->data['coverCode']." AND RegCode = ".$this->regCode;
+        $this->runQuery($sql);
+    }
+
     function getUpdateQuery(){
         $sql = "UPDATE `Table135` SET `CoverName` = ".$this->data['coverName'].", `FromRequired` = ".$this->data['fromRequired'].", `FromTop` = ".$this->data['fromTop'].", `FromLeft` = ".$this->data['fromLeft'].", `ToTop` = ".$this->data['toTop'].", `ToLeft` = ".$this->data['toLeft'].", `FromName` = ".$this->data['fromName'].", `FromAdd1` = ".$this->data['fromAdd1'].", `FromAdd2` = ".$this->data['fromAdd2'].", `FromAdd3` = ".$this->data['fromAdd3'].", `FromAdd4` = ".$this->data['fromAdd4'].", `LogoAvailable` = ".$this->data['logoAvailable'].", `LogoTop` = ".$this->data['logoTop'].", `LogoLeft` = ".$this->data['logoLeft'].", `LogoHeight` = ".$this->data["logoHeight"].", `LogoWidth` = ".$this->data['logoWidth'].", `Caption` = ".$this->data['caption'].", `CoverFeed` = ".$this->data['coverFeed']." WHERE `CoverCode` = ".$this->data['coverCode']." AND `RegCode` = ".$this->regCode;
 
@@ -156,6 +166,8 @@ class EnvelopeSettings
             $this->mode = 2;
         } elseif ($this->data["mode"] == "D") {
             $this->mode = 3;
+        } elseif ($this->data["mode"] == "L") {
+            $this->mode = 4;
         }
 
         $this->cleanData();
@@ -170,6 +182,9 @@ class EnvelopeSettings
                 break;
             case 3:
                 $this->deleteEnvelope();
+                break;
+            case 4:
+                $this->deleteEnvelopeLogo();
                 break;
         }
     }
