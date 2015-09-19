@@ -141,10 +141,9 @@ var pageContact = {
         if (data.status == 1) {
             pageContact.localContact = data.detail;
 
-            var contactHeaderString = "<h12>Contact Details</h12><button id='editContactBtn' class='btn btn-success pull-right' onclick='pageContact.openEditContactModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deleteContactBtn' class='btn btn-danger pull-left' onclick='pageContact.openDeleteContactModal(" + data.detail.contact.ContactCode + ", 2)'><span class='glyphicon glyphicon-trash'></span></button>";
+            var contactHeaderString = "<h12>Contact Details</h12><button id='editContactBtn' class='btn btn-success pull-right' onclick='pageContact.openEditContactModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deleteContactBtn' class='btn btn-danger pull-left' onclick='pageContact.openDeleteContactModal(" + data.detail.contact.ContactCode + ")'><span class='glyphicon glyphicon-trash'></span></button>";
             var contactDetailsString = "";
             var imageURL = "";
-            var editDeleteProfilePicString = "";
 
             if (window.innerWidth < 992 && !pageContact.firstTime) {
                 console.log("width less than 992");
@@ -177,17 +176,12 @@ var pageContact = {
                 });
             }
             pageContact.firstTime = false;
-            if (data.detail.contact.ImageURL != null) {
+            if (data.detail.contact.ImageURL != null)
                 imageURL = localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + data.detail.contact.ImageURL;
-                editDeleteProfilePicString = "<a tabindex='0' role='button' data-container='body' data-toggle='popover' data-trigger='focus' data-placement='top' data-content=\"<a href='#' onclick='pageContact.openProfilePicModal();'><i class='fa fa-pencil fa-lg fa-green'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageContact.openDeleteContactModal(" + data.detail.contact.ContactCode + ", 1);'><i class='fa fa-trash-o fa-lg fa-red'></i></a>\" data-html='true' class='clickable'>";
-            } else {
+            else
                 imageURL = "../img/default/contact/profilePicture.png";
-                editDeleteProfilePicString = "<a class='clickable' onclick='pageContact.openProfilePicModal();' class='clickable'>";
-            }
 
-            contactDetailsString += "<div class='row contact-details'><div class='image'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'>";
-            contactDetailsString += editDeleteProfilePicString;
-            contactDetailsString += "<span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></a></div></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>" + ((data.detail.contact.TitleName) ? data.detail.contact.TitleName + " " : "") + ((data.detail.contact.FullName) ? data.detail.contact.FullName : "") + "</h5></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='image'><a class='clickable' onclick='pageContact.openProfilePicModal();' class='clickable'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>" + ((data.detail.contact.TitleName) ? data.detail.contact.TitleName + " " : "") + ((data.detail.contact.FullName) ? data.detail.contact.FullName : "") + "</h5></div>";
 
             contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Guardian</div><value><div class='col-md-9'>" + ((data.detail.contact.GuardianName) ? data.detail.contact.GuardianName : "") + "</div></value></div></div>";
 
@@ -729,20 +723,7 @@ var pageContact = {
             $("#" + type + "Phone2").val(address[type].Phone2);
         }
     },
-    openDeleteContactModal: function (contactCode, typeOfAction) {
-        var deleteModalHeading = "Delete";
-
-        switch (typeOfAction) {
-            case 1:
-                deleteModalHeading = "Are you sure, you want to DELETE this Profile Picture?"
-                $("#form-delete-mode").val("DI");
-                break;
-            case 2:
-                deleteModalHeading = "Are you sure, you want to DELETE this CONTACT?"
-                $("#form-delete-mode").val("D");
-                break;
-        }
-        $('#deleteModalHeading').empty().html(deleteModalHeading);
+    openDeleteContactModal: function (contactCode) {
         $("#form-delete-code").val(contactCode);
         $("#deleteModal").modal('show');
     },
