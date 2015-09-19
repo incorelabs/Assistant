@@ -18,7 +18,7 @@ define("ROOT", "../../");
     include_once ROOT . 'dist/bootstrap.php';
     ?>
 
-    <link rel="stylesheet" href="../../dist/expenseVoucher/css/style.css"/>
+    <link rel="stylesheet" href="../../dist/incomeVoucher/css/style.css"/>
     <link rel="stylesheet" href="../../dist/css/style.css"/>
     <script src="http://malsup.github.com/jquery.form.js"></script>
     <script>
@@ -36,12 +36,12 @@ define("ROOT", "../../");
     </script>
     <script src="../../dist/script/script.js"></script>
     <script src="../../dist/date/script.js"></script>
-    <script src="../../dist/expenseVoucher/script/script.js"></script>
+    <script src="../../dist/incomeVoucher/script/script.js"></script>
 </head>
 <body>
 <!-- fixed top navbar -->
 <?php
-define('PAGE_TITLE', 'Expense Voucher');
+define('PAGE_TITLE', 'Income Voucher');
 $root_location = ROOT;
 include_once ROOT . 'dist/navbar.php';
 echo $navbar_str;
@@ -64,7 +64,7 @@ echo $navbar_str;
                 <i class="fa fa-arrow-left fa-lg"></i>
             </button>
         </div>
-        <div class="text-center row-desc-margin"><h4>Expense Description</h4></div>
+        <div class="text-center row-desc-margin"><h4>Income Description</h4></div>
         <div class="text-right row-right-btn-margin">
             <button class="btn btn-primary" id="btnAddVoucher" onclick="pageVoucher.openAddVoucherModal();">
                 <i class="fa fa-plus fa-lg"></i>
@@ -92,7 +92,7 @@ echo $navbar_str;
             <tr class="text-left">
                 <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle">1</td>
                 <td class="col-md-1 hidden-xs hidden-sm text-left text-middle">Phone</td>
-                <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle"><div class='image'><img src='../../img/default/preferences/logo.png' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'><a href="#" role='button' onclick='pageVoucher.openVoucherImageModal()'><span class='glyphicon glyphicon-pencil overlay-icon' style="height: 40px; width: 40px;"></span></a></div></div></td>
+                <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle"><div class='image'><img src='../../img/default/preferences/logo.png' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'><a href="#" class='clickable' onclick='pageVoucher.openVoucherImageModal()'><span class='glyphicon glyphicon-pencil overlay-icon' style="height: 40px; width: 40px;"></span></a></div></div></td>
                 <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">01/01/2011</td>
                 <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">Cash</td>
                 <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">-</td>
@@ -100,7 +100,7 @@ echo $navbar_str;
                 <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">1111</td>
                 <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle">111</td>
                 <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">-</td>
-                <td class="col-md-1 col-sm-1 col-xs-1 text-middle"><a href="#" onclick="pageVoucher.openEditVoucherModal()"><i class="fa fa-pencil fa-lg fa-green"></i></a><a href="#" onclick="pageVoucher.openDeleteExpenseModal()" class="action-btn-padding"><i class="fa fa-trash-o fa-lg fa-red"></i></a></td>
+                <td class="col-md-1 col-sm-1 col-xs-1 text-middle"><a href="#" onclick="pageVoucher.openEditVoucherModal()"><i class="fa fa-pencil fa-lg fa-green"></i></a><a href="#" onclick="pageVoucher.openDeleteIncomeModal()" class="action-btn-padding"><i class="fa fa-trash-o fa-lg fa-red"></i></a></td>
             </tr>
             </tbody>
         </table>
@@ -129,8 +129,8 @@ echo $navbar_str;
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <!--<input type="text" class="hidden" name="expenseTypeCode" id="expenseTypeCode" value="1"/>
-                    <input type="text" class="hidden" name="expenseCode" id="form-add-edit-code"/>
+                    <!--<input type="text" class="hidden" name="incomeTypeCode" id="incomeTypeCode" value="1"/>
+                    <input type="text" class="hidden" name="incomeCode" id="form-add-edit-code"/>
                     <input type="text" class="hidden" name="mode" id="form-add-edit-mode"/> -->
 
                     <div class="form-group form-group-margin">

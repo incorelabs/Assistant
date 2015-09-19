@@ -164,25 +164,24 @@ img {
 .overlay {
     background:#f1f1f1;
     text-align:center;
+    top: 10px;
+    opacity:0;
     -webkit-transition: opacity .25s ease;
     -moz-transition: opacity .25s ease;
     height: 40px;
     width: 40px;
-    top: 10px;
-    left: 31px;
-    display: none;
     position: absolute;
+    display: inline-block;
+    margin-left: -60px;
 }
 
 @media screen and (max-width: 992px) {
     .overlay{
-        left: 16px;
     }
 }
 
 .image:hover .overlay {
     opacity: 0.8;
-    display: block;
 }
 
 .btn-size {

@@ -1,37 +1,37 @@
-var pageExpense = {
+var pageIncome = {
     currentPageNo: 1,
-    localExpense: null,
-    defExpenseList: $.Deferred(),
+    localIncome: null,
+    defIncomeList: $.Deferred(),
     defSearchResult: $.Deferred(),
     firstTime: true,
-    openAddExpenseModal: function(){
-        document.getElementById("expenseForm").reset();
+    openAddIncomeModal: function(){
+        document.getElementById("incomeForm").reset();
         $('#addPrivacy').attr('checked', false);
         $('#addActiveStatus').attr('checked', true);
 
         $("#form-add-edit-mode").val("A");
         $("#form-add-edit-code").val(1);
 
-        $('#expenseModalHeading').empty().html("Add Expense");
-        $('#expenseModal').modal('show');
+        $('#incomeModalHeading').empty().html("Add Income");
+        $('#incomeModal').modal('show');
     },
-    openEditExpenseModal: function(){
-        document.getElementById("expenseForm").reset();
+    openEditIncomeModal: function(){
+        document.getElementById("incomeForm").reset();
         // $("#form-add-edit-mode").val("M");
 
-        $('#expenseModalHeading').empty().html("Edit Expense");
+        $('#incomeModalHeading').empty().html("Edit Income");
 
-        //$("#form-add-edit-code").val(pageExpense.localExpense.expense.ExpenseCode);
-        //pageExpense.setModalInputFields();
+        //$("#form-add-edit-code").val(pageIncome.localIncome.income.IncomeCode);
+        //pageIncome.setModalInputFields();
 
-        $("#expenseModal").modal('show');
+        $("#incomeModal").modal('show');
     },
-    openDeleteExpenseModal: function (expenseCode) {
-        $("#form-delete-code").val(expenseCode);
+    openDeleteIncomeModal: function (incomeCode) {
+        $("#form-delete-code").val(incomeCode);
         $("#deleteModal").modal("show");
     },
-    openVoucherExpenseModal: function (){
-        window.location.href = "../expense/voucher/";
+    openVoucherIncomeModal: function (){
+        window.location.href = "../income/voucher/";
     }
 };
 

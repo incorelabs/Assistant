@@ -157,7 +157,7 @@ echo $navbar_str;
                             </div>
                             <div class='row contact-details'>
                                 <div class='list-group-item-heading header_font'>
-                                    <div class='col-md-3'>Issuing Authority</div>
+                                    <div class='col-md-3'>Due To</div>
                                     <value>
                                         <div class='col-md-9'>Test</div>
                                     </value>
@@ -315,13 +315,13 @@ echo $navbar_str;
                 </div>
                 <div class="form-group form-group-margin">
                     <div class="input-group">
-                        <span class="input-group-addon input-group-addon-label">Issuing Auth*</span>
+                        <span class="input-group-addon input-group-addon-label">Due To*</span>
 
                         <div class="inner-addon right-addon">
                             <i class="fa fa-user hidden-xs fa-size"></i>
-                            <input type="text" class="form-control text-field-left-border" id="issuingAuthority"
-                                   name="issuingAuthority"
-                                   placeholder="Issuing Authority" aria-describedby="basic-addon1" tabindex="4"
+                            <input type="text" class="form-control text-field-left-border" id="dueTo"
+                                   name="dueTo"
+                                   placeholder="Due To" aria-describedby="basic-addon1" tabindex="4"
                                    required/>
                         </div>
                     </div>
@@ -395,7 +395,7 @@ echo $navbar_str;
                     </div>
                     <div class="col-md-6 col-sm-12 col-xs-12 second-col-left-padding second-col-right-padding" id="dueDayDiv">
                         <div class="input-group">
-                            <span class="input-group-addon input-group-addon-label">Due Date*</span>
+                            <span class="input-group-addon input-group-addon-label">Due Day*</span>
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-size"></i>
@@ -459,13 +459,13 @@ echo $navbar_str;
                 </div>
                 <div class="form-group form-group-margin">
                     <div class="input-group">
-                        <span class="input-group-addon input-group-addon-label">Loan Due Date</span>
+                        <span class="input-group-addon input-group-addon-label">Expiry Date</span>
 
                         <div class="inner-addon right-addon">
                             <i class="fa fa-calendar hidden-xs fa-size"></i>
-                            <input type="text" class="form-control text-field-left-border date" id="loadDueDate"
-                                   name="loadDueDate"
-                                   placeholder="Loan Due Date" aria-describedby="basic-addon1" tabindex="10"
+                            <input type="text" class="form-control text-field-left-border date" id="expiryDate"
+                                   name="expiryDate"
+                                   placeholder="Expiry Date" aria-describedby="basic-addon1" tabindex="10"
                                    required/>
                         </div>
                     </div>
