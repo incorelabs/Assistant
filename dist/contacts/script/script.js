@@ -182,6 +182,7 @@ var pageContact = {
                 editDeleteProfilePicString = "<a tabindex='0' role='button' data-container='body' data-toggle='popover' data-trigger='focus' data-placement='top' data-content=\"<a href='#' onclick='pageContact.openProfilePicModal();'><i class='fa fa-pencil fa-lg fa-green'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageContact.openDeleteContactModal(" + data.detail.contact.ContactCode + ", 1);'><i class='fa fa-trash-o fa-lg fa-red'></i></a>\" data-html='true' class='clickable'>";
             } else {
                 imageURL = "../img/default/contact/profilePicture.png";
+                editDeleteProfilePicString = "<a class='clickable' onclick='pageContact.openProfilePicModal();' class='clickable'>";
             }
 
             contactDetailsString += "<div class='row contact-details'><div class='image'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'>";
