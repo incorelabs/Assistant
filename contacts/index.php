@@ -1085,7 +1085,11 @@ echo $navbar_str;
                                            style="padding-bottom:10px;" required/>
 
                                     <p id="imageErrorMsg"></p>
+                                    <div class="delete-btn-padding">
+                                        <button type="button" class="btn btn-danger ">Delete Image</button>
+                                    </div>
                                 </div>
+
                                 <div class="col-lg-6 col-md-6 col-sm-4">
                                     <label class="control-label">Image Preview</label>
                                     <br>
