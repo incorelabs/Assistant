@@ -20,15 +20,21 @@ var pageEnvelopeSettings = {
             envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'>" + (i + 1) + "</td>";
 
             var imageURL = "../../img/default/preferences/logo.png";
+            var editDeleteLogoString = "";
 
             if (data[i]['LogoPath']) {
                 imageURL = localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + data[i]['LogoPath'];
+                editDeleteLogoString = "<a tabindex='0' role='button' data-container='body' data-toggle='popover' data-trigger='focus' data-placement='top' data-content=\"<a href='#' onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");'><i class='fa fa-pencil fa-lg fa-green'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageEnvelopeSettings.openDeleteEnvelopeSettingsModal(" + i + ", 1);'><i class='fa fa-trash-o fa-lg fa-red'></i></a>\" data-html='true' class='clickable'>";
+            } else {
+                editDeleteLogoString = "<a onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");' class='clickable'>"
             }
 
             if (data[i]['LogoAvailable'] == 1) {
-                envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image'><a onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");' class='clickable'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'><span class='glyphicon glyphicon-pencil overlay-icon'></span></div></a></div></td>";
+                envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image'>";
+                envelopeSettingsTableString += editDeleteLogoString;
+                envelopeSettingsTableString += "<img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'><span class='glyphicon glyphicon-pencil overlay-icon'></span></div></a></div></td>";
             } else {
-                envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image disabledLogo'><a onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");' class='clickable disable-anchor'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded'/><div class='overlay-default img-rounded'><span class='glyphicon glyphicon-remove overlay-icon'></span></div></a></div></td>";
+                envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image disabledLogo'><a class='clickable disable-anchor'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded'/><div class='overlay-default img-rounded'><span class='glyphicon glyphicon-remove overlay-icon'></span></div></a></div></td>";
             }
 
             envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'>" + ((data[i]['CoverName']) ? data[i]['CoverName'] : "-") + "</td>";
@@ -54,11 +60,13 @@ var pageEnvelopeSettings = {
 
             envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'><a href='#' onclick='pageEnvelopeSettings.openEditEnvelopeSettingsModal(" + i + ")'><i class='fa fa-pencil fa-lg fa-green'></i></a>";
 
-            envelopeSettingsTableString += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageEnvelopeSettings.openDeleteEnvelopeSettingsModal(" + data[i].CoverCode + ")'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td>";
+            envelopeSettingsTableString += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageEnvelopeSettings.openDeleteEnvelopeSettingsModal(" + i + ", 2)'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td>";
 
             envelopeSettingsTableString += "</tr>";
         }
         $("#table-body").html(envelopeSettingsTableString);
+
+        $('[data-toggle="popover"]').popover();
     },
     openAddEnvelopeSettingsModal: function () {
         document.getElementById("envelopeSettingsForm").reset();
@@ -96,9 +104,23 @@ var pageEnvelopeSettings = {
 
         $("#envelopeSettingsModal").modal('show');
     },
-    openDeleteEnvelopeSettingsModal: function (coverCode) {
-        console.log(coverCode);
-        $("#form-delete-code").val(coverCode);
+    openDeleteEnvelopeSettingsModal: function (envelopeSettingsIndex, typeOfAction) {
+        pageEnvelopeSettings.envelopeDetails = pageEnvelopeSettings.envelopeSettingList[envelopeSettingsIndex];
+
+        var deleteModalHeading = "Delete";
+
+        switch (typeOfAction) {
+            case 1:
+                deleteModalHeading = "Are you sure, you want to DELETE this LOGO?"
+                $("#form-delete-mode").val("DI");
+                break;
+            case 2:
+                deleteModalHeading = "Are you sure, you want to DELETE this ENVELOPE?"
+                $("#form-delete-mode").val("D");
+                break;
+        }
+        $('#deleteModalHeading').empty().html(deleteModalHeading);
+        $("#form-delete-code").val(pageEnvelopeSettings.envelopeDetails["CoverCode"]);
         $("#deleteModal").modal('show');
     },
     openLogoEnvelopeSettingsModal: function (envelopeSettingsIndex) {
@@ -353,7 +375,8 @@ $(document).ready(function () {
     });
 
     $("#deleteEnvelopeSettingsForm").ajaxForm({
-        beforeSubmit: function () {
+        beforeSubmit: function (formData) {
+            console.log(formData);
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
         },

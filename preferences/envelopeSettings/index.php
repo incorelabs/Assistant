@@ -305,8 +305,7 @@ echo $navbar_str;
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title text-center">
-                    Are you sure, you want to DELETE this Envelope?
+                <h4 class="modal-title text-center" id="deleteModalHeading">
                 </h4>
             </div>
             <br>
@@ -315,7 +314,7 @@ echo $navbar_str;
                     <div class="btn-group">
                         <form method="POST" action="controller.php" id="deleteEnvelopeSettingsForm">
                             <input type="text" class="hidden" name="coverCode" id="form-delete-code"/>
-                            <input type="text" class="hidden" name="mode" id="form-delete-mode" value="D"/>
+                            <input type="text" class="hidden" name="mode" id="form-delete-mode"/>
                             <button class="btn btn-danger modal_button" type="submit">
                                 <span class='glyphicon glyphicon-ok'></span>&nbsp
                                 Yes
