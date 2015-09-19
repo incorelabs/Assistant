@@ -35,6 +35,9 @@ var pageVoucher = {
     },
     openVoucherImageModal: function(){
         $("#imageModal").modal("show");
+    },
+    confirmDeleteImage: function(){
+        confirm("Are you sure, you want to delete this Image?");
     }
 };
 

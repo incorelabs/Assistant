@@ -76,8 +76,8 @@ echo $navbar_str;
             <thead>
             <tr class="text-left">
                 <th class="col-md-1 col-sm-1 col-xs-1 text-left">#</th>
-                <th class="col-md-1 hidden-xs hidden-sm text-left">Type</th>
                 <th class="col-md-1 col-sm-1 col-xs-1 text-left">Image</th>
+                <th class="col-md-1 hidden-xs hidden-sm text-left">Type</th>
                 <th class="col-md-1 hidden-sm hidden-xs text-left">Date</th>
                 <th class="col-md-1 hidden-sm hidden-xs text-left">Payment</th>
                 <th class="col-md-1 hidden-sm hidden-xs text-left">Ref No.</th>
@@ -91,8 +91,8 @@ echo $navbar_str;
             <tbody id="table-body">
             <tr class="text-left">
                 <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle">1</td>
-                <td class="col-md-1 hidden-xs hidden-sm text-left text-middle">Phone</td>
                 <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle"><div class='image'><img src='../../img/default/preferences/logo.png' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'><a href="#" class='clickable' onclick='pageVoucher.openVoucherImageModal()'><span class='glyphicon glyphicon-pencil overlay-icon' style="height: 40px; width: 40px;"></span></a></div></div></td>
+                <td class="col-md-1 hidden-xs hidden-sm text-left text-middle">Phone</td>
                 <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">01/01/2011</td>
                 <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">Cash</td>
                 <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">-</td>
@@ -328,7 +328,7 @@ echo $navbar_str;
 
                                     <p id="imageErrorMsg"></p>
                                     <div class="delete-btn-padding">
-                                        <button type="button" class="btn btn-danger ">Delete Image</button>
+                                        <button type="button" class="btn btn-danger" onclick="pageVoucher.confirmDeleteImage()">Delete Image</button>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-4">
