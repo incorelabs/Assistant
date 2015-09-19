@@ -387,7 +387,7 @@ echo $navbar_str;
                                     <p id="imageErrorMsg"></p>
 
                                     <div class="delete-btn-padding">
-                                        <button type="button" class="btn btn-danger ">Delete Image</button>
+                                        <button type="button" class="btn btn-danger">Delete Image</button>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-4">
