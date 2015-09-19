@@ -57,7 +57,7 @@ var pageEnvelopeSettings = {
                     coverFeedDirection = "Right";
                     break;
             }
-            envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'>" + coverFeedDirection + "</td>";
+            envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 hidden-sm hidden-xs'>" + coverFeedDirection + "</td>";
 
             envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'><a href='#' onclick='pageEnvelopeSettings.openEditEnvelopeSettingsModal(" + i + ")'><i class='fa fa-pencil fa-lg fa-green'></i></a>";
 
