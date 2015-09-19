@@ -116,7 +116,7 @@ var pageEnvelopeSettings = {
             $("#pageLoading").addClass("loader");
 
             $.post(url, {
-                labelCode: pageEnvelopeSettings.envelopeDetails.CoverCode,
+                coverCode: pageEnvelopeSettings.envelopeDetails.CoverCode,
                 mode: "DI"
             }).done(function (data) {
                 console.log(data);
