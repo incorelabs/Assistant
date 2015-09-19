@@ -24,7 +24,7 @@ var pageEnvelopeSettings = {
 
             if (data[i]['LogoPath']) {
                 imageURL = localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + data[i]['LogoPath'];
-                editDeleteLogoString = "<a tabindex='0' role='button' data-container='body' data-toggle='popover' data-trigger='focus' data-placement='top' data-content=\"<a href='#' onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");'><i class='fa fa-pencil fa-lg fa-green'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageEnvelopeSettings.openDeleteEnvelopeSettingsModal(" + i + ", 1);'><i class='fa fa-trash-o fa-lg fa-red'></i></a>\" data-html='true' class='clickable'>";
+                editDeleteLogoString = "<a tabindex='0' role='button' data-container='body' data-toggle='popover' data-trigger='focus' data-placement='top' data-content=\"<a href='#' onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");'><i class='fa fa-pencil fa-lg fa-green'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageEnvelopeSettings.openDeleteEnvelopeSettingsModal(" + data[i]['CoverCode'] + ", 1);'><i class='fa fa-trash-o fa-lg fa-red'></i></a>\" data-html='true' class='clickable'>";
             } else {
                 imageURL = "../../img/default/preferences/logo.png";
                 editDeleteLogoString = "<a onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");' class='clickable'>";
@@ -61,7 +61,7 @@ var pageEnvelopeSettings = {
 
             envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'><a href='#' onclick='pageEnvelopeSettings.openEditEnvelopeSettingsModal(" + i + ")'><i class='fa fa-pencil fa-lg fa-green'></i></a>";
 
-            envelopeSettingsTableString += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageEnvelopeSettings.openDeleteEnvelopeSettingsModal(" + i + ", 2)'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td>";
+            envelopeSettingsTableString += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageEnvelopeSettings.openDeleteEnvelopeSettingsModal(" + data[i]['CoverCode'] + ", 2)'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td>";
 
             envelopeSettingsTableString += "</tr>";
         }
@@ -105,9 +105,7 @@ var pageEnvelopeSettings = {
 
         $("#envelopeSettingsModal").modal('show');
     },
-    openDeleteEnvelopeSettingsModal: function (envelopeSettingsIndex, typeOfAction) {
-        pageEnvelopeSettings.envelopeDetails = pageEnvelopeSettings.envelopeSettingList[envelopeSettingsIndex];
-
+    openDeleteEnvelopeSettingsModal: function (coverCode, typeOfAction) {
         var deleteModalHeading = "Delete";
 
         switch (typeOfAction) {
@@ -121,7 +119,7 @@ var pageEnvelopeSettings = {
                 break;
         }
         $('#deleteModalHeading').empty().html(deleteModalHeading);
-        $("#form-delete-code").val(pageEnvelopeSettings.envelopeDetails["CoverCode"]);
+        $("#form-delete-code").val(coverCode);
         $("#deleteModal").modal('show');
     },
     openLogoEnvelopeSettingsModal: function (envelopeSettingsIndex) {

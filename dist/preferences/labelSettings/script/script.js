@@ -24,7 +24,7 @@ var pageLabelSettings = {
 
             if (data[i]['LogoPath']) {
                 imageURL = localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + data[i]['LogoPath'];
-                editDeleteLogoString = "<a tabindex='0' role='button' data-container='body' data-toggle='popover' data-trigger='focus' data-placement='top' data-content=\"<a href='#' onclick='pageLabelSettings.openLogoLabelSettingsModal(" + i + ");'><i class='fa fa-pencil fa-lg fa-green'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageLabelSettings.openDeleteLabelSettingsModal(" + i + ", 1);'><i class='fa fa-trash-o fa-lg fa-red'></i></a>\" data-html='true' class='clickable'>";
+                editDeleteLogoString = "<a tabindex='0' role='button' data-container='body' data-toggle='popover' data-trigger='focus' data-placement='top' data-content=\"<a href='#' onclick='pageLabelSettings.openLogoLabelSettingsModal(" + i + ");'><i class='fa fa-pencil fa-lg fa-green'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageLabelSettings.openDeleteLabelSettingsModal(" + data[i]['LabelCode'] + ", 1);'><i class='fa fa-trash-o fa-lg fa-red'></i></a>\" data-html='true' class='clickable'>";
             } else {
                 imageURL = "../../img/default/preferences/logo.png";
                 editDeleteLogoString = "<a onclick='pageLabelSettings.openLogoLabelSettingsModal(" + i + ");' class='clickable'>";
@@ -52,7 +52,7 @@ var pageLabelSettings = {
 
             labelSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'><a href='#' onclick='pageLabelSettings.openEditLabelSettingsModal(" + i + ")'><i class='fa fa-pencil fa-lg fa-green'></i></a>";
 
-            labelSettingsTableString += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageLabelSettings.openDeleteLabelSettingsModal(" + i + ", 2)'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td>";
+            labelSettingsTableString += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageLabelSettings.openDeleteLabelSettingsModal(" + data[i]['LabelCode'] + ", 2)'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td>";
 
             labelSettingsTableString += "</tr>";
         }
@@ -90,9 +90,7 @@ var pageLabelSettings = {
 
         $("#labelSettingsModal").modal('show');
     },
-    openDeleteLabelSettingsModal: function (labelSettingsIndex, typeOfAction) {
-        pageLabelSettings.labelDetails = pageLabelSettings.labelSettingList[labelSettingsIndex];
-
+    openDeleteLabelSettingsModal: function (labelCode, typeOfAction) {
         var deleteModalHeading = "Delete";
 
         switch (typeOfAction) {
@@ -106,7 +104,7 @@ var pageLabelSettings = {
                 break;
         }
         $('#deleteModalHeading').empty().html(deleteModalHeading);
-        $("#form-delete-code").val(pageLabelSettings.labelDetails["LabelCode"]);
+        $("#form-delete-code").val(labelCode);
         $("#deleteModal").modal('show');
     },
     openLogoLabelSettingsModal: function (labelSettingsIndex) {
