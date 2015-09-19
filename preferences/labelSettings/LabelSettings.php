@@ -164,7 +164,7 @@ class LabelSettings
             $this->mode = 2;
         } elseif ($this->data["mode"] == "D") {
             $this->mode = 3;
-        } elseif ($this->data["mode"] == "L") {
+        } elseif ($this->data["mode"] == "DI") {
             $this->mode = 4;
         }
 

@@ -33,7 +33,7 @@ do{
     }
 
     //Delete mode
-    if ($_POST["mode"] == "D" || $_POST["mode"] == "L") {
+    if ($_POST["mode"] == "D" || $_POST["mode"] == "DI") {
         break;
     }
 
