@@ -20,20 +20,16 @@ var pageEnvelopeSettings = {
             envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'>" + (i + 1) + "</td>";
 
             var imageURL = "";
-            var editDeleteLogoString = "";
 
-            if (data[i]['LogoPath']) {
+            if (data[i]['LogoPath'])
                 imageURL = localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + data[i]['LogoPath'];
-                editDeleteLogoString = "<a tabindex='0' role='button' data-container='body' data-toggle='popover' data-trigger='focus' data-placement='top' data-content=\"<a href='#' onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");'><i class='fa fa-pencil fa-lg fa-green'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageEnvelopeSettings.openDeleteEnvelopeSettingsModal(" + data[i]['CoverCode'] + ", 1);'><i class='fa fa-trash-o fa-lg fa-red'></i></a>\" data-html='true' class='clickable'>";
-            } else {
+            else
                 imageURL = "../../img/default/preferences/logo.png";
-                editDeleteLogoString = "<a onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");' class='clickable'>";
-            }
 
             if (data[i]['LogoAvailable'] == 1) {
-                envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'>";
-                envelopeSettingsTableString += editDeleteLogoString;
-                envelopeSettingsTableString += "<span class='glyphicon glyphicon-pencil overlay-icon'></span></a></div></div></td>";
+                envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'>";
+                envelopeSettingsTableString += "<a onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");' class='clickable'>";
+                envelopeSettingsTableString += "<div class='image'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'><span class='glyphicon glyphicon-pencil overlay-icon'></span></a></div></div></td>";
             } else {
                 envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image disabledLogo'><a class='clickable disable-anchor'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded'/><div class='overlay-default img-rounded'><span class='glyphicon glyphicon-remove overlay-icon'></span></div></a></div></td>";
             }
@@ -61,7 +57,7 @@ var pageEnvelopeSettings = {
 
             envelopeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'><a href='#' onclick='pageEnvelopeSettings.openEditEnvelopeSettingsModal(" + i + ")'><i class='fa fa-pencil fa-lg fa-green'></i></a>";
 
-            envelopeSettingsTableString += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageEnvelopeSettings.openDeleteEnvelopeSettingsModal(" + data[i]['CoverCode'] + ", 2)'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td>";
+            envelopeSettingsTableString += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageEnvelopeSettings.openDeleteEnvelopeSettingsModal(" + data[i]['CoverCode'] + ")'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td>";
 
             envelopeSettingsTableString += "</tr>";
         }
@@ -105,20 +101,7 @@ var pageEnvelopeSettings = {
 
         $("#envelopeSettingsModal").modal('show');
     },
-    openDeleteEnvelopeSettingsModal: function (coverCode, typeOfAction) {
-        var deleteModalHeading = "Delete";
-
-        switch (typeOfAction) {
-            case 1:
-                deleteModalHeading = "Are you sure, you want to DELETE this LOGO?"
-                $("#form-delete-mode").val("DI");
-                break;
-            case 2:
-                deleteModalHeading = "Are you sure, you want to DELETE this ENVELOPE?"
-                $("#form-delete-mode").val("D");
-                break;
-        }
-        $('#deleteModalHeading').empty().html(deleteModalHeading);
+    openDeleteEnvelopeSettingsModal: function (coverCode) {
         $("#form-delete-code").val(coverCode);
         $("#deleteModal").modal('show');
     },

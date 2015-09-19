@@ -305,7 +305,8 @@ echo $navbar_str;
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title text-center" id="deleteModalHeading">
+                <h4 class="modal-title text-center">
+                    Are you sure, you want to DELETE this ENVELOPE?
                 </h4>
             </div>
             <br>
