@@ -46,7 +46,7 @@ class ExpenseList
         }
 
         $this->setExpenseListQuery();
-        $this->setPasswordList();
+        $this->setExpenseList();
         $this->setCountQuery();
         $this->setCount();
     }
@@ -63,6 +63,17 @@ class ExpenseList
             $where .= " AND".$parameter;
         }
         $this->whereConstraints = $where;
+    }
+
+    function setSearchClause($searchText){
+        $searchParameters = new SearchParameters();
+        switch($this->searchType){
+            case 1:
+                $holderNameClause = $searchParameters->getHolderNameClause($searchText);
+                $expenseNameClause = $searchParameters->getExpenseNameClause($searchText);
+                $this->searchClause = " ( ".$expenseNameClause." OR ".$holderNameClause." ) ";
+                break;
+        }
     }
 
     function setExpenseListQuery(){
@@ -122,6 +133,20 @@ class ExpenseList
         else{
             $this->pages = $pages;
         }
+    }
+
+    function getResponse(){
+        if($this->successful){
+            $this->setPages();
+            $this->response = $this->createResponse(1,"Success");
+            $this->response["pages"] = $this->pages;
+            $this->response["result"] = $this->expenseList;
+        }
+        else{
+            $this->response = $this->createResponse(0,"No expense");
+        }
+
+        return $this->response;
     }
 
 
