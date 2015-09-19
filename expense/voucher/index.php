@@ -1,6 +1,6 @@
 <?php
 session_start();
-define("ROOT", "../");
+define("ROOT", "../../");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,25 +18,25 @@ define("ROOT", "../");
     include_once ROOT . 'dist/bootstrap.php';
     ?>
 
-    <link rel="stylesheet" href="../dist/voucher/css/style.css"/>
-    <link rel="stylesheet" href="../dist/css/style.css"/>
+    <link rel="stylesheet" href="../../dist/expenseVoucher/css/style.css"/>
+    <link rel="stylesheet" href="../../dist/css/style.css"/>
     <script src="http://malsup.github.com/jquery.form.js"></script>
     <script>
         var familyCode = '<?php echo $_SESSION['familyCode']; ?>';
     </script>
 
     <!-- Header Links -->
-    <link type="text/css" rel="stylesheet" href="../dist/css/sidebar.css"/>
-    <link type="text/css" rel="stylesheet" href="../dist/css/jquery_sidebar.css"/>
-    <script type="text/javascript" src="../dist/script/jquery.mmenu.min.all.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../dist/css/sidebar.css"/>
+    <link type="text/css" rel="stylesheet" href="../..//dist/css/jquery_sidebar.css"/>
+    <script type="text/javascript" src="../../dist/script/jquery.mmenu.min.all.js"></script>
     <script type="text/javascript">
         $(function () {
             $('nav#menu').mmenu();
         });
     </script>
-    <script src="../dist/script/script.js"></script>
-    <script src="../dist/date/script.js"></script>
-    <script src="../dist/voucher/script/script.js"></script>
+    <script src="../../dist/script/script.js"></script>
+    <script src="../../dist/date/script.js"></script>
+    <script src="../../dist/expenseVoucheroucher/script/script.js"></script>
 </head>
 <body>
 <!-- fixed top navbar -->
@@ -77,7 +77,7 @@ echo $navbar_str;
             <tr class="text-left">
                 <th class="col-md-1 col-sm-1 col-xs-1 text-left">#</th>
                 <th class="col-md-1 hidden-xs hidden-sm text-left">Type</th>
-                <th class="col-md-1 col-sm-1 col-xs-1 text-left">Description</th>
+                <th class="col-md-1 col-sm-1 col-xs-1 text-left">Image</th>
                 <th class="col-md-1 hidden-sm hidden-xs text-left">Date</th>
                 <th class="col-md-1 hidden-sm hidden-xs text-left">Payment</th>
                 <th class="col-md-1 hidden-sm hidden-xs text-left">Ref No.</th>
@@ -90,17 +90,17 @@ echo $navbar_str;
             </thead>
             <tbody id="table-body">
             <tr class="text-left">
-                <td class="col-md-1 col-sm-1 col-xs-1 text-left">1</td>
-                <td class="col-md-1 hidden-xs hidden-sm text-left">Phone</td>
-                <td class="col-md-1 col-sm-1 col-xs-1 text-left">Darshan 9840729849</td>
-                <td class="col-md-1 hidden-sm hidden-xs text-left">01/01/2011</td>
-                <td class="col-md-1 hidden-sm hidden-xs text-left">Cash</td>
-                <td class="col-md-1 hidden-sm hidden-xs text-left">-</td>
-                <td class="col-md-1 hidden-sm hidden-xs text-left">-</td>
-                <td class="col-md-1 hidden-sm hidden-xs text-left">1111</td>
-                <td class="col-md-1 col-sm-1 col-xs-1 text-left">111</td>
-                <td class="col-md-1 hidden-sm hidden-xs text-left">-</td>
-                <td class="col-md-1 col-sm-1 col-xs-1"><a href="#" onclick="pageVoucher.openEditVoucherModal()"><i class="fa fa-pencil fa-lg fa-green"></i></a><a href="#" onclick="pageVoucher.openDeleteExpenseModal()" class="action-btn-padding"><i class="fa fa-trash-o fa-lg fa-red"></i></a></td>
+                <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle">1</td>
+                <td class="col-md-1 hidden-xs hidden-sm text-left text-middle">Phone</td>
+                <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle"><div class='image'><img src='../../img/default/preferences/logo.png' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'><a href="#" role='button' data-container='body' class='clickable' data-trigger="focus" data-toggle="popover" data-html="true" data-placement="top" data-content="<a href='#' onclick='pageVoucher.openDeleteExpenseModal()' class='action-btn-padding'><i class='fa fa-trash-o fa-lg fa-red'></i></a><a href='#' onclick='pageVoucher.openVoucherImageModal()' class='action-btn-padding'><i class='fa fa-pencil fa-lg fa-green'></i></a>"><span class='glyphicon glyphicon-pencil overlay-icon' style="height: 40px; width: 40px;"></span></a></div></div></td>
+                <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">01/01/2011</td>
+                <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">Cash</td>
+                <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">-</td>
+                <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">-</td>
+                <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">1111</td>
+                <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle">111</td>
+                <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">-</td>
+                <td class="col-md-1 col-sm-1 col-xs-1 text-middle"><a href="#" onclick="pageVoucher.openEditVoucherModal()"><i class="fa fa-pencil fa-lg fa-green"></i></a><a href="#" onclick="pageVoucher.openDeleteExpenseModal()" class="action-btn-padding"><i class="fa fa-trash-o fa-lg fa-red"></i></a></td>
             </tr>
             </tbody>
         </table>
@@ -282,6 +282,76 @@ echo $navbar_str;
     </div>
 </div>
 <!--modal-->
+
+<!-- Image Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true"
+     data-backdrop="static">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <form class="form-horizontal" method="POST" action="upload.php" enctype="multipart/form-data" id="imageForm"
+                  runat="server">
+
+                <div class="modal-header">
+
+                    <div class="btn-group pull-left">
+                        <button class="btn btn-danger" data-dismiss="modal">
+                            <span class='glyphicon glyphicon-remove'></span>
+
+                        </button>
+                    </div>
+
+                    <div class="btn-group pull-right">
+                        <button type="submit" class="btn btn-success">
+                            <span class='glyphicon glyphicon-ok'></span>
+
+                        </button>
+                    </div>
+
+                    <h4 class="modal-title text-center">
+                        Edit Image
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+                    <input type="text" class="hidden" name="labelCode" id='photoId'/>
+
+                    <div class="form-group row">
+                        <center>
+                            <div class="col-sm-12 col-md-12">
+                                <div class="col-lg-6 col-md-6 col-sm-5">
+                                    <label class="control-label">Select Image</label>
+                                    <br>
+                                    <br>
+                                    <input type='file' id="imgInput" name="fileToUpload"
+                                           style="padding-bottom:10px;" accept="image/gif, image/jpeg, image/png" required/>
+
+                                    <p id="imageErrorMsg"></p>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-4">
+                                    <label class="control-label">Image Preview</label>
+                                    <br>
+                                    <br>
+                                    <img src="../../img/default/preferences/logo.png" id="imagePreview"
+                                         class="addImage">
+                                </div>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+            </form>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+                     style="width: 0%;">
+                    <span class="sr-only" id="progressValue">0% Complete</span>
+                </div>
+            </div>
+        </div>
+        <!--modal-content-->
+    </div>
+</div>
+<!--modal-->
+
 </body>
 <div class="cover">
     <div id="pageLoading"></div>

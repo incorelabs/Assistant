@@ -31,10 +31,13 @@ var pageVoucher = {
         $("#deleteModal").modal("show");
     },
     navigateBack: function () {
-        window.location.href = "../expense/";
+        window.location.href = "../";
+    },
+    openVoucherImageModal: function(){
+        $("#imageModal").modal("show");
     }
 };
 
 $(document).ready(function () {
-
+    $('[data-toggle="popover"]').popover();
 });
