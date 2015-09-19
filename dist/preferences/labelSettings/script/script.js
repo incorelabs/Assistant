@@ -31,9 +31,9 @@ var pageLabelSettings = {
             }
 
             if (data[i]['LogoAvailable'] == 1) {
-                labelSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image'>";
+                labelSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'>";
                 labelSettingsTableString += editDeleteLogoString;
-                labelSettingsTableString += "<img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'><span class='glyphicon glyphicon-pencil overlay-icon'></span></div></a></div></td>";
+                labelSettingsTableString += "<span class='glyphicon glyphicon-pencil overlay-icon'></span></a></div></div></td>";
             } else {
                 labelSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image disabledLogo'><a class='clickable disable-anchor'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded'/><div class='overlay-default img-rounded'><span class='glyphicon glyphicon-remove overlay-icon'></span></div></a></div></td>";
             }
