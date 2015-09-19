@@ -26,7 +26,7 @@ var pageEnvelopeSettings = {
                 imageURL = localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + data[i]['LogoPath'];
                 editDeleteLogoString = "<a tabindex='0' role='button' data-container='body' data-toggle='popover' data-trigger='focus' data-placement='top' data-content=\"<a href='#' onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");'><i class='fa fa-pencil fa-lg fa-green'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageEnvelopeSettings.openDeleteEnvelopeSettingsModal(" + i + ", 1);'><i class='fa fa-trash-o fa-lg fa-red'></i></a>\" data-html='true' class='clickable'>";
             } else {
-                editDeleteLogoString = "<a onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");' class='clickable'>"
+                editDeleteLogoString = "<a onclick='pageEnvelopeSettings.openLogoEnvelopeSettingsModal(" + i + ");' class='clickable'>";
             }
 
             if (data[i]['LogoAvailable'] == 1) {

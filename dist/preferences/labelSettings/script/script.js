@@ -20,15 +20,21 @@ var pageLabelSettings = {
             labelSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'>" + (i + 1) + "</td>";
 
             var imageURL = "../../img/default/preferences/logo.png";
+            var editDeleteLogoString = "";
 
             if (data[i]['LogoPath']) {
                 imageURL = localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + data[i]['LogoPath'];
+                editDeleteLogoString = "<a tabindex='0' role='button' data-container='body' data-toggle='popover' data-trigger='focus' data-placement='top' data-content=\"<a href='#' onclick='pageLabelSettings.openLogoLabelSettingsModal(" + i + ");'><i class='fa fa-pencil fa-lg fa-green'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageLabelSettings.openDeleteLabelSettingsModal(" + i + ", 1);'><i class='fa fa-trash-o fa-lg fa-red'></i></a>\" data-html='true' class='clickable'>";
+            } else {
+                editDeleteLogoString = "<a onclick='pageLabelSettings.openLogoLabelSettingsModal(" + i + ");' class='clickable'>";
             }
 
             if (data[i]['LogoAvailable'] == 1) {
-                labelSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image'><a onclick='pageLabelSettings.openLogoLabelSettingsModal(" + i + ");' class='clickable'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'><span class='glyphicon glyphicon-pencil overlay-icon'></span></div></a></div></td>";
+                labelSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image'>";
+                labelSettingsTableString += editDeleteLogoString;
+                labelSettingsTableString += "<img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'><span class='glyphicon glyphicon-pencil overlay-icon'></span></div></a></div></td>";
             } else {
-                labelSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image disabledLogo'><a onclick='pageLabelSettings.openLogoLabelSettingsModal(" + i + ");' class='clickable disable-anchor'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded'/><div class='overlay-default img-rounded'><span class='glyphicon glyphicon-remove overlay-icon'></span></div></a></div></td>";
+                labelSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'><div class='image disabledLogo'><a class='clickable disable-anchor'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded'/><div class='overlay-default img-rounded'><span class='glyphicon glyphicon-remove overlay-icon'></span></div></a></div></td>";
             }
 
             labelSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'>" + ((data[i]['LabelName']) ? data[i]['LabelName'] : "-") + "</td>";
@@ -45,11 +51,13 @@ var pageLabelSettings = {
 
             labelSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'><a href='#' onclick='pageLabelSettings.openEditLabelSettingsModal(" + i + ")'><i class='fa fa-pencil fa-lg fa-green'></i></a>";
 
-            labelSettingsTableString += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageLabelSettings.openDeleteLabelSettingsModal(" + data[i].LabelCode + ")'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td>";
+            labelSettingsTableString += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageLabelSettings.openDeleteLabelSettingsModal(" + i + ", 2)'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td>";
 
             labelSettingsTableString += "</tr>";
         }
         $("#table-body").html(labelSettingsTableString);
+
+        $('[data-toggle="popover"]').popover();
     },
     openAddLabelSettingsModal: function () {
         document.getElementById("labelSettingsForm").reset();
@@ -81,9 +89,23 @@ var pageLabelSettings = {
 
         $("#labelSettingsModal").modal('show');
     },
-    openDeleteLabelSettingsModal: function (labelCode) {
-        console.log(labelCode);
-        $("#form-delete-code").val(labelCode);
+    openDeleteLabelSettingsModal: function (labelSettingsIndex, typeOfAction) {
+        pageLabelSettings.labelDetails = pageLabelSettings.labelSettingList[labelSettingsIndex];
+
+        var deleteModalHeading = "Delete";
+
+        switch (typeOfAction) {
+            case 1:
+                deleteModalHeading = "Are you sure, you want to DELETE this LOGO?"
+                $("#form-delete-mode").val("DI");
+                break;
+            case 2:
+                deleteModalHeading = "Are you sure, you want to DELETE this LABEL?"
+                $("#form-delete-mode").val("D");
+                break;
+        }
+        $('#deleteModalHeading').empty().html(deleteModalHeading);
+        $("#form-delete-code").val(pageLabelSettings.labelDetails["LabelCode"]);
         $("#deleteModal").modal('show');
     },
     openLogoLabelSettingsModal: function (labelSettingsIndex) {
@@ -304,7 +326,8 @@ $(document).ready(function () {
     });
 
     $("#deleteLabelSettingsForm").ajaxForm({
-        beforeSubmit: function () {
+        beforeSubmit: function (formData) {
+            console.log(formData);
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
         },
