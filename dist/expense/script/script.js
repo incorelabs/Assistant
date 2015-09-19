@@ -31,7 +31,7 @@ var pageExpense = {
         $("#deleteModal").modal("show");
     },
     openVoucherExpenseModal: function (){
-        window.location.href = "../voucher/";
+        window.location.href = "../../../expense/voucher/";
     }
 };
 
