@@ -1,116 +1,63 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: kbokdia
+ * Date: 19/09/15
+ * Time: 12:01 PM
+ */
+
 session_start();
 define("ROOT", "../");
-include_once ROOT.'dist/authenticate.php';
-require_once ROOT.'db/Connection.php';
-//require_once ROOT.'modules/functions.php';
-$mysqli = getConnection();
 
-$regCode = $_SESSION['s_id'];
-$contactCode;
-$uploadOk = 1;
-$response = array();
-$target_dir = ROOT."img/".$regCode."/Contacts/";
+require ROOT.'dist/authenticate.php';
+require ROOT.'db/Connection.php';
+require 'ContactController.php';
+include(ROOT."external/class.upload.php");
 
 function createResponse($status,$message){
     return array('status' => $status, 'message' => $message);
 }
 
-//General Validation
+$response = createResponse(0,"Initialize");
+$validate = true;
 do{
-    if (!empty($_POST["contactCode"])){
-        $uploadOk = 1;
-        $contactCode = $_POST['contactCode'];
-    }
-    else{
-        $uploadOk = 0;
+    if(empty($_POST['contactCode'])){
+        $validate = false;
         $response = createResponse(0,"Invalid Request");
-        break;
     }
-
-    $temp = explode(".", $_FILES["fileToUpload"]["name"]);
-    $extension = end($temp);
-    $target_file = $target_dir . basename($contactCode.".".$extension);
-
-    $uploadStatus = array();
-    $uploadOk = 1;
-    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-    // Check if image file is a actual image or fake image
-    if(isset($_POST["submit"])) {
-        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-        if($check !== false) {
-            $uploadStatus['check'] = 1;
-            $uploadOk = 1;
-        } else {
-            $uploadOk = 0;
-            $response = createResponse(0,"No an actual Image");
-            break;
-        }
-    }
-
-    // Check file size
-    if ($_FILES["fileToUpload"]["size"] > 1 * 1000 * 1000) {
-        $uploadOk = 0;
-        $response = createResponse(0,"File size is greater than 1MB");
-        break;
-    }
-    else{
-        $uploadOk = 1;
-        $uploadStatus["size"] = 1;
-    }
-
-    // Allow certain file formats
-    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-        && $imageFileType != "gif" && $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG"
-        && $imageFileType != "GIF" ) {
-        $uploadOk = 0;
-        $response = createResponse(0,"Invalid Image Format");
-        break;
-    }
-    else{
-        $uploadOk = 1;
-    }
-
 }while(0);
 
+if($validate) {
+    $logo = new upload($_FILES["fileToUpload"]);
+    if($logo->uploaded){
+        //check upload size
+        $logo->file_max_size = 1024 * 1024; // 1 MB
+        //check mime type
+        $logo->mime_check = true;
+        $logo->allowed = array('image/*');
+        $logo->forbidden = array('application/*');
 
-
-// Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
-    //echo "Sorry, your file was not uploaded.";
-    $uploadStatus['location'] = null;
-// if everything is ok, try to upload file
-} else {
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-
-        $sql = "UPDATE `Table151` SET `PhotoUploaded` = 1 WHERE ContactCode = ".$contactCode." AND RegCode = ".$regCode.";";
-        $sql .= "DELETE FROM Table159 WHERE ContactCode = ".$contactCode." AND RegCode =".$regCode." AND SerialNo = 1;";
-        $sql .= "INSERT INTO `Table159`
-                VALUES
-                (".$regCode.",
-                ".$contactCode.",
-                1,
-                '".$target_file."',
-                101,
-                null,
-                null);
-";
-
-       //echo $sql;
-
-        if($mysqli->multi_query($sql)){
-            $response = createResponse(1,"File uploaded successfully");
-            $response["location"] = $target_file;
+        //upload
+        $logo->file_new_name_body = $_POST["contactCode"];
+        $logo->image_convert = 'jpg';
+        $logo->file_overwrite = true;
+        $path = ROOT."../Assistant_Users/".$_SESSION['s_id']."/contacts/";
+        $logo->Process($path);
+        if($logo->processed){
+            $path = "contacts/".$logo->file_dst_name;
+            $data = array("mode"=>"AI", "contactCode"=>$_POST["contactCode"],"imagePath"=>$path);
+            $settings = new \Assistant\Contacts\ContactController($data);
+            $response = createResponse(1,"Contact image uploaded successfully");
+            $response["location"] = $path;
         }
         else{
-            $response = createResponse(0,"Error occurred while uploading to the database: ".$mysqli->error);
+            $response = createResponse(0,$logo->error);
         }
-        //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-    } else {
-        //echo "Sorry, there was an error uploading your file.";
-        $response = createResponse(0,"Error occurred while uploading to the server");
+        $logo->Clean();
+    }
+    else{
+        $response = createResponse(0,"Please try some other image");
     }
 }
-$mysqli->close();
+
 echo json_encode($response);
-?>

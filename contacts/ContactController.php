@@ -35,6 +35,10 @@ class ContactController
             $this->mode = 2;
         } elseif ($this->data["mode"] == "D") {
             $this->mode = 3;
+        } elseif ($this->data["mode"] == "AI") {
+            $this->mode = 4;
+        } elseif ($this->data["mode"] == "DI") {
+            $this->mode = 5;
         }
 
         //call respect methods based on mode
@@ -47,6 +51,12 @@ class ContactController
                 break;
             case 3:
                 $this->deleteContact();
+                break;
+            case 4:
+                $this->setContactImagePath();
+                break;
+            case 5:
+                $this->deleteContactImage();
                 break;
         }
     }
@@ -118,6 +128,24 @@ class ContactController
             }
             $this->response['landing'] = $this->landing;
         }
+    }
+
+    function deleteContactImage(){
+        $fileName = "../../Assistant_Users/".$this->regCode."/contacts/".$this->data['contactCode'].".jpg";
+        if(file_exists($fileName)){
+            unlink($fileName);
+        }
+
+        $sql = "UPDATE Table151 SET PhotoUploaded = 2 WHERE ContactCode = ".$this->data['contactCode']." AND RegCode = ".$this->regCode.";";
+        $sql .= "DELETE FROM Table159 WHERE ContactCode = ".$this->data["contactCode"]." AND RegCode =".$this->regCode." AND SerialNo = 1;";
+        $this->runMultipleQuery($sql);
+    }
+
+    function setContactImagePath(){
+        $sql = "UPDATE Table151 SET PhotoUploaded = 1 WHERE RegCode = ".$this->regCode." AND ContactCode = ".$this->data["contactCode"].";";
+        $sql .= "DELETE FROM Table159 WHERE ContactCode = ".$this->data["contactCode"]." AND RegCode =".$this->regCode." AND SerialNo = 1;";
+        $sql .= "INSERT INTO Table159 VALUES (".$this->regCode.",".$this->data["contactCode"].",1,'".$this->data["imagePath"]."',101,null,null);";
+        $this->runMultipleQuery($sql);
     }
 
     function editContact(){

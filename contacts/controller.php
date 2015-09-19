@@ -27,9 +27,10 @@ do {
     if(empty($_POST['mode']) && empty($_POST['contactCode'])){
         $validate = false;
         $response = createResponse(0,"Invalid Request");
+        break;
     }
 
-    if($_POST['mode'] == "D"){
+    if($_POST['mode'] == "D" || $_POST["mode"] == "DI"){
         break;
     }
 
