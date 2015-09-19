@@ -55,6 +55,16 @@ class LabelSettings
         $this->runQuery($this->getDeleteQuery());
     }
 
+    function deleteLabelLogo(){
+        $fileName = "../../../Assistant_Users/".$this->regCode."/preferences/label/".$this->data['labelCode'].".jpg";
+        if(file_exists($fileName)){
+            unlink($fileName);
+        }
+
+        $sql = "UPDATE Table139 SET LogoPath = NULL WHERE LabelCode = ".$this->data['labelCode']." AND RegCode = ".$this->regCode;
+        $this->runQuery($sql);
+    }
+
     function getUpdateQuery(){
         $sql = "UPDATE `Table139` SET `LabelName` = ".$this->data["labelName"].", `LinesPerLabel` = ".$this->data["linesPerLabel"].", `LabelInRow` = ".$this->data["labelInRow"].", `LabelInColumn` = ".$this->data["labelInColumn"].", `LabelHeight` = ".$this->data["labelHeight"].", `LabelWidth` = ".$this->data["labelWidth"].", `LabelStartLeft` = ".$this->data["labelStartLeft"].", `LabelNextLeft` = ".$this->data["labelNextLeft"].", `LabelStartTop` = ".$this->data["labelStartTop"].", `LabelNextTop` = ".$this->data["labelNextTop"].", `SingleContent` = ".$this->data["singleContent"].", `LogoAvailable` = ".$this->data["logoAvailable"].", `LogoTop` = ".$this->data["logoTop"].", `LogoLeft` = ".$this->data["logoLeft"].", `LogoHeight` = ".$this->data["logoHeight"].", `LogoWidth` = ".$this->data["logoWidth"].", `LabelOrientation` = ".$this->data["labelOrientation"]." WHERE `LabelCode` = ".$this->data["labelCode"]." AND `RegCode` = ".$this->regCode;
         return $sql;
@@ -154,6 +164,8 @@ class LabelSettings
             $this->mode = 2;
         } elseif ($this->data["mode"] == "D") {
             $this->mode = 3;
+        } elseif ($this->data["mode"] == "L") {
+            $this->mode = 4;
         }
 
         $this->cleanData();
@@ -168,6 +180,9 @@ class LabelSettings
                 break;
             case 3:
                 $this->deleteLabel();
+                break;
+            case 4:
+                $this->deleteLabelLogo();
                 break;
         }
     }
