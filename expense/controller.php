@@ -26,7 +26,7 @@ do {
         break;
     }
 
-    if(empty($_POST['mode']) && empty($_POST["expenseCode"])) {
+    if(empty($_POST['mode']) || empty($_POST["expenseCode"])) {
         $validate = false;
         $response = createResponse(0,"Invalid Request");
         break;
@@ -38,7 +38,7 @@ do {
     }
 
     //Validate required fields
-    if (empty($_POST["name"]) || empty($_POST["mode"]) || empty($_POST["passwordType"]) || empty($_POST["passwordTypeCode"]) || empty($_POST["description"]) || empty($_POST["userID"]) || empty($_POST["password"])) {
+    if (empty($_POST["holderCode"]) || empty($_POST["mode"]) || empty($_POST["expenseTypeName"]) || empty($_POST["expenseTypeCode"]) || empty($_POST["expenseName"]) || empty($_POST["contactCode"]) || empty($_POST["dueTo"]) || empty($_POST["billingDay"]) || empty($_POST["dueDay"]) || empty($_POST["expenseFrequency"])) {
         $validate = false;
         $response = createResponse(0,"Required fields are empty");
         break;

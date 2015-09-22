@@ -18,7 +18,7 @@ class ExpenseController
     var $mysqli;
     var $active;
     var $landing;
-    var $passwordCode;
+    var $expenseCode;
 
     function __construct($data){
         $this->mysqli = getConnection();
@@ -39,12 +39,12 @@ class ExpenseController
 
         //call respect methods based on mode
         switch($this->mode){
-            /*case 1:
-                $this->addPassword();
+            case 1:
+                $this->addExpense();
                 break;
             case 2:
-                $this->editPassword();
-                break;*/
+                $this->editExpense();
+                break;
             case 3:
                 $this->deleteExpense();
                 break;
@@ -92,22 +92,94 @@ class ExpenseController
         }
     }
 
+    function editExpense(){
+
+        $this->expenseCode = intval($this->data["expenseCode"]);
+        $this->runMultipleQuery($this->getSpTable171Query());
+        $count = $this->countExpenseList();
+        if($count == 0){
+            $this->landing = null;
+        }
+        elseif($this->active == 2){
+            $this->setFirstRecordAsLanding();
+        }
+        else{
+            $this->landing = $this->expenseCode;
+        }
+        $this->response['landing'] = $this->landing;
+    }
+
+    function addExpense(){
+        $this->expenseCode = $this->generateExpenseCode();
+        $this->landing = $this->expenseCode;
+        $this->runMultipleQuery($this->getSpTable171Query());
+        $this->response['landing'] = $this->expenseCode;
+    }
+
+    function checkAndReplaceLink($link){
+        $subString = substr($link,0,4);
+        if($subString == "http" || $subString == "HTTP"){
+            return $link;
+        }
+        else{
+            $link = "http://".$link;
+            return $link;
+        }
+    }
+
+    function getSpTable171Query(){
+        // change date format yyyy-mm-dd
+        if(!empty($this->data['expiryDate'])){
+            $dob = explode("/", $this->data['expiryDate']);
+            $dob = array($dob[2],$dob[1],$dob[0]);
+            $this->data['expiryDate'] = implode("-", $dob);
+        }
+
+        $expenseCode = $this->expenseCode;
+        $expenseTypeCode = ((!empty($this->data["expenseTypeCode"])) ? intval($this->data['expenseTypeCode']) : 0);
+        $expenseTypeName = "'".$this->data["expenseTypeName"]."'";
+        $holderCode = intval($this->data['holderCode']);
+        $expenseName = "'".$this->data["expenseName"]."'";
+        $jointHolder = ((!empty($this->data["jointHolder"])) ? "'".$this->data["jointHolder"]."'" : "NULL");
+        $expenseRemarks = ((!empty($this->data["expenseRemarks"])) ? "'".$this->data["expenseRemarks"]."'" : "NULL");
+        $expenseFrequency = $this->data["expenseFrequency"];
+        $contactCode = $this->data["contactCode"];
+        $dueTo = "'".$this->data["dueTo"]."'";
+        $billingDay = $this->data["billingDay"];
+        $dueDay = $this->data["dueDay"];
+        $expiryDate = ((!empty($this->data["expiryDate"])) ? "'".$this->data["expiryDate"]."'" : "NULL");
+        $payWebsite = (!empty($this->data['payWebsite']) ? "'".$this->checkAndReplaceLink($this->data['payWebsite'])."'" : "NULL");
+        $inserted = $this->familyCode;
+        $private = (empty($this->data["private"]) ? 2 : 1);
+        $active = (empty($this->data["active"]) ? 2 : 1);
+        $this->active = $active;
+
+        $sql = "set @expenseCode = ".$expenseCode.";";
+        $sql .= "set @expenseTypeCode = ".$expenseTypeCode.";";
+
+        if($expenseTypeCode < 1001){
+            $sql .= "call spTable123(@expenseTypeCode, ".$expenseTypeName.", ".$this->regCode.", 1);";
+        }
+
+        $sql .= "call spTable171(".$this->regCode.", @expenseCode, @expenseTypeCode, ".$holderCode.", ".$expenseName.", ".$jointHolder.", ".$expenseRemarks.", ".$expenseFrequency.", ".$contactCode.", ".$dueTo.", ".$billingDay.", ".$dueDay.", ".$expiryDate.", ".$payWebsite.", ".$inserted.", ".$private.", ".$active.", now(), ".$this->mode.");";
+
+        return $sql;
+    }
+
     function countExpenseList(){
         $limit = 250;
         $page = 1;
         $expenseList = new ExpenseList($limit,$page);
         $expenseList->setWhereConstraints();
 
-        $qry = "SELECT count(*) AS 'count' FROM Table171 INNER JOIN Table107 ON Table107.FamilyCode = Table171.HolderCode ".$expenseList->whereConstraints;
+        $qry = "SELECT count(*) AS 'count' FROM Table171 ".$expenseList->whereConstraints;
         $count = 0;
 
         if($result = $this->mysqli->query($qry)){
             $count = intval($result->fetch_assoc()['count']);
-            return $count;
         }
-        else{
-            return $count;
-        }
+
+        return $count;
     }
 
     function setFirstRecordAsLanding(){
@@ -129,6 +201,17 @@ class ExpenseController
         else{
             $this->response = $this->createResponse(0,"Error occurred while uploading to the database: ".$this->mysqli->error);
         }
+    }
+
+    function generateExpenseCode(){
+        $expenseCode = 1001;
+        $sql = "SELECT MAX(ExpenseCode) AS 'ExpenseCode' FROM Table171 WHERE RegCode = ".$this->regCode;
+        if($result = $this->mysqli->query($sql)){
+            $expenseCode = intval($result->fetch_assoc()['ExpenseCode']);
+            $expenseCode = (($expenseCode == 0) ? 1001 : $expenseCode + 1);
+        }
+
+        return $expenseCode;
     }
 
     function runMultipleQuery($sql){
