@@ -76,15 +76,18 @@ var pageExpense = {
     getExpenseDetails: function (expenseCode) {
         if (expenseCode == null)
             return;
-        var url = localStorage.getItem("websiteRoot") + "expense/getPasswordDetail.php";
+        var url = localStorage.getItem("websiteRoot") + "expense/getExpenseDetail.php";
 
         $.getJSON(url, {
-            passwordCode: expenseCode
+            expenseCode: expenseCode
         }).done(function (data) {
-            pagePassword.setPasswordDetails(data);
+            pageExpense.setExpenseDetails(data);
         }).fail(function (error) {
 
         });
+    },
+    setExpenseDetails: function (data) {
+
     },
     openAddExpenseModal: function () {
         document.getElementById("expenseForm").reset();
@@ -99,12 +102,12 @@ var pageExpense = {
     },
     openEditExpenseModal: function () {
         document.getElementById("expenseForm").reset();
-        // $("#form-add-edit-mode").val("M");
+        $("#form-add-edit-mode").val("M");
 
         $('#expenseModalHeading').empty().html("Edit Expense");
 
-        //$("#form-add-edit-code").val(pageExpense.localExpense.expense.ExpenseCode);
-        //pageExpense.setModalInputFields();
+        $("#form-add-edit-code").val(pageExpense.localExpense.expense.ExpenseCode);
+        pageExpense.setModalInputFields();
 
         $("#expenseModal").modal('show');
     },
@@ -114,6 +117,34 @@ var pageExpense = {
     },
     openVoucherExpenseModal: function () {
         window.location.href = "../expense/voucher/";
+    },
+    getExpenseTypeList: function () {
+        var url = localStorage.getItem("websiteRoot") + "expense/getMasters.php";
+
+        $.getJSON(url, {
+            expenseType: 1
+        }).done(function (data) {
+            pageExpense.setExpenseTypeAutoComplete(data);
+        }).fail(function (error) {
+
+        });
+    },
+    setExpenseTypeAutoComplete: function (tags) {
+
+    },
+    getDueToList: function () {
+        var url = localStorage.getItem("websiteRoot") + "expense/getMasters.php";
+
+        $.getJSON(url, {
+            expenseType: 2
+        }).done(function (data) {
+            pageExpense.setDueToAutoComplete(data);
+        }).fail(function (error) {
+
+        });
+    },
+    setDueToAutoComplete: function (tags) {
+
     }
 };
 

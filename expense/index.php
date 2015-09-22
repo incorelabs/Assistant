@@ -284,7 +284,7 @@ echo $navbar_str;
 
                         <div class="inner-addon right-addon">
                             <i class="fa fa-caret-down fa-size"></i>
-                            <select class="form-control select-field-left-border" id="holderName" name="name"
+                            <select class="form-control select-field-left-border" id="holderCode" name="holderCode"
                                     tabindex="1">
                                 <option>Select Holder Name</option>
                             </select>
