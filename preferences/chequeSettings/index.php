@@ -1,6 +1,9 @@
 <?php
 session_start();
-define("ROOT", "../../");
+define("ROOT", "../");
+//require_once ROOT.'db/Connection.php';
+
+//$mysqli = getConnection();
 include_once ROOT . 'dist/authenticate.php';
 ?>
 <!DOCTYPE html>
@@ -10,383 +13,475 @@ include_once ROOT . 'dist/authenticate.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Assistant - Cheque Settings</title>
+    <title>Assistant - Expense</title>
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
     <?php
     include_once ROOT . 'dist/bootstrap.php';
     ?>
-
-    <link rel="stylesheet" href="../../dist/preferences/chequeSettings/css/style.css"/>
-    <link rel="stylesheet" href="../../dist/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../dist/css/style.css"/>
+    <link rel="stylesheet" href="../dist/expense/css/style.css"/>
     <script src="http://malsup.github.com/jquery.form.js"></script>
-
-    <!-- Header Links -->
-    <link type="text/css" rel="stylesheet" href="../../dist/css/sidebar.css"/>
-    <link type="text/css" rel="stylesheet" href="../../dist/css/jquery_sidebar.css"/>
-    <script type="text/javascript" src="../../dist/script/jquery.mmenu.min.all.js"></script>
+    <script>
+        var familyCode = '<?php echo $_SESSION['familyCode']; ?>';
+    </script>
+    <script src="../dist/script/script.js"></script>
+    <script src="../dist/date/script.js"></script>
+    <script src="../dist/expense/script/script.js"></script>
+    <link rel="stylesheet" href="../dist/css/sidebar.css"/>
+    <link rel="stylesheet" href="../dist/css/jquery_sidebar.css"/>
+    <script src="../dist/script/jquery.mmenu.min.all.js"></script>
     <script type="text/javascript">
         $(function () {
             $('nav#menu').mmenu();
         });
     </script>
-    <script src="../../dist/script/script.js"></script>
-    <script src="../../dist/date/script.js"></script>
-    <script src="../../dist/preferences/chequeSettings/script/script.js"></script>
 </head>
+
 <body>
-<!-- fixed top navbar -->
 <?php
-define('PAGE_TITLE', 'Cheque Settings');
+define('PAGE_TITLE', 'Expense');
 $root_location = ROOT;
 include_once ROOT . 'dist/navbar.php';
 echo $navbar_str;
 ?>
-<div class="container">
-    <div class="notification_outer">
-        <div class="notification_success" id="notification_success" style="display:none">
-            Added Successfully!
-        </div>
-    </div>
-
-    <div class="notification_outer">
-        <div class="notification_failure" id="notification_failure" style="display:none">
-            Something went wrong!
-        </div>
-    </div>
-    <div class="text-right button-top-margin">
-        <button class="btn btn-primary" onclick="pageChequeSettings.openAddChequeSettingsModal();">
-            <i class="fa fa-plus fa-lg"></i>
-        </button>
-    </div>
-    <div class="text-center">
-        <table class="table table-top-margin borderless">
-            <thead>
-            <tr>
-                <th class="text-center col-md-1 col-sm-1 col-xs-1">#</th>
-                <th class="text-center col-md-1 col-sm-1 col-xs-1">Name</th>
-                <th class="text-center col-md-1 col-sm-1 hidden-xs">A/C Holder Name</th>
-                <th class="text-center col-md-1 col-sm-1 col-xs-1">Continuous Feed</th>
-                <th class="text-center col-md-1 col-sm-1 col-xs-1">Print Feed</th>
-                <th class="text-center col-md-1 col-sm-1 col-xs-1">Actions</th>
-            </tr>
-            </thead>
-            <tbody id="table-body">
-            </tbody>
-        </table>
+<div class="notification_outer">
+    <div class="notification_success" id="notification_success" style="display:none">
+        Added Successfully!
     </div>
 </div>
 
-<!-- Add Cheque Modal -->
-<div class="modal fade" id="chequeSettingsModal" tabindex="-1" role="dialog" aria-labelledby="chequeSettingsModal">
+<div class="notification_outer">
+    <div class="notification_failure" id="notification_failure" style="display:none">
+        Something went wrong!
+    </div>
+</div>
+<div class="container-fluid navbar-padding">
+    <div class="row">
+        <div class="col-xs-12 col-md-5 col-padding" id="searchExpenseHeader">
+            <div class="list-group list-margin">
+                <div class="list-group-item list-margin">
+                    <div class="row">
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                            <div class="input-group">
+                                <input id="searchBox" type="text" class="form-control" placeholder="Search..."
+                                       autofocus/>
+
+                                <div class="input-group-btn">
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-success">
+                                            <span class="fa fa-search"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary btn-size"
+                                    onclick="pageExpense.openAddExpenseModal();"><span
+                                    class="glyphicon glyphicon-plus"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7 col-xs-12 col-sm-12 hidden-sm hidden-xs" id="expenseDetailHeaderDiv">
+            <div class="panel panel-default panelHeight list-margin" id="style-3">
+                <div id="expenseDetailHeader" class="panel-heading text-center">
+                    <h12>Expense Details</h12>
+                    <button id='editVoucherdBtn' class='btn btn-success pull-right btn-header-margin-left'
+                            onclick='pageExpense.openEditExpenseModal();'><span
+                            class='glyphicon glyphicon-pencil'></span></button>
+                    <button id='deleteVoucherBtn' class='btn btn-danger pull-left'
+                            onclick='pageExpense.openDeleteExpenseModal(" + data.detail.expense.ExpenseCode + ")'><span
+                            class='glyphicon glyphicon-trash'></span></button>
+                    <button id='voucherExpenceBtn' class='btn btn-info pull-right'
+                            onclick='pageExpense.openVoucherExpenseModal()'><span
+                            class='fa fa-sticky-note-o fa-lg'></span></button>
+                </div>
+            </div>
+            <!--Panel-->
+        </div>
+        <!--COL-->
+    </div>
+    <!--row-->
+    <div class="row">
+
+        <div class="col-md-5 col-sm-12 col-xs-12 col-padding" id="expenseListDiv">
+            <div class="panel panel-default panelHeight panel-margin" id="expenseListScroll">
+                <div class="panel-height">
+                    <!-- List group -->
+                    <div id="expenseList" class="list-group force-scroll mobile-list">
+                        <div class='list-group-item list-border-none'>
+                            <li class='list-group-item-text header_font'>Test</li>
+                        </div>
+                    </div>
+                    <!--List close-->
+                </div>
+            </div>
+            <!--Panel-->
+        </div>
+        <!--COL-->
+
+        <div class="col-md-7 col-sm-12 col-xs-12 hidden-sm hidden-xs" id="expenseDetailDiv">
+            <div id="expenseDetail" class="panel panel-default panelHeight panel-margin">
+                <div class='panel-height'>
+                    <!-- List group -->
+                    <div class="list-group">
+                        <div id="expenseDetailBody" class='list-group-item list-group-item-border'>
+                            <div class='row contact-details row-top-padding'>
+                                <div class='list-group-item-heading header_font'>
+                                    <div class='col-md-3'>Holder's Name</div>
+                                    <value>
+                                        <div class='col-md-9'>Test</div>
+                                    </value>
+                                </div>
+                            </div>
+                            <div class='row contact-details'>
+                                <div class='list-group-item-heading header_font'>
+                                    <div class='col-md-3'>Expense Type</div>
+                                    <value>
+                                        <div class='col-md-9'>Test</div>
+                                    </value>
+                                </div>
+                            </div>
+                            <div class='row contact-details'>
+                                <div class='list-group-item-heading header_font'>
+                                    <div class='col-md-3'>Description</div>
+                                    <value>
+                                        <div class='col-md-9'>Test</div>
+                                    </value>
+                                </div>
+                            </div>
+                            <div class='row contact-details'>
+                                <div class='list-group-item-heading header_font'>
+                                    <div class='col-md-3'>Due To</div>
+                                    <value>
+                                        <div class='col-md-9'>Test</div>
+                                    </value>
+                                </div>
+                            </div>
+                            <div class='row contact-details'>
+                                <div class='list-group-item-heading header_font'>
+                                    <div class='col-md-3'>Joint Holder Name</div>
+                                    <value>
+                                        <div class='col-md-9'>Test</div>
+                                    </value>
+                                </div>
+                            </div>
+                            <div class='row contact-details'>
+                                <div class='list-group-item-heading header_font'>
+                                    <div class='col-md-3'>Remarks</div>
+                                    <value>
+                                        <div class='col-md-9'>Test</div>
+                                    </value>
+                                </div>
+                            </div>
+                            <div class='row contact-details'>
+                                <div class='list-group-item-heading header_font'>
+                                    <div class='col-md-3'>Billing Day</div>
+                                    <value>
+                                        <div class='col-md-9'>Test</div>
+                                    </value>
+                                </div>
+                            </div>
+                            <div class='row contact-details'>
+                                <div class='list-group-item-heading header_font'>
+                                    <div class='col-md-3'>Due Day</div>
+                                    <value>
+                                        <div class='col-md-9'>Test</div>
+                                    </value>
+                                </div>
+                            </div>
+                            <div class='row contact-details'>
+                                <div class='list-group-item-heading header_font'>
+                                    <div class='col-md-3'>Payment Frequency</div>
+                                    <value>
+                                        <div class='col-md-9'>Test</div>
+                                    </value>
+                                </div>
+                            </div>
+                            <div class='row contact-details'>
+                                <div class='list-group-item-heading header_font'>
+                                    <div class='col-md-3'>Loan Due Date</div>
+                                    <value>
+                                        <div class='col-md-9'>Test</div>
+                                    </value>
+                                </div>
+                            </div>
+                            <div class='row contact-details'>
+                                <div class='list-group-item-heading header_font'>
+                                    <div class='col-md-3'>Payment URL</div>
+                                    <value>
+                                        <div class='col-md-9'>Test</div>
+                                    </value>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--List close-->
+                </div>
+
+            </div>
+            <!--Panel-->
+        </div>
+        <!--COL-->
+    </div>
+    <!--ROW-->
+</div>
+<!--Container-->
+
+<!-- Add Expense Modal -->
+<div class="modal fade" id="expenseModal" tabindex="-1" role="dialog" aria-labelledby="expenseModal"
+     aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" method="POST" action="controller.php" id="chequeSettingsForm"
-                  autocomplete="off">
+            <form class="form-horizontal" method="POST" action="controller.php" id="expenseForm" autocomplete="off">
                 <div class="modal-header">
-                    <div class="form-group pull-left modal-header-btn-left">
+                    <div class="form-group pull-left" style="margin-top:-5px">
                         <button class="btn btn-danger button-top-remove" data-dismiss="modal">
                             <span class='glyphicon glyphicon-remove'></span>
                         </button>
                     </div>
-                    <div class="form-group pull-right modal-header-btn-right">
+                    <div class="form-group pull-right" style="margin-top:-5px">
                         <button type="submit" class="btn btn-success button-top-remove">
                             <span class='glyphicon glyphicon-ok'></span>
                         </button>
                     </div>
-                    <h4 id="chequeSettingsModalHeading" class="modal-title text-center">
+                    <h4 id="expenseModalHeading" class="modal-title text-center">
                     </h4>
                 </div>
-                <input type="text" class="hidden" name="chequeCode" id="form-add-edit-code"/>
-                <input type="text" class="hidden" name="mode" id="form-add-edit-mode"/>
-
                 <div class="modal-body">
-                    <div class="info text-center">*Please enter all the values in "mm" only</div>
+                    <input type="text" class="hidden" name="expenseTypeCode" id="expenseTypeCode" value="1"/>
+                    <input type="text" class="hidden" name="expenseCode" id="form-add-edit-code"/>
+                    <input type="text" class="hidden" name="mode" id="form-add-edit-mode"/>
+
+
                     <div class="form-group form-group-margin">
-                        <table class="table borderless">
-                            <thead>
-                            <tr>
-                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <span
-                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Name*</span>
-                                </td>
-                                <td colspan="3" class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="text" name="chequeName" id="chequeName"
-                                           class="form-control input-height" placeholder="Cheque Name" required/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="text-center col-md-1 col-sm-1 col-xs-1 border-remove table-padding"></th>
-                                <th class="text-center col-md-1 col-sm-1 col-xs-1 border-remove table-padding">Top</th>
-                                <th class="text-center col-md-1 col-sm-1 col-xs-1 border-remove table-padding">Left</th>
-                                <th class="text-center col-md-1 col-sm-1 col-xs-1 border-remove table-padding">Wide</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr id="chequeDate">
-                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding table-padding-first-row">
-                                    <span
-                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Date*</span>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding table-padding-first-row">
-                                    <input type="number" class="form-control input-height" placeholder="Top"
-                                           name="dateTop"
-                                           id="dateTop" required/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding table-padding-first-row">
-                                    <input type="number" class="form-control input-height" placeholder="Left"
-                                           name="dateLeft"
-                                           id="dateLeft" required/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding table-padding-first-row">
-                                    <input type="number" class="form-control input-height" placeholder="Wide"
-                                           disabled="disabled"/>
-                                </td>
-                            </tr>
-                            <tr id="chequeName">
-                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <span
-                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Name*</span>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Top"
-                                           name="nameTop"
-                                           id="nameTop" required/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Left"
-                                           name="nameLeft"
-                                           id="nameLeft" required/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Wide"
-                                           name="nameWidth"
-                                           id="nameWidth" required/>
-                                </td>
-                            </tr>
-                            <tr id="chequeBearer">
-                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <span
-                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Bearer</span>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Top"
-                                           name="bearerTop"
-                                           id="bearerTop"/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Left"
-                                           name="bearerLeft"
-                                           id="bearerLeft"/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Wide"
-                                           name="bearerWidth"
-                                           id="bearerWidth"/>
-                                </td>
-                            </tr>
-                            <tr id="chequeRupeeLineOne">
-                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <span
-                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Rupee Line 1*</span>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Top"
-                                           name="rupee1Top"
-                                           id="rupee1Top" required/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Left"
-                                           name="rupee1Left"
-                                           id="rupee1Left" required/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Wide"
-                                           name="rupee1Width"
-                                           id="rupee1Width" required/>
-                                </td>
-                            </tr>
-                            <tr id="chequeRupeeLineTwo">
-                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <span
-                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Rupee Line 2*</span>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Top"
-                                           name="rupee2Top"
-                                           id="rupee2Top" required/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Left"
-                                           name="rupee2Left"
-                                           id="rupee2Left" required/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Wide"
-                                           name="rupee2Width"
-                                           id="rupee2Width" required/>
-                                </td>
-                            </tr>
-                            <tr id="chequeAmount">
-                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <span
-                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Amount*</span>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Top"
-                                           name="rsTop"
-                                           id="rsTop" required/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Left"
-                                           name="rsLeft"
-                                           id="rsLeft" required/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Wide"
-                                           disabled="disabled"/>
-                                </td>
-                            </tr>
-                            <tr id="chequeAcctPayee">
-                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <span
-                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">A/C Payee</span>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Top"
-                                           name="acPayeeTop"
-                                           id="acPayeeTop"/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Left"
-                                           name="acPayeeLeft"
-                                           id="acPayeeLeft"/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Wide"
-                                           disabled="disabled"/>
-                                </td>
-                            </tr>
-                            <tr id="chequeNotExceed">
-                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <span
-                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Not Exceeding</span>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Top"
-                                           name="notExceedTop"
-                                           id="notExceedTop"/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Left"
-                                           name="notExceedLeft"
-                                           id="notExceedLeft"/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Wide"
-                                           disabled="disabled"/>
-                                </td>
-                            </tr>
-                            <tr id="chequeForHolderName">
-                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <span
-                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">For Holder</span>
-                                </td>
-                                <td colspan="3" class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="text" class="form-control input-height" placeholder="For Holder Name"
-                                           name="forAcName" id="forAcName"/>
-                                </td>
-                            </tr>
-                            <tr id="chequeForHolderNamePosition">
-                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <span
-                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">For Holder</span>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Top"
-                                           name="forAcNameTop"
-                                           id="forAcNameTop"/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Left"
-                                           name="forAcNameLeft"
-                                           id="forAcNameLeft"/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Wide"
-                                           disabled="disabled"/>
-                                </td>
-                            </tr>
-                            <tr id="chequeSignatory">
-                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <span
-                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Signatory</span>
-                                </td>
-                                <td colspan="3" class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="text" class="form-control input-height" placeholder="Signatory"
-                                           name="signatoryName" id="signatoryName"/>
-                                </td>
-                            </tr>
-                            <tr id="chequeSignatoryPosition">
-                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <span
-                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Signatory</span>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Top"
-                                           name="signatoryNameTop"
-                                           id="signatoryNameTop"/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Left"
-                                           name="signatoryNameLeft"
-                                           id="signatoryNameLeft"/>
-                                </td>
-                                <td class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <input type="number" class="form-control input-height" placeholder="Wide"
-                                           disabled="disabled"/>
-                                </td>
-                            </tr>
-                            <tr id="chequeDateSplit">
-                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <span
-                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Date Split</span>
-                                </td>
-                                <td colspan="3" class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <select class="form-control input-height" name="dateSplit" id="dateSplit">
-                                        <option value="1" selected="selected">Yes</option>
-                                        <option value="2">No</option>
+                        <label class="col-xs-3 control-label">Private</label>
+
+                        <div class="col-xs-3">
+                            <div class='switch switch-padding'>
+                                <input type='checkbox' name='private' id='addPrivacy' class='switch-input'>
+                                <label for='addPrivacy' class='switch-label'></label>
+                            </div>
+                        </div>
+                        <label class="col-xs-3 control-label">Active</label>
+
+                        <div class="col-xs-3">
+                            <div class='switch switch-padding'>
+                                <input type='checkbox' name='active' id='addActiveStatus' class='switch-input'
+                                       checked='checked'>
+                                <label for='addActiveStatus' class='switch-label'></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-margin">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Holder's Name*</span>
+
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-caret-down fa-size"></i>
+                                <select class="form-control select-field-left-border" id="holderCode" name="holderCode"
+                                        tabindex="1">
+                                    <option>Select Holder Name</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-margin">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Expense Type*</span>
+
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-key hidden-xs fa-size"></i>
+                                <input type="text" class="form-control text-field-left-border" id="expenseType"
+                                       name="expenseType" placeholder="Expense Type" tabindex="2" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-margin">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Description*</span>
+
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
+                                <input type="text" class="form-control text-field-left-border" name="description"
+                                       id="description" placeholder="Description" tabindex="3" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-margin">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Due To*</span>
+
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-user hidden-xs fa-size"></i>
+                                <input type="text" class="form-control text-field-left-border" id="dueTo"
+                                       name="dueTo"
+                                       placeholder="Due To" aria-describedby="basic-addon1" tabindex="4"
+                                       required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-margin">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Joint Holder</span>
+
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-user hidden-xs fa-size"></i>
+                                <input type="text" class="form-control text-field-left-border" id="jointHolderName"
+                                       name="jointHolderName" placeholder="Joint Holder" tabindex="5"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-margin">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Remarks</span>
+
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
+                                <input type="text" class="form-control text-field-left-border" id="remarks"
+                                       name="remarks"
+                                       placeholder="Remarks" aria-describedby="basic-addon1" tabindex="6"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-margin">
+                        <div class="col-md-6 col-sm-12 col-xs-12 first-col-left-padding first-col-right-padding"
+                             id="billingDayDiv">
+                            <div class="input-group">
+                                <span class="input-group-addon input-group-addon-label">Billing Day*</span>
+
+                                <div class="inner-addon right-addon">
+                                    <i class="fa fa-caret-down fa-size"></i>
+                                    <select class="form-control select-field-left-border" id="billDate" name="billDate"
+                                            aria-describedby="basic-addin1" tabindex="7" required>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
                                     </select>
-                                </td>
-                            </tr>
-                            <tr id="chequeFeed">
-                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <span
-                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Print Feed</span>
-                                </td>
-                                <td colspan="3" class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <select class="form-control input-height" name="chequeFeed" id="chequeFeed">
-                                        <option value="1" selected="selected">Left</option>
-                                        <option value="2">Middle</option>
-                                        <option value="3">Right</option>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12 second-col-left-padding second-col-right-padding"
+                             id="dueDayDiv">
+                            <div class="input-group">
+                                <span class="input-group-addon input-group-addon-label">Due Day*</span>
+
+                                <div class="inner-addon right-addon">
+                                    <i class="fa fa-caret-down fa-size"></i>
+                                    <select class="form-control select-field-left-border" id="dueDate" name="dueDate"
+                                            aria-describedby="basic-addin1" tabindex="8" required>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
                                     </select>
-                                </td>
-                            </tr>
-                            <tr id="chequeContinuousFeed">
-                                <td class="col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <span
-                                        class="input-group-addon-label text-left input-group-addon span-label-height label-border">Continuous Feed</span>
-                                </td>
-                                <td colspan="3" class="text-center col-md-1 col-sm-1 col-xs-1 table-padding">
-                                    <select class="form-control input-height" name="continousFeed" id="continousFeed">
-                                        <option value="1">Yes</option>
-                                        <option value="2" selected="selected">No</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-margin">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Frequency*</span>
+
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-caret-down fa-size"></i>
+                                <select class="form-control select-field-left-border" id="frequency" name="frequency"
+                                        aria-describedby="basic-addin1" tabindex="9" required>
+                                    <option value="1">Daily</option>
+                                    <option value="2">Weekly</option>
+                                    <option value="3">Fort Night</option>
+                                    <option value="4">Monthly</option>
+                                    <option value="5">Bi-Monthly</option>
+                                    <option value="6">Quaterly</option>
+                                    <option value="7">Half Yearly</option>
+                                    <option value="8">Yearly</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-margin">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Expiry Date</span>
+
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-calendar hidden-xs fa-size"></i>
+                                <input type="text" class="form-control text-field-left-border date" id="expiryDate"
+                                       name="expiryDate"
+                                       placeholder="Expiry Date" aria-describedby="basic-addon1" tabindex="10"
+                                       required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-margin" id="paymentSiteDiv">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Payment Site</span>
+
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-globe fa-size"></i>
+                                <input type="text" class="form-control text-field-left-border" name="paymentSite"
+                                       id="paymentSite" placeholder="Payment URL" tabindex="11"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Modal Body -->
@@ -394,24 +489,25 @@ echo $navbar_str;
         </div>
         <!--modal-content-->
     </div>
-    <!--modal dialog-->
 </div>
-<!--modal start-->
-<!--Delete Cheque Modal-->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+<!--modal-->
+
+<!--Delete Expense Modal-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal"
+     aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title text-center">
-                    Are you sure, you want to DELETE this Cheque Setting?
+                    Are you sure, you want to DELETE this Expense?
                 </h4>
             </div>
             <br>
             <center>
                 <div class="modal-body">
                     <div class="btn-group">
-                        <form method="POST" action="controller.php" id="deleteChequeSettingsForm">
-                            <input type="text" class="hidden" name="chequeCode" id="form-delete-code"/>
+                        <form method="POST" action="controller.php" id="deleteExpenseForm">
+                            <input type="text" class="hidden" name="ExpenseCode" id="form-delete-code"/>
                             <input type="text" class="hidden" name="mode" id="form-delete-mode" value="D"/>
                             <button class="btn btn-danger modal_button" type="submit">
                                 <span class='glyphicon glyphicon-ok'></span>&nbsp
@@ -436,5 +532,9 @@ echo $navbar_str;
     </div>
 </div>
 <!--modal-->
+
 </body>
+<div class="cover">
+    <div id="pageLoading"></div>
+</div>
 </html>

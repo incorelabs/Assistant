@@ -230,13 +230,22 @@ $(document).ready(function(event){
 
 
 	$(".date").keypress(function(event){
-		//console.log(event);
+		//console.log("keyPress");
 		if (event.charCode > 47 && event.charCode < 58) {
 			var str = String.fromCharCode(event.charCode);
 			if (tempDate.length < 8) {
 				inputDate(this,str);
 			}
 		}
+        else{
+            if(event.keyCode == 9)
+            {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
 		return false;
 	});
 
@@ -245,7 +254,7 @@ $(document).ready(function(event){
 	});
 
 	$(".date").keydown(function(event){
-		//console.log(event);
+		//console.log("keyDown");
 		if (tempDate.length > 0) {
 			if (event.keyCode == 8 || event.keyCode == 46) {
 				tempDate = tempDate.substring(0,tempDate.length - 1);
@@ -255,5 +264,4 @@ $(document).ready(function(event){
 			}
 		}
 	});
-
 });
