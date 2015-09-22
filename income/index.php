@@ -441,6 +441,19 @@ echo $navbar_str;
                             </div>
                         </div>
                     </div>
+                    <div class="form-group form-group-margin">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Expiry Date</span>
+
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-calendar hidden-xs fa-size"></i>
+                                <input type="text" class="form-control text-field-left-border date" id="expiryDate"
+                                       name="expiryDate"
+                                       placeholder="Expiry Date" aria-describedby="basic-addon1" tabindex="10"
+                                       required/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- Modal Body -->
             </form>
