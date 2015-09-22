@@ -254,239 +254,241 @@ echo $navbar_str;
                     </h4>
                 </div>
                 <div class="modal-body">
-                <input type="text" class="hidden" name="expenseTypeCode" id="expenseTypeCode" value="1"/>
-                <input type="text" class="hidden" name="expenseCode" id="form-add-edit-code"/>
-                <input type="text" class="hidden" name="mode" id="form-add-edit-mode"/>
+                    <input type="text" class="hidden" name="expenseTypeCode" id="expenseTypeCode" value="1"/>
+                    <input type="text" class="hidden" name="expenseCode" id="form-add-edit-code"/>
+                    <input type="text" class="hidden" name="mode" id="form-add-edit-mode"/>
 
 
-                <div class="form-group form-group-margin">
-                    <label class="col-xs-3 control-label">Private</label>
+                    <div class="form-group form-group-margin">
+                        <label class="col-xs-3 control-label">Private</label>
 
-                    <div class="col-xs-3">
-                        <div class='switch switch-padding'>
-                            <input type='checkbox' name='private' id='addPrivacy' class='switch-input'>
-                            <label for='addPrivacy' class='switch-label'></label>
+                        <div class="col-xs-3">
+                            <div class='switch switch-padding'>
+                                <input type='checkbox' name='private' id='addPrivacy' class='switch-input'>
+                                <label for='addPrivacy' class='switch-label'></label>
+                            </div>
+                        </div>
+                        <label class="col-xs-3 control-label">Active</label>
+
+                        <div class="col-xs-3">
+                            <div class='switch switch-padding'>
+                                <input type='checkbox' name='active' id='addActiveStatus' class='switch-input'
+                                       checked='checked'>
+                                <label for='addActiveStatus' class='switch-label'></label>
+                            </div>
                         </div>
                     </div>
-                    <label class="col-xs-3 control-label">Active</label>
-
-                    <div class="col-xs-3">
-                        <div class='switch switch-padding'>
-                            <input type='checkbox' name='active' id='addActiveStatus' class='switch-input'
-                                   checked='checked'>
-                            <label for='addActiveStatus' class='switch-label'></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group form-group-margin">
-                    <div class="input-group">
-                        <span class="input-group-addon input-group-addon-label">Holder's Name*</span>
-
-                        <div class="inner-addon right-addon">
-                            <i class="fa fa-caret-down fa-size"></i>
-                            <select class="form-control select-field-left-border" id="holderName" name="name"
-                                    tabindex="1">
-                                <option>Select Holder Name</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group form-group-margin">
-                    <div class="input-group">
-                        <span class="input-group-addon input-group-addon-label">Expense Type*</span>
-
-                        <div class="inner-addon right-addon">
-                            <i class="fa fa-key hidden-xs fa-size"></i>
-                            <input type="text" class="form-control text-field-left-border" id="expenseType"
-                                   name="expenseType" placeholder="Expense Type" tabindex="2" required/>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group form-group-margin">
-                    <div class="input-group">
-                        <span class="input-group-addon input-group-addon-label">Description*</span>
-
-                        <div class="inner-addon right-addon">
-                            <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
-                            <input type="text" class="form-control text-field-left-border" name="description"
-                                   id="description" placeholder="Description" tabindex="3" required/>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group form-group-margin">
-                    <div class="input-group">
-                        <span class="input-group-addon input-group-addon-label">Due To*</span>
-
-                        <div class="inner-addon right-addon">
-                            <i class="fa fa-user hidden-xs fa-size"></i>
-                            <input type="text" class="form-control text-field-left-border" id="dueTo"
-                                   name="dueTo"
-                                   placeholder="Due To" aria-describedby="basic-addon1" tabindex="4"
-                                   required/>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group form-group-margin">
-                    <div class="input-group">
-                        <span class="input-group-addon input-group-addon-label">Joint Holder</span>
-
-                        <div class="inner-addon right-addon">
-                            <i class="fa fa-user hidden-xs fa-size"></i>
-                            <input type="text" class="form-control text-field-left-border" id="jointHolderName"
-                                   name="jointHolderName" placeholder="Joint Holder" tabindex="5"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group form-group-margin">
-                    <div class="input-group">
-                        <span class="input-group-addon input-group-addon-label">Remarks</span>
-
-                        <div class="inner-addon right-addon">
-                            <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
-                            <input type="text" class="form-control text-field-left-border" id="remarks"
-                                   name="remarks"
-                                   placeholder="Remarks" aria-describedby="basic-addon1" tabindex="6"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group form-group-margin">
-                    <div class="col-md-6 col-sm-12 col-xs-12 first-col-left-padding first-col-right-padding" id="billingDayDiv">
+                    <div class="form-group form-group-margin">
                         <div class="input-group">
-                            <span class="input-group-addon input-group-addon-label">Billing Day*</span>
+                            <span class="input-group-addon input-group-addon-label">Holder's Name*</span>
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-size"></i>
-                                <select class="form-control select-field-left-border" id="billDate" name="billDate"
-                                        aria-describedby="basic-addin1" tabindex="7" required>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                    <option value="13">13</option>
-                                    <option value="14">14</option>
-                                    <option value="15">15</option>
-                                    <option value="16">16</option>
-                                    <option value="17">17</option>
-                                    <option value="18">18</option>
-                                    <option value="19">19</option>
-                                    <option value="20">20</option>
-                                    <option value="21">21</option>
-                                    <option value="22">22</option>
-                                    <option value="23">23</option>
-                                    <option value="24">24</option>
-                                    <option value="25">25</option>
-                                    <option value="26">26</option>
-                                    <option value="27">27</option>
-                                    <option value="28">28</option>
-                                    <option value="29">29</option>
-                                    <option value="30">30</option>
-                                    <option value="31">31</option>
+                                <select class="form-control select-field-left-border" id="holderCode" name="holderCode"
+                                        tabindex="1">
+                                    <option>Select Holder Name</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12 second-col-left-padding second-col-right-padding" id="dueDayDiv">
+                    <div class="form-group form-group-margin">
                         <div class="input-group">
-                            <span class="input-group-addon input-group-addon-label">Due Day*</span>
+                            <span class="input-group-addon input-group-addon-label">Expense Type*</span>
+
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-key hidden-xs fa-size"></i>
+                                <input type="text" class="form-control text-field-left-border" id="expenseType"
+                                       name="expenseType" placeholder="Expense Type" tabindex="2" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-margin">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Description*</span>
+
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
+                                <input type="text" class="form-control text-field-left-border" name="description"
+                                       id="description" placeholder="Description" tabindex="3" required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-margin">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Due To*</span>
+
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-user hidden-xs fa-size"></i>
+                                <input type="text" class="form-control text-field-left-border" id="dueTo"
+                                       name="dueTo"
+                                       placeholder="Due To" aria-describedby="basic-addon1" tabindex="4"
+                                       required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-margin">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Joint Holder</span>
+
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-user hidden-xs fa-size"></i>
+                                <input type="text" class="form-control text-field-left-border" id="jointHolderName"
+                                       name="jointHolderName" placeholder="Joint Holder" tabindex="5"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-margin">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Remarks</span>
+
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
+                                <input type="text" class="form-control text-field-left-border" id="remarks"
+                                       name="remarks"
+                                       placeholder="Remarks" aria-describedby="basic-addon1" tabindex="6"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-margin">
+                        <div class="col-md-6 col-sm-12 col-xs-12 first-col-left-padding first-col-right-padding"
+                             id="billingDayDiv">
+                            <div class="input-group">
+                                <span class="input-group-addon input-group-addon-label">Billing Day*</span>
+
+                                <div class="inner-addon right-addon">
+                                    <i class="fa fa-caret-down fa-size"></i>
+                                    <select class="form-control select-field-left-border" id="billDate" name="billDate"
+                                            aria-describedby="basic-addin1" tabindex="7" required>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12 second-col-left-padding second-col-right-padding"
+                             id="dueDayDiv">
+                            <div class="input-group">
+                                <span class="input-group-addon input-group-addon-label">Due Day*</span>
+
+                                <div class="inner-addon right-addon">
+                                    <i class="fa fa-caret-down fa-size"></i>
+                                    <select class="form-control select-field-left-border" id="dueDate" name="dueDate"
+                                            aria-describedby="basic-addin1" tabindex="8" required>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-margin">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Frequency*</span>
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-size"></i>
-                                <select class="form-control select-field-left-border" id="dueDate" name="dueDate"
-                                        aria-describedby="basic-addin1" tabindex="8" required>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                    <option value="13">13</option>
-                                    <option value="14">14</option>
-                                    <option value="15">15</option>
-                                    <option value="16">16</option>
-                                    <option value="17">17</option>
-                                    <option value="18">18</option>
-                                    <option value="19">19</option>
-                                    <option value="20">20</option>
-                                    <option value="21">21</option>
-                                    <option value="22">22</option>
-                                    <option value="23">23</option>
-                                    <option value="24">24</option>
-                                    <option value="25">25</option>
-                                    <option value="26">26</option>
-                                    <option value="27">27</option>
-                                    <option value="28">28</option>
-                                    <option value="29">29</option>
-                                    <option value="30">30</option>
-                                    <option value="31">31</option>
+                                <select class="form-control select-field-left-border" id="frequency" name="frequency"
+                                        aria-describedby="basic-addin1" tabindex="9" required>
+                                    <option value="1">Daily</option>
+                                    <option value="2">Weekly</option>
+                                    <option value="3">Fort Night</option>
+                                    <option value="4">Monthly</option>
+                                    <option value="5">Bi-Monthly</option>
+                                    <option value="6">Quaterly</option>
+                                    <option value="7">Half Yearly</option>
+                                    <option value="8">Yearly</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group form-group-margin">
-                    <div class="input-group">
-                        <span class="input-group-addon input-group-addon-label">Frequency*</span>
+                    <div class="form-group form-group-margin">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Expiry Date</span>
 
-                        <div class="inner-addon right-addon">
-                            <i class="fa fa-caret-down fa-size"></i>
-                            <select class="form-control select-field-left-border" id="frequency" name="frequency"
-                                    aria-describedby="basic-addin1" tabindex="9" required>
-                                <option value="1">Daily</option>
-                                <option value="2">Weekly</option>
-                                <option value="3">Fort Night</option>
-                                <option value="4">Monthly</option>
-                                <option value="5">Bi-Monthly</option>
-                                <option value="6">Quaterly</option>
-                                <option value="7">Half Yearly</option>
-                                <option value="8">Yearly</option>
-                            </select>
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-calendar hidden-xs fa-size"></i>
+                                <input type="text" class="form-control text-field-left-border date" id="expiryDate"
+                                       name="expiryDate"
+                                       placeholder="Expiry Date" aria-describedby="basic-addon1" tabindex="10"
+                                       required/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-margin" id="paymentSiteDiv">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Payment Site</span>
+
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-globe fa-size"></i>
+                                <input type="text" class="form-control text-field-left-border" name="paymentSite"
+                                       id="paymentSite" placeholder="Payment URL" tabindex="11"/>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group form-group-margin">
-                    <div class="input-group">
-                        <span class="input-group-addon input-group-addon-label">Expiry Date</span>
-
-                        <div class="inner-addon right-addon">
-                            <i class="fa fa-calendar hidden-xs fa-size"></i>
-                            <input type="text" class="form-control text-field-left-border date" id="expiryDate"
-                                   name="expiryDate"
-                                   placeholder="Expiry Date" aria-describedby="basic-addon1" tabindex="10"
-                                   required/>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group form-group-margin" id="paymentSiteDiv">
-                    <div class="input-group">
-                        <span class="input-group-addon input-group-addon-label">Payment Site</span>
-
-                        <div class="inner-addon right-addon">
-                            <i class="fa fa-globe fa-size"></i>
-                            <input type="text" class="form-control text-field-left-border" name="paymentSite"
-                                   id="paymentSite" placeholder="Payment URL" tabindex="11"/>
-                        </div>
-                    </div>
-                </div>
+                <!-- Modal Body -->
+            </form>
         </div>
-        <!-- Modal Body -->
-        </form>
+        <!--modal-content-->
     </div>
-    <!--modal-content-->
-</div>
 </div>
 <!--modal-->
 

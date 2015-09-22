@@ -3,8 +3,90 @@ var pageExpense = {
     localExpense: null,
     defExpenseList: $.Deferred(),
     defSearchResult: $.Deferred(),
+    familyList: null,
+    expenseList: null,
     firstTime: true,
-    openAddExpenseModal: function(){
+    getFamilyList: function () {
+        var url = localStorage.getItem("websiteRoot") + "family/getFamily.php";
+
+        $.getJSON(url, {
+            list: 2
+        }).done(function (data) {
+            pageExpense.setFamilyList(data);
+        }).fail(function (error) {
+
+        });
+    },
+    setFamilyList: function (data) {
+        pageExpense.familyList = data;
+        var familyListString = "";
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].FamilyCode == familyCode) {
+                familyListString += "<option value = " + data[i].FamilyCode + " selected = 'selected'>" + data[i].FamilyName + "</option>";
+            }
+            else {
+                familyListString += "<option value = " + data[i].FamilyCode + ">" + data[i].FamilyName + "</option>";
+            }
+        }
+        $("#holderCode").html(familyListString);
+    },
+    getExpenseList: function () {
+        var url = localStorage.getItem("websiteRoot") + "expense/getExpenseList.php";
+
+        $.getJSON(url, {
+            pageNo: pageExpense.currentPageNo
+        }).done(function (data) {
+            pageExpense.defExpenseList.resolve(data);
+            pageExpense.setExpenseList(data);
+        }).fail(function (error) {
+
+        });
+    },
+    setExpenseList: function (data) {
+
+    },
+    doSearch: function () {
+        $("#expenseList").empty();
+        pageExpense.currentPageNo = 1;
+        pageExpense.firstTime = true;
+        pageExpense.defSearchResult = $.Deferred();
+        pageExpense.getSearchResults();
+        $.when(pageExpense.defSearchResult).done(function (data) {
+            if (data.status == 1)
+                pageExpense.getExpenseDetails(data.result[0].ExpenseCode);
+        });
+    },
+    getSearchResults: function () {
+        var url = localStorage.getItem("websiteRoot") + "expense/getExpenseList.php";
+
+        $.getJSON(url, {
+            pageNo: pageExpense.currentPageNo,
+            searchType: 1,
+            searchText: $('#searchBox').val().trim()
+        }).done(function (data) {
+            pageExpense.defSearchResult.resolve(data);
+            pageExpense.setSearchResults(data);
+        }).fail(function (error) {
+
+        });
+    },
+    setSearchResults: function (data) {
+
+    },
+    getExpenseDetails: function (expenseCode) {
+        if (expenseCode == null)
+            return;
+        var url = localStorage.getItem("websiteRoot") + "expense/getPasswordDetail.php";
+
+        $.getJSON(url, {
+            passwordCode: expenseCode
+        }).done(function (data) {
+            pagePassword.setPasswordDetails(data);
+        }).fail(function (error) {
+
+        });
+    },
+    openAddExpenseModal: function () {
         document.getElementById("expenseForm").reset();
         $('#addPrivacy').attr('checked', false);
         $('#addActiveStatus').attr('checked', true);
@@ -15,7 +97,7 @@ var pageExpense = {
         $('#expenseModalHeading').empty().html("Add Expense");
         $('#expenseModal').modal('show');
     },
-    openEditExpenseModal: function(){
+    openEditExpenseModal: function () {
         document.getElementById("expenseForm").reset();
         // $("#form-add-edit-mode").val("M");
 
@@ -30,14 +112,17 @@ var pageExpense = {
         $("#form-delete-code").val(expenseCode);
         $("#deleteModal").modal("show");
     },
-    openVoucherExpenseModal: function (){
+    openVoucherExpenseModal: function () {
         window.location.href = "../expense/voucher/";
     }
 };
 
 $(document).ready(function () {
-    if(window.innerWidth < 992)
-    {
+    localStorage.setItem("websiteRoot", "../");
+
+    pageExpense.getFamilyList();
+
+    if (window.innerWidth < 992) {
         $("#billingDayDiv").removeClass("first-col-left-padding first-col-right-padding");
         $("#dueDayDiv").removeClass("second-col-left-padding second-col-right-padding");
 
@@ -46,14 +131,14 @@ $(document).ready(function () {
     }
 });
 
-$(window).resize(function(){
-    if(window.innerWidth < 992) {
+$(window).resize(function () {
+    if (window.innerWidth < 992) {
         $("#billingDayDiv").removeClass("first-col-left-padding first-col-right-padding");
         $("#dueDayDiv").removeClass("second-col-left-padding second-col-right-padding");
 
         $("#billingDayDiv").addClass("mobile-col-padding-remove");
         $("#dueDayDiv").addClass("mobile-col-top-padding mobile-col-padding-remove");
-    } else{
+    } else {
         $("#billingDayDiv").addClass("first-col-left-padding first-col-right-padding");
         $("#dueDayDiv").addClass("second-col-left-padding second-col-right-padding");
 
