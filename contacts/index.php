@@ -1084,7 +1084,7 @@ echo $navbar_str;
                                     <input type='file' id="imgInput" name="fileToUpload"
                                            style="padding-bottom:10px;" required/>
 
-                                    <p id="imageErrorMsg"></p>
+                                    <p id="imageErrorMsg" class="info"></p>
 
                                     <div class="delete-btn-padding">
                                         <button type="button" class="btn btn-danger" id="deleteImageBtn"

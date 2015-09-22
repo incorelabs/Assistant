@@ -155,10 +155,19 @@ li {
     display: none;
 }
 
-img {
+.img-size {
     height: 40px;
     width: 40px;
     margin-right: 20px;
+}
+
+
+.addImage {
+    display: block;
+    max-width: 200px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
 }
 
 .overlay {
@@ -322,12 +331,6 @@ h5 {
     color: #333;
     background-color: #fff;
     border-color: #ccc;
-}
-
-.addImage {
-    width: 150px;
-    height: 150px;
-    border-radius: 10px;
 }
 
 .loading {

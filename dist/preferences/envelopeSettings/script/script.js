@@ -22,7 +22,7 @@ var pageEnvelopeSettings = {
             var imageURL = "";
 
             if (data[i]['LogoPath'])
-                imageURL = localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + data[i]['LogoPath'];
+                imageURL = localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + data[i]['LogoPath'] + "&rand=" + new Date().getTime();
             else
                 imageURL = "../../img/default/preferences/logo.png";
 
@@ -306,7 +306,7 @@ $(document).ready(function () {
         document.getElementById("logoForm").reset();
         $('#photoId').val(pageEnvelopeSettings.envelopeDetails.CoverCode);
         if (pageEnvelopeSettings.envelopeDetails.LogoPath) {
-            $("#imagePreview").attr("src", localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + pageEnvelopeSettings.envelopeDetails.LogoPath);
+            $("#imagePreview").attr("src", localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + pageEnvelopeSettings.envelopeDetails.LogoPath  + "&rand=" + new Date().getTime());
             $("#deleteImageBtn").removeClass("hidden");
         } else {
             $("#imagePreview").attr("src", "../../img/default/preferences/logo.png");

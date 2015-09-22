@@ -181,7 +181,7 @@ var pageContact = {
             else
                 imageURL = "../img/default/contact/profilePicture.png";
 
-            contactDetailsString += "<div class='row contact-details'><div class='image'><a class='clickable' onclick='pageContact.openProfilePicModal();' class='clickable'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded pull-left'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>" + ((data.detail.contact.TitleName) ? data.detail.contact.TitleName + " " : "") + ((data.detail.contact.FullName) ? data.detail.contact.FullName : "") + "</h5></div>";
+            contactDetailsString += "<div class='row contact-details'><div class='image'><a class='clickable' onclick='pageContact.openProfilePicModal();' class='clickable'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded pull-left img-size'/><div class='overlay img-rounded pull-left'><span class='glyphicon glyphicon-pencil' style='padding-top:10px'></span></div></a></div><div class='header_font'>Name</div><h5 class='list-group-item-heading'>" + ((data.detail.contact.TitleName) ? data.detail.contact.TitleName + " " : "") + ((data.detail.contact.FullName) ? data.detail.contact.FullName : "") + "</h5></div>";
 
             contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Guardian</div><value><div class='col-md-9'>" + ((data.detail.contact.GuardianName) ? data.detail.contact.GuardianName : "") + "</div></value></div></div>";
 
@@ -1087,7 +1087,7 @@ $(document).ready(function (event) {
             var response = JSON.parse(responseText);
             if (response.status == 1) {
                 $("#imageModal").modal('hide');
-                $("#imageResource").attr("src", localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + response.location);
+                $("#imageResource").attr("src", localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + response.location + "&rand=" + new Date().getTime());
                 pageContact.localContact.contact.ImageURL = response.location;
                 $(".progress").hide();
             } else {
