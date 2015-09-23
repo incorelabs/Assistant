@@ -19,7 +19,7 @@ function createInitialFolders($regCode)
     $path = "../../Assistant_Users/". $regCode;
     if(!file_exists($path)){
         if(mkdir($path)){
-            $folders = array("contacts","investments","assets","documents","preferences","preferences/envelope","preferences/cheque","preferences/label");
+            $folders = array("contacts","investments","assets","documents","preferences","preferences/envelope","preferences/cheque","preferences/label","expense");
 
             foreach($folders as $value){
                 $path = "../../Assistant_Users/". $regCode . "/".$value;

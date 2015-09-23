@@ -3,6 +3,10 @@
 namespace Assistant\Passwords;
 require 'PasswordAutoload.php';
 
+function createResponse($status,$message){
+    return array('status' => $status, 'message' => $message);
+}
+
 //General validation
 do{
     if(!empty($_GET['pageNo'])){

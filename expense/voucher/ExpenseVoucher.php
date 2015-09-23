@@ -39,6 +39,9 @@ class ExpenseVoucher
         if ($result = $this->mysqli->query($sql)) {
             $i = 0;
             while ($row = $result->fetch_assoc()) {
+                if(intval($row["PhotoUploaded"]) == 1){
+                    $row["ImagePath"] = $this->getImagePath($row["VoucherNo"]);
+                }
                 $response[$i] = $row;
                 $i++;
             }
@@ -47,6 +50,18 @@ class ExpenseVoucher
             $response = $this->mysqli->error;
         }
         return $response;
+    }
+
+    function getImagePath($voucherNo){
+        $sql = "SELECT ImagePath FROM Table177 ".$this->where." AND VoucherNo = ".$voucherNo." LIMIT 1";
+        if($result = $this->mysqli->query($sql)){
+            if($result->num_rows == 0){
+                return null;
+            }
+            else{
+                return $result->fetch_assoc()["ImagePath"];
+            }
+        }
     }
 
     function getDeleteQuery(){
@@ -65,6 +80,27 @@ class ExpenseVoucher
 
     function editVoucher(){
         $this->runQuery($this->getUpdateQuery());
+    }
+
+    function setVoucherImagePath(){
+        $sql = "UPDATE Table175 SET PhotoUploaded = 1 WHERE RegCode = ".$this->regCode." AND ExpenseCode = ".$this->expenseCode." AND VoucherNo = ".$this->data["voucherNo"].";";
+        $sql .= "DELETE FROM Table177 WHERE RegCode = ".$this->regCode." AND ExpenseCode = ".$this->expenseCode." AND VoucherNo = ".$this->data["voucherNo"].";";
+        $sql .= "INSERT INTO Table177 VALUES (".$this->regCode.",".$this->expenseCode.",".$this->data["voucherNo"].",".$this->data["imagePath"].",101,null,null);";
+        $this->runMultipleQuery($sql);
+    }
+
+    function deleteVoucherImage(){
+        $fileName = "../../../Assistant_Users/".$this->regCode."/expense/".$this->expenseCode."/".$this->data["voucherNo"].".jpg";
+        if(file_exists($fileName)){
+            unlink($fileName);
+        }
+    }
+
+    function deleteVoucherImagePath(){
+        $this->deleteVoucherImage();
+        $sql = "UPDATE Table175 SET PhotoUploaded = 2 WHERE RegCode = ".$this->regCode." AND ExpenseCode = ".$this->expenseCode." AND VoucherNo = ".$this->data["voucherNo"].";";
+        $sql .= "DELETE FROM Table177 WHERE RegCode = ".$this->regCode." AND ExpenseCode = ".$this->expenseCode." AND VoucherNo = ".$this->data["voucherNo"].";";
+        $this->runMultipleQuery($sql);
     }
 
     function generateVoucherCode(){
@@ -99,6 +135,22 @@ class ExpenseVoucher
         else{
             $this->response = $this->createResponse(0,"Error occurred while uploading to the database: ".$this->mysqli->error);
         }
+    }
+
+    function runMultipleQuery($sql){
+        if ($this->mysqli->multi_query($sql) === TRUE) {
+            $this->response = $this->createResponse(1,"Successful");
+            while($this->mysqli->more_results()){
+                $this->mysqli->next_result();
+                if($result = $this->mysqli->store_result()){
+                    $result->free();
+                }
+            }
+        }
+        else{
+            $this->response = $this->createResponse(0,"Error occurred while uploading to the database: ".$this->mysqli->error);
+        }
+
     }
 
     function cleanData(){
@@ -151,9 +203,12 @@ class ExpenseVoucher
             $this->mode = 2;
         } elseif ($this->data["mode"] == "D") {
             $this->mode = 3;
-        } elseif ($this->data["mode"] == "DI") {
+        } elseif ($this->data["mode"] == "AI") {
             $this->mode = 4;
+        } elseif ($this->data["mode"] == "DI") {
+            $this->mode = 5;
         }
+
 
         $this->cleanData();
 
@@ -168,9 +223,12 @@ class ExpenseVoucher
             case 3:
                 $this->deleteVoucher();
                 break;
-            /*case 4:
-                $this->deleteLabelLogo();
-                break;*/
+            case 4:
+                $this->setVoucherImagePath();
+                break;
+            case 5:
+                $this->deleteVoucherImagePath();
+                break;
         }
     }
 
