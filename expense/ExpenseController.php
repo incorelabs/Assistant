@@ -144,7 +144,7 @@ class ExpenseController
         $expenseRemarks = ((!empty($this->data["expenseRemarks"])) ? "'".$this->data["expenseRemarks"]."'" : "NULL");
         $expenseFrequency = $this->data["expenseFrequency"];
         $contactCode = $this->data["contactCode"];
-        $dueTo = "'".$this->data["dueTo"]."'";
+        $dueTo = "'".$this->data["fullName"]."'";
         $billingDay = $this->data["billingDay"];
         $dueDay = $this->data["dueDay"];
         $expiryDate = ((!empty($this->data["expiryDate"])) ? "'".$this->data["expiryDate"]."'" : "NULL");
