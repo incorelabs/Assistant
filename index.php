@@ -230,7 +230,23 @@
     <script src="dist/script/jquery.mmenu.min.all.js"></script>
     <script type="text/javascript">
 		$(function() {
-			$('nav#menu').mmenu();
+			$('nav#menu').mmenu({
+				extensions	: [ 'effect-slide-menu', 'pageshadow' ],
+				searchfield	: true,
+				counters	: true,
+				navbars		: [
+					{
+						position	: 'top',
+						content		: [ 'searchfield' ]
+					}, {
+						position	: 'top',
+						content		: [
+							'prev',
+							'title'
+						]
+					}
+				]
+			});
 		});
 	</script>
 </head>
