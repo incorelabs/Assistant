@@ -52,15 +52,19 @@ class LabelSettings
     }
 
     function deleteLabel(){
+        $this->deleteLabelLogoFile();
         $this->runQuery($this->getDeleteQuery());
     }
 
-    function deleteLabelLogo(){
+    function deleteLabelLogoFile(){
         $fileName = "../../../Assistant_Users/".$this->regCode."/preferences/label/".$this->data['labelCode'].".jpg";
         if(file_exists($fileName)){
             unlink($fileName);
         }
+    }
 
+    function deleteLabelLogo(){
+        $this->deleteLabelLogoFile();
         $sql = "UPDATE Table139 SET LogoPath = NULL WHERE LabelCode = ".$this->data['labelCode']." AND RegCode = ".$this->regCode;
         $this->runQuery($sql);
     }

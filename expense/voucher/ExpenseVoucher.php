@@ -69,6 +69,7 @@ class ExpenseVoucher
     }
 
     function deleteVoucher(){
+        $this->deleteVoucherImage();
         $this->runQuery($this->getDeleteQuery());
     }
 
