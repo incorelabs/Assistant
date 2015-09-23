@@ -127,6 +127,9 @@ li.mm-vertical.mm-opened > .mm-panel {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden; }
+  .mm-title {
+      margin-top: 10px !important;
+  }
   .mm-navbar .mm-btn {
     box-sizing: border-box;
     width: 40px;
@@ -400,7 +403,7 @@ em.mm-counter {
   right: 45px;
   top: 50%; }
   em.mm-counter + a.mm-next {
-    width: 90px; }
+    width: 70px; }
     em.mm-counter + a.mm-next + a,
     em.mm-counter + a.mm-next + span {
       margin-right: 90px; }
@@ -724,7 +727,7 @@ html.mm-opened.mm-dragging #mm-blocker {
   .mm-panel.mm-hassearch.mm-hasnavbar {
     padding-top: 80px; }
     .mm-panel.mm-hassearch.mm-hasnavbar .mm-search {
-      top: 40px; }
+      top: 55px; }
 
 .mm-noresultsmsg {
   text-align: center;

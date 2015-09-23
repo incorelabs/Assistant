@@ -28,8 +28,11 @@ include_once ROOT . 'dist/authenticate.php';
     <link type="text/css" rel="stylesheet" href="../dist/css/jquery_sidebar.css"/>
     <script type="text/javascript" src="../dist/script/jquery.mmenu.min.all.js"></script>
     <script type="text/javascript">
-        $(function () {
-            $('nav#menu').mmenu();
+        $(function() {
+            $('nav#menu').mmenu({
+                extensions	: [ 'effect-slide-menu', 'pageshadow' ],
+                searchfield	: true
+            });
         });
     </script>
 </head>

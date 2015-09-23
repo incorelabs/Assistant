@@ -232,20 +232,7 @@
 		$(function() {
 			$('nav#menu').mmenu({
 				extensions	: [ 'effect-slide-menu', 'pageshadow' ],
-				searchfield	: true,
-				counters	: true,
-				navbars		: [
-					{
-						position	: 'top',
-						content		: [ 'searchfield' ]
-					}, {
-						position	: 'top',
-						content		: [
-							'prev',
-							'title'
-						]
-					}
-				]
+				searchfield	: true
 			});
 		});
 	</script>

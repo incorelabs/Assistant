@@ -28,9 +28,12 @@
     <link rel="stylesheet" href="dist/css/sidebar.css" />
     <link rel="stylesheet" href="dist/css/jquery_sidebar.css" />
     <script src="dist/script/jquery.mmenu.min.all.js"></script>
-    <script type="text/javascript">
+	<script type="text/javascript">
 		$(function() {
-			$('nav#menu').mmenu();
+			$('nav#menu').mmenu({
+				extensions	: [ 'effect-slide-menu', 'pageshadow' ],
+				searchfield	: true
+			});
 		});
 	</script>
   </head>

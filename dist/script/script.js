@@ -231,9 +231,16 @@ var pageIndex = {
         $("#notification_failure").html(failureMessage);
         document.getElementById('notification_failure').style.display = "block";
         $("#notification_failure").delay(2000).fadeOut("slow");
+    },
+    openProfilePictureModal: function(){
+        $("#profilePictureModal").modal("show");
     }
 };
 $(document).ready(function () {
+
+    $('#navbarProfilePicture').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
+    $('#profileImagePreview').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
+
     $(".logout").click(function (event) {
         var url = localStorage.getItem("websiteRoot") + "api/logout.php";
 
