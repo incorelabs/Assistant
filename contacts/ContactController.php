@@ -119,6 +119,7 @@ class ContactController
         }
 
         if($valid){
+            $this->deleteContactImageFile();
             $this->runMultipleQuery($this->getDeleteQuery());
             if($this->countContactList() == 0){
                 $this->landing = null;
@@ -130,12 +131,15 @@ class ContactController
         }
     }
 
-    function deleteContactImage(){
+    function deleteContactImageFile(){
         $fileName = "../../Assistant_Users/".$this->regCode."/contacts/".$this->data['contactCode'].".jpg";
         if(file_exists($fileName)){
             unlink($fileName);
         }
+    }
 
+    function deleteContactImage(){
+        $this->deleteContactImageFile();
         $sql = "UPDATE Table151 SET PhotoUploaded = 2 WHERE ContactCode = ".$this->data['contactCode']." AND RegCode = ".$this->regCode.";";
         $sql .= "DELETE FROM Table159 WHERE ContactCode = ".$this->data["contactCode"]." AND RegCode =".$this->regCode." AND SerialNo = 1;";
         $this->runMultipleQuery($sql);

@@ -52,15 +52,19 @@ class EnvelopeSettings
     }
 
     function deleteEnvelope(){
+        $this->deleteEnvelopeLogoFile();
         $this->runQuery($this->getDeleteQuery());
     }
 
-    function deleteEnvelopeLogo(){
+    function deleteEnvelopeLogoFile(){
         $fileName = "../../../Assistant_Users/".$this->regCode."/preferences/envelope/".$this->data['coverCode'].".jpg";
         if(file_exists($fileName)){
             unlink($fileName);
         }
+    }
 
+    function deleteEnvelopeLogo(){
+        $this->deleteEnvelopeLogoFile();
         $sql = "UPDATE Table135 SET LogoPath = NULL WHERE CoverCode = ".$this->data['coverCode']." AND RegCode = ".$this->regCode;
         $this->runQuery($sql);
     }
