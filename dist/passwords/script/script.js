@@ -103,7 +103,6 @@ var pagePassword = {
                 var loadMoreString = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pagePassword.getSearchResults();'>Load more..</a></div>";
                 $("#passwordList").append(loadMoreString);
             }
-
         } else {
             var noMoreDataString = "<div class='list-group-item list-border-none'><li class='list-group-item-text header_font'>";
             noMoreDataString += data.message + "</li></div>";
@@ -136,7 +135,7 @@ var pagePassword = {
             if (window.innerWidth < 992 && !pagePassword.firstTime) {
                 //Show the Password Details Header and hides the search header
                 $("#searchPasswordHeader").addClass('hidden');
-                $("#passwordDetailsHeader").removeClass('hidden-xs hidden-sm');
+                $("#passwordDetailHeader").removeClass('hidden-xs hidden-sm');
 
                 //Show the Password Details and hides the password list
                 $("#passwordListDiv").addClass('hidden');
@@ -148,7 +147,7 @@ var pagePassword = {
 
                 $("#backButton").click(function () {
                     //Show the Password Details Header and hides the search header
-                    $("#passwordDetailsHeader").addClass('hidden-xs hidden-sm');
+                    $("#passwordDetailHeader").addClass('hidden-xs hidden-sm');
                     $("#searchPasswordHeader").removeClass('hidden');
 
                     //Show the Password Details and hides the password list
@@ -183,7 +182,6 @@ var pagePassword = {
         } else {
             pagePassword.localPassword = null;
         }
-
     },
     morphPassword: function (passwordText, passwordType) {
         switch (passwordType) {
@@ -479,7 +477,7 @@ $(document).ready(function () {
 
         $("#passwordDetail").removeClass("panelHeight");
         $("#passwordDetailDiv").addClass("mobileBody");
-        $("#passwordDetailsHeader").addClass("mobileHeader");
+        $("#passwordDetailHeader").addClass("mobileHeader");
     }
 });
 $(window).resize(function () {
@@ -492,7 +490,7 @@ $(window).resize(function () {
 
         $("#passwordDetail").removeClass("panelHeight");
         $("#passwordDetailDiv").addClass("mobileBody");
-        $("#passwordDetailsHeader").addClass("mobileHeader");
+        $("#passwordDetailHeader").addClass("mobileHeader");
     }
     else {
 
@@ -504,10 +502,10 @@ $(window).resize(function () {
 
         $("#passwordDetail").addClass("panelHeight");
         $("#passwordDetailDiv").removeClass("mobileBody");
-        $("#passwordDetailsHeader").removeClass("mobileHeader");
+        $("#passwordDetailHeader").removeClass("mobileHeader");
 
         //Show the Password Details Header and hides the search header
-        $("#passwordDetailsHeader").addClass('hidden-xs hidden-sm');
+        $("#passwordDetailHeader").addClass('hidden-xs hidden-sm');
         $("#searchPasswordHeader").removeClass('hidden');
 
         //Show the Password Details and hides the password list

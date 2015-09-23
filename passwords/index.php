@@ -87,13 +87,11 @@ echo $navbar_str;
             </div>
         </div>
 
-        <div class="col-md-7 col-xs-12 col-sm-12 hidden-sm hidden-xs" id="passwordDetailsHeader">
+        <div class="col-md-7 col-xs-12 col-sm-12 hidden-sm hidden-xs" id="passwordDetailHeader">
             <div class="panel panel-default panelHeight list-margin" id="style-3">
                 <div id="passwordDetailHeader" class="panel-heading text-center">
                     <h12>Password Details</h12>
-
                 </div>
-
             </div>
             <!--Panel-->
         </div>
@@ -107,7 +105,6 @@ echo $navbar_str;
                 <div class="panel-height">
                     <!-- List group -->
                     <div id="passwordList" class="list-group force-scroll mobile-list">
-
                     </div>
                     <!--List close-->
                 </div>
