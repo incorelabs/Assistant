@@ -38,7 +38,7 @@ do {
     }
 
     //Validate required fields
-    if (empty($_POST["holderCode"]) || empty($_POST["mode"]) || empty($_POST["expenseTypeName"]) || empty($_POST["expenseTypeCode"]) || empty($_POST["expenseName"]) || empty($_POST["contactCode"]) || empty($_POST["dueTo"]) || empty($_POST["billingDay"]) || empty($_POST["dueDay"]) || empty($_POST["expenseFrequency"])) {
+    if (empty($_POST["holderCode"]) || empty($_POST["mode"]) || empty($_POST["expenseTypeName"]) || empty($_POST["expenseTypeCode"]) || empty($_POST["expenseName"]) || empty($_POST["contactCode"]) || empty($_POST["fullName"]) || empty($_POST["billingDay"]) || empty($_POST["dueDay"]) || empty($_POST["expenseFrequency"])) {
         $validate = false;
         $response = createResponse(0,"Required fields are empty");
         break;
