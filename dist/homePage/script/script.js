@@ -1,6 +1,9 @@
 $(document).ready(function () {
     localStorage.setItem("websiteRoot", "");
 
+    $('#navbarProfilePicture').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
+    $('#accountProfileImagePreview').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
+
     $("#signUpForm").ajaxForm({
         beforeSubmit: function () {
             if (pageIndex.email_count == 1 && pageIndex.pwd_count == 1 && pageIndex.c_pwd_count == 1 && pageIndex.name_count == 1 && pageIndex.country_count == 1 && pageIndex.mobile_count == 1) {

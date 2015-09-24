@@ -86,7 +86,7 @@ hr {
     margin-bottom: 0;
 }
 
-img {
+.img-size {
     height: 40px;
     width: 40px;
 }
@@ -124,14 +124,6 @@ img {
 
 .image:hover .overlay {
     opacity: 0.8;
-}
-
-.addImage {
-    display: block;
-    max-width: 200px;
-    max-height: 200px;
-    width: auto;
-    height: auto;
 }
 
 .text-middle {

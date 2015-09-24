@@ -274,6 +274,27 @@ input[type=number] {
     padding-bottom: 20px;
 }
 
-.dropdown-menu{
+.dropdown-menu-custom{
     margin: -10px -150px 0 !important;
+    max-width: 160px !important;
+}
+
+.dropdown-menu-custom > li > a {
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    text-align: center !important;
+    padding: 3px 10px !important;
+}
+
+.account-img-modal{
+    margin-left: -15px !important;
+    margin-right: -15px !important;
+}
+
+.addImage {
+    display: block;
+    max-width: 200px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
 }

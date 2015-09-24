@@ -29,8 +29,7 @@ include_once ROOT . 'dist/authenticate.php';
         $(function() {
             $('nav#menu').mmenu({
                 extensions	: [ 'effect-slide-menu', 'pageshadow' ],
-                searchfield	: true,
-                counters	: true
+                searchfield	: true
             });
         });
     </script>

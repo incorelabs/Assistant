@@ -161,15 +161,6 @@ li {
     margin-right: 20px;
 }
 
-
-.addImage {
-    display: block;
-    max-width: 200px;
-    max-height: 200px;
-    width: auto;
-    height: auto;
-}
-
 .overlay {
     background:#f1f1f1;
     text-align:center;

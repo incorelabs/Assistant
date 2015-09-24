@@ -286,6 +286,9 @@ var pageFamily = {
 $(document).ready(function () {
     localStorage.setItem("websiteRoot", "../");
 
+    $('#navbarProfilePicture').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
+    $('#accountProfileImagePreview').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
+
     if (familyCode == 1001) {
         // isParentLoggedIn = true; Implies Parent
         pageFamily.isParentLoggedIn = true;

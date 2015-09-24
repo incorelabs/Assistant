@@ -135,7 +135,7 @@ var pagePassword = {
             if (window.innerWidth < 992 && !pagePassword.firstTime) {
                 //Show the Password Details Header and hides the search header
                 $("#searchPasswordHeader").addClass('hidden');
-                $("#passwordDetailHeader").removeClass('hidden-xs hidden-sm');
+                $("#passwordDetailsHeaderDiv").removeClass('hidden-xs hidden-sm');
 
                 //Show the Password Details and hides the password list
                 $("#passwordListDiv").addClass('hidden');
@@ -147,7 +147,7 @@ var pagePassword = {
 
                 $("#backButton").click(function () {
                     //Show the Password Details Header and hides the search header
-                    $("#passwordDetailHeader").addClass('hidden-xs hidden-sm');
+                    $("#passwordDetailsHeaderDiv").addClass('hidden-xs hidden-sm');
                     $("#searchPasswordHeader").removeClass('hidden');
 
                     //Show the Password Details and hides the password list
@@ -477,7 +477,7 @@ $(document).ready(function () {
 
         $("#passwordDetail").removeClass("panelHeight");
         $("#passwordDetailDiv").addClass("mobileBody");
-        $("#passwordDetailHeader").addClass("mobileHeader");
+        $("#passwordDetailsHeaderDiv").addClass("mobileHeader");
     }
 });
 $(window).resize(function () {
@@ -490,7 +490,7 @@ $(window).resize(function () {
 
         $("#passwordDetail").removeClass("panelHeight");
         $("#passwordDetailDiv").addClass("mobileBody");
-        $("#passwordDetailHeader").addClass("mobileHeader");
+        $("#passwordDetailsHeaderDiv").addClass("mobileHeader");
     }
     else {
 
@@ -502,10 +502,10 @@ $(window).resize(function () {
 
         $("#passwordDetail").addClass("panelHeight");
         $("#passwordDetailDiv").removeClass("mobileBody");
-        $("#passwordDetailHeader").removeClass("mobileHeader");
+        $("#passwordDetailsHeaderDiv").removeClass("mobileHeader");
 
         //Show the Password Details Header and hides the search header
-        $("#passwordDetailHeader").addClass('hidden-xs hidden-sm');
+        $("#passwordDetailsHeaderDiv").addClass('hidden-xs hidden-sm');
         $("#searchPasswordHeader").removeClass('hidden');
 
         //Show the Password Details and hides the password list

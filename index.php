@@ -9,52 +9,31 @@
 		include_once ROOT.'dist/navbar.php';
 		$str .= $navbar_str."
 				<div class='container' style='padding-top:100px'>
-						<div class='col-lg-6 col-md-12'>
+						<div class='col-lg-12 col-md-12'>
 						<div class='panel panel-primary'>
 							<div class='panel-heading'>Shortcuts</div>
 							<div class='panel-body'>
-								<div class='col-md-4'>
+								<div class='col-lg-2 col-md-3 col-sm-6'>
 									<div class='panel panel-default'>
 										<div class='panel-heading'>
 											<a href='contacts/'>Contacts</a>
 											<span class='badge pull-right'>102</span>
 										</div>
-										<div class='panel-body'>
-											<div class='text-center'>
-												<a href='contacts/'>
-													<span class='glyphicon glyphicon-user' style='font-size:50px'></span>
-												</a>
-											</div>
-										</div>
 									</div>
 								</div>
-								<div class='col-md-4'>
+								<div class='col-lg-2 col-md-3 col-sm-6'>
 									<div class='panel panel-default'>
 										<div class='panel-heading'>
 											<a href='family/'>Family</a>
 											<span class='badge pull-right'>3</span>
 										</div>
-										<div class='panel-body'>
-											<div class='text-center'>
-												<a href='family/'>
-													<span class='glyphicon glyphicon-home' style='font-size:50px'></span>
-												</a>
-											</div>
-										</div>
 									</div>
 								</div>
-								<div class='col-md-4'>
+								<div class='col-lg-2 col-md-3 col-sm-6'>
 									<div class='panel panel-default'>
 										<div class='panel-heading'>
 											<a href='contacts/'>Investments</a>
 											<span class='badge pull-right'>41</span>
-										</div>
-										<div class='panel-body'>
-											<div class='text-center'>
-												<a href='#/'>
-													<span class='glyphicon glyphicon-briefcase' style='font-size:50px'></span>
-												</a>
-											</div>
 										</div>
 									</div>
 								</div>
@@ -62,48 +41,6 @@
 						</div>
 					</div>
 					<div class='col-lg-6 col-md-12'>
-						<div class='panel panel-danger'>
-							<div class='panel-heading'>Upcoming Events</div>
-							<!-- Table -->
-								<table class='table'>
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Event</th>
-											<th>Date</th>
-											<th>Desc</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><i class='fa fa-birthday-cake'></i></td>
-											<td>Birthday</td>
-											<td>23/03/2015</td>
-											<td>My Bday</td>
-										</tr>
-										<tr>
-											<td><i class='fa fa-birthday-cake'></i></td>
-											<td>Marriage</td>
-											<td>07/12/2015</td>
-											<td>Vishal's Marriage</td>
-										</tr>
-										<tr>
-											<td><i class='fa fa-envelope-o'></i></td>
-											<td>Meeting&nbsp;<span class='badge badge-red'>!</span></td>
-											<td>01/12/2015</td>
-											<td>Client Meeting</td>
-										</tr>
-										<tr>
-											<td><i class='fa fa-envelope-o'></i></td>
-											<td>Meeting&nbsp;<span class='badge badge-green'>!</span></td>
-											<td>15/12/2015</td>
-											<td>Client Meeting</td>
-										</tr>
-									</tbody>
-								</table>
-						</div>
-					</div>
-						<div class='col-lg-6 col-md-12'>
 						<div class='panel panel-success'>
 							<div class='panel-heading'>Reminders</div>
 							<!-- Table -->

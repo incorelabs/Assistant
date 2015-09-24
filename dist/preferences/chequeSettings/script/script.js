@@ -227,6 +227,9 @@ var pageChequeSettings = {
 $(document).ready(function () {
     localStorage.setItem("websiteRoot", "../../");
 
+    $('#navbarProfilePicture').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
+    $('#accountProfileImagePreview').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
+
     console.log(window.innerWidth);
     if (window.innerWidth < 500) {
         $(':input').removeAttr('placeholder');

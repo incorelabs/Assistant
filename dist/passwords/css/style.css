@@ -77,29 +77,6 @@ li {
     display: none;
 }
 
-img {
-    height: 40px;
-    width: 40px;
-    margin-right: 20px;
-}
-
-.overlay {
-    display: none;
-}
-
-.image:hover .overlay {
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    margin-right: 20px;
-    top: 10px;
-    left: 15px;
-    display: inline-block;
-    background-color: #f1f1f1;
-    opacity: 0.8;
-    text-align: center;
-}
-
 .btn-size {
     width: 13%;
 }
@@ -314,12 +291,6 @@ h5 {
     color: #333;
     background-color: #fff;
     border-color: #ccc;
-}
-
-.addImage {
-    width: 150px;
-    height: 150px;
-    border-radius: 10px;
 }
 
 .loading {

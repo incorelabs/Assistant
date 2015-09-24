@@ -987,6 +987,10 @@ var pageContact = {
 $(document).ready(function (event) {
     localStorage.setItem("websiteRoot", "../");
 
+    $('#navbarProfilePicture').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
+    $('#profileImagePreview').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
+
+
     document.getElementById('searchBox').onkeypress = function (e) {
         if (!e)
             e = window.event;

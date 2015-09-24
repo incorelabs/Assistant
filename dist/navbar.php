@@ -9,8 +9,8 @@
     <div class='dropdown' style='float:right; right:-25px'>
     <a class='dropdown-toggle' data-toggle='dropdown'>
     <span class='fa fa-user fa-lg'></span><i class='fa fa-caret-down'></i></a>
-    <ul class='dropdown-menu'>
-      <li><a href='#' class='text-center' onclick='pageIndex.openProfilePictureModal()'><img class='img-rounded' width='100px' height='100px' id='navbarProfilePicture'/></a></li>
+    <ul class='dropdown-menu dropdown-menu-custom'>
+      <li><a href='#' class='text-center' onclick='pageIndex.openAccountProfilePictureModal()'><img class='img-rounded' width='100px' height='100px' id='navbarProfilePicture'/></a></li>
       <li><a href='#' style='pointer-events: none; cursor: default;'>".$_SESSION['name']."</a></li>
       <li class='divider'></li>
       <li><a href='#'>Account Info</a></li>
@@ -23,52 +23,31 @@
 			<li>
 				<a href='".$root_location."'>Dashboard</a>
 			</li>
-			<li><a href='#mm-2' data-target='#mm-2'>Contacts</a>
-				<ul>
-					<li><a href='".$root_location."contacts'>Contact Details</a></li>
-					<li><a href='#'>Events</a></li><li><a href='#'>Event Allocation</a></li>
-					<li><a href='#'>Labels</a></li>
+			<li><a href='".$root_location."contacts'>Contacts</a></li>
+			<li><a href='#'>Investment</a></li>
+			<li><a href='#'>Assets</a></li>
+			<li><a href='#'>Documents</a></li>
+			<li><a href='".$root_location."expense'>Expense</a></li>
+			<li><a href='".$root_location."income'>Income</a></li>
+			<li><a href='".$root_location."passwords'>Passwords</a></li>
+			<li><a href='#'>Events</a></li>
+			<li><a href='#'>Reminders</a></li>
+			<li><a href='#mm-2' data-target='#mm-2'>Reports</a>
+			    <ul>
+			        <li><a href='#'>Labels</a></li>
 					<li><a href='#'>Address Diary</a></li>
 					<li><a href='#'>Telephone Index</a></li>
 					<li><a href='#'>Birthday List</a></li>
 					<li><a href='#'>Anniversary List</a></li>
-					<li><a href='#'>Event Status</a></li>
-				</ul>
-			</li>
-			<li><a href='#mm-3' data-target='#mm-3'>Investments</a>
-				<ul>
-					<li><a href='#'>Investment Details</a></li>
 					<li><a href='#'>Investment Status</a></li>
-				</ul>
-			</li>
-			<li><a href='#mm-4' data-target='#mm-4'>Assets</a>
-				<ul>
-					<li><a href='#'>Assets Details</a></li>
 					<li><a href='#'>Assets Status</a></li>
-				</ul>
-			</li>
-			<li><a href='#mm-5' data-target='#mm-5'>Documents</a>
-				<ul>
-					<li><a href='#'>Document Details</a></li>
 					<li><a href='#'>Document Status</a></li>
-				</ul>
-			</li>
-			<li><a href='#mm-6' data-target='#mm-6'>Expense</a>
-				<ul>
-					<li><a href='".$root_location."expense'>Expense Details</a></li>
 					<li><a href='#'>Expense Status</a></li>
-				</ul>
-			</li>
-			<li><a href='#mm-7' data-target='#mm-7'>Income</a>
-				<ul>
-					<li><a href='".$root_location."income'>Income Details</a></li>
 					<li><a href='#'>Income Status</a></li>
-				</ul>
+					<li><a href='#'>Consolidate</a></li>
+			    </ul>
 			</li>
-			<li><a href='".$root_location."passwords'>Password</a></li>
-			<li><a href='#'>Reminder</a></li>
-			<li><a href='#'>Consolidate</a></li>
-			<li><a href='#mm-8' data-target='#mm-8'>Preferences</a>
+			<li><a href='#mm-3' data-target='#mm-3'>Preferences</a>
 				<ul>
 					<li><a href='".$root_location."family'>Family</a></li>
 					<li><a href='".$root_location."preferences/changePassword.php'>Change Password</a></li>
@@ -85,12 +64,12 @@
 </div>
 
 <!-- Image Modal -->
-<div class='modal fade' id='profilePictureModal' tabindex='-1' role='dialog' aria-labelledby='profilePictureModal' aria-hidden='true'
+<div class='modal fade' id='accountProfilePictureModal' tabindex='-1' role='dialog' aria-labelledby='accountProfilePictureModal' aria-hidden='true'
      data-backdrop='static'>
     <div class='modal-dialog modal-md'>
         <div class='modal-content'>
 
-            <form class='form-horizontal' method='POST' action='upload.php' enctype='multipart/form-data' id='profilePictureForm'
+            <form class='form-horizontal' method='POST' action='upload.php' enctype='multipart/form-data' id='accountProfilePictureForm'
                   runat='server'>
 
                 <div class='modal-header'>
@@ -115,22 +94,22 @@
                 </div>
 
                 <div class='modal-body'>
-                    <input type='text' class='hidden' name='labelCode' id='photoId'/>
+                    <input type='text' class='hidden' name='labelCode' id='accountPhotoId'/>
 
-                    <div class='form-group row'>
+                    <div class='form-group row account-img-modal'>
                         <center>
                             <div class='col-sm-12 col-md-12'>
                                 <div class='col-lg-6 col-md-6 col-sm-5'>
                                     <label class='control-label'>Select Image</label>
                                     <br>
                                     <br>
-                                    <input type='file' id='profileImgInput' name='ProfileFileToUpload'
+                                    <input type='file' id='accountProfileImgInput' name='ProfileFileToUpload'
                                            style='padding-bottom:10px;' required/>
 
                                     <p id='imageErrorMsg' class='info'></p>
 
                                     <div class='delete-btn-padding'>
-                                        <button type='button' class='btn btn-danger' id='deleteProfileImageBtn'>
+                                        <button type='button' class='btn btn-danger' id='accountProfileDeleteImageBtn'>
                                             Delete Image
                                         </button>
                                     </div>
@@ -139,8 +118,7 @@
                                     <label class='control-label'>Image Preview</label>
                                     <br>
                                     <br>
-                                    <img id='profileImagePreview'
-                                         class='addImage'>
+                                    <img id='accountProfileImagePreview' class='addImage'>
                                 </div>
                             </div>
                         </center>

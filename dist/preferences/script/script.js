@@ -1,5 +1,9 @@
 $(document).ready(function () {
     localStorage.setItem("websiteRoot", "../");
+
+    $('#navbarProfilePicture').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
+    $('#accountProfileImagePreview').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
+
     $("#changePasswordForm").ajaxForm({
         beforeSubmit: function () {
             $(".cover").fadeIn(100);
