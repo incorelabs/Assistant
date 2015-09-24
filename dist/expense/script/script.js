@@ -40,6 +40,7 @@ var pageExpense = {
         $.getJSON(url, {
             pageNo: pageExpense.currentPageNo
         }).done(function (data) {
+            console.log(data);
             pageExpense.defExpenseList.resolve(data);
             pageExpense.setExpenseList(data);
         }).fail(function (error) {
@@ -200,12 +201,18 @@ var pageExpense = {
         $("#form-add-edit-mode").val("A");
         $("#form-add-edit-code").val(1);
 
+        $("#fullName").closest(".form-group").removeClass("has-warning");
+        $("#fullName").closest('.form-group').find('.info').empty();
+
         $('#expenseModalHeading').empty().html("Add Expense");
         $('#expenseModal').modal('show');
     },
     openEditExpenseModal: function () {
         document.getElementById("expenseForm").reset();
         $("#form-add-edit-mode").val("M");
+
+        $("#fullName").closest(".form-group").removeClass("has-warning");
+        $("#fullName").closest('.form-group').find('.info').empty();
 
         $('#expenseModalHeading').empty().html("Edit Expense");
 
@@ -353,25 +360,31 @@ var pageExpense = {
         });
     },
     setDueToAutoComplete: function () {
-
-
         $("#fullName").autocomplete({
             source: pageExpense.dueToTag,
             response: function (event, ui) {
                 var index = $.inArray($(event.target).val(), pageExpense.dueToTag);
+                var formGroup = $(this).closest(".form-group");
                 if (index > -1) {
-                    var formGroup = $(this).closest(".form-group");
                     formGroup.addClass("has-warning");
-                    $(this).closest('.form-group').find('.info').html("A New Contact Will Be Created");
+                    $(this).closest('.form-group').find('.info').html("A New Contact Will Be Created.");
                     console.log("new contact will be created");
                     // show a red error that new contact will be created.
                     console.log("not selected but value is in array");
+                } else {
+                    formGroup.removeClass("has-warning");
+                    $(this).closest('.form-group').find('.info').empty();
                 }
                 $("#contactCode").val(1);
             },
             select: function (event, ui) {
                 console.log(ui);
                 console.log("Selected");
+
+                var formGroup = $(this).closest(".form-group");
+                formGroup.removeClass("has-warning");
+                $(this).closest('.form-group').find('.info').empty();
+
                 var index = $.inArray(ui.item.value, pageExpense.dueToTag);
                 console.log(index);
                 $("#contactCode").val(pageExpense.dueToCode[index]);
@@ -418,6 +431,101 @@ $(document).ready(function () {
             });
         }
     });
+
+    $("#fullName").focusout(function () {
+        if($(this).val().trim() == "") {
+            var formGroup = $(this).closest(".form-group");
+            formGroup.removeClass("has-warning");
+            $(this).closest('.form-group').find('.info').empty();
+            $("#contactCode").val(1);
+        }
+    });
+
+    $("#expenseForm").ajaxForm({
+        beforeSubmit: function (formData) {
+            console.log(formData);
+            for (var i = 0; i < formData.length; i++) {
+                if (formData[i].required && formData[i].value.trim() == "") {
+                    pageIndex.showNotificationFailure("Required fields are empty");
+                    return false;
+                }
+            }
+            $(".cover").fadeIn(100);
+            $("#pageLoading").addClass("loader");
+        },
+        success: function (responseText, statusText, xhr, $form) {
+            var response = JSON.parse(responseText);
+            if (response.status == 1) {
+                setTimeout(function () {
+                    pageExpense.currentPageNo = 1;
+                    $("#expenseList").empty();
+                    $("#expenseDetailBody").empty();
+                    $("#editExpenseBtn").remove();
+                    $("#deleteExpenseBtn").remove();
+                    $("#voucherExpenseBtn").remove();
+                    pageExpense.getExpenseDetails(response.landing);
+                    pageExpense.getExpenseList();
+                    pageIndex.showNotificationSuccess(response.message);
+                    pageExpense.getExpenseTypeList();
+                    pageExpense.getDueToList();
+                    $("#expenseModal").modal("hide");
+                }, 500);
+            } else {
+                pageIndex.showNotificationFailure(response.message);
+                $("#pageLoading").removeClass("loader");
+                $(".cover").fadeOut(100);
+            }
+        },
+        error: function () {
+            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            $("#pageLoading").removeClass("loader");
+            $(".cover").fadeOut(100);
+        }
+    });
+
+    $('#expenseModal').on('hidden.bs.modal', function (e) {
+        $("#pageLoading").removeClass("loader");
+        $(".cover").fadeOut(100);
+    });
+
+    $("#deleteExpenseForm").ajaxForm({
+        beforeSubmit: function () {
+            $(".cover").fadeIn(100);
+            $("#pageLoading").addClass("loader");
+        },
+        success: function (responseText, statusText, xhr, $form) {
+            var response = JSON.parse(responseText);
+            if (response.status == 1) {
+                setTimeout(function () {
+                    pageExpense.currentPageNo = 1;
+                    $("#expenseList").empty();
+                    $("#expenseDetailBody").empty();
+                    $("#editExpenseBtn").remove();
+                    $("#deleteExpenseBtn").remove();
+                    $("#voucherExpenseBtn").remove();
+                    pageIndex.showNotificationSuccess(response.message);
+                    pageExpense.getExpenseList();
+                    pageExpense.getExpenseDetails(response.landing);
+                    $("#deleteModal").modal("hide");
+                }, 500);
+            } else {
+                pageIndex.showNotificationFailure(response.message);
+                $("#pageLoading").removeClass("loader");
+                $(".cover").fadeOut(100);
+            }
+        },
+        error: function () {
+            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            $("#pageLoading").removeClass("loader");
+            $(".cover").fadeOut(100);
+        }
+    });
+
+    $('#deleteModal').on('hidden.bs.modal', function (e) {
+        $("#pageLoading").removeClass("loader");
+        $(".cover").fadeOut(100);
+    });
+
 
     if (window.innerWidth < 992) {
         $("#billingDayDiv").removeClass("first-col-left-padding first-col-right-padding");

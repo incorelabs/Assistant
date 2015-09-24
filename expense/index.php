@@ -214,6 +214,7 @@ echo $navbar_str;
                         </div>
                     </div>
                     <div class="form-group form-group-margin">
+                        <div class="info text-center"></div>
                         <div class="input-group">
                             <span class="input-group-addon input-group-addon-label">Due To*</span>
 
@@ -224,7 +225,6 @@ echo $navbar_str;
                                        required/>
                             </div>
                         </div>
-                        <div class="info text-center"></div>
                     </div>
                     <div class="form-group form-group-margin">
                         <div class="input-group">
@@ -367,7 +367,7 @@ echo $navbar_str;
                                 <i class="fa fa-calendar hidden-xs fa-size"></i>
                                 <input type="text" class="form-control text-field-left-border date" name="expiryDate"
                                        id="expiryDate" placeholder="Expiry Date" aria-describedby="basic-addon1"
-                                       tabindex="10" required/>
+                                       tabindex="10"/>
                             </div>
                         </div>
                     </div>
