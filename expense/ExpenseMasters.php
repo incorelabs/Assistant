@@ -30,6 +30,13 @@ class ExpenseMasters
         return $this->runQuery($sql);
     }
 
+    function getContactsList(){
+        $dueToCode = 1001;
+        $sql = "SELECT ContactCode, FullName FROM Table151 WHERE RegCode = ".$this->regCode." AND EmergencyCode = ".$dueToCode;
+
+        return $this->runQuery($sql);
+    }
+
     function runQuery($sql){
         if($result = $this->mysqli->query($sql)){
 

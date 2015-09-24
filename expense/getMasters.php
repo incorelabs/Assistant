@@ -8,7 +8,7 @@
 namespace Assistant\Expense;
 require 'ExpenseAutoload.php';
 
-$response = array();
+$response = null;
 $validate = true;
 
 //Validate Request
@@ -21,12 +21,16 @@ do {
 } while (0);
 
 if($validate){
-    $type = $_GET['type'];
+    $type = intval($_GET['type']);
     $expenseMasters = new ExpenseMasters();
 
     switch($type){
-        case "expenseType":
+        case 1:
             $response = $expenseMasters->getExpenseTypeList();
+            break;
+
+        case 2:
+            $response = $expenseMasters->getContactsList();
             break;
     }
 }
