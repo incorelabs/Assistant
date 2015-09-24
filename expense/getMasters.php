@@ -25,11 +25,11 @@ if($validate){
     $expenseMasters = new ExpenseMasters();
 
     switch($type){
-        case 1:
+        case "expenseType":
             $response = $expenseMasters->getExpenseTypeList();
             break;
 
-        case 2:
+        case "contactList":
             $response = $expenseMasters->getContactsList();
             break;
     }
