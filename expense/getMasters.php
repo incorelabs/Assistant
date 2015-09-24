@@ -8,7 +8,7 @@
 namespace Assistant\Expense;
 require 'ExpenseAutoload.php';
 
-$response = null;
+$response = array();
 $validate = true;
 
 //Validate Request

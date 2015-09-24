@@ -8,7 +8,7 @@
 namespace Assistant\Income;
 require 'IncomeAutoload.php';
 
-$response = null;
+$response = array();
 $validate = true;
 
 //Validate Request
