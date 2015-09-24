@@ -405,7 +405,7 @@ echo $navbar_str;
                 <div class="modal-body">
                     <div class="btn-group">
                         <form method="POST" action="controller.php" id="deleteExpenseForm">
-                            <input type="text" class="hidden" name="ExpenseCode" id="form-delete-code"/>
+                            <input type="text" class="hidden" name="expenseCode" id="form-delete-code"/>
                             <input type="text" class="hidden" name="mode" id="form-delete-mode" value="D"/>
                             <button class="btn btn-danger modal_button" type="submit">
                                 <span class='glyphicon glyphicon-ok'></span>&nbsp

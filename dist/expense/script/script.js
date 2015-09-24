@@ -190,8 +190,8 @@ var pageExpense = {
     },
     openAddExpenseModal: function () {
         document.getElementById("expenseForm").reset();
-        $('#addPrivacy').attr('checked', false);
-        $('#addActiveStatus').attr('checked', true);
+        $('#privateFlag').attr('checked', false);
+        $('#activeFlag').attr('checked', true);
 
         $("#form-add-edit-mode").val("A");
         $("#form-add-edit-code").val(1);
@@ -209,6 +209,78 @@ var pageExpense = {
         pageExpense.setModalInputFields();
 
         $("#expenseModal").modal('show');
+    },
+    setModalInputFields: function () {
+        var temp = familyCode;
+        familyCode = pageExpense.localExpense.expense.HolderCode;
+        pageExpense.setFamilyList(pageExpense.familyList);
+
+        if (pageExpense.localExpense.expense.ActiveFlag) {
+            if (pageExpense.localExpense.expense.ActiveFlag == 1) {
+                $("#activeFlag").attr("checked", true);
+            } else {
+                $("#activeFlag").attr("checked", false);
+            }
+        } else {
+            $("#activeFlag").attr("checked", false);
+        }
+
+        if (pageExpense.localExpense.expense.PrivateFlag) {
+            if (pageExpense.localExpense.expense.PrivateFlag == 1) {
+                $("#privateFlag").attr("checked", true);
+            } else {
+                $("#privateFlag").attr("checked", false);
+            }
+        } else {
+            $("#privateFlag").attr("checked", false);
+        }
+
+        if (pageExpense.localExpense.expense.ContactCode) {
+            $("#contactCode").val(pageExpense.localExpense.expense.ContactCode);
+        }
+
+        if (pageExpense.localExpense.expense.ExpenseTypeCode) {
+            $("#expenseTypeName").val(pageExpense.localExpense.expense.ExpenseTypeName);
+            $("#expenseTypeCode").val(pageExpense.localExpense.expense.ExpenseTypeCode);
+        }
+
+        if (pageExpense.localExpense.expense.ExpenseName) {
+            $("#expenseName").val(pageExpense.localExpense.expense.ExpenseName);
+        }
+
+        if (pageExpense.localExpense.expense.FullName) {
+            $("#fullName").val(pageExpense.localExpense.expense.FullName);
+        }
+
+        if (pageExpense.localExpense.expense.JointHolder) {
+            $("#jointHolder").val(pageExpense.localExpense.expense.JointHolder);
+        }
+
+        if (pageExpense.localExpense.expense.ExpenseRemarks) {
+            $("#expenseRemarks").val(pageExpense.localExpense.expense.ExpenseRemarks);
+        }
+
+        if (pageExpense.localExpense.expense.BillingDay) {
+            $("#billingDay").val(pageExpense.localExpense.expense.BillingDay);
+        }
+
+        if (pageExpense.localExpense.expense.DueDay) {
+            $("#dueDay").val(pageExpense.localExpense.expense.DueDay);
+        }
+
+        if (pageExpense.localExpense.expense.ExpenseFrequency) {
+            $("#expenseFrequency").val(pageExpense.localExpense.expense.ExpenseFrequency);
+        }
+
+        if (pageExpense.localExpense.expense.ExpiryDate) {
+            $("#expiryDate").val(pageExpense.localExpense.expense.ExpiryDate);
+        }
+
+        if (pageExpense.localExpense.expense.PayWebsite) {
+            $("#payWebsite").val(pageExpense.localExpense.expense.PayWebsite);
+        }
+
+        familyCode = temp;
     },
     openDeleteExpenseModal: function (expenseCode) {
         $("#form-delete-code").val(expenseCode);

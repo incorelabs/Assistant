@@ -91,15 +91,6 @@ echo $navbar_str;
             <div class="panel panel-default panelHeight list-margin" id="style-3">
                 <div id="incomeDetailHeader" class="panel-heading text-center">
                     <h12>Income Details</h12>
-                    <button id='editVoucherdBtn' class='btn btn-success pull-right btn-header-margin-left'
-                            onclick='pageIncome.openEditIncomeModal();'><span
-                            class='glyphicon glyphicon-pencil'></span></button>
-                    <button id='deleteVoucherBtn' class='btn btn-danger pull-left'
-                            onclick='pageIncome.openDeleteIncomeModal(" + data.detail.income.IncomeCode + ")'><span
-                            class='glyphicon glyphicon-trash'></span></button>
-                    <button id='voucherExpenceBtn' class='btn btn-info pull-right'
-                            onclick='pageIncome.openVoucherIncomeModal()'><span
-                            class='fa fa-sticky-note-o fa-lg'></span></button>
                 </div>
             </div>
             <!--Panel-->
@@ -114,9 +105,6 @@ echo $navbar_str;
                 <div class="panel-height">
                     <!-- List group -->
                     <div id="incomeList" class="list-group force-scroll mobile-list">
-                        <div class='list-group-item list-border-none'>
-                            <li class='list-group-item-text header_font'>Test</li>
-                        </div>
                     </div>
                     <!--List close-->
                 </div>
@@ -131,78 +119,6 @@ echo $navbar_str;
                     <!-- List group -->
                     <div class="list-group">
                         <div id="incomeDetailBody" class='list-group-item list-group-item-border'>
-                            <div class='row contact-details row-top-padding'>
-                                <div class='list-group-item-heading header_font'>
-                                    <div class='col-md-3'>Holder's Name</div>
-                                    <value>
-                                        <div class='col-md-9'>Test</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class='row contact-details'>
-                                <div class='list-group-item-heading header_font'>
-                                    <div class='col-md-3'>Income Type</div>
-                                    <value>
-                                        <div class='col-md-9'>Test</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class='row contact-details'>
-                                <div class='list-group-item-heading header_font'>
-                                    <div class='col-md-3'>Description</div>
-                                    <value>
-                                        <div class='col-md-9'>Test</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class='row contact-details'>
-                                <div class='list-group-item-heading header_font'>
-                                    <div class='col-md-3'>Due From</div>
-                                    <value>
-                                        <div class='col-md-9'>Test</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class='row contact-details'>
-                                <div class='list-group-item-heading header_font'>
-                                    <div class='col-md-3'>Joint Holder Name</div>
-                                    <value>
-                                        <div class='col-md-9'>Test</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class='row contact-details'>
-                                <div class='list-group-item-heading header_font'>
-                                    <div class='col-md-3'>Remarks</div>
-                                    <value>
-                                        <div class='col-md-9'>Test</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class='row contact-details'>
-                                <div class='list-group-item-heading header_font'>
-                                    <div class='col-md-3'>Billing Day</div>
-                                    <value>
-                                        <div class='col-md-9'>Test</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class='row contact-details'>
-                                <div class='list-group-item-heading header_font'>
-                                    <div class='col-md-3'>Due Day</div>
-                                    <value>
-                                        <div class='col-md-9'>Test</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class='row contact-details'>
-                                <div class='list-group-item-heading header_font'>
-                                    <div class='col-md-3'>Payment Frequency</div>
-                                    <value>
-                                        <div class='col-md-9'>Test</div>
-                                    </value>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <!--List close-->
@@ -239,6 +155,7 @@ echo $navbar_str;
                 </div>
                 <div class="modal-body">
                     <input type="text" class="hidden" name="incomeTypeCode" id="incomeTypeCode" value="1"/>
+                    <input type="text" class="hidden" name="contactCode" id="contactCode" value="1"/>
                     <input type="text" class="hidden" name="incomeCode" id="form-add-edit-code"/>
                     <input type="text" class="hidden" name="mode" id="form-add-edit-mode"/>
 
@@ -248,17 +165,17 @@ echo $navbar_str;
 
                         <div class="col-xs-3">
                             <div class='switch switch-padding'>
-                                <input type='checkbox' name='private' id='addPrivacy' class='switch-input'>
-                                <label for='addPrivacy' class='switch-label'></label>
+                                <input type='checkbox' name='privateFlag' id='privateFlag' class='switch-input'>
+                                <label for='privateFlag' class='switch-label'></label>
                             </div>
                         </div>
                         <label class="col-xs-3 control-label">Active</label>
 
                         <div class="col-xs-3">
                             <div class='switch switch-padding'>
-                                <input type='checkbox' name='active' id='addActiveStatus' class='switch-input'
+                                <input type='checkbox' name='activeFlag' id='activeFlag' class='switch-input'
                                        checked='checked'>
-                                <label for='addActiveStatus' class='switch-label'></label>
+                                <label for='activeFlag' class='switch-label'></label>
                             </div>
                         </div>
                     </div>
@@ -268,7 +185,7 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-size"></i>
-                                <select class="form-control select-field-left-border" id="holderName" name="name"
+                                <select class="form-control select-field-left-border" name="holderCode" id="holderCode"
                                         tabindex="1">
                                     <option>Select Holder Name</option>
                                 </select>
@@ -281,8 +198,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-key hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" id="incomeType"
-                                       name="incomeType" placeholder="Income Type" tabindex="2" required/>
+                                <input type="text" class="form-control text-field-left-border" name="incomeTypeName"
+                                       id="incomeTypeName" placeholder="Income Type" tabindex="2" required/>
                             </div>
                         </div>
                     </div>
@@ -292,8 +209,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" name="description"
-                                       id="description" placeholder="Description" tabindex="3" required/>
+                                <input type="text" class="form-control text-field-left-border" name="incomeName"
+                                       id="incomeName" placeholder="Description" tabindex="3" required/>
                             </div>
                         </div>
                     </div>
@@ -303,9 +220,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-user hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" id="dueFrom"
-                                       name="dueFrom"
-                                       placeholder="Due From" aria-describedby="basic-addon1" tabindex="4"
+                                <input type="text" class="form-control text-field-left-border" name="fullName"
+                                       id="fullName" placeholder="Due From" aria-describedby="basic-addon1" tabindex="4"
                                        required/>
                             </div>
                         </div>
@@ -316,8 +232,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-user hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" id="jointHolderName"
-                                       name="jointHolderName" placeholder="Joint Holder" tabindex="5"/>
+                                <input type="text" class="form-control text-field-left-border" name="jointHolder"
+                                       id="jointHolder" placeholder="Joint Holder" tabindex="5"/>
                             </div>
                         </div>
                     </div>
@@ -327,21 +243,22 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" id="remarks"
-                                       name="remarks"
-                                       placeholder="Remarks" aria-describedby="basic-addon1" tabindex="6"/>
+                                <input type="text" class="form-control text-field-left-border" name="incomeRemarks"
+                                       id="incomeRemarks" placeholder="Remarks" aria-describedby="basic-addon1"
+                                       tabindex="6"/>
                             </div>
                         </div>
                     </div>
                     <div class="form-group form-group-margin">
-                        <div class="col-md-6 col-sm-12 col-xs-12 first-col-left-padding first-col-right-padding" id="billingDayDiv">
+                        <div class="col-md-6 col-sm-12 col-xs-12 first-col-left-padding first-col-right-padding"
+                             id="billingDayDiv">
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-label">Billing Day*</span>
 
                                 <div class="inner-addon right-addon">
                                     <i class="fa fa-caret-down fa-size"></i>
-                                    <select class="form-control select-field-left-border" id="billDate" name="billDate"
-                                            aria-describedby="basic-addin1" tabindex="7" required>
+                                    <select class="form-control select-field-left-border" name="billingDay"
+                                            id="billingDay" aria-describedby="basic-addin1" tabindex="7" required>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -377,13 +294,14 @@ echo $navbar_str;
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12 second-col-left-padding second-col-right-padding" id="dueDayDiv">
+                        <div class="col-md-6 col-sm-12 col-xs-12 second-col-left-padding second-col-right-padding"
+                             id="dueDayDiv">
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-label">Due Day*</span>
 
                                 <div class="inner-addon right-addon">
                                     <i class="fa fa-caret-down fa-size"></i>
-                                    <select class="form-control select-field-left-border" id="dueDay" name="dueDay"
+                                    <select class="form-control select-field-left-border" name="dueDay" id="dueDay"
                                             aria-describedby="basic-addin1" tabindex="8" required>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -427,8 +345,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-size"></i>
-                                <select class="form-control select-field-left-border" id="frequency" name="frequency"
-                                        aria-describedby="basic-addin1" tabindex="9" required>
+                                <select class="form-control select-field-left-border" name="incomeFrequency"
+                                        id="incomeFrequency" aria-describedby="basic-addin1" tabindex="9" required>
                                     <option value="1">Daily</option>
                                     <option value="2">Weekly</option>
                                     <option value="3">Fort Night</option>
@@ -447,10 +365,9 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-calendar hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border date" id="expiryDate"
-                                       name="expiryDate"
-                                       placeholder="Expiry Date" aria-describedby="basic-addon1" tabindex="10"
-                                       required/>
+                                <input type="text" class="form-control text-field-left-border date" name="expiryDate"
+                                       id="expiryDate" placeholder="Expiry Date" aria-describedby="basic-addon1"
+                                       tabindex="10" required/>
                             </div>
                         </div>
                     </div>
@@ -478,7 +395,7 @@ echo $navbar_str;
                 <div class="modal-body">
                     <div class="btn-group">
                         <form method="POST" action="controller.php" id="deleteIncomeForm">
-                            <input type="text" class="hidden" name="IncomeCode" id="form-delete-code"/>
+                            <input type="text" class="hidden" name="incomeCode" id="form-delete-code"/>
                             <input type="text" class="hidden" name="mode" id="form-delete-mode" value="D"/>
                             <button class="btn btn-danger modal_button" type="submit">
                                 <span class='glyphicon glyphicon-ok'></span>&nbsp

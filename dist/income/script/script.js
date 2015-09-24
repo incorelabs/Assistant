@@ -190,8 +190,8 @@ var pageIncome = {
     },
     openAddIncomeModal: function(){
         document.getElementById("incomeForm").reset();
-        $('#addPrivacy').attr('checked', false);
-        $('#addActiveStatus').attr('checked', true);
+        $('#privateFlag').attr('checked', false);
+        $('#activeFlag').attr('checked', true);
 
         $("#form-add-edit-mode").val("A");
         $("#form-add-edit-code").val(1);
@@ -201,14 +201,82 @@ var pageIncome = {
     },
     openEditIncomeModal: function(){
         document.getElementById("incomeForm").reset();
-        // $("#form-add-edit-mode").val("M");
+        $("#form-add-edit-mode").val("M");
 
         $('#incomeModalHeading').empty().html("Edit Income");
 
-        //$("#form-add-edit-code").val(pageIncome.localIncome.income.IncomeCode);
-        //pageIncome.setModalInputFields();
+        $("#form-add-edit-code").val(pageIncome.localIncome.income.IncomeCode);
+        pageIncome.setModalInputFields();
 
         $("#incomeModal").modal('show');
+    },
+    setModalInputFields: function () {
+        var temp = familyCode;
+        familyCode = pageIncome.localIncome.income.HolderCode;
+        pageIncome.setFamilyList(pageIncome.familyList);
+
+        if (pageIncome.localIncome.income.ActiveFlag) {
+            if (pageIncome.localIncome.income.ActiveFlag == 1) {
+                $("#activeFlag").attr("checked", true);
+            } else {
+                $("#activeFlag").attr("checked", false);
+            }
+        } else {
+            $("#activeFlag").attr("checked", false);
+        }
+
+        if (pageIncome.localIncome.income.PrivateFlag) {
+            if (pageIncome.localIncome.income.PrivateFlag == 1) {
+                $("#privateFlag").attr("checked", true);
+            } else {
+                $("#privateFlag").attr("checked", false);
+            }
+        } else {
+            $("#privateFlag").attr("checked", false);
+        }
+
+        if (pageIncome.localIncome.income.ContactCode) {
+            $("#contactCode").val(pageIncome.localIncome.income.ContactCode);
+        }
+
+        if (pageIncome.localIncome.income.IncomeTypeCode) {
+            $("#incomeTypeName").val(pageIncome.localIncome.income.IncomeTypeName);
+            $("#incomeTypeCode").val(pageIncome.localIncome.income.IncomeTypeCode);
+        }
+
+        if (pageIncome.localIncome.income.IncomeName) {
+            $("#incomeName").val(pageIncome.localIncome.income.IncomeName);
+        }
+
+        if (pageIncome.localIncome.income.FullName) {
+            $("#fullName").val(pageIncome.localIncome.income.FullName);
+        }
+
+        if (pageIncome.localIncome.income.JointHolder) {
+            $("#jointHolder").val(pageIncome.localIncome.income.JointHolder);
+        }
+
+        if (pageIncome.localIncome.income.IncomeRemarks) {
+            $("#incomeRemarks").val(pageIncome.localIncome.income.IncomeRemarks);
+        }
+
+        if (pageIncome.localIncome.income.BillingDay) {
+            $("#billingDay").val(pageIncome.localIncome.income.BillingDay);
+        }
+
+        if (pageIncome.localIncome.income.DueDay) {
+            $("#dueDay").val(pageIncome.localIncome.income.DueDay);
+        }
+
+        if (pageIncome.localIncome.income.IncomeFrequency) {
+            $("#incomeFrequency").val(pageIncome.localIncome.income.IncomeFrequency);
+        }
+
+        if (pageIncome.localIncome.income.ExpiryDate) {
+            $("#expiryDate").val(pageIncome.localIncome.income.ExpiryDate);
+        }
+
+        familyCode = temp;
     },
     openDeleteIncomeModal: function (incomeCode) {
         $("#form-delete-code").val(incomeCode);
