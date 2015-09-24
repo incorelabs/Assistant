@@ -132,7 +132,7 @@ var pageExpense = {
         if (data.status == 1) {
             pageExpense.localExpense = data.detail;
 
-            var expenseHeaderString = "<h12>Expense Details</h12><button id='editExpenseBtn' class='btn btn-success pull-right btn-header-margin-left' onclick='pageExpense.openEditExpenseModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deleteExpenseBtn' class='btn btn-danger pull-left' onclick='pageExpense.openDeleteExpenseModal(" + data.detail.expense.ExpenseCode + ")'><span class='glyphicon glyphicon-trash'></span></button><button id='voucherExpenseBtn' class='btn btn-info pull-right' onclick='pageExpense.openVoucherExpenseModal()'><span class='fa fa-sticky-note-o fa-lg'></span></button>";
+            var expenseHeaderString = "<h12>Expense Details</h12><button id='editExpenseBtn' class='btn btn-success pull-right btn-header-margin-left' onclick='pageExpense.openEditExpenseModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deleteExpenseBtn' class='btn btn-danger pull-left' onclick='pageExpense.openDeleteExpenseModal(" + data.detail.expense.ExpenseCode + ")'><span class='glyphicon glyphicon-trash'></span></button><button id='voucherExpenseBtn' class='btn btn-info pull-right' onclick='pageExpense.openVoucherExpenseModal(" + data.detail.expense.ExpenseCode + ")'><span class='fa fa-sticky-note-o fa-lg'></span></button>";
             var expenseDetailString = "";
             if (window.innerWidth < 992 && !pageExpense.firstTime) {
                 //Show the Expense Details Header and hides the search header
@@ -297,8 +297,8 @@ var pageExpense = {
         $("#form-delete-code").val(expenseCode);
         $("#deleteModal").modal("show");
     },
-    openVoucherExpenseModal: function () {
-        window.location.href = "../expense/voucher/";
+    openVoucherExpenseModal: function (expenseCode) {
+        window.location.href = localStorage.getItem("websiteRoot") + "expense/voucher/index.php?expenseCode=" + expenseCode;
     },
     getExpenseTypeList: function () {
         var url = localStorage.getItem("websiteRoot") + "expense/getMasters.php";
@@ -433,7 +433,7 @@ $(document).ready(function () {
     });
 
     $("#fullName").focusout(function () {
-        if($(this).val().trim() == "") {
+        if ($(this).val().trim() == "") {
             var formGroup = $(this).closest(".form-group");
             formGroup.removeClass("has-warning");
             $(this).closest('.form-group').find('.info').empty();
