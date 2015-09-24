@@ -224,7 +224,7 @@ echo $navbar_str;
                                        required/>
                             </div>
                         </div>
-                        <div class="info"></div>
+                        <div class="info text-center"></div>
                     </div>
                     <div class="form-group form-group-margin">
                         <div class="input-group">

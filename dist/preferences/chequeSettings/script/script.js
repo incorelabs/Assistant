@@ -17,13 +17,13 @@ var pageChequeSettings = {
         for (var i = 0; i < data.length; i++) {
             chequeSettingsTableString += "<tr>";
 
-            chequeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'>" + (i + 1) + "</td>";
+            chequeSettingsTableString += "<td class=''>" + (i + 1) + "</td>";
 
-            chequeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-3'>" + ((data[i]['ChequeName']) ? data[i]['ChequeName'] : "-") + "</td>";
+            chequeSettingsTableString += "<td class=''>" + ((data[i]['ChequeName']) ? data[i]['ChequeName'] : "-") + "</td>";
 
-            chequeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 hidden-xs'>" + ((data[i]['ForAcName']) ? data[i]['ForAcName'] : "-") + "</td>";
+            chequeSettingsTableString += "<td class='hidden-sm hidden-xs'>" + ((data[i]['ForAcName']) ? data[i]['ForAcName'] : "-") + "</td>";
 
-            chequeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'>" + ((data[i]['ContinousFeed'] == 1) ? "Yes" : "No") + "</td>";
+            chequeSettingsTableString += "<td class=''>" + ((data[i]['ContinousFeed'] == 1) ? "Yes" : "No") + "</td>";
 
             var chequeFeedDirection = "";
 
@@ -39,9 +39,9 @@ var pageChequeSettings = {
                     break;
             }
 
-            chequeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'>" + chequeFeedDirection + "</td>";
+            chequeSettingsTableString += "<td class=''>" + chequeFeedDirection + "</td>";
 
-            chequeSettingsTableString += "<td class='text-center text-middle col-md-1 col-sm-1 col-xs-1'><a href='#' onclick='pageChequeSettings.openEditChequeSettingsModal(" + i + ")'><i class='fa fa-pencil fa-lg fa-green'></i></a>";
+            chequeSettingsTableString += "<td class=''><a href='#' onclick='pageChequeSettings.openEditChequeSettingsModal(" + i + ")'><i class='fa fa-pencil fa-lg fa-green'></i></a>";
 
             chequeSettingsTableString += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='pageChequeSettings.openDeleteChequeSettingsModal(" + data[i].ChequeCode + ")'><i class='fa fa-trash-o fa-lg fa-red'></i></a></td>";
 

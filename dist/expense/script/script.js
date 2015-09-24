@@ -353,11 +353,16 @@ var pageExpense = {
         });
     },
     setDueToAutoComplete: function () {
+
+
         $("#fullName").autocomplete({
             source: pageExpense.dueToTag,
             response: function (event, ui) {
                 var index = $.inArray($(event.target).val(), pageExpense.dueToTag);
                 if (index > -1) {
+                    var formGroup = $(this).closest(".form-group");
+                    formGroup.addClass("has-warning");
+                    $(this).closest('.form-group').find('.info').html("A New Contact Will Be Created");
                     console.log("new contact will be created");
                     // show a red error that new contact will be created.
                     console.log("not selected but value is in array");

@@ -11,31 +11,67 @@
 				<div class='container' style='padding-top:100px'>
 						<div class='col-lg-12 col-md-12'>
 						<div class='panel panel-primary'>
-							<div class='panel-heading'>Shortcuts</div>
+							<div class='panel-heading'>Shortcuts<i class='pull-right'><a href='#'><i class='fa fa-pencil fa-lg'></i></a></i></div>
 							<div class='panel-body'>
-								<div class='col-lg-2 col-md-3 col-sm-6'>
-									<div class='panel panel-default'>
-										<div class='panel-heading'>
-											<a href='contacts/'>Contacts</a>
-											<span class='badge pull-right'>102</span>
-										</div>
-									</div>
+								<div class='col-lg-4 col-md-4 col-sm-6'>
+                                    <a href='contacts/'>
+                                        <div class='panel panel-default'>
+                                            <div class='panel-heading'>
+                                                Contacts
+                                                <span class='badge pull-right'>102</span>
+                                            </div>
+                                        </div>
+                                    </a>
 								</div>
-								<div class='col-lg-2 col-md-3 col-sm-6'>
-									<div class='panel panel-default'>
-										<div class='panel-heading'>
-											<a href='family/'>Family</a>
-											<span class='badge pull-right'>3</span>
-										</div>
-									</div>
+								<div class='col-lg-4 col-md-4 col-sm-6'>
+								    <a href='family/'>
+                                        <div class='panel panel-default'>
+                                            <div class='panel-heading'>
+                                                Family
+                                                <span class='badge pull-right'>3</span>
+                                            </div>
+                                        </div>
+                                    </a>
 								</div>
-								<div class='col-lg-2 col-md-3 col-sm-6'>
-									<div class='panel panel-default'>
-										<div class='panel-heading'>
-											<a href='contacts/'>Investments</a>
-											<span class='badge pull-right'>41</span>
-										</div>
-									</div>
+								<div class='col-lg-4 col-md-4 col-sm-6'>
+                                    <a href='Expense/'>
+                                        <div class='panel panel-default'>
+                                            <div class='panel-heading'>
+                                                Expense
+                                                <span class='badge pull-right'>41</span>
+                                            </div>
+                                        </div>
+                                    </a>
+								</div>
+								<div class='col-lg-4 col-md-4 col-sm-6'>
+                                    <a href='income/'>
+                                        <div class='panel panel-default'>
+                                            <div class='panel-heading'>
+                                                Income
+                                                <span class='badge pull-right'>102</span>
+                                            </div>
+                                        </div>
+                                    </a>
+								</div>
+								<div class='col-lg-4 col-md-4 col-sm-6'>
+								    <a href='preferences/chequeSettings'>
+                                        <div class='panel panel-default'>
+                                            <div class='panel-heading'>
+                                                Cheque Settings
+                                                <span class='badge pull-right'>3</span>
+                                            </div>
+                                        </div>
+									</a>
+								</div>
+								<div class='col-lg-4 col-md-4 col-sm-6'>
+                                    <a href='passwords/'>
+                                        <div class='panel panel-default'>
+                                            <div class='panel-heading'>
+                                                Passwords
+                                                <span class='badge pull-right'>41</span>
+                                            </div>
+                                        </div>
+                                    </a>
 								</div>
 							</div>
 						</div>
