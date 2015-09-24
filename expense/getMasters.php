@@ -21,7 +21,7 @@ do {
 } while (0);
 
 if($validate){
-    $type = intval($_GET['type']);
+    $type = $_GET['type'];
     $expenseMasters = new ExpenseMasters();
 
     switch($type){
