@@ -201,11 +201,11 @@ var pageContact = {
 
             contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Remarks</div><value><div class='col-md-9'>" + ((data.detail.contact.Remarks) ? data.detail.contact.Remarks : "") + "</div></value></div></div>";
 
-            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile</div><value><div class='col-md-9'>";
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Mobile</div><value><div class='col-md-8'>";
 
             if (data.detail.contact.Mobile1 != null || data.detail.contact.Mobile2 != null || data.detail.contact.Mobile3) {
                 if (data.detail.contact.Mobile1 != null)
-                    contactDetailsString += "<a href='tel:" + data.detail.contact.Mobile1 + "'>" + data.detail.contact.Mobile1 + "</a>";
+                    contactDetailsString += data.detail.contact.Mobile1 + "<span class='pull-right'><a href='tel:" + data.detail.contact.Mobile1 + "'><i class='fa fa-phone fa-green fa-lg'></i></a>&nbsp;&nbsp;&nbsp;<a href='sms:" + data.detail.contact.Mobile1 + "'><i class='fa fa-comment fa-green fa-lg'></i></a></span>";
                 if (data.detail.contact.Mobile1 != null && data.detail.contact.Mobile2 !== null)
                     contactDetailsString += "<br/>";
 
@@ -213,13 +213,13 @@ var pageContact = {
                     contactDetailsString += "<br/>";
 
                 if (data.detail.contact.Mobile2 != null)
-                    contactDetailsString += "<a href='tel:" + data.detail.contact.Mobile2 + "'>" + data.detail.contact.Mobile2 + "</a>";
+                    contactDetailsString += data.detail.contact.Mobile2 + "<span class='pull-right'><a href='tel:" + data.detail.contact.Mobile2 + "'><i class='fa fa-phone fa-green fa-lg'></i></a>&nbsp;&nbsp;&nbsp;<a href='sms:" + data.detail.contact.Mobile2 + "'><i class='fa fa-comment fa-green fa-lg'></i></a></span>";
 
                 if (data.detail.contact.Mobile2 != null && data.detail.contact.Mobile3 !== null)
                     contactDetailsString += "<br/>";
 
                 if (data.detail.contact.Mobile3 != null)
-                    contactDetailsString += "<a href='tel:" + data.detail.contact.Mobile3 + "'>" + data.detail.contact.Mobile3 + "</a>";
+                    contactDetailsString += data.detail.contact.Mobile3 + "<span class='pull-right'><a href='tel:" + data.detail.contact.Mobile3 + "'><i class='fa fa-phone fa-green fa-lg'></i></a>&nbsp;&nbsp;&nbsp;<a href='sms:" + data.detail.contact.Mobile3 + "'><i class='fa fa-comment fa-green fa-lg'></i></a></span>";
             }
 
             contactDetailsString += "</div></value></div></div>";

@@ -135,3 +135,7 @@ hr {
     width: 40px;
     padding-top: 10px;
 }
+
+tr{
+    word-break: break-all;
+}

@@ -62,19 +62,19 @@ echo $navbar_str;
             <i class="fa fa-plus fa-lg"></i>
         </button>
     </div>
-    <div class="text-center">
+    <div>
         <table class="table table-top-margin borderless">
             <thead>
             <tr>
-                <th class="text-center col-md-1 col-sm-1 col-xs-1">#</th>
-                <th class="text-center col-md-1 col-sm-1 col-xs-3">Logo</th>
-                <th class="text-center col-md-1 col-sm-1 col-xs-3">Name</th>
-                <th class="text-center col-md-1 col-sm-1 hidden-xs">Rows</th>
-                <th class="text-center col-md-1 col-sm-1 hidden-xs">Columns</th>
-                <th class="text-center col-md-1 col-sm-1 hidden-xs">Lines in Label</th>
-                <th class="text-center col-md-1 col-sm-1 hidden-xs">Single Content</th>
-                <th class="text-center col-md-1 col-sm-1 hidden-xs">Orientation</th>
-                <th class="text-center col-md-1 col-sm-1 col-xs-3">Actions</th>
+                <th class="col-md-1 col-sm-1 col-xs-1">#</th>
+                <th class="col-md-1 col-sm-1 col-xs-3">Logo</th>
+                <th class="col-md-2 col-sm-2 col-xs-3">Name</th>
+                <th class="col-md-1 col-sm-1 hidden-xs">Rows</th>
+                <th class="col-md-1 col-sm-1 hidden-xs">Columns</th>
+                <th class="col-md-1 hidden-sm hidden-xs">Lines in Label</th>
+                <th class="col-md-2 hidden-sm hidden-xs">Single Content</th>
+                <th class="col-md-1 col-sm-2 hidden-xs">Orientation</th>
+                <th class="col-md-1 col-sm-1 col-xs-3">Actions</th>
             </tr>
             </thead>
             <tbody id="table-body">

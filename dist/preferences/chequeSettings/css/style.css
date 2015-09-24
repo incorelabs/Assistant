@@ -117,3 +117,6 @@ table{
 .table-padding-first-row{
     padding-top: 10px !important;
 }
+tr{
+    word-break: break-all;
+}

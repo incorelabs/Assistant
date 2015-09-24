@@ -66,12 +66,12 @@ echo $navbar_str;
         <table class="table table-top-margin borderless">
             <thead>
             <tr>
-                <th class="">#</th>
-                <th class="">Name</th>
-                <th class="hidden-sm hidden-xs">A/C Holder Name</th>
-                <th class="">Continuous Feed</th>
-                <th class="">Print Feed</th>
-                <th class="">Actions</th>
+                <th class="col-md-1 col-sm-1 col-xs-1">#</th>
+                <th class="col-md-3 col-sm-2 col-xs-1">Name</th>
+                <th class="col-md-2 hidden-sm hidden-xs">A/C Holder Name</th>
+                <th class="col-md-2 hidden-sm hidden-xs">Continuous Feed</th>
+                <th class="col-md-2 col-sm-1 col-xs-1">Print Feed</th>
+                <th class="col-md-2 col-sm-1 col-xs-1">Actions</th>
             </tr>
             </thead>
             <tbody id="table-body">
