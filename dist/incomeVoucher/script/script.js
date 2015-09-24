@@ -1,4 +1,4 @@
-var pageVoucher = {
+var pageIncomeVoucher = {
     currentPageNo: 1,
     localVoucher: null,
     defVoucherList: $.Deferred(),

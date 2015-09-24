@@ -60,13 +60,13 @@ echo $navbar_str;
     </div>
     <div class="row button-top-margin" style="position:relative;">
         <div class="text-left">
-            <button class="btn btn-primary" id="btnAddVoucher" onclick="pageVoucher.navigateBack();">
+            <button class="btn btn-primary" id="btnAddVoucher" onclick="pageIncomeVoucher.navigateBack();">
                 <i class="fa fa-arrow-left fa-lg"></i>
             </button>
         </div>
         <div class="text-center row-desc-margin"><h4>Income Description</h4></div>
         <div class="text-right row-right-btn-margin">
-            <button class="btn btn-primary" id="btnAddVoucher" onclick="pageVoucher.openAddVoucherModal();">
+            <button class="btn btn-primary" id="btnAddVoucher" onclick="pageIncomeVoucher.openAddVoucherModal();">
                 <i class="fa fa-plus fa-lg"></i>
             </button>
         </div>
@@ -91,7 +91,7 @@ echo $navbar_str;
             <tbody id="table-body">
             <tr class="text-left">
                 <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle">1</td>
-                <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle"><div class='image'><img src='../../img/default/preferences/logo.png' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'><a href="#" class='clickable' onclick='pageVoucher.openVoucherImageModal()'><span class='glyphicon glyphicon-pencil overlay-icon' style="height: 40px; width: 40px;"></span></a></div></div></td>
+                <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle"><div class='image'><img src='../../img/default/preferences/logo.png' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'><a href="#" class='clickable' onclick='pageIncomeVoucher.openVoucherImageModal()'><span class='glyphicon glyphicon-pencil overlay-icon' style="height: 40px; width: 40px;"></span></a></div></div></td>
                 <td class="col-md-1 hidden-xs hidden-sm text-left text-middle">Phone</td>
                 <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">01/01/2011</td>
                 <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">Cash</td>
@@ -100,7 +100,7 @@ echo $navbar_str;
                 <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">1111</td>
                 <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle">111</td>
                 <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">-</td>
-                <td class="col-md-1 col-sm-1 col-xs-1 text-middle"><a href="#" onclick="pageVoucher.openEditVoucherModal()"><i class="fa fa-pencil fa-lg fa-green"></i></a><a href="#" onclick="pageVoucher.openDeleteIncomeModal()" class="action-btn-padding"><i class="fa fa-trash-o fa-lg fa-red"></i></a></td>
+                <td class="col-md-1 col-sm-1 col-xs-1 text-middle"><a href="#" onclick="pageIncomeVoucher.openEditVoucherModal()"><i class="fa fa-pencil fa-lg fa-green"></i></a><a href="#" onclick="pageIncomeVoucher.openDeleteIncomeModal()" class="action-btn-padding"><i class="fa fa-trash-o fa-lg fa-red"></i></a></td>
             </tr>
             </tbody>
         </table>
@@ -328,7 +328,7 @@ echo $navbar_str;
 
                                     <p id="imageErrorMsg"></p>
                                     <div class="delete-btn-padding">
-                                        <button type="button" class="btn btn-danger" onclick="pageVoucher.confirmDeleteImage()">Delete Image</button>
+                                        <button type="button" class="btn btn-danger" onclick="pageIncomeVoucher.confirmDeleteImage()">Delete Image</button>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-4">
