@@ -150,8 +150,8 @@ class ExpenseController
         $expiryDate = ((!empty($this->data["expiryDate"])) ? "'".$this->data["expiryDate"]."'" : "NULL");
         $payWebsite = (!empty($this->data['payWebsite']) ? "'".$this->checkAndReplaceLink($this->data['payWebsite'])."'" : "NULL");
         $inserted = $this->familyCode;
-        $private = (empty($this->data["private"]) ? 2 : 1);
-        $active = (empty($this->data["active"]) ? 2 : 1);
+        $private = (empty($this->data["privateFlag"]) ? 2 : 1);
+        $active = (empty($this->data["activeFlag"]) ? 2 : 1);
         $this->active = $active;
 
         $sql = "set @expenseCode = ".$expenseCode.";";
