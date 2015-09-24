@@ -3,6 +3,10 @@ var pageExpense = {
     localExpense: null,
     defExpenseList: $.Deferred(),
     defSearchResult: $.Deferred(),
+    expenseTypeTag: [],
+    expenseTypeCode: [],
+    dueToTag: [],
+    dueToCode: [],
     familyList: null,
     expenseList: null,
     firstTime: true,
@@ -293,29 +297,82 @@ var pageExpense = {
         var url = localStorage.getItem("websiteRoot") + "expense/getMasters.php";
 
         $.getJSON(url, {
-            expenseType: 1
-        }).done(function (data) {
-            pageExpense.setExpenseTypeAutoComplete(data);
+            type: 'expenseType'
+        }).done(function (expenseTypeList) {
+            console.log(expenseTypeList);
+            for (var i = 0; i < expenseTypeList.length; i++) {
+                pageExpense.expenseTypeTag[i] = expenseTypeList[i].ExpenseTypeName;
+                pageExpense.expenseTypeCode[i] = expenseTypeList[i].ExpenseTypeCode;
+            }
+            console.log(pageExpense.expenseTypeCode);
+            console.log(pageExpense.expenseTypeTag);
+            pageExpense.setExpenseTypeAutoComplete();
         }).fail(function (error) {
 
         });
     },
-    setExpenseTypeAutoComplete: function (tags) {
-
+    setExpenseTypeAutoComplete: function () {
+        $("#expenseTypeName").autocomplete({
+            source: pageExpense.expenseTypeTag,
+            change: function (event, ui) {
+                var index = $.inArray($(event.target).val(), pageExpense.expenseTypeTag);
+                if (index > -1) {
+                    console.log("not selected but value is in array");
+                    $("#expenseTypeCode").val(pageExpense.expenseTypeCode[index]);
+                } else {
+                    console.log("Change triggered");
+                    $("#expenseTypeCode").val(1);
+                }
+            },
+            select: function (event, ui) {
+                console.log(ui);
+                console.log("Selected");
+                var index = $.inArray(ui.item.value, pageExpense.expenseTypeTag);
+                console.log(index);
+                $("#expenseTypeCode").val(pageExpense.expenseTypeCode[index]);
+                console.log($("#expenseTypeCode").val());
+            }
+        });
     },
     getDueToList: function () {
         var url = localStorage.getItem("websiteRoot") + "expense/getMasters.php";
 
         $.getJSON(url, {
-            expenseType: 2
-        }).done(function (data) {
-            pageExpense.setDueToAutoComplete(data);
+            type: 'contactList'
+        }).done(function (dueToList) {
+            console.log(dueToList);
+            for (var i = 0; i < dueToList.length; i++) {
+                pageExpense.dueToTag[i] = dueToList[i].FullName;
+                pageExpense.dueToCode[i] = dueToList[i].ContactCode;
+            }
+            console.log(pageExpense.dueToCode);
+            console.log(pageExpense.dueToTag);
+            pageExpense.setDueToAutoComplete();
         }).fail(function (error) {
 
         });
     },
-    setDueToAutoComplete: function (tags) {
-
+    setDueToAutoComplete: function () {
+        $("#fullName").autocomplete({
+            source: pageExpense.dueToTag,
+            response: function (event, ui) {
+                var index = $.inArray($(event.target).val(), pageExpense.dueToTag);
+                if (index > -1) {
+                    console.log("new contact will be created");
+                    // show a red error that new contact will be created.
+                    console.log("not selected but value is in array");
+                }
+                $("#contactCode").val(1);
+            },
+            select: function (event, ui) {
+                console.log(ui);
+                console.log("Selected");
+                var index = $.inArray(ui.item.value, pageExpense.dueToTag);
+                console.log(index);
+                $("#contactCode").val(pageExpense.dueToCode[index]);
+                console.log($("#contactCode").val());
+            }
+        });
     }
 };
 
@@ -340,6 +397,8 @@ $(document).ready(function () {
 
     pageExpense.getFamilyList();
     pageExpense.getExpenseList();
+    pageExpense.getExpenseTypeList();
+    pageExpense.getDueToList();
 
     $("#searchBox").on('input propertychange', function () {
         if ($(this).val().trim() == "") {
