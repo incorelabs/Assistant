@@ -38,18 +38,14 @@ class IncomeMasters
     }
 
     function runQuery($sql){
+        $this->response = array();
         if($result = $this->mysqli->query($sql)){
+            $i = 0;
+            while($row = $result->fetch_assoc()){
+                $this->response[$i] = $row;
+                $i++;
+            }
 
-            if($result->num_rows == 0){
-                return null;
-            }
-            else{
-                $i = 0;
-                while($row = $result->fetch_assoc()){
-                    $this->response[$i] = $row;
-                    $i++;
-                }
-            }
         }
         else{
             $this->response = $this->mysqli->error;
