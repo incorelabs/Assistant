@@ -3,13 +3,13 @@
  * Created by PhpStorm.
  * User: kbokdia
  * Date: 24/09/15
- * Time: 11:15 AM
+ * Time: 2:33 PM
  */
 
-namespace Assistant\Expense;
+namespace Assistant\Income;
 
 
-class ExpenseMasters
+class IncomeMasters
 {
     var $mysqli;
     var $regCode;
@@ -24,15 +24,15 @@ class ExpenseMasters
         $this->defaultCode = 10000;
     }
 
-    function getExpenseTypeList(){
-        $sql = "SELECT ExpenseTypeCode, ExpenseTypeName FROM Table123 WHERE RegCode IN (".$this->defaultCode.",".$this->regCode.")";
+    function getIncomeTypeList(){
+        $sql = "SELECT IncomeTypeCode, IncomeTypeName FROM Table121 WHERE RegCode IN (".$this->defaultCode.",".$this->regCode.")";
 
         return $this->runQuery($sql);
     }
 
     function getContactsList(){
-        $dueToCode = 1005;
-        $sql = "SELECT ContactCode, FullName FROM Table151 WHERE RegCode = ".$this->regCode." AND EmergencyCode = ".$dueToCode;
+        $dueFromCode = 1006;
+        $sql = "SELECT ContactCode, FullName FROM Table151 WHERE RegCode = ".$this->regCode." AND EmergencyCode = ".$dueFromCode;
 
         return $this->runQuery($sql);
     }
