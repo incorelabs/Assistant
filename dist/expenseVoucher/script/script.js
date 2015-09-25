@@ -1,5 +1,4 @@
 var pageExpenseVoucher = {
-    currentPageNo: 1,
     voucherList: null,
     voucherDetails: null,
     expenseCode: window.location.search.split("=").pop(),
