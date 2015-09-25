@@ -353,7 +353,7 @@ echo $navbar_str;
                                     <option value="3">Fort Night</option>
                                     <option value="4">Monthly</option>
                                     <option value="5">Bi-Monthly</option>
-                                    <option value="6">Quaterly</option>
+                                    <option value="6">Quarterly</option>
                                     <option value="7">Half Yearly</option>
                                     <option value="8">Yearly</option>
                                 </select>

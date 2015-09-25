@@ -181,7 +181,36 @@ var pageExpense = {
 
             expenseDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Due Day</div><value><div class='col-md-9'>" + ((data.detail.expense.DueDay) ? data.detail.expense.DueDay : "") + "</div></value></div></div>";
 
-            expenseDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Payment Frequency</div><value><div class='col-md-9'>" + ((data.detail.expense.ExpenseFrequency) ? data.detail.expense.ExpenseFrequency : "") + "</div></value></div></div>";
+            var frequency = "";
+
+            switch (data.detail.expense.ExpenseFrequency) {
+                case "1":
+                    frequency = "Daily";
+                    break;
+                case "2":
+                    frequency = "Weekly";
+                    break;
+                case "3":
+                    frequency = "Fort Night";
+                    break;
+                case "4":
+                    frequency = "Monthly";
+                    break;
+                case "5":
+                    frequency = "Bi-Monthly";
+                    break;
+                case "6":
+                    frequency = "Quarterly";
+                    break;
+                case "7":
+                    frequency = "Half Yearly";
+                    break;
+                case "8":
+                    frequency = "Yearly";
+                    break;
+            }
+
+            expenseDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Payment Frequency</div><value><div class='col-md-9'>" + frequency + "</div></value></div></div>";
 
             expenseDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Loan Due Date</div><value><div class='col-md-9'>" + ((data.detail.expense.ExpiryDate) ? data.detail.expense.ExpiryDate : "") + "</div></value></div></div>";
 

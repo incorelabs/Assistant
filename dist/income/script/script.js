@@ -181,7 +181,36 @@ var pageIncome = {
 
             incomeDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Due Day</div><value><div class='col-md-9'>" + ((data.detail.income.DueDay) ? data.detail.income.DueDay : "") + "</div></value></div></div>";
 
-            incomeDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Payment Frequency</div><value><div class='col-md-9'>" + ((data.detail.income.IncomeFrequency) ? data.detail.income.IncomeFrequency : "") + "</div></value></div></div>";
+            var frequency = "";
+
+            switch (data.detail.income.IncomeFrequency) {
+                case "1":
+                    frequency = "Daily";
+                    break;
+                case "2":
+                    frequency = "Weekly";
+                    break;
+                case "3":
+                    frequency = "Fort Night";
+                    break;
+                case "4":
+                    frequency = "Monthly";
+                    break;
+                case "5":
+                    frequency = "Bi-Monthly";
+                    break;
+                case "6":
+                    frequency = "Quarterly";
+                    break;
+                case "7":
+                    frequency = "Half Yearly";
+                    break;
+                case "8":
+                    frequency = "Yearly";
+                    break;
+            }
+
+            incomeDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Payment Frequency</div><value><div class='col-md-9'>" + frequency + "</div></value></div></div>";
 
             incomeDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Loan Due Date</div><value><div class='col-md-9'>" + ((data.detail.income.ExpiryDate) ? data.detail.income.ExpiryDate : "") + "</div></value></div></div>";
 
