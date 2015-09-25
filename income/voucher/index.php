@@ -91,7 +91,16 @@ echo $navbar_str;
             <tbody id="table-body">
             <tr class="text-left">
                 <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle">1</td>
-                <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle"><div class='image'><img src='../../img/default/preferences/logo.png' id='imageResource' alt='...' class='img-rounded'/><div class='overlay img-rounded'><a href="#" class='clickable' onclick='pageIncomeVoucher.openVoucherImageModal()'><span class='glyphicon glyphicon-pencil overlay-icon' style="height: 40px; width: 40px;"></span></a></div></div></td>
+                <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle">
+                    <div class='image'><img src='../../img/default/preferences/logo.png' id='imageResource' alt='...'
+                                            class='img-rounded'/>
+
+                        <div class='overlay img-rounded'><a href="#" class='clickable'
+                                                            onclick='pageIncomeVoucher.openVoucherImageModal()'><span
+                                    class='glyphicon glyphicon-pencil overlay-icon'
+                                    style="height: 40px; width: 40px;"></span></a></div>
+                    </div>
+                </td>
                 <td class="col-md-1 hidden-xs hidden-sm text-left text-middle">Phone</td>
                 <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">01/01/2011</td>
                 <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">Cash</td>
@@ -100,7 +109,12 @@ echo $navbar_str;
                 <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">1111</td>
                 <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle">111</td>
                 <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">-</td>
-                <td class="col-md-1 col-sm-1 col-xs-1 text-middle"><a href="#" onclick="pageIncomeVoucher.openEditVoucherModal()"><i class="fa fa-pencil fa-lg fa-green"></i></a><a href="#" onclick="pageIncomeVoucher.openDeleteIncomeModal()" class="action-btn-padding"><i class="fa fa-trash-o fa-lg fa-red"></i></a></td>
+                <td class="col-md-1 col-sm-1 col-xs-1 text-middle"><a href="#"
+                                                                      onclick="pageIncomeVoucher.openEditVoucherModal()"><i
+                            class="fa fa-pencil fa-lg fa-green"></i></a><a href="#"
+                                                                           onclick="pageIncomeVoucher.openDeleteIncomeModal()"
+                                                                           class="action-btn-padding"><i
+                            class="fa fa-trash-o fa-lg fa-red"></i></a></td>
             </tr>
             </tbody>
         </table>
@@ -124,7 +138,7 @@ echo $navbar_str;
                             <span class='glyphicon glyphicon-ok'></span>
                         </button>
                     </div>
-                    <h4 class="modal-title text-center"  id="voucherModalHeading">
+                    <h4 class="modal-title text-center" id="voucherModalHeading">
 
                     </h4>
                 </div>
@@ -234,7 +248,7 @@ echo $navbar_str;
                     </div>
                 </div>
                 <!-- Modal Body -->
-
+            </form>
         </div>
         <!--modal-content-->
     </div>
@@ -257,14 +271,13 @@ echo $navbar_str;
                 <div class="modal-body">
                     <div class="btn-group">
                         <form method="POST" action="controller.php" id="deleteVoucherForm">
-                            <input type="text" class="hidden" name="voucherCode" id="form-delete-code"/>
+                            <input type="text" class="hidden" name="voucherNo" id="form-delete-code"/>
                             <input type="text" class="hidden" name="mode" id="form-delete-mode" value="D"/>
                             <button class="btn btn-danger modal_button" type="submit">
                                 <span class='glyphicon glyphicon-ok'></span>&nbsp
                                 Yes
                             </button>
                         </form>
-
                     </div>
                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     <div class="btn-group">
@@ -324,11 +337,15 @@ echo $navbar_str;
                                     <br>
                                     <br>
                                     <input type='file' id="imgInput" name="fileToUpload"
-                                           style="padding-bottom:10px;" accept="image/gif, image/jpeg, image/png" required/>
+                                           style="padding-bottom:10px;" accept="image/gif, image/jpeg, image/png"
+                                           required/>
 
                                     <p id="imageErrorMsg"></p>
+
                                     <div class="delete-btn-padding">
-                                        <button type="button" class="btn btn-danger" onclick="pageIncomeVoucher.confirmDeleteImage()">Delete Image</button>
+                                        <button type="button" class="btn btn-danger"
+                                                onclick="pageIncomeVoucher.confirmDeleteImage()">Delete Image
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-4">

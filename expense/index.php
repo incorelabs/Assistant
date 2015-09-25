@@ -78,9 +78,9 @@ echo $navbar_str;
                             </div>
                         </div>
                         <div>
-                            <button class="btn btn-primary btn-size"
-                                    onclick="pageExpense.openAddExpenseModal();"><span
-                                    class="glyphicon glyphicon-plus"></span></button>
+                            <button class="btn btn-primary btn-size" onclick="pageExpense.openAddExpenseModal();">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
                         </div>
                     </div>
                 </div>

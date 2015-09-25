@@ -78,9 +78,9 @@ echo $navbar_str;
                             </div>
                         </div>
                         <div>
-                            <button class="btn btn-primary btn-size"
-                                    onclick="pageIncome.openAddIncomeModal();"><span
-                                    class="glyphicon glyphicon-plus"></span></button>
+                            <button class="btn btn-primary btn-size" onclick="pageIncome.openAddIncomeModal();">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -215,6 +215,7 @@ echo $navbar_str;
                         </div>
                     </div>
                     <div class="form-group form-group-margin">
+                        <div class="info text-center"></div>
                         <div class="input-group">
                             <span class="input-group-addon input-group-addon-label">Due From*</span>
 
