@@ -462,7 +462,7 @@ $(document).ready(function () {
                     pageIncome.getIncomeList();
                     pageIndex.showNotificationSuccess(response.message);
                     pageIncome.getIncomeTypeList();
-                    pageIncome.getDueToList();
+                    pageIncome.getDueFromList();
                     $("#incomeModal").modal("hide");
                 }, 500);
             } else {
