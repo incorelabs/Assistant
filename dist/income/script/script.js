@@ -133,7 +133,7 @@ var pageIncome = {
         if (data.status == 1) {
             pageIncome.localIncome = data.detail;
 
-            var incomeHeaderString = "<h12>Income Details</h12><button id='editIncomeBtn' class='btn btn-success pull-right btn-header-margin-left' onclick='pageIncome.openEditIncomeModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deleteIncomeBtn' class='btn btn-danger pull-left' onclick='pageIncome.openDeleteIncomeModal(" + data.detail.income.IncomeCode + ")'><span class='glyphicon glyphicon-trash'></span></button><button id='voucherIncomeBtn' class='btn btn-info pull-right' onclick='pageIncome.openVoucherIncomeModal()'><span class='fa fa-sticky-note-o fa-lg'></span></button>";
+            var incomeHeaderString = "<h12>Income Details</h12><button id='editIncomeBtn' class='btn btn-success pull-right btn-header-margin-left' onclick='pageIncome.openEditIncomeModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deleteIncomeBtn' class='btn btn-danger pull-left' onclick='pageIncome.openDeleteIncomeModal(" + data.detail.income.IncomeCode + ")'><span class='glyphicon glyphicon-trash'></span></button><button id='voucherIncomeBtn' class='btn btn-info pull-right' onclick='pageIncome.openVoucherIncomeModal(" + data.detail.income.IncomeCode + ")'><span class='fa fa-sticky-note-o fa-lg'></span></button>";
             var incomeDetailString = "";
             if (window.innerWidth < 992 && !pageIncome.firstTime) {
                 //Show the Income Details Header and hides the search header
