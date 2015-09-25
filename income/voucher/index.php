@@ -21,9 +21,6 @@ define("ROOT", "../../");
     <link rel="stylesheet" href="../../dist/incomeVoucher/css/style.css"/>
     <link rel="stylesheet" href="../../dist/css/style.css"/>
     <script src="http://malsup.github.com/jquery.form.js"></script>
-    <script>
-        var familyCode = '<?php echo $_SESSION['familyCode']; ?>';
-    </script>
 
     <!-- Header Links -->
     <link type="text/css" rel="stylesheet" href="../../dist/css/sidebar.css"/>
@@ -77,7 +74,6 @@ echo $navbar_str;
             <tr class="text-left">
                 <th class="col-md-1 col-sm-1 col-xs-1 text-left">#</th>
                 <th class="col-md-1 col-sm-1 col-xs-1 text-left">Image</th>
-                <th class="col-md-1 hidden-xs hidden-sm text-left">Type</th>
                 <th class="col-md-1 hidden-sm hidden-xs text-left">Date</th>
                 <th class="col-md-1 hidden-sm hidden-xs text-left">Payment</th>
                 <th class="col-md-1 hidden-sm hidden-xs text-left">Ref No.</th>
@@ -89,33 +85,6 @@ echo $navbar_str;
             </tr>
             </thead>
             <tbody id="table-body">
-            <tr class="text-left">
-                <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle">1</td>
-                <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle">
-                    <div class='image'><img src='../../img/default/preferences/logo.png' id='imageResource' alt='...'
-                                            class='img-rounded'/>
-
-                        <div class='overlay img-rounded'><a href="#" class='clickable'
-                                                            onclick='pageIncomeVoucher.openVoucherImageModal()'><span
-                                    class='glyphicon glyphicon-pencil overlay-icon'
-                                    style="height: 40px; width: 40px;"></span></a></div>
-                    </div>
-                </td>
-                <td class="col-md-1 hidden-xs hidden-sm text-left text-middle">Phone</td>
-                <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">01/01/2011</td>
-                <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">Cash</td>
-                <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">-</td>
-                <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">-</td>
-                <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">1111</td>
-                <td class="col-md-1 col-sm-1 col-xs-1 text-left text-middle">111</td>
-                <td class="col-md-1 hidden-sm hidden-xs text-left text-middle">-</td>
-                <td class="col-md-1 col-sm-1 col-xs-1 text-middle"><a href="#"
-                                                                      onclick="pageIncomeVoucher.openEditVoucherModal()"><i
-                            class="fa fa-pencil fa-lg fa-green"></i></a><a href="#"
-                                                                           onclick="pageIncomeVoucher.openDeleteIncomeModal()"
-                                                                           class="action-btn-padding"><i
-                            class="fa fa-trash-o fa-lg fa-red"></i></a></td>
-            </tr>
             </tbody>
         </table>
     </div>
@@ -142,10 +111,11 @@ echo $navbar_str;
 
                     </h4>
                 </div>
+                <input type="text" class="hidden" name="voucherNo" id="form-add-edit-code"/>
+                <input type="text" class="hidden" name="incomeCode" id="incomeCodeForAddEditVoucher"/>
+                <input type="text" class="hidden" name="mode" id="form-add-edit-mode"/>
+
                 <div class="modal-body">
-                    <!--<input type="text" class="hidden" name="incomeTypeCode" id="incomeTypeCode" value="1"/>
-                    <input type="text" class="hidden" name="incomeCode" id="form-add-edit-code"/>
-                    <input type="text" class="hidden" name="mode" id="form-add-edit-mode"/> -->
 
                     <div class="form-group form-group-margin">
                         <div class="input-group">
@@ -153,8 +123,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-sticky-note-o-down hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" id="voucherDescription"
-                                       name="voucherDescription" tabindex="1" value="Description" readonly/>
+                                <input type="text" name="voucherDescription" id="voucherDescription"
+                                       class="form-control text-field-left-border" tabindex="1" readonly/>
                             </div>
                         </div>
                     </div>
@@ -164,8 +134,9 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-calendar hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border date" id="voucherDate"
-                                       name="voucherDate" placeholder="Voucher Date" tabindex="2" required/>
+                                <input type="text" name="voucherDt" id="voucherDt"
+                                       class="form-control text-field-left-border date" placeholder="Voucher Date"
+                                       tabindex="2" required/>
                             </div>
                         </div>
                     </div>
@@ -175,8 +146,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down fa-size"></i>
-                                <select class="form-control select-field-left-border" name="voucherPaymentMode"
-                                        id="voucherPaymentMode" tabindex="3">
+                                <select name="payMode" id="payMode"
+                                        class="form-control select-field-left-border" tabindex="3">
                                     <option value="1">Cash</option>
                                     <option value="2">Debit/Credit Card</option>
                                     <option value="3">Cheque</option>
@@ -191,9 +162,9 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border date" id="referenceNumber"
-                                       name="receiptNumber"
-                                       placeholder="Reference Number" aria-describedby="basic-addon1" tabindex="4"/>
+                                <input type="text" name="referNo" id="referNo"
+                                       class="form-control text-field-left-border date" placeholder="Reference Number"
+                                       aria-describedby="basic-addon1" tabindex="4"/>
                             </div>
                         </div>
                     </div>
@@ -203,9 +174,9 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-calendar hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" id="chequeDate"
-                                       name="chequeDate"
-                                       placeholder="Date of Cheque/DD" aria-describedby="basic-addon1" tabindex="5"/>
+                                <input type="text" name="referDt" id="referDt"
+                                       class="form-control text-field-left-border" placeholder="Date of Cheque/DD"
+                                       aria-describedby="basic-addon1" tabindex="5"/>
                             </div>
                         </div>
                     </div>
@@ -215,8 +186,7 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" id="receiptNumber"
-                                       name="receiptNumber"
+                                <input type="text" name="docNo" id="docNo" class="form-control text-field-left-border"
                                        placeholder="Receipt Number" aria-describedby="basic-addon1" tabindex="6"/>
                             </div>
                         </div>
@@ -227,10 +197,9 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-money hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" id="voucherAmount"
-                                       name="voucherAmount"
-                                       placeholder="Amount" aria-describedby="basic-addon1" tabindex="7"
-                                       required/>
+                                <input type="text" name="docAmount" id="docAmount"
+                                       class="form-control text-field-left-border" placeholder="Amount"
+                                       aria-describedby="basic-addon1" tabindex="7" required/>
                             </div>
                         </div>
                     </div>
@@ -240,9 +209,9 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-sticky-note-o fa-size hidden-xs"></i>
-                                <input type="text" class="form-control text-field-left-border" id="voucherRemarks"
-                                       name="voucherRemarks"
-                                       placeholder="Remarks" aria-describedby="basic-addon1" tabindex="8"/>
+                                <input type="text" name="remarks" id="remarks"
+                                       class="form-control text-field-left-border" placeholder="Remarks"
+                                       aria-describedby="basic-addon1" tabindex="8"/>
                             </div>
                         </div>
                     </div>
@@ -254,7 +223,6 @@ echo $navbar_str;
     </div>
 </div>
 <!--modal-->
-
 
 <!--Delete Voucher Modal-->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true"
@@ -272,6 +240,7 @@ echo $navbar_str;
                     <div class="btn-group">
                         <form method="POST" action="controller.php" id="deleteVoucherForm">
                             <input type="text" class="hidden" name="voucherNo" id="form-delete-code"/>
+                            <input type="text" class="hidden" name="incomeCode" id="incomeCodeForDeleteVoucher"/>
                             <input type="text" class="hidden" name="mode" id="form-delete-mode" value="D"/>
                             <button class="btn btn-danger modal_button" type="submit">
                                 <span class='glyphicon glyphicon-ok'></span>&nbsp
@@ -327,7 +296,8 @@ echo $navbar_str;
                 </div>
 
                 <div class="modal-body">
-                    <input type="text" class="hidden" name="labelCode" id='photoId'/>
+                    <input type="text" class="hidden" name="voucherNo" id='photoId'/>
+                    <input type="text" class="hidden" name="incomeCode" id='incomeCodeForImage'/>
 
                     <div class="form-group row">
                         <center>
@@ -343,8 +313,9 @@ echo $navbar_str;
                                     <p id="imageErrorMsg"></p>
 
                                     <div class="delete-btn-padding">
-                                        <button type="button" class="btn btn-danger"
-                                                onclick="pageIncomeVoucher.confirmDeleteImage()">Delete Image
+                                        <button type="button" class="btn btn-danger" id="deleteImageBtn"
+                                                onclick="pageIncomeVoucher.deleteCurrentLogo();">
+                                            Delete Image
                                         </button>
                                     </div>
                                 </div>

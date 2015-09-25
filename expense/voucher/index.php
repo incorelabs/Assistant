@@ -314,7 +314,7 @@ echo $navbar_str;
 
                                     <div class="delete-btn-padding">
                                         <button type="button" class="btn btn-danger" id="deleteImageBtn"
-                                                onclick="pageExpenseVoucher.deleteCurrentLogo()">
+                                                onclick="pageExpenseVoucher.deleteCurrentLogo();">
                                             Delete Image
                                         </button>
                                     </div>
