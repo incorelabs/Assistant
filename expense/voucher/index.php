@@ -76,8 +76,8 @@ echo $navbar_str;
                 <th class="col-md-1 col-sm-1 col-xs-1 text-left">Image</th>
                 <th class="col-md-1 hidden-sm hidden-xs text-left">Date</th>
                 <th class="col-md-1 hidden-sm hidden-xs text-left">Payment</th>
-                <th class="col-md-1 hidden-sm hidden-xs text-left">Ref No.</th>
-                <th class="col-md-1 hidden-sm hidden-xs text-left">Ref Date.</th>
+                <th class="col-md-1 hidden-sm hidden-xs text-left">Chq/DD No.</th>
+                <th class="col-md-1 hidden-sm hidden-xs text-left">Chq/DD Date.</th>
                 <th class="col-md-1 hidden-sm hidden-xs text-left">Receipt No.</th>
                 <th class="col-md-1 col-sm-1 col-xs-1 text-left">Amount</th>
                 <th class="col-md-1 col-sm-1 col-xs-1 hidden-xs hidden-sm text-left">Remarks</th>
@@ -152,13 +152,14 @@ echo $navbar_str;
                                     <option value="2">Debit/Credit Card</option>
                                     <option value="3">Cheque</option>
                                     <option value="4">Demand Draft</option>
+                                    <option value="5">Net Banking</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="form-group form-group-margin" id="referenceNumberDiv">
                         <div class="input-group">
-                            <span class="input-group-addon input-group-addon-label">Reference No</span>
+                            <span class="input-group-addon input-group-addon-label">Chq/DD No</span>
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
@@ -170,7 +171,7 @@ echo $navbar_str;
                     </div>
                     <div class="form-group form-group-margin" id="chequeDateDiv">
                         <div class="input-group">
-                            <span class="input-group-addon input-group-addon-label">Date</span>
+                            <span class="input-group-addon input-group-addon-label">Chq/DD Date</span>
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-calendar hidden-xs fa-size"></i>

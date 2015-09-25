@@ -212,7 +212,7 @@ var pageIncome = {
 
             incomeDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Payment Frequency</div><value><div class='col-md-9'>" + frequency + "</div></value></div></div>";
 
-            incomeDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Loan Due Date</div><value><div class='col-md-9'>" + ((data.detail.income.ExpiryDate) ? data.detail.income.ExpiryDate : "") + "</div></value></div></div>";
+            incomeDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Loan Expiry Date</div><value><div class='col-md-9'>" + ((data.detail.income.ExpiryDate) ? data.detail.income.ExpiryDate : "") + "</div></value></div></div>";
 
             $("#incomeDetailHeader").html(incomeHeaderString);
             $("#incomeDetailBody").html(incomeDetailString);

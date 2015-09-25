@@ -212,7 +212,7 @@ var pageExpense = {
 
             expenseDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Payment Frequency</div><value><div class='col-md-9'>" + frequency + "</div></value></div></div>";
 
-            expenseDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Loan Due Date</div><value><div class='col-md-9'>" + ((data.detail.expense.ExpiryDate) ? data.detail.expense.ExpiryDate : "") + "</div></value></div></div>";
+            expenseDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Loan Expiry Date</div><value><div class='col-md-9'>" + ((data.detail.expense.ExpiryDate) ? data.detail.expense.ExpiryDate : "") + "</div></value></div></div>";
 
             expenseDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Payment URL</div><value><div class='col-md-9'>" + ((data.detail.expense.PayWebsite) ? data.detail.expense.PayWebsite : "") + "</div></value></div></div>";
 
