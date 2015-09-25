@@ -113,6 +113,7 @@ var pageExpense = {
             $("#expenseDetailBody").empty();
             $("#editExpenseBtn").remove();
             $("#deleteExpenseBtn").remove();
+            $("#voucherExpenseBtn").remove();
         }
     },
     getExpenseDetails: function (expenseCode) {

@@ -3,6 +3,10 @@ var pageIncome = {
     localIncome: null,
     defIncomeList: $.Deferred(),
     defSearchResult: $.Deferred(),
+    incomeTypeTag: [],
+    incomeTypeCode: [],
+    dueFromTag: [],
+    dueFromCode: [],
     familyList: null,
     incomeList: null,
     firstTime: true,
@@ -36,6 +40,7 @@ var pageIncome = {
         $.getJSON(url, {
             pageNo: pageIncome.currentPageNo
         }).done(function (data) {
+            console.log(data);
             pageIncome.defIncomeList.resolve(data);
             pageIncome.setIncomeList(data);
         }).fail(function (error) {
@@ -108,6 +113,7 @@ var pageIncome = {
             $("#incomeDetailBody").empty();
             $("#editIncomeBtn").remove();
             $("#deleteIncomeBtn").remove();
+            $("#voucherIncomeBtn").remove();
         }
     },
     getIncomeDetails: function (incomeCode) {
@@ -165,7 +171,7 @@ var pageIncome = {
 
             incomeDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Description</div><value><div class='col-md-9'>" + ((data.detail.income.IncomeName) ? data.detail.income.IncomeName : "") + "</div></value></div></div>";
 
-            incomeDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Due To</div><value><div class='col-md-9'>" + ((data.detail.income.FullName) ? data.detail.income.FullName : "") + "</div></value></div></div>";
+            incomeDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Due From</div><value><div class='col-md-9'>" + ((data.detail.income.FullName) ? data.detail.income.FullName : "") + "</div></value></div></div>";
 
             incomeDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Joint Holder Name</div><value><div class='col-md-9'>" + ((data.detail.income.JointHolder) ? data.detail.income.JointHolder : "") + "</div></value></div></div>";
 
@@ -179,8 +185,6 @@ var pageIncome = {
 
             incomeDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Loan Due Date</div><value><div class='col-md-9'>" + ((data.detail.income.ExpiryDate) ? data.detail.income.ExpiryDate : "") + "</div></value></div></div>";
 
-            incomeDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Payment URL</div><value><div class='col-md-9'>" + ((data.detail.income.PayWebsite) ? data.detail.income.PayWebsite : "") + "</div></value></div></div>";
-
             $("#incomeDetailHeader").html(incomeHeaderString);
             $("#incomeDetailBody").html(incomeDetailString);
 
@@ -188,7 +192,7 @@ var pageIncome = {
             pageIncome.localIncome = null;
         }
     },
-    openAddIncomeModal: function(){
+    openAddIncomeModal: function () {
         document.getElementById("incomeForm").reset();
         $('#privateFlag').attr('checked', false);
         $('#activeFlag').attr('checked', true);
@@ -196,12 +200,18 @@ var pageIncome = {
         $("#form-add-edit-mode").val("A");
         $("#form-add-edit-code").val(1);
 
+        $("#fullName").closest(".form-group").removeClass("has-warning");
+        $("#fullName").closest('.form-group').find('.info').empty();
+
         $('#incomeModalHeading').empty().html("Add Income");
         $('#incomeModal').modal('show');
     },
-    openEditIncomeModal: function(){
+    openEditIncomeModal: function () {
         document.getElementById("incomeForm").reset();
         $("#form-add-edit-mode").val("M");
+
+        $("#fullName").closest(".form-group").removeClass("has-warning");
+        $("#fullName").closest('.form-group').find('.info').empty();
 
         $('#incomeModalHeading').empty().html("Edit Income");
 
@@ -282,8 +292,100 @@ var pageIncome = {
         $("#form-delete-code").val(incomeCode);
         $("#deleteModal").modal("show");
     },
-    openVoucherIncomeModal: function (){
-        window.location.href = "../income/voucher/";
+    openVoucherIncomeModal: function (incomeCode) {
+        window.location.href = localStorage.getItem("websiteRoot") + "income/voucher/index.php?incomeCode=" + incomeCode;
+    },
+    getIncomeTypeList: function () {
+        var url = localStorage.getItem("websiteRoot") + "income/getMasters.php";
+
+        $.getJSON(url, {
+            type: 'incomeType'
+        }).done(function (incomeTypeList) {
+            console.log(incomeTypeList);
+            for (var i = 0; i < incomeTypeList.length; i++) {
+                pageIncome.incomeTypeTag[i] = incomeTypeList[i].IncomeTypeName;
+                pageIncome.incomeTypeCode[i] = incomeTypeList[i].IncomeTypeCode;
+            }
+            console.log(pageIncome.incomeTypeCode);
+            console.log(pageIncome.incomeTypeTag);
+            pageIncome.setIncomeTypeAutoComplete();
+        }).fail(function (error) {
+
+        });
+    },
+    setIncomeTypeAutoComplete: function () {
+        $("#incomeTypeName").autocomplete({
+            source: pageIncome.incomeTypeTag,
+            change: function (event, ui) {
+                var index = $.inArray($(event.target).val(), pageIncome.incomeTypeTag);
+                if (index > -1) {
+                    console.log("not selected but value is in array");
+                    $("#incomeTypeCode").val(pageIncome.incomeTypeCode[index]);
+                } else {
+                    console.log("Change triggered");
+                    $("#incomeTypeCode").val(1);
+                }
+            },
+            select: function (event, ui) {
+                console.log(ui);
+                console.log("Selected");
+                var index = $.inArray(ui.item.value, pageIncome.incomeTypeTag);
+                console.log(index);
+                $("#incomeTypeCode").val(pageIncome.incomeTypeCode[index]);
+                console.log($("#incomeTypeCode").val());
+            }
+        });
+    },
+    getDueFromList: function () {
+        var url = localStorage.getItem("websiteRoot") + "income/getMasters.php";
+
+        $.getJSON(url, {
+            type: 'contactList'
+        }).done(function (dueFromList) {
+            console.log(dueFromList);
+            for (var i = 0; i < dueFromList.length; i++) {
+                pageIncome.dueFromTag[i] = dueFromList[i].FullName;
+                pageIncome.dueFromCode[i] = dueFromList[i].ContactCode;
+            }
+            console.log(pageIncome.dueFromCode);
+            console.log(pageIncome.dueFromTag);
+            pageIncome.setDueFromAutoComplete();
+        }).fail(function (error) {
+
+        });
+    },
+    setDueFromAutoComplete: function () {
+        $("#fullName").autocomplete({
+            source: pageIncome.dueFromTag,
+            response: function (event, ui) {
+                var index = $.inArray($(event.target).val(), pageIncome.dueFromTag);
+                var formGroup = $(this).closest(".form-group");
+                if (index > -1) {
+                    formGroup.addClass("has-warning");
+                    $(this).closest('.form-group').find('.info').html("A New Contact Will Be Created.");
+                    console.log("new contact will be created");
+                    // show a red error that new contact will be created.
+                    console.log("not selected but value is in array");
+                } else {
+                    formGroup.removeClass("has-warning");
+                    $(this).closest('.form-group').find('.info').empty();
+                }
+                $("#contactCode").val(1);
+            },
+            select: function (event, ui) {
+                console.log(ui);
+                console.log("Selected");
+
+                var formGroup = $(this).closest(".form-group");
+                formGroup.removeClass("has-warning");
+                $(this).closest('.form-group').find('.info').empty();
+
+                var index = $.inArray(ui.item.value, pageIncome.dueFromTag);
+                console.log(index);
+                $("#contactCode").val(pageIncome.dueFromCode[index]);
+                console.log($("#contactCode").val());
+            }
+        });
     }
 };
 
@@ -308,6 +410,8 @@ $(document).ready(function () {
 
     pageIncome.getFamilyList();
     pageIncome.getIncomeList();
+    pageIncome.getIncomeTypeList();
+    pageIncome.getDueFromList();
 
     $("#searchBox").on('input propertychange', function () {
         if ($(this).val().trim() == "") {
@@ -323,8 +427,101 @@ $(document).ready(function () {
         }
     });
 
-    if(window.innerWidth < 992)
-    {
+    $("#fullName").focusout(function () {
+        if ($(this).val().trim() == "") {
+            var formGroup = $(this).closest(".form-group");
+            formGroup.removeClass("has-warning");
+            $(this).closest('.form-group').find('.info').empty();
+            $("#contactCode").val(1);
+        }
+    });
+
+    $("#incomeForm").ajaxForm({
+        beforeSubmit: function (formData) {
+            console.log(formData);
+            for (var i = 0; i < formData.length; i++) {
+                if (formData[i].required && formData[i].value.trim() == "") {
+                    pageIndex.showNotificationFailure("Required fields are empty");
+                    return false;
+                }
+            }
+            $(".cover").fadeIn(100);
+            $("#pageLoading").addClass("loader");
+        },
+        success: function (responseText, statusText, xhr, $form) {
+            var response = JSON.parse(responseText);
+            if (response.status == 1) {
+                setTimeout(function () {
+                    pageIncome.currentPageNo = 1;
+                    $("#incomeList").empty();
+                    $("#incomeDetailBody").empty();
+                    $("#editIncomeBtn").remove();
+                    $("#deleteIncomeBtn").remove();
+                    $("#voucherIncomeBtn").remove();
+                    pageIncome.getIncomeDetails(response.landing);
+                    pageIncome.getIncomeList();
+                    pageIndex.showNotificationSuccess(response.message);
+                    pageIncome.getIncomeTypeList();
+                    pageIncome.getDueToList();
+                    $("#incomeModal").modal("hide");
+                }, 500);
+            } else {
+                pageIndex.showNotificationFailure(response.message);
+                $("#pageLoading").removeClass("loader");
+                $(".cover").fadeOut(100);
+            }
+        },
+        error: function () {
+            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            $("#pageLoading").removeClass("loader");
+            $(".cover").fadeOut(100);
+        }
+    });
+
+    $('#incomeModal').on('hidden.bs.modal', function (e) {
+        $("#pageLoading").removeClass("loader");
+        $(".cover").fadeOut(100);
+    });
+
+    $("#deleteIncomeForm").ajaxForm({
+        beforeSubmit: function () {
+            $(".cover").fadeIn(100);
+            $("#pageLoading").addClass("loader");
+        },
+        success: function (responseText, statusText, xhr, $form) {
+            var response = JSON.parse(responseText);
+            if (response.status == 1) {
+                setTimeout(function () {
+                    pageIncome.currentPageNo = 1;
+                    $("#incomeList").empty();
+                    $("#incomeDetailBody").empty();
+                    $("#editIncomeBtn").remove();
+                    $("#deleteIncomeBtn").remove();
+                    $("#voucherIncomeBtn").remove();
+                    pageIndex.showNotificationSuccess(response.message);
+                    pageIncome.getIncomeList();
+                    pageIncome.getIncomeDetails(response.landing);
+                    $("#deleteModal").modal("hide");
+                }, 500);
+            } else {
+                pageIndex.showNotificationFailure(response.message);
+                $("#pageLoading").removeClass("loader");
+                $(".cover").fadeOut(100);
+            }
+        },
+        error: function () {
+            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            $("#pageLoading").removeClass("loader");
+            $(".cover").fadeOut(100);
+        }
+    });
+
+    $('#deleteModal').on('hidden.bs.modal', function (e) {
+        $("#pageLoading").removeClass("loader");
+        $(".cover").fadeOut(100);
+    });
+
+    if (window.innerWidth < 992) {
         $("#billingDayDiv").removeClass("first-col-left-padding first-col-right-padding");
         $("#dueDayDiv").removeClass("second-col-left-padding second-col-right-padding");
 
@@ -333,14 +530,14 @@ $(document).ready(function () {
     }
 });
 
-$(window).resize(function(){
-    if(window.innerWidth < 992) {
+$(window).resize(function () {
+    if (window.innerWidth < 992) {
         $("#billingDayDiv").removeClass("first-col-left-padding first-col-right-padding");
         $("#dueDayDiv").removeClass("second-col-left-padding second-col-right-padding");
 
         $("#billingDayDiv").addClass("mobile-col-padding-remove");
         $("#dueDayDiv").addClass("mobile-col-top-padding mobile-col-padding-remove");
-    } else{
+    } else {
         $("#billingDayDiv").addClass("first-col-left-padding first-col-right-padding");
         $("#dueDayDiv").addClass("second-col-left-padding second-col-right-padding");
 
