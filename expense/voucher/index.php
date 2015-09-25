@@ -163,7 +163,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
                                 <input type="text" name="referNo" id="referNo"
-                                       class="form-control text-field-left-border date" placeholder="Reference Number"
+                                       class="form-control text-field-left-border" placeholder="Reference Number"
                                        aria-describedby="basic-addon1" tabindex="4"/>
                             </div>
                         </div>
@@ -175,7 +175,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-calendar hidden-xs fa-size"></i>
                                 <input type="text" name="referDt" id="referDt"
-                                       class="form-control text-field-left-border" placeholder="Date of Cheque/DD"
+                                       class="form-control text-field-left-border date" placeholder="Date of Cheque/DD"
                                        aria-describedby="basic-addon1" tabindex="5"/>
                             </div>
                         </div>
