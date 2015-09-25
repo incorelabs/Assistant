@@ -368,7 +368,7 @@ echo $navbar_str;
                                 <i class="fa fa-calendar hidden-xs fa-size"></i>
                                 <input type="text" class="form-control text-field-left-border date" name="expiryDate"
                                        id="expiryDate" placeholder="Expiry Date" aria-describedby="basic-addon1"
-                                       tabindex="10" required/>
+                                       tabindex="10"/>
                             </div>
                         </div>
                     </div>
