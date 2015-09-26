@@ -3,7 +3,13 @@ $(document).ready(function () {
     app.setAccountProfilePicture();
 
     $("#changePasswordForm").ajaxForm({
-        beforeSubmit: function () {
+        beforeSubmit: function (formData) {
+            for (var i = 0; i < formData.length; i++) {
+                if (formData[i].required && formData[i].value.trim() == "") {
+                    app.showNotificationFailure("Required fields are empty");
+                    return false;
+                }
+            }
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
         },

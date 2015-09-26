@@ -2,7 +2,16 @@ var pageLogin = {};
 $(document).ready(function () {
     app.websiteRoot = "";
     $("#loginForm").ajaxForm({
-        beforeSubmit: function () {
+        beforeSubmit: function (formData) {
+            for (var i = 0; i < formData.length; i++) {
+                if (formData[i].required && formData[i].value.trim() == "") {
+                    app.showNotificationFailure("Required fields are empty");
+                    return false;
+                }
+                if(formData[i].name === "email") {
+                    formData[i].value = formData[i].value.toLowerCase();
+                }
+            }
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
         },

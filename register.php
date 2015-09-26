@@ -14,7 +14,7 @@ $mysqli = getConnection();
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Assistant - Sign Up</title>
     <?php
-        include_once ROOT.'dist/fetchCSS.php';
+    include_once ROOT . 'dist/fetchCSS.php';
     ?>
     <link rel="stylesheet" href="dist/homePage/css/style.css"/>
 </head>
@@ -47,7 +47,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-user" style="font-size: 20px;"></i>
                                 <input type="text" class="form-control textbox_height email" name="email" id="email"
-                                       placeholder="Email ID"/>
+                                       placeholder="Email ID" required/>
                             </div>
                             <div class="info"></div>
                         </div>
@@ -55,7 +55,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-key" style="font-size: 20px;"></i>
                                 <input type="password" class="form-control textbox_height password" name="password"
-                                       id="password" placeholder="Password"/>
+                                       id="password" placeholder="Password" required/>
                             </div>
                             <div class="info"></div>
                         </div>
@@ -63,7 +63,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-key" style="font-size: 20px;"></i>
                                 <input type="password" class="form-control textbox_height c_password"
-                                       name="confirmPassword" id="c_password" placeholder="Confirm Password"/>
+                                       name="confirmPassword" id="c_password" placeholder="Confirm Password" required/>
                             </div>
                             <div class="info"></div>
                         </div>
@@ -72,14 +72,14 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-user" style="font-size: 20px;"></i>
                                 <input type="text" class="form-control textbox_height name" name="name" id="name"
-                                       placeholder="Name"/>
+                                       placeholder="Name" required/>
                             </div>
                             <div class="info"></div>
                         </div>
                         <div class="form-group">
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-globe" style="font-size: 20px;"></i>
-                                <select name="country" id="country" class="form-control textbox_height">
+                                <select name="country" id="country" class="form-control textbox_height" required>
                                     <option value="">Select Country</option>
                                     <!--<option value="1046">India</option>-->
                                     <?php
@@ -100,7 +100,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="glyphicon glyphicon-phone" style="font-size: 20px;"></i>
                                 <input type="text" class="form-control textbox_height mobile" id="mobile" name="mobile"
-                                       placeholder="Mobile"/>
+                                       placeholder="Mobile" required/>
 
                                 <div class="info"></div>
                             </div>
@@ -118,7 +118,7 @@ echo $navbar_str;
     </div>
 </div>
 <?php
-include_once ROOT.'dist/fetchJS.php';
+include_once ROOT . 'dist/fetchJS.php';
 ?>
 <script src="dist/script/register.js"></script>
 </body>

@@ -2,7 +2,16 @@ var pageRegister = {};
 $(document).ready(function () {
     app.websiteRoot = "";
     $("#signUpForm").ajaxForm({
-        beforeSubmit: function () {
+        beforeSubmit: function (formData) {
+            for (var i = 0; i < formData.length; i++) {
+                if (formData[i].required && formData[i].value.trim() == "") {
+                    app.showNotificationFailure("Required fields are empty");
+                    return false;
+                }
+                if(formData[i].name === "email") {
+                    formData[i].value = formData[i].value.toLowerCase();
+                }
+            }
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
             /*if (app.email_count == 1 && app.pwd_count == 1 && app.c_pwd_count == 1 && app.name_count == 1 && app.country_count == 1 && app.mobile_count == 1) {
