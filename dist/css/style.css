@@ -298,3 +298,7 @@ input[type=number] {
     width: auto;
     height: auto;
 }
+
+#menu:not(.mm-menu) {
+    display: none;
+}

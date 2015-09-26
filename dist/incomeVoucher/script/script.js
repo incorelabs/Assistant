@@ -4,7 +4,7 @@ var pageIncomeVoucher = {
     incomeCode: window.location.search.split("=").pop(),
     incomeName: "",
     getVoucherList: function () {
-        var url = localStorage.getItem("websiteRoot") + "income/voucher/getVoucherList.php";
+        var url = app.websiteRoot + "income/voucher/getVoucherList.php";
 
         $.getJSON(url, {
             incomeCode: pageIncomeVoucher.incomeCode
@@ -26,9 +26,9 @@ var pageIncomeVoucher = {
             var imageURL = "";
 
             if (data[i]['ImagePath'])
-                imageURL = localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + data[i]['ImagePath'] + "&rand=" + new Date().getTime();
+                imageURL = app.websiteRoot + "img/getImage.php?file=" + data[i]['ImagePath'] + "&rand=" + new Date().getTime();
             else
-                imageURL = localStorage.getItem("websiteRoot") + "img/default/preferences/logo.png";
+                imageURL = app.websiteRoot + "img/default/preferences/logo.png";
 
             voucherTableString += "<td class='col-md-1 col-sm-1 col-xs-1 text-left text-middle'><div class='image'><a onclick='pageIncomeVoucher.openLogoVoucherModal(" + i + ");' class='clickable'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded img-size'/><div class='overlay img-rounded'><span class='glyphicon glyphicon-pencil overlay-icon'></span></div></a></div></td>";
 
@@ -72,7 +72,7 @@ var pageIncomeVoucher = {
         $("#table-body").html(voucherTableString);
     },
     getIncomeDetails: function () {
-        var url = localStorage.getItem("websiteRoot") + "income/getIncomeDetail.php";
+        var url = app.websiteRoot + "income/getIncomeDetail.php";
 
         $.getJSON(url, {
             incomeCode: pageIncomeVoucher.incomeCode
@@ -159,7 +159,7 @@ var pageIncomeVoucher = {
     deleteCurrentLogo: function () {
         var deleteLogo = confirm("Do you REALLY want to DELETE the LOGO?");
         if (deleteLogo) {
-            var url = localStorage.getItem("websiteRoot") + "income/voucher/controller.php";
+            var url = app.websiteRoot + "income/voucher/controller.php";
 
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
@@ -172,18 +172,18 @@ var pageIncomeVoucher = {
                 console.log(data);
                 var response = JSON.parse(data);
                 if (response.status == 1) {
-                    pageIndex.showNotificationSuccess(response.message);
+                    app.showNotificationSuccess(response.message);
                     setTimeout(function () {
                         pageIncomeVoucher.getVoucherList();
                     }, 200);
                 } else {
-                    pageIndex.showNotificationFailure(response.message);
+                    app.showNotificationFailure(response.message);
                 }
                 $("#imageModal").modal('hide');
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
             }).fail(function () {
-                pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+                app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
             });
@@ -198,10 +198,8 @@ var pageIncomeVoucher = {
 };
 
 $(document).ready(function () {
-    localStorage.setItem("websiteRoot", "../../");
-
-    $('#navbarProfilePicture').attr("src", localStorage.getItem("websiteRoot") + "img/default/contact/profilePicture.png");
-    $('#accountProfileImagePreview').attr("src", localStorage.getItem("websiteRoot") + "img/default/contact/profilePicture.png");
+    app.websiteRoot = "../../";
+    app.setAccountProfilePicture();
 
     pageIncomeVoucher.getIncomeDetails();
     pageIncomeVoucher.getVoucherList();
@@ -231,7 +229,7 @@ $(document).ready(function () {
         $("#incomeCodeForImage").val(pageIncomeVoucher.incomeCode);
         $('#photoId').val(pageIncomeVoucher.voucherDetails.VoucherNo);
         if (pageIncomeVoucher.voucherDetails.ImagePath) {
-            $("#imagePreview").attr("src", localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + pageIncomeVoucher.voucherDetails.ImagePath + "&rand=" + new Date().getTime());
+            $("#imagePreview").attr("src", app.websiteRoot + "img/getImage.php?file=" + pageIncomeVoucher.voucherDetails.ImagePath + "&rand=" + new Date().getTime());
             $("#deleteImageBtn").removeClass("hidden");
         } else {
             $("#imagePreview").attr("src", "../../img/default/preferences/logo.png");
@@ -246,7 +244,7 @@ $(document).ready(function () {
                 console.log(formData[i]);
                 if (formData[i].name == "fileToUpload") {
                     if (formData[i].value == "") {
-                        pageIndex.showNotificationFailure("No Image Selected");
+                        app.showNotificationFailure("No Image Selected");
                         return false;
                     }
                 }
@@ -267,12 +265,12 @@ $(document).ready(function () {
                 }, 200);
                 $(".progress").hide();
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
                 $(".progress").hide();
             }
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $(".progress").hide();
         }
     });
@@ -284,7 +282,7 @@ $(document).ready(function () {
             console.log(formData);
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
-                    pageIndex.showNotificationFailure("Required fields are empty");
+                    app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
             }
@@ -295,20 +293,20 @@ $(document).ready(function () {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 1) {
-                pageIndex.showNotificationSuccess(response.message);
+                app.showNotificationSuccess(response.message);
                 setTimeout(function () {
                     pageIncomeVoucher.getVoucherList();
                 }, 200);
                 $("#voucherModal").modal('hide');
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
                 $("#voucherModal").modal('show');
             }
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }
@@ -324,19 +322,19 @@ $(document).ready(function () {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 1) {
-                pageIndex.showNotificationSuccess(response.message);
+                app.showNotificationSuccess(response.message);
                 setTimeout(function () {
                     pageIncomeVoucher.getVoucherList();
                 }, 200);
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
             }
             $("#deleteModal").modal('hide');
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }

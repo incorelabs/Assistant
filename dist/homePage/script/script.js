@@ -26,10 +26,10 @@ $(document).ready(function () {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 0) {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
             }
             else {
-                pageIndex.showNotificationSuccess(response.message);
+                app.showNotificationSuccess(response.message);
                 window.location.href = "login.php";
             }
             $("#pageLoading").removeClass("loader");
@@ -48,15 +48,15 @@ $(document).ready(function () {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 0) {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
             }
             else {
                 if (response.status == 1) {
-                    pageIndex.showNotificationSuccess(response.message);
+                    app.showNotificationSuccess(response.message);
                     window.location.href = localStorage.getItem("websiteRoot") + "preferences/changePassword.php";
                 }
                 else {
-                    pageIndex.showNotificationSuccess(response.message);
+                    app.showNotificationSuccess(response.message);
                     window.location.href = localStorage.getItem("websiteRoot") + "index.php";
                 }
             }

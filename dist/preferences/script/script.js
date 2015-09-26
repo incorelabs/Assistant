@@ -1,8 +1,6 @@
 $(document).ready(function () {
-    localStorage.setItem("websiteRoot", "../");
-
-    $('#navbarProfilePicture').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
-    $('#accountProfileImagePreview').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
+    app.websiteRoot = "../";
+    app.setAccountProfilePicture();
 
     $("#changePasswordForm").ajaxForm({
         beforeSubmit: function () {
@@ -13,11 +11,11 @@ $(document).ready(function () {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 0) {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
             }
             else {
-                pageIndex.showNotificationSuccess(response.message);
-                window.location.href = localStorage.getItem("websiteRoot");
+                app.showNotificationSuccess(response.message);
+                window.location.href = app.websiteRoot;
             }
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);

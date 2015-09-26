@@ -9,7 +9,7 @@ var pagePassword = {
     stateEncryptLoginPassword1: false,
     stateEncryptLoginPassword2: false,
     getFamilyList: function () {
-        var url = localStorage.getItem("websiteRoot") + "family/getFamily.php";
+        var url = app.websiteRoot + "family/getFamily.php";
 
         $.getJSON(url, {
             list: 2
@@ -33,7 +33,7 @@ var pagePassword = {
         $("#holderName").html(familyListString);
     },
     getPasswordList: function () {
-        var url = localStorage.getItem("websiteRoot") + "passwords/getPasswordList.php";
+        var url = app.websiteRoot + "passwords/getPasswordList.php";
 
         $.getJSON(url, {
             pageNo: pagePassword.currentPageNo
@@ -76,7 +76,7 @@ var pagePassword = {
         });
     },
     getSearchResults: function () {
-        var url = localStorage.getItem("websiteRoot") + "passwords/getPasswordList.php";
+        var url = app.websiteRoot + "passwords/getPasswordList.php";
 
         $.getJSON(url, {
             pageNo: pagePassword.currentPageNo,
@@ -115,7 +115,7 @@ var pagePassword = {
     getPasswordDetails: function (passwordCode) {
         if (passwordCode == null)
             return;
-        var url = localStorage.getItem("websiteRoot") + "passwords/getPasswordDetail.php";
+        var url = app.websiteRoot + "passwords/getPasswordDetail.php";
 
         $.getJSON(url, {
             passwordCode: passwordCode
@@ -290,7 +290,7 @@ var pagePassword = {
         familyCode = temp;
     },
     getPasswordTypeList: function () {
-        var url = localStorage.getItem("websiteRoot") + "passwords/getMasters.php";
+        var url = app.websiteRoot + "passwords/getMasters.php";
 
         $.getJSON(url, {
             passwordType: 1
@@ -344,7 +344,8 @@ var pagePassword = {
 };
 
 $(document).ready(function () {
-    localStorage.setItem("websiteRoot", "../");
+    app.websiteRoot = "../";
+    app.setAccountProfilePicture();
 
     document.getElementById('searchBox').onkeypress = function (e) {
         if (!e)
@@ -376,7 +377,7 @@ $(document).ready(function () {
         beforeSubmit: function (formData) {
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
-                    pageIndex.showNotificationFailure("Required fields are empty");
+                    app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
             }
@@ -394,18 +395,18 @@ $(document).ready(function () {
                     $("#deletePasswordBtn").remove();
                     pagePassword.getPasswordDetails(response.landing);
                     pagePassword.getPasswordList();
-                    pageIndex.showNotificationSuccess(response.message);
+                    app.showNotificationSuccess(response.message);
                     pagePassword.getPasswordTypeList();
                     $("#passwordModal").modal("hide");
                 }, 500);
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
             }
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }
@@ -431,19 +432,19 @@ $(document).ready(function () {
                     $("#passwordDetailBody").empty();
                     $("#editPasswordBtn").remove();
                     $("#deletePasswordBtn").remove();
-                    pageIndex.showNotificationSuccess(response.message);
+                    app.showNotificationSuccess(response.message);
                     pagePassword.getPasswordList();
                     pagePassword.getPasswordDetails(response.landing);
                     $("#deleteModal").modal("hide");
                 }, 500);
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
             }
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }

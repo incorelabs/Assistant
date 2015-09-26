@@ -1,7 +1,4 @@
 <?php
-	//$root_location = "http://localhost/Assistant/";
-	//$root_location = "http://43.225.52.206/~chetansanghvi/";
-	
 	$navbar_str = "<div id='page'>
 	<div class='header' style='text-decoration:none;font-weight:200;font-size:20px'>
 		<a href='#' id='backButton' class='pull-left hidden' style='margin-left: -35px;'><i class='fa fa-chevron-left fa-lg'></i></a>
@@ -10,11 +7,11 @@
     <a class='dropdown-toggle' data-toggle='dropdown'>
     <span class='fa fa-user fa-lg'></span><i class='fa fa-caret-down'></i></a>
     <ul class='dropdown-menu dropdown-menu-custom'>
-      <li><a href='#' class='text-center' onclick='pageIndex.openAccountProfilePictureModal()'><img class='img-rounded' width='100px' height='100px' id='navbarProfilePicture'/></a></li>
+      <li><a href='#' class='text-center' onclick='app.openAccountProfilePictureModal()'><img class='img-rounded' width='100px' height='100px' id='navbarProfilePicture'/></a></li>
       <li><a href='#' style='pointer-events: none; cursor: default;'>".$_SESSION['name']."</a></li>
       <li class='divider'></li>
       <li><a href='#'>Account Info</a></li>
-      <li><a href='#' class='logout'>Sign Out</a></li>
+      <li><a href='#' onclick='app.logout();'>Sign Out</a></li>
     </ul>
     </div>
 	</div>
@@ -31,7 +28,7 @@
 			<li><a href='".$root_location."income'>Income</a></li>
 			<li><a href='".$root_location."passwords'>Passwords</a></li>
 			<li><a href='#'>Events</a></li>
-			<li><a href='#'>Reminders</a></li>
+			<!--<li><a href='#'>Reminders</a></li>-->
 			<li><a href='#mm-2' data-target='#mm-2'>Reports</a>
 			    <ul>
 			        <li><a href='#'>Labels</a></li>
@@ -58,7 +55,7 @@
 					<li><a href='".$root_location."preferences/envelopeSettings/'>Envelope Settings</a></li>
 				</ul>
 			</li>
-			<li><a href='#' class='logout'>Sign Out</a></li>
+			<li><a href='#' onclick='app.logout();' >Sign Out</a></li>
 		</ul>
 	</nav>
 </div>

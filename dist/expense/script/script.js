@@ -11,7 +11,7 @@ var pageExpense = {
     expenseList: null,
     firstTime: true,
     getFamilyList: function () {
-        var url = localStorage.getItem("websiteRoot") + "family/getFamily.php";
+        var url = app.websiteRoot + "family/getFamily.php";
 
         $.getJSON(url, {
             list: 2
@@ -35,7 +35,7 @@ var pageExpense = {
         $("#holderCode").html(familyListString);
     },
     getExpenseList: function () {
-        var url = localStorage.getItem("websiteRoot") + "expense/getExpenseList.php";
+        var url = app.websiteRoot + "expense/getExpenseList.php";
 
         $.getJSON(url, {
             pageNo: pageExpense.currentPageNo
@@ -79,7 +79,7 @@ var pageExpense = {
         });
     },
     getSearchResults: function () {
-        var url = localStorage.getItem("websiteRoot") + "expense/getExpenseList.php";
+        var url = app.websiteRoot + "expense/getExpenseList.php";
 
         $.getJSON(url, {
             pageNo: pageExpense.currentPageNo,
@@ -119,11 +119,12 @@ var pageExpense = {
     getExpenseDetails: function (expenseCode) {
         if (expenseCode == null)
             return;
-        var url = localStorage.getItem("websiteRoot") + "expense/getExpenseDetail.php";
+        var url = app.websiteRoot + "expense/getExpenseDetail.php";
 
         $.getJSON(url, {
             expenseCode: expenseCode
         }).done(function (data) {
+            console.log(data);
             pageExpense.setExpenseDetails(data);
         }).fail(function (error) {
 
@@ -328,10 +329,10 @@ var pageExpense = {
         $("#deleteModal").modal("show");
     },
     openVoucherExpenseModal: function (expenseCode) {
-        window.location.href = localStorage.getItem("websiteRoot") + "expense/voucher/index.php?expenseCode=" + expenseCode;
+        window.location.href = app.websiteRoot + "expense/voucher/index.php?expenseCode=" + expenseCode;
     },
     getExpenseTypeList: function () {
-        var url = localStorage.getItem("websiteRoot") + "expense/getMasters.php";
+        var url = app.websiteRoot + "expense/getMasters.php";
 
         $.getJSON(url, {
             type: 'expenseType'
@@ -372,7 +373,7 @@ var pageExpense = {
         });
     },
     getDueToList: function () {
-        var url = localStorage.getItem("websiteRoot") + "expense/getMasters.php";
+        var url = app.websiteRoot + "expense/getMasters.php";
 
         $.getJSON(url, {
             type: 'contactList'
@@ -425,7 +426,8 @@ var pageExpense = {
 };
 
 $(document).ready(function () {
-    localStorage.setItem("websiteRoot", "../");
+    app.websiteRoot = "../";
+    app.setAccountProfilePicture();
 
     document.getElementById('searchBox').onkeypress = function (e) {
         if (!e)
@@ -476,7 +478,7 @@ $(document).ready(function () {
             console.log(formData);
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
-                    pageIndex.showNotificationFailure("Required fields are empty");
+                    app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
             }
@@ -495,19 +497,19 @@ $(document).ready(function () {
                     $("#voucherExpenseBtn").remove();
                     pageExpense.getExpenseDetails(response.landing);
                     pageExpense.getExpenseList();
-                    pageIndex.showNotificationSuccess(response.message);
+                    app.showNotificationSuccess(response.message);
                     pageExpense.getExpenseTypeList();
                     pageExpense.getDueToList();
                     $("#expenseModal").modal("hide");
                 }, 500);
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
             }
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }
@@ -533,19 +535,19 @@ $(document).ready(function () {
                     $("#editExpenseBtn").remove();
                     $("#deleteExpenseBtn").remove();
                     $("#voucherExpenseBtn").remove();
-                    pageIndex.showNotificationSuccess(response.message);
+                    app.showNotificationSuccess(response.message);
                     pageExpense.getExpenseList();
                     pageExpense.getExpenseDetails(response.landing);
                     $("#deleteModal").modal("hide");
                 }, 500);
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
             }
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }

@@ -1,6 +1,7 @@
 <?php
 session_start();
 define("ROOT", "../");
+include_once ROOT . 'dist/authenticate.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,36 +11,10 @@ define("ROOT", "../");
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Assistant - Family</title>
-
-    <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS -->
     <?php
-    include_once ROOT . 'dist/authenticate.php';
-    include_once ROOT . 'dist/bootstrap.php';
+        include_once ROOT.'dist/fetchCSS.php';
     ?>
-
     <link rel="stylesheet" href="../dist/family/css/style.css"/>
-    <link rel="stylesheet" href="../dist/css/style.css"/>
-    <script src="http://malsup.github.com/jquery.form.js"></script>
-    <script>
-        var familyCode = '<?php echo $_SESSION['familyCode']; ?>';
-    </script>
-
-    <!-- Header Links -->
-    <link type="text/css" rel="stylesheet" href="../dist/css/sidebar.css"/>
-    <link type="text/css" rel="stylesheet" href="../dist/css/jquery_sidebar.css"/>
-    <script type="text/javascript" src="../dist/script/jquery.mmenu.min.all.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            $('nav#menu').mmenu({
-                extensions	: [ 'effect-slide-menu', 'pageshadow' ],
-                searchfield	: true
-            });
-        });
-    </script>
-    <script src="../dist/script/script.js"></script>
-    <script src="../dist/date/script.js"></script>
-    <script src="../dist/family/script/script.js"></script>
 </head>
 <body>
 <!-- fixed top navbar -->
@@ -266,9 +241,17 @@ echo $navbar_str;
     </div>
 </div>
 <!--modal-->
+
+<?php
+    include_once ROOT.'dist/fetchJS.php';
+?>
+<script src="../dist/family/script/script.js"></script>
+<script src="../dist/date/script.js"></script>
+<script>
+    var familyCode = '<?php echo $_SESSION['familyCode']; ?>';
+</script>
 </body>
 <div class="cover">
     <div id="pageLoading"></div>
 </div>
-
 </html>

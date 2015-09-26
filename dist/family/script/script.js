@@ -6,7 +6,7 @@ var pageFamily = {
     isYesEnabled: true,
     isNoEnabled: true,
     getFamilyList: function () {
-        var url = localStorage.getItem("websiteRoot") + "family/getFamily.php";
+        var url = app.websiteRoot + "family/getFamily.php";
 
         $.getJSON(url, {
             list: 1
@@ -193,7 +193,7 @@ var pageFamily = {
         }
     },
     getRelationList: function () {
-        var url = localStorage.getItem("websiteRoot") + "family/getRelation.php";
+        var url = app.websiteRoot + "family/getRelation.php";
 
         $.getJSON(url, {
             list: 1
@@ -284,10 +284,8 @@ var pageFamily = {
 };
 
 $(document).ready(function () {
-    localStorage.setItem("websiteRoot", "../");
-
-    $('#navbarProfilePicture').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
-    $('#accountProfileImagePreview').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
+    app.websiteRoot = "../";
+    app.setAccountProfilePicture();
 
     if (familyCode == 1001) {
         // isParentLoggedIn = true; Implies Parent
@@ -347,7 +345,7 @@ $(document).ready(function () {
             console.log(formData);
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
-                    pageIndex.showNotificationFailure("Required fields are empty");
+                    app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
             }
@@ -358,20 +356,20 @@ $(document).ready(function () {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 1) {
-                pageIndex.showNotificationSuccess(response.message);
+                app.showNotificationSuccess(response.message);
                 setTimeout(function () {
                     pageFamily.getFamilyList();
                 }, 200);
                 $("#familyModal").modal('hide');
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
                 $("#familyModal").modal('show');
             }
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }
@@ -386,19 +384,19 @@ $(document).ready(function () {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 1) {
-                pageIndex.showNotificationSuccess(response.message);
+                app.showNotificationSuccess(response.message);
                 setTimeout(function () {
                     pageFamily.getFamilyList();
                 }, 200);
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
             }
             $("#deleteModal").modal('hide');
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }

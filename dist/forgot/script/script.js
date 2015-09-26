@@ -1,8 +1,10 @@
+var pageForgotPassword = {
+    enableToggle: function (current, other) {
+        other.disabled = current.value.replace(/\s+/, '').length > 0 ? true : false;
+    }
+};
 $(document).ready(function () {
-    localStorage.setItem("websiteRoot", "../");
-
-    $('#navbarProfilePicture').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
-    $('#accountProfileImagePreview').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
+    app.websiteRoot = "../";
 
     $("#forgotPasswordForm").ajaxForm({
         beforeSubmit: function () {
@@ -13,14 +15,25 @@ $(document).ready(function () {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 0) {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
             }
             else {
-                pageIndex.showNotificationSuccess(response.message);
-                window.location.href = localStorage.getItem("websiteRoot") + "login.php";
+                app.showNotificationSuccess(response.message);
+                window.location.href = app.websiteRoot + "login.php";
             }
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }
     });
+
+    var forgotEmail = document.getElementById('forgotEmail');
+    var forgotMobile = document.getElementById('forgotMobile');
+
+    forgotEmail.onkeyup = function () {
+        pageForgotPassword.enableToggle(this, forgotMobile);
+    };
+
+    forgotMobile.onkeyup = function () {
+        pageForgotPassword.enableToggle(this, forgotEmail);
+    };
 });

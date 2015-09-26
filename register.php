@@ -13,27 +13,11 @@ $mysqli = getConnection();
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Assistant - Sign Up</title>
-
-    <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS -->
     <?php
-    include_once ROOT . 'dist/bootstrap.php';
+        include_once ROOT.'dist/fetchCSS.php';
     ?>
-    <link rel="stylesheet" type="text/css" href="dist/css/style.css"/>
     <link rel="stylesheet" href="dist/homePage/css/style.css"/>
-    <script src="http://malsup.github.com/jquery.form.js"></script>
-    <script src="dist/script/script.js"></script>
-    <script src="dist/homePage/script/script.js"></script>
-    <link rel="stylesheet" href="dist/css/sidebar.css"/>
-    <link rel="stylesheet" href="dist/css/jquery_sidebar.css"/>
-    <script src="dist/script/jquery.mmenu.min.all.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('nav#menu').mmenu();
-        });
-    </script>
 </head>
-
 <body>
 <?php
 include_once ROOT . 'dist/navbar_logout.php';
@@ -45,7 +29,6 @@ echo $navbar_str;
         Added Successfully!
     </div>
 </div>
-
 <div class="notification_outer">
     <div class="notification_failure" id="notification_failure" style="display:none">
         Something went wrong!
@@ -134,7 +117,10 @@ echo $navbar_str;
         </div>
     </div>
 </div>
-
+<?php
+include_once ROOT.'dist/fetchJS.php';
+?>
+<script src="dist/script/register.js"></script>
 </body>
 <div class="cover">
     <div id="pageLoading"></div>

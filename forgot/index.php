@@ -1,7 +1,6 @@
 <?php
 session_start();
 define("ROOT", "../");
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,47 +10,11 @@ define("ROOT", "../");
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Assistant - Forgot Password</title>
-
-    <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS -->
     <?php
-    include_once ROOT . 'dist/bootstrap.php';
+        include_once ROOT.'dist/fetchCSS.php';
     ?>
-    <link rel="stylesheet" type="text/css" href="../dist/css/style.css"/>
     <link rel="stylesheet" href="../dist/homePage/css/style.css"/>
-    <script src="http://malsup.github.com/jquery.form.js"></script>
-    <script src="../dist/script/script.js"></script>
-    <script src="../dist/forgot/script/script.js"></script>
-    <link rel="stylesheet" href="../dist/css/sidebar.css"/>
-    <link rel="stylesheet" href="../dist/css/jquery_sidebar.css"/>
-    <script src="../dist/script/jquery.mmenu.min.all.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            $('nav#menu').mmenu({
-                extensions	: [ 'effect-slide-menu', 'pageshadow' ],
-                searchfield	: true
-            });
-        });
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var forgotEmail = document.getElementById('forgotEmail'),
-                forgotMobile = document.getElementById('forgotMobile');
-
-            function enableToggle(current, other) {
-                other.disabled = current.value.replace(/\s+/, '').length > 0 ? true : false;
-            }
-
-            forgotEmail.onkeyup = function () {
-                enableToggle(this, forgotMobile);
-            }
-            forgotMobile.onkeyup = function () {
-                enableToggle(this, forgotEmail);
-            }
-        });
-    </script>
 </head>
-
 <body>
 <?php
 define('PAGE_TITLE', 'Contact');
@@ -111,6 +74,11 @@ echo $navbar_str;
         </div>
     </div>
 </div>
+
+<?php
+    include_once ROOT.'dist/fetchJS.php';
+?>
+<script src="../dist/forgot/script/script.js"></script>
 </body>
 <div class="cover">
     <div id="pageLoading"></div>

@@ -28,7 +28,7 @@ var pageContact = {
     addBtnOtherPhoneCount: 0,
     firstTime: true,
     getContactList: function () {
-        var url = localStorage.getItem("websiteRoot") + "contacts/getContactList.php";
+        var url = app.websiteRoot + "contacts/getContactList.php";
 
         $.getJSON(url, {
             pageNo: pageContact.currentPageNo
@@ -79,7 +79,7 @@ var pageContact = {
         });
     },
     getSearchResults: function () {
-        var url = localStorage.getItem("websiteRoot") + "contacts/getContactList.php";
+        var url = app.websiteRoot + "contacts/getContactList.php";
 
         $.getJSON(url, {
             pageNo: pageContact.currentPageNo,
@@ -127,7 +127,7 @@ var pageContact = {
     getContactDetails: function (contactCode) {
         if (contactCode == null)
             return;
-        var url = localStorage.getItem("websiteRoot") + "contacts/getContactDetail.php";
+        var url = app.websiteRoot + "contacts/getContactDetail.php";
 
         $.getJSON(url, {
             contactCode: contactCode
@@ -177,7 +177,7 @@ var pageContact = {
             }
             pageContact.firstTime = false;
             if (data.detail.contact.ImageURL != null)
-                imageURL = localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + data.detail.contact.ImageURL;
+                imageURL = app.websiteRoot + "img/getImage.php?file=" + data.detail.contact.ImageURL;
             else
                 imageURL = "../img/default/contact/profilePicture.png";
 
@@ -322,7 +322,7 @@ var pageContact = {
         }
     },
     getTitleData: function () {
-        var url = localStorage.getItem("websiteRoot") + "contacts/getMasters.php";
+        var url = app.websiteRoot + "contacts/getMasters.php";
 
         $.getJSON(url, {
             type: 'title'
@@ -337,7 +337,7 @@ var pageContact = {
         });
     },
     getGroupData: function () {
-        var url = localStorage.getItem("websiteRoot") + "contacts/getMasters.php";
+        var url = app.websiteRoot + "contacts/getMasters.php";
 
         $.getJSON(url, {
             type: 'group'
@@ -352,7 +352,7 @@ var pageContact = {
         });
     },
     getEmergencyData: function () {
-        var url = localStorage.getItem("websiteRoot") + "contacts/getMasters.php";
+        var url = app.websiteRoot + "contacts/getMasters.php";
 
         $.getJSON(url, {
             type: 'emergency'
@@ -367,7 +367,7 @@ var pageContact = {
         });
     },
     getCountryData: function () {
-        var url = localStorage.getItem("websiteRoot") + "contacts/getMasters.php";
+        var url = app.websiteRoot + "contacts/getMasters.php";
 
         $.getJSON(url, {
             type: 'country'
@@ -383,7 +383,7 @@ var pageContact = {
         });
     },
     getStateData: function () {
-        var url = localStorage.getItem("websiteRoot") + "contacts/getMasters.php";
+        var url = app.websiteRoot + "contacts/getMasters.php";
 
         $.getJSON(url, {
             type: 'state'
@@ -399,7 +399,7 @@ var pageContact = {
         });
     },
     getCityData: function () {
-        var url = localStorage.getItem("websiteRoot") + "contacts/getMasters.php";
+        var url = app.websiteRoot + "contacts/getMasters.php";
 
         $.getJSON(url, {
             type: 'city'
@@ -415,7 +415,7 @@ var pageContact = {
         });
     },
     getAreaData: function () {
-        var url = localStorage.getItem("websiteRoot") + "contacts/getMasters.php";
+        var url = app.websiteRoot + "contacts/getMasters.php";
 
         $.getJSON(url, {
             type: 'area'
@@ -731,7 +731,7 @@ var pageContact = {
     deleteProfilePic: function () {
         var deletePic = confirm("Do you REALLY want to DELETE the Profile Picture?");
         if (deletePic) {
-            var url = localStorage.getItem("websiteRoot") + "contacts/controller.php";
+            var url = app.websiteRoot + "contacts/controller.php";
 
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
@@ -743,17 +743,17 @@ var pageContact = {
                 console.log(data);
                 var response = JSON.parse(data);
                 if (response.status == 1) {
-                    pageContact.showNotificationSuccess(response.message);
+                    app.showNotificationSuccess(response.message);
                     pageContact.localContact.contact.ImageURL = null;
                     $("#imageResource").attr("src", "../img/default/contact/profilePicture.png");
                 } else {
-                    pageContact.showNotificationFailure(response.message);
+                    app.showNotificationFailure(response.message);
                 }
                 $("#imageModal").modal('hide');
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
             }).fail(function () {
-                pageContact.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+                app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
             });
@@ -971,25 +971,12 @@ var pageContact = {
                 pageContact.addBtnOtherPhoneCount--;
                 break;
         }
-    },
-    showNotificationSuccess: function (successMessage) {
-        $("#notification_success").html(successMessage);
-        document.getElementById('notification_success').style.display = "block";
-        $("#notification_success").delay(2000).fadeOut("slow");
-    },
-    showNotificationFailure: function (failureMessage) {
-        $("#notification_failure").html(failureMessage);
-        document.getElementById('notification_failure').style.display = "block";
-        $("#notification_failure").delay(2000).fadeOut("slow");
     }
 };
 
 $(document).ready(function (event) {
-    localStorage.setItem("websiteRoot", "../");
-
-    $('#navbarProfilePicture').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
-    $('#profileImagePreview').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
-
+    app.websiteRoot = "../";
+    app.setAccountProfilePicture();
 
     document.getElementById('searchBox').onkeypress = function (e) {
         if (!e)
@@ -1060,7 +1047,7 @@ $(document).ready(function (event) {
         document.getElementById("profileForm").reset();
         $('#photoId').val(pageContact.localContact.contact.ContactCode);
         if (pageContact.localContact.contact.ImageURL) {
-            $("#imagePreview").attr("src", localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + pageContact.localContact.contact.ImageURL);
+            $("#imagePreview").attr("src", app.websiteRoot + "img/getImage.php?file=" + pageContact.localContact.contact.ImageURL);
             $("#deleteImageBtn").removeClass("hidden");
         } else {
             $("#imagePreview").attr("src", "../img/default/contact/profilePicture.png");
@@ -1075,7 +1062,7 @@ $(document).ready(function (event) {
                 console.log(formData[i]);
                 if (formData[i].name == "fileToUpload") {
                     if (formData[i].value == "") {
-                        pageContact.showNotificationFailure("No Image Selected");
+                        app.showNotificationFailure("No Image Selected");
                         return false;
                     }
                 }
@@ -1091,16 +1078,16 @@ $(document).ready(function (event) {
             var response = JSON.parse(responseText);
             if (response.status == 1) {
                 $("#imageModal").modal('hide');
-                $("#imageResource").attr("src", localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + response.location + "&rand=" + new Date().getTime());
+                $("#imageResource").attr("src", app.websiteRoot + "img/getImage.php?file=" + response.location + "&rand=" + new Date().getTime());
                 pageContact.localContact.contact.ImageURL = response.location;
                 $(".progress").hide();
             } else {
-                pageContact.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
                 $(".progress").hide();
             }
         },
         error: function () {
-            pageContact.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $(".progress").hide();
         }
     });
@@ -1130,19 +1117,19 @@ $(document).ready(function (event) {
                     $("#contactDetailBody").empty();
                     $("#editContactBtn").remove();
                     $("#deleteContactBtn").remove();
-                    pageContact.showNotificationSuccess(response.message);
+                    app.showNotificationSuccess(response.message);
                     pageContact.getContactList();
                     pageContact.getContactDetails(response.landing);
                     $("#deleteModal").modal('hide');
                 }, 500);
             } else {
-                pageContact.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
             }
         },
         error: function () {
-            pageContact.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }
@@ -1158,24 +1145,24 @@ $(document).ready(function (event) {
             console.log(formData);
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
-                    pageContact.showNotificationFailure("Required fields are empty");
+                    app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
             }
             if ($("#homeCity").val().trim() != "") {
                 // If city has a value then state and country also should
                 if ($("#homeState").val().trim() == "") {
-                    pageContact.showNotificationFailure("The \"Home\" state field is empty");
+                    app.showNotificationFailure("The \"Home\" state field is empty");
                     return false;
                 } else if ($("#homeCountry").val().trim() == "") {
-                    pageContact.showNotificationFailure("The \"Home\" country field is empty");
+                    app.showNotificationFailure("The \"Home\" country field is empty");
                     return false;
                 }
             } else if ($("#homeState").val().trim() != "") {
                 // If city does not have a value check if state has a value
                 // If state does then country should also
                 if ($("#homeCountry").val().trim() == "") {
-                    pageContact.showNotificationFailure("The \"Home\" country field is empty");
+                    app.showNotificationFailure("The \"Home\" country field is empty");
                     return false;
                 }
             }
@@ -1183,17 +1170,17 @@ $(document).ready(function (event) {
             if ($("#workCity").val().trim() != "") {
                 // If city has a value then state and country also should
                 if ($("#workState").val().trim() == "") {
-                    pageContact.showNotificationFailure("The \"Work\" state field is empty");
+                    app.showNotificationFailure("The \"Work\" state field is empty");
                     return false;
                 } else if ($("#workCountry").val().trim() == "") {
-                    pageContact.showNotificationFailure("The \"Work\" country field is empty");
+                    app.showNotificationFailure("The \"Work\" country field is empty");
                     return false;
                 }
             } else if ($("#workState").val().trim() != "") {
                 // If city does not have a value check if state has a value
                 // If state does then country should also
                 if ($("#workCountry").val().trim() == "") {
-                    pageContact.showNotificationFailure("The \"Work\" country field is empty");
+                    app.showNotificationFailure("The \"Work\" country field is empty");
                     return false;
                 }
             }
@@ -1201,17 +1188,17 @@ $(document).ready(function (event) {
             if ($("#otherCity").val().trim() != "") {
                 // If city has a value then state and country also should
                 if ($("#otherState").val().trim() == "") {
-                    pageContact.showNotificationFailure("The \"Other\" state field is empty");
+                    app.showNotificationFailure("The \"Other\" state field is empty");
                     return false;
                 } else if ($("#otherCountry").val().trim() == "") {
-                    pageContact.showNotificationFailure("The \"Other\" country field is empty");
+                    app.showNotificationFailure("The \"Other\" country field is empty");
                     return false;
                 }
             } else if ($("#otherState").val().trim() != "") {
                 // If city does not have a value check if state has a value
                 // If state does then country should also
                 if ($("#otherCountry").val().trim() == "") {
-                    pageContact.showNotificationFailure("The \"Other\" country field is empty");
+                    app.showNotificationFailure("The \"Other\" country field is empty");
                     return false;
                 }
             }
@@ -1232,18 +1219,18 @@ $(document).ready(function (event) {
                     $("#deleteContactBtn").remove();
                     pageContact.getContactDetails(response.landing);
                     pageContact.getContactList();
-                    pageContact.showNotificationSuccess(response.message);
+                    app.showNotificationSuccess(response.message);
                     pageContact.refreshMasterList();
                     $("#contactModal").modal('hide');
                 }, 500);
             } else {
-                pageContact.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
             }
         },
         error: function () {
-            pageContact.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }

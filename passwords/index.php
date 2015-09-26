@@ -1,9 +1,6 @@
 <?php
 session_start();
 define("ROOT", "../");
-//require_once ROOT.'db/Connection.php';
-
-//$mysqli = getConnection();
 include_once ROOT . 'dist/authenticate.php';
 ?>
 <!DOCTYPE html>
@@ -14,33 +11,11 @@ include_once ROOT . 'dist/authenticate.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Assistant - Passwords</title>
-
-    <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS -->
     <?php
-    include_once ROOT . 'dist/bootstrap.php';
+        include_once ROOT.'dist/fetchCSS.php';
     ?>
-    <link rel="stylesheet" type="text/css" href="../dist/css/style.css"/>
     <link rel="stylesheet" href="../dist/passwords/css/style.css"/>
-    <script src="http://malsup.github.com/jquery.form.js"></script>
-    <script>
-        var familyCode = '<?php echo $_SESSION['familyCode']; ?>';
-    </script>
-    <script src="../dist/script/script.js"></script>
-    <script src="../dist/passwords/script/script.js"></script>
-    <link rel="stylesheet" href="../dist/css/sidebar.css"/>
-    <link rel="stylesheet" href="../dist/css/jquery_sidebar.css"/>
-    <script src="../dist/script/jquery.mmenu.min.all.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            $('nav#menu').mmenu({
-                extensions	: [ 'effect-slide-menu', 'pageshadow' ],
-                searchfield	: true
-            });
-        });
-    </script>
 </head>
-
 <body>
 <?php
 define('PAGE_TITLE', 'Passwords');
@@ -304,6 +279,14 @@ echo $navbar_str;
     </div>
 </div>
 <!--modal-->
+
+<?php
+    include_once ROOT.'dist/fetchJS.php';
+?>
+<script src="../dist/passwords/script/script.js"></script>
+<script>
+    var familyCode = '<?php echo $_SESSION['familyCode']; ?>';
+</script>
 </body>
 <div class="cover">
     <div id="pageLoading"></div>

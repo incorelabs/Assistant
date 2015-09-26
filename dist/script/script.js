@@ -247,7 +247,7 @@ $(document).ready(function () {
                 window.location.href = localStorage.getItem("websiteRoot");
             }
             else {
-                pageIndex.showNotificationFailure("Logout unsuccessful. Please try again");
+                app.showNotificationFailure("Logout unsuccessful. Please try again");
             }
         }).fail(function (error) {
 

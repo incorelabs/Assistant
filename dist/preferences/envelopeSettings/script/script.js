@@ -2,7 +2,7 @@ var pageEnvelopeSettings = {
     envelopeSettingList: null,
     envelopeDetails: null,
     getEnvelopeList: function () {
-        var url = localStorage.getItem("websiteRoot") + "preferences/envelopeSettings/getEnvelopeList.php";
+        var url = app.websiteRoot + "preferences/envelopeSettings/getEnvelopeList.php";
 
         $.getJSON(url).done(function (data) {
             console.log(data);
@@ -22,7 +22,7 @@ var pageEnvelopeSettings = {
             var imageURL = "";
 
             if (data[i]['LogoPath'])
-                imageURL = localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + data[i]['LogoPath'] + "&rand=" + new Date().getTime();
+                imageURL = app.websiteRoot + "img/getImage.php?file=" + data[i]['LogoPath'] + "&rand=" + new Date().getTime();
             else
                 imageURL = "../../img/default/preferences/logo.png";
 
@@ -108,7 +108,7 @@ var pageEnvelopeSettings = {
     deleteCurrentLogo: function () {
         var deleteLogo = confirm("Do you REALLY want to DELETE the LOGO?");
         if (deleteLogo) {
-            var url = localStorage.getItem("websiteRoot") + "preferences/envelopeSettings/controller.php";
+            var url = app.websiteRoot + "preferences/envelopeSettings/controller.php";
 
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
@@ -120,18 +120,18 @@ var pageEnvelopeSettings = {
                 console.log(data);
                 var response = JSON.parse(data);
                 if (response.status == 1) {
-                    pageIndex.showNotificationSuccess(response.message);
+                    app.showNotificationSuccess(response.message);
                     setTimeout(function () {
                         pageEnvelopeSettings.getEnvelopeList();
                     }, 200);
                 } else {
-                    pageIndex.showNotificationFailure(response.message);
+                    app.showNotificationFailure(response.message);
                 }
                 $("#imageModal").modal('hide');
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
             }).fail(function () {
-                pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+                app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
             });
@@ -244,10 +244,8 @@ var pageEnvelopeSettings = {
     }
 };
 $(document).ready(function () {
-    localStorage.setItem("websiteRoot", "../../");
-
-    $('#navbarProfilePicture').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
-    $('#accountProfileImagePreview').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
+    app.websiteRoot = "../../";
+    app.setAccountProfilePicture();
 
     pageEnvelopeSettings.getEnvelopeList();
 
@@ -309,7 +307,7 @@ $(document).ready(function () {
         document.getElementById("logoForm").reset();
         $('#photoId').val(pageEnvelopeSettings.envelopeDetails.CoverCode);
         if (pageEnvelopeSettings.envelopeDetails.LogoPath) {
-            $("#imagePreview").attr("src", localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + pageEnvelopeSettings.envelopeDetails.LogoPath  + "&rand=" + new Date().getTime());
+            $("#imagePreview").attr("src", app.websiteRoot + "img/getImage.php?file=" + pageEnvelopeSettings.envelopeDetails.LogoPath  + "&rand=" + new Date().getTime());
             $("#deleteImageBtn").removeClass("hidden");
         } else {
             $("#imagePreview").attr("src", "../../img/default/preferences/logo.png");
@@ -324,7 +322,7 @@ $(document).ready(function () {
                 console.log(formData[i]);
                 if (formData[i].name == "fileToUpload") {
                     if (formData[i].value == "") {
-                        pageIndex.showNotificationFailure("No Image Selected");
+                        app.showNotificationFailure("No Image Selected");
                         return false;
                     }
                 }
@@ -345,12 +343,12 @@ $(document).ready(function () {
                 }, 200);
                 $(".progress").hide();
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
                 $(".progress").hide();
             }
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $(".progress").hide();
         }
     });
@@ -362,7 +360,7 @@ $(document).ready(function () {
             console.log(formData);
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
-                    pageIndex.showNotificationFailure("Required fields are empty");
+                    app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
             }
@@ -373,20 +371,20 @@ $(document).ready(function () {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 1) {
-                pageIndex.showNotificationSuccess(response.message);
+                app.showNotificationSuccess(response.message);
                 setTimeout(function () {
                     pageEnvelopeSettings.getEnvelopeList();
                 }, 200);
                 $("#envelopeSettingsModal").modal('hide');
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
                 $("#envelopeSettingsModal").modal('show');
             }
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }
@@ -402,19 +400,19 @@ $(document).ready(function () {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 1) {
-                pageIndex.showNotificationSuccess(response.message);
+                app.showNotificationSuccess(response.message);
                 setTimeout(function () {
                     pageEnvelopeSettings.getEnvelopeList();
                 }, 200);
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
             }
             $("#deleteModal").modal('hide');
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }

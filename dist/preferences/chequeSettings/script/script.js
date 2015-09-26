@@ -2,7 +2,7 @@ var pageChequeSettings = {
     chequeSettingList: null,
     chequeDetails: null,
     getChequeList: function () {
-        var url = localStorage.getItem("websiteRoot") + "preferences/chequeSettings/getChequeList.php";
+        var url = app.websiteRoot + "preferences/chequeSettings/getChequeList.php";
 
         $.getJSON(url).done(function (data) {
             console.log(data);
@@ -225,10 +225,8 @@ var pageChequeSettings = {
 };
 
 $(document).ready(function () {
-    localStorage.setItem("websiteRoot", "../../");
-
-    $('#navbarProfilePicture').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
-    $('#accountProfileImagePreview').attr("src",localStorage.getItem("websiteRoot")+"img/default/contact/profilePicture.png");
+    app.websiteRoot = "../../";
+    app.setAccountProfilePicture();
 
     console.log(window.innerWidth);
     if (window.innerWidth < 500) {
@@ -242,7 +240,7 @@ $(document).ready(function () {
             console.log(formData);
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
-                    pageIndex.showNotificationFailure("Required fields are empty");
+                    app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
             }
@@ -253,20 +251,20 @@ $(document).ready(function () {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 1) {
-                pageIndex.showNotificationSuccess(response.message);
+                app.showNotificationSuccess(response.message);
                 setTimeout(function () {
                     pageChequeSettings.getChequeList();
                 }, 200);
                 $("#chequeSettingsModal").modal('hide');
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
                 $("#chequeSettingsModal").modal('show');
             }
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }
@@ -281,19 +279,19 @@ $(document).ready(function () {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 1) {
-                pageIndex.showNotificationSuccess(response.message);
+                app.showNotificationSuccess(response.message);
                 setTimeout(function () {
                     pageChequeSettings.getChequeList();
                 }, 200);
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
             }
             $("#deleteModal").modal('hide');
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }

@@ -1,9 +1,6 @@
 <?php
 session_start();
 define("ROOT", "../../");
-//require_once ROOT.'db/Connection.php';
-
-//$mysqli = getConnection();
 include_once ROOT . 'dist/authenticate.php';
 ?>
 <!DOCTYPE html>
@@ -14,31 +11,12 @@ include_once ROOT . 'dist/authenticate.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Assistant - Cheque Settings</title>
-
-    <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS -->
     <?php
-    include_once ROOT . 'dist/bootstrap.php';
+        include_once ROOT.'dist/fetchCSS.php';
     ?>
-    <link rel="stylesheet" href="../../dist/css/style.css"/>
     <link rel="stylesheet" href="../../dist/preferences/chequeSettings/css/style.css"/>
-    <script src="http://malsup.github.com/jquery.form.js"></script>
-    <!-- Header Links -->
-    <link type="text/css" rel="stylesheet" href="../../dist/css/sidebar.css"/>
-    <link type="text/css" rel="stylesheet" href="../../dist/css/jquery_sidebar.css"/>
-    <script type="text/javascript" src="../../dist/script/jquery.mmenu.min.all.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            $('nav#menu').mmenu({
-                extensions	: [ 'effect-slide-menu', 'pageshadow' ],
-                searchfield	: true
-            });
-        });
-    </script>
-    <script src="../../dist/script/script.js"></script>
-    <script src="../../dist/date/script.js"></script>
-    <script src="../../dist/preferences/chequeSettings/script/script.js"></script>
 </head>
+<body>
 <?php
 define('PAGE_TITLE', 'Cheque Settings');
 $root_location = ROOT;
@@ -366,6 +344,11 @@ echo $navbar_str;
 </div>
 <!--modal-->
 
+<?php
+    include_once ROOT.'dist/fetchJS.php';
+?>
+<script src="../../dist/preferences/chequeSettings/script/script.js"></script>
+<script src="../../dist/date/script.js"></script>
 </body>
 <div class="cover">
     <div id="pageLoading"></div>

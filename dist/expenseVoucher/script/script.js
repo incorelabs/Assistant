@@ -4,7 +4,7 @@ var pageExpenseVoucher = {
     expenseCode: window.location.search.split("=").pop(),
     expenseName: "",
     getVoucherList: function () {
-        var url = localStorage.getItem("websiteRoot") + "expense/voucher/getVoucherList.php";
+        var url = app.websiteRoot + "expense/voucher/getVoucherList.php";
 
         $.getJSON(url, {
             expenseCode: pageExpenseVoucher.expenseCode
@@ -26,9 +26,9 @@ var pageExpenseVoucher = {
             var imageURL = "";
 
             if (data[i]['ImagePath'])
-                imageURL = localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + data[i]['ImagePath'] + "&rand=" + new Date().getTime();
+                imageURL = app.websiteRoot + "img/getImage.php?file=" + data[i]['ImagePath'] + "&rand=" + new Date().getTime();
             else
-                imageURL = localStorage.getItem("websiteRoot") + "img/default/preferences/logo.png";
+                imageURL = app.websiteRoot + "img/default/preferences/logo.png";
 
                 voucherTableString += "<td class='col-md-1 col-sm-1 col-xs-1 text-left text-middle'><div class='image'><a onclick='pageExpenseVoucher.openLogoVoucherModal(" + i + ");' class='clickable'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded img-size'/><div class='overlay img-rounded'><span class='glyphicon glyphicon-pencil overlay-icon'></span></div></a></div></td>";
 
@@ -72,7 +72,7 @@ var pageExpenseVoucher = {
         $("#table-body").html(voucherTableString);
     },
     getExpenseDetails: function () {
-        var url = localStorage.getItem("websiteRoot") + "expense/getExpenseDetail.php";
+        var url = app.websiteRoot + "expense/getExpenseDetail.php";
 
         $.getJSON(url, {
             expenseCode: pageExpenseVoucher.expenseCode
@@ -159,7 +159,7 @@ var pageExpenseVoucher = {
     deleteCurrentLogo: function () {
         var deleteLogo = confirm("Do you REALLY want to DELETE the LOGO?");
         if (deleteLogo) {
-            var url = localStorage.getItem("websiteRoot") + "expense/voucher/controller.php";
+            var url = app.websiteRoot + "expense/voucher/controller.php";
 
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
@@ -172,18 +172,18 @@ var pageExpenseVoucher = {
                 console.log(data);
                 var response = JSON.parse(data);
                 if (response.status == 1) {
-                    pageIndex.showNotificationSuccess(response.message);
+                    app.showNotificationSuccess(response.message);
                     setTimeout(function () {
                         pageExpenseVoucher.getVoucherList();
                     }, 200);
                 } else {
-                    pageIndex.showNotificationFailure(response.message);
+                    app.showNotificationFailure(response.message);
                 }
                 $("#imageModal").modal('hide');
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
             }).fail(function () {
-                pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+                app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
             });
@@ -198,10 +198,8 @@ var pageExpenseVoucher = {
 };
 
 $(document).ready(function () {
-    localStorage.setItem("websiteRoot", "../../");
-
-    $('#navbarProfilePicture').attr("src", localStorage.getItem("websiteRoot") + "img/default/contact/profilePicture.png");
-    $('#accountProfileImagePreview').attr("src", localStorage.getItem("websiteRoot") + "img/default/contact/profilePicture.png");
+    app.websiteRoot = "../../";
+    app.setAccountProfilePicture();
 
     pageExpenseVoucher.getExpenseDetails();
     pageExpenseVoucher.getVoucherList();
@@ -231,7 +229,7 @@ $(document).ready(function () {
         $("#expenseCodeForImage").val(pageExpenseVoucher.expenseCode);
         $('#photoId').val(pageExpenseVoucher.voucherDetails.VoucherNo);
         if (pageExpenseVoucher.voucherDetails.ImagePath) {
-            $("#imagePreview").attr("src", localStorage.getItem("websiteRoot") + "img/getImage.php?file=" + pageExpenseVoucher.voucherDetails.ImagePath + "&rand=" + new Date().getTime());
+            $("#imagePreview").attr("src", app.websiteRoot + "img/getImage.php?file=" + pageExpenseVoucher.voucherDetails.ImagePath + "&rand=" + new Date().getTime());
             $("#deleteImageBtn").removeClass("hidden");
         } else {
             $("#imagePreview").attr("src", "../../img/default/preferences/logo.png");
@@ -246,7 +244,7 @@ $(document).ready(function () {
                 console.log(formData[i]);
                 if (formData[i].name == "fileToUpload") {
                     if (formData[i].value == "") {
-                        pageIndex.showNotificationFailure("No Image Selected");
+                        app.showNotificationFailure("No Image Selected");
                         return false;
                     }
                 }
@@ -267,12 +265,12 @@ $(document).ready(function () {
                 }, 200);
                 $(".progress").hide();
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
                 $(".progress").hide();
             }
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $(".progress").hide();
         }
     });
@@ -284,7 +282,7 @@ $(document).ready(function () {
             console.log(formData);
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
-                    pageIndex.showNotificationFailure("Required fields are empty");
+                    app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
             }
@@ -295,20 +293,20 @@ $(document).ready(function () {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 1) {
-                pageIndex.showNotificationSuccess(response.message);
+                app.showNotificationSuccess(response.message);
                 setTimeout(function () {
                     pageExpenseVoucher.getVoucherList();
                 }, 200);
                 $("#voucherModal").modal('hide');
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
                 $("#voucherModal").modal('show');
             }
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }
@@ -324,19 +322,19 @@ $(document).ready(function () {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 1) {
-                pageIndex.showNotificationSuccess(response.message);
+                app.showNotificationSuccess(response.message);
                 setTimeout(function () {
                     pageExpenseVoucher.getVoucherList();
                 }, 200);
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
             }
             $("#deleteModal").modal('hide');
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }

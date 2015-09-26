@@ -11,35 +11,14 @@ include_once ROOT . 'dist/authenticate.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Assistant - Contacts</title>
-
-    <!-- Bootstrap -->
     <?php
-    include_once ROOT . 'dist/bootstrap.php';
+        include_once ROOT.'dist/fetchCSS.php';
     ?>
-    <link rel="stylesheet" type="text/css" href="../dist/css/style.css"/>
     <link rel="stylesheet" href="../dist/contacts/css/style.css">
-    <script src="http://malsup.github.com/jquery.form.js"></script>
-    <script src="../dist/contacts/script/script.js"></script>
-    <script src="../dist/contacts/script/validation.js"></script>
-    <script src="../dist/date/script.js"></script>
-
-    <!-- Header Links -->
-    <link type="text/css" rel="stylesheet" href="../dist/css/sidebar.css"/>
-    <link type="text/css" rel="stylesheet" href="../dist/css/jquery_sidebar.css"/>
-    <script type="text/javascript" src="../dist/script/jquery.mmenu.min.all.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            $('nav#menu').mmenu({
-                extensions	: [ 'effect-slide-menu', 'pageshadow' ],
-                searchfield	: true
-            });
-        });
-    </script>
 </head>
 <body>
 <!-- fixed top navbar -->
 <?php
-
 define('PAGE_TITLE', 'Contact');
 $root_location = ROOT;
 include_once ROOT . 'dist/navbar.php';
@@ -173,7 +152,6 @@ echo $navbar_str;
     </div>
     <!--ROW-->
 </div>
-
 
 <!-- Contact Modal -->
 <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModal" aria-hidden="true" data-backdrop="static">
@@ -1121,6 +1099,11 @@ echo $navbar_str;
 </div>
 <!--modal-->
 
+<?php
+    include_once ROOT.'dist/fetchJS.php';
+?>
+<script src="../dist/contacts/script/script.js"></script>
+<script src="../dist/date/script.js"></script>
 </body>
 <div class="cover">
     <div id="pageLoading"></div>

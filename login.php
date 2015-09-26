@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	define("ROOT", "");
-	
+
 	if (isset($_SESSION['s_id'])) {
 		exit(header("Location:index.php"));
 	}
@@ -14,36 +14,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Assistant - Sign In</title>
-
-    <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS -->
-    <?php
-    	include_once ROOT.'dist/bootstrap.php';
-    ?>
-    <link rel="stylesheet" type="text/css" href="dist/css/style.css" />
-    <link rel="stylesheet" href="dist/homePage/css/style.css" />
-	<script src="http://malsup.github.com/jquery.form.js"></script>
-	<script src="dist/script/script.js"></script>
-    <script src="dist/homePage/script/script.js"></script>
-    <link rel="stylesheet" href="dist/css/sidebar.css" />
-    <link rel="stylesheet" href="dist/css/jquery_sidebar.css" />
-    <script src="dist/script/jquery.mmenu.min.all.js"></script>
-	<script type="text/javascript">
-		$(function() {
-			$('nav#menu').mmenu({
-				extensions	: [ 'effect-slide-menu', 'pageshadow' ],
-				searchfield	: true
-			});
-		});
-	</script>
-  </head>
-
+	<?php
+		include_once ROOT.'dist/fetchCSS.php';
+	?>
+	<link rel="stylesheet" href="dist/homePage/css/style.css" />
+</head>
 <body>
 <?php
     include_once ROOT.'dist/navbar_logout.php';
 	$root_location = ROOT;
     echo $navbar_str;
-?> 
+?>
 	<div class="notification_outer">
 	  <div class="notification_success" id="notification_success" style="display:none">
 	    Added Successfully!
@@ -54,7 +35,7 @@
 	  <div class="notification_failure" id="notification_failure" style="display:none">
 	    Something went wrong!
 	  </div>
-	</div>	
+	</div>
     <div class="outer">
         <div class="middle">
         	<div class="inner">
@@ -96,7 +77,10 @@
 			</div>
 		</div>
 	</div>
-
+    <?php
+        include_once ROOT.'dist/fetchJS.php';
+    ?>
+    <script src="dist/script/login.js"></script>
 </body>
 <div class="cover">
 	<div id="pageLoading"></div>

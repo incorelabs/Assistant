@@ -11,7 +11,7 @@ var pageIncome = {
     incomeList: null,
     firstTime: true,
     getFamilyList: function () {
-        var url = localStorage.getItem("websiteRoot") + "family/getFamily.php";
+        var url = app.websiteRoot + "family/getFamily.php";
 
         $.getJSON(url, {
             list: 2
@@ -35,7 +35,7 @@ var pageIncome = {
         $("#holderCode").html(familyListString);
     },
     getIncomeList: function () {
-        var url = localStorage.getItem("websiteRoot") + "income/getIncomeList.php";
+        var url = app.websiteRoot + "income/getIncomeList.php";
 
         $.getJSON(url, {
             pageNo: pageIncome.currentPageNo
@@ -79,7 +79,7 @@ var pageIncome = {
         });
     },
     getSearchResults: function () {
-        var url = localStorage.getItem("websiteRoot") + "income/getIncomeList.php";
+        var url = app.websiteRoot + "income/getIncomeList.php";
 
         $.getJSON(url, {
             pageNo: pageIncome.currentPageNo,
@@ -119,7 +119,7 @@ var pageIncome = {
     getIncomeDetails: function (incomeCode) {
         if (incomeCode == null)
             return;
-        var url = localStorage.getItem("websiteRoot") + "income/getIncomeDetail.php";
+        var url = app.websiteRoot + "income/getIncomeDetail.php";
 
         $.getJSON(url, {
             incomeCode: incomeCode
@@ -322,10 +322,10 @@ var pageIncome = {
         $("#deleteModal").modal("show");
     },
     openVoucherIncomeModal: function (incomeCode) {
-        window.location.href = localStorage.getItem("websiteRoot") + "income/voucher/index.php?incomeCode=" + incomeCode;
+        window.location.href = app.websiteRoot + "income/voucher/index.php?incomeCode=" + incomeCode;
     },
     getIncomeTypeList: function () {
-        var url = localStorage.getItem("websiteRoot") + "income/getMasters.php";
+        var url = app.websiteRoot + "income/getMasters.php";
 
         $.getJSON(url, {
             type: 'incomeType'
@@ -366,7 +366,7 @@ var pageIncome = {
         });
     },
     getDueFromList: function () {
-        var url = localStorage.getItem("websiteRoot") + "income/getMasters.php";
+        var url = app.websiteRoot + "income/getMasters.php";
 
         $.getJSON(url, {
             type: 'contactList'
@@ -419,7 +419,8 @@ var pageIncome = {
 };
 
 $(document).ready(function () {
-    localStorage.setItem("websiteRoot", "../");
+    app.websiteRoot = "../";
+    app.setAccountProfilePicture();
 
     document.getElementById('searchBox').onkeypress = function (e) {
         if (!e)
@@ -470,7 +471,7 @@ $(document).ready(function () {
             console.log(formData);
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
-                    pageIndex.showNotificationFailure("Required fields are empty");
+                    app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
             }
@@ -489,19 +490,19 @@ $(document).ready(function () {
                     $("#voucherIncomeBtn").remove();
                     pageIncome.getIncomeDetails(response.landing);
                     pageIncome.getIncomeList();
-                    pageIndex.showNotificationSuccess(response.message);
+                    app.showNotificationSuccess(response.message);
                     pageIncome.getIncomeTypeList();
                     pageIncome.getDueFromList();
                     $("#incomeModal").modal("hide");
                 }, 500);
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
             }
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }
@@ -527,19 +528,19 @@ $(document).ready(function () {
                     $("#editIncomeBtn").remove();
                     $("#deleteIncomeBtn").remove();
                     $("#voucherIncomeBtn").remove();
-                    pageIndex.showNotificationSuccess(response.message);
+                    app.showNotificationSuccess(response.message);
                     pageIncome.getIncomeList();
                     pageIncome.getIncomeDetails(response.landing);
                     $("#deleteModal").modal("hide");
                 }, 500);
             } else {
-                pageIndex.showNotificationFailure(response.message);
+                app.showNotificationFailure(response.message);
                 $("#pageLoading").removeClass("loader");
                 $(".cover").fadeOut(100);
             }
         },
         error: function () {
-            pageIndex.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }
