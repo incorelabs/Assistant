@@ -136,11 +136,15 @@ var pageIncome = {
             var incomeHeaderString = "<h12>Income Details</h12><button id='editIncomeBtn' class='btn btn-success pull-right btn-header-margin-left' onclick='pageIncome.openEditIncomeModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deleteIncomeBtn' class='btn btn-danger pull-left' onclick='pageIncome.openDeleteIncomeModal(" + data.detail.income.IncomeCode + ")'><span class='glyphicon glyphicon-trash'></span></button><button id='voucherIncomeBtn' class='btn btn-info pull-right' onclick='pageIncome.openVoucherIncomeModal(" + data.detail.income.IncomeCode + ")'><span class='fa fa-sticky-note-o fa-lg'></span></button>";
             var incomeDetailString = "";
             if (window.innerWidth < 992 && !pageIncome.firstTime) {
-                //Show the Income Details Header and hides the search header
-                $("#searchIncomeHeader").addClass('hidden');
-                $("#incomeDetailHeader").removeClass('hidden-xs hidden-sm');
+                //Change the Expense Details Name to Expense
+                $('#incomeDetailsTag').empty().html("Details");
 
-                //Show the Income Details and hides the income list
+                //Show the Expense Details Header and hides the search header
+
+                $("#searchIncomeHeader").addClass('hidden');
+                $("#incomeDetailHeaderDiv").removeClass('hidden-xs hidden-sm');
+
+                //Show the Expense Details and hides the expense list
                 $("#incomeListDiv").addClass('hidden');
                 $("#incomeDetailDiv").removeClass('hidden-xs hidden-sm');
 
@@ -149,18 +153,17 @@ var pageIncome = {
                 $("#backButton").removeClass('hidden');
 
                 $("#backButton").click(function () {
-                    //Show the Income Details Header and hides the search header
-                    $("#incomeDetailHeader").addClass('hidden-xs hidden-sm');
+                    //Show the Expense Details Header and hides the search header
+                    $("#incomeDetailHeaderDiv").addClass('hidden-xs hidden-sm');
                     $("#searchIncomeHeader").removeClass('hidden');
 
-                    //Show the Income Details and hides the income list
+                    //Show the Expense Details and hides the expense list
                     $("#incomeListDiv").removeClass('hidden');
                     $("#incomeDetailDiv").addClass('hidden-xs hidden-sm');
 
                     //Show Hide of menu button with back button
                     $(".menu_img").removeClass('hidden');
                     $("#backButton").addClass('hidden');
-
                 });
             }
             pageIncome.firstTime = false;
@@ -552,6 +555,18 @@ $(document).ready(function () {
     });
 
     if (window.innerWidth < 992) {
+        //Mobile View list & detaills
+        $("body").css("overflow", "auto");
+        $("#incomeListScroll").removeClass("panelHeight");
+        $("#incomeList").addClass("mobile-list");
+        $("#incomeListDiv").addClass("mobileBody");
+        $("#searchIncomeHeader").addClass("mobileHeader");
+
+        $("#incomeDetail").removeClass("panelHeight");
+        $("#incomeDetailDiv").addClass("mobileBody");
+        $("#incomeDetailHeaderDiv").addClass("mobileHeader");
+
+        //For Modal Text field resize
         $("#billingDayDiv").removeClass("first-col-left-padding first-col-right-padding");
         $("#dueDayDiv").removeClass("second-col-left-padding second-col-right-padding");
 
@@ -562,12 +577,45 @@ $(document).ready(function () {
 
 $(window).resize(function () {
     if (window.innerWidth < 992) {
+        //Mobile View list & detaills
+        $("body").css("overflow", "auto");
+        $("#incomeListScroll").removeClass("panelHeight");
+        $("#incomeList").addClass("mobile-list");
+        $("#incomeListDiv").addClass("mobileBody");
+        $("#searchIncomeHeader").addClass("mobileHeader");
+
+        $("#incomeDetail").removeClass("panelHeight");
+        $("#incomeDetailDiv").addClass("mobileBody");
+        $("#incomeDetailHeaderDiv").addClass("mobileHeader");
+
         $("#billingDayDiv").removeClass("first-col-left-padding first-col-right-padding");
         $("#dueDayDiv").removeClass("second-col-left-padding second-col-right-padding");
 
         $("#billingDayDiv").addClass("mobile-col-padding-remove");
         $("#dueDayDiv").addClass("mobile-col-top-padding mobile-col-padding-remove");
     } else {
+        $("body").css("overflow", "hidden");
+        $("#incomeListScroll").addClass("panelHeight");
+        $("#incomeList").removeClass("mobile-list");
+        $("#incomeListDiv").removeClass("mobileBody");
+        $("#searchIncomeHeader").removeClass("mobileHeader");
+
+        $("#incomeDetail").addClass("panelHeight");
+        $("#incomeDetailDiv").removeClass("mobileBody");
+        $("#incomeDetailHeaderDiv").removeClass("mobileHeader");
+
+        //Show the Expense Details Header and hides the search header
+        $("#incomeDetailHeaderDiv").addClass('hidden-xs hidden-sm');
+        $("#searchIncomeHeader").removeClass('hidden');
+
+        //Show the Expense Details and hides the password list
+        $("#incomeListDiv").removeClass('hidden');
+        $("#incomeDetailDiv").addClass('hidden-xs hidden-sm');
+
+        //Show Hide of menu button with back button
+        $(".menu_img").removeClass('hidden');
+        $("#backButton").addClass('hidden');
+
         $("#billingDayDiv").addClass("first-col-left-padding first-col-right-padding");
         $("#dueDayDiv").addClass("second-col-left-padding second-col-right-padding");
 

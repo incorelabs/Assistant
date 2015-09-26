@@ -134,12 +134,18 @@ var pageExpense = {
         if (data.status == 1) {
             pageExpense.localExpense = data.detail;
 
-            var expenseHeaderString = "<h12>Expense Details</h12><button id='editExpenseBtn' class='btn btn-success pull-right btn-header-margin-left' onclick='pageExpense.openEditExpenseModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deleteExpenseBtn' class='btn btn-danger pull-left' onclick='pageExpense.openDeleteExpenseModal(" + data.detail.expense.ExpenseCode + ")'><span class='glyphicon glyphicon-trash'></span></button><button id='voucherExpenseBtn' class='btn btn-info pull-right' onclick='pageExpense.openVoucherExpenseModal(" + data.detail.expense.ExpenseCode + ")'><span class='fa fa-sticky-note-o fa-lg'></span></button>";
+            var expenseHeaderString = "<h12 id='expenseDetailsTag'>Expense Details</h12><button id='editExpenseBtn' class='btn btn-success pull-right btn-header-margin-left' onclick='pageExpense.openEditExpenseModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deleteExpenseBtn' class='btn btn-danger pull-left' onclick='pageExpense.openDeleteExpenseModal(" + data.detail.expense.ExpenseCode + ")'><span class='glyphicon glyphicon-trash'></span></button><button id='voucherExpenseBtn' class='btn btn-info pull-right' onclick='pageExpense.openVoucherExpenseModal(" + data.detail.expense.ExpenseCode + ")'><span class='fa fa-sticky-note-o fa-lg'></span></button>";
+            $("#expenseDetailHeader").html(expenseHeaderString);
             var expenseDetailString = "";
             if (window.innerWidth < 992 && !pageExpense.firstTime) {
+
+                //Change the Expense Details Name to Expense
+                $('#expenseDetailsTag').empty().html("Details");
+
                 //Show the Expense Details Header and hides the search header
+
                 $("#searchExpenseHeader").addClass('hidden');
-                $("#expenseDetailHeader").removeClass('hidden-xs hidden-sm');
+                $("#expenseDetailHeaderDiv").removeClass('hidden-xs hidden-sm');
 
                 //Show the Expense Details and hides the expense list
                 $("#expenseListDiv").addClass('hidden');
@@ -151,7 +157,7 @@ var pageExpense = {
 
                 $("#backButton").click(function () {
                     //Show the Expense Details Header and hides the search header
-                    $("#expenseDetailHeader").addClass('hidden-xs hidden-sm');
+                    $("#expenseDetailHeaderDiv").addClass('hidden-xs hidden-sm');
                     $("#searchExpenseHeader").removeClass('hidden');
 
                     //Show the Expense Details and hides the expense list
@@ -217,7 +223,6 @@ var pageExpense = {
 
             expenseDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Payment URL</div><value><div class='col-md-9'>" + ((data.detail.expense.PayWebsite) ? data.detail.expense.PayWebsite : "") + "</div></value></div></div>";
 
-            $("#expenseDetailHeader").html(expenseHeaderString);
             $("#expenseDetailBody").html(expenseDetailString);
 
         } else {
@@ -560,6 +565,17 @@ $(document).ready(function () {
 
 
     if (window.innerWidth < 992) {
+        $("body").css("overflow", "auto");
+        $("#expenseListScroll").removeClass("panelHeight");
+        $("#expenseList").addClass("mobile-list");
+        $("#expenseListDiv").addClass("mobileBody");
+        $("#searchExpenseHeader").addClass("mobileHeader");
+
+        $("#expenseDetail").removeClass("panelHeight");
+        $("#expenseDetailDiv").addClass("mobileBody");
+        $("#expenseDetailHeaderDiv").addClass("mobileHeader");
+
+        //For Modal Text field resize
         $("#billingDayDiv").removeClass("first-col-left-padding first-col-right-padding");
         $("#dueDayDiv").removeClass("second-col-left-padding second-col-right-padding");
 
@@ -570,12 +586,48 @@ $(document).ready(function () {
 
 $(window).resize(function () {
     if (window.innerWidth < 992) {
+        //Mobile View list & detaills
+        $("body").css("overflow", "auto");
+        $("#expenseListScroll").removeClass("panelHeight");
+        $("#expenseList").addClass("mobile-list");
+        $("#expenseListDiv").addClass("mobileBody");
+        $("#searchExpenseHeader").addClass("mobileHeader");
+
+        $("#expenseDetail").removeClass("panelHeight");
+        $("#expenseDetailDiv").addClass("mobileBody");
+        $("#expenseDetailHeaderDiv").addClass("mobileHeader");
+
+
+        //For Modal Text field resize
         $("#billingDayDiv").removeClass("first-col-left-padding first-col-right-padding");
         $("#dueDayDiv").removeClass("second-col-left-padding second-col-right-padding");
 
         $("#billingDayDiv").addClass("mobile-col-padding-remove");
         $("#dueDayDiv").addClass("mobile-col-top-padding mobile-col-padding-remove");
     } else {
+        $("body").css("overflow", "hidden");
+        $("#expenseListScroll").addClass("panelHeight");
+        $("#expenseList").removeClass("mobile-list");
+        $("#expenseListDiv").removeClass("mobileBody");
+        $("#searchExpenseHeader").removeClass("mobileHeader");
+
+        $("#expenseDetail").addClass("panelHeight");
+        $("#expenseDetailDiv").removeClass("mobileBody");
+        $("#expenseDetailHeaderDiv").removeClass("mobileHeader");
+
+        //Show the Expense Details Header and hides the search header
+        $("#expenseDetailHeaderDiv").addClass('hidden-xs hidden-sm');
+        $("#searchExpenseHeader").removeClass('hidden');
+
+        //Show the Expense Details and hides the password list
+        $("#expenseListDiv").removeClass('hidden');
+        $("#expenseDetailDiv").addClass('hidden-xs hidden-sm');
+
+        //Show Hide of menu button with back button
+        $(".menu_img").removeClass('hidden');
+        $("#backButton").addClass('hidden');
+
+        //For Modal Text field resize
         $("#billingDayDiv").addClass("first-col-left-padding first-col-right-padding");
         $("#dueDayDiv").addClass("second-col-left-padding second-col-right-padding");
 
