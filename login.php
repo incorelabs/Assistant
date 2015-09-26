@@ -49,13 +49,13 @@
 							<div class="form-group">
 								<div class="inner-addon left-addon">
 								    <i class="fa fa-user" style="font-size: 20px;"></i>
-									<input type="email" class="form-control textbox_height" name="email" placeholder="Email" autofocus="true" required/>
+									<input type="email" class="form-control textbox_height" id="email" name="email" placeholder="Email" autofocus="true" required/>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="inner-addon left-addon">
 								    <i class="fa fa-key" style="font-size: 20px;"></i>
-									<input type="password" class="form-control textbox_height" name="password" placeholder="Password" required/>
+									<input type="password" class="form-control textbox_height" id="password" name="password" placeholder="Password" required/>
 								</div>
 							</div>
 						</div>

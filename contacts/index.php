@@ -163,10 +163,10 @@ echo $navbar_str;
                 <div class="modal-header">
 
                     <div class="form-group pull-left">
-                        <button class="btn btn-danger" data-dismiss="modal">
+                        <a class="btn btn-danger" data-dismiss="modal">
                             <span class='glyphicon glyphicon-remove'></span>
 
-                        </button>
+                        </a>
                     </div>
 
                     <div class="form-group pull-right">
@@ -1008,10 +1008,10 @@ echo $navbar_str;
                     </div>
                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     <div class="btn-group">
-                        <button class="btn btn-success modal_button" data-dismiss="modal">
+                        <a class="btn btn-success modal_button" data-dismiss="modal">
                             <span class='glyphicon glyphicon-remove'></span>&nbsp
                             No
-                        </button>
+                        </a>
                     </div>
                     <br>
                     <br>
@@ -1034,10 +1034,10 @@ echo $navbar_str;
                 <div class="modal-header">
 
                     <div class="btn-group pull-left">
-                        <button class="btn btn-danger" data-dismiss="modal">
+                        <a class="btn btn-danger" data-dismiss="modal">
                             <span class='glyphicon glyphicon-remove'></span>
 
-                        </button>
+                        </a>
                     </div>
 
                     <div class="btn-group pull-right">

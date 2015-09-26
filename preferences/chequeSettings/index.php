@@ -68,9 +68,9 @@ echo $navbar_str;
                   autocomplete="off">
                 <div class="modal-header">
                     <div class="form-group pull-left modal-header-btn-left">
-                        <button class="btn btn-danger button-top-remove" data-dismiss="modal">
+                        <a class="btn btn-danger button-top-remove" data-dismiss="modal">
                             <span class='glyphicon glyphicon-remove'></span>
-                        </button>
+                        </a>
                     </div>
                     <div class="form-group pull-right modal-header-btn-right">
                         <button type="submit" class="btn btn-success button-top-remove">
@@ -329,10 +329,10 @@ echo $navbar_str;
                     </div>
                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     <div class="btn-group">
-                        <button class="btn btn-success modal_button" data-dismiss="modal">
+                        <a class="btn btn-success modal_button" data-dismiss="modal">
                             <span class='glyphicon glyphicon-remove'></span>&nbsp
                             No
-                        </button>
+                        </a>
                     </div>
                     <br>
                     <br>

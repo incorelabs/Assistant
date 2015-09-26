@@ -119,9 +119,9 @@ echo $navbar_str;
             <form class="form-horizontal" method="POST" action="controller.php" id="passwordForm" autocomplete="off">
                 <div class="modal-header">
                     <div class="form-group pull-left" style="margin-top:-5px">
-                        <button class="btn btn-danger button-top-remove" data-dismiss="modal">
+                        <a class="btn btn-danger button-top-remove" data-dismiss="modal">
                             <span class='glyphicon glyphicon-remove'></span>
-                        </button>
+                        </a>
                     </div>
                     <div class="form-group pull-right" style="margin-top:-5px">
                         <button type="submit" class="btn btn-success button-top-remove">
@@ -265,10 +265,10 @@ echo $navbar_str;
                     </div>
                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     <div class="btn-group">
-                        <button class="btn btn-success modal_button" data-dismiss="modal">
+                        <a class="btn btn-success modal_button" data-dismiss="modal">
                             <span class='glyphicon glyphicon-remove'></span>&nbsp
                             No
-                        </button>
+                        </a>
                     </div>
                     <br>
                     <br>

@@ -72,10 +72,10 @@
                 <div class='modal-header'>
 
                     <div class='btn-group pull-left'>
-                        <button class='btn btn-danger' data-dismiss='modal'>
+                        <a class='btn btn-danger' data-dismiss='modal'>
                             <span class='glyphicon glyphicon-remove'></span>
 
-                        </button>
+                        </a>
                     </div>
 
                     <div class='btn-group pull-right'>
