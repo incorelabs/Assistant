@@ -12,7 +12,7 @@ include_once ROOT . 'dist/authenticate.php';
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Assistant - Contacts</title>
     <?php
-        include_once ROOT.'dist/fetchCSS.php';
+    include_once ROOT . 'dist/fetchCSS.php';
     ?>
     <link rel="stylesheet" href="../dist/contacts/css/style.css">
 </head>
@@ -154,7 +154,8 @@ echo $navbar_str;
 </div>
 
 <!-- Contact Modal -->
-<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModal" aria-hidden="true" data-backdrop="static">
+<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModal" aria-hidden="true"
+     data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -204,12 +205,12 @@ echo $navbar_str;
 
                     <div class="form-group form-group-margin">
                         <div class="input-group">
-                            <span class="input-group-addon input-group-addon-label">Title*</span>
+                            <span class="input-group-addon input-group-addon-label">Title</span>
 
                             <div class="inner-addon right-addon">
                                 <i class="glyphicon glyphicon-star fa-size hidden-xs"></i>
                                 <input type="text" name="title" class="form-control text-field-left-border"
-                                       id="addTitle" placeholder="Title" autofocus tabindex="1" required/>
+                                       id="addTitle" placeholder="Title" autofocus tabindex="1"/>
                             </div>
                         </div>
                     </div>
@@ -1024,7 +1025,8 @@ echo $navbar_str;
 <!--modal-->
 
 <!-- Image Modal -->
-<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true" data-backdrop="static">
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModal" aria-hidden="true"
+     data-backdrop="static">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
 
@@ -1100,7 +1102,7 @@ echo $navbar_str;
 <!--modal-->
 
 <?php
-    include_once ROOT.'dist/fetchJS.php';
+include_once ROOT . 'dist/fetchJS.php';
 ?>
 <script src="../dist/contacts/script/script.js"></script>
 <script src="../dist/date/script.js"></script>
