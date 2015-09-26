@@ -30,7 +30,7 @@ class ExpenseVoucher
     }
 
     function getSelectQuery(){
-        return "SELECT * FROM Table175".$this->where;
+        return "SELECT RegCode, ExpenseCode, VoucherNo, DATE_FORMAT(VoucherDt,'%d/%m/%Y') as 'VoucherDt', PayMode, ReferNo, DATE_FORMAT(ReferDt,'%d/%m/%Y') as 'ReferDt', DocNo, DocAmount, Remarks, PhotoUploaded, LastAccessDate FROM Table175".$this->where;
     }
 
     function getVoucherList(){

@@ -29,7 +29,7 @@ class IncomeVoucher
     }
 
     function getSelectQuery(){
-        return "SELECT * FROM Table183".$this->where;
+        return "SELECT RegCode, IncomeCode, VoucherNo, DATE_FORMAT(VoucherDt,'%d/%m/%Y') as 'VoucherDt', PayMode, ReferNo, DATE_FORMAT(ReferDt,'%d/%m/%Y') as 'ReferDt', DocNo, DocAmount, Remarks, PhotoUploaded, LastAccessDate FROM Table183".$this->where;
     }
 
     function getVoucherList(){
