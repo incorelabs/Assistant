@@ -218,7 +218,7 @@ class ContactController
 
     function getSpTable151Query(){
         $contactCode = $this->contactCode;
-        $titleCode = ((!empty($this->data['titleCode'])) ? $this->data['titleCode'] : "NULL");
+        $titleCode = ((!empty($this->data['titleCode'])) ? (($this->data['titleCode'] == "1") ? "NULL" : $this->data['titleCode']) : "NULL");
         $groupCode = ((!empty($this->data['groupCode'])) ? $this->data['groupCode'] : "NULL");
         $emergencyCode = ((!empty($this->data['emergencyCode'])) ? $this->data['emergencyCode'] : "NULL");
 

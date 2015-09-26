@@ -35,7 +35,7 @@ do {
     }
 
     //Required Validation
-    if(!empty($_POST['mode']) && !empty($_POST['title']) && !empty($_POST['firstName'])){
+    if(!empty($_POST['mode']) && !empty($_POST['firstName'])){
         $validate = true;
     }
     else{
