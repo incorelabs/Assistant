@@ -143,7 +143,7 @@ class IncomeList
             $this->response["result"] = $this->incomeList;
         }
         else{
-            $this->response = $this->createResponse(0,"No expense");
+            $this->response = $this->createResponse(0,"No income");
         }
 
         return $this->response;
