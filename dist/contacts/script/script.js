@@ -1148,6 +1148,12 @@ $(document).ready(function (event) {
                     app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
+                if(formData[i].name === "email1") {
+                    formData[i].value = formData[i].value.toLowerCase();
+                }
+                if(formData[i].name === "email2") {
+                    formData[i].value = formData[i].value.toLowerCase();
+                }
             }
             if ($("#homeCity").val().trim() != "") {
                 // If city has a value then state and country also should
