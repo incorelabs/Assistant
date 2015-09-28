@@ -15,7 +15,7 @@ body{
 
 .inner {
     margin-left: auto;
-    margin-right: auto; 
+    margin-right: auto;
     max-width: 340px;
 }
 
@@ -76,20 +76,6 @@ select{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-}
-
-.bootcards-summary-item {
-    background: #f5f5f5;
-    display: block;
-    border-radius: 4px;
-    padding: 25px 10px;
-    text-align: center;
-    position: relative;
-    height: 130px;
-}
-
-.bootcards-summary .panel-body>.row>div {
-    padding: 8px;
 }
 
 .badge{

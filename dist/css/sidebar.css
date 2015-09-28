@@ -16,6 +16,7 @@ a, a:link, a:active, a:visited, a:hover
 	text-align: center;
 	position: fixed;
 	z-index: 10;
+	padding-left: 85px !important;
 }
 .header,
 .footer

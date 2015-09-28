@@ -48,7 +48,7 @@
 				<ul>
 					<li><a href='".$root_location."family'>Family</a></li>
 					<li><a href='".$root_location."preferences/changePassword.php'>Change Password</a></li>
-					<li><a href='#'>Import Contacts</a></li>
+					<li><a href='".$root_location."preferences/importContacts/'>Import Contacts</a></li>
 					<li><a href='#'>General Settings</a></li>
 					<li><a href='".$root_location."preferences/labelSettings/'>Label Settings</a></li>
 					<li><a href='".$root_location."preferences/chequeSettings/'>Cheque Settings</a></li>

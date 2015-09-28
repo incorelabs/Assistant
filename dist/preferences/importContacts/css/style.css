@@ -1,0 +1,86 @@
+.outer {
+    display: table;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 740px;
+}
+
+.textbox_height{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 40px;
+    border-radius: 5px !important;
+    font-weight: 400;
+}
+
+.panel-header-height{
+    height: 50px;
+}
+
+.panel-border{
+    border: 1px solid #34495e;
+}
+.panel-background>.panel-heading {
+    color: #fff;
+    background-color: #34495e;
+    border-color: #34495e;
+}
+
+.form-group-margin {
+    margin-bottom: 10px;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+.input-padding{
+    padding-top: 20px;
+}
+
+.googleBtn {
+    display: inline-block;
+    background: #DD4B39;
+    color: white;
+    width: 190px;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+.googleBtn:hover {
+    cursor: pointer;
+}
+span.label {
+    font-weight: bold;
+}
+span.icon {
+    display: inline-block;
+    vertical-align: middle;
+    width: 42px;
+    height: 42px;
+    border-right: #DD8B39 1px solid;
+    padding-top: 9px;
+    padding-right: 5px;
+}
+span.buttonText {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 42px;
+    padding-right: 42px;
+    font-size: 14px;
+    font-weight: bold;
+    /* Use the Roboto font that is loaded in the <head> */
+    font-family: 'Roboto', sans-serif;
+}
+
+.panel-body-height{
+    min-height: 125px;
+}

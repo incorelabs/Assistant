@@ -10,7 +10,7 @@
 				<div class='container' style='padding-top:100px'>
 						<div class='col-lg-12 col-md-12'>
 						<div class='panel panel-primary'>
-							<div class='panel-heading'>Shortcuts<i class='pull-right'><a href='#'><i class='fa fa-pencil fa-lg'></i></a></i></div>
+							<div class='panel-heading'>Shortcuts</div>
 							<div class='panel-body'>
 								<div class='col-lg-4 col-md-4 col-sm-6'>
                                     <a href='contacts/'>

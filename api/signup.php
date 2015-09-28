@@ -189,7 +189,7 @@ if ($validate) {
         $mail->addAddress($email, $name);
 
         $mail->Subject = "[ASSISTANT] Welcome";
-        $mail->Body    = "Hi ".$name."\n\nWe are have excited to have you here.";
+        $mail->Body    = "Hi ".$name."\n\nWe are excited to have you here.";
 
         if(!$mail->send()) {
             $validate = false;
