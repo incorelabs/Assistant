@@ -3,31 +3,52 @@ $(document).ready(function () {
     app.websiteRoot = "";
     $("#signUpForm").ajaxForm({
         beforeSubmit: function (formData) {
+            var isValid = false;
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
                     app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
-                if(formData[i].name === "email") {
+                if (formData[i].name == "email") {
                     formData[i].value = formData[i].value.toLowerCase();
+                    if (app.validateEmail(formData[i].value) === app.emailValidationState.SUCCESS)
+                        isValid = true;
+                    else {
+                        isValid = false;
+                        break;
+                    }
+                } else if (formData[i].name == "password") {
+                    if (app.validatePassword(formData[i].value) === app.passwordValidationState.SUCCESS)
+                        isValid = true;
+                    else {
+                        isValid = false;
+                        break;
+                    }
+                } else if (formData[i].name == "confirmPassword") {
+                    if (app.validateConfirmPassword(formData[i - 1].value, formData[i].value) === app.emailValidationState.SUCCESS)
+                        isValid = true;
+                    else {
+                        isValid = false;
+                        break;
+                    }
+                } else if (formData[i].name == "name") {
+                    isValid = true;
+                } else if (formData[i].name == "mobile") {
+                    if (app.validateNumber(formData[i].value) === app.numberValidationState.SUCCESS)
+                        isValid = true;
+                    else {
+                        isValid = false;
+                        break;
+                    }
                 }
+            }
+            console.log(isValid);
+            if (!isValid) {
+                app.showNotificationFailure("Validation Failed for some input field");
+                return false;
             }
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
-            /*if (app.email_count == 1 && app.pwd_count == 1 && app.c_pwd_count == 1 && app.name_count == 1 && app.country_count == 1 && app.mobile_count == 1) {
-                $(".cover").fadeIn(100);
-                $("#pageLoading").addClass("loader");
-                return true;
-            }
-            else {
-                app.validateEmail(".email");
-                app.validatePassword(".password");
-                app.validateConfirmPassword(".password", ".c_password");
-                app.validateName(".name");
-                app.validateMobile(".mobile");
-                app.validateCountry("#country");
-                return false;
-            }*/
         },
         success: function (responseText, statusText, xhr, $form) {
             console.log(responseText);
@@ -47,5 +68,21 @@ $(document).ready(function () {
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }
+    });
+
+    $("#email").on('input propertychange', function () {
+        app.validate(this, 2);
+    });
+
+    $("#mobile").on('input propertychange', function () {
+        app.validate(this, 3);
+    });
+
+    $("#password").on('input propertychange', function () {
+        app.validate(this, 4);
+    });
+
+    $("#confirmPassword").on('input propertychange', function () {
+        app.validate(this, 5);
     });
 });

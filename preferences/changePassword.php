@@ -68,7 +68,7 @@ echo $navbar_str;
                         <div class="form-group" style="margin-bottom:0px">
                             <div class="inner-addon left-addon">
                                 <i class="fa fa-key" style="font-size: 20px;"></i>
-                                <input type="password" class="form-control textbox-height c_password"
+                                <input type="password" class="form-control textbox-height"
                                        name="confirmPassword" placeholder="Confirm New Password" required/>
 
                                 <div class="info"></div>

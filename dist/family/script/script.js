@@ -217,7 +217,7 @@ var pageFamily = {
         return "<div class='input-group'><span class='input-group-addon input-group-addon-label'>Password*</span><input type='password' name='password' id='password' class='form-control password text-field-left-border' placeholder='Password' tabindex='8'/><span class='input-group-btn'><button class='btn btn-primary button-addon-custom' type='button' onclick='pageFamily.toggleInputFieldPassword(0)'><i class='fa fa-eye fa-lg'></i></button></span></div><div class='info'></div>";
     },
     getConfirmPasswordDivString: function () {
-        return "<div class='input-group'><span class='input-group-addon input-group-addon-label'>Confirm*</span><input type='password' name='confirmPassword' id='confirmPassword' class='form-control c_password text-field-left-border' placeholder='Confirm Password' tabindex='9'/><span class='input-group-btn'><button class='btn btn-primary button-addon-custom' type='button' onclick='pageFamily.toggleInputFieldPassword(1)'><i class='fa fa-eye fa-lg'></i></button></span></div><div class='info'></div>";
+        return "<div class='input-group'><span class='input-group-addon input-group-addon-label'>Confirm*</span><input type='password' name='confirmPassword' id='confirmPassword' class='form-control text-field-left-border' placeholder='Confirm Password' tabindex='9'/><span class='input-group-btn'><button class='btn btn-primary button-addon-custom' type='button' onclick='pageFamily.toggleInputFieldPassword(1)'><i class='fa fa-eye fa-lg'></i></button></span></div><div class='info'></div>";
     },
     toggleInputFieldPassword: function (typeOfPassword) {
         switch (typeOfPassword) {
