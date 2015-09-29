@@ -262,6 +262,15 @@ class ContactController
         $active = (isset($this->data["active"]) ? 1 : 2);
         $this->active = $active;
 
+        $homePhone1 = (!empty($this->data["address"]["home"]['phone1']) ? "'".$this->data["address"]["home"]['phone1']."'" : "NULL");
+        $homePhone2 = (!empty($this->data["address"]["home"]['phone2']) ? "'".$this->data["address"]["home"]['phone2']."'" : "NULL");
+
+        $workPhone1 = (!empty($this->data["address"]["work"]['phone1']) ? "'".$this->data["address"]["work"]['phone1']."'" : "NULL");
+        $workPhone2 = (!empty($this->data["address"]["work"]['phone2']) ? "'".$this->data["address"]["work"]['phone2']."'" : "NULL");
+
+        $otherPhone1 = (!empty($this->data["address"]["other"]['phone1']) ? "'".$this->data["address"]["other"]['phone1']."'" : "NULL");
+        $otherPhone2 = (!empty($this->data["address"]["other"]['phone2']) ? "'".$this->data["address"]["other"]['phone2']."'" : "NULL");
+
         $sql = "set @contactCode = ".$contactCode.";";
         $sql .= "set @sTitleCode = ".$titleCode.";";
         $sql .= "set @sGroupCode = ".$groupCode.";";
@@ -286,7 +295,10 @@ class ContactController
             $sql .= "call spTable128(@sEmergencyCode,".$emergency.",".$this->regCode.",1);";
         }
 
-        $sql .= "call spTable151(".$this->regCode.",@contactCode,".$fName.",".$mName.",".$lName.",".$fullName.",@sTitleCode,".$guardian.",".$company.",".$designation.",".$alias.",".$dob.",".$dom.",@sGroupCode,@sEmergencyCode,".$remarks.",".$mobile1.",".$mobile2.",".$mobile3.",".$email1.",".$email2.",".$facebook.",".$twitter.",".$googlePlus.",".$linkedin.",".$website.",1,1,0,".$defaultAddress.",".$this->familyCode.",".$private.",".$active.",NOW(),".$this->mode.");";
+        $sql .= "call spTable151(".$this->regCode.",@contactCode,".$fName.",".$mName.",".$lName.",".$fullName.",@sTitleCode,".$guardian.",".$company.",".$designation.",".$alias.",".$dob.",".$dom.",@sGroupCode,@sEmergencyCode,".$remarks.",".$facebook.",".$twitter.",".$googlePlus.",".$linkedin.",".$website.",1,1,0,".$defaultAddress.",".$this->familyCode.",".$private.",".$active.",NOW(),".$this->mode.");";
+
+        $sql .= "call spTable187(".$this->regCode.", @ContactCode, ".$mobile1.", ".$mobile2.", ".$mobile3.", ".$email1.", ".$email2.", ".$homePhone1.", ".$homePhone2.", ".$workPhone1.", ".$workPhone2.", ".$otherPhone1.", ".$otherPhone2.", ".$this->mode.");";
+
         $sql .= "SELECT @contactCode as 'ContactCode';";
 
         if(!empty($this->data["address"]["home"])){
@@ -312,8 +324,6 @@ class ContactController
             $country = (!empty($home['country']) ? "'".$home['country']."'" : "NULL");
             $pincode = (!empty($home['pincode']) ? "'".$home['pincode']."'" : "NULL");
             $area = (!empty($home['area']) ? "'".$home['area']."'" : "NULL");
-            $phone1 = (!empty($home['phone1']) ? "'".$home['phone1']."'" : "NULL");
-            $phone2 = (!empty($home['phone2']) ? "'".$home['phone2']."'" : "NULL");
 
             //create codes
             if(intval($home["countryCode"]) < 1000 && !empty($home["country"])){
@@ -329,7 +339,7 @@ class ContactController
                 $sql .= "call spTable119(@sAreaCode, ".$area.", ".$this->regCode.", 1);";
             }
 
-            $sql .= "call spTable153(".$this->regCode.", ".$contactCode.",".$address1.", ".$address2.", ".$address3.", ".$address4.", ".$address5.", ".$pincode.", @sCountryCode, @sStateCode, @sCityCode, @sAreaCode, ".$phone1.", ".$phone2.", NULL, $this->mode);";
+            $sql .= "call spTable153(".$this->regCode.", ".$contactCode.",".$address1.", ".$address2.", ".$address3.", ".$address4.", ".$address5.", ".$pincode.", @sCountryCode, @sStateCode, @sCityCode, @sAreaCode,".$this->mode.");";
         }
 
         if(!empty($this->data["address"]["work"])){
@@ -355,8 +365,6 @@ class ContactController
             $country = (!empty($work['country']) ? "'".$work['country']."'" : "NULL");
             $pincode = (!empty($work['pincode']) ? "'".$work['pincode']."'" : "NULL");
             $area = (!empty($work['area']) ? "'".$work['area']."'" : "NULL");
-            $phone1 = (!empty($work['phone1']) ? "'".$work['phone1']."'" : "NULL");
-            $phone2 = (!empty($work['phone2']) ? "'".$work['phone2']."'" : "NULL");
 
             //create codes
             if(intval($work["countryCode"]) < 1000 && !empty($work["country"])){
@@ -372,7 +380,7 @@ class ContactController
                 $sql .= "call spTable119(@sAreaCode, ".$area.", ".$this->regCode.", 1);";
             }
 
-            $sql .= "call spTable155(".$this->regCode.", ".$contactCode.",".$address1.", ".$address2.", ".$address3.", ".$address4.", ".$address5.", ".$pincode.", @sCountryCode, @sStateCode, @sCityCode, @sAreaCode, ".$phone1.", ".$phone2.", NULL, $this->mode);";
+            $sql .= "call spTable155(".$this->regCode.", ".$contactCode.",".$address1.", ".$address2.", ".$address3.", ".$address4.", ".$address5.", ".$pincode.", @sCountryCode, @sStateCode, @sCityCode, @sAreaCode,".$this->mode.");";
         }
 
         if(!empty($this->data["address"]["other"])){
@@ -398,8 +406,6 @@ class ContactController
             $country = (!empty($other['country']) ? "'".$other['country']."'" : "NULL");
             $pincode = (!empty($other['pincode']) ? "'".$other['pincode']."'" : "NULL");
             $area = (!empty($other['area']) ? "'".$other['area']."'" : "NULL");
-            $phone1 = (!empty($other['phone1']) ? "'".$other['phone1']."'" : "NULL");
-            $phone2 = (!empty($other['phone2']) ? "'".$other['phone2']."'" : "NULL");
 
             //create codes
             if(intval($other["countryCode"]) < 1000 && !empty($other["country"])){
@@ -415,7 +421,7 @@ class ContactController
                 $sql .= "call spTable119(@sAreaCode, ".$area.", ".$this->regCode.", 1);";
             }
 
-            $sql .= "call spTable157(".$this->regCode.", ".$contactCode.",".$address1.", ".$address2.", ".$address3.", ".$address4.", ".$address5.", ".$pincode.", @sCountryCode, @sStateCode, @sCityCode, @sAreaCode, ".$phone1.", ".$phone2.", NULL, $this->mode);";
+            $sql .= "call spTable157(".$this->regCode.", ".$contactCode.",".$address1.", ".$address2.", ".$address3.", ".$address4.", ".$address5.", ".$pincode.", @sCountryCode, @sStateCode, @sCityCode, @sAreaCode, ".$this->mode.");";
         }
 
         //echo $sql;
