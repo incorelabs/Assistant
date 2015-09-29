@@ -29,6 +29,7 @@ class OutlookFormat
     function __construct($fileLocation){
        $this->fileLocation = $fileLocation;
         $this->numContactsImport = 0;
+        $this->numContacts = 0;
         $this->regCode = intval($_SESSION['s_id']);
         $this->familyCode = intval($_SESSION['familyCode']); //Session family code
         $this->setData();
@@ -49,7 +50,7 @@ class OutlookFormat
                 if($row == 1){
                     continue;
                 }
-                $this->numContacts = count($data);
+                $this->numContacts++;
                 $this->organizeData($data);
                 $this->contactCode++;
             }
@@ -61,10 +62,9 @@ class OutlookFormat
             return;
         }
 
-        $this->numContactsImport++;
         $this->data = safeStringForSQL($data);
         $this->sql = $this->getSpTable151Query();
-        echo $this->sql;
+        //echo $this->sql;
         $this->runMultipleQuery($this->sql);
     }
 
@@ -141,17 +141,17 @@ class OutlookFormat
         $emergencyCode = 1001;
 
         // change date format yyyy-mm-dd
-        if(!empty($this->data['dob'])){
-            $dob = explode("/", $this->data['dob']);
-            $dob = array($dob[2],$dob[1],$dob[0]);
-            $this->data['dob'] = implode("-", $dob);
+        if(!empty($this->data[8])){
+            $dob = explode("/", $this->data[8]);
+            $dob = array($dob[2],$dob[0],$dob[1]);
+            $this->data[8] = implode("-", $dob);
         }
 
         // change date format yyyy-mm-dd
-        if(!empty($this->data['dom'])) {
-            $dob = explode("/", $this->data['dom']);
-            $dob = array($dob[2],$dob[1],$dob[0]);
-            $this->data['dom'] = implode("-", $dob);
+        if(!empty($this->data[9])){
+            $dob = explode("/", $this->data[9]);
+            $dob = array($dob[2],$dob[0],$dob[1]);
+            $this->data[9] = implode("-", $dob);
         }
 
         $fName = "'".$this->name[0]."'";
@@ -165,8 +165,8 @@ class OutlookFormat
         $email2 = (!empty($this->data['15']) ? "'".$this->data['15']."'" : "NULL");
         $defaultAddress = (!empty($this->data['defaultAddress']) ? $this->data['defaultAddress'] : "NULL");
         $guardian = (!empty($this->data['32']) ? "'".$this->data['32']."'" : "NULL");
-        $dob = (!empty($this->data['dob']) ? "'".$this->data['dob']."'" : "NULL");
-        $dom = (!empty($this->data['dom']) ? "'".$this->data['dom']."'" : "NULL");
+        $dob = (!empty($this->data[8]) ? "'".$this->data[8]."'" : "NULL");
+        $dom = (!empty($this->data[9]) ? "'".$this->data[9]."'" : "NULL");
         $remarks = (!empty($this->data['remarks']) ? "'".$this->data['remarks']."'" : "NULL");
         $alias = (!empty($this->data['alias']) ? "'".$this->data['alias']."'" : "NULL");
         $company = (!empty($this->data['42']) ? "'".$this->data['42']."'" : "NULL");
@@ -333,6 +333,7 @@ class OutlookFormat
 
     function runMultipleQuery($sql){
         if ($this->mysqli->multi_query($sql) === TRUE) {
+            $this->numContactsImport++;
             $this->response = $this->createResponse(1,"Successful");
             while($this->mysqli->more_results()){
                 $this->mysqli->next_result();
@@ -346,6 +347,13 @@ class OutlookFormat
         }
 
     }
+
+    function getResponse(){
+        $this->response["noOfContacts"] = $this->numContacts;
+        $this->response["noOfContactsImported"] = $this->numContactsImport;
+        return $this->response;
+    }
+
     function createResponse($status,$message){
         return array('status' => $status, 'message' => $message);
     }
