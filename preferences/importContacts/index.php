@@ -81,7 +81,6 @@ echo $navbar_str;
                             </div>
                         </div>
                         <div class="input-padding text-center">
-                            <button class="btn btn-primary">Download Template <i class="fa fa-download"></i></button>
                             <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                     </form>
