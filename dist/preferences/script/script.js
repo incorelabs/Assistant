@@ -4,11 +4,31 @@ $(document).ready(function () {
 
     $("#changePasswordForm").ajaxForm({
         beforeSubmit: function (formData) {
+            var isValid = false;
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
                     app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
+                if (formData[i].name == "password") {
+                    if (app.validatePassword(formData[i].value) === app.passwordValidationState.SUCCESS)
+                        isValid = true;
+                    else {
+                        isValid = false;
+                        break;
+                    }
+                } else if (formData[i].name == "confirmPassword") {
+                    if (app.validateConfirmPassword(formData[i - 1].value, formData[i].value) === app.emailValidationState.SUCCESS)
+                        isValid = true;
+                    else {
+                        isValid = false;
+                        break;
+                    }
+                }
+            }
+            if (!isValid) {
+                app.showNotificationFailure("Validation Failed for some input field");
+                return false;
             }
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
@@ -26,5 +46,13 @@ $(document).ready(function () {
             $("#pageLoading").removeClass("loader");
             $(".cover").fadeOut(100);
         }
+    });
+
+    $("#password").on('input propertychange', function () {
+        app.validate(this, 4);
+    });
+
+    $("#confirmPassword").on('input propertychange', function () {
+        app.validate(this, 5);
     });
 });

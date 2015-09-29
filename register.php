@@ -46,7 +46,7 @@ echo $navbar_str;
                         <div class="form-group">
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-user" style="font-size: 20px;"></i>
-                                <input type="text" class="form-control textbox_height email" name="email" id="email"
+                                <input type="email" class="form-control textbox_height email" name="email" id="email"
                                        placeholder="Email ID" required/>
                             </div>
                             <div class="info"></div>
@@ -63,7 +63,8 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-key" style="font-size: 20px;"></i>
                                 <input type="password" class="form-control textbox_height"
-                                       name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required/>
+                                       name="confirmPassword" id="confirmPassword" placeholder="Confirm Password"
+                                       required/>
                             </div>
                             <div class="info"></div>
                         </div>
@@ -99,7 +100,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="glyphicon glyphicon-phone" style="font-size: 20px;"></i>
-                                <input type="text" class="form-control textbox_height mobile" id="mobile" name="mobile"
+                                <input type="number" class="form-control textbox_height mobile" id="mobile"
+                                       name="mobile"
                                        placeholder="Mobile" required/>
 
                                 <div class="info"></div>

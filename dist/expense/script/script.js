@@ -563,7 +563,6 @@ $(document).ready(function () {
         $(".cover").fadeOut(100);
     });
 
-
     if (window.innerWidth < 992) {
         $("body").css("overflow", "auto");
         $("#expenseListScroll").removeClass("panelHeight");
@@ -596,7 +595,6 @@ $(window).resize(function () {
         $("#expenseDetail").removeClass("panelHeight");
         $("#expenseDetailDiv").addClass("mobileBody");
         $("#expenseDetailHeaderDiv").addClass("mobileHeader");
-
 
         //For Modal Text field resize
         $("#billingDayDiv").removeClass("first-col-left-padding first-col-right-padding");

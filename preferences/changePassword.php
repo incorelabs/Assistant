@@ -12,7 +12,7 @@ include_once ROOT . 'dist/authenticate.php';
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Assistant - Change Password</title>
     <?php
-        include_once ROOT.'dist/fetchCSS.php';
+    include_once ROOT . 'dist/fetchCSS.php';
     ?>
     <link rel="stylesheet" type="text/css" href="../dist/css/style.css"/>
     <link rel="stylesheet" href="../dist/preferences/css/style.css"/>
@@ -49,8 +49,9 @@ echo $navbar_str;
                         <div class="form-group">
                             <div class="inner-addon left-addon">
                                 <i class="fa fa-key" style="font-size: 20px;"></i>
-                                <input type="password" class="form-control textbox-height" name="oldPassword"
-                                       placeholder="Current Password" autofocus="true" required/>
+                                <input type="password" id="oldPassword" name="oldPassword"
+                                       class="form-control textbox-height" placeholder="Current Password"
+                                       autofocus="true" required/>
 
                                 <div class="info"></div>
                             </div>
@@ -59,7 +60,7 @@ echo $navbar_str;
                         <div class="form-group">
                             <div class="inner-addon left-addon">
                                 <i class="fa fa-key" style="font-size: 20px;"></i>
-                                <input type="password" class="form-control textbox-height password" name="password"
+                                <input type="password" id="password" name="password" class="form-control textbox-height"
                                        placeholder="New Password" required/>
 
                                 <div class="info"></div>
@@ -68,8 +69,8 @@ echo $navbar_str;
                         <div class="form-group" style="margin-bottom:0px">
                             <div class="inner-addon left-addon">
                                 <i class="fa fa-key" style="font-size: 20px;"></i>
-                                <input type="password" class="form-control textbox-height"
-                                       name="confirmPassword" placeholder="Confirm New Password" required/>
+                                <input type="password" id="confirmPassword" name="confirmPassword"
+                                       class="form-control textbox-height" placeholder="Confirm New Password" required/>
 
                                 <div class="info"></div>
                             </div>
@@ -87,7 +88,7 @@ echo $navbar_str;
     </div>
 </div>
 <?php
-    include_once ROOT.'dist/fetchJS.php';
+include_once ROOT . 'dist/fetchJS.php';
 ?>
 <script src="../dist/preferences/script/script.js"></script>
 </body>
