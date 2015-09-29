@@ -42,7 +42,6 @@ $(document).ready(function () {
                     }
                 }
             }
-            console.log(isValid);
             if (!isValid) {
                 app.showNotificationFailure("Validation Failed for some input field");
                 return false;
