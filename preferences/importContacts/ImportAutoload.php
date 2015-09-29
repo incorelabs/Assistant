@@ -10,6 +10,7 @@ define("ROOT", "../../");
 
 require_once ROOT.'dist/authenticate.php';
 require_once ROOT.'db/Connection.php';
+require_once ROOT . 'modules/functions.php';
 
 
 function ImportAutoload($className)

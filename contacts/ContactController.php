@@ -298,7 +298,7 @@ class ContactController
 
         $sql .= "call spTable151(".$this->regCode.",@contactCode,".$fName.",".$mName.",".$lName.",".$fullName.",@sTitleCode,".$guardian.",".$company.",".$designation.",".$alias.",".$dob.",".$dom.",@sGroupCode,@sEmergencyCode,".$remarks.",".$facebook.",".$twitter.",".$googlePlus.",".$linkedin.",".$website.",1,1,0,".$defaultAddress.",".$this->familyCode.",".$private.",".$active.",NOW(),".$this->mode.");";
 
-        $sql .= "call spTable187(".$this->regCode.", @ContactCode, ".$mobile1.", ".$mobile2.", ".$mobile3.", ".$email1.", ".$email2.", ".$homePhone1.", ".$homePhone2.", ".$workPhone1.", ".$workPhone2.", ".$otherPhone1.", ".$otherPhone2.", ".$this->mode.");";
+        $sql .= "call spTable187(".$this->regCode.", @contactCode, ".$mobile1.", ".$mobile2.", ".$mobile3.", ".$email1.", ".$email2.", ".$homePhone1.", ".$homePhone2.", ".$workPhone1.", ".$workPhone2.", ".$otherPhone1.", ".$otherPhone2.", ".$this->mode.");";
 
         $sql .= "SELECT @contactCode as 'ContactCode';";
 
