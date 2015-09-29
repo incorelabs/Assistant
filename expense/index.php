@@ -347,6 +347,7 @@ echo $navbar_str;
                                        tabindex="10"/>
                             </div>
                         </div>
+                        <div class="info"></div>
                     </div>
                     <div class="form-group form-group-margin" id="paymentSiteDiv">
                         <div class="input-group">

@@ -2,11 +2,13 @@ var app = {
     websiteRoot: "",
     dateValidationState: {
         SUCCESS: 0,
-        INVALID: 1
+        EMPTY: 1,
+        INVALID: 2
     },
     validateDate: function (inputDate) {
-        var date = new MyDate(inputDate);
-        if (date.isValid())
+        if(inputDate === "" || inputDate === "__/__/____")
+            return app.dateValidationState.EMPTY;
+        if (new MyDate(inputDate).isValid())
             return app.dateValidationState.SUCCESS;
         else
             return app.dateValidationState.INVALID;
@@ -95,6 +97,9 @@ var app = {
             case 1:
                 errorCode = app.validateDate(valueToValidate);
                 switch (errorCode) {
+                    case app.dateValidationState.EMPTY:
+                        errorString = "Please Enter a Date";
+                        break;
                     case app.dateValidationState.INVALID:
                         errorString = "Invalid Date. Enter Date in DD/MM/YYYY format";
                         break;

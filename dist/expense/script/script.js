@@ -469,6 +469,16 @@ $(document).ready(function () {
         }
     });
 
+    $("#expiryDate").focusout(function () {
+        app.validate(this, 1);
+        if(this.value.trim() === "" || this.value.trim() === "__/__/____") {
+            if(!this.required) {
+                console.log("not required, so removed it.");
+                $(this).closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+            }
+        }
+    });
+
     $("#fullName").focusout(function () {
         if ($(this).val().trim() == "") {
             var formGroup = $(this).closest(".form-group");
