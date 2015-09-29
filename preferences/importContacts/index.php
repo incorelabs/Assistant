@@ -46,19 +46,21 @@ echo $navbar_str;
 
                 <div class='panel-heading text-center'>Assistant Template</div>
                 <div class='panel-body panel-body-height'>
-                    <div class="text-center input-group">
-                        <input id="AssistantUpload" name="AssistantUpload" class="form-control" placeholder="Choose File" disabled="disabled" />
-                        <div class="input-group-btn">
-                            <div class="fileUpload btn btn-primary">
-                                <span>Upload</span>
-                                <input type="file" class="upload" id="AssistantUploadBtn" name="AssistantUploadBtn"/>
+                    <form id="assistantTemplateForm" name="assistantTemplateForm">
+                        <div class="text-center input-group">
+                            <input id="AssistantUpload" name="AssistantUpload" class="form-control" placeholder="Choose File" disabled="disabled" />
+                            <div class="input-group-btn">
+                                <div class="fileUpload btn btn-primary">
+                                    <span>Upload</span>
+                                    <input type="file" class="upload" id="AssistantUploadBtn" name="AssistantUploadBtn"/>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="input-padding text-center">
-                        <a href="download.php?file=Assistant_Contacts_Template.csv"><button class="btn btn-primary">Download Template <i class="fa fa-download"></i></button></a>
-                        <button class="btn btn-success">Submit</button>
-                    </div>
+                        <div class="input-padding text-center">
+                            <a href="download.php?file=Assistant_Contacts_Template.csv"><button class="btn btn-primary">Download Template <i class="fa fa-download"></i></button></a>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
                 </div>
 
         </div>
@@ -68,19 +70,21 @@ echo $navbar_str;
 
                 <div class='panel-heading text-center'>Outlook</div>
                 <div class='panel-body panel-body-height'>
-                    <div class="text-center input-group">
-                        <input id="outlookUpload" name="outlookUpload" class="form-control" placeholder="Choose File" disabled="disabled" />
-                        <div class="input-group-btn">
-                            <div class="fileUpload btn btn-primary">
-                                <span>Upload</span>
-                                <input type="file" class="upload" id="outlookUploadBtn" name="outlookUploadBtn"/>
+                    <form id="outlookForm" method="POST" action="import.php" enctype="multipart/form-data">
+                        <div class="text-center input-group">
+                            <input id="outlookUpload" name="outlookUpload" class="form-control" placeholder="Choose File" disabled="disabled" />
+                            <div class="input-group-btn">
+                                <div class="fileUpload btn btn-primary">
+                                    <span>Upload</span>
+                                    <input type="file" class="upload" id="outlookUploadBtn" name="fileToUpload"/>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="input-padding text-center">
-                        <button class="btn btn-primary">Download Template <i class="fa fa-download"></i></button>
-                        <button class="btn btn-success">Submit</button>
-                    </div>
+                        <div class="input-padding text-center">
+                            <button class="btn btn-primary">Download Template <i class="fa fa-download"></i></button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
                 </div>
 
         </div>
@@ -90,6 +94,7 @@ echo $navbar_str;
 
                 <div class='panel-heading text-center'>Import from Google Contacts</div>
                 <div class='panel-body panel-body-height'>
+                    <form id="googleForm" name="googleForm">
                     <div class="input-padding text-center">
                         <div class="googleBtn" id="googleBtn">
                             <a href="#">

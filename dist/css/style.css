@@ -318,3 +318,9 @@ input[type=number] {
     opacity: 0;
     filter: alpha(opacity=0);
 }
+
+select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}

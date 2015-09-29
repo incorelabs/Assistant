@@ -72,12 +72,6 @@ body{
 	padding-right: 30px;
 }
 
-select{
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
 .badge{
 height: 20px;
 }

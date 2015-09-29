@@ -4,7 +4,7 @@
 		<a href='#' id='backButton' class='pull-left hidden' style='margin-left: -35px;'><i class='fa fa-chevron-left fa-lg'></i></a>
 		<a href='#menu' class='menu_img'></a>".PAGE_TITLE."
     <div class='dropdown' style='float:right; right:-25px'>
-    <a class='dropdown-toggle' data-toggle='dropdown'>
+    <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
     <span class='fa fa-user fa-lg'></span><i class='fa fa-caret-down'></i></a>
     <ul class='dropdown-menu dropdown-menu-custom'>
       <li><a href='#' class='text-center' onclick='app.openAccountProfilePictureModal()'><img class='img-rounded' width='100px' height='100px' id='navbarProfilePicture'/></a></li>
@@ -49,7 +49,7 @@
 					<li><a href='".$root_location."family'>Family</a></li>
 					<li><a href='".$root_location."preferences/changePassword.php'>Change Password</a></li>
 					<li><a href='".$root_location."preferences/importContacts/'>Import Contacts</a></li>
-					<li><a href='#'>General Settings</a></li>
+					<li><a href='".$root_location."preferences/generalSettings/'>General Settings</a></li>
 					<li><a href='".$root_location."preferences/labelSettings/'>Label Settings</a></li>
 					<li><a href='".$root_location."preferences/chequeSettings/'>Cheque Settings</a></li>
 					<li><a href='".$root_location."preferences/envelopeSettings/'>Envelope Settings</a></li>
@@ -105,7 +105,7 @@
                                         <div class='input-group-btn'>
                                             <div class='fileUpload btn btn-primary'>
                                                 <span>Upload</span>
-                                                <input type='file' id='accountProfileImgInput' name='ProfileFileToUpload' class='upload' style='padding-bottom:10px;' required/>
+                                                <input type='file' id='accountProfileImgInput' name='ProfileFileToUpload' class='upload' style='padding-bottom:10px;' required />
                                             </div>
                                         </div>
                                     </div>
