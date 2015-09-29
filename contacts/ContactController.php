@@ -68,6 +68,7 @@ class ContactController
         $sql .= "DELETE FROM Table155 WHERE RegCode = ".$this->regCode." AND ContactCode = ".$contactCode.";";
         $sql .= "DELETE FROM Table157 WHERE RegCode = ".$this->regCode." AND ContactCode = ".$contactCode.";";
         $sql .= "DELETE FROM Table159 WHERE RegCode = ".$this->regCode." AND ContactCode = ".$contactCode." AND SerialNo = 1 ;";
+        $sql .= "DELETE FROM Table187 WHERE RegCode = ".$this->regCode." AND ContactCode = ".$contactCode.";";
 
         return $sql;
     }
