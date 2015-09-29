@@ -339,4 +339,10 @@ $(document).ready(function () {
             $(".cover").fadeOut(100);
         }
     });
+
+    document.getElementById("imgInput").onchange = function () {
+        var path = this.value;
+        var filename = path.replace(/^.*\\/, "");
+        document.getElementById("incomeImgInputPath").value = filename;
+    };
 });

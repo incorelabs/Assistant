@@ -40,47 +40,66 @@ echo $navbar_str;
             <i class="fa fa-plus fa-lg"></i>
         </button>
     </div>
-<div class='container' style='padding-top:100px'>
+<div class='container' style='padding-top:50px'>
     <div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>
         <div class='panel panel-primary'>
-            <form id=""></form>
-            <div class='panel-heading text-center'>Assistant Template</div>
-            <div class='panel-body panel-body-height'>
-                <div class="text-center">
-                    <input type="file" class="form-control">
+
+                <div class='panel-heading text-center'>Assistant Template</div>
+                <div class='panel-body panel-body-height'>
+                    <div class="text-center input-group">
+                        <input id="AssistantUpload" name="AssistantUpload" class="form-control" placeholder="Choose File" disabled="disabled" />
+                        <div class="input-group-btn">
+                            <div class="fileUpload btn btn-primary">
+                                <span>Upload</span>
+                                <input type="file" class="upload" id="AssistantUploadBtn" name="AssistantUploadBtn"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-padding text-center">
+                        <a href="download.php?file=Assistant_Contacts_Template.csv"><button class="btn btn-primary">Download Template <i class="fa fa-download"></i></button></a>
+                        <button class="btn btn-success">Submit</button>
+                    </div>
                 </div>
-                <div class="input-padding text-center">
-                    <button class="btn btn-primary">Download Template <i class="fa fa-download"></i></button>
-                    <button class="btn btn-success">Submit</button>
-                </div>
-            </div>
+
         </div>
     </div>
     <div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>
         <div class='panel panel-success'>
-            <div class='panel-heading text-center'>Outlook</div>
-            <div class='panel-body panel-body-height'>
-                <input type="file" class="form-control">
-                <div class="input-padding text-center">
-                    <button class="btn btn-primary">Download Template <i class="fa fa-download"></i></button>
-                    <button class="btn btn-success">Submit</button>
+
+                <div class='panel-heading text-center'>Outlook</div>
+                <div class='panel-body panel-body-height'>
+                    <div class="text-center input-group">
+                        <input id="outlookUpload" name="outlookUpload" class="form-control" placeholder="Choose File" disabled="disabled" />
+                        <div class="input-group-btn">
+                            <div class="fileUpload btn btn-primary">
+                                <span>Upload</span>
+                                <input type="file" class="upload" id="outlookUploadBtn" name="outlookUploadBtn"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-padding text-center">
+                        <button class="btn btn-primary">Download Template <i class="fa fa-download"></i></button>
+                        <button class="btn btn-success">Submit</button>
+                    </div>
                 </div>
-            </div>
+
         </div>
     </div>
     <div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>
         <div class='panel panel-danger'>
-            <div class='panel-heading text-center'>Import from Google Contacts</div>
-            <div class='panel-body panel-body-height'>
-                <div class="input-padding text-center">
-                    <div class="googleBtn" id="googleBtn">
-                        <a href="import.php">
-                            <span class="icon"><i class="fa fa-google fa-2x"></i></span>
-                            <span class="buttonText">Google</span>
-                        </a>
+
+                <div class='panel-heading text-center'>Import from Google Contacts</div>
+                <div class='panel-body panel-body-height'>
+                    <div class="input-padding text-center">
+                        <div class="googleBtn" id="googleBtn">
+                            <a href="#">
+                                <span class="icon"><i class="fa fa-google fa-2x"></i></span>
+                                <span class="buttonText">Google</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
+
         </div>
     </div>
 </div>

@@ -1330,6 +1330,11 @@ $(document).ready(function (event) {
         $("#contactDetailDiv").addClass("mobileBody");
         $("#contactDetailHeaderDiv").addClass("mobileHeader");
     }
+    document.getElementById("imgInput").onchange = function () {
+        var path = this.value;
+        var filename = path.replace(/^.*\\/, "");
+        document.getElementById("imgInputPath").value = filename;
+    };
 });
 $(window).resize(function () {
     if (window.innerWidth < 992) {

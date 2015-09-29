@@ -1064,8 +1064,16 @@ echo $navbar_str;
                                     <label class="control-label">Select Image</label>
                                     <br>
                                     <br>
-                                    <input type='file' id="imgInput" name="fileToUpload"
-                                           style="padding-bottom:10px;" required/>
+                                    <div class="input-group">
+                                    <input id="imgInputPath" name="imgInputPath" class="form-control" placeholder="Choose File" disabled="disabled" />
+                                        <div class="input-group-btn">
+                                            <div class="fileUpload btn btn-primary">
+                                                <span>Upload</span>
+                                                <input type='file' id="imgInput" name="fileToUpload" class="upload" style="padding-bottom:10px;" required/>
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                                     <p id="imageErrorMsg" class="info"></p>
 

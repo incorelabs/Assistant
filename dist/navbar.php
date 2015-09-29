@@ -100,9 +100,15 @@
                                     <label class='control-label'>Select Image</label>
                                     <br>
                                     <br>
-                                    <input type='file' id='accountProfileImgInput' name='ProfileFileToUpload'
-                                           style='padding-bottom:10px;' required/>
-
+                                    <div class='input-group'>
+                                        <input id='accountImgInputPath' name='accountImgInputPath' class='form-control' placeholder='Choose File' disabled='disabled' />
+                                        <div class='input-group-btn'>
+                                            <div class='fileUpload btn btn-primary'>
+                                                <span>Upload</span>
+                                                <input type='file' id='accountProfileImgInput' name='ProfileFileToUpload' class='upload' style='padding-bottom:10px;' required/>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <p id='imageErrorMsg' class='info'></p>
 
                                     <div class='delete-btn-padding'>

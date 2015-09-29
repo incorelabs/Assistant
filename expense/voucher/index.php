@@ -288,9 +288,15 @@ echo $navbar_str;
                                     <label class="control-label">Select Image</label>
                                     <br>
                                     <br>
-                                    <input type='file' id="imgInput" name="fileToUpload"
-                                           style="padding-bottom:10px;" accept="image/gif, image/jpeg, image/png"
-                                           required/>
+                                    <div class='input-group'>
+                                        <input id='expenseImgInputPath' name='expenseImgInputPath' class='form-control' placeholder='Choose File' disabled='disabled' />
+                                        <div class='input-group-btn'>
+                                            <div class='fileUpload btn btn-primary'>
+                                                <span>Upload</span>
+                                                <input type='file' id="imgInput" name="fileToUpload" style="padding-bottom:10px;" class="upload" accept="image/gif, image/jpeg, image/png" required/>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <p id="imageErrorMsg"></p>
 
