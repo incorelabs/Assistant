@@ -5,6 +5,7 @@ define("ROOT", "../");
 include_once ROOT.'dist/authenticate.php';
 require_once ROOT.'db/Connection.php';
 require_once ROOT.'modules/functions.php';
+require_once ROOT."mail/MailerAutoload.php";
 $mysqli = getConnection();
 
 $response = array();
@@ -19,6 +20,8 @@ class FamilyController
     var $isParent;
     var $response;
     var $mysqli;
+    var $hash;
+    var $activeFlag;
 
     function __construct($data){
         $this->mysqli = getConnection();
@@ -26,6 +29,7 @@ class FamilyController
         $this->regCode = intval($_SESSION['s_id']);
         $this->familyCode = intval($_SESSION['familyCode']); //Session family code
         $this->isParent = (($this->familyCode == 1001) ? true : false );
+        $this->activeFlag = 1;
 
         //set mode
         if($this->data["mode"] == "A"){
@@ -94,6 +98,9 @@ class FamilyController
             if(intval($this->data["access"]) == 1){
                 if($this->isMailIdAvailable() && validatePassword()){
                     $validate = true;
+                    $this->activeFlag = 0;
+                    $this->hash = md5( rand(0,1000) );
+                    $this->sendActivationMail();
                 }
                 else{
                     $this->response = createResponse(0,"Mail ID is unavailable or Password details do not match the policy");
@@ -135,6 +142,9 @@ class FamilyController
         if(intval($this->data["access"]) == 1){
             if($this->isMailIdAvailable() && validatePassword()){
                 $validate = true;
+                $this->activeFlag = 0;
+                $this->hash = md5( rand(0,1000) );
+                $this->sendActivationMail();
             }
             else{
                 $this->response = createResponse(0,"Mail ID is unavailable or Password details do not match the policy");
@@ -165,6 +175,28 @@ class FamilyController
         }
     }
 
+    function sendActivationMail(){
+        $email = $this->data['email'];
+        $name = $this->data['name'];
+        $url = $_SERVER["REQUEST_SCHEME"]."://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+        $url = str_replace("family/controller.php","verify.php",$url);
+        $url .= "?email=".$email."&hash=".$this->hash;
+
+        $mail = new \Assistant\Mail\Mailer();
+        $mail->addAddress($email, $name);
+
+        $mail->Subject = "[ASSISTANT] Welcome";
+        $mail->Body    = "Hi ".$name."\n\nWe are excited to have you here.\n\nPlease click this link to activate your account:\n".$url;
+
+        if(!$mail->send()) {
+            //$validate = false;
+            $this->response = createResponse(0,"Mailer Error: " . $mail->ErrorInfo);
+        } else {
+            //$validate = true;
+            $this->response = createResponse(1,"Your account has been created");
+        }
+    }
+
     function getSpTable107Query(){
         $name = "'".$this->data['name']."'";
         $relationCode = $this->data['relation'];
@@ -175,7 +207,8 @@ class FamilyController
         $gender = intval($this->data['gender']);
         $parentFlag = ((intval($this->data["familyCode"]) == 1001) ? 1 : 2);
         $loginFlag = ((intval($this->data["access"]) == 1) ? 1 : 2);
-        $activeFlag = 1;
+        $activeFlag = $this->activeFlag;
+        $hash = (is_null($this->hash) ? "NULL" : "'".$this->hash."'");
 
         $sql =  "call spTable107(
 					".$this->regCode.",
@@ -190,6 +223,7 @@ class FamilyController
 					".$parentFlag.",
 					".$loginFlag.",
 					".$activeFlag.",
+					".$hash.",
 					".$this->mode."
 				);";
 

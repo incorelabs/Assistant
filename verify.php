@@ -35,8 +35,9 @@ if($validate){
 
     if($result = $mysqli->query($sql)){
         if($result->num_rows > 0){
-            $sql = "UPDATE Table109 SET ActiveFlag = 1 WHERE RegEmail = '".$email."' AND Hash = '".$hash."' AND ActiveFlag = 0";
-            $mysqli->query($sql) or die($mysqli->error);
+            $sql = "UPDATE Table109 SET ActiveFlag = 1 WHERE RegEmail = '".$email."' AND Hash = '".$hash."' AND ActiveFlag = 0;UPDATE Table107 SET ActiveFlag = 1 WHERE Email = '".$email."' AND ActiveFlag = 0";
+
+            $mysqli->multi_query($sql) or die($mysqli->error);
             $validate = true;
             $response = createResponse(1,"Your account has been activated, you can now login");
         }
