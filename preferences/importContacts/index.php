@@ -67,25 +67,38 @@ echo $navbar_str;
     </div>
     <div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>
         <div class='panel panel-success'>
-
-                <div class='panel-heading text-center'>Outlook</div>
-                <div class='panel-body panel-body-height'>
-                    <form id="outlookForm" method="POST" action="import.php" enctype="multipart/form-data">
-                        <div class="text-center input-group">
-                            <input id="outlookUpload" name="outlookUpload" class="form-control" placeholder="Choose File" disabled="disabled" />
-                            <div class="input-group-btn">
-                                <div class="fileUpload btn btn-primary">
-                                    <span>Upload</span>
-                                    <input type="file" class="upload" id="outlookUploadBtn" name="fileToUpload"/>
-                                </div>
+            <div class='panel-heading text-center'>Outlook</div>
+            <div class='panel-body panel-body-height'>
+                <form id="outlookForm" method="POST" action="import.php" enctype="multipart/form-data">
+                    <div class="text-center input-group">
+                        <input id="outlookUpload" name="outlookUpload" class="form-control" placeholder="Choose File" disabled="disabled" />
+                        <div class="input-group-btn">
+                            <div class="fileUpload btn btn-primary">
+                                <span>Upload</span>
+                                <input type="file" class="upload" id="outlookUploadBtn" name="fileToUpload"/>
                             </div>
                         </div>
-                        <div class="input-padding text-center">
-                            <button type="submit" class="btn btn-success">Submit</button>
-                        </div>
-                    </form>
+                    </div>
+                    <div class="input-padding text-center">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="progress hidden" id="outlookUploadProgress">
+                <div class="progress-bar" id="outlookUploadProgressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+                     style="width: 0%;">
+                    <span class="sr-only" id="outlookUploadProgressValue">0% Complete</span>
                 </div>
-
+            </div>
+            <div class="hidden" id="importContactSummaryDiv">
+                <div class="text-center">
+                    Upload Summary
+                </div>
+                <div class="hidden" id="successDiv">
+                </div>
+                <div class="hidden" id="failureDiv">
+                </div>
+            </div>
         </div>
     </div>
     <div class='col-lg-4 col-md-4 col-sm-12 col-xs-12'>
