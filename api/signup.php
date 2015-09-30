@@ -133,7 +133,7 @@ if ($validate) {
         $mobile = "'" . $_POST['mobile'] . "'";
         $parentFlag = 1;
         $loginFlag = 1;
-        $activeFlag = 1;
+        $activeFlag = 0;
         $country = intval($_POST["country"]);
         $familySize = 1;
         $renewalNo = 1;
@@ -141,6 +141,7 @@ if ($validate) {
         $dataSizeUsed = 0;
         $photoUploaded = 0;
         $noOfHits = 0;
+        $hash = md5( rand(0,1000) );
         $nextYear = new DateTime("now");
         $nextYear->add(new DateInterval('P1Y'));
         $today = new DateTime("now");
@@ -168,6 +169,7 @@ if ($validate) {
 			" . $dataSizeUsed . ",
 			" . $photoUploaded . ",
 			" . $noOfHits . ",
+			'" . $hash . "',
 			NOW()
 		);";
 
@@ -184,12 +186,15 @@ if ($validate) {
 
         $email = $_POST['email'];
         $name = $_POST['name'];
+        $url = $_SERVER["REQUEST_SCHEME"]."://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+        $url = str_replace("api/signup.php","verify.php",$url);
+        $url .= "?email=".$email."&hash=".$hash;
 
         $mail = new \Assistant\Mail\Mailer();
         $mail->addAddress($email, $name);
 
         $mail->Subject = "[ASSISTANT] Welcome";
-        $mail->Body    = "Hi ".$name."\n\nWe are excited to have you here.";
+        $mail->Body    = "Hi ".$name."\n\nWe are excited to have you here.\n\nPlease click this link to activate your account:\n".$url;
 
         if(!$mail->send()) {
             $validate = false;

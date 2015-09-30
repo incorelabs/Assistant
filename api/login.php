@@ -58,7 +58,7 @@ if ($validate) {
         $_POST = safeStringForSQL($_POST);
         $password = hash("sha256", $_POST['password']);
 
-        $sql = "SELECT RegCode, RegName, RegEmail, RegPassword, RegMobile, FamilyCode, ForgotFlag FROM Table109 WHERE RegEmail = '" . $_POST['email'] . "' AND RegPassword = '" . $password . "' LIMIT 1";
+        $sql = "SELECT RegCode, RegName, RegEmail, RegPassword, RegMobile, FamilyCode, ForgotFlag FROM Table109 WHERE RegEmail = '" . $_POST['email'] . "' AND RegPassword = '" .$password ."' AND ActiveFlag = 1 LIMIT 1";
 
         if ($result = $mysqli->query($sql)) {
             if ($result->num_rows == 0) {
