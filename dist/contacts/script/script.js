@@ -259,7 +259,7 @@ var pageContact = {
                     if (home.CityName != null || home.Pincode != null)
                         homeAddress += "<br/>";
                     homeAddress += ((home.AreaName) ? ("(Area) " + home.AreaName + "<br/>") : "");
-                    homeAddress += ((home.Phone1) ? (home.Phone1 + " ") : "") + ((home.Phone2) ? (home.Phone2) : "");
+                    homeAddress += ((data.detail.contact.HomePhone1) ? (data.detail.contact.HomePhone1 + " ") : "") + ((data.detail.contact.HomePhone2) ? (data.detail.contact.HomePhone2) : "");
                 }
 
                 if (data.detail.address.work) {
@@ -277,7 +277,7 @@ var pageContact = {
                     if (work.CityName != null || work.Pincode != null)
                         workAddress += "<br/>";
                     workAddress += ((work.AreaName) ? ("(Area) " + work.AreaName + "<br/>") : "");
-                    workAddress += ((work.Phone1) ? (work.Phone1 + " ") : "") + ((work.Phone2) ? (work.Phone2) : "");
+                    workAddress += ((data.detail.contact.WorkPhone1 ) ? (data.detail.contact.WorkPhone1 + " ") : "") + ((data.detail.contact.WorkPhone2) ? (data.detail.contact.WorkPhone2) : "");
                 }
 
                 if (data.detail.address.other) {
@@ -295,7 +295,7 @@ var pageContact = {
                     if (other.CityName != null || other.Pincode != null)
                         otherAddress += "<br/>";
                     otherAddress += ((other.AreaName) ? ("(Area) " + other.AreaName + "<br/>") : "");
-                    otherAddress += ((other.Phone1) ? (other.Phone1 + " ") : "") + ((other.Phone2) ? (other.Phone2) : "");
+                    otherAddress += ((data.detail.contact.OtherPhone1) ? (data.detail.contact.OtherPhone1 + " ") : "") + ((data.detail.contact.OtherPhone2) ? (data.detail.contact.OtherPhone2) : "");
                 }
             }
 
@@ -318,8 +318,7 @@ var pageContact = {
             $("#contactDetailHeader").empty().html(contactHeaderString);
             $("#contactDetailBody").empty().html(contactDetailsString);
 
-            if(window.innerWidth > 992)
-            {
+            if (window.innerWidth > 992) {
                 console.log("hi");
                 //To hide the call & sms icons
                 $("#mobileSmsIcon").addClass("hidden");
@@ -628,6 +627,36 @@ var pageContact = {
             $('#addWebsite').val(pageContact.localContact.contact.Website);
         }
 
+        if (pageContact.localContact.contact.HomePhone1) {
+            $("#homePhone1").val(pageContact.localContact.contact.HomePhone1);
+        }
+
+        if (pageContact.localContact.contact.WorkPhone1) {
+            $("#workPhone1").val(pageContact.localContact.contact.WorkPhone1);
+        }
+
+        if (pageContact.localContact.contact.OtherPhone1) {
+            $("#otherPhone1").val(pageContact.localContact.contact.OtherPhone1);
+        }
+
+        if (pageContact.localContact.contact.HomePhone2) {
+            pageContact.addBtnHomePhoneCount++;
+            $(".addHomePhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='address[home][phone" + (pageContact.addBtnHomePhoneCount + 1) + "]' id='homePhone" + (pageContact.addBtnHomePhoneCount + 1) + "' class='form-control text-field-left-border' placeholder='Other'/><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-home-phone' type='button' onclick='pageContact.removeBtn(this, 2)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+            $("#homePhone2").val(pageContact.localContact.contact.HomePhone2);
+        }
+
+        if (pageContact.localContact.contact.WorkPhone2) {
+            pageContact.addBtnWorkPhoneCount++;
+            $(".addWorkPhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='address[work][phone" + pageContact.addBtnWorkPhoneCount + "]' id='workPhone" + pageContact.addBtnWorkPhoneCount + "' class='form-control text-field-left-border' placeholder='Other'/><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-work-phone' type='button' onclick='pageContact.removeBtn(this, 3)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+            $("#workPhone2").val(pageContact.localContact.contact.WorkPhone2);
+        }
+
+        if (pageContact.localContact.contact.OtherPhone2) {
+            pageContact.addBtnOtherPhoneCount++;
+            $(".addOtherPhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='address[other][phone" + pageContact.addBtnOtherPhoneCount + "]' id='otherPhone" + pageContact.addBtnOtherPhoneCount + "' class='form-control text-field-left-border' placeholder='Other'/><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-other-phone' type='button' onclick='pageContact.removeBtn(this, 4)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
+            $("#otherPhone2").val(pageContact.localContact.contact.OtherPhone2);
+        }
+
         if (pageContact.localContact.address) {
             var address = pageContact.localContact.address;
             var type = "";
@@ -706,28 +735,6 @@ var pageContact = {
 
         if (address[type].Pincode) {
             $("#" + type + "Pincode").val(address[type].Pincode);
-        }
-
-        if (address[type].Phone1) {
-            $("#" + type + "Phone1").val(address[type].Phone1);
-        }
-
-        if (address[type].Phone2) {
-            switch (type) {
-                case "home":
-                    pageContact.addBtnHomePhoneCount++;
-                    $(".addHomePhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='address[home][phone" + (pageContact.addBtnHomePhoneCount + 1) + "]' id='homePhone" + (pageContact.addBtnHomePhoneCount + 1) + "' class='form-control text-field-left-border' placeholder='Other'/><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-home-phone' type='button' onclick='pageContact.removeBtn(this, 2)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
-                    break;
-                case "work":
-                    pageContact.addBtnWorkPhoneCount++;
-                    $(".addWorkPhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='address[work][phone" + pageContact.addBtnWorkPhoneCount + "]' id='workPhone" + pageContact.addBtnWorkPhoneCount + "' class='form-control text-field-left-border' placeholder='Other'/><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-work-phone' type='button' onclick='pageContact.removeBtn(this, 3)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
-                    break;
-                case "other":
-                    pageContact.addBtnOtherPhoneCount++;
-                    $(".addOtherPhone").append("<div class='addedBtn'><div class='form-group form-group-margin'><div class='input-group'><span class='input-group-addon input-group-addon-label'>Phone</span><input type='text' name='address[other][phone" + pageContact.addBtnOtherPhoneCount + "]' id='otherPhone" + pageContact.addBtnOtherPhoneCount + "' class='form-control text-field-left-border' placeholder='Other'/><span class='input-group-btn'><button class='btn btn-danger button-addon-custom btn-other-phone' type='button' onclick='pageContact.removeBtn(this, 4)'><i class='fa fa-minus fa-lg'></i></button></span></div></div></div>");
-                    break;
-            }
-            $("#" + type + "Phone2").val(address[type].Phone2);
         }
     },
     openDeleteContactModal: function (contactCode) {
@@ -1157,10 +1164,10 @@ $(document).ready(function (event) {
                     app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
-                if(formData[i].name === "email1") {
+                if (formData[i].name === "email1") {
                     formData[i].value = formData[i].value.toLowerCase();
                 }
-                if(formData[i].name === "email2") {
+                if (formData[i].name === "email2") {
                     formData[i].value = formData[i].value.toLowerCase();
                 }
             }
