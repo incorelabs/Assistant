@@ -12,7 +12,7 @@ include_once ROOT . 'dist/authenticate.php';
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Assistant - Income</title>
     <?php
-        include_once ROOT.'dist/fetchCSS.php';
+    include_once ROOT . 'dist/fetchCSS.php';
     ?>
     <link rel="stylesheet" href="../dist/income/css/style.css"/>
 </head>
@@ -344,10 +344,11 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-calendar hidden-xs fa-size"></i>
                                 <input type="text" class="form-control text-field-left-border date" name="expiryDate"
-                                       id="expiryDate" placeholder="Expiry Date" aria-describedby="basic-addon1"
+                                       id="expiryDate" placeholder="DD/MM/YYYY" aria-describedby="basic-addon1"
                                        tabindex="10"/>
                             </div>
                         </div>
+                        <div class="info"></div>
                     </div>
                 </div>
                 <!-- Modal Body -->
@@ -400,7 +401,7 @@ echo $navbar_str;
 <!--modal-->
 
 <?php
-    include_once ROOT.'dist/fetchJS.php';
+include_once ROOT . 'dist/fetchJS.php';
 ?>
 <script src="../dist/income/script/script.js"></script>
 <script src="../dist/date/script.js"></script>

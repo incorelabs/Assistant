@@ -135,6 +135,7 @@ echo $navbar_str;
                                        placeholder="Mobile" tabindex="4"/>
                             </div>
                         </div>
+                        <div class='info'></div>
                     </div>
                     <div class="form-group form-group-margin">
                         <div class="input-group">

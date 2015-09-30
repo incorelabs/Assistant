@@ -207,9 +207,11 @@ $(document).ready(function () {
         extensions: ['effect-slide-menu', 'pageshadow'],
         searchfield: true
     });
-    document.getElementById("accountProfileImgInput").onchange = function () {
-        var path = this.value;
-        var filename = path.replace(/^.*\\/, "");
-        document.getElementById("accountImgInputPath").value = filename;
-    };
+    if(document.getElementById("accountProfileImgInput")) {
+        document.getElementById("accountProfileImgInput").onchange = function () {
+            var path = this.value;
+            var filename = path.replace(/^.*\\/, "");
+            document.getElementById("accountImgInputPath").value = filename;
+        };
+    }
 });

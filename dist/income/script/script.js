@@ -460,6 +460,19 @@ $(document).ready(function () {
         }
     });
 
+    $("#expiryDate").focusin(function () {
+        if (this.value.indexOf('_') > -1) {
+            this.value = "";
+        }
+    }).focusout(function () {
+        app.validate(this, 1);
+        if (this.value.trim() === "" || this.value.trim() === "__/__/____") {
+            if (!this.required) {
+                $(this).closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+            }
+        }
+    });
+
     $("#fullName").focusout(function () {
         if ($(this).val().trim() == "") {
             var formGroup = $(this).closest(".form-group");

@@ -12,7 +12,7 @@ include_once ROOT . 'dist/authenticate.php';
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Assistant - Voucher</title>
     <?php
-        include_once ROOT.'dist/fetchCSS.php';
+    include_once ROOT . 'dist/fetchCSS.php';
     ?>
     <link rel="stylesheet" href="../../dist/incomeVoucher/css/style.css"/>
 </head>
@@ -116,10 +116,11 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-calendar hidden-xs fa-size"></i>
                                 <input type="text" name="voucherDt" id="voucherDt"
-                                       class="form-control text-field-left-border date" placeholder="Voucher Date"
+                                       class="form-control text-field-left-border date" placeholder="DD/MM/YYYY"
                                        tabindex="2" required/>
                             </div>
                         </div>
+                        <div class="info"></div>
                     </div>
                     <div class="form-group form-group-margin" id="voucherPaymentModeDiv">
                         <div class="input-group">
@@ -145,10 +146,11 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
                                 <input type="text" name="referNo" id="referNo"
-                                       class="form-control text-field-left-border" placeholder="Reference Number"
+                                       class="form-control text-field-left-border" placeholder="DD/MM/YYYY"
                                        aria-describedby="basic-addon1" tabindex="4"/>
                             </div>
                         </div>
+                        <div class="info"></div>
                     </div>
                     <div class="form-group form-group-margin" id="chequeDateDiv">
                         <div class="input-group">
@@ -184,6 +186,7 @@ echo $navbar_str;
                                        aria-describedby="basic-addon1" tabindex="7" required/>
                             </div>
                         </div>
+                        <div class="info"></div>
                     </div>
                     <div class="form-group form-group-margin">
                         <div class="input-group">
@@ -288,12 +291,17 @@ echo $navbar_str;
                                     <label class="control-label">Select Image</label>
                                     <br>
                                     <br>
+
                                     <div class='input-group'>
-                                        <input id='incomeImgInputPath' name='incomeImgInputPath' class='form-control' placeholder='Choose File' disabled='disabled' />
+                                        <input id='incomeImgInputPath' name='incomeImgInputPath' class='form-control'
+                                               placeholder='Choose File' disabled='disabled'/>
+
                                         <div class='input-group-btn'>
                                             <div class='fileUpload btn btn-primary'>
                                                 <span>Upload</span>
-                                                <input type='file' id="imgInput" name="fileToUpload" style="padding-bottom:10px;" class="upload" accept="image/gif, image/jpeg, image/png" required/>
+                                                <input type='file' id="imgInput" name="fileToUpload"
+                                                       style="padding-bottom:10px;" class="upload"
+                                                       accept="image/gif, image/jpeg, image/png" required/>
                                             </div>
                                         </div>
                                     </div>
@@ -332,7 +340,7 @@ echo $navbar_str;
 <!--modal-->
 
 <?php
-    include_once ROOT.'dist/fetchJS.php';
+include_once ROOT . 'dist/fetchJS.php';
 ?>
 <script src="../../dist/incomeVoucher/script/script.js"></script>
 <script src="../../dist/date/script.js"></script>

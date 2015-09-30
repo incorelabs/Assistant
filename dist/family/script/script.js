@@ -238,16 +238,23 @@ var pageFamily = {
     showLoginAccess: function () {
         $("#loginAccess").removeClass("hidden");
 
-        $("#email").attr("required", "");
-        $("#password").attr("required", "");
-        $("#confirmPassword").attr("required", "");
+        $("#email").attr("required", "").on('input propertychange', function () {
+            app.validate(this, 2);
+        });
+        $("#password").attr("required", "").on('input propertychange', function () {
+            app.validate(this, 4);
+        });
+        $("#confirmPassword").attr("required", "").on('input propertychange', function () {
+            app.validate(this, 5);
+        });
     },
     hideLoginAccess: function () {
+        // TODO: Remove the error label
         $("#loginAccess").addClass("hidden");
 
-        $("#email").removeAttr("required");
-        $("#password").removeAttr("required");
-        $("#confirmPassword").removeAttr("required");
+        $("#email").removeAttr("required").off();
+        $("#password").removeAttr("required").off();
+        $("#confirmPassword").removeAttr("required").off();
     },
     validateGender: function (element) {
         var gender = $(element).val();
@@ -299,7 +306,24 @@ $(document).ready(function () {
     pageFamily.getFamilyList();
     pageFamily.getRelationList();
 
-    $("#gender").focusin(function () {
+    $("#dob").focusin(function () {
+        if (this.value.indexOf('_') > -1) {
+            this.value = "";
+        }
+    }).focusout(function () {
+        app.validate(this, 1);
+        if (this.value.trim() === "" || this.value.trim() === "__/__/____") {
+            if (!this.required) {
+                $(this).closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+            }
+        }
+    });
+
+    $("#mobile").on('input propertychange', function () {
+        app.validate(this, 3);
+    });
+
+    /*$("#gender").focusin(function () {
         var gender = $(this).val();
         var formGroup = $(this).closest(".form-group");
         formGroup.removeClass("has-error");
@@ -315,7 +339,7 @@ $(document).ready(function () {
         $(this).closest('.form-group').find('.info').empty();
     }).focusout(function () {
         pageFamily.validateRelation(this);
-    });
+    });*/
 
     $('#familyModal').on('show.bs.modal', function (e) {
         $('.info').empty();

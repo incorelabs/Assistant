@@ -204,7 +204,35 @@ $(document).ready(function () {
     pageExpenseVoucher.getExpenseDetails();
     pageExpenseVoucher.getVoucherList();
 
-    console.log(pageExpenseVoucher.expenseCode);
+    $("#voucherDt").focusin(function () {
+        if (this.value.indexOf('_') > -1) {
+            this.value = "";
+        }
+    }).focusout(function () {
+        app.validate(this, 1);
+        if (this.value.trim() === "" || this.value.trim() === "__/__/____") {
+            if (!this.required) {
+                $(this).closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+            }
+        }
+    });
+
+    $("#referDt").focusin(function () {
+        if (this.value.indexOf('_') > -1) {
+            this.value = "";
+        }
+    }).focusout(function () {
+        app.validate(this, 1);
+        if (this.value.trim() === "" || this.value.trim() === "__/__/____") {
+            if (!this.required) {
+                $(this).closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+            }
+        }
+    });
+
+    $("#docAmount").on('input propertychange', function () {
+        app.validate(this, 6);
+    });
 
     $('#imgInput').change(function () {
         var image = this.files[0];
