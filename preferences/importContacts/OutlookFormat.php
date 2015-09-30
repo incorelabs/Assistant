@@ -61,8 +61,9 @@ class OutlookFormat
         if(!$this->organizeName(array($data[0],$data[1],$data[2]))){
             return;
         }
-
-        $this->data = safeStringForSQL($data);
+        $data = safeStringForSQL($data);
+        $data = preg_replace("/[^a-zA-Z0-9-@+'#.',\/ ]/","",$data);
+        $this->data = $data;
         $this->sql = $this->getSpTable151Query();
         //echo $this->sql;
         $this->runMultipleQuery($this->sql);
@@ -351,6 +352,7 @@ class OutlookFormat
     function getResponse(){
         $this->response["noOfContacts"] = $this->numContacts;
         $this->response["noOfContactsImported"] = $this->numContactsImport;
+        $this->response["noOfContactsRejected"] = $this->numContacts - $this->numContactsImport;
         return $this->response;
     }
 
