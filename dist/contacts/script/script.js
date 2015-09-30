@@ -259,7 +259,6 @@ var pageContact = {
                     if (home.CityName != null || home.Pincode != null)
                         homeAddress += "<br/>";
                     homeAddress += ((home.AreaName) ? ("(Area) " + home.AreaName + "<br/>") : "");
-                    homeAddress += ((data.detail.contact.HomePhone1) ? (data.detail.contact.HomePhone1 + " ") : "") + ((data.detail.contact.HomePhone2) ? (data.detail.contact.HomePhone2) : "");
                 }
 
                 if (data.detail.address.work) {
@@ -277,7 +276,6 @@ var pageContact = {
                     if (work.CityName != null || work.Pincode != null)
                         workAddress += "<br/>";
                     workAddress += ((work.AreaName) ? ("(Area) " + work.AreaName + "<br/>") : "");
-                    workAddress += ((data.detail.contact.WorkPhone1 ) ? (data.detail.contact.WorkPhone1 + " ") : "") + ((data.detail.contact.WorkPhone2) ? (data.detail.contact.WorkPhone2) : "");
                 }
 
                 if (data.detail.address.other) {
@@ -295,15 +293,20 @@ var pageContact = {
                     if (other.CityName != null || other.Pincode != null)
                         otherAddress += "<br/>";
                     otherAddress += ((other.AreaName) ? ("(Area) " + other.AreaName + "<br/>") : "");
-                    otherAddress += ((data.detail.contact.OtherPhone1) ? (data.detail.contact.OtherPhone1 + " ") : "") + ((data.detail.contact.OtherPhone2) ? (data.detail.contact.OtherPhone2) : "");
                 }
             }
 
             contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Address</div><value><div class='col-md-9'>" + homeAddress + "</div></value></div></div>";
 
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Home Phone</div><value><div class='col-md-9'>" + ((data.detail.contact.HomePhone1) ? (data.detail.contact.HomePhone1 + " ") : "")+"<br/>" + ((data.detail.contact.HomePhone2) ? (data.detail.contact.HomePhone2) : "") + "</div></value></div></div>";
+
             contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Work Address</div><value><div class='col-md-9'>" + workAddress + "</div></value></div></div>";
 
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Work Phone</div><value><div class='col-md-9'>" + ((data.detail.contact.WorkPhone1) ? (data.detail.contact.WorkPhone1 + " ") : "")+"<br/>" + ((data.detail.contact.WorkPhone2) ? (data.detail.contact.WorkPhone2) : "") + "</div></value></div></div>";
+
             contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Other Address</div><value><div class='col-md-9'>" + otherAddress + "</div></value></div></div>";
+
+            contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Other Phone</div><value><div class='col-md-9'>" + ((data.detail.contact.OtherPhone1) ? (data.detail.contact.OtherPhone1 + " ") : "")+"<br/>" + ((data.detail.contact.OtherPhone2) ? (data.detail.contact.OtherPhone2) : "") + "</div></value></div></div>";
 
             contactDetailsString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Facebook</div><value><div class='col-md-9'><a href='" + ((data.detail.contact.Facebook) ? data.detail.contact.Facebook : "") + "' target='_blank'>" + ((data.detail.contact.Facebook) ? data.detail.contact.Facebook : "") + "</a></div></value></div></div>";
 
