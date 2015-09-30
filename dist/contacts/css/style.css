@@ -13,55 +13,8 @@ body {
     }
 }
 
-.navbar-default {
-    background-color: #34495e;
-}
-
-.navbar-default .navbar-brand {
-    color: white;
-}
-
-.navbar-default .navbar-brand:hover {
-    color: #a1a1a1 !important;
-}
-
-.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
-    background-color: #34495e;
-}
-
-.navbar-default .navbar-toggle {
-    border-color: #ddd;
-}
-
-.navbar-default .navbar-nav > li > a {
-    color: white;
-}
-
-.navbar-default .navbar-nav > li > a:hover {
-    color: #a1a1a1 !important;
-    background-color: #34495e;
-}
-
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
-    color: #a1a1a1 !important;
-    background-color: #34495e !important;
-}
-
-.dropdown-toggle {
-    color: white;
-}
-
-.ul_margin {
-    margin: 0px;
-    padding: 0px;
-}
-
 h12 {
     font-size: 2.5rem;
-}
-
-.search_text {
-    width: 105%;
 }
 
 li {
@@ -93,11 +46,6 @@ li {
     font-weight: 200;
     margin: 0;
 }
-
-.details_padding {
-    padding-top: 5px;
-}
-
 .header_margin {
     padding-bottom: 5px !important;
     padding-left: 17px !important;
@@ -151,10 +99,6 @@ li {
     margin-bottom: 0px !important;
 }
 
-::-webkit-scrollbar {
-    display: none;
-}
-
 .img-size {
     height: 40px;
     width: 40px;
@@ -175,22 +119,12 @@ li {
     margin-left: -60px;
 }
 
-@media screen and (max-width: 992px) {
-    .overlay{
-    }
-}
-
 .image:hover .overlay {
     opacity: 0.8;
 }
 
 .btn-size {
     width: 13%;
-}
-
-.navbar-brand:hover {
-    color: white;
-    background-color: transparent
 }
 
 value {
@@ -238,10 +172,6 @@ h5 {
     padding: 6px 20px;
 }
 
-.input-group-btn .btn-group {
-
-}
-
 .btn-group1 .btn1 {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -277,35 +207,6 @@ h5 {
     }
 }
 
-.left-inner-addon {
-    position: relative;
-}
-
-.left-inner-addon input {
-    padding-left: 30px;
-}
-
-.left-inner-addon i {
-    position: absolute;
-    padding: 10px 12px;
-    pointer-events: none;
-}
-
-.right-inner-addon {
-    position: relative;
-}
-
-.right-inner-addon input {
-    padding-right: 30px;
-}
-
-.right-inner-addon i {
-    position: absolute;
-    right: 0px;
-    padding: 10px 12px;
-    pointer-events: none;
-}
-
 @media (min-width: 768px) {
     .btn-default {
         margin: 8px;
@@ -331,14 +232,6 @@ h5 {
     overflow-y: hidden;
     display: block;
     margin: 0 auto 0 45%;
-}
-
-.fa-blue {
-    color: #337ab7;
-}
-
-.fa-red {
-    color: #b71c1c;
 }
 
 .input-group-addon-label {

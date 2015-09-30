@@ -205,7 +205,7 @@ var pageContact = {
 
             if (data.detail.contact.Mobile1 != null || data.detail.contact.Mobile2 != null || data.detail.contact.Mobile3) {
                 if (data.detail.contact.Mobile1 != null)
-                    contactDetailsString += data.detail.contact.Mobile1 + "<span class='pull-right'><a href='tel:" + data.detail.contact.Mobile1 + "'><i class='fa fa-phone fa-green fa-lg'></i></a>&nbsp;&nbsp;&nbsp;<a href='sms:" + data.detail.contact.Mobile1 + "'><i class='fa fa-comment fa-green fa-lg'></i></a></span>";
+                    contactDetailsString += data.detail.contact.Mobile1 + "<span class='pull-right' id='mobileSmsIcon'><a href='tel:" + data.detail.contact.Mobile1 + "'><i class='fa fa-phone fa-green fa-lg'></i></a>&nbsp;&nbsp;&nbsp;<a href='sms:" + data.detail.contact.Mobile1 + "'><i class='fa fa-comment fa-green fa-lg'></i></a></span>";
                 if (data.detail.contact.Mobile1 != null && data.detail.contact.Mobile2 !== null)
                     contactDetailsString += "<br/>";
 
@@ -213,13 +213,13 @@ var pageContact = {
                     contactDetailsString += "<br/>";
 
                 if (data.detail.contact.Mobile2 != null)
-                    contactDetailsString += data.detail.contact.Mobile2 + "<span class='pull-right'><a href='tel:" + data.detail.contact.Mobile2 + "'><i class='fa fa-phone fa-green fa-lg'></i></a>&nbsp;&nbsp;&nbsp;<a href='sms:" + data.detail.contact.Mobile2 + "'><i class='fa fa-comment fa-green fa-lg'></i></a></span>";
+                    contactDetailsString += data.detail.contact.Mobile2 + "<span class='pull-right' id='mobileSmsIcon1'><a href='tel:" + data.detail.contact.Mobile2 + "'><i class='fa fa-phone fa-green fa-lg'></i></a>&nbsp;&nbsp;&nbsp;<a href='sms:" + data.detail.contact.Mobile2 + "'><i class='fa fa-comment fa-green fa-lg'></i></a></span>";
 
                 if (data.detail.contact.Mobile2 != null && data.detail.contact.Mobile3 !== null)
                     contactDetailsString += "<br/>";
 
                 if (data.detail.contact.Mobile3 != null)
-                    contactDetailsString += data.detail.contact.Mobile3 + "<span class='pull-right'><a href='tel:" + data.detail.contact.Mobile3 + "'><i class='fa fa-phone fa-green fa-lg'></i></a>&nbsp;&nbsp;&nbsp;<a href='sms:" + data.detail.contact.Mobile3 + "'><i class='fa fa-comment fa-green fa-lg'></i></a></span>";
+                    contactDetailsString += data.detail.contact.Mobile3 + "<span class='pull-right' id='mobileSmsIcon2'><a href='tel:" + data.detail.contact.Mobile3 + "'><i class='fa fa-phone fa-green fa-lg'></i></a>&nbsp;&nbsp;&nbsp;<a href='sms:" + data.detail.contact.Mobile3 + "'><i class='fa fa-comment fa-green fa-lg'></i></a></span>";
             }
 
             contactDetailsString += "</div></value></div></div>";
@@ -317,6 +317,15 @@ var pageContact = {
 
             $("#contactDetailHeader").empty().html(contactHeaderString);
             $("#contactDetailBody").empty().html(contactDetailsString);
+
+            if(window.innerWidth > 992)
+            {
+                console.log("hi");
+                //To hide the call & sms icons
+                $("#mobileSmsIcon").addClass("hidden");
+                $("#mobileSmsIcon1").addClass("hidden");
+                $("#mobileSmsIcon2").addClass("hidden");
+            }
         } else {
             pageContact.localContact = null;
         }
@@ -1352,6 +1361,11 @@ $(window).resize(function () {
         $("#contactDetail").removeClass("panelHeight");
         $("#contactDetailDiv").addClass("mobileBody");
         $("#contactDetailHeaderDiv").addClass("mobileHeader");
+
+        //To hide the call & sms icons
+        $("#mobileSmsIcon").removeClass("hidden");
+        $("#mobileSmsIcon1").removeClass("hidden");
+        $("#mobileSmsIcon2").removeClass("hidden");
     } else {
         $("body").css("overflow", "hidden");
         $("#contactListScroll").addClass("panelHeight");
@@ -1374,6 +1388,11 @@ $(window).resize(function () {
         //Show Hide of menu button with back button
         $(".menu_img").removeClass('hidden');
         $("#backButton").addClass('hidden');
+
+        //To show the call & sms icons
+        $("#mobileSmsIcon").addClass("hidden");
+        $("#mobileSmsIcon1").addClass("hidden");
+        $("#mobileSmsIcon2").addClass("hidden");
 
         var websiteTabs = document.getElementById('websiteTabs');
         websiteTabs.style.display = "block";

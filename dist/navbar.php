@@ -1,7 +1,7 @@
 <?php
 	$navbar_str = "<div id='page'>
 	<div class='header' style='text-decoration:none;font-weight:200;font-size:20px'>
-		<a href='#' id='backButton' class='pull-left hidden' style='margin-left: -35px;'><i class='fa fa-chevron-left fa-lg'></i></a>
+		<a href='#' id='backButton' class='pull-left hidden' style='margin-left: -60px;'><i class='fa fa-chevron-left fa-lg'></i></a>
 		<a href='#menu' class='menu_img'></a>".PAGE_TITLE."
     <div class='dropdown' style='float:right; right:-25px'>
     <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
