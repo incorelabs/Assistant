@@ -187,8 +187,8 @@ echo $navbar_str;
                                     <i class="fa fa-caret-down fa-size"></i>
                                     <select class="form-control select-field-left-border" name="singleContent"
                                             id="singleContent">
-                                        <option value="1" selected="selected">Content</option>
-                                        <option value="2">Content</option>
+                                        <option value="1" selected="selected">Single</option>
+                                        <option value="2">Multiple</option>
                                     </select>
                                 </div>
                             </div>

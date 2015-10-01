@@ -37,7 +37,7 @@ echo $navbar_str;
 <div class="navbar navbar-default navbar-padding">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
+        <div class="navbar-header navbar-top-margin">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
@@ -50,7 +50,7 @@ echo $navbar_str;
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav col-md-12 col-sm-12 col-xs-12 navbar-bottom-padding sm-left-padding sm-right-padding-none">
-                <div class="">
+                <div>
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <div class="col-md-3 col-left-padding label-margin">
                             <span class="multiselect-label">State</span>
@@ -164,9 +164,9 @@ echo $navbar_str;
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-1 col-sm-1 col-xs-12 col-top-padding col-left-padding search-button-top-padding">
-                    <button class="btn btn-success">Submit</button>
-                </div>
+                    <div class="col-md-1 col-sm-1 col-xs-12 col-top-padding col-left-padding search-button-top-padding btn-position">
+                        <button class="btn btn-success">Submit</button>
+                    </div>
                 </div>
             </ul>
         </div><!-- /.navbar-collapse -->

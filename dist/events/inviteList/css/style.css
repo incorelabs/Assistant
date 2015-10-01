@@ -457,4 +457,11 @@ h5 {
     .sm-right-padding{
         padding-right: 15px;
     }
+    .btn-position{
+        padding-top: 15px;
+        text-align: center;
+    }
+}
+.navbar-top-margin{
+    margin-top: -10px;
 }
