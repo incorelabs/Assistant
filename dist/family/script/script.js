@@ -95,6 +95,7 @@ var pageFamily = {
 
         $("#loginAccess").addClass("hidden");
 
+        $("#relation option[value='1']").remove();
         $("#selectRelationDiv").removeClass("hidden");
         $("#email").removeAttr("readonly").removeAttr("required");
         $("#password").removeAttr("required");
@@ -162,6 +163,7 @@ var pageFamily = {
                 $("#passwordDiv").empty();
                 $("#confirmPasswordDiv").empty();
             } else {
+                $("#relation option[value='1']").remove();
                 $("#provideLoginDiv").removeClass("hidden");
                 if (personDetails["LoginFlag"] == 1) {
                     $('input:radio[name=access]')[0].checked = true;

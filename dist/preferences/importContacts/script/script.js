@@ -17,7 +17,7 @@ $(document).ready(function () {
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].name == "fileToUpload") {
                     if (formData[i].value == "") {
-                        app.showNotificationFailure("No Image Selected");
+                        app.showNotificationFailure("No File Selected");
                         return false;
                     }
                 }
