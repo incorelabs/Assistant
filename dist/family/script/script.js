@@ -240,12 +240,30 @@ var pageFamily = {
 
         $("#email").attr("required", "").on('input propertychange', function () {
             app.validate(this, 2);
+        }).focusout(function () {
+            if (this.value.trim() === "") {
+                if (!this.required) {
+                    $(this).closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+                }
+            }
         });
         $("#password").attr("required", "").on('input propertychange', function () {
             app.validate(this, 4);
+        }).focusout(function () {
+            if (this.value.trim() === "") {
+                if (!this.required) {
+                    $(this).closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+                }
+            }
         });
         $("#confirmPassword").attr("required", "").on('input propertychange', function () {
             app.validate(this, 5);
+        }).focusout(function () {
+            if (this.value.trim() === "") {
+                if (!this.required) {
+                    $(this).closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+                }
+            }
         });
     },
     hideLoginAccess: function () {
@@ -321,6 +339,12 @@ $(document).ready(function () {
 
     $("#mobile").on('input propertychange', function () {
         app.validate(this, 3);
+    }).focusout(function () {
+        if (this.value.trim() === "") {
+            if (!this.required) {
+                $(this).closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+            }
+        }
     });
 
     /*$("#gender").focusin(function () {

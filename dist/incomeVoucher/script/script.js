@@ -233,6 +233,12 @@ $(document).ready(function () {
 
     $("#docAmount").on('input propertychange', function () {
         app.validate(this, 6);
+    }).focusout(function () {
+        if (this.value.trim() === "") {
+            if (!this.required) {
+                $(this).closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+            }
+        }
     });
 
     $('#imgInput').change(function () {

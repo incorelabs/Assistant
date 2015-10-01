@@ -25,12 +25,11 @@ $(document).ready(function () {
             $("#outlookUploadProgress").removeClass("hidden");
         },
         uploadProgress: function (event, position, total, percentComplete) {
-            $(".outlookUploadProgressBar").width(percentComplete + "%");
+            $("#outlookUploadProgressBar").width(percentComplete + "%");
             $("#outlookUploadProgressValue").html(percentComplete + "% complete");
         },
         success: function (responseText, statusText, xhr, $form) {
             var response = JSON.parse(responseText);
-            $("#outlookUpload").val("");
             $("#outlookUploadProgress").addClass("hidden");
             $("#importContactSummaryDiv").removeClass("hidden");
             var importContactString = "<div>Total Contacts: " + response.noOfContacts + "</div><div>Success: " + response.noOfContactsImported + "</div><div>Failed: " + response.noOfContactsRejected + "</div>";

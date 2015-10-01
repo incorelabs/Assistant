@@ -256,7 +256,7 @@ echo $navbar_str;
                         <div class="input-group">
                             <span class="input-group-addon input-group-addon-label">Mobile</span>
                             <input type="text" name="mobile1" id="addMobile1"
-                                   class="form-control text-field-left-border" placeholder="Mobile" tabindex="5"/>
+                                   class="form-control text-field-left-border phoneValidation" placeholder="Mobile" tabindex="5"/>
                             <span class="input-group-btn">
                                 <button class="btn btn-success button-addon-custom btn-add-mobile" type="button"
                                         onclick="pageContact.addBtn(0)">
@@ -264,13 +264,14 @@ echo $navbar_str;
                                 </button>
                             </span>
                         </div>
+                        <div class="info"></div>
                     </div>
                     <div class='addMobileDiv'></div>
                     <div class="form-group form-group-margin">
                         <div class="input-group">
                             <span class="input-group-addon input-group-addon-label">Email</span>
                             <input type="email" name="email1" id="addEmail1"
-                                   class="form-control text-field-left-border" placeholder="Email" tabindex="8"/>
+                                   class="form-control text-field-left-border emailValidation" placeholder="Email" tabindex="8"/>
                             <span class="input-group-btn">
                                 <button class="btn btn-success button-addon-custom btn-add-email" type="button"
                                         onclick="pageContact.addBtn(1)">
@@ -278,6 +279,7 @@ echo $navbar_str;
                                 </button>
                             </span>
                         </div>
+                        <div class="info"></div>
                     </div>
                     <div class='addEmailDiv'></div>
                     <div class="form-group form-group-margin">
@@ -359,9 +361,10 @@ echo $navbar_str;
                                         <i class="fa fa-birthday-cake fa-size"></i>
                                         <input type="text" name="dob" id="addDOB"
                                                class="form-control date text-field-left-border"
-                                               placeholder="Date of Birth" tabindex="13"/>
+                                               placeholder="DD/MM/YYYY" tabindex="13"/>
                                     </div>
                                 </div>
+                                <div class="info"></div>
                             </div>
                             <div class="form-group form-group-margin">
                                 <div class="input-group">
@@ -371,9 +374,10 @@ echo $navbar_str;
                                         <i class="fa fa-calendar fa-size"></i>
                                         <input type="text" name="dom" id="addDOM"
                                                class="form-control date text-field-left-border"
-                                               placeholder="Anniversary Date" tabindex="14"/>
+                                               placeholder="DD/MM/YYYY" tabindex="14"/>
                                     </div>
                                 </div>
+                                <div class="info"></div>
                             </div>
                             <input type="text" class="hidden" name="groupCode" id="groupCode" value="1"/>
 
@@ -547,6 +551,7 @@ echo $navbar_str;
                                                tabindex="37"/>
                                     </div>
                                 </div>
+                                <div class="info"></div>
                             </div>
                             <div class="form-group form-group-margin">
                                 <div class="input-group">
@@ -567,7 +572,7 @@ echo $navbar_str;
                                 <div class="input-group">
                                     <span class="input-group-addon input-group-addon-label">Phone</span>
                                     <input type="text" name="address[home][phone1]" id="homePhone1"
-                                           class="form-control text-field-left-border" placeholder="Phone"
+                                           class="form-control text-field-left-border phoneValidation" placeholder="Phone"
                                            tabindex="39"/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-success button-addon-custom btn-home-phone"
@@ -576,6 +581,7 @@ echo $navbar_str;
                                         </button>
                                     </span>
                                 </div>
+                                <div class="info"></div>
                             </div>
                             <div class="addHomePhone"></div>
                         </div>
@@ -699,6 +705,7 @@ echo $navbar_str;
                                                tabindex="50"/>
                                     </div>
                                 </div>
+                                <div class="info"></div>
                             </div>
                             <div class="form-group form-group-margin">
                                 <div class="input-group">
@@ -719,7 +726,7 @@ echo $navbar_str;
                                 <div class="input-group">
                                     <span class="input-group-addon input-group-addon-label">Phone</span>
                                     <input type="text" name="address[work][phone1]" id="workPhone1"
-                                           class="form-control text-field-left-border" placeholder="Phone"
+                                           class="form-control text-field-left-border phoneValidation" placeholder="Phone"
                                            tabindex="52"/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-success button-addon-custom btn-work-phone"
@@ -728,6 +735,7 @@ echo $navbar_str;
                                         </button>
                                     </span>
                                 </div>
+                                <div class="info"></div>
                             </div>
                             <div class="addWorkPhone"></div>
                         </div>
@@ -850,6 +858,7 @@ echo $navbar_str;
                                                tabindex="62"/>
                                     </div>
                                 </div>
+                                <div class="info"></div>
                             </div>
                             <div class="form-group form-group-margin">
                                 <div class="input-group">
@@ -870,7 +879,7 @@ echo $navbar_str;
                                 <div class="input-group">
                                     <span class="input-group-addon input-group-addon-label">Phone</span>
                                     <input type="text" name="address[other][phone1]" id="otherPhone1"
-                                           class="form-control text-field-left-border" placeholder="Phone"
+                                           class="form-control text-field-left-border phoneValidation" placeholder="Phone"
                                            tabindex="64"/>
                                     <span class="input-group-btn">
                                         <button class="btn btn-success button-addon-custom btn-other-phone"
@@ -879,6 +888,7 @@ echo $navbar_str;
                                         </button>
                                     </span>
                                 </div>
+                                <div class="info"></div>
                             </div>
                             <div class="addOtherPhone"></div>
                         </div>
