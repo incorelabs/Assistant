@@ -251,9 +251,14 @@ h5 {
     font-size: 20px;
 }
 
-@media (min-width: 992px) {
-    .col-padding {
-        padding-right: 0px;
+.col-padding {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+@media screen and (max-width: 992px){
+    .col-top-padding {
+        padding-top: 15px;
     }
 }
 
@@ -275,4 +280,140 @@ h5 {
 
 .list-border-none {
     border: none;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.multiselect {
+    max-width: 100%;
+    font-size: 15px;
+    padding-bottom: 4px;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    transition: 0.2s;
+    outline: none;
+}
+
+.multiselect:hover {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.multiselect.active {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom: 1px solid transparent;
+}
+
+.multiselect > .title {
+    cursor: pointer;
+    height: 34px;
+    padding: 4.5px 6px 13px 10px;;
+    border-radius: 4px;
+}
+
+.multiselect > .title > .text {
+    max-width: 87%;
+    max-height: 25px;
+    display: block;
+    float: left;
+    overflow: hidden;
+    line-height: 1.3em;
+    padding-top: 5px;
+}
+
+.multiselect > .title > .expand-icon,
+.multiselect > .title > .close-icon {
+    float: right;
+    padding: 0 4px;
+    font-weight: 700;
+    transition: 0.2s;
+    display: none;
+    margin-top: 2px;
+}
+
+.multiselect.selection > .title > .expand-icon {
+    display: none;
+}
+
+.multiselect > .title > .expand-icon,
+.multiselect.selection > .title > .close-icon {
+    display: block;
+}
+
+.multiselect > .title > .close-icon:hover {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background: rgb(203, 32, 32);
+    color: #fff;
+}
+.multiselect > .multicontainer {
+    max-height: 200px;
+    overflow: auto;
+    margin-top: 4px;
+    margin-left: -1px;
+    transition: 0.2s;
+    position: absolute;
+    z-index: 99;
+    background: #fff;
+    border: 1px solid transparent;
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.multiselect.active > .multicontainer {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+.multiselect:hover > .multicontainer {
+    border-top-color: rgba(0, 0, 0, 0.3);
+}
+
+.multiselect.active:hover > .multicontainer {
+    border-color: rgba(0, 0, 0, 0.3);
+}
+
+.multiselect > .multicontainer > option {
+    display: none;
+    padding: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+}
+
+.multiselect > .multicontainer > option.selected {
+    background: rgb(122, 175, 233);
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+.multiselect > .multicontainer > option:hover {
+    background: rgba(0, 0, 0, 0.3);
+    color: #000;
+}
+
+.multiselect.active > .multicontainer > option {
+    display: block;
+}
+
+.selectbox-height{
+    height: 40px;
+}
+
+.multiselect-label{
+    font-weight: bold;
+    padding-right: 5px;
 }
