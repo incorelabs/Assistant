@@ -153,6 +153,8 @@ var pageFamily = {
         }
         if (pageFamily.isParentLoggedIn) {
             if (personDetails["FamilyCode"] == familyCode) {
+                $("#relation").append("<option value='1'>Self</option>");
+                $("#relation").val("1");
                 $('input:radio[name=access]')[0].checked = true;
                 $("#provideLoginDiv").addClass("hidden");
                 $("#loginAccess").addClass("hidden");
