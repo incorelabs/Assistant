@@ -34,97 +34,83 @@ echo $navbar_str;
         Something went wrong!
     </div>
 </div>
-<div class="container-fluid navbar-padding">
-    <div class="row">
-        <div class="col-xs-12 col-md-12 id="searchEventsHeader">
-            <div class="list-group list-margin">
-                <div class="list-group-item list-margin">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-12">
-                            <div class="col-md-3">
-                            <span class="multiselect-label">Select State</span>
-                            </div>
-                            <div class="col-md-9 col-padding">
-                                <div class="multiselect" id="countries" multiple="multiple" data-target="multi-0">
-                                    <div class="title noselect">
-                                        <span class="text">State</span>
-                                        <span class="close-icon">&times;</span>
-                                        <span class="expand-icon">&plus;</span>
-                                    </div>
-                                    <div class="multicontainer">
-                                        <option value='Andaman and Nicobar Islands'>Andaman and Nicobar</option>
-                                        <option value='Andhra Pradesh'>Andhra Pradesh</option>
-                                        <option value='Arunachal Pradesh'>Arunachal Pradesh</option>
-                                        <option value='Assam'>Assam</option>
-                                        <option value='Bihar'>Bihar</option>
-                                        <option value='Chandigarh'>Chandigarh</option>
-                                        <option value='Chhattisgarh'>Chhattisgarh</option>
-                                        <option value='Dadra and Nagar Haveli'>Dadra and Nagar Haveli</option>
-                                        <option value='Daman and Diu'>Daman and Diu</option>
-                                        <option value='Delhi'>Delhi</option>
-                                        <option value='Goa'>Goa</option>
-                                        <option value='Gujarat'>Gujarat</option>
-                                        <option value='Haryana'>Haryana</option>
-                                        <option value='Himachal Pradesh'>Himachal Pradesh</option>
-                                        <option value='Jammu and Kashmir'>Jammu and Kashmir</option>
-                                        <option value='Jharkhand'>Jharkhand</option>
-                                        <option value='Karnataka'>Karnataka</option>
-                                        <option value='Kerala'>Kerala</option>
-                                        <option value='Lakshadweep'>Lakshadweep</option>
-                                        <option value='Madhya Pradesh'>Madhya Pradesh</option>
-                                        <option value='Maharashtra'>Maharashtra</option>
-                                        <option value='Manipur'>Manipur</option>
-                                        <option value='Meghalaya'>Meghalaya</option>
-                                        <option value='Mizoram'>Mizoram</option>
-                                        <option value='Nagaland'>Nagaland</option>
-                                        <option value='Odisha'>Odisha</option>
-                                        <option value='Puducherry'>Puducherry</option>
-                                        <option value='Punjab'>Punjab</option>
-                                        <option value='Rajasthan'>Rajasthan</option>
-                                        <option value='Sikkim'>Sikkim</option>
-                                        <option value='Tamil Nadu'>Tamil Nadu</option>
-                                        <option value='Telengana'>Telengana</option>
-                                        <option value='Tripura'>Tripura</option>
-                                        <option value='Uttar Pradesh'>Uttar Pradesh</option>
-                                        <option value='Uttarakhand'>Uttarakhand</option>
-                                        <option value='West Bengal'>West Bengal</option>
-                                    </div>
-                                </div>
-                            </div>
+<div class="navbar navbar-default navbar-padding">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand hidden-sm hidden-md hidden-lg">Filter</span>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav col-md-12 col-sm-12 col-xs-12 navbar-bottom-padding sm-left-padding sm-right-padding-none">
+                <div class="">
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <div class="col-md-3 col-left-padding label-margin">
+                            <span class="multiselect-label">State</span>
                         </div>
-                        <div class="col-md-3 col-sm-12 col-top-padding">
-                            <div class="col-md-3">
-                                <span class="multiselect-label">Select City</span>
-                            </div>
-                            <div class="col-md-9 col-padding">
-                                <div class="multiselect" id="state" multiple="multiple" data-target="multi-0">
-                                    <div class="title noselect">
-                                        <span class="text">City</span>
-                                        <span class="close-icon">&times;</span>
-                                        <span class="expand-icon">&plus;</span>
-                                    </div>
-                                    <div class="multicontainer">
-                                        <option value="us">USA</option>
-                                        <option value="fr">France</option>
-                                        <option value="gr">Greece</option>
-                                        <option value="uk">United Kingdom</option>
-                                        <option value="ge">Germany</option>
-                                        <option value="sp">Spain</option>
-                                        <option value="it">Italy</option>
-                                        <option value="ch">China</option>
-                                        <option value="jp">Japan</option>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-12 col-top-padding">
-                            <div class="col-md-3">
-                                <span class="multiselect-label">Select Group</span>
-                            </div>
-                            <div class="col-md-9 col-padding">
-                            <div class="multiselect" id="group" multiple="multiple" data-target="multi-0">
+                        <div class="col-md-9 col-padding">
+                            <div class="multiselect" id="countries" multiple="multiple" data-target="multi-0">
                                 <div class="title noselect">
-                                    <span class="text">Group</span>
+                                    <span class="text">Select</span>
+                                    <span class="close-icon">&times;</span>
+                                    <span class="expand-icon">&plus;</span>
+                                </div>
+                                <div class="multicontainer">
+                                    <option value='Andaman and Nicobar Islands'>Andaman and Nicobar</option>
+                                    <option value='Andhra Pradesh'>Andhra Pradesh</option>
+                                    <option value='Arunachal Pradesh'>Arunachal Pradesh</option>
+                                    <option value='Assam'>Assam</option>
+                                    <option value='Bihar'>Bihar</option>
+                                    <option value='Chandigarh'>Chandigarh</option>
+                                    <option value='Chhattisgarh'>Chhattisgarh</option>
+                                    <option value='Dadra and Nagar Haveli'>Dadra and Nagar Haveli</option>
+                                    <option value='Daman and Diu'>Daman and Diu</option>
+                                    <option value='Delhi'>Delhi</option>
+                                    <option value='Goa'>Goa</option>
+                                    <option value='Gujarat'>Gujarat</option>
+                                    <option value='Haryana'>Haryana</option>
+                                    <option value='Himachal Pradesh'>Himachal Pradesh</option>
+                                    <option value='Jammu and Kashmir'>Jammu and Kashmir</option>
+                                    <option value='Jharkhand'>Jharkhand</option>
+                                    <option value='Karnataka'>Karnataka</option>
+                                    <option value='Kerala'>Kerala</option>
+                                    <option value='Lakshadweep'>Lakshadweep</option>
+                                    <option value='Madhya Pradesh'>Madhya Pradesh</option>
+                                    <option value='Maharashtra'>Maharashtra</option>
+                                    <option value='Manipur'>Manipur</option>
+                                    <option value='Meghalaya'>Meghalaya</option>
+                                    <option value='Mizoram'>Mizoram</option>
+                                    <option value='Nagaland'>Nagaland</option>
+                                    <option value='Odisha'>Odisha</option>
+                                    <option value='Puducherry'>Puducherry</option>
+                                    <option value='Punjab'>Punjab</option>
+                                    <option value='Rajasthan'>Rajasthan</option>
+                                    <option value='Sikkim'>Sikkim</option>
+                                    <option value='Tamil Nadu'>Tamil Nadu</option>
+                                    <option value='Telengana'>Telengana</option>
+                                    <option value='Tripura'>Tripura</option>
+                                    <option value='Uttar Pradesh'>Uttar Pradesh</option>
+                                    <option value='Uttarakhand'>Uttarakhand</option>
+                                    <option value='West Bengal'>West Bengal</option>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 col-top-padding col-left-padding">
+                        <div class="col-md-3 col-left-padding label-margin">
+                            <span class="multiselect-label">City</span>
+                        </div>
+                        <div class="col-md-9 col-padding">
+                            <div class="multiselect" id="state" multiple="multiple" data-target="multi-0">
+                                <div class="title noselect">
+                                    <span class="text">Select</span>
                                     <span class="close-icon">&times;</span>
                                     <span class="expand-icon">&plus;</span>
                                 </div>
@@ -140,172 +126,52 @@ echo $navbar_str;
                                     <option value="jp">Japan</option>
                                 </div>
                             </div>
-                            </div>
                         </div>
-                        <div class="col-md-3 col-sm-12 col-top-padding">
-                            <div class="col-md-3">
-                                <span class="multiselect-label">Invited</span>
-                            </div>
-                            <div class="col-md-9 col-padding">
-                                <select class="form-control selectbox-height">
-                                    <option>Yes</option>
-                                    <option>No</option>
-                                </select>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12 col-top-padding col-left-padding">
+                        <div class="col-md-3 col-left-padding label-margin">
+                            <span class="multiselect-label">Group</span>
+                        </div>
+                        <div class="col-md-9 col-padding">
+                            <div class="multiselect" id="group" multiple="multiple" data-target="multi-0">
+                                <div class="title noselect">
+                                    <span class="text">Select</span>
+                                    <span class="close-icon">&times;</span>
+                                    <span class="expand-icon">&plus;</span>
+                                </div>
+                                <div class="multicontainer">
+                                    <option value="us">USA</option>
+                                    <option value="fr">France</option>
+                                    <option value="gr">Greece</option>
+                                    <option value="uk">United Kingdom</option>
+                                    <option value="ge">Germany</option>
+                                    <option value="sp">Spain</option>
+                                    <option value="it">Italy</option>
+                                    <option value="ch">China</option>
+                                    <option value="jp">Japan</option>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--row-->
-    <div class="row">
-
-        <div class="col-md-12 col-sm-12 col-xs-12" id="eventsListDiv">
-            <div class="panel panel-default panelHeight panel-margin" id="eventsListScroll">
-                <div class="panel-height">
-                    <!-- List group -->
-                    <div id="eventsList" class="list-group force-scroll mobile-list">
+                    <div class="col-md-2 col-sm-2 col-xs-12 col-top-padding col-left-padding">
+                        <div class="col-md-4 col-sm-12 col-left-padding label-margin">
+                            <span class="multiselect-label">Invitees</span>
+                        </div>
+                        <div class="col-md-8 col-sm-12 select-padding">
+                            <select class="form-control selectbox-height">
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </div>
                     </div>
-                    <!--List close-->
+                    <div class="col-md-1 col-sm-1 col-xs-12 col-top-padding col-left-padding search-button-top-padding">
+                    <button class="btn btn-success">Submit</button>
                 </div>
-            </div>
-            <!--Panel-->
-        </div>
-        <!--COL-->
-    </div>
-    <!--ROW-->
+                </div>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
 </div>
-<!--Container-->
-
-<!-- Add Events Modal -->
-<div class="modal fade" id="eventsModal" tabindex="-1" role="dialog" aria-labelledby="eventsModal"
-     aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form class="form-horizontal" method="POST" action="controller.php" id="eventsForm" autocomplete="off">
-                <div class="modal-header">
-                    <div class="form-group pull-left" style="margin-top:-5px">
-                        <a class="btn btn-danger button-top-remove" data-dismiss="modal">
-                            <span class='glyphicon glyphicon-remove'></span>
-                        </a>
-                    </div>
-                    <div class="form-group pull-right" style="margin-top:-5px">
-                        <button type="submit" class="btn btn-success button-top-remove">
-                            <span class='glyphicon glyphicon-ok'></span>
-                        </button>
-                    </div>
-                    <h4 id="eventsModalHeading" class="modal-title text-center">
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <input type="text" class="hidden" name="eventsTypeCode" id="eventsTypeCode" value="1"/>
-                    <input type="text" class="hidden" name="eventsCode" id="form-add-edit-code"/>
-                    <input type="text" class="hidden" name="mode" id="form-add-edit-mode"/>
-
-
-                    <div class="form-group form-group-margin">
-                        <label class="col-xs-3 control-label">Private</label>
-
-                        <div class="col-xs-3">
-                            <div class='switch switch-padding'>
-                                <input type='checkbox' name='private' id='addPrivacy' class='switch-input'>
-                                <label for='addPrivacy' class='switch-label'></label>
-                            </div>
-                        </div>
-                        <label class="col-xs-3 control-label">Active</label>
-
-                        <div class="col-xs-3">
-                            <div class='switch switch-padding'>
-                                <input type='checkbox' name='active' id='addActiveStatus' class='switch-input'
-                                       checked='checked'>
-                                <label for='addActiveStatus' class='switch-label'></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group form-group-margin">
-                        <div class="input-group">
-                            <span class="input-group-addon input-group-addon-label">Event Name*</span>
-
-                            <div class="inner-addon right-addon">
-                                <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" name="eventName"
-                                       id="eventName" placeholder="Name" tabindex="1" required/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group form-group-margin">
-                        <div class="input-group">
-                            <span class="input-group-addon input-group-addon-label">Date*</span>
-
-                            <div class="inner-addon right-addon">
-                                <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" name="eventDate"
-                                       id="eventDate" placeholder="dd/mm/yyyy" tabindex="2" required/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group form-group-margin">
-                        <div class="input-group">
-                            <span class="input-group-addon input-group-addon-label">Sub Events*</span>
-
-                            <div class="inner-addon right-addon">
-                                <i class="fa fa-user hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" id="subEvents" name="subEvents"
-                                       placeholder="Sub Events" aria-describedby="basic-addon1" tabindex="3" required/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal Body -->
-            </form>
-        </div>
-        <!--modal-content-->
-    </div>
-</div>
-<!--modal-->
-
-<!--Delete Modal-->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal"
-     aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title text-center">
-                    Are you sure, you want to DELETE this Event?
-                </h4>
-            </div>
-            <br>
-            <center>
-                <div class="modal-body">
-                    <div class="btn-group">
-                        <form method="POST" action="controller.php" id="deleteEventsForm">
-                            <input type="text" class="hidden" name="eventCode" id="form-delete-code"/>
-                            <input type="text" class="hidden" name="mode" id="form-delete-mode" value="D"/>
-                            <button class="btn btn-danger modal_button" type="submit">
-                                <span class='glyphicon glyphicon-ok'></span>&nbsp
-                                Yes
-                            </button>
-                        </form>
-
-                    </div>
-                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                    <div class="btn-group">
-                        <a class="btn btn-success modal_button" data-dismiss="modal">
-                            <span class='glyphicon glyphicon-remove'></span>&nbsp
-                            No
-                        </a>
-                    </div>
-                    <br>
-                    <br>
-                </div>
-            </center>
-        </div>
-        <!--modal-content-->
-    </div>
-</div>
-<!--modal-->
-
 <?php
 include_once ROOT.'dist/fetchJS.php';
 ?>

@@ -45,7 +45,7 @@ var pageEnvelopeSettings = {
                     coverFeedDirection = "Left";
                     break;
                 case "2":
-                    coverFeedDirection = "Center";
+                    coverFeedDirection = "Middle";
                     break;
                 case "3":
                     coverFeedDirection = "Right";

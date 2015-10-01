@@ -27,7 +27,7 @@
 			<li><a href='".$root_location."expense'>Expense</a></li>
 			<li><a href='".$root_location."income'>Income</a></li>
 			<li><a href='".$root_location."passwords'>Passwords</a></li>
-			<li><a href='#'>Events</a></li>
+			<li><a href='".$root_location."events'>Events</a></li>
 			<!--<li><a href='#'>Reminders</a></li>-->
 			<li><a href='#mm-2' data-target='#mm-2'>Reports</a>
 			    <ul>

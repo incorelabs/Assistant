@@ -40,7 +40,7 @@ var pageLabelSettings = {
 
             labelSettingsTableString += "<td class='text-middle col-md-2 hidden-sm hidden-xs'>" + ((data[i]['LinesPerLabel']) ? data[i]['LinesPerLabel'] : "-") + "</td>";
 
-            labelSettingsTableString += "<td class='text-middle col-md-2 hidden-sm hidden-xs'>" + ((data[i]['SingleContent'] == 1) ? "Multiple Content" : "Single Content") + "</td>";
+            labelSettingsTableString += "<td class='text-middle col-md-2 hidden-sm hidden-xs'>" + ((data[i]['SingleContent'] == 1) ? "Multiple" : "Single") + "</td>";
 
             labelSettingsTableString += "<td class='text-middle col-md-1 col-sm-1 hidden-xs'>" + ((data[i]['LabelOrientation'] == 1) ? "Portrait" : "Landscape") + "</td>";
 

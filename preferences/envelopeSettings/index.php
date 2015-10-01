@@ -267,7 +267,7 @@ echo $navbar_str;
                                 <i class="fa fa-caret-down fa-size"></i>
                                 <select class="form-control select-field-left-border" name="coverFeed" id="coverFeed">
                                     <option value="1">Left</option>
-                                    <option value="2">Center</option>
+                                    <option value="2">Middle</option>
                                     <option value="3">Right</option>
                                 </select>
                             </div>

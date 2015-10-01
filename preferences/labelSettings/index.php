@@ -51,7 +51,7 @@ echo $navbar_str;
                 <th class="col-md-1 col-sm-1 hidden-xs">Rows</th>
                 <th class="col-md-1 col-sm-1 hidden-xs">Columns</th>
                 <th class="col-md-1 hidden-sm hidden-xs">Lines in Label</th>
-                <th class="col-md-2 hidden-sm hidden-xs">Single Content</th>
+                <th class="col-md-2 hidden-sm hidden-xs">Content</th>
                 <th class="col-md-1 col-sm-2 hidden-xs">Orientation</th>
                 <th class="col-md-1 col-sm-1 col-xs-3">Actions</th>
             </tr>
@@ -187,8 +187,8 @@ echo $navbar_str;
                                     <i class="fa fa-caret-down fa-size"></i>
                                     <select class="form-control select-field-left-border" name="singleContent"
                                             id="singleContent">
-                                        <option value="1" selected="selected">Multiple Content</option>
-                                        <option value="2">Single Content</option>
+                                        <option value="1" selected="selected">Content</option>
+                                        <option value="2">Content</option>
                                     </select>
                                 </div>
                             </div>
