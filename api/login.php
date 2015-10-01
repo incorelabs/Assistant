@@ -58,7 +58,7 @@ if ($validate) {
         $_POST = safeStringForSQL($_POST);
         $password = hash("sha256", $_POST['password']);
 
-        $sql = "SELECT RegCode, RegName, RegEmail, RegPassword, RegMobile, FamilyCode, ForgotFlag FROM Table109 WHERE RegEmail = '" . $_POST['email'] . "' AND RegPassword = '" .$password ."' AND ActiveFlag = 1 LIMIT 1";
+        $sql = "SELECT RegCode, RegName, RegEmail, RegPassword, RegMobile, FamilyCode, ForgotFlag, ActiveFlag FROM Table109 WHERE RegEmail = '" . $_POST['email'] . "' AND RegPassword = '" .$password ."' LIMIT 1";
 
         if ($result = $mysqli->query($sql)) {
             if ($result->num_rows == 0) {
@@ -66,6 +66,14 @@ if ($validate) {
                 break;
             } else {
                 $row = $result->fetch_assoc();
+
+                //Account inactive
+                if(intval($row['ActiveFlag']) == 0){
+                    $validate = false;
+                    $response = createResponse(0,"This account is inactive");
+                    break;
+                }
+
                 session_regenerate_id();
                 $_SESSION['email'] = $row['RegEmail'];
                 $_SESSION['name'] = $row['RegName'];
