@@ -25,7 +25,7 @@ $(document).ready(function () {
                         break;
                     }
                 } else if (formData[i].name == "confirmPassword") {
-                    if (app.validateConfirmPassword(formData[i - 1].value, formData[i].value) === app.emailValidationState.SUCCESS)
+                    if (app.validateConfirmPassword(formData[i - 1].value, formData[i].value) === app.confirmPasswordValidationState.SUCCESS)
                         isValid = true;
                     else {
                         isValid = false;
@@ -42,6 +42,7 @@ $(document).ready(function () {
                     }
                 }
             }
+            console.log(isValid);
             if (!isValid) {
                 app.showNotificationFailure("Validation Failed for some input field");
                 return false;

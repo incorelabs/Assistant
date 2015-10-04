@@ -395,14 +395,62 @@ $(document).ready(function () {
     $("#familyForm").ajaxForm({
         beforeSubmit: function (formData) {
             console.log(formData);
+            var isValid = false;
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
                     app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
-                if(formData[i].name === "email") {
+                if(formData[i].name === "dob") {
+                    if (app.validateDate(formData[i].value) === app.dateValidationState.SUCCESS)
+                        isValid = true;
+                    else {
+                        isValid = false;
+                        break;
+                    }
+                } else if (formData[i].name === "mobile") {
+                    if(formData[i].value.trim() != "") {
+                        if (app.validateNumber(formData[i].value) === app.numberValidationState.SUCCESS)
+                            isValid = true;
+                        else {
+                            isValid = false;
+                            break;
+                        }
+                    }
+                } else if (formData[i].name === "email") {
                     formData[i].value = formData[i].value.toLowerCase();
+                    if(formData[i].required && formData[i].value.trim() != "") {
+                        if (app.validateEmail(formData[i].value) === app.emailValidationState.SUCCESS)
+                            isValid = true;
+                        else {
+                            isValid = false;
+                            break;
+                        }
+                    }
+                } else if (formData[i].name === "password") {
+                    if(formData[i].required && formData[i].value.trim() != "") {
+                        if (app.validatePassword(formData[i].value) === app.passwordValidationState.SUCCESS)
+                            isValid = true;
+                        else {
+                            isValid = false;
+                            break;
+                        }
+                    }
+                } else if (formData[i].name === "confirmPassword") {
+                    if(formData[i].required && formData[i].value.trim() != "") {
+                        if (app.validateConfirmPassword(formData[i - 1].value, formData[i].value) === app.confirmPasswordValidationState.SUCCESS)
+                            isValid = true;
+                        else {
+                            isValid = false;
+                            break;
+                        }
+                    }
                 }
+            }
+            console.log(isValid);
+            if (!isValid) {
+                app.showNotificationFailure("Validation Failed for some input field");
+                return false;
             }
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");

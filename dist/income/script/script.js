@@ -485,11 +485,29 @@ $(document).ready(function () {
     $("#incomeForm").ajaxForm({
         beforeSubmit: function (formData) {
             console.log(formData);
+            var isValid = false;
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
                     app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
+                if (formData[i].name == "expiryDate") {
+                    if(formData[i].value.trim() != "") {
+                        if (app.validateDate(formData[i].value) === app.dateValidationState.SUCCESS)
+                            isValid = true;
+                        else {
+                            isValid = false;
+                            break;
+                        }
+                    } else {
+                        isValid = true;
+                    }
+                }
+            }
+            console.log(isValid);
+            if (!isValid) {
+                app.showNotificationFailure("Validation Failed for some input field");
+                return false;
             }
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");

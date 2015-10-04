@@ -30,7 +30,7 @@ var pageExpenseVoucher = {
             else
                 imageURL = app.websiteRoot + "img/default/preferences/logo.png";
 
-                voucherTableString += "<td class='col-md-1 col-sm-1 col-xs-1 text-left text-middle'><div class='image'><a onclick='pageExpenseVoucher.openLogoVoucherModal(" + i + ");' class='clickable'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded img-size'/><div class='overlay img-rounded'><span class='glyphicon glyphicon-pencil overlay-icon'></span></div></a></div></td>";
+            voucherTableString += "<td class='col-md-1 col-sm-1 col-xs-1 text-left text-middle'><div class='image'><a onclick='pageExpenseVoucher.openLogoVoucherModal(" + i + ");' class='clickable'><img src='" + imageURL + "' id='imageResource' alt='...' class='img-rounded img-size'/><div class='overlay img-rounded'><span class='glyphicon glyphicon-pencil overlay-icon'></span></div></a></div></td>";
 
             voucherTableString += "<td class='col-md-1 hidden-xs hidden-sm text-left text-middle'>" + ((data[i]['VoucherDt']) ? data[i]['VoucherDt'] : "-") + "</td>";
 
@@ -314,11 +314,43 @@ $(document).ready(function () {
     $("#voucherForm").ajaxForm({
         beforeSubmit: function (formData) {
             console.log(formData);
+            var isValid = false;
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
                     app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
+                if (formData[i].name == "voucherDt") {
+                    if (app.validateDate(formData[i].value) === app.dateValidationState.SUCCESS)
+                        isValid = true;
+                    else {
+                        isValid = false;
+                        break;
+                    }
+                } else if (formData[i].name == "referDt") {
+                    if (formData[i].value.trim() != "") {
+                        if (app.validateDate(formData[i].value) === app.dateValidationState.SUCCESS)
+                            isValid = true;
+                        else {
+                            isValid = false;
+                            break;
+                        }
+                    } else {
+                        isValid = true;
+                    }
+                } else if (formData[i].name == "docAmount") {
+                    if (app.validateAmount(formData[i].value) === app.amountValidationState.SUCCESS)
+                        isValid = true;
+                    else {
+                        isValid = false;
+                        break;
+                    }
+                }
+            }
+            console.log(isValid);
+            if (!isValid) {
+                app.showNotificationFailure("Validation Failed for some input field");
+                return false;
             }
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");

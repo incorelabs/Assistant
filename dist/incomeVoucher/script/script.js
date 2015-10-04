@@ -315,11 +315,43 @@ $(document).ready(function () {
     $("#voucherForm").ajaxForm({
         beforeSubmit: function (formData) {
             console.log(formData);
+            var isValid = false;
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
                     app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
+                if (formData[i].name == "voucherDt") {
+                    if (app.validateDate(formData[i].value) === app.dateValidationState.SUCCESS)
+                        isValid = true;
+                    else {
+                        isValid = false;
+                        break;
+                    }
+                } else if (formData[i].name == "referDt") {
+                    if (formData[i].value.trim() != "") {
+                        if (app.validateDate(formData[i].value) === app.dateValidationState.SUCCESS)
+                            isValid = true;
+                        else {
+                            isValid = false;
+                            break;
+                        }
+                    } else {
+                        isValid = true;
+                    }
+                } else if (formData[i].name == "docAmount") {
+                    if (app.validateAmount(formData[i].value) === app.amountValidationState.SUCCESS)
+                        isValid = true;
+                    else {
+                        isValid = false;
+                        break;
+                    }
+                }
+            }
+            console.log(isValid);
+            if (!isValid) {
+                app.showNotificationFailure("Validation Failed for some input field");
+                return false;
             }
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
