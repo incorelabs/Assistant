@@ -100,6 +100,10 @@ var pageExpenseVoucher = {
         $("#voucherDescription").empty().val(pageExpenseVoucher.expenseName);
         $("#expenseCodeForAddEditVoucher").val(pageExpenseVoucher.expenseCode);
 
+        $("#voucherDt").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#referDt").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#docAmount").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+
         $('#voucherModal').modal('show');
     },
     openEditVoucherModal: function (voucherIndex) {
@@ -111,6 +115,10 @@ var pageExpenseVoucher = {
         $('#voucherModalHeading').empty().html("Edit Voucher");
         $("#voucherDescription").empty().val(pageExpenseVoucher.expenseName);
         $("#expenseCodeForAddEditVoucher").val(pageExpenseVoucher.expenseCode);
+
+        $("#voucherDt").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#referDt").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#docAmount").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
 
         pageExpenseVoucher.setInputFields(pageExpenseVoucher.voucherDetails);
         $("#form-add-edit-code").val(pageExpenseVoucher.voucherDetails["VoucherNo"]);

@@ -232,8 +232,8 @@ var pageIncome = {
         $("#form-add-edit-mode").val("A");
         $("#form-add-edit-code").val(1);
 
-        $("#fullName").closest(".form-group").removeClass("has-warning");
-        $("#fullName").closest('.form-group').find('.info').empty();
+        $("#fullName").closest(".form-group").removeClass("has-warning").find('.info').empty();
+        $("#expiryDate").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
 
         $('#incomeModalHeading').empty().html("Add Income");
         $('#incomeModal').modal('show');
@@ -242,8 +242,8 @@ var pageIncome = {
         document.getElementById("incomeForm").reset();
         $("#form-add-edit-mode").val("M");
 
-        $("#fullName").closest(".form-group").removeClass("has-warning");
-        $("#fullName").closest('.form-group').find('.info').empty();
+        $("#fullName").closest(".form-group").removeClass("has-warning").find('.info').empty();
+        $("#expiryDate").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
 
         $('#incomeModalHeading').empty().html("Edit Income");
 

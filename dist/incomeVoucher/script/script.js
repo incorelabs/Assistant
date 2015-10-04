@@ -101,6 +101,10 @@ var pageIncomeVoucher = {
         $("#voucherDescription").empty().val(pageIncomeVoucher.incomeName);
         $("#incomeCodeForAddEditVoucher").val(pageIncomeVoucher.incomeCode);
 
+        $("#voucherDt").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#referDt").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#docAmount").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+
         $('#voucherModal').modal('show');
     },
     openEditVoucherModal: function (voucherIndex) {
@@ -112,6 +116,10 @@ var pageIncomeVoucher = {
         $('#voucherModalHeading').empty().html("Edit Voucher");
         $("#voucherDescription").empty().val(pageIncomeVoucher.incomeName);
         $("#incomeCodeForAddEditVoucher").val(pageIncomeVoucher.incomeCode);
+
+        $("#voucherDt").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#referDt").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#docAmount").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
 
         pageIncomeVoucher.setInputFields(pageIncomeVoucher.voucherDetails);
         $("#form-add-edit-code").val(pageIncomeVoucher.voucherDetails["VoucherNo"]);
