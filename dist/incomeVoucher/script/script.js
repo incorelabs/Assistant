@@ -91,7 +91,6 @@ var pageIncomeVoucher = {
             $("#voucherHeader").html("Income Description");
     },
     openAddVoucherModal: function () {
-        // TODO: Remove the error labels when the Modals open.
         document.getElementById("voucherForm").reset();
 
         $("#form-add-edit-mode").val("A");

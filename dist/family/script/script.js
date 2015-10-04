@@ -281,7 +281,6 @@ var pageFamily = {
         });
     },
     hideLoginAccess: function () {
-        // TODO: Remove the error label
         $("#loginAccess").addClass("hidden");
 
         $("#email").removeAttr("required").off().val("").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
