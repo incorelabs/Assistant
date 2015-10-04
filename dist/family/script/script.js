@@ -97,9 +97,12 @@ var pageFamily = {
 
         $("#relation option[value='1']").remove();
         $("#selectRelationDiv").removeClass("hidden");
-        $("#email").removeAttr("readonly").removeAttr("required");
-        $("#password").removeAttr("required");
-        $("#confirmPassword").removeAttr("required");
+
+        $("#dob").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#mobile").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#email").removeAttr("readonly").removeAttr("required").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#password").removeAttr("required").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#confirmPassword").removeAttr("required").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
 
         $("#familyModal").modal('show');
     },
@@ -116,7 +119,13 @@ var pageFamily = {
 
         $("#selectRelationDiv").removeClass("hidden");
 
-        pageFamily.setInputFields(pageFamily.personDetails);
+        $("#dob").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#mobile").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#email").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#password").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#confirmPassword").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+
+        //pageFamily.setInputFields(pageFamily.personDetails);
         $("#form-add-edit-code").val(pageFamily.personDetails["FamilyCode"]);
         console.log(pageFamily.personDetails["FamilyCode"]);
 
@@ -160,7 +169,7 @@ var pageFamily = {
                 $("#loginAccess").addClass("hidden");
 
                 $("#selectRelationDiv").addClass("hidden");
-                $("#email").attr("required", "");
+                $("#email").attr("required", "").attr("readonly", "");
 
                 $("#passwordDiv").empty();
                 $("#confirmPasswordDiv").empty();
@@ -190,10 +199,11 @@ var pageFamily = {
             }
         } else {
             $("#relation option[value='1']").remove();
-            if (personDetails["LoginFlag"] == 1)
-                $('input:radio[name=access]')[0].checked = true;
-            else
-                $('input:radio[name=access]')[1].checked = true;
+            if (personDetails["LoginFlag"] == 1) {
+                $("input:radio[name=access]")[0].checked = true;
+                $("#email").attr("required", "");
+            } else
+                $("input:radio[name=access]")[1].checked = true;
         }
     },
     getRelationList: function () {
@@ -274,9 +284,9 @@ var pageFamily = {
         // TODO: Remove the error label
         $("#loginAccess").addClass("hidden");
 
-        $("#email").removeAttr("required").off();
-        $("#password").removeAttr("required").off();
-        $("#confirmPassword").removeAttr("required").off();
+        $("#email").removeAttr("required").off().val("").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#password").removeAttr("required").off().val("").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#confirmPassword").removeAttr("required").off().val("").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
     },
     validateGender: function (element) {
         var gender = $(element).val();
@@ -342,8 +352,10 @@ $(document).ready(function () {
     });
 
     $("#mobile").on('input propertychange', function () {
+        console.log("Er");
         app.validate(this, 3);
     }).focusout(function () {
+        console.log("fr");
         if (this.value.trim() === "") {
             if (!this.required) {
                 $(this).closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
@@ -352,22 +364,22 @@ $(document).ready(function () {
     });
 
     /*$("#gender").focusin(function () {
-        var gender = $(this).val();
-        var formGroup = $(this).closest(".form-group");
-        formGroup.removeClass("has-error");
-        $(this).closest('.form-group').find('.info').empty();
-    }).focusout(function () {
-        pageFamily.validateGender(this);
-    });
+     var gender = $(this).val();
+     var formGroup = $(this).closest(".form-group");
+     formGroup.removeClass("has-error");
+     $(this).closest('.form-group').find('.info').empty();
+     }).focusout(function () {
+     pageFamily.validateGender(this);
+     });
 
-    $("#relation").focusin(function () {
-        var relation = $(this).val();
-        var formGroup = $(this).closest(".form-group");
-        formGroup.removeClass("has-error");
-        $(this).closest('.form-group').find('.info').empty();
-    }).focusout(function () {
-        pageFamily.validateRelation(this);
-    });*/
+     $("#relation").focusin(function () {
+     var relation = $(this).val();
+     var formGroup = $(this).closest(".form-group");
+     formGroup.removeClass("has-error");
+     $(this).closest('.form-group').find('.info').empty();
+     }).focusout(function () {
+     pageFamily.validateRelation(this);
+     });*/
 
     $('#familyModal').on('show.bs.modal', function (e) {
         $('.info').empty();
@@ -401,7 +413,7 @@ $(document).ready(function () {
                     app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
-                if(formData[i].name === "dob") {
+                if (formData[i].name === "dob") {
                     if (app.validateDate(formData[i].value) === app.dateValidationState.SUCCESS)
                         isValid = true;
                     else {
@@ -409,7 +421,7 @@ $(document).ready(function () {
                         break;
                     }
                 } else if (formData[i].name === "mobile") {
-                    if(formData[i].value.trim() != "") {
+                    if (formData[i].value.trim() != "") {
                         if (app.validateNumber(formData[i].value) === app.numberValidationState.SUCCESS)
                             isValid = true;
                         else {
@@ -419,7 +431,7 @@ $(document).ready(function () {
                     }
                 } else if (formData[i].name === "email") {
                     formData[i].value = formData[i].value.toLowerCase();
-                    if(formData[i].required && formData[i].value.trim() != "") {
+                    if (formData[i].value.trim() != "") {
                         if (app.validateEmail(formData[i].value) === app.emailValidationState.SUCCESS)
                             isValid = true;
                         else {
@@ -428,7 +440,7 @@ $(document).ready(function () {
                         }
                     }
                 } else if (formData[i].name === "password") {
-                    if(formData[i].required && formData[i].value.trim() != "") {
+                    if (formData[i].value.trim() != "") {
                         if (app.validatePassword(formData[i].value) === app.passwordValidationState.SUCCESS)
                             isValid = true;
                         else {
@@ -437,7 +449,7 @@ $(document).ready(function () {
                         }
                     }
                 } else if (formData[i].name === "confirmPassword") {
-                    if(formData[i].required && formData[i].value.trim() != "") {
+                    if (formData[i].value.trim() != "") {
                         if (app.validateConfirmPassword(formData[i - 1].value, formData[i].value) === app.confirmPasswordValidationState.SUCCESS)
                             isValid = true;
                         else {
@@ -452,6 +464,7 @@ $(document).ready(function () {
                 app.showNotificationFailure("Validation Failed for some input field");
                 return false;
             }
+            return false;
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
         },

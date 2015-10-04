@@ -8,7 +8,7 @@ $(document).ready(function () {
                     app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
-                if(formData[i].name === "email") {
+                if (formData[i].name === "email") {
                     formData[i].value = formData[i].value.toLowerCase();
                 }
             }

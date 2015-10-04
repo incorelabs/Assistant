@@ -307,7 +307,7 @@ $(document).ready(function () {
         document.getElementById("logoForm").reset();
         $('#photoId').val(pageEnvelopeSettings.envelopeDetails.CoverCode);
         if (pageEnvelopeSettings.envelopeDetails.LogoPath) {
-            $("#imagePreview").attr("src", app.websiteRoot + "img/getImage.php?file=" + pageEnvelopeSettings.envelopeDetails.LogoPath  + "&rand=" + new Date().getTime());
+            $("#imagePreview").attr("src", app.websiteRoot + "img/getImage.php?file=" + pageEnvelopeSettings.envelopeDetails.LogoPath + "&rand=" + new Date().getTime());
             $("#deleteImageBtn").removeClass("hidden");
         } else {
             $("#imagePreview").attr("src", "../../img/default/preferences/logo.png");

@@ -6,7 +6,7 @@ var app = {
         INVALID: 2
     },
     validateDate: function (inputDate) {
-        if(inputDate === "" || inputDate === "__/__/____")
+        if (inputDate === "" || inputDate === "__/__/____")
             return app.dateValidationState.EMPTY;
         if (new MyDate(inputDate).isValid())
             return app.dateValidationState.SUCCESS;
@@ -207,7 +207,7 @@ $(document).ready(function () {
         extensions: ['effect-slide-menu', 'pageshadow'],
         searchfield: true
     });
-    if(document.getElementById("accountProfileImgInput")) {
+    if (document.getElementById("accountProfileImgInput")) {
         document.getElementById("accountProfileImgInput").onchange = function () {
             var path = this.value;
             var filename = path.replace(/^.*\\/, "");

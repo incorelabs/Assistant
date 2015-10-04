@@ -501,7 +501,7 @@ $(document).ready(function () {
                     return false;
                 }
                 if (formData[i].name == "expiryDate") {
-                    if(formData[i].value.trim() != "") {
+                    if (formData[i].value.trim() != "") {
                         if (app.validateDate(formData[i].value) === app.dateValidationState.SUCCESS)
                             isValid = true;
                         else {
