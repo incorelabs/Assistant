@@ -1,5 +1,6 @@
 body {
     height: 100%;
+    overflow: hidden;
 }
 
 .ul_margin {
@@ -62,10 +63,29 @@ li {
 }
 
 .panelHeight {
-    max-height: calc(100vh - 120px);
+    max-height: calc(100vh - 10px);
     overflow-y: auto;
     overflow-x: auto;
 }
+
+@media screen and (max-width: 767px){
+    .panelHeight {
+        max-height: calc(100vh - 1px);
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+}
+
+.panel-height {
+    height: calc(100vh - 150px);
+}
+
+@media screen and (max-width: 767px) {
+    .panel-height {
+        height: calc(100vh - 100px);
+    }
+}
+
 
 .btn-size {
     width: 13%;
@@ -93,8 +113,6 @@ value {
 
 .panel-margin {
     margin-top: 0px !important;
-    border-top-right-radius: 0px !important;
-    border-top-left-radius: 0px !important;
     border-top: 0px !important;
 }
 
@@ -179,31 +197,12 @@ h5 {
     border-color: #ccc;
 }
 
-.loading {
-    height: calc(100vh - 135px);
-    background-image: url('../../../img/index/loading2.gif');
-    background-repeat: no-repeat;
-    overflow-y: hidden;
-    display: block;
-    margin: 0 auto 0 45%;
-}
-
 .fa-blue {
     color: #337ab7;
 }
 
 .fa-red {
     color: #b71c1c;
-}
-
-.panel-height {
-    height: calc(100vh - 135px);
-}
-
-@media screen and (max-width: 992px) {
-    .panel-height {
-        height: calc(100vh - 106px);
-    }
 }
 
 .list-group {
@@ -365,8 +364,8 @@ h5 {
     color: #fff;
 }
 .multiselect > .multicontainer {
-    max-height: 200px;
-    overflow: auto;
+    max-height: 130px;
+    overflow: auto !important;
     margin-top: 4px;
     margin-left: -1px;
     transition: 0.2s;
@@ -436,6 +435,7 @@ h5 {
 
 .navbar-bottom-padding{
     padding-bottom: 10px;
+    padding-right: 0px;
 }
 
 @media screen and (max-width: 992px){
@@ -444,7 +444,7 @@ h5 {
         padding-right: 0px;
     }
 }
-@media screen and (max-width: 768px){
+@media screen and (max-width: 767px){
     .sm-left-padding-none{
         padding-left: 0px;
     }
@@ -464,4 +464,91 @@ h5 {
 }
 .navbar-top-margin{
     margin-top: -10px;
+}
+@media screen and (min-width: 768px) and (max-width: 992px){
+    .btn-position{
+        padding-top: 15px;
+        padding-left: 10px;
+    }
+}
+
+.navbar-fixed-custom{
+    overflow: auto !important;
+}
+
+.panel-container{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+@media screen and (max-width: 768px){
+    .panel-container{
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-top: 0px;
+    }
+    .navbar{
+        margin-bottom: 0px;
+    }
+
+}
+
+td{
+    white-space: nowrap;
+    word-wrap: normal;
+    word-break: keep-all;
+}
+th{
+    white-space: nowrap;
+    word-wrap: normal;
+    word-break: keep-all;
+}
+
+.fixed-row{
+    position: fixed;
+    background-color: white;
+}
+
+.fixedTable .table {
+    background-color: white;
+    width: auto;
+    margin-bottom: 0px;
+}
+.fixedTable .table tr td,
+.fixedTable .table tr th {
+    min-width: 100px;
+    width: 100px;
+    min-height: 20px;
+    height: 20px;
+    padding: 5px;
+}
+.fixedTable-header {
+    width: calc(100vw - 152px);
+    height: 30px;
+    margin-left: 110px;
+    overflow: hidden;
+    border-bottom: 1px solid #CCC;
+}
+
+.fixedTable-sidebar {
+    width: 110px;
+    height: calc(100vh - 200px);
+    float: left;
+    overflow: hidden;
+    border-right: 1px solid #CCC;
+}
+.fixedTable-body {
+    overflow: auto;
+    width: calc(100vw - 152px);
+    height: calc(100vh - 200px);
+    float: left;
+}
+
+@media screen and (max-width: 768px){
+    .fixedTable-header {
+        width: calc(100vw - 120px);
+    }
+    .fixedTable-body {
+        width: calc(100vw - 120px);
+    }
 }

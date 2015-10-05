@@ -390,6 +390,17 @@ echo $navbar_str;
                         </div>
                     </div>
                 </div>
+                <div class="row row-top-padding">
+                    <div class="col-md-8 col-sm-8 col-xs-8">
+                        <label>Input Fields</label>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <select class="form-control">
+                            <option>Int Caps</option>
+                            <option>All Caps</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
         </div>
