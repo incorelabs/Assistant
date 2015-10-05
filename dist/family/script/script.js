@@ -125,7 +125,7 @@ var pageFamily = {
         $("#password").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
         $("#confirmPassword").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
 
-        //pageFamily.setInputFields(pageFamily.personDetails);
+        pageFamily.setInputFields(pageFamily.personDetails);
         $("#form-add-edit-code").val(pageFamily.personDetails["FamilyCode"]);
         console.log(pageFamily.personDetails["FamilyCode"]);
 
@@ -427,6 +427,8 @@ $(document).ready(function () {
                             isValid = false;
                             break;
                         }
+                    } else {
+                        isValid = true;
                     }
                 } else if (formData[i].name === "email") {
                     formData[i].value = formData[i].value.toLowerCase();
@@ -463,7 +465,6 @@ $(document).ready(function () {
                 app.showNotificationFailure("Validation Failed for some input field");
                 return false;
             }
-            return false;
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
         },

@@ -1,6 +1,7 @@
 var pageContact = {
     currentPageNo: 1,
     localContact: null,
+    isContactFormValid: false,
     defContactList: $.Deferred(),
     defSearchResult: $.Deferred(),
     titleTag: [],
@@ -459,6 +460,14 @@ var pageContact = {
         $("#workCountry").attr('readonly', false);
         $("#otherCountry").attr('readonly', false);
 
+        $(".phoneValidation").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $(".emailValidation").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#addDOB").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#addDOM").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#homePincode").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#workPincode").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#otherPincode").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+
         $('.addMobileDiv').empty();
         pageContact.addBtnMobileCount = 0;
         $('.addEmailDiv').empty();
@@ -493,6 +502,14 @@ var pageContact = {
         pageContact.addBtnWorkPhoneCount = 0;
         $('.addOtherPhone').empty();
         pageContact.addBtnOtherPhoneCount = 0;
+
+        $(".phoneValidation").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $(".emailValidation").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#addDOB").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#addDOM").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#homePincode").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#workPincode").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#otherPincode").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
 
         $("#form-add-edit-code").val(pageContact.localContact.contact.ContactCode);
 
@@ -1089,6 +1106,45 @@ var pageContact = {
                 pageContact.addBtnOtherPhoneCount--;
                 break;
         }
+    },
+    validateContactFormNumber: function (formData) {
+        if (formData.value.trim() != "") {
+            if (app.validateNumber(formData.value.trim()) === app.numberValidationState.SUCCESS)
+                pageContact.isContactFormValid = true;
+            else {
+                pageContact.isContactFormValid = false;
+                return false;
+            }
+        } else {
+            pageContact.isContactFormValid = true;
+        }
+        return true;
+    },
+    validateContactFormEmail: function (formData) {
+        if (formData.value.trim() != "") {
+            if (app.validateEmail(formData.value.trim()) === app.emailValidationState.SUCCESS)
+                pageContact.isContactFormValid = true;
+            else {
+                pageContact.isContactFormValid = false;
+                return false;
+            }
+        } else {
+            pageContact.isContactFormValid = true;
+        }
+        return true;
+    },
+    validateContactFormDate: function (formData) {
+        if (formData.value.trim() != "") {
+            if (app.validateDate(formData.value.trim()) === app.dateValidationState.SUCCESS)
+                pageContact.isContactFormValid = true;
+            else {
+                pageContact.isContactFormValid = false;
+                return false;
+            }
+        } else {
+            pageContact.isContactFormValid = true;
+        }
+        return true;
     }
 };
 
@@ -1262,18 +1318,65 @@ $(document).ready(function (event) {
     });
 
     $("#contactForm").ajaxForm({
+        // TODO: @Neelabh -> Remove unwanted error messages when modal is opened.
         beforeSubmit: function (formData, $form, options) {
             console.log(formData);
+            pageContact.isContactFormValid = false;
             for (var i = 0; i < formData.length; i++) {
                 if (formData[i].required && formData[i].value.trim() == "") {
                     app.showNotificationFailure("Required fields are empty");
                     return false;
                 }
-                if (formData[i].name === "email1") {
+                if (formData[i].name === "mobile1") {
+                    if (pageContact.validateContactFormNumber(formData[i]) === false)
+                        break;
+                } else if (formData[i].name === "mobile2") {
+                    if (pageContact.validateContactFormNumber(formData[i]) === false)
+                        break;
+                } else if (formData[i].name === "mobile3") {
+                    if (pageContact.validateContactFormNumber(formData[i]) === false)
+                        break;
+                } else if (formData[i].name === "email1") {
                     formData[i].value = formData[i].value.toLowerCase();
-                }
-                if (formData[i].name === "email2") {
+                    if (pageContact.validateContactFormEmail(formData[i]) === false)
+                        break;
+                } else if (formData[i].name === "email2") {
                     formData[i].value = formData[i].value.toLowerCase();
+                    if (pageContact.validateContactFormEmail(formData[i]) === false)
+                        break;
+                } else if (formData[i].name === "dob") {
+                    if (pageContact.validateContactFormDate(formData[i]) === false)
+                        break;
+                } else if (formData[i].name === "dom") {
+                    if (pageContact.validateContactFormDate(formData[i]) === false)
+                        break;
+                } else if (formData[i].name === "address[home][pincode]") {
+                    if (pageContact.validateContactFormNumber(formData[i]) === false)
+                        break;
+                } else if (formData[i].name === "address[home][phone1]") {
+                    if (pageContact.validateContactFormNumber(formData[i]) === false)
+                        break;
+                } else if (formData[i].name === "address[home][phone2]") {
+                    if (pageContact.validateContactFormNumber(formData[i]) === false)
+                        break;
+                } else if (formData[i].name === "address[work][pincode]") {
+                    if (pageContact.validateContactFormNumber(formData[i]) === false)
+                        break;
+                } else if (formData[i].name === "address[work][phone1]") {
+                    if (pageContact.validateContactFormNumber(formData[i]) === false)
+                        break;
+                } else if (formData[i].name === "address[work][phone2]") {
+                    if (pageContact.validateContactFormNumber(formData[i]) === false)
+                        break;
+                } else if (formData[i].name === "address[other][pincode]") {
+                    if (pageContact.validateContactFormNumber(formData[i]) === false)
+                        break;
+                } else if (formData[i].name === "address[other][phone1]") {
+                    if (pageContact.validateContactFormNumber(formData[i]) === false)
+                        break;
+                } else if (formData[i].name === "address[other][phone2]") {
+                    if (pageContact.validateContactFormNumber(formData[i]) === false)
+                        break;
                 }
             }
             if ($("#homeCity").val().trim() != "") {
@@ -1328,6 +1431,12 @@ $(document).ready(function (event) {
                     app.showNotificationFailure("The \"Other\" country field is empty");
                     return false;
                 }
+            }
+
+            console.log(pageContact.isContactFormValid);
+            if (!pageContact.isContactFormValid) {
+                app.showNotificationFailure("Validation Failed for some input field");
+                return false;
             }
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
