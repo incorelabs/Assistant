@@ -21,7 +21,7 @@ var pageAssets = {
         $("#imageModal").modal('show');
     },
     changeImage: function(image){
-
+        $("#imagePreview").attr("src",image);
     }
 };
 

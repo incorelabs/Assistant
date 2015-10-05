@@ -316,3 +316,13 @@ h5 {
 .image-details-padding{
     padding-top: 10px;
 }
+
+a{
+    text-decoration: none !important;
+}
+
+.image-horizontal-scroll{
+    white-space: nowrap;
+    overflow-y: auto;
+    overflow-x: auto;
+}

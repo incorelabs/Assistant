@@ -91,7 +91,7 @@ echo $navbar_str;
                 <div class="panel-height">
                     <!-- List group -->
                     <div id="assetsList" class="list-group force-scroll mobile-list">
-                        <a class="list-group-item contacts_font" onclick="">Audi R8</a>
+                        <a class="list-group-item contacts_font" onclick="pageAssets.openAssetImageModal()">Audi R8</a>
                     </div>
                     <!--List close-->
                 </div>
@@ -559,13 +559,18 @@ echo $navbar_str;
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div class="info">*You can select upto max 5 images</div>
                                     <p id="imageErrorMsg"></p>
-
                                     <div class="delete-btn-padding">
                                         <button type="button" class="btn btn-danger" id="deleteImageBtn"
                                                 onclick="">
                                             Delete Image
+                                        </button>
+                                    </div>
+                                    <div class="delete-btn-padding">
+                                        <button type="button" class="btn btn-danger" id="deleteImageBtn"
+                                                onclick="">
+                                            Delete All Images
                                         </button>
                                     </div>
                                 </div>
@@ -583,22 +588,24 @@ echo $navbar_str;
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <div class="image text-center">
-                        <a href="#" onclick="pageAssets.changeImage('../img/default/preferences/logo.png')" class="clickable">
-                            <img src="../img/index/assets.png" id='imageResource' alt='...' class='img-thumbnail modal-img-size'/>
-                        </a>
-                        <a href="#" onclick="pageAssets.openAssetImageModal()" class="clickable">
-                            <img src="../img/index/assets1.png" id='imageResource' alt='...' class='img-thumbnail modal-img-size'/>
-                        </a>
-                        <a href="#" onclick="pageAssets.openAssetImageModal()" class="clickable">
-                            <img src="../img/index/cars.png" id='imageResource' alt='...' class='img-thumbnail modal-img-size'/>
-                        </a>
-                        <a href="#" onclick="pageAssets.openAssetImageModal()" class="clickable">
-                            <img src="../img/index/contacts.png" id='imageResource' alt='...' class='img-thumbnail modal-img-size'/>
-                        </a>
-                        <a href="#" onclick="pageAssets.openAssetImageModal()" class="clickable">
-                            <img src="../img/index/shares.png" id='imageResource' alt='...' class='img-thumbnail modal-img-size'/>
-                        </a>
+                    <div class="row">
+                        <div class="image text-center image-horizontal-scroll">
+                            <a href="#" onclick="pageAssets.changeImage('../img/default/preferences/logo.png')" class="clickable">
+                                <img src="../img/default/preferences/logo.png" id='imageResource' class='img-thumbnail modal-img-size'/>
+                            </a>
+                            <a href="#" onclick="pageAssets.changeImage('../img/index/assets.png')" class="clickable">
+                                <img src="../img/index/assets.png" id='imageResource' class='img-thumbnail modal-img-size'/>
+                            </a>
+                            <a href="#" onclick="pageAssets.changeImage('../img/index/cars.png')" class="clickable">
+                                <img src="../img/index/cars.png" id='imageResource' class='img-thumbnail modal-img-size'/>
+                            </a>
+                            <a href="#" onclick="pageAssets.changeImage('../img/index/contacts.png')" class="clickable">
+                                <img src="../img/index/contacts.png" id='imageResource' class='img-thumbnail modal-img-size'/>
+                            </a>
+                            <a href="#" onclick="pageAssets.changeImage('../img/index/shares.png')" class="clickable">
+                                <img src="../img/index/shares.png" id='imageResource' class='img-thumbnail modal-img-size'/>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </form>
