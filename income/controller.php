@@ -44,6 +44,12 @@ do {
         break;
     }
 
+    if(intval($_POST["incomeTypeCode"]) == 1002 && empty($_POST["expiryDate"])){
+        $validate = false;
+        $response = createResponse(0,"Please enter expiry date.");
+        break;
+    }
+
 } while (0);
 
 //Business Logic
