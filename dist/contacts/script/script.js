@@ -1318,7 +1318,6 @@ $(document).ready(function (event) {
     });
 
     $("#contactForm").ajaxForm({
-        // TODO: @Neelabh -> Remove unwanted error messages when modal is opened.
         beforeSubmit: function (formData, $form, options) {
             console.log(formData);
             pageContact.isContactFormValid = false;
