@@ -1,5 +1,7 @@
 var pageContact = {
     currentPageNo: 1,
+    contactListLetterIndex: "",
+    searchListLetterIndex: "",
     localContact: null,
     isContactFormValid: false,
     defContactList: $.Deferred(),
@@ -28,8 +30,10 @@ var pageContact = {
     addBtnWorkPhoneCount: 0,
     addBtnOtherPhoneCount: 0,
     firstTime: true,
-    getContactList: function () {
+    getContactList: function (isLoadMore) {
         var url = app.websiteRoot + "contacts/getContactList.php";
+        if (!isLoadMore)
+            pageContact.contactListLetterIndex = "";
 
         $.getJSON(url, {
             pageNo: pageContact.currentPageNo
@@ -44,22 +48,21 @@ var pageContact = {
         if (data.status == 1) {
             $('#loadMore').remove();
             pageContact.currentPageNo++;
-            var letterIndex = "";
             var contactListString = "";
             for (var i = 0; i < data.result.length; i++) {
                 var letter = data.result[i].FullName.toUpperCase()[0];
                 console.log(letter);
-                if (letter != letterIndex) {
+                if (letter != pageContact.contactListLetterIndex) {
                     contactListString += "<li class='list-group-item-info li-pad'>" + letter + "</li>";
-                    letterIndex = letter;
-                    console.log(letterIndex);
+                    pageContact.contactListLetterIndex = letter;
+                    console.log(pageContact.contactListLetterIndex);
                 }
                 contactListString += "<a onclick='pageContact.getContactDetails(" + data.result[i].ContactCode + ")' class='list-group-item contacts_font'>" + data.result[i].FullName + "</a>";
             }
             $("#contactList").append(contactListString);
             if (pageContact.currentPageNo <= data.pages) {
                 // Show Load More
-                var loadMoreString = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pageContact.getContactList();'>Load more..</a></div>";
+                var loadMoreString = "<div id='loadMore' class='list-group-item' align='center'><a class='list-group-item-text header_font' style='cursor: pointer;' onclick='pageContact.getContactList(true);'>Load more..</a></div>";
                 $("#contactList").append(loadMoreString);
             }
         } else {
@@ -72,6 +75,7 @@ var pageContact = {
         $("#contactList").empty();
         pageContact.currentPageNo = 1;
         pageContact.firstTime = true;
+        pageContact.searchListLetterIndex = "";
         pageContact.defSearchResult = $.Deferred();
         pageContact.getSearchResults();
         $.when(pageContact.defSearchResult).done(function (data) {
@@ -97,15 +101,14 @@ var pageContact = {
         if (data.status == 1) {
             $('#loadMore').remove();
             pageContact.currentPageNo++;
-            var letterIndex = "";
             var searchResultsString = "";
             for (var i = 0; i < data.result.length; i++) {
                 var letter = data.result[i].FullName.toUpperCase()[0];
                 console.log(letter);
-                if (letter != letterIndex) {
+                if (letter != pageContact.searchListLetterIndex) {
                     searchResultsString += "<li class='list-group-item-info li-pad'>" + letter + "</li>";
-                    letterIndex = letter;
-                    console.log(letterIndex);
+                    pageContact.searchListLetterIndex = letter;
+                    console.log(pageContact.searchListLetterIndex);
                 }
                 searchResultsString += "<a onclick='pageContact.getContactDetails(" + data.result[i].ContactCode + ")' class='list-group-item contacts_font'>" + data.result[i].FullName + "</a>";
             }
@@ -1168,7 +1171,7 @@ $(document).ready(function (event) {
             pageContact.getContactDetails(data.result[0].ContactCode);
     });
 
-    pageContact.getContactList();
+    pageContact.getContactList(false);
     pageContact.refreshMasterList();
 
     if (window.innerWidth < 992) {
@@ -1295,7 +1298,7 @@ $(document).ready(function (event) {
                     $("#editContactBtn").remove();
                     $("#deleteContactBtn").remove();
                     app.showNotificationSuccess(response.message);
-                    pageContact.getContactList();
+                    pageContact.getContactList(false);
                     pageContact.getContactDetails(response.landing);
                     $("#deleteModal").modal('hide');
                 }, 500);
@@ -1453,7 +1456,7 @@ $(document).ready(function (event) {
                     $("#editContactBtn").remove();
                     $("#deleteContactBtn").remove();
                     pageContact.getContactDetails(response.landing);
-                    pageContact.getContactList();
+                    pageContact.getContactList(false);
                     app.showNotificationSuccess(response.message);
                     pageContact.refreshMasterList();
                     $("#contactModal").modal('hide');
@@ -1483,7 +1486,7 @@ $(document).ready(function (event) {
             pageContact.currentPageNo = 1;
             pageContact.firstTime = true;
             pageContact.defContactList = $.Deferred();
-            pageContact.getContactList();
+            pageContact.getContactList(false);
             $.when(pageContact.defContactList).done(function (data) {
                 if (data.status == 1)
                     pageContact.getContactDetails(data.result[0].ContactCode);
