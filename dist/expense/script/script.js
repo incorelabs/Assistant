@@ -238,7 +238,7 @@ var pageExpense = {
         $("#form-add-edit-code").val(1);
 
         $("#fullName").closest(".form-group").removeClass("has-warning").find('.info').empty();
-        $("#expiryDate").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#expiryDate").removeAttr("required").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
 
         $('#expenseModalHeading').empty().html("Add Expense");
         $('#expenseModal').modal('show');
@@ -248,7 +248,7 @@ var pageExpense = {
         $("#form-add-edit-mode").val("M");
 
         $("#fullName").closest(".form-group").removeClass("has-warning").find('.info').empty();
-        $("#expiryDate").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#expiryDate").removeAttr("required").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
 
         $('#expenseModalHeading').empty().html("Edit Expense");
 
@@ -289,6 +289,8 @@ var pageExpense = {
         if (pageExpense.localExpense.expense.ExpenseTypeCode) {
             $("#expenseTypeName").val(pageExpense.localExpense.expense.ExpenseTypeName);
             $("#expenseTypeCode").val(pageExpense.localExpense.expense.ExpenseTypeCode);
+            if (pageExpense.localExpense.expense.ExpenseTypeCode == 1004)
+                $("#expiryDate").attr("required", "");
         }
 
         if (pageExpense.localExpense.expense.ExpenseName) {
@@ -361,8 +363,14 @@ var pageExpense = {
                 var index = $.inArray($(event.target).val(), pageExpense.expenseTypeTag);
                 if (index > -1) {
                     console.log("not selected but value is in array");
+                    if (pageExpense.expenseTypeCode[index] == 1004)
+                        $("#expiryDate").attr("required", "");
+                    else
+                        $("#expiryDate").removeAttr("required");
                     $("#expenseTypeCode").val(pageExpense.expenseTypeCode[index]);
                 } else {
+                    if ($(event.target).val().trim() == "")
+                        $("#expiryDate").removeAttr("required");
                     console.log("Change triggered");
                     $("#expenseTypeCode").val(1);
                 }
@@ -371,7 +379,10 @@ var pageExpense = {
                 console.log(ui);
                 console.log("Selected");
                 var index = $.inArray(ui.item.value, pageExpense.expenseTypeTag);
-                console.log(index);
+                if (pageExpense.expenseTypeCode[index] == 1004)
+                    $("#expiryDate").attr("required", "");
+                else
+                    $("#expiryDate").removeAttr("required");
                 $("#expenseTypeCode").val(pageExpense.expenseTypeCode[index]);
                 console.log($("#expenseTypeCode").val());
             }

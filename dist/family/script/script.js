@@ -85,7 +85,7 @@ var pageFamily = {
         $("#form-add-edit-mode").val('A');
         $("#form-add-edit-code").val(1);
 
-        $('#familyModalHeading').empty().html("Add Family Member");
+        $('#familyModalHeading').empty().html("Add Family");
 
         if (pageFamily.isParentLoggedIn)
             $("#provideLoginDiv").removeClass("hidden");
@@ -112,7 +112,7 @@ var pageFamily = {
         document.getElementById("familyForm").reset();
         $("#form-add-edit-mode").val('M');
 
-        $('#familyModalHeading').empty().html("Edit Family Member");
+        $('#familyModalHeading').empty().html("Edit Family");
 
         console.log(pageFamily.familyList[memberIndex]);
         initializeDate();

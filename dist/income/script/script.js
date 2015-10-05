@@ -233,7 +233,7 @@ var pageIncome = {
         $("#form-add-edit-code").val(1);
 
         $("#fullName").closest(".form-group").removeClass("has-warning").find('.info').empty();
-        $("#expiryDate").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#expiryDate").removeAttr("required").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
 
         $('#incomeModalHeading').empty().html("Add Income");
         $('#incomeModal').modal('show');
@@ -243,7 +243,7 @@ var pageIncome = {
         $("#form-add-edit-mode").val("M");
 
         $("#fullName").closest(".form-group").removeClass("has-warning").find('.info').empty();
-        $("#expiryDate").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#expiryDate").removeAttr("required").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
 
         $('#incomeModalHeading').empty().html("Edit Income");
 
@@ -284,6 +284,8 @@ var pageIncome = {
         if (pageIncome.localIncome.income.IncomeTypeCode) {
             $("#incomeTypeName").val(pageIncome.localIncome.income.IncomeTypeName);
             $("#incomeTypeCode").val(pageIncome.localIncome.income.IncomeTypeCode);
+            if (pageIncome.localIncome.income.IncomeTypeCode == 1002)
+                $("#expiryDate").attr("required", "");
         }
 
         if (pageIncome.localIncome.income.IncomeName) {
@@ -352,8 +354,14 @@ var pageIncome = {
                 var index = $.inArray($(event.target).val(), pageIncome.incomeTypeTag);
                 if (index > -1) {
                     console.log("not selected but value is in array");
+                    if (pageIncome.incomeTypeCode[index] == 1002)
+                        $("#expiryDate").attr("required", "");
+                    else
+                        $("#expiryDate").removeAttr("required");
                     $("#incomeTypeCode").val(pageIncome.incomeTypeCode[index]);
                 } else {
+                    if ($(event.target).val().trim() == "")
+                        $("#expiryDate").removeAttr("required");
                     console.log("Change triggered");
                     $("#incomeTypeCode").val(1);
                 }
@@ -362,7 +370,10 @@ var pageIncome = {
                 console.log(ui);
                 console.log("Selected");
                 var index = $.inArray(ui.item.value, pageIncome.incomeTypeTag);
-                console.log(index);
+                if (pageIncome.incomeTypeCode[index] == 1002)
+                    $("#expiryDate").attr("required", "");
+                else
+                    $("#expiryDate").removeAttr("required");
                 $("#incomeTypeCode").val(pageIncome.incomeTypeCode[index]);
                 console.log($("#incomeTypeCode").val());
             }
