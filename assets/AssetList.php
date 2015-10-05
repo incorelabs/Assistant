@@ -2,30 +2,30 @@
 /**
  * Created by PhpStorm.
  * User: kbokdia
- * Date: 19/09/15
- * Time: 2:58 PM
+ * Date: 05/10/15
+ * Time: 4:46 PM
  */
 
-namespace Assistant\Expense;
+namespace Assistant\Assets;
 
 
-class ExpenseList
+class AssetList
 {
     var $limit;
     var $pages;
     var $requestPage;
-    var $expenseList;
+    var $assetList;
     var $count;
     var $mysqli;
     var $regCode;
     var $familyCode;
     var $response;
-    var $successful; // if expense retrieved then successful
+    var $successful; // if asset retrieved then successful
     var $searchText;
     var $searchType;
     var $searchClause;
     var $countQuery;
-    var $expenseListQuery;
+    var $assetListQuery;
     var $whereConstraints;
 
     function __construct($limit,$page,$searchType=null,$searchText=null){
@@ -45,8 +45,8 @@ class ExpenseList
             $this->setWhereConstraints();
         }
 
-        $this->setExpenseListQuery();
-        $this->setExpenseList();
+        $this->setAssetListQuery();
+        $this->setAssetList();
         $this->setCountQuery();
         $this->setCount();
     }
@@ -58,7 +58,7 @@ class ExpenseList
     }
 
     function setWhereConstraints($parameter = null){
-        $where = " WHERE Table171.RegCode = ".$this->regCode." AND ((Table171.InsertedBy != ".$this->familyCode." and PrivateFlag = 2) or Table171.InsertedBy = ".$this->familyCode.") AND Table171.ActiveFlag = 1";
+        $where = " WHERE Table168.RegCode = ".$this->regCode." AND ((Table168.InsertedBy != ".$this->familyCode." and PrivateFlag = 2) or Table168.InsertedBy = ".$this->familyCode.") AND Table168.ActiveFlag = 1";
         if(!is_null($parameter)) {
             $where .= " AND".$parameter;
         }
@@ -70,22 +70,22 @@ class ExpenseList
         switch($this->searchType){
             case 1:
                 $holderNameClause = $searchParameters->getHolderNameClause($searchText);
-                $expenseNameClause = $searchParameters->getExpenseNameClause($searchText);
-                $this->searchClause = " ( ".$expenseNameClause." OR ".$holderNameClause." ) ";
+                $assetNameClause = $searchParameters->getAssetNameClause($searchText);
+                $this->searchClause = " ( ".$assetNameClause." OR ".$holderNameClause." ) ";
                 break;
         }
     }
 
-    function setExpenseListQuery(){
-        $this->expenseListQuery = "SELECT Table171.ExpenseCode, Table107.FamilyName as 'HolderName', Table171.ExpenseName FROM Table171 LEFT JOIN Table107 ON Table107.RegCode = Table171.RegCode AND Table107.FamilyCode = Table171.HolderCode".$this->whereConstraints." ORDER BY Table107.FamilyName LIMIT ".$this->limit." OFFSET ".$this->getLimits()["lower"].";";
+    function setAssetListQuery(){
+        $this->assetListQuery = "SELECT Table168.AssetCode, Table107.FamilyName as 'HolderName', Table168.AssetName FROM Table168 LEFT JOIN Table107 ON Table107.RegCode = Table168.RegCode AND Table107.FamilyCode = Table168.HolderCode".$this->whereConstraints." ORDER BY Table107.FamilyName LIMIT ".$this->limit." OFFSET ".$this->getLimits()["lower"].";";
     }
 
-    function getExpenseListQuery(){
-        return $this->expenseListQuery;
+    function getAssetListQuery(){
+        return $this->assetListQuery;
     }
 
-    function setExpenseList(){
-        $sql = $this->getExpenseListQuery();
+    function setAssetList(){
+        $sql = $this->getAssetListQuery();
         if($result = $this->mysqli->query($sql)){
 
             if($result->num_rows == 0){
@@ -94,7 +94,7 @@ class ExpenseList
             else{
                 $i = 0;
                 while($row = $result->fetch_assoc()){
-                    $this->expenseList[$i] = $row;
+                    $this->assetList[$i] = $row;
                     $i++;
                 }
                 $this->successful = true;
@@ -103,7 +103,7 @@ class ExpenseList
     }
 
     function setCountQuery(){
-        $qry = "SELECT count(*) as 'count' FROM Table171";
+        $qry = "SELECT count(*) as 'count' FROM Table168";
         $this->countQuery = $qry . $this->whereConstraints;
     }
 
@@ -140,10 +140,10 @@ class ExpenseList
             $this->setPages();
             $this->response = $this->createResponse(1,"Success");
             $this->response["pages"] = $this->pages;
-            $this->response["result"] = $this->expenseList;
+            $this->response["result"] = $this->assetList;
         }
         else{
-            $this->response = $this->createResponse(0,"No expense");
+            $this->response = $this->createResponse(0,"No asset");
         }
 
         return $this->response;
