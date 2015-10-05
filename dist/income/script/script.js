@@ -53,7 +53,7 @@ var pageIncome = {
             pageIncome.currentPageNo++;
             var incomeListString = "";
             for (var i = 0; i < data.result.length; i++) {
-                incomeListString += "<a onclick='pageIncome.getIncomeDetails(" + data.result[i].IncomeCode + ")' class='list-group-item contacts_font'>" + data.result[i].IncomeName + "</a>";
+                incomeListString += "<a onclick='pageIncome.getIncomeDetails(" + data.result[i].IncomeCode + ")' class='list-group-item contacts_font'>" + data.result[i].HolderName + " - " + data.result[i].IncomeName + "</a>";
             }
             $("#incomeList").append(incomeListString);
             if (pageIncome.currentPageNo <= data.pages) {
@@ -98,7 +98,7 @@ var pageIncome = {
             pageIncome.currentPageNo++;
             var searchResultsString = "";
             for (var i = 0; i < data.result.length; i++) {
-                searchResultsString += "<a onclick='pageIncome.getIncomeDetails(" + data.result[i].IncomeCode + ")' class='list-group-item contacts_font'>" + data.result[i].IncomeName + "</a>";
+                searchResultsString += "<a onclick='pageIncome.getIncomeDetails(" + data.result[i].IncomeCode + ")' class='list-group-item contacts_font'>" + data.result[i].HolderName + " - " + data.result[i].IncomeName + "</a>";
             }
             $("#incomeList").append(searchResultsString);
             if (pageIncome.currentPageNo <= data.pages) {

@@ -12,7 +12,7 @@ include_once ROOT . 'dist/authenticate.php';
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Assistant - Expense</title>
     <?php
-        include_once ROOT.'dist/fetchCSS.php';
+    include_once ROOT . 'dist/fetchCSS.php';
     ?>
     <link rel="stylesheet" href="../dist/expense/css/style.css"/>
 </head>
@@ -47,7 +47,7 @@ echo $navbar_str;
 
                                 <div class="input-group-btn">
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-success">
+                                        <button type="button" class="btn btn-success" onclick="pageExpense.doSearch();">
                                             <span class="fa fa-search"></span>
                                         </button>
                                     </div>
@@ -411,7 +411,7 @@ echo $navbar_str;
 <!--modal-->
 
 <?php
-    include_once ROOT.'dist/fetchJS.php';
+include_once ROOT . 'dist/fetchJS.php';
 ?>
 <script src="../dist/expense/script/script.js"></script>
 <script src="../dist/date/script.js"></script>

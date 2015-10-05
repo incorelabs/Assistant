@@ -53,7 +53,7 @@ var pageExpense = {
             pageExpense.currentPageNo++;
             var expenseListString = "";
             for (var i = 0; i < data.result.length; i++) {
-                expenseListString += "<a onclick='pageExpense.getExpenseDetails(" + data.result[i].ExpenseCode + ")' class='list-group-item contacts_font'>" + data.result[i].ExpenseName + "</a>";
+                expenseListString += "<a onclick='pageExpense.getExpenseDetails(" + data.result[i].ExpenseCode + ")' class='list-group-item contacts_font'>" + data.result[i].HolderName + " - " + data.result[i].ExpenseName + "</a>";
             }
             $("#expenseList").append(expenseListString);
             if (pageExpense.currentPageNo <= data.pages) {
@@ -98,7 +98,7 @@ var pageExpense = {
             pageExpense.currentPageNo++;
             var searchResultsString = "";
             for (var i = 0; i < data.result.length; i++) {
-                searchResultsString += "<a onclick='pageExpense.getExpenseDetails(" + data.result[i].ExpenseCode + ")' class='list-group-item contacts_font'>" + data.result[i].ExpenseName + "</a>";
+                searchResultsString += "<a onclick='pageExpense.getExpenseDetails(" + data.result[i].ExpenseCode + ")' class='list-group-item contacts_font'>" + data.result[i].HolderName + " - " + data.result[i].ExpenseName + "</a>";
             }
             $("#expenseList").append(searchResultsString);
             if (pageExpense.currentPageNo <= data.pages) {

@@ -47,7 +47,7 @@ echo $navbar_str;
 
                                 <div class="input-group-btn">
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-success">
+                                        <button type="button" class="btn btn-success" onclick="pageIncome.doSearch();">
                                             <span class="fa fa-search"></span>
                                         </button>
                                     </div>
