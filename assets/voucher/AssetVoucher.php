@@ -30,7 +30,7 @@ class AssetVoucher
     }
 
     function getSelectQuery(){
-        return "SELECT RegCode, AssetCode, VoucherNo, DATE_FORMAT(VoucherDt,'%d/%m/%Y') as 'VoucherDt', PayMode, ReferNo, DATE_FORMAT(ReferDt,'%d/%m/%Y') as 'ReferDt', DocNo, DocAmount, Remarks, PhotoUploaded, LastAccessDate FROM Table164".$this->where;
+        return "SELECT RegCode, AssetCode, VoucherNo, DATE_FORMAT(VoucherDt,'%d/%m/%Y') as 'VoucherDt', VoucherType, PayMode, ReferNo, DATE_FORMAT(ReferDt,'%d/%m/%Y') as 'ReferDt', DocNo, DocAmount, Remarks, PhotoUploaded, LastAccessDate FROM Table164".$this->where;
     }
 
     function getVoucherList(){
@@ -40,7 +40,7 @@ class AssetVoucher
             $i = 0;
             while ($row = $result->fetch_assoc()) {
                 if(intval($row["PhotoUploaded"]) == 1){
-                    $row["ImagePath"] = $this->getImagePath($row["SerialNo"]);
+                    $row["ImagePath"] = $this->getImagePath($row["VoucherNo"]);
                 }
                 $response[$i] = $row;
                 $i++;
@@ -74,7 +74,7 @@ class AssetVoucher
     }
 
     function getUpdateQuery(){
-        $sql = "UPDATE Table164 SET VoucherDt = ".$this->data['voucherDt'].", PayMode = ".$this->data['payMode'].", ReferNo = ".$this->data['referNo'].", ReferDt = ".$this->data['referDt'].", DocNo = ".$this->data['docNo'].", DocAmount = ".$this->data['docAmount'].", Remarks = ".$this->data['remarks'].", LastAccessDate = now() WHERE RegCode = ".$this->regCode." AND AssetCode = ".$this->assetCode." AND VoucherNo = ".$this->data['voucherNo'];
+        $sql = "UPDATE Table164 SET VoucherDt = ".$this->data['voucherDt'].", VoucherType = ".$this->data['voucherType'].", PayMode = ".$this->data['payMode'].", ReferNo = ".$this->data['referNo'].", ReferDt = ".$this->data['referDt'].", DocNo = ".$this->data['docNo'].", DocAmount = ".$this->data['docAmount'].", Remarks = ".$this->data['remarks'].", LastAccessDate = now() WHERE RegCode = ".$this->regCode." AND AssetCode = ".$this->assetCode." AND VoucherNo = ".$this->data['voucherNo'];
 
         return $sql;
     }
@@ -85,13 +85,13 @@ class AssetVoucher
 
     function setVoucherImagePath(){
         $sql = "UPDATE Table164 SET PhotoUploaded = 1 WHERE RegCode = ".$this->regCode." AND AssetCode = ".$this->assetCode." AND VoucherNo = ".$this->data["voucherNo"].";";
-        $sql .= "DELETE FROM Table166 WHERE RegCode = ".$this->regCode." AND AssetCode = ".$this->assetCode." AND VoucherNo = ".$this->data["voucherNo"].";";
+        $sql .= "DELETE FROM Table166 WHERE RegCode = ".$this->regCode." AND AssetCode = ".$this->assetCode." AND SerialNo = ".$this->data["voucherNo"].";";
         $sql .= "INSERT INTO Table166 VALUES (".$this->regCode.",".$this->assetCode.",".$this->data["voucherNo"].",".$this->data["imagePath"].",101,null,null);";
         $this->runMultipleQuery($sql);
     }
 
     function deleteVoucherImage(){
-        $fileName = "../../../Assistant_Users/".$this->regCode."/asset/".$this->assetCode."/".$this->data["voucherNo"].".jpg";
+        $fileName = "../../../Assistant_Users/".$this->regCode."/assets/".$this->assetCode."/".$this->data["voucherNo"].".jpg";
         if(file_exists($fileName)){
             unlink($fileName);
         }
@@ -120,7 +120,7 @@ class AssetVoucher
 
     function getInsertQuery(){
         $voucherCode = $this->generateVoucherCode();
-        $sql = "INSERT INTO Table164 VALUES (".$this->regCode.", ".$this->assetCode.", ".$voucherCode.", ".$this->data['voucherDt'].", ".$this->data['payMode'].", ".$this->data['referNo'].", ".$this->data['referDt'].", ".$this->data['docNo'].", ".$this->data['docAmount'].", ".$this->data['remarks'].", 2, now())";
+        $sql = "INSERT INTO Table164 VALUES (".$this->regCode.", ".$this->assetCode.", ".$voucherCode.", ".$this->data['voucherDt'].", ".$this->data['voucherType'].", ".$this->data['payMode'].", ".$this->data['referNo'].", ".$this->data['referDt'].", ".$this->data['docNo'].", ".$this->data['docAmount'].", ".$this->data['remarks'].", 2, now())";
 
         return $sql;
     }
@@ -167,6 +167,7 @@ class AssetVoucher
             $this->data['referDt'] = implode("-", $dob);
         }
         $this->data['voucherDt'] = ((!empty($this->data['voucherDt'])) ? $this->data['voucherDt'] : NULL);
+        $this->data['voucherType'] = ((!empty($this->data['voucherType'])) ? $this->data['voucherType'] : NULL);
         $this->data['payMode'] = ((!empty($this->data['payMode'])) ? $this->data['payMode'] : NULL);
         $this->data['referNo'] = ((!empty($this->data['referNo'])) ? $this->data['referNo'] : NULL);
         $this->data['referDt'] = ((!empty($this->data['referDt'])) ? $this->data['referDt'] : NULL);
