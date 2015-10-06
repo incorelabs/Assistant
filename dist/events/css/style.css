@@ -291,10 +291,6 @@ h5 {
     border-bottom-left-radius: 0px !important;
 }
 
-.margin-left{
-    margin-left: 20%;
-}
-
 @media screen and (max-width: 768px){
     .btn-group-multiselect{
         width: 100%;
@@ -312,4 +308,14 @@ h5 {
     .margin-left{
         margin-left: 0;
     }
+}
+.btn-group-multiselect{
+    width: 100%;
+}
+.multiselect-col-margin{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.multiselect-dropdown-width{
+    width: 100%;
 }
