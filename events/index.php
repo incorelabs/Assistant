@@ -12,9 +12,10 @@ include_once ROOT . 'dist/authenticate.php';
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Assistant - Events</title>
     <?php
-    include_once ROOT.'dist/fetchCSS.php';
+    include_once ROOT . 'dist/fetchCSS.php';
     ?>
     <link rel="stylesheet" href="../dist/events/css/style.css"/>
+    <link rel="stylesheet" href="../dist/events/css/bootstrap-multiselect.css"/>
 </head>
 <body>
 <?php
@@ -67,7 +68,7 @@ echo $navbar_str;
 
         <div class="col-md-7 col-xs-12 col-sm-12 hidden-sm hidden-xs" id="eventsDetailsHeaderDiv">
             <div class="panel panel-default panelHeight list-margin">
-                <div class="panel-heading text-center" id="eventsDetailHeader" >
+                <div class="panel-heading text-center" id="eventsDetailHeader">
                     <h12>Event Details</h12>
                 </div>
             </div>
@@ -82,9 +83,10 @@ echo $navbar_str;
             <div class="panel panel-default panelHeight panel-margin" id="eventsListScroll">
                 <div class="panel-height">
                     <!-- List group -->
-                    <div id="eventsList" class="list-group force-scroll mobile-list">
+                    <div id="assetsList" class="list-group force-scroll mobile-list">
+                        <a href="#" class="list-group-item contacts_font"
+                           onclick="pageEvents.openEventsInviteListModal()">Test to open invite modal</a>
                     </div>
-                    <!--List close-->
                 </div>
             </div>
             <!--Panel-->
@@ -97,7 +99,9 @@ echo $navbar_str;
                     <!-- List group -->
                     <div class="list-group">
                         <div id="eventsDetailBody" class='list-group-item list-group-item-border'>
-                            <a href="inviteList/"><button class="btn btn-primary">Invite List</button></a>
+                            <a href="#" onclick="pageEvents.openEventsInviteListModal()">
+                                <button class="btn btn-primary">Invite List</button>
+                            </a>
                         </div>
                     </div>
                     <!--List close-->
@@ -185,7 +189,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-user hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" id="subEvents" name="subEvents"
+                                <input type="text" class="form-control text-field-left-border" id="subEvents"
+                                       name="subEvents"
                                        placeholder="Sub Events" aria-describedby="basic-addon1" tabindex="3" required/>
                             </div>
                         </div>
@@ -240,12 +245,140 @@ echo $navbar_str;
 </div>
 <!--modal-->
 
+<!--Invite List Modal -->
+<div class="modal fade" id="inviteListModal" tabindex="-1" role="dialog" aria-labelledby="inviteListModal"
+     aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" method="POST" action="controller.php" id="inviteListForm" autocomplete="off">
+                <div class="modal-header">
+                    <div class="form-group pull-left" style="margin-top:-5px">
+                        <a class="btn btn-danger button-top-remove" data-dismiss="modal">
+                            <span class='glyphicon glyphicon-remove'></span>
+                        </a>
+                    </div>
+                    <div class="form-group pull-right" style="margin-top:-5px">
+                        <button type="submit" class="btn btn-success button-top-remove">
+                            <span class='glyphicon glyphicon-ok'></span>
+                        </button>
+                    </div>
+                    <h4 id="eventsModalHeading" class="modal-title text-center">
+                        Invitees
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="form-group form-group-margin">
+                            <div class="col-md-6 col-sm-6 col-xs-12 multiselect-col-margin">
+                                <div class="input-group">
+                                    <span class="input-group-addon input-group-addon-label">State*</span>
+                                    <select id="statesSelection" multiple="multiple" class="form-control">
+                                        <option value='Andaman and Nicobar Islands'>Andaman and Nicobar</option>
+                                        <option value='Andhra Pradesh'>Andhra Pradesh</option>
+                                        <option value='Arunachal Pradesh'>Arunachal Pradesh</option>
+                                        <option value='Assam'>Assam</option>
+                                        <option value='Bihar'>Bihar</option>
+                                        <option value='Chandigarh'>Chandigarh</option>
+                                        <option value='Chhattisgarh'>Chhattisgarh</option>
+                                        <option value='Dadra and Nagar Haveli'>Dadra and Nagar Haveli</option>
+                                        <option value='Daman and Diu'>Daman and Diu</option>
+                                        <option value='Delhi'>Delhi</option>
+                                        <option value='Goa'>Goa</option>
+                                        <option value='Gujarat'>Gujarat</option>
+                                        <option value='Haryana'>Haryana</option>
+                                        <option value='Himachal Pradesh'>Himachal Pradesh</option>
+                                        <option value='Jammu and Kashmir'>Jammu and Kashmir</option>
+                                        <option value='Jharkhand'>Jharkhand</option>
+                                        <option value='Karnataka'>Karnataka</option>
+                                        <option value='Kerala'>Kerala</option>
+                                        <option value='Lakshadweep'>Lakshadweep</option>
+                                        <option value='Madhya Pradesh'>Madhya Pradesh</option>
+                                        <option value='Maharashtra'>Maharashtra</option>
+                                        <option value='Manipur'>Manipur</option>
+                                        <option value='Meghalaya'>Meghalaya</option>
+                                        <option value='Mizoram'>Mizoram</option>
+                                        <option value='Nagaland'>Nagaland</option>
+                                        <option value='Odisha'>Odisha</option>
+                                        <option value='Puducherry'>Puducherry</option>
+                                        <option value='Punjab'>Punjab</option>
+                                        <option value='Rajasthan'>Rajasthan</option>
+                                        <option value='Sikkim'>Sikkim</option>
+                                        <option value='Tamil Nadu'>Tamil Nadu</option>
+                                        <option value='Telengana'>Telengana</option>
+                                        <option value='Tripura'>Tripura</option>
+                                        <option value='Uttar Pradesh'>Uttar Pradesh</option>
+                                        <option value='Uttarakhand'>Uttarakhand</option>
+                                        <option value='West Bengal'>West Bengal</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 multiselect-col-margin top-padding">
+                                <div class="input-group">
+                                    <span class="input-group-addon input-group-addon-label">Cities*</span>
+                                    <select id="citiesSelection" multiple="multiple" class="form-control">
+                                        <option value="cheese">Cheese</option>
+                                        <option value="tomatoes">Tomatoes</option>
+                                        <option value="mozarella">Mozzarella</option>
+                                        <option value="mushrooms">Mushrooms</option>
+                                        <option value="pepperoni">Pepperoni</option>
+                                        <option value="onions">Onions</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 margin-left">
+                        <div class="form-group form-group-margin">
+                            <div class="input-group">
+                                <span class="input-group-addon input-group-addon-label">Groups*</span>
+                                <select id="groupsSelection" multiple="multiple" class="form-control">
+                                    <option value="cheese">Cheese</option>
+                                    <option value="tomatoes">Tomatoes</option>
+                                    <option value="mozarella">Mozzarella</option>
+                                    <option value="mushrooms">Mushrooms</option>
+                                    <option value="pepperoni">Pepperoni</option>
+                                    <option value="onions">Onions</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- Modal Body -->
+            </form>
+        </div>
+        <!--modal-content-->
+    </div>
+</div>
+<!-- Modal-->
+
 <?php
-include_once ROOT.'dist/fetchJS.php';
+include_once ROOT . 'dist/fetchJS.php';
 ?>
 <script src="../dist/events/script/script.js"></script>
+<script src="../dist/events/script/bootstrap-multiselect.js"></script>
+<script src="../dist/events/script/bootstrap-multiselect-collapsible-groups.js"></script>
 <script>
     var familyCode = '<?php echo $_SESSION['familyCode']; ?>';
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#statesSelection').multiselect({
+            maxHeight: 200,
+            includeSelectAllOption: true
+        });
+        $('#citiesSelection').multiselect({
+            maxHeight: 200,
+            includeSelectAllOption: true
+        });
+        $('#groupsSelection').multiselect({
+            maxHeight: 200,
+            includeSelectAllOption: true
+        });
+    });
 </script>
 </body>
 <div class="cover">

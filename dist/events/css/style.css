@@ -234,15 +234,14 @@ h5 {
 }
 
 .input-group-addon-label {
-    min-width: 105px;
-    font-size: 11px;
+    min-width: 80px;
     text-align: left;
 }
 
 @media screen and (min-width: 768px) {
     .input-group-addon-label {
         font-size: 14px;
-        min-width: 127px;
+        min-width: 80px;
         text-align: left;
     }
 }
@@ -275,4 +274,42 @@ h5 {
 
 .list-border-none {
     border: none;
+}
+
+.select-box{
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+}
+
+.btn-multi-custom{
+    background-color: white;
+    height: 40px;
+    border: 1px solid #cccccc;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0) !important;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0) !important;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+}
+
+.margin-left{
+    margin-left: 20%;
+}
+
+@media screen and (max-width: 768px){
+    .btn-group-multiselect{
+        width: 100%;
+    }
+    .multiselect-col-margin{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .multiselect-dropdown-width{
+        width: 100%;
+    }
+    .top-padding{
+        padding-top: 10px;
+    }
+    .margin-left{
+        margin-left: 0;
+    }
 }
