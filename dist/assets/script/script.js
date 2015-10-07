@@ -391,8 +391,8 @@ var pageAsset = {
         }).done(function (boughtFromList) {
             console.log(boughtFromList);
             for (var i = 0; i < boughtFromList.length; i++) {
-                pageAsset.boughtFromTag[i] = boughtFromList[i].BoughtFromName;
-                pageAsset.boughtFromCode[i] = boughtFromList[i].BoughtFrom;
+                pageAsset.boughtFromTag[i] = boughtFromList[i].FullName;
+                pageAsset.boughtFromCode[i] = boughtFromList[i].ContactCode;
             }
             console.log(pageAsset.boughtFromCode);
             console.log(pageAsset.boughtFromTag);
@@ -442,8 +442,8 @@ var pageAsset = {
         }).done(function (serviceCenterList) {
             console.log(serviceCenterList);
             for (var i = 0; i < serviceCenterList.length; i++) {
-                pageAsset.serviceCenterTag[i] = serviceCenterList[i].ServiceCentreName;
-                pageAsset.serviceCenterCode[i] = serviceCenterList[i].ServiceCentre;
+                pageAsset.serviceCenterTag[i] = serviceCenterList[i].FullName;
+                pageAsset.serviceCenterCode[i] = serviceCenterList[i].ContactCode;
             }
             console.log(pageAsset.serviceCenterCode);
             console.log(pageAsset.serviceCenterTag);
@@ -454,9 +454,9 @@ var pageAsset = {
     },
     setServiceCenterAutoComplete: function () {
         $("#serviceCentreName").autocomplete({
-            source: pageAsset.locationTag,
+            source: pageAsset.serviceCenterTag,
             response: function (event, ui) {
-                var index = $.inArray($(event.target).val(), pageAsset.locationTag);
+                var index = $.inArray($(event.target).val(), pageAsset.serviceCenterTag);
                 var formGroup = $(this).closest(".form-group");
                 if (index > -1) {
                     formGroup.addClass("has-warning");
@@ -478,9 +478,9 @@ var pageAsset = {
                 formGroup.removeClass("has-warning");
                 $(this).closest('.form-group').find('.info').empty();
 
-                var index = $.inArray(ui.item.value, pageAsset.locationTag);
+                var index = $.inArray(ui.item.value, pageAsset.serviceCenterTag);
                 console.log(index);
-                $("#serviceCentre").val(pageAsset.locationCode[index]);
+                $("#serviceCentre").val(pageAsset.serviceCenterCode[index]);
                 console.log($("#serviceCentre").val());
             }
         });
