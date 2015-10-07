@@ -700,7 +700,7 @@ echo $navbar_str;
 
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-globe fa-size"></i>
-                                        <input type="text" name="address[work][pincode]" id="pincode"
+                                        <input type="text" name="address[work][pincode]" id="workPincode"
                                                class="form-control text-field-left-border" placeholder="Pincode"
                                                tabindex="50"/>
                                     </div>
