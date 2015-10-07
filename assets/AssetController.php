@@ -38,6 +38,12 @@ class AssetController
         elseif($this->data["mode"] == "D"){
             $this->mode = 3;
         }
+        elseif ($this->data["mode"] == "AI") {
+            $this->mode = 4;
+        }
+        elseif ($this->data["mode"] == "DI") {
+            $this->mode = 5;
+        }
 
         //call respect methods based on mode
         switch($this->mode){
@@ -49,6 +55,9 @@ class AssetController
                 break;
             case 3:
                 $this->deleteAsset();
+                break;
+            case 4:
+                $this->setAssetImagePath();
                 break;
         }
     }
@@ -121,6 +130,16 @@ class AssetController
         $this->response['landing'] = $this->assetCode;
     }
 
+    function setAssetImagePath(){
+        $this->assetCode = $this->data["assetCode"];
+
+        $sql = "DELETE FROM Table166 WHERE RegCode = ".$this->regCode." AND AssetCode = ".$this->assetCode." AND SerialNo = ".$this->data["serialNo"].";";
+        $sql .= "INSERT INTO Table166 VALUES (".$this->regCode.",".$this->assetCode.",".$this->data["serialNo"].",'".$this->data["imagePath"]."',101,null,null);";
+
+        echo $sql;
+        $this->runMultipleQuery($sql);
+    }
+
     function splitName($name){
         $nameArr = array();
         $tempArr = explode(" ",$name);
@@ -169,10 +188,10 @@ class AssetController
             $serviceCentreName = $this->splitName($serviceCentreName);
         }
 
-        $broughtFromName = ((!empty($this->data["broughtFromName"])) ? $this->data['broughtFromName'] : array("null","null", "null"));
+        $boughtFromName = ((!empty($this->data["boughtFromName"])) ? $this->data['boughtFromName'] : array("null","null", "null"));
 
-        if(!empty($this->data["broughtFromName"])){
-            $broughtFromName = $this->splitName($broughtFromName);
+        if(!empty($this->data["boughtFromName"])){
+            $boughtFromName = $this->splitName($boughtFromName);
         }
 
         $assetCode = $this->assetCode;
@@ -181,8 +200,8 @@ class AssetController
         $holderCode = intval($this->data['holderCode']);
         $assetName = "'".$this->data["assetName"]."'";
         $jointHolder = ((!empty($this->data["jointHolder"])) ? "'".$this->data["jointHolder"]."'" : "NULL");
-        $broughtFrom = $this->data["broughtFrom"];
-        //$broughtFromName = "'".$this->data["broughtFromName"]."'";
+        $boughtFrom = $this->data["boughtFrom"];
+        //$boughtFromName = "'".$this->data["boughtFromName"]."'";
         $serviceCentre = ((!empty($this->data["serviceCentre"])) ? intval($this->data['serviceCentre']) : "NULL");
         $locationCode = ((!empty($this->data["locationCode"])) ? intval($this->data['locationCode']) : 1);
         $locationName = "'".$this->data["locationName"]."'";
@@ -210,7 +229,7 @@ class AssetController
             $sql .= "call spTable132(@locationCode, ".$locationName.", ".$this->regCode.", 1);";
         }
 
-        $sql .= "call spTable168(".$this->regCode.", @assetCode, @assetTypeCode, ".$holderCode.", ".$assetName.", ".$jointHolder.", ".$broughtFrom.", ".$broughtFromName[0].", ".$broughtFromName[1].", ".$broughtFromName[2].", ".$broughtFromName[3].", ".$serviceCentre.", ".$serviceCentreName[0].", ".$serviceCentreName[1].", ".$serviceCentreName[2].", ".$serviceCentreName[3].", @locationCode, ".$serialNo.", ".$modelName.", ".$remarks.", ".$billNo.", ".$billDate.", ".$warrantyUpto.", ".$purchaseAmount.", ".$inserted.", ".$private.", ".$active.", NOW(), ".$this->mode.");";
+        $sql .= "call spTable168(".$this->regCode.", @assetCode, @assetTypeCode, ".$holderCode.", ".$assetName.", ".$jointHolder.", ".$boughtFrom.", ".$boughtFromName[0].", ".$boughtFromName[1].", ".$boughtFromName[2].", ".$boughtFromName[3].", ".$serviceCentre.", ".$serviceCentreName[0].", ".$serviceCentreName[1].", ".$serviceCentreName[2].", ".$serviceCentreName[3].", @locationCode, ".$serialNo.", ".$modelName.", ".$remarks.", ".$billNo.", ".$billDate.", ".$warrantyUpto.", ".$purchaseAmount.", ".$inserted.", ".$private.", ".$active.", NOW(), ".$this->mode.");";
 
         //echo $sql;
         return $sql;

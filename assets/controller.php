@@ -38,7 +38,7 @@ do {
     }
 
     //Validate required fields
-    if (empty($_POST["holderCode"]) || empty($_POST["assetTypeName"]) || empty($_POST["assetTypeCode"]) || empty($_POST["assetName"]) || empty($_POST["broughtFrom"]) || empty($_POST["broughtFromName"]) || empty($_POST["locationCode"]) || empty($_POST["locationName"]) || empty($_POST["billDate"])) {
+    if (empty($_POST["holderCode"]) || empty($_POST["assetTypeName"]) || empty($_POST["assetTypeCode"]) || empty($_POST["assetName"]) || empty($_POST["boughtFrom"]) || empty($_POST["boughtFromName"]) || empty($_POST["locationCode"]) || empty($_POST["locationName"]) || empty($_POST["billDate"])) {
         $validate = false;
         $response = createResponse(0,"Required fields are empty");
         break;
