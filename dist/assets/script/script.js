@@ -326,7 +326,6 @@ var pageAsset = {
         }
 
         familyCode = temp;
-
     },
     openDeleteAssetModal: function(assetCode){
         $("#form-delete-code").val(assetCode);
