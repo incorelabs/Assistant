@@ -17,34 +17,61 @@ function createResponse($status,$message){
     return array('status' => $status, 'message' => $message);
 }
 
-function getFileName(){
-    global $mysqli;
+function getFileName($assetCode){
+    global $mysqli, $regCode;
     $fileName = 1;
-    $sql = "SELECT MAX(SerialNo) as 'SerialNo' FROM Table166 WHERE RegCode = 10001 and AssetCode = 1002 and SerialNo < 1000";
+    $sql = "SELECT MAX(SerialNo) as 'SerialNo' FROM Table166 WHERE RegCode = ".$regCode." and AssetCode = ".$assetCode." and SerialNo < 1000";
     if($result = $mysqli->query($sql)){
         $fileName = intval($result->fetch_assoc()["SerialNo"]);
-        echo "\n(Before)Serial No : ".$fileName;
         $fileName = (($fileName == 0) ? 1 : $fileName + 1);
-        echo "\n(After) Serial No : ".$fileName."\n";
     }
     return $fileName;
 }
 
+function getFileCount($assetCode){
+    global $mysqli, $regCode;
+    $count = 0;
+    $sql = "SELECT COUNT(*) as 'count' FROM Table166 WHERE RegCode = ".$regCode." and AssetCode = ".$assetCode." and SerialNo < 1000";
+
+    if($result = $mysqli->query($sql)){
+        $count = intval($result->fetch_assoc()["count"]);
+    }
+    return $count;
+}
+
 $mysqli = getConnection();
+$regCode = intval($_SESSION['s_id']);
+$assetCode = 1;
+$limit = 5;
 $response = createResponse(0,"Initialize");
 $validate = true;
 do{
     if(empty($_POST['assetCode']) || empty($_FILES["fileToUpload"])){
         $validate = false;
         $response = createResponse(0,"Invalid Request");
+        break;
     }
+
+    $assetCode = intval($_POST['assetCode']);
+    $count = getFileCount($assetCode);
+    if($count >= 5){
+        $validate = false;
+        $response = createResponse(0,"You cannot add more than five images");
+        break;
+    }
+    echo "\nCOUNT : ".$count;
+    echo "\nLimit : ".$limit;
+    //update limit
+    $limit = $limit - $count;
+    echo "\n(A)Limit : ".$limit;
+
 }while(0);
 
 if($validate){
     $files = array();
     $counter = 0;
     foreach ($_FILES['fileToUpload'] as $k => $l) {
-        if($counter == 5)
+        if($counter == $limit)
             break;
         foreach ($l as $i => $v) {
             if (!array_key_exists($i, $files))
@@ -53,6 +80,8 @@ if($validate){
         }
         $counter++;
     }
+
+    print_r($files);
 
     //upload files
     foreach ($files as $file) {
@@ -67,7 +96,7 @@ if($validate){
             $logo->forbidden = array('application/*');
 
             //upload
-            $serialNo = getFileName();
+            $serialNo = getFileName($assetCode);
             $logo->file_new_name_body = $serialNo;
             $logo->image_convert = 'jpg';
             $logo->file_overwrite = true;
@@ -75,7 +104,7 @@ if($validate){
             //echo $path;
             $logo->Process($path);
             if($logo->processed){
-                $path = "asset/".$_POST["assetCode"]."/".$logo->file_dst_name;
+                $path = "assets/".$_POST["assetCode"]."/".$logo->file_dst_name;
                 $data["mode"] = "AI";
                 $data["imagePath"] = $path;
                 $data['assetCode'] = intval($_POST['assetCode']);
@@ -95,3 +124,5 @@ if($validate){
         unset($logo);
     }
 }
+
+echo json_encode($response);

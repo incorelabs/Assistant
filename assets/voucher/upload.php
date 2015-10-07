@@ -45,7 +45,7 @@ if($validate) {
         //echo $path;
         $logo->Process($path);
         if($logo->processed){
-            $path = "asset/".$_POST["assetCode"]."/".$logo->file_dst_name;
+            $path = "assets/".$_POST["assetCode"]."/".$logo->file_dst_name;
             $_POST["mode"] = "AI";
             $_POST["imagePath"] = $path;
             $_POST['voucherNo'] = intval($_POST['voucherNo']);

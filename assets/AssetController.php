@@ -136,7 +136,6 @@ class AssetController
         $sql = "DELETE FROM Table166 WHERE RegCode = ".$this->regCode." AND AssetCode = ".$this->assetCode." AND SerialNo = ".$this->data["serialNo"].";";
         $sql .= "INSERT INTO Table166 VALUES (".$this->regCode.",".$this->assetCode.",".$this->data["serialNo"].",'".$this->data["imagePath"]."',101,null,null);";
 
-        echo $sql;
         $this->runMultipleQuery($sql);
     }
 
