@@ -36,7 +36,7 @@ echo $navbar_str;
 </div>
 <div class="container-fluid navbar-padding">
     <div class="row">
-        <div class="col-xs-12 col-md-5 col-padding" id="searchAssetsHeader">
+        <div class="col-xs-12 col-md-5 col-padding" id="searchAssetHeader">
             <div class="list-group list-margin">
                 <div class="list-group-item list-margin">
                     <div class="row">
@@ -55,7 +55,7 @@ echo $navbar_str;
                             </div>
                         </div>
                         <div>
-                            <button class="btn btn-primary btn-size" onclick="pageAssets.openAddAssetsModal();">
+                            <button class="btn btn-primary btn-size" onclick="pageAsset.openAddAssetModal();">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </button>
                         </div>
@@ -64,17 +64,17 @@ echo $navbar_str;
             </div>
         </div>
 
-        <div class="col-md-7 col-xs-12 col-sm-12 hidden-sm hidden-xs" id="assetsDetailHeaderDiv">
+        <div class="col-md-7 col-xs-12 col-sm-12 hidden-sm hidden-xs" id="assetDetailHeaderDiv">
             <div class="panel panel-default panelHeight list-margin" id="style-3">
-                <div id="assetsDetailHeader" class="panel-heading text-center">
-                    <h12 id='assetsDetailsTag'>Asset Details</h12>
-                    <button id='editAssetsBtn' class='btn btn-success pull-right btn-header-margin-left' onclick='pageAssets.openEditAssetsModal();'>
+                <div id="assetDetailHeader" class="panel-heading text-center">
+                    <h12 id='assetDetailsTag'>Asset Details</h12>
+                    <button id='editAssetBtn' class='btn btn-success pull-right btn-header-margin-left' onclick='pageAsset.openEditAssetModal();'>
                         <span class='glyphicon glyphicon-pencil'></span>
                     </button>
-                    <button id='deleteAssetsBtn' class='btn btn-danger pull-left' onclick='pageAssets.openDeleteAssetsModal()'>
+                    <button id='deleteAssetBtn' class='btn btn-danger pull-left' onclick='pageAsset.openDeleteAssetModal()'>
                         <span class='glyphicon glyphicon-trash'></span>
                     </button>
-                    <button id='voucherAssetsBtn' class='btn btn-info pull-right' onclick='pageAssets.openVoucherAssetsModal()'>
+                    <button id='voucherAssetBtn' class='btn btn-info pull-right' onclick='pageAsset.openVoucherAssetModal()'>
                         <span class='fa fa-sticky-note-o fa-lg'></span>
                     </button>
                 </div>
@@ -86,12 +86,11 @@ echo $navbar_str;
     <!--row-->
     <div class="row">
 
-        <div class="col-md-5 col-sm-12 col-xs-12 col-padding" id="assetsListDiv">
-            <div class="panel panel-default panelHeight panel-margin" id="assetsListScroll">
+        <div class="col-md-5 col-sm-12 col-xs-12 col-padding" id="assetListDiv">
+            <div class="panel panel-default panelHeight panel-margin" id="assetListScroll">
                 <div class="panel-height">
                     <!-- List group -->
-                    <div id="assetsList" class="list-group force-scroll mobile-list">
-                        <a class="list-group-item contacts_font" onclick="pageAssets.openAssetImageModal()">Audi R8</a>
+                    <div id="assetList" class="list-group force-scroll mobile-list">
                     </div>
                     <!--List close-->
                 </div>
@@ -100,141 +99,12 @@ echo $navbar_str;
         </div>
         <!--COL-->
 
-        <div class="col-md-7 col-sm-12 col-xs-12 hidden-sm hidden-xs" id="assetsDetailDiv">
-            <div id="assetsDetail" class="panel panel-default panelHeight panel-margin">
+        <div class="col-md-7 col-sm-12 col-xs-12 hidden-sm hidden-xs" id="assetDetailDiv">
+            <div id="assetDetail" class="panel panel-default panelHeight panel-margin">
                 <div class='panel-height'>
                     <!-- List group -->
                     <div class="list-group">
-                        <div id="assetsDetailBody" class='list-group-item list-group-item-border'>
-                            <div class="row contact-details row-top-padding">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3 image-details-padding">Images</div>
-                                    <value>
-                                        <div class="col-md-9">
-                                            <div class="image">
-                                                <a href="#" onclick="pageAssets.openAssetImageModal()" class="clickable">
-                                                    <img src="../img/default/preferences/logo.png" id='imageResource' alt='...' class='img-rounded img-size'/>
-                                                    <div class='overlay img-rounded'>
-                                                        <span class='glyphicon glyphicon-pencil overlay-icon'></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Holder's Name</div>
-                                    <value>
-                                        <div class="col-md-9">Darshan A Turakhia</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Asset Type</div>
-                                    <value>
-                                        <div class="col-md-9">Automobile</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Description</div>
-                                    <value>
-                                        <div class="col-md-9">Audi R8</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Bought From</div>
-                                    <value>
-                                        <div class="col-md-9">Audi Chennai</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Joint Holder Name</div>
-                                    <value>
-                                        <div class="col-md-9"></div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Model Number</div>
-                                    <value>
-                                        <div class="col-md-9">R8</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Serial Number</div>
-                                    <value>
-                                        <div class="col-md-9">x1231</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Remarks</div>
-                                    <value>
-                                        <div class="col-md-9">TN 01 R 8</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Bill No.</div>
-                                    <value>
-                                        <div class="col-md-9">1531</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Bill Date</div>
-                                    <value>
-                                        <div class="col-md-9">12/12/2012</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Asset Cost</div>
-                                    <value>
-                                        <div class="col-md-9">11441231</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Warranty Upto</div>
-                                    <value>
-                                        <div class="col-md-9">11/12/2014</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Service Center</div>
-                                    <value>
-                                        <div class="col-md-9">Saidapet Audi</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Document Location</div>
-                                    <value>
-                                        <div class="col-md-9">NA</div>
-                                    </value>
-                                </div>
-                            </div>
+                        <div id="assetDetailBody" class='list-group-item list-group-item-border'>
                         </div>
                     </div>
                     <!--List close-->
@@ -249,11 +119,11 @@ echo $navbar_str;
 <!--Container-->
 
 <!-- Add Asset Modal -->
-<div class="modal fade" id="assetsModal" tabindex="-1" role="dialog" aria-labelledby="assetsModal"
+<div class="modal fade" id="assetModal" tabindex="-1" role="dialog" aria-labelledby="assetModal"
      aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" method="POST" action="controller.php" id="assetsForm" autocomplete="off">
+            <form class="form-horizontal" method="POST" action="controller.php" id="assetForm" autocomplete="off">
                 <div class="modal-header">
                     <div class="form-group pull-left" style="margin-top:-5px">
                         <a class="btn btn-danger button-top-remove" data-dismiss="modal">
@@ -265,15 +135,16 @@ echo $navbar_str;
                             <span class='glyphicon glyphicon-ok'></span>
                         </button>
                     </div>
-                    <h4 id="assetsModalHeading" class="modal-title text-center">
+                    <h4 id="assetModalHeading" class="modal-title text-center">
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <input type="text" class="hidden" name="assetsTypeCode" id="assetsTypeCode" value="1"/>
-                    <input type="text" class="hidden" name="contactCode" id="contactCode" value="1"/>
-                    <input type="text" class="hidden" name="assetsCode" id="form-add-edit-code"/>
+                    <input type="text" class="hidden" name="assetTypeCode" id="assetTypeCode" value="1"/>
+                    <input type="text" class="hidden" name="boughtFrom" id="boughtFrom" value="1"/>
+                    <input type="text" class="hidden" name="locationCode" id="locationCode" value="1"/>
+                    <input type="text" class="hidden" name="serviceCentre" id="serviceCentre" value="1"/>
+                    <input type="text" class="hidden" name="assetCode" id="form-add-edit-code"/>
                     <input type="text" class="hidden" name="mode" id="form-add-edit-mode"/>
-
 
                     <div class="form-group form-group-margin">
                         <label class="col-xs-3 control-label">Private</label>
@@ -313,8 +184,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-key hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" name="assetsTypeName"
-                                       id="assetsTypeName" placeholder="Asset Type" tabindex="2" required/>
+                                <input type="text" class="form-control text-field-left-border" name="assetTypeName"
+                                       id="assetTypeName" placeholder="Asset Type" tabindex="2" required/>
                             </div>
                         </div>
                     </div>
@@ -324,8 +195,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" name="assetsName"
-                                       id="assetsName" placeholder="Description" tabindex="3" required/>
+                                <input type="text" class="form-control text-field-left-border" name="assetName"
+                                       id="assetName" placeholder="Description" tabindex="3" required/>
                             </div>
                         </div>
                     </div>
@@ -336,8 +207,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-user hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" name="boughtFrom"
-                                       id="boughtFrom" placeholder="Bought From" aria-describedby="basic-addon1" tabindex="4"
+                                <input type="text" class="form-control text-field-left-border" name="boughtFromName"
+                                       id="boughtFromName" placeholder="Bought From" aria-describedby="basic-addon1" tabindex="4"
                                        required/>
                             </div>
                         </div>
@@ -359,8 +230,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-globe fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" name="serviceCenter"
-                                       id="serviceCenter" placeholder="Service Center" tabindex="13"/>
+                                <input type="text" class="form-control text-field-left-border" name="serviceCentreName"
+                                       id="serviceCentreName" placeholder="Service Center" tabindex="6"/>
                             </div>
                         </div>
                     </div>
@@ -370,8 +241,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-globe fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" name="documentLocation"
-                                       id="documentLocation" placeholder="Document Location" tabindex="14" required/>
+                                <input type="text" class="form-control text-field-left-border" name="locationName"
+                                       id="locationName" placeholder="Document Location" tabindex="7" required/>
                             </div>
                         </div>
                     </div>
@@ -381,9 +252,9 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" name="billNumber"
-                                       id="billNumber" placeholder="Bill Number" aria-describedby="basic-addon1"
-                                       tabindex="9"/>
+                                <input type="text" class="form-control text-field-left-border" name="billNo"
+                                       id="billNo" placeholder="Bill Number" aria-describedby="basic-addon1"
+                                       tabindex="8"/>
                             </div>
                         </div>
                     </div>
@@ -395,7 +266,7 @@ echo $navbar_str;
                                 <i class="fa fa-calendar hidden-xs fa-size"></i>
                                 <input type="text" class="form-control text-field-left-border date" name="billDate"
                                        id="billDate" placeholder="DD/MM/YYYY" aria-describedby="basic-addon1"
-                                       tabindex="10" required/>
+                                       tabindex="9" required/>
                             </div>
                         </div>
                         <div class="info"></div>
@@ -406,11 +277,12 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" name="assetCost"
-                                       id="assetCost" placeholder="Asset Cost" aria-describedby="basic-addon1"
-                                       tabindex="11"/>
+                                <input type="text" class="form-control text-field-left-border" name="purchaseAmount"
+                                       id="purchaseAmount" placeholder="Asset Cost" aria-describedby="basic-addon1"
+                                       tabindex="10"/>
                             </div>
                         </div>
+                        <div class="info"></div>
                     </div>
                     <div class="form-group form-group-margin">
                         <div class="input-group">
@@ -418,9 +290,9 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-calendar hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border date" name="warrantyDate"
-                                       id="warrantyDate" placeholder="DD/MM/YYYY" aria-describedby="basic-addon1"
-                                       tabindex="12"/>
+                                <input type="text" class="form-control text-field-left-border date" name="warrantyUpto"
+                                       id="warrantyUpto" placeholder="DD/MM/YYYY" aria-describedby="basic-addon1"
+                                       tabindex="11"/>
                             </div>
                         </div>
                         <div class="info"></div>
@@ -431,8 +303,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" name="modelNumber"
-                                       id="modelNumber" placeholder="Model Name" tabindex="6"/>
+                                <input type="text" class="form-control text-field-left-border" name="modelName"
+                                       id="modelName" placeholder="Model Name" tabindex="12"/>
                             </div>
                         </div>
                     </div>
@@ -442,8 +314,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" name="serialNumber"
-                                       id="serialNumber" placeholder="Serial Number" tabindex="7"/>
+                                <input type="text" class="form-control text-field-left-border" name="serialNo"
+                                       id="serialNo" placeholder="Serial Number" tabindex="13"/>
                             </div>
                         </div>
                     </div>
@@ -453,9 +325,9 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" name="assetsRemarks"
-                                       id="assetsRemarks" placeholder="Remarks" aria-describedby="basic-addon1"
-                                       tabindex="8"/>
+                                <input type="text" class="form-control text-field-left-border" name="remarks"
+                                       id="remarks" placeholder="Remarks" aria-describedby="basic-addon1"
+                                       tabindex="14"/>
                             </div>
                         </div>
                     </div>
@@ -483,7 +355,7 @@ echo $navbar_str;
                 <div class="modal-body">
                     <div class="btn-group">
                         <form method="POST" action="controller.php" id="deleteAssetForm">
-                            <input type="text" class="hidden" name="assetsCode" id="form-delete-code"/>
+                            <input type="text" class="hidden" name="assetCode" id="form-delete-code"/>
                             <input type="text" class="hidden" name="mode" id="form-delete-mode" value="D"/>
                             <button class="btn btn-danger modal_button" type="submit">
                                 <span class='glyphicon glyphicon-ok'></span>&nbsp
@@ -541,7 +413,7 @@ echo $navbar_str;
 
                 <div class="modal-body">
                     <input type="text" class="hidden" name="voucherNo" id='photoId'/>
-                    <input type="text" class="hidden" name="expenseCode" id='expenseCodeForImage'/>
+                    <input type="text" class="hidden" name="assetCode" id='assetCodeForImage'/>
 
                     <div class="form-group row">
                         <center>
@@ -551,7 +423,7 @@ echo $navbar_str;
                                     <br>
                                     <br>
                                     <div class='input-group'>
-                                        <input id='expenseImgInputPath' name='expenseImgInputPath' class='form-control' placeholder='Choose File' disabled='disabled' />
+                                        <input id='assetImgInputPath' name='assetImgInputPath' class='form-control' placeholder='Choose File' disabled='disabled' />
                                         <div class='input-group-btn'>
                                             <div class='fileUpload btn btn-primary'>
                                                 <span>Upload</span>
@@ -590,19 +462,19 @@ echo $navbar_str;
                 <div class="modal-footer">
                     <div class="row">
                         <div class="image text-center image-horizontal-scroll">
-                            <a href="#" onclick="pageAssets.changeImage('../img/default/preferences/logo.png')" class="clickable">
+                            <a href="#" onclick="pageAsset.changeImage('../img/default/preferences/logo.png')" class="clickable">
                                 <img src="../img/default/preferences/logo.png" id='imageResource' class='img-thumbnail modal-img-size'/>
                             </a>
-                            <a href="#" onclick="pageAssets.changeImage('../img/index/assets.png')" class="clickable">
+                            <a href="#" onclick="pageAsset.changeImage('../img/index/assets.png')" class="clickable">
                                 <img src="../img/index/assets.png" id='imageResource' class='img-thumbnail modal-img-size'/>
                             </a>
-                            <a href="#" onclick="pageAssets.changeImage('../img/index/cars.png')" class="clickable">
+                            <a href="#" onclick="pageAsset.changeImage('../img/index/cars.png')" class="clickable">
                                 <img src="../img/index/cars.png" id='imageResource' class='img-thumbnail modal-img-size'/>
                             </a>
-                            <a href="#" onclick="pageAssets.changeImage('../img/index/contacts.png')" class="clickable">
+                            <a href="#" onclick="pageAsset.changeImage('../img/index/contacts.png')" class="clickable">
                                 <img src="../img/index/contacts.png" id='imageResource' class='img-thumbnail modal-img-size'/>
                             </a>
-                            <a href="#" onclick="pageAssets.changeImage('../img/index/shares.png')" class="clickable">
+                            <a href="#" onclick="pageAsset.changeImage('../img/index/shares.png')" class="clickable">
                                 <img src="../img/index/shares.png" id='imageResource' class='img-thumbnail modal-img-size'/>
                             </a>
                         </div>
