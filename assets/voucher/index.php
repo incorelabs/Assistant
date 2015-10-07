@@ -38,13 +38,13 @@ echo $navbar_str;
     </div>
     <div class="row button-top-margin" style="position:relative;">
         <div class="text-left">
-            <button class="btn btn-primary" id="btnAddVoucher" onclick="pageAssetsVoucher.navigateBack();">
+            <button class="btn btn-primary" id="btnAddVoucher" onclick="pageAssetVoucher.navigateBack();">
                 <i class="fa fa-arrow-left fa-lg"></i>
             </button>
         </div>
         <div class="text-center row-desc-margin"><h4 id="voucherHeader"></h4></div>
         <div class="text-right row-right-btn-margin">
-            <button class="btn btn-primary" id="btnAddVoucher" onclick="pageAssetsVoucher.openAddVoucherModal();">
+            <button class="btn btn-primary" id="btnAddVoucher" onclick="pageAssetVoucher.openAddVoucherModal();">
                 <i class="fa fa-plus fa-lg"></i>
             </button>
         </div>
@@ -53,33 +53,20 @@ echo $navbar_str;
         <table class="table table-top-margin borderless">
             <thead>
             <tr class="text-left">
-                <th class="col-md-1 col-sm-1 col-xs-1">#</th>
-                <th class="col-md-1 col-sm-1 col-xs-1">Image</th>
-                <th class="col-md-1 hidden-sm hidden-xs">Type</th>
-                <th class="col-md-1 hidden-sm hidden-xs">Date</th>
-                <th class="col-md-1 hidden-sm hidden-xs">Payment</th>
-                <th class="col-md-1 hidden-sm hidden-xs">Ref No.</th>
-                <th class="col-md-1 hidden-sm hidden-xs">Ref Date.</th>
-                <th class="col-md-1 hidden-sm hidden-xs">Receipt No.</th>
-                <th class="col-md-1 col-sm-1 col-xs-1">Amount</th>
-                <th class="col-md-1 col-sm-1 col-xs-1 hidden-xs hidden-sm">Remarks</th>
+                <th class="col-md-1 col-sm-1 col-xs-1 text-left">#</th>
+                <th class="col-md-1 col-sm-1 col-xs-1 text-left">Image</th>
+                <th class="col-md-1 hidden-sm hidden-xs text-left">Type</th>
+                <th class="col-md-1 hidden-sm hidden-xs text-left">Date</th>
+                <th class="col-md-1 hidden-sm hidden-xs text-left">Payment</th>
+                <th class="col-md-1 hidden-sm hidden-xs text-left">Chq/DD No.</th>
+                <th class="col-md-1 hidden-sm hidden-xs text-left">Chq/DD Date.</th>
+                <th class="col-md-1 hidden-sm hidden-xs text-left">Receipt No.</th>
+                <th class="col-md-1 col-sm-1 col-xs-1 text-left">Amount</th>
+                <th class="col-md-1 col-sm-1 col-xs-1 hidden-xs hidden-sm text-left">Remarks</th>
                 <th class="col-md-1 col-sm-1 col-xs-1">Actions</th>
             </tr>
             </thead>
             <tbody id="table-body">
-                <tr class="text-left">
-                    <td class="col-md-1 col-sm-1 col-xs-1 text-middle">1</td>
-                    <td class="col-md-1 col-sm-1 col-xs-1 text-middle"><div class="image"><a href="#" onclick="pageAssetsVoucher.openLogoVoucherModal()" class="clickable"><img src="../../img/default/preferences/logo.png" id='imageResource' alt='...' class='img-rounded img-size'/><div class='overlay img-rounded'><span class='glyphicon glyphicon-pencil overlay-icon'></span></div></a></div></td>
-                    <td class="col-md-1 hidden-sm hidden-xs text-middle">Test</td>
-                    <td class="col-md-1 hidden-sm hidden-xs text-middle">12/12/2015</td>
-                    <td class="col-md-1 hidden-sm hidden-xs text-middle">Cash</td>
-                    <td class="col-md-1 hidden-sm hidden-xs text-middle">123</td>
-                    <td class="col-md-1 hidden-sm hidden-xs text-middle">12/12/2015</td>
-                    <td class="col-md-1 hidden-sm hidden-xs text-middle">1</td>
-                    <td class="col-md-1 col-sm-1 col-xs-1 text-middle">12000</td>
-                    <td class="col-md-1 hidden-sm hidden-xs text-middle">-</td>
-                    <td class="col-md-1 col-sm-1 col-xs-1 text-middle"><a href="#" onclick="pageAssetsVoucher.openEditVoucherModal()"><i class="fa fa-pencil fa-green fa-lg"></i></a><a href="#" onclick="pageAssetsVoucher.openDeleteVoucherModal()" class="action-btn-padding"><i class="fa fa-trash-o fa-red fa-lg"></i></a></td>
-                </tr>
             </tbody>
         </table>
     </div>
@@ -107,7 +94,7 @@ echo $navbar_str;
                     </h4>
                 </div>
                 <input type="text" class="hidden" name="voucherNo" id="form-add-edit-code"/>
-                <input type="text" class="hidden" name="assetsCode" id="assetsCodeForAddEditVoucher"/>
+                <input type="text" class="hidden" name="assetCode" id="assetCodeForAddEditVoucher"/>
                 <input type="text" class="hidden" name="mode" id="form-add-edit-mode"/>
 
                 <div class="modal-body">
@@ -256,7 +243,7 @@ echo $navbar_str;
                     <div class="btn-group">
                         <form method="POST" action="controller.php" id="deleteVoucherForm">
                             <input type="text" class="hidden" name="voucherNo" id="form-delete-code"/>
-                            <input type="text" class="hidden" name="assetsCode" id="assetsCodeForDeleteVoucher"/>
+                            <input type="text" class="hidden" name="assetCode" id="assetCodeForDeleteVoucher"/>
                             <input type="text" class="hidden" name="mode" id="form-delete-mode" value="D"/>
                             <button class="btn btn-danger modal_button" type="submit">
                                 <span class='glyphicon glyphicon-ok'></span>&nbsp
@@ -313,7 +300,7 @@ echo $navbar_str;
 
                 <div class="modal-body">
                     <input type="text" class="hidden" name="voucherNo" id='photoId'/>
-                    <input type="text" class="hidden" name="assetsCode" id='assetsCodeForImage'/>
+                    <input type="text" class="hidden" name="assetCode" id='assetCodeForImage'/>
 
                     <div class="form-group row">
                         <center>
@@ -323,7 +310,7 @@ echo $navbar_str;
                                     <br>
                                     <br>
                                     <div class='input-group'>
-                                        <input id='assetsImgInputPath' name='assetsImgInputPath' class='form-control' placeholder='Choose File' disabled='disabled' />
+                                        <input id='assetImgInputPath' name='assetImgInputPath' class='form-control' placeholder='Choose File' disabled='disabled' />
                                         <div class='input-group-btn'>
                                             <div class='fileUpload btn btn-primary'>
                                                 <span>Upload</span>
@@ -336,7 +323,7 @@ echo $navbar_str;
 
                                     <div class="delete-btn-padding">
                                         <button type="button" class="btn btn-danger" id="deleteImageBtn"
-                                                onclick="pageAssetsVoucher.deleteCurrentLogo();">
+                                                onclick="pageAssetVoucher.deleteCurrentLogo();">
                                             Delete Image
                                         </button>
                                     </div>
