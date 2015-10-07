@@ -59,29 +59,21 @@ do{
         $response = createResponse(0,"You cannot add more than five images");
         break;
     }
-    echo "\nCOUNT : ".$count;
-    echo "\nLimit : ".$limit;
-    //update limit
-    $limit = $limit - $count;
-    echo "\n(A)Limit : ".$limit;
 
 }while(0);
 
 if($validate){
+
     $files = array();
     $counter = 0;
+    $files = array();
     foreach ($_FILES['fileToUpload'] as $k => $l) {
-        if($counter == $limit)
-            break;
         foreach ($l as $i => $v) {
             if (!array_key_exists($i, $files))
                 $files[$i] = array();
             $files[$i][$k] = $v;
         }
-        $counter++;
     }
-
-    print_r($files);
 
     //upload files
     foreach ($files as $file) {
