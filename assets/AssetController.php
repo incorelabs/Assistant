@@ -181,13 +181,13 @@ class AssetController
             $this->data['warrantyUpto'] = implode("-", $dob);
         }
 
-        $serviceCentreName = ((!empty($this->data["serviceCentreName"])) ? $this->data['serviceCentreName'] : array("null","null", "null"));
+        $serviceCentreName = ((!empty($this->data["serviceCentreName"])) ? $this->data['serviceCentreName'] : array("null","null", "null","null"));
 
         if(!empty($this->data["serviceCentreName"])){
             $serviceCentreName = $this->splitName($serviceCentreName);
         }
 
-        $boughtFromName = ((!empty($this->data["boughtFromName"])) ? $this->data['boughtFromName'] : array("null","null", "null"));
+        $boughtFromName = ((!empty($this->data["boughtFromName"])) ? $this->data['boughtFromName'] : array("null","null", "null","null"));
 
         if(!empty($this->data["boughtFromName"])){
             $boughtFromName = $this->splitName($boughtFromName);
