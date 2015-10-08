@@ -25,7 +25,7 @@ class ImageController
     }
 
     function getImageList(){
-        $sql = "SELECT * FROM Table166 WHERE RegCode = ".$this->regCode." AND AssetCode = ".$this->assetCode." AND SerialNo < 1000";
+        $sql = "SELECT RegCode, AssetCode, SerialNo, ImagePath FROM Table166 WHERE RegCode = ".$this->regCode." AND AssetCode = ".$this->assetCode." AND SerialNo < 1000";
 
         $this->response = $this->createResponse(0,"No images");
         if($result = $this->mysqli->query($sql)){
