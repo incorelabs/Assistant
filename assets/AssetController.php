@@ -216,6 +216,10 @@ class AssetController
         $active = (empty($this->data["activeFlag"]) ? 2 : 1);
         $this->active = $active;
 
+        if(empty($this->data["serviceCentreName"])){
+            $serviceCentre = "NULL";
+        }
+
         $sql = "set @assetCode = ".$assetCode.";";
         $sql .= "set @assetTypeCode = ".$assetTypeCode.";";
         $sql .= "set @locationCode = ".$locationCode.";";
