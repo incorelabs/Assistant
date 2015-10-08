@@ -36,7 +36,7 @@ do{
         break;
     }
 
-    if(empty($_POST["voucherDt"]) || empty($_POST["payMode"]) || empty($_POST["voucherType"]) || empty($_POST["docAmount"])){
+    if(empty($_POST["voucherDt"]) || empty($_POST["payMode"]) || empty($_POST["voucherType"])){
         $validate = false;
         $response = createResponse(0,"Required Fields are empty");
         break;

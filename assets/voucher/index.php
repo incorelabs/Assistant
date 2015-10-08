@@ -195,13 +195,13 @@ echo $navbar_str;
                     </div>
                     <div class="form-group form-group-margin">
                         <div class="input-group">
-                            <span class="input-group-addon input-group-addon-label">Amount*</span>
+                            <span class="input-group-addon input-group-addon-label">Amount</span>
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-money hidden-xs fa-size"></i>
                                 <input type="text" name="docAmount" id="docAmount"
                                        class="form-control text-field-left-border" placeholder="Amount"
-                                       aria-describedby="basic-addon1" tabindex="7" required/>
+                                       aria-describedby="basic-addon1" tabindex="7" />
                             </div>
                         </div>
                         <div class="info"></div>
