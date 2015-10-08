@@ -43,13 +43,17 @@ class ImageController
 
     function deleteImage($serialNo=null){
         if(is_null($serialNo)){
-            for($i=1; $i<6; $i++){
-                //Delete Image file
-                $fileName = "../../Assistant_Users/".$this->regCode."/assets/".$this->assetCode."/".$i.".jpg";
-                $this->deleteImageFile($fileName);
+            $sql = "SELECT SerialNo FROM Table166 WHERE RegCode = ".$this->regCode." AND AssetCode = ".$this->assetCode." AND SerialNo < 1000";
+            if($result = $this->mysqli->query($sql)){
+                if($result->num_rows > 0){
+                    while($serialNo = $result->fetch_assoc()["SerialNo"]){
+                        $fileName = "../../Assistant_Users/".$this->regCode."/assets/".$this->assetCode."/".$serialNo.".jpg";
+                        $this->deleteImageFile($fileName);
 
-                $sql = "DELETE FROM Table166 WHERE RegCode = ".$this->regCode." AND AssetCode = ".$this->assetCode." AND SerialNo = ".$i;
-                $this->mysqli->query($sql) or die($this->mysqli->error);
+                        $sql = "DELETE FROM Table166 WHERE RegCode = ".$this->regCode." AND AssetCode = ".$this->assetCode." AND SerialNo = ".$serialNo;
+                        $this->mysqli->query($sql) or die($this->mysqli->error);
+                    }
+                }
             }
         }
         else{
