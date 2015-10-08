@@ -59,6 +59,8 @@ do{
         $response = createResponse(0,"You cannot add more than five images");
         break;
     }
+    //update limit
+    $limit = $limit - $count;
 
 }while(0);
 
@@ -77,6 +79,8 @@ if($validate){
 
     //upload files
     foreach ($files as $file) {
+        if($counter == $limit)
+            break;
         $logo = new upload($file);
         if($logo->uploaded){
             //check upload size
@@ -114,6 +118,18 @@ if($validate){
             $response = createResponse(0,$logo->error);
         }
         unset($logo);
+        $counter++;
+    }
+
+    if(count($files) > $limit){
+        switch($limit){
+            case 1:
+                $response = createResponse(1,"Only ".$limit." image was uploaded");
+                break;
+
+            default:
+                $response = createResponse(1,"Only ".$limit." images were uploaded");
+        }
     }
 }
 
