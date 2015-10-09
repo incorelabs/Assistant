@@ -333,10 +333,10 @@
             disableIfEmpty: false,
             delimiterText: ', ',
             templates: {
-                button: '<button type="button" class="multiselect btn-group-multiselect dropdown-toggle" data-toggle="dropdown"><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',
+                button: '<button type="button" class="multiselect btn-group-multiselect dropdown-toggle" data-toggle="dropdown"><span class="multiselect-selected-text label-position"></span> <b class="fa fa-caret-down caret-down-position"></b></button>',
                 ul: '<ul class="multiselect-container dropdown-menu multiselect-dropdown-width"></ul>',
-                filter: '<li class="multiselect-item filter"><div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input class="form-control multiselect-search" type="text"></div></li>',
-                filterClearBtn: '<span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span>',
+                filter: '<li class="multiselect-item filter multiselect-search"><div class="input-group"><input class="form-control multiselect-search" type="text"></div></li>',
+                filterClearBtn: '<span class="input-group-btn"><button class="btn btn-danger multiselect-clear-filter" type="button"><i class="glyphicon glyphicon-remove-circle"></i></button></span>',
                 li: '<li><a tabindex="0"><label></label></a></li>',
                 divider: '<li class="multiselect-item divider"></li>',
                 liGroup: '<li class="multiselect-item multiselect-group"><label></label></li>'
