@@ -327,11 +327,11 @@ $(document).ready(function () {
                     }
                 }
             }
-            $(".progress").show();
+            $("#envelopeSettingsUploadProgress").removeClass("hidden");
         },
         uploadProgress: function (event, position, total, percentComplete) {
-            $(".progress-bar").width(percentComplete + "%");
-            $("#progressValue").html(percentComplete + "% complete");
+            $("#envelopeSettingsUploadProgressBar").width(percentComplete + "%");
+            $("#envelopeSettingsUploadProgressValue").html(percentComplete + "% complete");
         },
         success: function (responseText, statusText, xhr, $form) {
             console.log(responseText);
@@ -341,19 +341,17 @@ $(document).ready(function () {
                 setTimeout(function () {
                     pageEnvelopeSettings.getEnvelopeList();
                 }, 200);
-                $(".progress").hide();
+                $("#envelopeSettingsUploadProgress").addClass("hidden");
             } else {
                 app.showNotificationFailure(response.message);
-                $(".progress").hide();
+                $("#envelopeSettingsUploadProgress").addClass("hidden");
             }
         },
         error: function () {
             app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
-            $(".progress").hide();
+            $("#envelopeSettingsUploadProgress").addClass("hidden");
         }
     });
-
-    $(".progress").hide();
 
     $("#envelopeSettingsForm").ajaxForm({
         beforeSubmit: function (formData) {

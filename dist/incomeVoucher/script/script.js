@@ -291,11 +291,11 @@ $(document).ready(function () {
                     }
                 }
             }
-            $(".progress").show();
+            $("#incomeVoucherUploadProgress").removeClass("hidden");
         },
         uploadProgress: function (event, position, total, percentComplete) {
-            $(".progress-bar").width(percentComplete + "%");
-            $("#progressValue").html(percentComplete + "% complete");
+            $("#incomeVoucherUploadProgressBar").width(percentComplete + "%");
+            $("#incomeVoucherUploadProgressValue").html(percentComplete + "% complete");
         },
         success: function (responseText, statusText, xhr, $form) {
             console.log(responseText);
@@ -305,19 +305,17 @@ $(document).ready(function () {
                 setTimeout(function () {
                     pageIncomeVoucher.getVoucherList();
                 }, 200);
-                $(".progress").hide();
+                $("#incomeVoucherUploadProgress").addClass("hidden");
             } else {
                 app.showNotificationFailure(response.message);
-                $(".progress").hide();
+                $("#incomeVoucherUploadProgress").addClass("hidden");
             }
         },
         error: function () {
             app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
-            $(".progress").hide();
+            $("#incomeVoucherUploadProgress").addClass("hidden");
         }
     });
-
-    $(".progress").hide();
 
     $("#voucherForm").ajaxForm({
         beforeSubmit: function (formData) {

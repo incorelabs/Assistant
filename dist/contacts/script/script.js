@@ -1248,11 +1248,11 @@ $(document).ready(function (event) {
                     }
                 }
             }
-            $(".progress").show();
+            $("#contactUploadProgress").removeClass("hidden");
         },
         uploadProgress: function (event, position, total, percentComplete) {
-            $(".progress-bar").width(percentComplete + "%");
-            $("#progressValue").html(percentComplete + "% complete");
+            $("#contactUploadProgressBar").width(percentComplete + "%");
+            $("#contactUploadProgressValue").html(percentComplete + "% complete");
         },
         success: function (responseText, statusText, xhr, $form) {
             console.log(responseText);
@@ -1261,15 +1261,15 @@ $(document).ready(function (event) {
                 $("#imageModal").modal('hide');
                 $("#imageResource").attr("src", app.websiteRoot + "img/getImage.php?file=" + response.location + "&rand=" + new Date().getTime());
                 pageContact.localContact.contact.ImageURL = response.location;
-                $(".progress").hide();
+                $("#contactUploadProgress").addClass("hidden");
             } else {
                 app.showNotificationFailure(response.message);
-                $(".progress").hide();
+                $("#contactUploadProgress").addClass("hidden");
             }
         },
         error: function () {
             app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
-            $(".progress").hide();
+            $("#contactUploadProgress").addClass("hidden");
         }
     });
 
@@ -1278,8 +1278,6 @@ $(document).ready(function (event) {
             $('#addTitle').focus();
         }
     });
-
-    $(".progress").hide();
 
     $("#deleteContactForm").ajaxForm({
         beforeSubmit: function (formData, $form, options) {

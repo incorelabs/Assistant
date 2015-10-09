@@ -317,11 +317,11 @@ $(document).ready(function () {
                     }
                 }
             }
-            $(".progress").show();
+            $("#assetVoucherUploadProgress").removeClass("hidden");
         },
         uploadProgress: function (event, position, total, percentComplete) {
-            $(".progress-bar").width(percentComplete + "%");
-            $("#progressValue").html(percentComplete + "% complete");
+            $("#assetVoucherUploadProgressBar").width(percentComplete + "%");
+            $("#assetVoucherUploadProgressValue").html(percentComplete + "% complete");
         },
         success: function (responseText, statusText, xhr, $form) {
             console.log(responseText);
@@ -331,19 +331,17 @@ $(document).ready(function () {
                 setTimeout(function () {
                     pageAssetVoucher.getVoucherList();
                 }, 200);
-                $(".progress").hide();
+                $("#assetVoucherUploadProgress").addClass("hidden");
             } else {
                 app.showNotificationFailure(response.message);
-                $(".progress").hide();
+                $("#assetVoucherUploadProgress").addClass("hidden");
             }
         },
         error: function () {
             app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
-            $(".progress").hide();
+            $("#assetVoucherUploadProgress").addClass("hidden");
         }
     });
-
-    $(".progress").hide();
 
     $("#voucherForm").ajaxForm({
         beforeSubmit: function (formData) {

@@ -1107,10 +1107,10 @@ echo $navbar_str;
                     </div>
                 </div>
             </form>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+            <div class="progress hidden" id="contactUploadProgress">
+                <div class="progress-bar" id="contactUploadProgressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
                      style="width: 0%;">
-                    <span class="sr-only" id="progressValue">0% Complete</span>
+                    <span class="sr-only" id="contactUploadProgressValue">0% Complete</span>
                 </div>
             </div>
         </div>

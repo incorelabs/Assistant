@@ -779,8 +779,6 @@ $(document).ready(function () {
         }
     });
 
-    $(".progress").hide();
-
     $('#imageModal').on('show.bs.modal', function () {
         document.getElementById("imageForm").reset();
         $("#assetCodeForImage").val(pageAsset.localAsset.asset.AssetCode);
@@ -809,12 +807,12 @@ $(document).ready(function () {
                 formData.push(fileObject);
             }
             console.log(formData);
-            $(".progress").show();
+            $("#assetUploadProgress").removeClass("hidden");
             pageAsset.uploadImageList = [];
         },
         uploadProgress: function (event, position, total, percentComplete) {
-            $(".progress-bar").width(percentComplete + "%");
-            $("#progressValue").html(percentComplete + "% complete");
+            $("#assetUploadProgressBar").width(percentComplete + "%");
+            $("#assetUploadProgressValue").html(percentComplete + "% complete");
         },
         complete: function (xhr) {
             var responseText = xhr.responseText;
@@ -822,15 +820,15 @@ $(document).ready(function () {
             if (response.status == 1) {
                 pageAsset.getImageList(pageAsset.localAsset.asset.AssetCode);
                 $("#imageModal").modal('hide');
-                $(".progress").hide();
+                $("#assetUploadProgress").addClass("hidden");
             } else {
                 app.showNotificationFailure(response.message);
-                $(".progress").hide();
+                $("#assetUploadProgress").addClass("hidden");
             }
         },
         error: function () {
             app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
-            $(".progress").hide();
+            $("#assetUploadProgress").addClass("hidden");
         }
     });
 

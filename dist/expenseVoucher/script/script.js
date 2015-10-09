@@ -291,11 +291,11 @@ $(document).ready(function () {
                     }
                 }
             }
-            $(".progress").show();
+            $("#expenseVoucherUploadProgress").removeClass("hidden");
         },
         uploadProgress: function (event, position, total, percentComplete) {
-            $(".progress-bar").width(percentComplete + "%");
-            $("#progressValue").html(percentComplete + "% complete");
+            $("#expenseVoucherUploadProgressBar").width(percentComplete + "%");
+            $("#expenseVoucherUploadProgressValue").html(percentComplete + "% complete");
         },
         success: function (responseText, statusText, xhr, $form) {
             console.log(responseText);
@@ -305,19 +305,17 @@ $(document).ready(function () {
                 setTimeout(function () {
                     pageExpenseVoucher.getVoucherList();
                 }, 200);
-                $(".progress").hide();
+                $("#expenseVoucherUploadProgress").addClass("hidden");
             } else {
                 app.showNotificationFailure(response.message);
-                $(".progress").hide();
+                $("#expenseVoucherUploadProgress").addClass("hidden");
             }
         },
         error: function () {
             app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
-            $(".progress").hide();
+            $("#expenseVoucherUploadProgress").addClass("hidden");
         }
     });
-
-    $(".progress").hide();
 
     $("#voucherForm").ajaxForm({
         beforeSubmit: function (formData) {
