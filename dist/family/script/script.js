@@ -164,8 +164,8 @@ var pageFamily = {
         }
         if (pageFamily.isParentLoggedIn) {
             if (personDetails["FamilyCode"] == familyCode) {
-                $("#relation").append("<option value='1'>Self</option>").val("1").attr("disabled","");
-                $("#relationTextBox").attr("name","relation").val("1");
+                $("#relation").append("<option value='1'>Self</option>").val("1").attr("disabled", "");
+                $("#relationTextBox").attr("name", "relation").val("1");
                 $('input:radio[name=access]')[0].checked = true;
                 $("#provideLoginDiv").addClass("hidden");
                 $("#loginAccess").addClass("hidden");
@@ -287,38 +287,6 @@ var pageFamily = {
         $("#email").removeAttr("required").off().val("").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
         $("#password").removeAttr("required").off().val("").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
         $("#confirmPassword").removeAttr("required").off().val("").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
-    },
-    validateGender: function (element) {
-        var gender = $(element).val();
-        var formGroup = $(element).closest(".form-group");
-        if (gender == "") {
-            formGroup.removeClass("has-success");
-            formGroup.addClass("has-error");
-            $(element).closest('.form-group').find('.info').html("Select a Gender");
-            pageIndex.country_count = 0;
-        }
-        else {
-            formGroup.removeClass("has-error");
-            formGroup.addClass("has-success");
-            $(element).closest('.form-group').find('.info').empty();
-            pageIndex.country_count = 1;
-        }
-    },
-    validateRelation: function (element) {
-        var relation = $(element).val();
-        var formGroup = $(element).closest(".form-group");
-        if (relation == "") {
-            formGroup.removeClass("has-success");
-            formGroup.addClass("has-error");
-            $(element).closest('.form-group').find('.info').html("Select a Relation");
-            pageIndex.country_count = 0;
-        }
-        else {
-            formGroup.removeClass("has-error");
-            formGroup.addClass("has-success");
-            $(element).closest('.form-group').find('.info').empty();
-            pageIndex.country_count = 1;
-        }
     }
 };
 
@@ -362,24 +330,6 @@ $(document).ready(function () {
             }
         }
     });
-
-    /*$("#gender").focusin(function () {
-     var gender = $(this).val();
-     var formGroup = $(this).closest(".form-group");
-     formGroup.removeClass("has-error");
-     $(this).closest('.form-group').find('.info').empty();
-     }).focusout(function () {
-     pageFamily.validateGender(this);
-     });
-
-     $("#relation").focusin(function () {
-     var relation = $(this).val();
-     var formGroup = $(this).closest(".form-group");
-     formGroup.removeClass("has-error");
-     $(this).closest('.form-group').find('.info').empty();
-     }).focusout(function () {
-     pageFamily.validateRelation(this);
-     });*/
 
     $('#familyModal').on('show.bs.modal', function (e) {
         $('.info').empty();
