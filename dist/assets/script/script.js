@@ -3,6 +3,7 @@ var pageAsset = {
     localAsset: null,
     defAssetList: $.Deferred(),
     defSearchResult: $.Deferred(),
+    defImageList: $.Deferred(),
     assetTypeTag: [],
     assetTypeCode: [],
     boughtFromTag: [],
@@ -14,6 +15,10 @@ var pageAsset = {
     familyList: null,
     assetList: null,
     firstTime: true,
+    uploadImageList: [],
+    imageDataList: [null, null, null, null, null],
+    displayImageList: null,
+    currentSerialNo: null,
     getFamilyList: function () {
         var url = app.websiteRoot + "family/getFamily.php";
 
@@ -128,6 +133,7 @@ var pageAsset = {
         $.getJSON(url, {
             assetCode: assetCode
         }).done(function (data) {
+            pageAsset.displayImageList = null;
             console.log(data);
             pageAsset.setAssetDetails(data);
         }).fail(function (error) {
@@ -136,6 +142,7 @@ var pageAsset = {
     },
     setAssetDetails: function (data) {
         if (data.status == 1) {
+            pageAsset.getImageList(data.detail.asset.AssetCode);
             pageAsset.localAsset = data.detail;
 
             var assetHeaderString = "<h12 id='assetDetailsTag'>Asset Details</h12><button id='editAssetBtn' class='btn btn-success pull-right btn-header-margin-left' onclick='pageAsset.openEditAssetModal();'><span class='glyphicon glyphicon-pencil'></span></button><button id='deleteAssetBtn' class='btn btn-danger pull-left' onclick='pageAsset.openDeleteAssetModal(" + data.detail.asset.AssetCode + ")'><span class='glyphicon glyphicon-trash'></span></button><button id='voucherAssetBtn' class='btn btn-info pull-right' onclick='pageAsset.openVoucherAssetModal(" + data.detail.asset.AssetCode + ")'><span class='fa fa-sticky-note-o fa-lg'></span></button>";
@@ -210,6 +217,22 @@ var pageAsset = {
         } else {
             pageAsset.localAsset = null;
         }
+    },
+    getImageList: function (assetCode) {
+        var url = app.websiteRoot + "assets/getImageList.php";
+
+        $.getJSON(url, {
+            assetCode: assetCode
+        }).done(function (data) {
+            console.log(data);
+            if(data.status === undefined)
+                pageAsset.displayImageList = data;
+            else
+                pageAsset.displayImageList = null;
+            pageAsset.defImageList.resolve();
+        }).fail(function (error) {
+
+        });
     },
     openAddAssetModal: function () {
         document.getElementById("assetForm").reset();
@@ -337,8 +360,99 @@ var pageAsset = {
     openAssetImageModal: function(){
         $("#imageModal").modal('show');
     },
-    changeImage: function(image){
-        $("#imagePreview").attr("src",image);
+    deleteAssetImage: function (typeOfDeletion) {
+        var deleteOptions = null;
+        var deleteString = "";
+        switch(typeOfDeletion) {
+            case 1:
+                deleteOptions = {
+                    assetCode: pageAsset.localAsset.asset.AssetCode,
+                    serialNo: pageAsset.currentSerialNo
+                };
+                deleteString = "the current image?"
+                break;
+            case 2:
+                deleteOptions = {
+                    assetCode: pageAsset.localAsset.asset.AssetCode
+                };
+                deleteString = "all the images?"
+                break;
+
+        }
+        var deletePic = confirm("Do you REALLY want to DELETE "+ deleteString);
+        if (deletePic) {
+            var url = app.websiteRoot + "assets/deleteImage.php";
+
+            $(".cover").fadeIn(100);
+            $("#pageLoading").addClass("loader");
+
+            $.post(url, deleteOptions).done(function (data) {
+                console.log(data);
+                var response = JSON.parse(data);
+                if (response.status == 1) {
+                    switch(typeOfDeletion) {
+                        case 1:
+                            pageAsset.defImageList = $.Deferred();
+                            pageAsset.getImageList(pageAsset.localAsset.asset.AssetCode);
+                            $.when(pageAsset.defImageList).done(function () {
+                                pageAsset.setImageModal();
+                            });
+                            break;
+                        case 2:
+                            pageAsset.defImageList = $.Deferred();
+                            pageAsset.displayImageList = null;
+                            $("#imageModal").modal('hide');
+                            break;
+                    }
+                    app.showNotificationSuccess(response.message);
+                } else {
+                    $("#imageModal").modal('hide');
+                    app.showNotificationFailure(response.message);
+                }
+                $("#pageLoading").removeClass("loader");
+                $(".cover").fadeOut(100);
+            }).fail(function () {
+                app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+                $("#pageLoading").removeClass("loader");
+                $(".cover").fadeOut(100);
+            });
+        } else {
+            return;
+        }
+    },
+    setImageModal: function () {
+        $("#smallImagePreview").empty();
+        if(pageAsset.displayImageList) {
+            console.log(pageAsset.displayImageList);
+            $(".modal-footer").removeClass("hidden");
+            $("#deleteImageBtn").removeClass("hidden");
+            $("#deleteAllImageBtn").removeClass("hidden");
+            var firstImagePreview = false;
+            for(var i = 0; i < pageAsset.displayImageList.length; i++) {
+                $("#smallImagePreview").append("<a href='#' onclick='pageAsset.changeImage("+i+",2)' class='clickable'><img src='"+app.websiteRoot + "img/getImage.php?file="+ pageAsset.displayImageList[i].ImagePath +"' class='img-thumbnail modal-img-size'/></a>");
+                if(!firstImagePreview) {
+                    pageAsset.changeImage(i, 2);
+                    firstImagePreview = true;
+                }
+            }
+        } else {
+            $("#deleteImageBtn").addClass("hidden");
+            $("#deleteAllImageBtn").addClass("hidden");
+            $("#imagePreview").attr("src","../img/default/preferences/logo.png");
+            $(".modal-footer").addClass("hidden");
+        }
+    },
+    changeImage: function(imageIndex, typeOfMethod){
+        switch (typeOfMethod) {
+            case 1:
+                $("#imagePreview").attr("src", pageAsset.imageDataList[imageIndex]);
+                break;
+            case 2:
+                pageAsset.currentSerialNo = pageAsset.displayImageList[imageIndex].SerialNo;
+                $("#imagePreview").attr("src", app.websiteRoot + "img/getImage.php?file=" + pageAsset.displayImageList[imageIndex].ImagePath);
+                break;
+        }
+
     },
     getAssetTypeList: function () {
         var url = app.websiteRoot + "assets/getMasters.php";
@@ -616,6 +730,103 @@ $(document).ready(function () {
             if (!this.required) {
                 $(this).closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
             }
+        }
+    });
+
+    $('#imgInput').change(function () {
+        if (this.files.length > 5 || this.files.length < 1) {
+            return;
+        }
+        $(".modal-footer").removeClass("hidden");
+        console.log(this.files);
+        pageAsset.imageDataList = [null, null, null, null, null];
+        pageAsset.uploadImageList = [];
+        var firstImagePreview = false;
+        for(var i = 0; i < this.files.length; i++) {
+            var image = this.files[i];
+            if ((image.size || image.fileSize) < 1 * 1000 * 1000) {
+                console.log(image);
+                pageAsset.uploadImageList.push(image);
+                var reader = new FileReader();
+                (function(i) {
+                    reader.onloadend = function () {
+                        console.log(i);
+                        pageAsset.imageDataList[i] = this.result;
+                        console.log(this.result);
+                        $("#smallImagePreview").append("<a href='#' onclick='pageAsset.changeImage("+i+",1)' class='clickable'><img src='"+this.result+"' class='img-thumbnail modal-img-size'/></a>");
+                        if(!firstImagePreview) {
+                            pageAsset.changeImage(i, 1);
+                            firstImagePreview = true;
+                        }
+                    };
+                })(i);
+                reader.readAsDataURL(image);
+            } else {
+                console.log(image.name + " is greater than 1MB");
+            }
+        }
+        console.log(pageAsset.uploadImageList);
+    });
+
+    $(".progress").hide();
+
+    $('#imageModal').on('show.bs.modal', function () {
+        document.getElementById("imageForm").reset();
+        $("#assetCodeForImage").val(pageAsset.localAsset.asset.AssetCode);
+        pageAsset.setImageModal();
+    });
+
+    $("#imageForm").ajaxForm({
+        beforeSubmit: function (formData) {
+            for(var i = formData.length -1; i > 0; i--) {
+                formData.splice(formData.length -1, 1);
+            }
+            /*for (var i = 0; i < formData.length; i++) {
+                console.log(formData);
+                formData.splice(2,1);
+            }*/
+            for (var i = 0; i < pageAsset.uploadImageList.length; i++) {
+                console.log(i);
+                var fileObject = {
+                    name: "fileToUpload[]",
+                    type: "file",
+                    value: pageAsset.uploadImageList[i]
+                };
+                formData.push(fileObject);
+            }
+            console.log(formData);
+            /*for (var i = 0; i < formData.length; i++) {
+                console.log(formData[i]);
+                if (formData[i].name == "fileToUpload") {
+                    if (formData[i].value == "") {
+                        app.showNotificationFailure("No Image Selected");
+                        return false;
+                    }
+                }
+            }*/
+            $(".progress").show();
+        },
+        uploadProgress: function (event, position, total, percentComplete) {
+            $(".progress-bar").width(percentComplete + "%");
+            $("#progressValue").html(percentComplete + "% complete");
+        },
+        success: function (responseText, statusText, xhr, $form) {
+            console.log(responseText);
+            var response = JSON.parse(responseText);
+            if (response.status == 1) {
+                pageAsset.getImageList(pageAsset.localAsset.asset.AssetCode);
+                $("#imageModal").modal('hide');
+                //$("#imageResource").attr("src", app.websiteRoot + "img/getImage.php?file=" + response.location + "&rand=" + new Date().getTime());
+                //pageContact.localContact.contact.ImageURL = response.location;
+                $(".progress").hide();
+            } else {
+                app.showNotificationFailure(response.message);
+                $(".progress").hide();
+            }
+        },
+        error: function () {
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            $(".progress").hide();
         }
     });
 

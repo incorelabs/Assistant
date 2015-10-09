@@ -1225,6 +1225,7 @@ $(document).ready(function (event) {
 
     $('#imageModal').on('show.bs.modal', function () {
         document.getElementById("profileForm").reset();
+        $("#imageErrorMsg").html("");
         $('#photoId').val(pageContact.localContact.contact.ContactCode);
         if (pageContact.localContact.contact.ImageURL) {
             $("#imagePreview").attr("src", app.websiteRoot + "img/getImage.php?file=" + pageContact.localContact.contact.ImageURL);

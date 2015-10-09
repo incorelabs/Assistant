@@ -109,7 +109,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <p id='imageErrorMsg' class='info'></p>
+                                    <p id='accountProfileImageErrorMsg' class='info'></p>
 
                                     <div class='delete-btn-padding'>
                                         <button type='button' class='btn btn-danger' id='accountProfileDeleteImageBtn'>

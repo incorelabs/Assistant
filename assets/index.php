@@ -412,7 +412,6 @@ echo $navbar_str;
                 </div>
 
                 <div class="modal-body">
-                    <input type="text" class="hidden" name="voucherNo" id='photoId'/>
                     <input type="text" class="hidden" name="assetCode" id='assetCodeForImage'/>
 
                     <div class="form-group row">
@@ -427,7 +426,7 @@ echo $navbar_str;
                                         <div class='input-group-btn'>
                                             <div class='fileUpload btn btn-primary'>
                                                 <span>Upload</span>
-                                                <input type='file' id="imgInput" name="fileToUpload" style="padding-bottom:10px;" class="upload" accept="image/gif, image/jpeg, image/png" required multiple/>
+                                                <input type='file' id="imgInput" name="fileToUpload[]" style="padding-bottom:10px;" class="upload" accept="image/gif, image/jpeg, image/png" required multiple/>
                                             </div>
                                         </div>
                                     </div>
@@ -435,13 +434,13 @@ echo $navbar_str;
                                     <p id="imageErrorMsg"></p>
                                     <div class="delete-btn-padding">
                                         <button type="button" class="btn btn-danger" id="deleteImageBtn"
-                                                onclick="">
+                                                onclick="pageAsset.deleteAssetImage(1)">
                                             Delete Image
                                         </button>
                                     </div>
                                     <div class="delete-btn-padding">
-                                        <button type="button" class="btn btn-danger" id="deleteImageBtn"
-                                                onclick="">
+                                        <button type="button" class="btn btn-danger" id="deleteAllImageBtn"
+                                                onclick="pageAsset.deleteAssetImage(2)">
                                             Delete All Images
                                         </button>
                                     </div>
@@ -461,22 +460,7 @@ echo $navbar_str;
                 </div>
                 <div class="modal-footer">
                     <div class="row">
-                        <div class="image text-center image-horizontal-scroll">
-                            <a href="#" onclick="pageAsset.changeImage('../img/default/preferences/logo.png')" class="clickable">
-                                <img src="../img/default/preferences/logo.png" id='imageResource' class='img-thumbnail modal-img-size'/>
-                            </a>
-                            <a href="#" onclick="pageAsset.changeImage('../img/index/assets.png')" class="clickable">
-                                <img src="../img/index/assets.png" id='imageResource' class='img-thumbnail modal-img-size'/>
-                            </a>
-                            <a href="#" onclick="pageAsset.changeImage('../img/index/cars.png')" class="clickable">
-                                <img src="../img/index/cars.png" id='imageResource' class='img-thumbnail modal-img-size'/>
-                            </a>
-                            <a href="#" onclick="pageAsset.changeImage('../img/index/contacts.png')" class="clickable">
-                                <img src="../img/index/contacts.png" id='imageResource' class='img-thumbnail modal-img-size'/>
-                            </a>
-                            <a href="#" onclick="pageAsset.changeImage('../img/index/shares.png')" class="clickable">
-                                <img src="../img/index/shares.png" id='imageResource' class='img-thumbnail modal-img-size'/>
-                            </a>
+                        <div class="image text-center image-horizontal-scroll" id="smallImagePreview">
                         </div>
                     </div>
                 </div>
