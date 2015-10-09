@@ -740,15 +740,19 @@ $(document).ready(function () {
     });
 
     $('#imgInput').change(function () {
-        if (this.files.length > 5 || this.files.length < 1) {
-            app.showNotificationFailure("Select more than 5 images at once");
-            return;
-        } else if (pageAsset.displayImageList != null && (pageAsset.displayImageList.length + this.files.length) > 5) {
-            app.showNotificationFailure("Already 5 images are used. DELETE some");
-            return;
-        } else if (($("#smallImagePreview a").length + this.files.length) > 5) {
-            app.showNotificationFailure("These are more than 5 images, cut them down");
-            return;
+        if(pageAsset.displayImageList) {
+            if ((pageAsset.displayImageList.length + this.files.length) > 5) {
+                app.showNotificationFailure("Already 5 images are used. DELETE some");
+                return;
+            } else if (($("#smallImagePreview a").length + this.files.length) > 5) {
+                app.showNotificationFailure("These are more than 5 images, cut them down");
+                return;
+            }
+        } else {
+            if(($("#smallImagePreview a").length + this.files.length) < 1 && ($("#smallImagePreview a").length + this.files.length) > 5) {
+                app.showNotificationFailure("Either no image is selected or more than 5 images at once");
+                return;
+            }
         }
         $(".modal-footer").removeClass("hidden");
         pageAsset.imageDataList = [null, null, null, null, null];
@@ -780,6 +784,7 @@ $(document).ready(function () {
     $('#imageModal').on('show.bs.modal', function () {
         document.getElementById("imageForm").reset();
         $("#assetCodeForImage").val(pageAsset.localAsset.asset.AssetCode);
+        pageAsset.uploadImageList = [];
         pageAsset.setImageModal();
     });
 

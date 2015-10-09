@@ -426,7 +426,7 @@ echo $navbar_str;
                                         <div class='input-group-btn'>
                                             <div class='fileUpload btn btn-primary'>
                                                 <span>Upload</span>
-                                                <input type='file' id="imgInput" name="fileToUpload[]" style="padding-bottom:10px;" class="upload" accept="image/gif, image/jpeg, image/png" required multiple/>
+                                                <input type='file' id="imgInput" name="fileToUpload[]" style="padding-bottom:10px;" class="upload" accept="image/gif, image/jpeg, image/png" multiple/>
                                             </div>
                                         </div>
                                     </div>
