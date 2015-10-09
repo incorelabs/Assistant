@@ -735,24 +735,26 @@ $(document).ready(function () {
 
     $('#imgInput').change(function () {
         if (this.files.length > 5 || this.files.length < 1) {
+            app.showNotificationFailure("Select more than 5 images at once");
+            return;
+        } else if (pageAsset.displayImageList != null && (pageAsset.displayImageList.length + this.files.length) > 5) {
+            app.showNotificationFailure("Already 5 images are used. DELETE some");
+            return;
+        } else if (($("#smallImagePreview a").length + this.files.length) > 5) {
+            app.showNotificationFailure("These are more than 5 images, cut them down");
             return;
         }
         $(".modal-footer").removeClass("hidden");
-        console.log(this.files);
         pageAsset.imageDataList = [null, null, null, null, null];
-        pageAsset.uploadImageList = [];
         var firstImagePreview = false;
         for(var i = 0; i < this.files.length; i++) {
             var image = this.files[i];
             if ((image.size || image.fileSize) < 1 * 1000 * 1000) {
-                console.log(image);
                 pageAsset.uploadImageList.push(image);
                 var reader = new FileReader();
                 (function(i) {
                     reader.onloadend = function () {
-                        console.log(i);
                         pageAsset.imageDataList[i] = this.result;
-                        console.log(this.result);
                         $("#smallImagePreview").append("<a href='#' onclick='pageAsset.changeImage("+i+",1)' class='clickable'><img src='"+this.result+"' class='img-thumbnail modal-img-size'/></a>");
                         if(!firstImagePreview) {
                             pageAsset.changeImage(i, 1);
@@ -762,10 +764,9 @@ $(document).ready(function () {
                 })(i);
                 reader.readAsDataURL(image);
             } else {
-                console.log(image.name + " is greater than 1MB");
+                app.showNotificationFailure("Some images are greater than 1 MB");
             }
         }
-        console.log(pageAsset.uploadImageList);
     });
 
     $(".progress").hide();
@@ -778,15 +779,17 @@ $(document).ready(function () {
 
     $("#imageForm").ajaxForm({
         beforeSubmit: function (formData) {
+            if (pageAsset.uploadImageList.length === 0) {
+                app.showNotificationFailure("No images selected to UPLOAD");
+                return false;
+            } else if (pageAsset.displayImageList != null && (pageAsset.displayImageList.length + pageAsset.uploadImageList.length) > 5) {
+                app.showNotificationFailure("There are more than 5 images selected");
+                return false;
+            }
             for(var i = formData.length -1; i > 0; i--) {
                 formData.splice(formData.length -1, 1);
             }
-            /*for (var i = 0; i < formData.length; i++) {
-                console.log(formData);
-                formData.splice(2,1);
-            }*/
             for (var i = 0; i < pageAsset.uploadImageList.length; i++) {
-                console.log(i);
                 var fileObject = {
                     name: "fileToUpload[]",
                     type: "file",
@@ -795,29 +798,19 @@ $(document).ready(function () {
                 formData.push(fileObject);
             }
             console.log(formData);
-            /*for (var i = 0; i < formData.length; i++) {
-                console.log(formData[i]);
-                if (formData[i].name == "fileToUpload") {
-                    if (formData[i].value == "") {
-                        app.showNotificationFailure("No Image Selected");
-                        return false;
-                    }
-                }
-            }*/
             $(".progress").show();
+            pageAsset.uploadImageList = [];
         },
         uploadProgress: function (event, position, total, percentComplete) {
             $(".progress-bar").width(percentComplete + "%");
             $("#progressValue").html(percentComplete + "% complete");
         },
-        success: function (responseText, statusText, xhr, $form) {
-            console.log(responseText);
+        complete: function (xhr) {
+            var responseText = xhr.responseText;
             var response = JSON.parse(responseText);
             if (response.status == 1) {
                 pageAsset.getImageList(pageAsset.localAsset.asset.AssetCode);
                 $("#imageModal").modal('hide');
-                //$("#imageResource").attr("src", app.websiteRoot + "img/getImage.php?file=" + response.location + "&rand=" + new Date().getTime());
-                //pageContact.localContact.contact.ImageURL = response.location;
                 $(".progress").hide();
             } else {
                 app.showNotificationFailure(response.message);
