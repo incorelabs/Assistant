@@ -200,7 +200,7 @@ echo $navbar_str;
                                     <div class="col-md-3">Room Allocation</div>
                                     <value>
                                         <div class="col-md-9">
-                                            <button class="btn btn-primary" onclick="pageEvents."><i
+                                            <button class="btn btn-primary" onclick="pageEvents.openRoomAllocationPage()"><i
                                                     class="fa fa-sticky-note-o"></i></button>
                                         </div>
                                     </value>
@@ -211,7 +211,7 @@ echo $navbar_str;
                                     <div class="col-md-3">Vehicle Allocation</div>
                                     <value>
                                         <div class="col-md-9">
-                                            <button class="btn btn-primary" onclick="pageEvents."><i
+                                            <button class="btn btn-primary" onclick="pageEvents.openVehicleAllocationPage()"><i
                                                     class="fa fa-sticky-note-o"></i></button>
 
                                         </div>
@@ -223,7 +223,7 @@ echo $navbar_str;
                                     <div class="col-md-3">Service Provider</div>
                                     <value>
                                         <div class="col-md-9">
-                                            <button class="btn btn-primary" onclick="pageEvents."><i
+                                            <button class="btn btn-primary" onclick="pageEvents.openServiceProviderPage()"><i
                                                     class="fa fa-sticky-note-o"></i></button>
 
                                         </div>
@@ -478,8 +478,7 @@ echo $navbar_str;
                                         </div>
                                     </div>
                                 </div>
-                                <div
-                                    class="col-md-6 col-sm-6 col-xs-12 col-padding-left-remove col-padding-right-remove col-padding-remove">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-padding-left-remove col-padding-right-remove col-padding-remove">
                                     <div class="form-group margin-right-none ">
                                         <div class="input-group">
                                             <span class="input-group-addon input-group-addon-label two-col-span-label">Date*</span>

@@ -646,6 +646,12 @@ $(document).ready(function () {
     app.websiteRoot = "../";
     app.setAccountProfilePicture();
 
+    document.getElementById("imgInput").onchange = function () {
+        var path = this.value;
+        var filename = path.replace(/^.*\\/, "");
+        document.getElementById("assetImgInputPath").value = filename;
+    };
+
     document.getElementById('searchBox').onkeypress = function (e) {
         if (!e)
             e = window.event;

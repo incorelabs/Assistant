@@ -145,3 +145,6 @@
     vertical-align: middle !important;
 }
 
+table>tr>td{
+    word-break: break-all;
+}

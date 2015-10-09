@@ -163,7 +163,10 @@
         margin-left: 45px !important;
     }
     .two-col-span-label{
-        min-width: 50px !important;
+        min-width: 60px !important;
+    }
+    .check-span-label{
+        min-width: 95px !important;
     }
     .col-padding-left-remove{
         padding-left: 0px;
@@ -186,7 +189,6 @@
     }
 }
 .checkbox-margin{
-    margin-left: 15px !important;
     width: 100%;
 }
 
@@ -200,6 +202,14 @@
 .select-right-radius-none {
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
+}
+.fa-size-mobile{
+    font-size: 1.9em;
+    margin-top: -3px;
+}
+.fa-size-car{
+    font-size: 1.5em;
+    margin-right: -5px;
 }
 
 table>tr>td{

@@ -312,3 +312,7 @@ thead>tr>th{
     text-align: center;
     margin-top: 20px;
 }
+
+table>tr>td{
+    word-break: break-all;
+}

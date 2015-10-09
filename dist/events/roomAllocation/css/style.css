@@ -163,7 +163,10 @@
         margin-left: 45px !important;
     }
     .two-col-span-label{
-        min-width: 50px !important;
+        min-width: 60px !important;
+    }
+    .check-span-label{
+        min-width: 95px !important;
     }
     .col-padding-left-remove{
         padding-left: 0px;

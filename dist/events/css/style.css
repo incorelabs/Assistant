@@ -353,6 +353,9 @@ h5 {
     }
 }
 
+table>tr>td{
+    word-break: break-all;
+}
 
 .select-inline{
     width: 37%;

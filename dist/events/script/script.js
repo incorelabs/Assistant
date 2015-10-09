@@ -65,6 +65,15 @@ var pageEvents = {
     },
     openGuestConfirmationPage: function () {
         window.location.href = "guestConfirmation/";
+    },
+    openRoomAllocationPage: function(){
+        window.location.href = "roomAllocation/"
+    },
+    openVehicleAllocationPage: function () {
+        window.location.href = "vehicleAllocation/"
+    },
+    openServiceProviderPage: function() {
+        window.location.href = "serviceProvider/"
     }
 };
 $(document).ready(function(){
