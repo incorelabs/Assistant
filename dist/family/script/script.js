@@ -96,7 +96,8 @@ var pageFamily = {
         $("#loginAccess").addClass("hidden");
 
         $("#relation option[value='1']").remove();
-        $("#selectRelationDiv").removeClass("hidden");
+        $("#relation").removeAttr("disabled");
+        $("#relationTextBox").removeAttr("name");
 
         $("#dob").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
         $("#mobile").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
@@ -117,7 +118,8 @@ var pageFamily = {
         console.log(pageFamily.familyList[memberIndex]);
         initializeDate();
 
-        $("#selectRelationDiv").removeClass("hidden");
+        $("#relation").removeAttr("disabled");
+        $("#relationTextBox").removeAttr("name");
 
         $("#dob").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
         $("#mobile").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
@@ -162,13 +164,12 @@ var pageFamily = {
         }
         if (pageFamily.isParentLoggedIn) {
             if (personDetails["FamilyCode"] == familyCode) {
-                $("#relation").append("<option value='1'>Self</option>");
-                $("#relation").val("1");
+                $("#relation").append("<option value='1'>Self</option>").val("1").attr("disabled","");
+                $("#relationTextBox").attr("name","relation").val("1");
                 $('input:radio[name=access]')[0].checked = true;
                 $("#provideLoginDiv").addClass("hidden");
                 $("#loginAccess").addClass("hidden");
 
-                $("#selectRelationDiv").addClass("hidden");
                 $("#email").attr("required", "").attr("readonly", "");
 
                 $("#passwordDiv").empty();

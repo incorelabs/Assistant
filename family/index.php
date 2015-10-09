@@ -100,7 +100,7 @@ echo $navbar_str;
                         </div>
                         <div class='info'></div>
                     </div>
-                    <div class="form-group form-group-margin" id="selectRelationDiv">
+                    <div class="form-group form-group-margin">
                         <div class="input-group">
                             <span class="input-group-addon input-group-addon-label">Relation*</span>
 
@@ -109,6 +109,7 @@ echo $navbar_str;
                                 <select name="relation" class="form-control textbox_height select-field-left-border"
                                         id="relation" tabindex="2" required>
                                 </select>
+                                <input type="text" class="hidden" name="" id="relationTextBox" />
                             </div>
                         </div>
                         <div class='info'></div>
