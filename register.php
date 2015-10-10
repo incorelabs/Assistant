@@ -41,7 +41,7 @@ echo $navbar_str;
                 <div class="panel-heading panel-header-height">
                     <h1 class="panel-title text-center" style="font-size: 24px;">Sign Up</h1>
                 </div>
-                <form action="api/signup.php" method="POST" id="signUpForm">
+                <form action="" method="POST" id="signUpForm">
                     <div class="panel-body">
                         <div class="form-group">
                             <div class="inner-addon right-addon">
@@ -110,7 +110,7 @@ echo $navbar_str;
                     </div>
                     <div class="panel-footer">
                         <div class="form-group" style="padding-top: 10px;">
-                            <button type="submit" class="btn btn-primary form-control" id="register">Register</button>
+                            <button type="button" class="btn btn-primary form-control" id="register">Register</button>
                         </div>
                     </div>
                 </form>

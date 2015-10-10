@@ -15,6 +15,7 @@ include_once ROOT . 'dist/authenticate.php';
     include_once ROOT . 'dist/fetchCSS.php';
     ?>
     <link rel="stylesheet" href="../../dist/events/roomAllocation/css/style.css"/>
+    <link rel="stylesheet" href="../../dist/multiselect/css/bootstrap-multiselect.css"/>
 </head>
 <body>
 <!-- fixed top navbar -->
@@ -118,7 +119,7 @@ echo $navbar_str;
                     </div>
                     <div class="form-group form-group-margin">
                         <div class="input-group">
-                            <span class="input-group-addon input-group-addon-label">Venue*</span>
+                            <span class="input-group-addon input-group-addon-label">Accommodation*</span>
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down hidden-xs fa-size"></i>
@@ -130,16 +131,45 @@ echo $navbar_str;
                     </div>
                     <div class="form-group form-group-margin">
                         <div class="input-group">
-                            <span class="input-group-addon input-group-addon-label">Room Number*</span>
-
+                            <span class="input-group-addon input-group-addon-label">Room No.*</span>
+                            <select id="venueRooms" multiple="multiple" class="form-control">
+                                <option value='1'>Room 1102 (2)</option>
+                                <option value='2'>Room 1103 (2)</option>
+                                <option value='3'>Room 1104 (4)</option>
+                                <option value='4'>Room 1105 (2)</option>
+                                <option value='5'>Room 1106 (2)</option>
+                                <option value='6'>Room 1107 (2)</option>
+                                <option value='7'>Room 1108 (4)</option>
+                                <option value='8'>Room 1109 (2)</option>
+                                <option value='9'>Room 1111 (2)</option>
+                                <option value='10'>Room 1112 (2)</option>
+                                <option value='11'>Room 1114 (4)</option>
+                                <option value='12'>Room 1116 (2)</option>
+                                <option value='13'>Room 1117 (2)</option>
+                                <option value='14'>Room 1120 (2)</option>
+                                <option value='15'>Room 1124 (4)</option>
+                                <option value='16'>Room 1126 (2)</option>
+                                <option value='17'>Room 1127 (2)</option>
+                                <option value='18'>Room 1128 (2)</option>
+                                <option value='19'>Room 1131 (4)</option>
+                                <option value='20'>Room 1135 (2)</option>
+                                <option value='21'>Room 1145 (2)</option>
+                                <option value='22'>Room 1186 (2)</option>
+                                <option value='23'>Room 1197 (4)</option>
+                                <option value='24'>Room 1199 (2)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-margin">
+                        <div class="input-group">
+                            <span class="input-group-addon input-group-addon-label">Guests Allocated*</span>
                             <div class="inner-addon right-addon">
-                                <i class="fa fa-caret-down hidden-xs fa-size"></i>
-                                <select class="form-control select-field-left-border" id="guestName" name="guestName">
-                                    <option>Room 1102 (2)</option>  <!--Rooms Available & the occupancy in each room-->
-                                </select>
+                                <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
+                                <input type="number" class="form-control text-field-left-border" id="guestAllocated" name="guestAllocated" placeholder="Guest Allocated" required/>
                             </div>
                         </div>
                     </div>
+                    <center><div class="info">*Max Limit of 9 rooms</div></center>
                     <hr/>
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-padding-right-remove">
@@ -147,8 +177,8 @@ echo $navbar_str;
                                 <div class="input-group">
                                     <span
                                         class="input-group-addon input-group-addon-label check-span-label">Check-In</span>
-                                        <input type="text" class="form-control text-field-left-border date" id=""
-                                               name="" placeholder="DD/MM/YYYY" tabindex="8" required="">
+                                        <input type="text" class="form-control text-field-left-border date" id="checkIn"
+                                               name="checkIn" placeholder="DD/MM/YYYY" tabindex="8"/>
                                 </div>
                             </div>
                         </div>
@@ -266,8 +296,8 @@ echo $navbar_str;
                                 <div class="input-group">
                                     <span
                                         class="input-group-addon input-group-addon-label check-span-label">Check-Out</span>
-                                        <input type="text" class="form-control text-field-left-border date" id=""
-                                               name="" placeholder="DD/MM/YYYY" tabindex="8" required="">
+                                        <input type="text" class="form-control text-field-left-border date" id="checkOut"
+                                               name="checkOut" placeholder="DD/MM/YYYY" tabindex="8">
                                 </div>
                             </div>
                         </div>
@@ -433,6 +463,7 @@ echo $navbar_str;
 include_once ROOT . 'dist/fetchJS.php';
 ?>
 <script src="../../dist/events/roomAllocation/script/script.js"></script>
+<script src="../../dist/multiselect/script/bootstrap-multiselect.js"></script>
 </body>
 <div class="cover">
     <div id="pageLoading"></div>

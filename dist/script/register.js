@@ -42,7 +42,7 @@ $(document).ready(function () {
                     }
                 }
             }
-            console.log(isValid);
+            //console.log(isValid);
             if (!isValid) {
                 app.showNotificationFailure("Validation Failed for some input field");
                 return false;
@@ -51,7 +51,7 @@ $(document).ready(function () {
             $("#pageLoading").addClass("loader");
         },
         success: function (responseText, statusText, xhr, $form) {
-            console.log(responseText);
+            //console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 0) {
                 app.showNotificationFailure(response.message);
