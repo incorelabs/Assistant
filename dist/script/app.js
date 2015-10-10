@@ -211,7 +211,7 @@ var app = {
         $("#accountProfilePictureModal").modal("show");
     },
     deleteAccountProfilePicture: function () {
-        var deleteProfilePicture = confirm("Do you REALLY want to DELETE the LOGO?");
+        var deleteProfilePicture = confirm("Do you REALLY want to DELETE the Profile Picture?");
         if (deleteProfilePicture) {
             var url = app.websiteRoot + "navbar/profileController.php";
 
