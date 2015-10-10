@@ -195,7 +195,7 @@ var app = {
     deleteAccountProfilePicture: function () {
         var deleteProfilePicture = confirm("Do you REALLY want to DELETE the LOGO?");
         if (deleteProfilePicture) {
-            var url = app.websiteRoot + "profileController.php";
+            var url = app.websiteRoot + "navbar/profileController.php";
 
             $(".cover").fadeIn(100);
             $("#pageLoading").addClass("loader");
@@ -286,7 +286,6 @@ $(document).ready(function () {
                     }
                 }
             }
-            return false;
             $("#navbarProgress").removeClass("hidden");
         },
         uploadProgress: function (event, position, total, percentComplete) {

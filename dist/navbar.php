@@ -66,7 +66,7 @@
     <div class='modal-dialog modal-md'>
         <div class='modal-content'>
 
-            <form class='form-horizontal' method='POST' action='profileController.php' enctype='multipart/form-data' id='accountProfilePictureForm'
+            <form class='form-horizontal' method='POST' action='".$root_location."navbar/profileController.php' enctype='multipart/form-data' id='accountProfilePictureForm'
                   runat='server'>
 
                 <div class='modal-header'>
