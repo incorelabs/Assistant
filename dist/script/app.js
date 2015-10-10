@@ -1,5 +1,6 @@
 var app = {
     websiteRoot: "",
+    loginDetails: null,
     dateValidationState: {
         SUCCESS: 0,
         EMPTY: 1,
@@ -169,6 +170,21 @@ var app = {
         else
             $(uiElement).closest(".form-group").removeClass("has-success").addClass("has-error").find('.info').html(errorString);
     },
+    getLoginDetails: function () {
+        var url = app.websiteRoot + "navbar/getLoginDetail.php";
+
+        $.getJSON(url).done(function (data) {
+            app.setLoginDetails(data);
+        }).fail(function (error) {
+            if (error.status === 401) {
+                app.loginDetails = null;
+            }
+        });
+    },
+    setLoginDetails: function (data) {
+        app.loginDetails = data;
+        app.setAccountProfilePicture();
+    },
     logout: function () {
         var url = app.websiteRoot + "api/logout.php";
 
@@ -185,8 +201,10 @@ var app = {
     },
     setAccountProfilePicture: function () {
         console.log(app.websiteRoot);
-        $('#navbarProfilePicture').attr("src", app.websiteRoot + "img/default/contact/profilePicture.png");
-        $('#accountProfileImagePreview').attr("src", app.websiteRoot + "img/default/contact/profilePicture.png");
+        if (app.loginDetails.PhotoUploaded)
+            $('#navbarProfilePicture').attr("src", app.websiteRoot + "img/getImage.php?file=" + app.loginDetails.ImagePath + "&rand=" + new Date().getTime());
+        else
+            $('#navbarProfilePicture').attr("src", app.websiteRoot + "img/default/contact/profilePicture.png");
     },
     openAccountProfilePictureModal: function () {
         $("#navbarProgress").addClass("hidden");
@@ -206,6 +224,8 @@ var app = {
                 console.log(data);
                 var response = JSON.parse(data);
                 if (response.status == 1) {
+                    app.loginDetails.PhotoUploaded = null;
+                    app.getLoginDetails();
                     app.showNotificationSuccess(response.message);
                 } else {
                     app.showNotificationFailure(response.message);
@@ -265,8 +285,8 @@ $(document).ready(function () {
 
     $('#accountProfilePictureModal').on('show.bs.modal', function () {
         document.getElementById("accountProfilePictureForm").reset();
-        if (false) {
-            $("#accountProfileImagePreview").attr("src", app.websiteRoot + "img/default/contact/profilePicture.png");
+        if (app.loginDetails.PhotoUploaded) {
+            $('#accountProfileImagePreview').attr("src", app.websiteRoot + "img/getImage.php?file=" + app.loginDetails.ImagePath + "&rand=" + new Date().getTime());
             $("#accountProfileDeleteImageBtn").removeClass("hidden");
         } else {
             $("#accountProfileImagePreview").attr("src", app.websiteRoot + "img/default/contact/profilePicture.png");
@@ -296,6 +316,7 @@ $(document).ready(function () {
             console.log(responseText);
             var response = JSON.parse(responseText);
             if (response.status == 1) {
+                app.getLoginDetails();
                 $("#accountProfilePictureModal").modal('hide');
                 $("#navbarProgress").addClass("hidden");
             } else {

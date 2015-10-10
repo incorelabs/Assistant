@@ -207,7 +207,7 @@ var pageIncomeVoucher = {
 
 $(document).ready(function () {
     app.websiteRoot = "../../";
-    app.setAccountProfilePicture();
+    app.getLoginDetails();
 
     pageIncomeVoucher.getIncomeDetails();
     pageIncomeVoucher.getVoucherList();

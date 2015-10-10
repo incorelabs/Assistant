@@ -1153,7 +1153,7 @@ var pageContact = {
 
 $(document).ready(function (event) {
     app.websiteRoot = "../";
-    app.setAccountProfilePicture();
+    app.getLoginDetails();
 
     document.getElementById('searchBox').onkeypress = function (e) {
         if (!e)

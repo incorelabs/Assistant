@@ -233,7 +233,7 @@ var pageAssetVoucher = {
 
 $(document).ready(function () {
     app.websiteRoot = "../../";
-    app.setAccountProfilePicture();
+    app.getLoginDetails();
 
     pageAssetVoucher.getAssetDetails();
     pageAssetVoucher.getVoucherList();

@@ -1,6 +1,6 @@
 $(document).ready(function () {
     app.websiteRoot = "../";
-    app.setAccountProfilePicture();
+    app.getLoginDetails();
 
     $("#changePasswordForm").ajaxForm({
         beforeSubmit: function (formData) {

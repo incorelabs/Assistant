@@ -443,7 +443,7 @@ var pageExpense = {
 
 $(document).ready(function () {
     app.websiteRoot = "../";
-    app.setAccountProfilePicture();
+    app.getLoginDetails();
 
     document.getElementById('searchBox').onkeypress = function (e) {
         if (!e)

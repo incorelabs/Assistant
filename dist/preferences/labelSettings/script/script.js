@@ -213,7 +213,7 @@ var pageLabelSettings = {
 };
 $(document).ready(function () {
     app.websiteRoot = "../../";
-    app.setAccountProfilePicture();
+    app.getLoginDetails();
 
     pageLabelSettings.getLabelList();
 

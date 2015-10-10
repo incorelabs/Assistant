@@ -245,7 +245,7 @@ var pageEnvelopeSettings = {
 };
 $(document).ready(function () {
     app.websiteRoot = "../../";
-    app.setAccountProfilePicture();
+    app.getLoginDetails();
 
     pageEnvelopeSettings.getEnvelopeList();
 

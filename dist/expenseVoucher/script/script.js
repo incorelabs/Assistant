@@ -207,7 +207,7 @@ var pageExpenseVoucher = {
 
 $(document).ready(function () {
     app.websiteRoot = "../../";
-    app.setAccountProfilePicture();
+    app.getLoginDetails();
 
     pageExpenseVoucher.getExpenseDetails();
     pageExpenseVoucher.getVoucherList();

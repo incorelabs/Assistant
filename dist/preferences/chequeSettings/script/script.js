@@ -226,7 +226,7 @@ var pageChequeSettings = {
 
 $(document).ready(function () {
     app.websiteRoot = "../../";
-    app.setAccountProfilePicture();
+    app.getLoginDetails();
 
     console.log(window.innerWidth);
     if (window.innerWidth < 500) {

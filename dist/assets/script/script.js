@@ -644,7 +644,7 @@ var pageAsset = {
 
 $(document).ready(function () {
     app.websiteRoot = "../";
-    app.setAccountProfilePicture();
+    app.getLoginDetails();
 
     document.getElementById("imgInput").onchange = function () {
         var path = this.value;

@@ -292,7 +292,7 @@ var pageFamily = {
 
 $(document).ready(function () {
     app.websiteRoot = "../";
-    app.setAccountProfilePicture();
+    app.getLoginDetails();
 
     if (familyCode == 1001) {
         // isParentLoggedIn = true; Implies Parent
