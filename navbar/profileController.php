@@ -6,11 +6,11 @@
  * Time: 6:45 PM
  */
 session_start();
-define("ROOT", "");
+define("ROOT", "../");
 
 require ROOT.'dist/authenticate.php';
 require ROOT.'db/Connection.php';
-require ROOT.'ProfileImageController.php';
+require 'ProfileImageController.php';
 include(ROOT."external/class.upload.php");
 
 function createResponse($status,$message){
