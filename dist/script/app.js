@@ -189,7 +189,38 @@ var app = {
         $('#accountProfileImagePreview').attr("src", app.websiteRoot + "img/default/contact/profilePicture.png");
     },
     openAccountProfilePictureModal: function () {
+        $("#navbarProgress").addClass("hidden");
         $("#accountProfilePictureModal").modal("show");
+    },
+    deleteAccountProfilePicture: function () {
+        var deleteProfilePicture = confirm("Do you REALLY want to DELETE the LOGO?");
+        if (deleteProfilePicture) {
+            var url = app.websiteRoot + "profileController.php";
+
+            $(".cover").fadeIn(100);
+            $("#pageLoading").addClass("loader");
+
+            $.post(url, {
+                mode: "D"
+            }).done(function (data) {
+                console.log(data);
+                var response = JSON.parse(data);
+                if (response.status == 1) {
+                    app.showNotificationSuccess(response.message);
+                } else {
+                    app.showNotificationFailure(response.message);
+                }
+                $("#accountProfilePictureModal").modal('hide');
+                $("#pageLoading").removeClass("loader");
+                $(".cover").fadeOut(100);
+            }).fail(function () {
+                app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+                $("#pageLoading").removeClass("loader");
+                $(".cover").fadeOut(100);
+            });
+        } else {
+            return;
+        }
     },
     showNotificationSuccess: function (successMessage) {
         $("#notification_success").html(successMessage);
@@ -214,4 +245,68 @@ $(document).ready(function () {
             document.getElementById("accountImgInputPath").value = filename;
         };
     }
+
+    $('#accountProfileImgInput').change(function () {
+        var image = this.files[0];
+        if ((image.size || image.fileSize) < 1 * 1000 * 1000) {
+            console.log(image);
+            var img = $("#accountProfileImagePreview");
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                img.attr("src", reader.result);
+            };
+            reader.readAsDataURL(image);
+            $("#accountProfileImageErrorMsg").html("");
+        } else {
+            $("#accountProfileImageErrorMsg").html("Image size is greater than 1MB");
+            document.getElementById("imageForm").reset();
+        }
+    });
+
+    $('#accountProfilePictureModal').on('show.bs.modal', function () {
+        document.getElementById("accountProfilePictureForm").reset();
+        if (false) {
+            $("#accountProfileImagePreview").attr("src", app.websiteRoot + "img/default/contact/profilePicture.png");
+            $("#accountProfileDeleteImageBtn").removeClass("hidden");
+        } else {
+            $("#accountProfileImagePreview").attr("src", app.websiteRoot + "img/default/contact/profilePicture.png");
+            $("#accountProfileDeleteImageBtn").addClass("hidden");
+        }
+    });
+
+    $("#accountProfilePictureForm").ajaxForm({
+        beforeSubmit: function (formData) {
+            console.log(formData);
+            for (var i = 0; i < formData.length; i++) {
+                console.log(formData[i]);
+                if (formData[i].name == "fileToUpload") {
+                    if (formData[i].value == "") {
+                        app.showNotificationFailure("No Image Selected");
+                        return false;
+                    }
+                }
+            }
+            return false;
+            $("#navbarProgress").removeClass("hidden");
+        },
+        uploadProgress: function (event, position, total, percentComplete) {
+            $("#navbarProgressBar").width(percentComplete + "%");
+            $("#navbarProgressValue").html(percentComplete + "% complete");
+        },
+        success: function (responseText, statusText, xhr, $form) {
+            console.log(responseText);
+            var response = JSON.parse(responseText);
+            if (response.status == 1) {
+                $("#accountProfilePictureModal").modal('hide');
+                $("#navbarProgress").addClass("hidden");
+            } else {
+                app.showNotificationFailure(response.message);
+                $("#navbarProgress").addClass("hidden");
+            }
+        },
+        error: function () {
+            app.showNotificationFailure("Our Server probably took a Nap!<br/>Try Again! :-)");
+            $("#navbarProgress").addClass("hidden");
+        }
+    });
 });

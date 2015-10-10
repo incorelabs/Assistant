@@ -66,7 +66,7 @@
     <div class='modal-dialog modal-md'>
         <div class='modal-content'>
 
-            <form class='form-horizontal' method='POST' action='upload.php' enctype='multipart/form-data' id='accountProfilePictureForm'
+            <form class='form-horizontal' method='POST' action='profileController.php' enctype='multipart/form-data' id='accountProfilePictureForm'
                   runat='server'>
 
                 <div class='modal-header'>
@@ -91,7 +91,7 @@
                 </div>
 
                 <div class='modal-body'>
-                    <input type='text' class='hidden' name='labelCode' id='accountPhotoId'/>
+                    <input type='text' class='hidden' name='mode' id='accountPhotoId' value='A' />
 
                     <div class='form-group row account-img-modal'>
                         <center>
@@ -105,14 +105,14 @@
                                         <div class='input-group-btn'>
                                             <div class='fileUpload btn btn-primary'>
                                                 <span>Upload</span>
-                                                <input type='file' id='accountProfileImgInput' name='ProfileFileToUpload' class='upload' style='padding-bottom:10px;' required />
+                                                <input type='file' id='accountProfileImgInput' name='fileToUpload' class='upload' style='padding-bottom:10px;' required />
                                             </div>
                                         </div>
                                     </div>
                                     <p id='accountProfileImageErrorMsg' class='info'></p>
 
                                     <div class='delete-btn-padding'>
-                                        <button type='button' class='btn btn-danger' id='accountProfileDeleteImageBtn'>
+                                        <button type='button' class='btn btn-danger' id='accountProfileDeleteImageBtn' onclick='app.deleteAccountProfilePicture();'>
                                             Delete Image
                                         </button>
                                     </div>
@@ -128,7 +128,7 @@
                     </div>
                 </div>
             </form>
-            <div class='progress' id='navbarProgress'>
+            <div class='progress hidden' id='navbarProgress'>
                 <div class='progress-bar' id='navbarProgressBar' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100'
                      style='width: 0%;'>
                     <span class='sr-only' id='navbarProgressValue'>0% Complete</span>
