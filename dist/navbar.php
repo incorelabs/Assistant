@@ -23,7 +23,7 @@
 			<li><a href='".$root_location."contacts'>Contacts</a></li>
 			<li><a href='#'>Investment</a></li>
 			<li><a href='".$root_location."assets'>Assets</a></li>
-			<li><a href='#'>Documents</a></li>
+			<li><a href='".$root_location."documents'>Documents</a></li>
 			<li><a href='".$root_location."expense'>Expense</a></li>
 			<li><a href='".$root_location."income'>Income</a></li>
 			<li><a href='".$root_location."passwords'>Passwords</a></li>
