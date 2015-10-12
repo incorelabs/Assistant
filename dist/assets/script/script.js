@@ -957,4 +957,54 @@ $(document).ready(function () {
         $("#pageLoading").removeClass("loader");
         $(".cover").fadeOut(100);
     });
+
+    if (window.innerWidth < 992) {
+        $("body").css("overflow", "auto");
+        $("#assetListScroll").removeClass("panelHeight");
+        $("#assetList").addClass("mobile-list");
+        $("#assetListDiv").addClass("mobileBody");
+        $("#searchAssetHeader").addClass("mobileHeader");
+
+        $("#assetDetail").removeClass("panelHeight");
+        $("#assetDetailDiv").addClass("mobileBody");
+        $("#assetDetailHeaderDiv").addClass("mobileHeader");
+    }
+});
+
+$(window).resize(function () {
+    if (window.innerWidth < 992) {
+        //Mobile View list & detaills
+        $("body").css("overflow", "auto");
+        $("#assetListScroll").removeClass("panelHeight");
+        $("#assetList").addClass("mobile-list");
+        $("#assetListDiv").addClass("mobileBody");
+        $("#searchAssetHeader").addClass("mobileHeader");
+
+        $("#assetDetail").removeClass("panelHeight");
+        $("#assetDetailDiv").addClass("mobileBody");
+        $("#assetDetailHeaderDiv").addClass("mobileHeader");
+
+    } else {
+        $("body").css("overflow", "hidden");
+        $("#assetListScroll").addClass("panelHeight");
+        $("#assetList").removeClass("mobile-list");
+        $("#assetListDiv").removeClass("mobileBody");
+        $("#searchAssetHeader").removeClass("mobileHeader");
+
+        $("#assetDetail").addClass("panelHeight");
+        $("#assetDetailDiv").removeClass("mobileBody");
+        $("#assetDetailHeaderDiv").removeClass("mobileHeader");
+
+        //Show the Expense Details Header and hides the search header
+        $("#assetDetailHeaderDiv").addClass('hidden-xs hidden-sm');
+        $("#searchAssetHeader").removeClass('hidden');
+
+        //Show the Expense Details and hides the password list
+        $("#assetListDiv").removeClass('hidden');
+        $("#assetDetailDiv").addClass('hidden-xs hidden-sm');
+
+        //Show Hide of menu button with back button
+        $(".menu_img").removeClass('hidden');
+        $("#backButton").addClass('hidden');
+    }
 });

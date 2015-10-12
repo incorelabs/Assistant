@@ -1174,19 +1174,6 @@ $(document).ready(function (event) {
     pageContact.getContactList(false);
     pageContact.refreshMasterList();
 
-    if (window.innerWidth < 992) {
-        var div = document.getElementById('websiteTabs');
-        div.style.display = "none";
-        var div = document.getElementById('mobileTabs');
-        div.style.display = "block";
-    } else {
-        var div = document.getElementById('websiteTabs');
-        div.style.display = "block";
-        var div = document.getElementById('mobileTabs');
-        div.style.display = "none";
-    }
-
-    // TODO: @Darshan -> Fix the Active Tab on resize.
 
     $('#filter').change(function () {
         if ($(this).val() != "0") {
@@ -1645,10 +1632,6 @@ $(document).ready(function (event) {
 });
 $(window).resize(function () {
     if (window.innerWidth < 992) {
-        var websiteTabs = document.getElementById('websiteTabs');
-        websiteTabs.style.display = "none";
-        var mobileTabs = document.getElementById('mobileTabs');
-        mobileTabs.style.display = "block";
 
         $("body").css("overflow", "auto");
         $("#contactListScroll").removeClass("panelHeight");
@@ -1691,10 +1674,5 @@ $(window).resize(function () {
         $("#mobileSmsIcon").addClass("hidden");
         $("#mobileSmsIcon1").addClass("hidden");
         $("#mobileSmsIcon2").addClass("hidden");
-
-        var websiteTabs = document.getElementById('websiteTabs');
-        websiteTabs.style.display = "block";
-        var mobileTabs = document.getElementById('mobileTabs');
-        mobileTabs.style.display = "none";
     }
 });

@@ -22,6 +22,8 @@ $(document).ready(function () {
                     }
                 }
             }
+            $("#importContactSummaryDiv").addClass("hidden");
+            $("#outlookUploadProgressBar").width(0 + "%");
             $("#outlookUploadProgress").removeClass("hidden");
         },
         uploadProgress: function (event, position, total, percentComplete) {
@@ -32,7 +34,7 @@ $(document).ready(function () {
             var response = JSON.parse(responseText);
             $("#outlookUploadProgress").addClass("hidden");
             $("#importContactSummaryDiv").removeClass("hidden");
-            var importContactString = "<div>Total Contacts: " + response.noOfContacts + "</div><div>Success: " + response.noOfContactsImported + "</div><div>Failed: " + response.noOfContactsRejected + "</div>";
+            var importContactString = "<div>Total Contacts: " + response.noOfContacts + "</div><div class='success'>Success: " + response.noOfContactsImported + "</div><div class='info'>Failed: " + response.noOfContactsRejected + "</div>";
             if (response.status == 1) {
                 $("#successDiv").html(importContactString).removeClass("hidden");
             } else {

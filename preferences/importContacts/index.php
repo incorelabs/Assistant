@@ -90,13 +90,13 @@ echo $navbar_str;
                     <span class="sr-only" id="outlookUploadProgressValue">0% Complete</span>
                 </div>
             </div>
-            <div class="hidden" id="importContactSummaryDiv">
-                <div class="text-center">
-                    Upload Summary
+            <div class="hidden result-div success text-center" id="importContactSummaryDiv">
+                <div class="result-header">
+                    <h5>Upload Summary<h5>
                 </div>
-                <div class="hidden" id="successDiv">
+                <div class="hidden success" id="successDiv">
                 </div>
-                <div class="hidden" id="failureDiv">
+                <div class="hidden info" id="failureDiv">
                 </div>
             </div>
         </div>

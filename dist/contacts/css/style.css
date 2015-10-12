@@ -259,7 +259,7 @@ h5 {
 }
 
 .mobile-panel-hide {
-    display: none;
+    display: block;
     padding-bottom: 15px;
 }
 
@@ -272,9 +272,16 @@ h5 {
     box-shadow: 0 0 0 rgba(0, 0, 0, .075);
 }
 
+.fa-contacts-size{
+    font-size: 2em;
+}
+
 @media (min-width: 992px) {
     .col-padding {
         padding-right: 0px;
+    }
+    .fa-contacts-size{
+        font-size: 1.5em;
     }
 }
 
@@ -305,4 +312,9 @@ h5 {
 
 .contact-focus:hover{
     color: #555 !important;
+}
+
+.margin-sides-remove{
+    margin-left: 0px !important;
+    margin-right: 0px !important;
 }

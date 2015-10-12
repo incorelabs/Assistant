@@ -297,44 +297,22 @@ echo $navbar_str;
                             </div>
                         </div>
                     </div>
-                    <div id="websiteTabs">
-                        <div class="form-group form-group-margin"
-                             style="margin-left:0px !important; margin-right:0px !important">
-                            <ul class="nav nav-tabs nav-justified" id="myTab">
-                                <li><a href="#tab1" data-toggle="tab" tabindex="11"><span
-                                            class='glyphicon glyphicon-user'></span><br>Personal
-                                        Details</a></li>
-                                <li><a href="#tab3" data-toggle="tab" tabindex="19"><span
-                                            class='glyphicon glyphicon-briefcase'></span><br>Professional Details</a>
-                                </li>
-                                <li><a href="#tab4" data-toggle="tab" tabindex="22"><span
-                                            class='glyphicon glyphicon-globe'></span><br>Social Details</a></li>
-                                <li><a href="#home" data-toggle="tab" tabindex="28"><span
-                                            class='glyphicon glyphicon-home'></span><br>Home
-                                        Address</a></li>
-                                <li><a href="#work" data-toggle="tab" tabindex="41"><span
-                                            class='glyphicon glyphicon-briefcase'></span><br>Work Address</a></li>
-                                <li><a href="#other" data-toggle="tab" tabindex="53"><span
-                                            class='glyphicon glyphicon-road'></span><br>Other Address</a></li>
-                            </ul>
-                        </div>
-                    </div>
 
                     <div id="mobileTabs" class="mobile-panel-hide">
                         <center>
                             <ul class="row nav nav-tabs" id="myTab">
                                 <li class="col-xs-2 panel-padding-remove"><a href="#tab1" data-toggle="tab"><i
-                                            class='fa fa-user fa-2x'></i></a></li>
+                                            class='fa fa-user fa-contacts-size'></i><span class="hidden-sm hidden-xs"><br>Personal Details</span></a></li>
                                 <li class="col-xs-2 panel-padding-remove"><a href="#tab3" data-toggle="tab"><i
-                                            class='fa fa-briefcase fa-2x'></i></a></li>
+                                            class='fa fa-briefcase fa-contacts-size'></i><span class="hidden-sm hidden-xs"><br>Professional Details</span></a></li>
                                 <li class="col-xs-2 panel-padding-remove"><a href="#tab4" data-toggle="tab"><i
-                                            class='fa fa-globe fa-2x'></i></a></li>
+                                            class='fa fa-globe fa-contacts-size'></i><span class="hidden-sm hidden-xs"><br>Social Details</span></a></li>
                                 <li class="col-xs-2 panel-padding-remove"><a href="#home" data-toggle="tab"><i
-                                            class='fa fa-home fa-2x'></i></a></li>
+                                            class='fa fa-home fa-contacts-size'></i><span class="hidden-sm hidden-xs"><br>Home Address</span></a></li>
                                 <li class="col-xs-2 panel-padding-remove"><a href="#work" data-toggle="tab"><i
-                                            class='fa fa-building fa-2x'></i></a></li>
+                                            class='fa fa-building fa-contacts-size'></i><span class="hidden-sm hidden-xs"><br>Work Address</span></a></li>
                                 <li class="col-xs-2 panel-padding-remove"><a href="#other" data-toggle="tab"><i
-                                            class='fa fa-road fa-2x'></i></a></li>
+                                            class='fa fa-road fa-contacts-size'></i><span class="hidden-sm hidden-xs"><br>Other Address</span></a></li>
                             </ul>
                         </center>
                     </div>

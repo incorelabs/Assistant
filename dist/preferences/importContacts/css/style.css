@@ -71,3 +71,14 @@ span.buttonText {
     margin-bottom: 0px;
     border-radius: 0px;
 }
+.success{
+    color: #3d9c03;
+}
+.result-div{
+    padding: 15px;
+}
+.result-header{
+    color: midnightblue;
+    text-decoration: underline;
+    font-weight: 900;
+}
