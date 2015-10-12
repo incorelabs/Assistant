@@ -326,7 +326,6 @@ var pageContact = {
             $("#contactDetailBody").empty().html(contactDetailsString);
 
             if (window.innerWidth > 992) {
-                console.log("hi");
                 //To hide the call & sms icons
                 $("#mobileSmsIcon").addClass("hidden");
                 $("#mobileSmsIcon1").addClass("hidden");
@@ -819,6 +818,7 @@ var pageContact = {
         $("#deleteModal").modal('show');
     },
     openProfilePicModal: function () {
+        $("#contactUploadProgressBar").width(0 + "%");
         $("#imageModal").modal('show');
     },
     deleteProfilePic: function () {

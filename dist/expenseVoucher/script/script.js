@@ -163,6 +163,7 @@ var pageExpenseVoucher = {
     openLogoVoucherModal: function (voucherIndex) {
         pageExpenseVoucher.voucherDetails = pageExpenseVoucher.voucherList[voucherIndex];
         $("#imageModal").modal("show");
+        $("#expenseVoucherUploadProgressBar").width(0 + "%");
     },
     deleteCurrentLogo: function () {
         var deleteLogo = confirm("Do you REALLY want to DELETE the LOGO?");

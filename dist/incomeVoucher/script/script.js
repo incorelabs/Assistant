@@ -163,6 +163,7 @@ var pageIncomeVoucher = {
     openLogoVoucherModal: function (voucherIndex) {
         pageIncomeVoucher.voucherDetails = pageIncomeVoucher.voucherList[voucherIndex];
         $("#imageModal").modal("show");
+        $("#incomeVoucherUploadProgressBar").width(0 + "%");
     },
     deleteCurrentLogo: function () {
         var deleteLogo = confirm("Do you REALLY want to DELETE the LOGO?");

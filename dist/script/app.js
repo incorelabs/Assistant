@@ -209,6 +209,8 @@ var app = {
     openAccountProfilePictureModal: function () {
         $("#navbarProgress").addClass("hidden");
         $("#accountProfilePictureModal").modal("show");
+        $("#navbarProgressBar").width(0 + "%");
+
     },
     deleteAccountProfilePicture: function () {
         var deleteProfilePicture = confirm("Do you REALLY want to DELETE the Profile Picture?");

@@ -188,6 +188,7 @@ var pageAssetVoucher = {
     },
     openLogoVoucherModal: function (voucherIndex) {
         pageAssetVoucher.voucherDetails = pageAssetVoucher.voucherList[voucherIndex];
+        $("#assetVoucherUploadProgressBar").width(0 + "%");
         $("#imageModal").modal("show");
     },
     deleteCurrentLogo: function () {

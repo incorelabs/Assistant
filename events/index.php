@@ -672,7 +672,7 @@ echo $navbar_str;
                         </a>
                     </div>
                     <div class="form-group pull-right" style="margin-top:-5px">
-                        <button type="submit" class="btn btn-success button-top-remove">
+                        <button type="button" class="btn btn-success button-top-remove" onclick="window.location.href = 'inviteList/'">
                             <span class='glyphicon glyphicon-ok'></span>
                         </button>
                     </div>
@@ -758,6 +758,22 @@ echo $navbar_str;
                                         <option value="pepperoni">Pepperoni</option>
                                         <option value="onions">Onions</option>
                                     </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 margin-left">
+                            <div class="form-group form-group-margin">
+                                <div class="input-group">
+                                    <span class="input-group-addon input-group-addon-label-multiselect">Groups*</span>
+                                    <div class="inner-addon right-addon">
+                                        <i class="fa fa-caret-down fa-size"></i>
+                                        <select id="inviteesOption"class="form-control select-field-left-border">
+                                            <option value="0">Yes</option>
+                                            <option value="1" selected="selected">No</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>

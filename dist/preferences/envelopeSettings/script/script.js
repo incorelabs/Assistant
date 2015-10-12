@@ -104,6 +104,7 @@ var pageEnvelopeSettings = {
     openLogoEnvelopeSettingsModal: function (envelopeSettingsIndex) {
         pageEnvelopeSettings.envelopeDetails = pageEnvelopeSettings.envelopeSettingList[envelopeSettingsIndex];
         $("#imageModal").modal('show');
+        $("#envelopeSettingsUploadProgressBar").width(0 + "%");
     },
     deleteCurrentLogo: function () {
         var deleteLogo = confirm("Do you REALLY want to DELETE the LOGO?");

@@ -89,6 +89,8 @@ var pageLabelSettings = {
     openLogoLabelSettingsModal: function (labelSettingsIndex) {
         pageLabelSettings.labelDetails = pageLabelSettings.labelSettingList[labelSettingsIndex];
         $("#imageModal").modal('show');
+        $("#labelSettingsUploadProgressBar").width(0 + "%");
+
     },
     deleteCurrentLogo: function () {
         var deleteLogo = confirm("Do you REALLY want to DELETE the LOGO?");

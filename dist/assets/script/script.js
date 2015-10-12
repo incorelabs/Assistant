@@ -358,6 +358,7 @@ var pageAsset = {
         window.location.href = app.websiteRoot + "assets/voucher/index.php?assetCode=" + assetCode;
     },
     openAssetImageModal: function(){
+        $("#assetUploadProgressBar").width(0 + "%");
         $("#imageModal").modal('show');
     },
     deleteAssetImage: function (typeOfDeletion) {
