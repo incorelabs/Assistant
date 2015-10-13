@@ -65,7 +65,7 @@ class ExpenseController
         //Record can only be deleted by whom it was inserted
         if($result = $this->mysqli->query($qry)){
             if($result->num_rows == 0){
-                $this->response = $this->createResponse(0,"This is Record Unavailable");
+                $this->response = $this->createResponse(0,"This Record Unavailable");
                 return;
             }
             else{
