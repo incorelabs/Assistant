@@ -198,45 +198,6 @@ echo $navbar_str;
                             </div>
                         </div>
                     </div>
-                    <div class="hidden"><!-- Show when autocomplete is selected as Medical Consultation-->
-                        <div class="form-group form-group-margin">
-                            <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Doctor Name</span>
-
-                                <div class="inner-addon right-addon">
-                                    <i class="fa fa-user hidden-xs fa-size"></i>
-                                    <input type="text" class="form-control text-field-left-border" name="doctorName"
-                                           id="doctorName" placeholder="Doctor Name" tabindex="4"/><!-- Saves Name in contacts -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hidden"><!-- Show when autocomplete is selected as Medical Test-->
-                        <div class="form-group form-group-margin">
-                            <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Lab Name</span>
-
-                                <div class="inner-addon right-addon">
-                                    <i class="fa fa-user hidden-xs fa-size"></i>
-                                    <input type="text" class="form-control text-field-left-border" name="labName"
-                                           id="labName" placeholder="Lab Name" tabindex="4"/><!-- Saves Name in contacts -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hidden"><!-- Show when autocomplete is selected as Property-->
-                        <div class="form-group form-group-margin">
-                            <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Property Holder</span>
-
-                                <div class="inner-addon right-addon">
-                                    <i class="fa fa-user hidden-xs fa-size"></i>
-                                    <input type="text" class="form-control text-field-left-border" name="propertyHolder"
-                                           id="propertyHolder" placeholder="Property Holder" tabindex="4"/><!-- Saves Name in contacts -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="form-group form-group-margin">
                         <div class="input-group">
                             <span class="input-group-addon input-group-addon-label">Joint Holder</span>
@@ -250,7 +211,7 @@ echo $navbar_str;
                     </div>
                     <div class="form-group form-group-margin">
                         <div class="input-group">
-                            <span class="input-group-addon input-group-addon-label">Issuing Auth</span>
+                            <span class="input-group-addon input-group-addon-label" id="issuedByNameLabel">Issuing Auth*</span>
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-globe fa-size"></i>
@@ -278,7 +239,7 @@ echo $navbar_str;
                                 <i class="fa fa-calendar hidden-xs fa-size"></i>
                                 <input type="text" class="form-control text-field-left-border date" name="issueDate"
                                        id="issueDate" placeholder="DD/MM/YYYY" aria-describedby="basic-addon1"
-                                       tabindex="8" required/>
+                                       tabindex="8"/>
                             </div>
                         </div>
                         <div class="info"></div>

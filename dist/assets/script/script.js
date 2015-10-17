@@ -481,8 +481,6 @@ var pageAsset = {
                     console.log("not selected but value is in array");
                     $("#assetTypeCode").val(pageAsset.assetTypeCode[index]);
                 } else {
-                    if ($(event.target).val().trim() == "")
-                        $("#expiryDate").removeAttr("required");
                     console.log("Change triggered");
                     $("#assetTypeCode").val(1);
                 }
@@ -625,8 +623,6 @@ var pageAsset = {
                     console.log("not selected but value is in array");
                     $("#locationCode").val(pageAsset.locationCode[index]);
                 } else {
-                    if ($(event.target).val().trim() == "")
-                        $("#expiryDate").removeAttr("required");
                     console.log("Change triggered");
                     $("#locationCode").val(1);
                 }

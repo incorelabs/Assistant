@@ -190,7 +190,22 @@ var pageDocument = {
 
             documentDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Joint Holder Name</div><value><div class='col-md-9'>" + ((data.detail.document.JointHolder) ? data.detail.document.JointHolder : "") + "</div></value></div></div>";
 
-            documentDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Issuing Authority</div><value><div class='col-md-9'>" + ((data.detail.document.IssuedByName) ? data.detail.document.IssuedByName : "") + "</div></value></div></div>";
+            var issuedByNameString = "";
+            switch (data.detail.document.DocumentTypeCode) {
+                case "1009":
+                    issuedByNameString = "Lab";
+                    break;
+                case "1010":
+                    issuedByNameString = "Doctor";
+                    break;
+                case "1011":
+                    issuedByNameString = "Reference";
+                    break;
+                default:
+                    issuedByNameString = "Issuing Auth";
+            }
+
+            documentDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>" + issuedByNameString + "</div><value><div class='col-md-9'>" + ((data.detail.document.IssuedByName) ? data.detail.document.IssuedByName : "") + "</div></value></div></div>";
 
             documentDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Document Location</div><value><div class='col-md-9'>" + ((data.detail.document.LocationName) ? data.detail.document.LocationName : "") + "</div></value></div></div>";
 
@@ -231,6 +246,7 @@ var pageDocument = {
 
         $("#issueDate").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
         $("#expiryDate").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#issuedByNameLabel").html("Issuing Auth*");
 
         $('#documentModalHeading').empty().html("Add Document");
         $('#documentModal').modal('show');
@@ -241,6 +257,7 @@ var pageDocument = {
 
         $("#issueDate").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
         $("#expiryDate").closest(".form-group").removeClass("has-success").removeClass("has-error").find('.info').empty();
+        $("#issuedByNameLabel").html("Issuing Auth*");
 
         $('#documentModalHeading').empty().html("Edit Document");
 
@@ -277,6 +294,21 @@ var pageDocument = {
         if (pageDocument.localDocument.document.DocumentTypeCode) {
             $("#documentTypeCode").val(pageDocument.localDocument.document.DocumentTypeCode);
             $("#documentTypeName").val(pageDocument.localDocument.document.DocumentTypeName);
+            var issuedByNameString = "";
+            switch (pageDocument.localDocument.document.DocumentTypeCode) {
+                case "1009":
+                    issuedByNameString = "Lab*";
+                    break;
+                case "1010":
+                    issuedByNameString = "Doctor*";
+                    break;
+                case "1011":
+                    issuedByNameString = "Reference*";
+                    break;
+                default:
+                    issuedByNameString = "Issuing Auth*";
+            }
+            $("#issuedByNameLabel").html(issuedByNameString);
         }
 
         if (pageDocument.localDocument.document.DocumentName) {
@@ -436,11 +468,23 @@ var pageDocument = {
             change: function (event, ui) {
                 var index = $.inArray($(event.target).val(), pageDocument.documentTypeTag);
                 if (index > -1) {
+                    switch (pageDocument.documentTypeCode[index]) {
+                        case "1009":
+                            $("#issuedByNameLabel").html("Lab*");
+                            break;
+                        case "1010":
+                            $("#issuedByNameLabel").html("Doctor*");
+                            break;
+                        case "1011":
+                            $("#issuedByNameLabel").html("Reference*");
+                            break;
+                        default:
+                            $("#issuedByNameLabel").html("Issuing Auth*");
+                    }
                     console.log("not selected but value is in array");
                     $("#documentTypeCode").val(pageDocument.documentTypeCode[index]);
                 } else {
-                    if ($(event.target).val().trim() == "")
-                        $("#expiryDate").removeAttr("required");
+                    $("#issuedByNameLabel").html("Issuing Auth");
                     console.log("Change triggered");
                     $("#documentTypeCode").val(1);
                 }
@@ -449,6 +493,19 @@ var pageDocument = {
                 console.log(ui);
                 console.log("Selected");
                 var index = $.inArray(ui.item.value, pageDocument.documentTypeTag);
+                switch (pageDocument.documentTypeCode[index]) {
+                    case "1009":
+                        $("#issuedByNameLabel").html("Lab*");
+                        break;
+                    case "1010":
+                        $("#issuedByNameLabel").html("Doctor*");
+                        break;
+                    case "1011":
+                        $("#issuedByNameLabel").html("Reference*");
+                        break;
+                    default:
+                        $("#issuedByNameLabel").html("Issuing Auth*");
+                }
                 $("#documentTypeCode").val(pageDocument.documentTypeCode[index]);
                 console.log($("#documentTypeCode").val());
             }
@@ -592,6 +649,12 @@ $(document).ready(function () {
                 if (data.status == 1)
                     pageDocument.getDocumentDetails(data.result[0].DocumentCode);
             });
+        }
+    });
+
+    $("#documentTypeName").focusout(function () {
+        if (this.value.trim() === "") {
+            $("#issuedByNameLabel").html("Issuing Auth*");
         }
     });
 
