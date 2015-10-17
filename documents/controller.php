@@ -38,7 +38,7 @@ do {
     }
 
     //Validate required fields
-    if (empty($_POST["holderCode"]) || empty($_POST["documentTypeName"]) || empty($_POST["documentTypeCode"]) || empty($_POST["documentName"]) || empty($_POST["issuedBy"]) || empty($_POST["issuedByName"]) || empty($_POST["locationCode"]) || empty($_POST["locationName"]) || empty($_POST["issuedBy"])) {
+    if (empty($_POST["holderCode"]) || empty($_POST["documentTypeName"]) || empty($_POST["documentTypeCode"]) || empty($_POST["documentName"]) || empty($_POST["issuedBy"]) || empty($_POST["issuedByName"]) || empty($_POST["locationCode"]) || empty($_POST["locationName"])) {
         $validate = false;
         $response = createResponse(0,"Required fields are empty");
         break;

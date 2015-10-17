@@ -176,7 +176,7 @@ class DocumentController
         $locationCode = ((!empty($this->data["locationCode"])) ? intval($this->data['locationCode']) : 1);
         $locationName = "'".$this->data["locationName"]."'";
         $remarks = ((!empty($this->data["remarks"])) ? "'".$this->data["remarks"]."'" : "NULL");
-        $issueDate = "'".$this->data["issueDate"]."'";
+        $issueDate = ((!empty($this->data["issueDate"])) ? "'".$this->data["issueDate"]."'" : "NULL");
         $expiryDate = ((!empty($this->data["expiryDate"])) ? "'".$this->data["expiryDate"]."'" : "NULL");
         $inserted = $this->familyCode;
         $private = (empty($this->data["privateFlag"]) ? 2 : 1);
