@@ -255,7 +255,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-globe fa-size"></i>
                                 <input type="text" class="form-control text-field-left-border" name="issuedByName"
-                                       id="issuedByName" placeholder="Issuing Authority" tabindex="6"/>
+                                       id="issuedByName" placeholder="Issuing Authority" tabindex="6" required/>
                             </div>
                         </div>
                     </div>
@@ -278,7 +278,7 @@ echo $navbar_str;
                                 <i class="fa fa-calendar hidden-xs fa-size"></i>
                                 <input type="text" class="form-control text-field-left-border date" name="issueDate"
                                        id="issueDate" placeholder="DD/MM/YYYY" aria-describedby="basic-addon1"
-                                       tabindex="8"/>
+                                       tabindex="8" required/>
                             </div>
                         </div>
                         <div class="info"></div>
