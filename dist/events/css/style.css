@@ -238,12 +238,12 @@ h5 {
 }
 
 .input-group-addon-label {
-    min-width: 104px;
+    min-width: 107px;
     text-align: left;
 }
 
 .input-group-addon-label-multiselect {
-    min-width: 104px;
+    min-width: 107px;
     text-align: left;
 }
 
@@ -313,7 +313,7 @@ h5 {
 @media screen and (min-width: 768px) {
     .subEventsBtn{
         margin-left: -65px;
-        margin-top: 52px;
+        margin-top: 77px;
     }
     .assignTaskBtn{
         margin-left: -70px;
@@ -328,7 +328,7 @@ h5 {
         margin-left: 45px !important;
     }
     .two-col-span-label{
-        min-width: 50px !important;
+        min-width: 65px !important;
     }
     .col-padding-left-remove{
         padding-left: 0px;
@@ -363,4 +363,9 @@ table>tr>td{
 .select-right-radius-none{
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
+}
+
+.row-margin-none{
+    margin-left: 0px;
+    margin-right: 0px;
 }

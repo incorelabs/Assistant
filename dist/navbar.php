@@ -10,7 +10,7 @@
       <li><a href='#' class='text-center' onclick='app.openAccountProfilePictureModal()'><img class='img-rounded' width='100px' height='100px' id='navbarProfilePicture'/></a></li>
       <li><a href='#' style='pointer-events: none; cursor: default;'>".$_SESSION['name']."</a></li>
       <li class='divider'></li>
-      <li><a href='#'>Account Info</a></li>
+      <li><a href='".$root_location."accountInfo'>Account Info</a></li>
       <li><a href='#' onclick='app.logout();'>Sign Out</a></li>
     </ul>
     </div>
@@ -21,7 +21,7 @@
 				<a href='".$root_location."'>Dashboard</a>
 			</li>
 			<li><a href='".$root_location."contacts'>Contacts</a></li>
-			<li><a href='#'>Investment</a></li>
+			<li><a href='".$root_location."investments'>Investments</a></li>
 			<li><a href='".$root_location."assets'>Assets</a></li>
 			<li><a href='".$root_location."documents'>Documents</a></li>
 			<li><a href='".$root_location."expense'>Expense</a></li>

@@ -237,7 +237,7 @@ echo $navbar_str;
                     </div>
                     <div class="form-group form-group-margin">
                         <div class="input-group">
-                            <span class="input-group-addon input-group-addon-label">Doc Location*</span>
+                            <span class="input-group-addon input-group-addon-label">Location*</span>
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-globe fa-size"></i>

@@ -203,7 +203,7 @@ echo $navbar_str;
                                 <div class="list-group-item-heading header_font">
                                     <div class="col-md-3">Remarks</div>
                                     <value>
-                                        <div class="col-md-9"></div>
+                                        <div class="col-md-8 text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
                                     </value>
                                 </div>
                             </div>
@@ -361,7 +361,7 @@ echo $navbar_str;
                     </div>
                     <div class="form-group form-group-margin">
                         <div class="input-group">
-                            <span class="input-group-addon input-group-addon-label">Doc Location*</span>
+                            <span class="input-group-addon input-group-addon-label">Location*</span>
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-globe fa-size"></i>
@@ -399,13 +399,9 @@ echo $navbar_str;
                     <div class="form-group form-group-margin">
                         <div class="input-group">
                             <span class="input-group-addon input-group-addon-label">Remarks</span>
-
-                            <div class="inner-addon right-addon">
-                                <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" name="remarks"
+                                <textarea type="text" class="form-control text-field-left-border textarea-style" name="remarks"
                                        id="remarks" placeholder="Remarks" aria-describedby="basic-addon1"
-                                       tabindex="10"/>
-                            </div>
+                                       tabindex="10" rows="4"></textarea>
                         </div>
                     </div>
                 </div>

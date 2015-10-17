@@ -184,7 +184,7 @@ h5 {
 }
 
 .input-group-addon-label {
-    min-width: 105px;
+    min-width: 110px;
     font-size: 11px;
     text-align: left;
 }
@@ -192,7 +192,7 @@ h5 {
 @media screen and (min-width: 768px) {
     .input-group-addon-label {
         font-size: 14px;
-        min-width: 127px;
+        min-width: 134px;
         text-align: left;
     }
 }
@@ -340,4 +340,74 @@ a{
 
 .text-justify{
     text-align: justify;
+}
+
+.input-no-radius{
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
+.input-right-radius{
+    border-top-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+}
+
+@media screen and (min-width: 768px) {
+    .subEventsBtn{
+        margin-left: -65px;
+        margin-top: 30px;
+    }
+    .assignTaskBtn{
+        margin-left: -70px;
+        margin-top: 30px;
+    }
+    .margin-left-none{
+        margin-left: 0px !important;
+        margin-right: 45px !important;
+    }
+    .margin-right-none{
+        margin-right: 0px !important;
+        margin-left: 45px !important;
+    }
+    .two-col-span-label{
+        min-width: 60px !important;
+    }
+    .check-span-label{
+        min-width: 95px !important;
+    }
+    .col-padding-left-remove{
+        padding-left: 0px;
+    }
+    .col-padding-right-remove{
+        padding-right: 0px;
+    }
+    .bottom-margin-ten{
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .col-padding-remove{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .bottom-margin-ten{
+        margin-bottom: 15px;
+    }
+}
+.checkbox-margin{
+    margin-left: 15px !important;
+    width: 100%;
+}
+
+.top-margin-none{
+    margin-top:0px;
+}
+
+.select-inline{
+    width: 37%;
+}
+.select-right-radius-none {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
 }

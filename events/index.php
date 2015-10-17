@@ -37,7 +37,7 @@ echo $navbar_str;
 </div>
 <div class="container-fluid navbar-padding">
     <div class="row">
-        <div class="col-xs-12 col-md-5 col-padding" id="searchEventsHeader">
+        <div class="col-xs-12 col-md-5 col-padding" id="searchEventHeader">
             <div class="list-group list-margin">
                 <div class="list-group-item list-margin">
                     <div class="row">
@@ -58,7 +58,7 @@ echo $navbar_str;
                         </div>
                         <div>
                             <button class="btn btn-primary btn-size"
-                                    onclick="pageEvents.openAddEventsModal()"><span
+                                    onclick="pageEvent.openAddEventModal()"><span
                                     class="glyphicon glyphicon-plus"></span></button>
                         </div>
                     </div>
@@ -66,9 +66,9 @@ echo $navbar_str;
             </div>
         </div>
 
-        <div class="col-md-7 col-xs-12 col-sm-12 hidden-sm hidden-xs" id="eventsDetailsHeaderDiv">
+        <div class="col-md-7 col-xs-12 col-sm-12 hidden-sm hidden-xs" id="eventDetailsHeaderDiv">
             <div class="panel panel-default panelHeight list-margin">
-                <div class="panel-heading text-center" id="eventsDetailHeader">
+                <div class="panel-heading text-center" id="eventDetailHeader">
                     <h12>Event Details</h12>
                 </div>
             </div>
@@ -79,13 +79,13 @@ echo $navbar_str;
     <!--row-->
     <div class="row">
 
-        <div class="col-md-5 col-sm-12 col-xs-12 col-padding" id="eventsListDiv">
-            <div class="panel panel-default panelHeight panel-margin" id="eventsListScroll">
+        <div class="col-md-5 col-sm-12 col-xs-12 col-padding" id="eventListDiv">
+            <div class="panel panel-default panelHeight panel-margin" id="eventListScroll">
                 <div class="panel-height">
                     <!-- List group -->
                     <div id="assetsList" class="list-group force-scroll mobile-list">
                         <a href="#" class="list-group-item contacts_font"
-                           onclick="pageEvents.openEventsInviteListModal()">Test to open invite modal</a>
+                           onclick="pageEvent.openEventInviteListModal()">Test to open invite modal</a>
                     </div>
                 </div>
             </div>
@@ -93,12 +93,12 @@ echo $navbar_str;
         </div>
         <!--COL-->
 
-        <div class="col-md-7 col-sm-12 col-xs-12 hidden-sm hidden-xs" id="eventsDetailDiv">
-            <div id="eventsDetail" class="panel panel-default panelHeight panel-margin">
+        <div class="col-md-7 col-sm-12 col-xs-12 hidden-sm hidden-xs" id="eventDetailDiv">
+            <div id="eventDetail" class="panel panel-default panelHeight panel-margin">
                 <div class='panel-height'>
                     <!-- List group -->
                     <div class="list-group list-group-remove-margin">
-                        <div id="eventsDetailBody" class='list-group-item list-group-item-border'>
+                        <div id="eventDetailBody" class='list-group-item list-group-item-border'>
                             <div class="row contact-details">
                                 <div class="list-group-item-heading header_font">
                                     <div class="col-md-3">Event Name</div>
@@ -153,7 +153,7 @@ echo $navbar_str;
                                     <value>
                                         <div class="col-md-9">
                                             <button class="btn btn-primary"
-                                                    onclick="pageEvents.openEventsInviteListModal()"><i
+                                                    onclick="pageEvent.openEventInviteListModal()"><i
                                                     class="fa fa-sticky-note-o"></i></button>
                                         </div>
                                     </value>
@@ -164,7 +164,7 @@ echo $navbar_str;
                                     <div class="col-md-3">Assign Tasks</div>
                                     <value>
                                         <div class="col-md-9">
-                                            <button class="btn btn-primary" onclick="pageEvents.openAssignTaskPage()">
+                                            <button class="btn btn-primary" onclick="pageEvent.openAssignTaskPage()">
                                                 <i
                                                     class="fa fa-sticky-note-o"></i></button>
                                         </div>
@@ -176,7 +176,8 @@ echo $navbar_str;
                                     <div class="col-md-3">Guest Confirmation</div>
                                     <value>
                                         <div class="col-md-9">
-                                            <button class="btn btn-primary" onclick="pageEvents.openGuestConfirmationPage()"><i
+                                            <button class="btn btn-primary"
+                                                    onclick="pageEvent.openGuestConfirmationPage()"><i
                                                     class="fa fa-sticky-note-o"></i></button>
 
                                         </div>
@@ -188,7 +189,8 @@ echo $navbar_str;
                                     <div class="col-md-3">Accommodation</div>
                                     <value>
                                         <div class="col-md-9">
-                                            <button class="btn btn-primary" onclick="pageEvents.openAccommodationPage()"><i
+                                            <button class="btn btn-primary" onclick="pageEvent.openAccommodationPage()">
+                                                <i
                                                     class="fa fa-sticky-note-o"></i></button>
 
                                         </div>
@@ -200,7 +202,8 @@ echo $navbar_str;
                                     <div class="col-md-3">Room Allocation</div>
                                     <value>
                                         <div class="col-md-9">
-                                            <button class="btn btn-primary" onclick="pageEvents.openRoomAllocationPage()"><i
+                                            <button class="btn btn-primary"
+                                                    onclick="pageEvent.openRoomAllocationPage()"><i
                                                     class="fa fa-sticky-note-o"></i></button>
                                         </div>
                                     </value>
@@ -211,7 +214,8 @@ echo $navbar_str;
                                     <div class="col-md-3">Vehicle Allocation</div>
                                     <value>
                                         <div class="col-md-9">
-                                            <button class="btn btn-primary" onclick="pageEvents.openVehicleAllocationPage()"><i
+                                            <button class="btn btn-primary"
+                                                    onclick="pageEvent.openVehicleAllocationPage()"><i
                                                     class="fa fa-sticky-note-o"></i></button>
 
                                         </div>
@@ -223,7 +227,8 @@ echo $navbar_str;
                                     <div class="col-md-3">Service Provider</div>
                                     <value>
                                         <div class="col-md-9">
-                                            <button class="btn btn-primary" onclick="pageEvents.openServiceProviderPage()"><i
+                                            <button class="btn btn-primary"
+                                                    onclick="pageEvent.openServiceProviderPage()"><i
                                                     class="fa fa-sticky-note-o"></i></button>
 
                                         </div>
@@ -244,12 +249,12 @@ echo $navbar_str;
 </div>
 <!--Container-->
 
-<!-- Add Events Modal -->
-<div class="modal fade" id="eventsModal" tabindex="-1" role="dialog" aria-labelledby="eventsModal"
+<!-- Add Event Modal -->
+<div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModal"
      aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" method="POST" action="controller.php" id="eventsForm" autocomplete="off">
+            <form class="form-horizontal" method="POST" action="controller.php" id="eventForm" autocomplete="off">
                 <div class="modal-header">
                     <div class="form-group pull-left" style="margin-top:-5px">
                         <a class="btn btn-danger button-top-remove" data-dismiss="modal">
@@ -261,12 +266,12 @@ echo $navbar_str;
                             <span class='glyphicon glyphicon-ok'></span>
                         </button>
                     </div>
-                    <h4 id="eventsModalHeading" class="modal-title text-center">
+                    <h4 id="eventModalHeading" class="modal-title text-center">
                     </h4>
                 </div>
                 <div class="modal-body add-event-modal-body">
-                    <input type="text" class="hidden" name="eventsTypeCode" id="eventsTypeCode" value="1"/>
-                    <input type="text" class="hidden" name="eventsCode" id="form-add-edit-code"/>
+                    <input type="text" class="hidden" name="eventTypeCode" id="eventTypeCode" value="1"/>
+                    <input type="text" class="hidden" name="eventCode" id="form-add-edit-code"/>
                     <input type="text" class="hidden" name="mode" id="form-add-edit-mode"/>
 
 
@@ -300,8 +305,7 @@ echo $navbar_str;
                             </div>
                         </div>
                     </div>
-                    <div
-                        class="col-md-6 col-sm-6 col-xs-12 col-padding-left-remove col-padding-right-remove col-padding-remove">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-padding-left-remove col-padding-right-remove col-padding-remove">
                         <div class="form-group margin-right-none">
                             <div class="input-group">
                                 <span class="input-group-addon input-group-addon-label">From Date*</span>
@@ -328,7 +332,7 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-caret-down hidden-xs fa-size"></i>
                                 <select class="form-control select-field-left-border" name="subEventConfirmation"
-                                        id="subEventConfirmation" onchange="pageEvents.subEventConfirmation()"
+                                        id="subEventConfirmation" onchange="pageEvent.subEventConfirmation()"
                                         tabindex="4">
                                     <option value="0">Yes</option>
                                     <option value="1" selected>No</option>
@@ -348,13 +352,124 @@ echo $navbar_str;
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group form-group-margin">
-                            <div class="input-group">
-                                <span class="input-group-addon input-group-addon-label">Time*</span>
+                        <div class="row row-margin-none">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-padding-left-remove col-padding-right-remove col-padding-remove">
+                                <div class="form-group margin-right-none">
+                                    <div class="input-group">
+                                        <span
+                                            class="input-group-addon input-group-addon-label two-col-span-label">From*</span>
+                                        <span class="input-group-btn select-inline">
+                                            <div class="inner-addon right-addon">
+                                                <i class="fa fa-caret-down fa-size"></i>
+                                                <select
+                                                    class="form-control select-field-left-border select-right-radius-none">
+                                                    <option value="00">00</option>
+                                                    <option value="01">01</option>
+                                                    <option value="02">02</option>
+                                                    <option value="03">03</option>
+                                                    <option value="04">04</option>
+                                                    <option value="05">05</option>
+                                                    <option value="06">06</option>
+                                                    <option value="07">07</option>
+                                                    <option value="08">08</option>
+                                                    <option value="09">09</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                </select>
+                                            </div>
+                                        </span>
+                                        <span class="input-group-btn select-inline">
+                                            <div class="inner-addon right-addon">
+                                                <i class="fa fa-caret-down fa-size"></i>
+                                                <select class="form-control select-field-left-border">
+                                                    <option value="00">00</option>
+                                                    <option value="01">01</option>
+                                                    <option value="02">02</option>
+                                                    <option value="03">03</option>
+                                                    <option value="04">04</option>
+                                                    <option value="05">05</option>
+                                                    <option value="06">06</option>
+                                                    <option value="07">07</option>
+                                                    <option value="08">08</option>
+                                                    <option value="09">09</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                    <option value="00">24</option>
+                                                    <option value="01">25</option>
+                                                    <option value="02">26</option>
+                                                    <option value="03">27</option>
+                                                    <option value="04">28</option>
+                                                    <option value="05">29</option>
+                                                    <option value="06">30</option>
+                                                    <option value="07">31</option>
+                                                    <option value="08">32</option>
+                                                    <option value="09">33</option>
+                                                    <option value="10">34</option>
+                                                    <option value="11">35</option>
+                                                    <option value="12">36</option>
+                                                    <option value="13">37</option>
+                                                    <option value="14">38</option>
+                                                    <option value="15">39</option>
+                                                    <option value="16">40</option>
+                                                    <option value="17">41</option>
+                                                    <option value="18">42</option>
+                                                    <option value="19">43</option>
+                                                    <option value="20">44</option>
+                                                    <option value="21">45</option>
+                                                    <option value="22">46</option>
+                                                    <option value="23">47</option>
+                                                    <option value="00">48</option>
+                                                    <option value="01">49</option>
+                                                    <option value="02">50</option>
+                                                    <option value="03">51</option>
+                                                    <option value="04">52</option>
+                                                    <option value="05">53</option>
+                                                    <option value="06">54</option>
+                                                    <option value="07">55</option>
+                                                    <option value="08">56</option>
+                                                    <option value="09">57</option>
+                                                    <option value="10">58</option>
+                                                    <option value="11">59</option>
+                                                </select>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-padding-right-remove col-padding-remove">
+                            <div class="form-group margin-left-none">
+                                <div class="input-group">
+                                    <span
+                                        class="input-group-addon input-group-addon-label two-col-span-label">To</span>
                                     <span class="input-group-btn select-inline">
                                         <div class="inner-addon right-addon">
                                             <i class="fa fa-caret-down fa-size"></i>
-                                            <select class="form-control select-field-left-border select-right-radius-none">
+                                            <select
+                                                class="form-control select-field-left-border select-right-radius-none">
                                                 <option value="00">00</option>
                                                 <option value="01">01</option>
                                                 <option value="02">02</option>
@@ -449,39 +564,42 @@ echo $navbar_str;
                                             </select>
                                         </div>
                                     </span>
+                                </div>
                             </div>
                         </div>
+                        </div>
                     </div>
-                    <div id="subEventsAddDiv" class="hidden">
-                        <hr/>
-                        <div class="row">
-                            <div class="col-md-11 col-sm-11 col-xs-12">
-                                <div class="form-group form-group-margin">
-                                    <div class="input-group">
-                                        <span class="input-group-addon input-group-addon-label">Name*</span>
-
-                                        <div class="inner-addon right-addon">
-                                            <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
-                                            <input type="text" class="form-control text-field-left-border" id="" name=""
-                                                   placeholder="Sub Event Name" tabindex="6" required/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group form-group-margin">
-                                    <div class="input-group">
-                                        <span class="input-group-addon input-group-addon-label">Venue*</span>
-
-                                        <div class="inner-addon right-addon">
-                                            <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
-                                            <input type="text" class="form-control text-field-left-border" id="" name=""
-                                                   placeholder="Sub Event Venue" tabindex="7" required/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12 col-padding-left-remove col-padding-right-remove col-padding-remove">
-                                    <div class="form-group margin-right-none ">
+                    <div id="subEventAddDiv" class="hidden">
+                            <hr/>
+                            <div class="row">
+                                <div class="col-md-11 col-sm-11 col-xs-12">
+                                    <div class="form-group form-group-margin">
                                         <div class="input-group">
-                                            <span class="input-group-addon input-group-addon-label two-col-span-label">Date*</span>
+                                            <span class="input-group-addon input-group-addon-label">Name*</span>
+
+                                            <div class="inner-addon right-addon">
+                                                <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
+                                                <input type="text" class="form-control text-field-left-border" id=""
+                                                       name=""
+                                                       placeholder="Sub Event Name" tabindex="6" required/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-margin">
+                                        <div class="input-group">
+                                            <span class="input-group-addon input-group-addon-label">Venue*</span>
+
+                                            <div class="inner-addon right-addon">
+                                                <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
+                                                <input type="text" class="form-control text-field-left-border" id=""
+                                                       name=""
+                                                       placeholder="Sub Event Venue" tabindex="7" required/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-margin">
+                                        <div class="input-group">
+                                            <span class="input-group-addon input-group-addon-label">Date*</span>
 
                                             <div class="inner-addon right-addon">
                                                 <i class="fa fa-calendar hidden-xs fa-size"></i>
@@ -491,43 +609,149 @@ echo $navbar_str;
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12 col-padding-right-remove col-padding-remove">
-                                    <div class="form-group margin-left-none">
-                                        <div class="input-group">
-                                            <span class="input-group-addon input-group-addon-label two-col-span-label">Time*</span>
-                                    <span class="input-group-btn select-inline">
-                                        <div class="inner-addon right-addon">
-                                            <i class="fa fa-caret-down fa-size"></i>
-                                            <select class="form-control select-field-left-border select-right-radius-none">
-                                                <option value="00">00</option>
-                                                <option value="01">01</option>
-                                                <option value="02">02</option>
-                                                <option value="03">03</option>
-                                                <option value="04">04</option>
-                                                <option value="05">05</option>
-                                                <option value="06">06</option>
-                                                <option value="07">07</option>
-                                                <option value="08">08</option>
-                                                <option value="09">09</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                                <option value="13">13</option>
-                                                <option value="14">14</option>
-                                                <option value="15">15</option>
-                                                <option value="16">16</option>
-                                                <option value="17">17</option>
-                                                <option value="18">18</option>
-                                                <option value="19">19</option>
-                                                <option value="20">20</option>
-                                                <option value="21">21</option>
-                                                <option value="22">22</option>
-                                                <option value="23">23</option>
-                                            </select>
+                                    <div class="col-md-6 col-sm-6 col-xs-12 col-padding-left-remove col-padding-right-remove col-padding-remove">
+                                        <div class="form-group margin-right-none">
+                                            <div class="input-group">
+                                                <span class="input-group-addon input-group-addon-label two-col-span-label">From*</span>
+                                                <span class="input-group-btn select-inline">
+                                                    <div class="inner-addon right-addon">
+                                                        <i class="fa fa-caret-down fa-size"></i>
+                                                        <select
+                                                            class="form-control select-field-left-border select-right-radius-none">
+                                                            <option value="00">00</option>
+                                                            <option value="01">01</option>
+                                                            <option value="02">02</option>
+                                                            <option value="03">03</option>
+                                                            <option value="04">04</option>
+                                                            <option value="05">05</option>
+                                                            <option value="06">06</option>
+                                                            <option value="07">07</option>
+                                                            <option value="08">08</option>
+                                                            <option value="09">09</option>
+                                                            <option value="10">10</option>
+                                                            <option value="11">11</option>
+                                                            <option value="12">12</option>
+                                                            <option value="13">13</option>
+                                                            <option value="14">14</option>
+                                                            <option value="15">15</option>
+                                                            <option value="16">16</option>
+                                                            <option value="17">17</option>
+                                                            <option value="18">18</option>
+                                                            <option value="19">19</option>
+                                                            <option value="20">20</option>
+                                                            <option value="21">21</option>
+                                                            <option value="22">22</option>
+                                                            <option value="23">23</option>
+                                                        </select>
+                                                    </div>
+                                                </span>
+                                                <span class="input-group-btn select-inline">
+                                                    <div class="inner-addon right-addon">
+                                                        <i class="fa fa-caret-down fa-size"></i>
+                                                        <select class="form-control select-field-left-border">
+                                                            <option value="00">00</option>
+                                                            <option value="01">01</option>
+                                                            <option value="02">02</option>
+                                                            <option value="03">03</option>
+                                                            <option value="04">04</option>
+                                                            <option value="05">05</option>
+                                                            <option value="06">06</option>
+                                                            <option value="07">07</option>
+                                                            <option value="08">08</option>
+                                                            <option value="09">09</option>
+                                                            <option value="10">10</option>
+                                                            <option value="11">11</option>
+                                                            <option value="12">12</option>
+                                                            <option value="13">13</option>
+                                                            <option value="14">14</option>
+                                                            <option value="15">15</option>
+                                                            <option value="16">16</option>
+                                                            <option value="17">17</option>
+                                                            <option value="18">18</option>
+                                                            <option value="19">19</option>
+                                                            <option value="20">20</option>
+                                                            <option value="21">21</option>
+                                                            <option value="22">22</option>
+                                                            <option value="23">23</option>
+                                                            <option value="00">24</option>
+                                                            <option value="01">25</option>
+                                                            <option value="02">26</option>
+                                                            <option value="03">27</option>
+                                                            <option value="04">28</option>
+                                                            <option value="05">29</option>
+                                                            <option value="06">30</option>
+                                                            <option value="07">31</option>
+                                                            <option value="08">32</option>
+                                                            <option value="09">33</option>
+                                                            <option value="10">34</option>
+                                                            <option value="11">35</option>
+                                                            <option value="12">36</option>
+                                                            <option value="13">37</option>
+                                                            <option value="14">38</option>
+                                                            <option value="15">39</option>
+                                                            <option value="16">40</option>
+                                                            <option value="17">41</option>
+                                                            <option value="18">42</option>
+                                                            <option value="19">43</option>
+                                                            <option value="20">44</option>
+                                                            <option value="21">45</option>
+                                                            <option value="22">46</option>
+                                                            <option value="23">47</option>
+                                                            <option value="00">48</option>
+                                                            <option value="01">49</option>
+                                                            <option value="02">50</option>
+                                                            <option value="03">51</option>
+                                                            <option value="04">52</option>
+                                                            <option value="05">53</option>
+                                                            <option value="06">54</option>
+                                                            <option value="07">55</option>
+                                                            <option value="08">56</option>
+                                                            <option value="09">57</option>
+                                                            <option value="10">58</option>
+                                                            <option value="11">59</option>
+                                                        </select>
+                                                    </div>
+                                                </span>
+                                            </div>
                                         </div>
-                                    </span>
-                                    <span class="input-group-btn select-inline">
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12 col-padding-right-remove col-padding-remove">
+                                        <div class="form-group margin-left-none">
+                                            <div class="input-group">
+                                                <span class="input-group-addon input-group-addon-label two-col-span-label">To</span>
+                                                <span class="input-group-btn select-inline">
+                                                    <div class="inner-addon right-addon">
+                                                        <i class="fa fa-caret-down fa-size"></i>
+                                                        <select
+                                                            class="form-control select-field-left-border select-right-radius-none">
+                                                            <option value="00">00</option>
+                                                            <option value="01">01</option>
+                                                            <option value="02">02</option>
+                                                            <option value="03">03</option>
+                                                            <option value="04">04</option>
+                                                            <option value="05">05</option>
+                                                            <option value="06">06</option>
+                                                            <option value="07">07</option>
+                                                            <option value="08">08</option>
+                                                            <option value="09">09</option>
+                                                            <option value="10">10</option>
+                                                            <option value="11">11</option>
+                                                            <option value="12">12</option>
+                                                            <option value="13">13</option>
+                                                            <option value="14">14</option>
+                                                            <option value="15">15</option>
+                                                            <option value="16">16</option>
+                                                            <option value="17">17</option>
+                                                            <option value="18">18</option>
+                                                            <option value="19">19</option>
+                                                            <option value="20">20</option>
+                                                            <option value="21">21</option>
+                                                            <option value="22">22</option>
+                                                            <option value="23">23</option>
+                                                        </select>
+                                                    </div>
+                                                </span>
+                                                <span class="input-group-btn select-inline">
                                         <div class="inner-addon right-addon">
                                             <i class="fa fa-caret-down fa-size"></i>
                                             <select class="form-control select-field-left-border">
@@ -594,21 +818,22 @@ echo $navbar_str;
                                             </select>
                                         </div>
                                     </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-1 col-sm-1 col-xs-12">
-                                <div class='col-md-1 col-sm-1 col-xs-12'>
-                                    <center>
-                                        <button type='button' class='btn btn-success subEventsBtn' onclick='pageEvents.addSubDiv(1)'>
-                                            <i class='fa fa-plus fa-lg'></i>
-                                        </button>
-                                    </center>
+                                <div class="col-md-1 col-sm-1 col-xs-12">
+                                    <div class='col-md-1 col-sm-1 col-xs-12'>
+                                        <center>
+                                            <button type='button' class='btn btn-success subEventsBtn'
+                                                    onclick='pageEvent.addSubDiv(1)'>
+                                                <i class='fa fa-plus fa-lg'></i>
+                                            </button>
+                                        </center>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
                 <!-- Modal Body -->
             </form>
@@ -632,7 +857,7 @@ echo $navbar_str;
             <center>
                 <div class="modal-body">
                     <div class="btn-group">
-                        <form method="POST" action="controller.php" id="deleteEventsForm">
+                        <form method="POST" action="controller.php" id="deleteEventForm">
                             <input type="text" class="hidden" name="eventCode" id="form-delete-code"/>
                             <input type="text" class="hidden" name="mode" id="form-delete-mode" value="D"/>
                             <button class="btn btn-danger modal_button" type="submit">
@@ -672,11 +897,12 @@ echo $navbar_str;
                         </a>
                     </div>
                     <div class="form-group pull-right" style="margin-top:-5px">
-                        <button type="button" class="btn btn-success button-top-remove" onclick="window.location.href = 'inviteList/'">
+                        <button type="button" class="btn btn-success button-top-remove"
+                                onclick="window.location.href = 'inviteList/'">
                             <span class='glyphicon glyphicon-ok'></span>
                         </button>
                     </div>
-                    <h4 id="eventsModalHeading" class="modal-title text-center">
+                    <h4 id="eventModalHeading" class="modal-title text-center">
                         Invitees
                     </h4>
                 </div>
@@ -767,9 +993,10 @@ echo $navbar_str;
                             <div class="form-group form-group-margin">
                                 <div class="input-group">
                                     <span class="input-group-addon input-group-addon-label-multiselect">Groups*</span>
+
                                     <div class="inner-addon right-addon">
                                         <i class="fa fa-caret-down fa-size"></i>
-                                        <select id="inviteesOption"class="form-control select-field-left-border">
+                                        <select id="inviteesOption" class="form-control select-field-left-border">
                                             <option value="0">Yes</option>
                                             <option value="1" selected="selected">No</option>
                                         </select>

@@ -1,0 +1,61 @@
+.row-top-80{
+    margin-top:80px;
+}
+.row-bottom-15{
+    margin-bottom: 15px;
+}
+.row-left-right-0{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.panel-highlight{
+    transition: all 300ms linear;
+    transition-delay: 0.1s; /* delays for 1 second */
+    -webkit-transition-delay: 0.1s; /* for Safari & Chrome */
+}
+.panel-highlight:hover{
+    border: 1px solid #337ab7;
+    transition: all 300ms linear;
+    transition-delay: 0.001s;
+    -webkit-transition-delay: 0.001s;
+    -webkit-box-shadow: 2px 8px 20px 1px rgba(128,128,128,0.75);
+    -moz-box-shadow: 2px 8px 20px 1px rgba(128,128,128,0.75);
+    box-shadow: 2px 8px 20px 1px rgba(128,128,128,0.75);
+}
+.features-bold{
+    font-weight: 400;
+    font-size: 1.3em;
+}
+.pricing-plan-desc{
+    font-weight: 200;
+    letter-spacing: 1px;
+    height: 320px;
+}
+.pricing-sms-desc{
+    font-weight: 200;
+    letter-spacing: 1px;
+    height: 120px;
+}
+.pricing-button{
+    background-color: white;
+    width:100%;
+    border: 1px solid #337ab7;
+    font-size: 2em;
+    font-weight: 100;
+    -webkit-transition-delay: 0.001s;
+    color: #337ab7;
+    line-height: 2;
+    letter-spacing: 3px;
+}
+.pricing-button:hover{
+    background-color: #337ab7;
+    border: 1px solid white;
+    color: white;
+    -webkit-transition-delay: 0.001s;
+}
+.pricing-header{
+    font-size: 1.8em;
+}
+p{
+    margin: 0px;
+}

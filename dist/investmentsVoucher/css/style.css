@@ -6,7 +6,7 @@
 
 
 .button-top-remove {
-    margin-top: 0px;
+    margin-top: -5px;
 }
 
 .table-top-margin {
@@ -145,43 +145,3 @@
     vertical-align: middle !important;
 }
 
-@media screen and (min-width: 768px) {
-    .subEventsBtn{
-        margin-left: -65px;
-        margin-top: 52px;
-    }
-    .twoTextBtn{
-        margin-left: -70px;
-        margin-top: 30px;
-    }
-    .margin-left-none{
-        margin-left: 0px !important;
-        margin-right: 45px !important;
-    }
-    .margin-right-none{
-        margin-right: 0px !important;
-        margin-left: 45px !important;
-    }
-    .two-col-span-label{
-        min-width: 60px !important;
-    }
-    .col-padding-left-remove{
-        padding-left: 0px;
-    }
-    .col-padding-right-remove{
-        padding-right: 0px;
-    }
-    .check-span-label{
-        min-width: 95px !important;
-    }
-}
-table>tr>td{
-    word-break: break-all;
-}
-.select-inline{
-    width: 37%;
-}
-.select-right-radius-none {
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-}
