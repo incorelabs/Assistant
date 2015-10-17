@@ -36,7 +36,7 @@ echo $navbar_str;
 </div>
 <div class="container-fluid navbar-padding">
     <div class="row">
-        <div class="col-xs-12 col-md-5 col-padding" id="searchDocumentsHeader">
+        <div class="col-xs-12 col-md-5 col-padding" id="searchDocumentHeader">
             <div class="list-group list-margin">
                 <div class="list-group-item list-margin">
                     <div class="row">
@@ -55,7 +55,7 @@ echo $navbar_str;
                             </div>
                         </div>
                         <div>
-                            <button class="btn btn-primary btn-size" onclick="pageDocuments.openAddDocumentsModal();">
+                            <button class="btn btn-primary btn-size" onclick="pageDocument.openAddDocumentModal();">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </button>
                         </div>
@@ -64,16 +64,16 @@ echo $navbar_str;
             </div>
         </div>
 
-        <div class="col-md-7 col-xs-12 col-sm-12 hidden-sm hidden-xs" id="documentsDetailHeaderDiv">
+        <div class="col-md-7 col-xs-12 col-sm-12 hidden-sm hidden-xs" id="documentDetailHeaderDiv">
             <div class="panel panel-default panelHeight list-margin" id="style-3">
-                <div id="documentsDetailHeader" class="panel-heading text-center">
-                    <h12 id='documentsDetailsTag'>Document Details</h12>
-                    <button id='editDocumentsBtn' class='btn btn-success pull-right btn-header-margin-left'
-                            onclick='pageDocuments.openEditDocumentsModal();'>
+                <div id="documentDetailHeader" class="panel-heading text-center">
+                    <h12 id='documentDetailsTag'>Document Details</h12>
+                    <button id='editDocumentBtn' class='btn btn-success pull-right btn-header-margin-left'
+                            onclick='pageDocument.openEditDocumentModal();'>
                         <span class='glyphicon glyphicon-pencil'></span>
                     </button>
-                    <button id='deleteDocumentsBtn' class='btn btn-danger pull-left'
-                            onclick='pageDocuments.openDeleteDocumentsModal()'>
+                    <button id='deleteDocumentBtn' class='btn btn-danger pull-left'
+                            onclick='pageDocument.openDeleteDocumentModal()'>
                         <span class='glyphicon glyphicon-trash'></span>
                     </button>
                 </div>
@@ -85,13 +85,11 @@ echo $navbar_str;
     <!--row-->
     <div class="row">
 
-        <div class="col-md-5 col-sm-12 col-xs-12 col-padding" id="documentsListDiv">
-            <div class="panel panel-default panelHeight panel-margin" id="documentsListScroll">
+        <div class="col-md-5 col-sm-12 col-xs-12 col-padding" id="documentListDiv">
+            <div class="panel panel-default panelHeight panel-margin" id="documentListScroll">
                 <div class="panel-height">
                     <!-- List group -->
-                    <div id="documentsList" class="list-group force-scroll mobile-list">
-                        <div class="list-group">
-                        </div>
+                    <div id="documentList" class="list-group force-scroll mobile-list">
                     </div>
                     <!--List close-->
                 </div>
@@ -100,113 +98,12 @@ echo $navbar_str;
         </div>
         <!--COL-->
 
-        <div class="col-md-7 col-sm-12 col-xs-12 hidden-sm hidden-xs" id="documentsDetailDiv">
-            <div id="documentsDetail" class="panel panel-default panelHeight panel-margin">
+        <div class="col-md-7 col-sm-12 col-xs-12 hidden-sm hidden-xs" id="documentDetailDiv">
+            <div id="documentDetail" class="panel panel-default panelHeight panel-margin">
                 <div class='panel-height'>
                     <!-- List group -->
                     <div class="list-group">
-                        <div id="documentsDetailBody" class='list-group-item list-group-item-border'>
-                            <div class="row contact-details row-top-padding">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3 image-details-padding">Images</div>
-                                    <value>
-                                        <div class="col-md-9">
-                                            <div class="image">
-                                                <a href="#" onclick="pageDocuments.openDocumentsImageModal()"
-                                                   class="clickable">
-                                                    <img src="../img/default/preferences/logo.png"
-                                                         id="imageResource" alt="..." class="img-rounded img-size">
-
-                                                    <div class="overlay img-rounded">
-                                                            <span
-                                                                class="glyphicon glyphicon-pencil overlay-icon"></span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Holder's Name</div>
-                                    <value>
-                                        <div class="col-md-9">Darshan</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Document Type</div>
-                                    <value>
-                                        <div class="col-md-9">Test</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Description</div>
-                                    <value>
-                                        <div class="col-md-9">Test</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Doctor</div>
-                                    <value>
-                                        <div class="col-md-9">Dr. Test</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Joint Holder Name</div>
-                                    <value>
-                                        <div class="col-md-9"></div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Issuing Authority</div>
-                                    <value>
-                                        <div class="col-md-9">Test</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Document Location</div>
-                                    <value>
-                                        <div class="col-md-9"></div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Issue Date</div>
-                                    <value>
-                                        <div class="col-md-9">12/12/2012</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Expiry Date</div>
-                                    <value>
-                                        <div class="col-md-9">11/12/2018</div>
-                                    </value>
-                                </div>
-                            </div>
-                            <div class="row contact-details">
-                                <div class="list-group-item-heading header_font">
-                                    <div class="col-md-3">Remarks</div>
-                                    <value>
-                                        <div class="col-md-8 text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
-                                    </value>
-                                </div>
-                            </div>
+                        <div id="documentDetailBody" class='list-group-item list-group-item-border'>
                         </div>
                     </div>
                     <!--List close-->
@@ -220,12 +117,12 @@ echo $navbar_str;
 </div>
 <!--Container-->
 
-<!-- Add documents Modal -->
-<div class="modal fade" id="documentsModal" tabindex="-1" role="dialog" aria-labelledby="documentsModal"
+<!-- Add Document Modal -->
+<div class="modal fade" id="documentModal" tabindex="-1" role="dialog" aria-labelledby="documentModal"
      aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" method="POST" action="controller.php" id="documentsForm" autocomplete="off">
+            <form class="form-horizontal" method="POST" action="controller.php" id="documentForm" autocomplete="off">
                 <div class="modal-header">
                     <div class="form-group pull-left" style="margin-top:-5px">
                         <a class="btn btn-danger button-top-remove" data-dismiss="modal">
@@ -237,11 +134,14 @@ echo $navbar_str;
                             <span class='glyphicon glyphicon-ok'></span>
                         </button>
                     </div>
-                    <h4 id="documentsModalHeading" class="modal-title text-center">
+                    <h4 id="documentModalHeading" class="modal-title text-center">
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <input type="text" class="hidden" name="documentsTypeCode" id="documentsTypeCode" value="1"/>
+                    <input type="text" class="hidden" name="documentTypeCode" id="documentTypeCode" value="1"/>
+                    <input type="text" class="hidden" name="issuedBy" id="issuedBy" value="1"/>
+                    <input type="text" class="hidden" name="locationCode" id="locationCode" value="1"/>
+                    <input type="text" class="hidden" name="documentCode" id="form-add-edit-code"/>
                     <input type="text" class="hidden" name="mode" id="form-add-edit-mode"/>
 
                     <div class="form-group form-group-margin">
@@ -282,8 +182,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-key hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" name="documentsTypeName"
-                                       id="documentsTypeName" placeholder="Document Type" tabindex="2" required/>
+                                <input type="text" class="form-control text-field-left-border" name="documentTypeName"
+                                       id="documentTypeName" placeholder="Document Type" tabindex="2" required/>
                             </div>
                         </div>
                     </div>
@@ -293,8 +193,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" name="documentsDec"
-                                       id="documentsDesc" placeholder="Description" tabindex="3" required/>
+                                <input type="text" class="form-control text-field-left-border" name="documentName"
+                                       id="documentName" placeholder="Description" tabindex="3" required/>
                             </div>
                         </div>
                     </div>
@@ -354,8 +254,8 @@ echo $navbar_str;
 
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-globe fa-size"></i>
-                                <input type="text" class="form-control text-field-left-border" name="issuingAuthority"
-                                       id="issuingAuthority" placeholder="Issuing Authority" tabindex="6"/>
+                                <input type="text" class="form-control text-field-left-border" name="issuedByName"
+                                       id="issuedByName" placeholder="Issuing Authority" tabindex="6"/>
                             </div>
                         </div>
                     </div>
@@ -399,9 +299,13 @@ echo $navbar_str;
                     <div class="form-group form-group-margin">
                         <div class="input-group">
                             <span class="input-group-addon input-group-addon-label">Remarks</span>
-                                <textarea type="text" class="form-control text-field-left-border textarea-style" name="remarks"
-                                       id="remarks" placeholder="Remarks" aria-describedby="basic-addon1"
-                                       tabindex="10" rows="4"></textarea>
+
+                            <div class="inner-addon right-addon">
+                                <i class="fa fa-sticky-note-o hidden-xs fa-size"></i>
+                                <textarea type="text" class="form-control text-field-left-border textarea-style"
+                                          name="remarks" id="remarks" placeholder="Remarks"
+                                          aria-describedby="basic-addon1" tabindex="10" rows="4"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -413,7 +317,7 @@ echo $navbar_str;
 </div>
 <!--modal-->
 
-<!--Delete Documents Modal-->
+<!--Delete Document Modal-->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal"
      aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog">
@@ -427,8 +331,8 @@ echo $navbar_str;
             <center>
                 <div class="modal-body">
                     <div class="btn-group">
-                        <form method="POST" action="controller.php" id="deleteDocumentsForm">
-                            <input type="text" class="hidden" name="documentsCode" id="form-delete-code"/>
+                        <form method="POST" action="controller.php" id="deleteDocumentForm">
+                            <input type="text" class="hidden" name="documentCode" id="form-delete-code"/>
                             <input type="text" class="hidden" name="mode" id="form-delete-mode" value="D"/>
                             <button class="btn btn-danger modal_button" type="submit">
                                 <span class='glyphicon glyphicon-ok'></span>&nbsp
@@ -485,7 +389,7 @@ echo $navbar_str;
                 </div>
 
                 <div class="modal-body">
-                    <input type="text" class="hidden" name="documentsCode" id='documentsCodeForImage'/>
+                    <input type="text" class="hidden" name="documentCode" id='documentCodeForImage'/>
 
                     <div class="form-group row">
                         <center>
@@ -496,7 +400,7 @@ echo $navbar_str;
                                     <br>
 
                                     <div class='input-group'>
-                                        <input id='documentsImgInputPath' name='documentsImgInputPath'
+                                        <input id='documentImgInputPath' name='documentImgInputPath'
                                                class='form-control' placeholder='Choose File' disabled='disabled'/>
 
                                         <div class='input-group-btn'>
@@ -508,18 +412,17 @@ echo $navbar_str;
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="info">*You can select upto max 5 images</div>
                                     <p id="imageErrorMsg"></p>
 
                                     <div class="delete-btn-padding">
                                         <button type="button" class="btn btn-danger" id="deleteImageBtn"
-                                                onclick="pageDocuments.deleteDocumentsImage(1)">
+                                                onclick="pageDocument.deleteDocumentImage(1)">
                                             Delete Image
                                         </button>
                                     </div>
                                     <div class="delete-btn-padding">
                                         <button type="button" class="btn btn-danger" id="deleteAllImageBtn"
-                                                onclick="pageDocuments.deleteDocumentsImage(2)">
+                                                onclick="pageDocument.deleteDocumentImage(2)">
                                             Delete All Images
                                         </button>
                                     </div>
@@ -541,66 +444,15 @@ echo $navbar_str;
                 <div class="modal-footer">
                     <div class="row">
                         <div class="image text-center image-horizontal-scroll" id="smallImagePreview">
-                            <a href="#" onclick="" class="clickable">
-                                <img src="../img/default/preferences/logo.png" class="img-thumbnail modal-img-size">
-                            </a>
-                            <a href="#" onclick="" class="clickable">
-                                <img src="../img/default/preferences/logo.png" class="img-thumbnail modal-img-size">
-                            </a>
-                            <a href="#" onclick="" class="clickable">
-                                <img src="../img/default/preferences/logo.png" class="img-thumbnail modal-img-size">
-                            </a>
-                            <a href="#" onclick="" class="clickable">
-                                <img src="../img/default/preferences/logo.png" class="img-thumbnail modal-img-size">
-                            </a>
-                            <a href="#" onclick="" class="clickable">
-                                <img src="../img/default/preferences/logo.png" class="img-thumbnail modal-img-size">
-                            </a>
-                            <a href="#" onclick="" class="clickable">
-                                <img src="../img/default/preferences/logo.png" class="img-thumbnail modal-img-size">
-                            </a>
-                            <a href="#" onclick="" class="clickable">
-                                <img src="../img/default/preferences/logo.png" class="img-thumbnail modal-img-size">
-                            </a>
-                            <a href="#" onclick="" class="clickable">
-                                <img src="../img/default/preferences/logo.png" class="img-thumbnail modal-img-size">
-                            </a>
-                            <a href="#" onclick="" class="clickable">
-                                <img src="../img/default/preferences/logo.png" class="img-thumbnail modal-img-size">
-                            </a>
-                            <a href="#" onclick="" class="clickable">
-                                <img src="../img/default/preferences/logo.png" class="img-thumbnail modal-img-size">
-                            </a>
-                            <a href="#" onclick="" class="clickable">
-                                <img src="../img/default/preferences/logo.png" class="img-thumbnail modal-img-size">
-                            </a>
-                            <a href="#" onclick="" class="clickable">
-                                <img src="../img/default/preferences/logo.png" class="img-thumbnail modal-img-size">
-                            </a>
-                            <a href="#" onclick="" class="clickable">
-                                <img src="../img/default/preferences/logo.png" class="img-thumbnail modal-img-size">
-                            </a>
-                            <a href="#" onclick="" class="clickable">
-                                <img src="../img/default/preferences/logo.png" class="img-thumbnail modal-img-size">
-                            </a>
-                            <a href="#" onclick="" class="clickable">
-                                <img src="../img/default/preferences/logo.png" class="img-thumbnail modal-img-size">
-                            </a>
-                            <a href="#" onclick="" class="clickable">
-                                <img src="../img/default/preferences/logo.png" class="img-thumbnail modal-img-size">
-                            </a>
-                            <a href="#" onclick="" class="clickable">
-                                <img src="../img/default/preferences/logo.png" class="img-thumbnail modal-img-size">
-                            </a>
                         </div>
                     </div>
                 </div>
             </form>
-            <div class="progress hidden" id="documentsUploadProgress">
-                <div class="progress-bar" id="documentsUploadProgressBar" role="progressbar" aria-valuenow="0"
+            <div class="progress hidden" id="documentUploadProgress">
+                <div class="progress-bar" id="documentUploadProgressBar" role="progressbar" aria-valuenow="0"
                      aria-valuemin="0" aria-valuemax="100"
                      style="width: 0%;">
-                    <span class="sr-only" id="documentsUploadProgressValue">0% Complete</span>
+                    <span class="sr-only" id="documentUploadProgressValue">0% Complete</span>
                 </div>
             </div>
         </div>

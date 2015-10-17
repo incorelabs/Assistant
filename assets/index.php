@@ -12,7 +12,7 @@ include_once ROOT . 'dist/authenticate.php';
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Assistant - Asset</title>
     <?php
-    include_once ROOT.'dist/fetchCSS.php';
+    include_once ROOT . 'dist/fetchCSS.php';
     ?>
     <link rel="stylesheet" href="../dist/assets/css/style.css"/>
 </head>
@@ -68,13 +68,16 @@ echo $navbar_str;
             <div class="panel panel-default panelHeight list-margin" id="style-3">
                 <div id="assetDetailHeader" class="panel-heading text-center">
                     <h12 id='assetDetailsTag'>Asset Details</h12>
-                    <button id='editAssetBtn' class='btn btn-success pull-right btn-header-margin-left' onclick='pageAsset.openEditAssetModal();'>
+                    <button id='editAssetBtn' class='btn btn-success pull-right btn-header-margin-left'
+                            onclick='pageAsset.openEditAssetModal();'>
                         <span class='glyphicon glyphicon-pencil'></span>
                     </button>
-                    <button id='deleteAssetBtn' class='btn btn-danger pull-left' onclick='pageAsset.openDeleteAssetModal()'>
+                    <button id='deleteAssetBtn' class='btn btn-danger pull-left'
+                            onclick='pageAsset.openDeleteAssetModal()'>
                         <span class='glyphicon glyphicon-trash'></span>
                     </button>
-                    <button id='voucherAssetBtn' class='btn btn-info pull-right' onclick='pageAsset.openVoucherAssetModal()'>
+                    <button id='voucherAssetBtn' class='btn btn-info pull-right'
+                            onclick='pageAsset.openVoucherAssetModal()'>
                         <span class='fa fa-sticky-note-o fa-lg'></span>
                     </button>
                 </div>
@@ -208,7 +211,8 @@ echo $navbar_str;
                             <div class="inner-addon right-addon">
                                 <i class="fa fa-user hidden-xs fa-size"></i>
                                 <input type="text" class="form-control text-field-left-border" name="boughtFromName"
-                                       id="boughtFromName" placeholder="Bought From" aria-describedby="basic-addon1" tabindex="4"
+                                       id="boughtFromName" placeholder="Bought From" aria-describedby="basic-addon1"
+                                       tabindex="4"
                                        required/>
                             </div>
                         </div>
@@ -421,17 +425,23 @@ echo $navbar_str;
                                     <label class="control-label">Select Image</label>
                                     <br>
                                     <br>
+
                                     <div class='input-group'>
-                                        <input id='assetImgInputPath' name='assetImgInputPath' class='form-control' placeholder='Choose File' disabled='disabled' />
+                                        <input id='assetImgInputPath' name='assetImgInputPath' class='form-control'
+                                               placeholder='Choose File' disabled='disabled'/>
+
                                         <div class='input-group-btn'>
                                             <div class='fileUpload btn btn-primary'>
                                                 <span>Upload</span>
-                                                <input type='file' id="imgInput" name="fileToUpload[]" style="padding-bottom:10px;" class="upload" accept="image/gif, image/jpeg, image/png" multiple/>
+                                                <input type='file' id="imgInput" name="fileToUpload[]"
+                                                       style="padding-bottom:10px;" class="upload"
+                                                       accept="image/gif, image/jpeg, image/png" multiple/>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="info">*You can select upto max 5 images</div>
                                     <p id="imageErrorMsg"></p>
+
                                     <div class="delete-btn-padding">
                                         <button type="button" class="btn btn-danger" id="deleteImageBtn"
                                                 onclick="pageAsset.deleteAssetImage(1)">
@@ -449,9 +459,10 @@ echo $navbar_str;
                                     <label class="control-label">Image Preview</label>
                                     <br>
                                     <br>
+
                                     <div id="imagePreviewDiv">
-                                    <img src="../img/default/preferences/logo.png" id="imagePreview"
-                                         class="addImage">
+                                        <img src="../img/default/preferences/logo.png" id="imagePreview"
+                                             class="addImage">
                                     </div>
                                 </div>
                             </div>
@@ -466,7 +477,8 @@ echo $navbar_str;
                 </div>
             </form>
             <div class="progress hidden" id="assetUploadProgress">
-                <div class="progress-bar" id="assetUploadProgressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+                <div class="progress-bar" id="assetUploadProgressBar" role="progressbar" aria-valuenow="0"
+                     aria-valuemin="0" aria-valuemax="100"
                      style="width: 0%;">
                     <span class="sr-only" id="assetUploadProgressValue">0% Complete</span>
                 </div>
@@ -478,7 +490,7 @@ echo $navbar_str;
 <!--modal-->
 
 <?php
-include_once ROOT.'dist/fetchJS.php';
+include_once ROOT . 'dist/fetchJS.php';
 ?>
 <script src="../dist/assets/script/script.js"></script>
 <script src="../dist/date/script.js"></script>

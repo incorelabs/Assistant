@@ -183,7 +183,7 @@ var pageAsset = {
             }
             pageAsset.firstTime = false;
 
-            assetDetailString += "<div class='row contact-details row-top-padding'><div class='list-group-item-heading header_font'><div class='col-md-3 image-details-padding'>Images</div><value><div class='col-md-9'><div class='image'><a href='#' onclick='pageAsset.openAssetImageModal()' class='clickable'><img src='"+ app.websiteRoot +"img/default/preferences/logo.png' id='imageResource' alt='...' class='img-rounded img-size'/><div class='overlay img-rounded'><span class='glyphicon glyphicon-pencil overlay-icon'></span></div></a></div></div></value></div></div>";
+            assetDetailString += "<div class='row contact-details row-top-padding'><div class='list-group-item-heading header_font'><div class='col-md-3 image-details-padding'>Images</div><value><div class='col-md-9'><div class='image'><a href='#' onclick='pageAsset.openAssetImageModal()' class='clickable'><img src='" + app.websiteRoot + "img/default/preferences/logo.png' id='imageResource' alt='...' class='img-rounded img-size'/><div class='overlay img-rounded'><span class='glyphicon glyphicon-pencil overlay-icon'></span></div></a></div></div></value></div></div>";
 
             assetDetailString += "<div class='row contact-details'><div class='list-group-item-heading header_font'><div class='col-md-3'>Holder's Name</div><value><div class='col-md-9'>" + ((data.detail.asset.HolderName) ? data.detail.asset.HolderName : "") + "</div></value></div></div>";
 
@@ -225,7 +225,7 @@ var pageAsset = {
             assetCode: assetCode
         }).done(function (data) {
             console.log(data);
-            if(data.status === undefined)
+            if (data.status === undefined)
                 pageAsset.displayImageList = data;
             else
                 pageAsset.displayImageList = null;
@@ -350,37 +350,36 @@ var pageAsset = {
 
         familyCode = temp;
     },
-    openDeleteAssetModal: function(assetCode){
+    openDeleteAssetModal: function (assetCode) {
         $("#form-delete-code").val(assetCode);
         $("#deleteModal").modal("show");
     },
-    openVoucherAssetModal: function(assetCode){
+    openVoucherAssetModal: function (assetCode) {
         window.location.href = app.websiteRoot + "assets/voucher/index.php?assetCode=" + assetCode;
     },
-    openAssetImageModal: function(){
+    openAssetImageModal: function () {
         $("#assetUploadProgressBar").width(0 + "%");
         $("#imageModal").modal('show');
     },
     deleteAssetImage: function (typeOfDeletion) {
         var deleteOptions = null;
         var deleteString = "";
-        switch(typeOfDeletion) {
+        switch (typeOfDeletion) {
             case 1:
                 deleteOptions = {
                     assetCode: pageAsset.localAsset.asset.AssetCode,
                     serialNo: pageAsset.currentSerialNo
                 };
-                deleteString = "the current image?"
+                deleteString = "the current image?";
                 break;
             case 2:
                 deleteOptions = {
                     assetCode: pageAsset.localAsset.asset.AssetCode
                 };
-                deleteString = "all the images?"
+                deleteString = "all the images?";
                 break;
-
         }
-        var deletePic = confirm("Do you REALLY want to DELETE "+ deleteString);
+        var deletePic = confirm("Do you REALLY want to DELETE " + deleteString);
         if (deletePic) {
             var url = app.websiteRoot + "assets/deleteImage.php";
 
@@ -391,7 +390,7 @@ var pageAsset = {
                 console.log(data);
                 var response = JSON.parse(data);
                 if (response.status == 1) {
-                    switch(typeOfDeletion) {
+                    switch (typeOfDeletion) {
                         case 1:
                             pageAsset.defImageList = $.Deferred();
                             pageAsset.getImageList(pageAsset.localAsset.asset.AssetCode);
@@ -423,15 +422,15 @@ var pageAsset = {
     },
     setImageModal: function () {
         $("#smallImagePreview").empty();
-        if(pageAsset.displayImageList) {
+        if (pageAsset.displayImageList) {
             console.log(pageAsset.displayImageList);
             $(".modal-footer").removeClass("hidden");
             $("#deleteImageBtn").removeClass("hidden");
             $("#deleteAllImageBtn").removeClass("hidden");
             var firstImagePreview = false;
-            for(var i = 0; i < pageAsset.displayImageList.length; i++) {
-                $("#smallImagePreview").append("<a href='#' onclick='pageAsset.changeImage("+i+",2)' class='clickable'><img src='"+app.websiteRoot + "img/getImage.php?file="+ pageAsset.displayImageList[i].ImagePath +"' class='img-thumbnail modal-img-size'/></a>");
-                if(!firstImagePreview) {
+            for (var i = 0; i < pageAsset.displayImageList.length; i++) {
+                $("#smallImagePreview").append("<a href='#' onclick='pageAsset.changeImage(" + i + ",2)' class='clickable'><img src='" + app.websiteRoot + "img/getImage.php?file=" + pageAsset.displayImageList[i].ImagePath + "' class='img-thumbnail modal-img-size'/></a>");
+                if (!firstImagePreview) {
                     pageAsset.changeImage(i, 2);
                     firstImagePreview = true;
                 }
@@ -439,11 +438,11 @@ var pageAsset = {
         } else {
             $("#deleteImageBtn").addClass("hidden");
             $("#deleteAllImageBtn").addClass("hidden");
-            $("#imagePreview").attr("src","../img/default/preferences/logo.png");
+            $("#imagePreview").attr("src", "../img/default/preferences/logo.png");
             $(".modal-footer").addClass("hidden");
         }
     },
-    changeImage: function(imageIndex, typeOfMethod){
+    changeImage: function (imageIndex, typeOfMethod) {
         switch (typeOfMethod) {
             case 1:
                 $("#imagePreview").attr("src", pageAsset.imageDataList[imageIndex]);
@@ -741,7 +740,7 @@ $(document).ready(function () {
     });
 
     $('#imgInput').change(function () {
-        if(pageAsset.displayImageList) {
+        if (pageAsset.displayImageList) {
             if ((pageAsset.displayImageList.length + this.files.length) > 5) {
                 app.showNotificationFailure("Already 5 images are used. DELETE some");
                 return;
@@ -750,7 +749,7 @@ $(document).ready(function () {
                 return;
             }
         } else {
-            if(($("#smallImagePreview a").length + this.files.length) < 1 && ($("#smallImagePreview a").length + this.files.length) > 5) {
+            if (($("#smallImagePreview a").length + this.files.length) < 1 && ($("#smallImagePreview a").length + this.files.length) > 5) {
                 app.showNotificationFailure("Either no image is selected or more than 5 images at once");
                 return;
             }
@@ -758,16 +757,16 @@ $(document).ready(function () {
         $(".modal-footer").removeClass("hidden");
         pageAsset.imageDataList = [null, null, null, null, null];
         var firstImagePreview = false;
-        for(var i = 0; i < this.files.length; i++) {
+        for (var i = 0; i < this.files.length; i++) {
             var image = this.files[i];
             if ((image.size || image.fileSize) < 1 * 1000 * 1000) {
                 pageAsset.uploadImageList.push(image);
                 var reader = new FileReader();
-                (function(i) {
+                (function (i) {
                     reader.onloadend = function () {
                         pageAsset.imageDataList[i] = this.result;
-                        $("#smallImagePreview").append("<a href='#' onclick='pageAsset.changeImage("+i+",1)' class='clickable'><img src='"+this.result+"' class='img-thumbnail modal-img-size'/></a>");
-                        if(!firstImagePreview) {
+                        $("#smallImagePreview").append("<a href='#' onclick='pageAsset.changeImage(" + i + ",1)' class='clickable'><img src='" + this.result + "' class='img-thumbnail modal-img-size'/></a>");
+                        if (!firstImagePreview) {
                             pageAsset.changeImage(i, 1);
                             firstImagePreview = true;
                         }
@@ -796,8 +795,8 @@ $(document).ready(function () {
                 app.showNotificationFailure("There are more than 5 images selected");
                 return false;
             }
-            for(var i = formData.length -1; i > 0; i--) {
-                formData.splice(formData.length -1, 1);
+            for (var i = formData.length - 1; i > 0; i--) {
+                formData.splice(formData.length - 1, 1);
             }
             for (var i = 0; i < pageAsset.uploadImageList.length; i++) {
                 var fileObject = {
